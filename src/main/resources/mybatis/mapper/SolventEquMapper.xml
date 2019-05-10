@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.SolventEquMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.SolventEqu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="number" jdbcType="TINYINT" property="number" />
+    <result column="gasequ_id" jdbcType="INTEGER" property="gasequId" />
+    <result column="gasequ_name" jdbcType="CHAR" property="gasequName" />
+    <result column="gasequ_fabri" jdbcType="CHAR" property="gasequFabri" />
+    <result column="runtime" jdbcType="INTEGER" property="runtime" />
+    <result column="material_name1" jdbcType="CHAR" property="materialName1" />
+    <result column="material_usage1" jdbcType="DOUBLE" property="materialUsage1" />
+    <result column="material_unit1" jdbcType="CHAR" property="materialUnit1" />
+    <result column="material_name2" jdbcType="CHAR" property="materialName2" />
+    <result column="material_usage2" jdbcType="DOUBLE" property="materialUsage2" />
+    <result column="material_unit2" jdbcType="CHAR" property="materialUnit2" />
+    <result column="material_name3" jdbcType="CHAR" property="materialName3" />
+    <result column="material_usage3" jdbcType="DOUBLE" property="materialUsage3" />
+    <result column="material_unit3" jdbcType="CHAR" property="materialUnit3" />
+    <result column="product_name1" jdbcType="CHAR" property="productName1" />
+    <result column="product_usage1" jdbcType="DOUBLE" property="productUsage1" />
+    <result column="product_unit1" jdbcType="CHAR" property="productUnit1" />
+    <result column="product_name2" jdbcType="CHAR" property="productName2" />
+    <result column="product_usage2" jdbcType="DOUBLE" property="productUsage2" />
+    <result column="product_unit2" jdbcType="CHAR" property="productUnit2" />
+    <result column="product_name3" jdbcType="CHAR" property="productName3" />
+    <result column="product_usage3" jdbcType="DOUBLE" property="productUsage3" />
+    <result column="product_unit3" jdbcType="CHAR" property="productUnit3" />
+    <result column="treat_name" jdbcType="CHAR" property="treatName" />
+    <result column="gasprofabri" jdbcType="CHAR" property="gasprofabri" />
+    <result column="effi" jdbcType="DOUBLE" property="effi" />
+    <result column="activity_meas" jdbcType="CHAR" property="activityMeas" />
+    <result column="activity" jdbcType="DOUBLE" property="activity" />
+    <result column="activity_unit" jdbcType="CHAR" property="activityUnit" />
+    <result column="voc_emi" jdbcType="DOUBLE" property="vocEmi" />
+    <result column="solvent_id" jdbcType="INTEGER" property="solventId" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, gasequ_id, gasequ_name, gasequ_fabri, runtime, material_name1, material_usage1, 
+    material_unit1, material_name2, material_usage2, material_unit2, material_name3, 
+    material_usage3, material_unit3, product_name1, product_usage1, product_unit1, product_name2, 
+    product_usage2, product_unit2, product_name3, product_usage3, product_unit3, treat_name, 
+    gasprofabri, effi, activity_meas, activity, activity_unit, voc_emi, solvent_id, scccode
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.SolventEquExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from solvent_equ
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from solvent_equ
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from solvent_equ
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.SolventEquExample">
+    delete from solvent_equ
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.SolventEqu">
+    insert into solvent_equ (id, number, gasequ_id, 
+      gasequ_name, gasequ_fabri, runtime, 
+      material_name1, material_usage1, material_unit1, 
+      material_name2, material_usage2, material_unit2, 
+      material_name3, material_usage3, material_unit3, 
+      product_name1, product_usage1, product_unit1, 
+      product_name2, product_usage2, product_unit2, 
+      product_name3, product_usage3, product_unit3, 
+      treat_name, gasprofabri, effi, 
+      activity_meas, activity, activity_unit, 
+      voc_emi, solvent_id, scccode
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=TINYINT}, #{gasequId,jdbcType=INTEGER}, 
+      #{gasequName,jdbcType=CHAR}, #{gasequFabri,jdbcType=CHAR}, #{runtime,jdbcType=INTEGER}, 
+      #{materialName1,jdbcType=CHAR}, #{materialUsage1,jdbcType=DOUBLE}, #{materialUnit1,jdbcType=CHAR}, 
+      #{materialName2,jdbcType=CHAR}, #{materialUsage2,jdbcType=DOUBLE}, #{materialUnit2,jdbcType=CHAR}, 
+      #{materialName3,jdbcType=CHAR}, #{materialUsage3,jdbcType=DOUBLE}, #{materialUnit3,jdbcType=CHAR}, 
+      #{productName1,jdbcType=CHAR}, #{productUsage1,jdbcType=DOUBLE}, #{productUnit1,jdbcType=CHAR}, 
+      #{productName2,jdbcType=CHAR}, #{productUsage2,jdbcType=DOUBLE}, #{productUnit2,jdbcType=CHAR}, 
+      #{productName3,jdbcType=CHAR}, #{productUsage3,jdbcType=DOUBLE}, #{productUnit3,jdbcType=CHAR}, 
+      #{treatName,jdbcType=CHAR}, #{gasprofabri,jdbcType=CHAR}, #{effi,jdbcType=DOUBLE}, 
+      #{activityMeas,jdbcType=CHAR}, #{activity,jdbcType=DOUBLE}, #{activityUnit,jdbcType=CHAR}, 
+      #{vocEmi,jdbcType=DOUBLE}, #{solventId,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.SolventEqu">
+    insert into solvent_equ
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="gasequId != null">
+        gasequ_id,
+      </if>
+      <if test="gasequName != null">
+        gasequ_name,
+      </if>
+      <if test="gasequFabri != null">
+        gasequ_fabri,
+      </if>
+      <if test="runtime != null">
+        runtime,
+      </if>
+      <if test="materialName1 != null">
+        material_name1,
+      </if>
+      <if test="materialUsage1 != null">
+        material_usage1,
+      </if>
+      <if test="materialUnit1 != null">
+        material_unit1,
+      </if>
+      <if test="materialName2 != null">
+        material_name2,
+      </if>
+      <if test="materialUsage2 != null">
+        material_usage2,
+      </if>
+      <if test="materialUnit2 != null">
+        material_unit2,
+      </if>
+      <if test="materialName3 != null">
+        material_name3,
+      </if>
+      <if test="materialUsage3 != null">
+        material_usage3,
+      </if>
+      <if test="materialUnit3 != null">
+        material_unit3,
+      </if>
+      <if test="productName1 != null">
+        product_name1,
+      </if>
+      <if test="productUsage1 != null">
+        product_usage1,
+      </if>
+      <if test="productUnit1 != null">
+        product_unit1,
+      </if>
+      <if test="productName2 != null">
+        product_name2,
+      </if>
+      <if test="productUsage2 != null">
+        product_usage2,
+      </if>
+      <if test="productUnit2 != null">
+        product_unit2,
+      </if>
+      <if test="productName3 != null">
+        product_name3,
+      </if>
+      <if test="productUsage3 != null">
+        product_usage3,
+      </if>
+      <if test="productUnit3 != null">
+        product_unit3,
+      </if>
+      <if test="treatName != null">
+        treat_name,
+      </if>
+      <if test="gasprofabri != null">
+        gasprofabri,
+      </if>
+      <if test="effi != null">
+        effi,
+      </if>
+      <if test="activityMeas != null">
+        activity_meas,
+      </if>
+      <if test="activity != null">
+        activity,
+      </if>
+      <if test="activityUnit != null">
+        activity_unit,
+      </if>
+      <if test="vocEmi != null">
+        voc_emi,
+      </if>
+      <if test="solventId != null">
+        solvent_id,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=TINYINT},
+      </if>
+      <if test="gasequId != null">
+        #{gasequId,jdbcType=INTEGER},
+      </if>
+      <if test="gasequName != null">
+        #{gasequName,jdbcType=CHAR},
+      </if>
+      <if test="gasequFabri != null">
+        #{gasequFabri,jdbcType=CHAR},
+      </if>
+      <if test="runtime != null">
+        #{runtime,jdbcType=INTEGER},
+      </if>
+      <if test="materialName1 != null">
+        #{materialName1,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage1 != null">
+        #{materialUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit1 != null">
+        #{materialUnit1,jdbcType=CHAR},
+      </if>
+      <if test="materialName2 != null">
+        #{materialName2,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage2 != null">
+        #{materialUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit2 != null">
+        #{materialUnit2,jdbcType=CHAR},
+      </if>
+      <if test="materialName3 != null">
+        #{materialName3,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage3 != null">
+        #{materialUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit3 != null">
+        #{materialUnit3,jdbcType=CHAR},
+      </if>
+      <if test="productName1 != null">
+        #{productName1,jdbcType=CHAR},
+      </if>
+      <if test="productUsage1 != null">
+        #{productUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit1 != null">
+        #{productUnit1,jdbcType=CHAR},
+      </if>
+      <if test="productName2 != null">
+        #{productName2,jdbcType=CHAR},
+      </if>
+      <if test="productUsage2 != null">
+        #{productUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit2 != null">
+        #{productUnit2,jdbcType=CHAR},
+      </if>
+      <if test="productName3 != null">
+        #{productName3,jdbcType=CHAR},
+      </if>
+      <if test="productUsage3 != null">
+        #{productUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit3 != null">
+        #{productUnit3,jdbcType=CHAR},
+      </if>
+      <if test="treatName != null">
+        #{treatName,jdbcType=CHAR},
+      </if>
+      <if test="gasprofabri != null">
+        #{gasprofabri,jdbcType=CHAR},
+      </if>
+      <if test="effi != null">
+        #{effi,jdbcType=DOUBLE},
+      </if>
+      <if test="activityMeas != null">
+        #{activityMeas,jdbcType=CHAR},
+      </if>
+      <if test="activity != null">
+        #{activity,jdbcType=DOUBLE},
+      </if>
+      <if test="activityUnit != null">
+        #{activityUnit,jdbcType=CHAR},
+      </if>
+      <if test="vocEmi != null">
+        #{vocEmi,jdbcType=DOUBLE},
+      </if>
+      <if test="solventId != null">
+        #{solventId,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.SolventEquExample" resultType="java.lang.Long">
+    select count(*) from solvent_equ
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update solvent_equ
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=TINYINT},
+      </if>
+      <if test="record.gasequId != null">
+        gasequ_id = #{record.gasequId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gasequName != null">
+        gasequ_name = #{record.gasequName,jdbcType=CHAR},
+      </if>
+      <if test="record.gasequFabri != null">
+        gasequ_fabri = #{record.gasequFabri,jdbcType=CHAR},
+      </if>
+      <if test="record.runtime != null">
+        runtime = #{record.runtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.materialName1 != null">
+        material_name1 = #{record.materialName1,jdbcType=CHAR},
+      </if>
+      <if test="record.materialUsage1 != null">
+        material_usage1 = #{record.materialUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialUnit1 != null">
+        material_unit1 = #{record.materialUnit1,jdbcType=CHAR},
+      </if>
+      <if test="record.materialName2 != null">
+        material_name2 = #{record.materialName2,jdbcType=CHAR},
+      </if>
+      <if test="record.materialUsage2 != null">
+        material_usage2 = #{record.materialUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialUnit2 != null">
+        material_unit2 = #{record.materialUnit2,jdbcType=CHAR},
+      </if>
+      <if test="record.materialName3 != null">
+        material_name3 = #{record.materialName3,jdbcType=CHAR},
+      </if>
+      <if test="record.materialUsage3 != null">
+        material_usage3 = #{record.materialUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.materialUnit3 != null">
+        material_unit3 = #{record.materialUnit3,jdbcType=CHAR},
+      </if>
+      <if test="record.productName1 != null">
+        product_name1 = #{record.productName1,jdbcType=CHAR},
+      </if>
+      <if test="record.productUsage1 != null">
+        product_usage1 = #{record.productUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productUnit1 != null">
+        product_unit1 = #{record.productUnit1,jdbcType=CHAR},
+      </if>
+      <if test="record.productName2 != null">
+        product_name2 = #{record.productName2,jdbcType=CHAR},
+      </if>
+      <if test="record.productUsage2 != null">
+        product_usage2 = #{record.productUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productUnit2 != null">
+        product_unit2 = #{record.productUnit2,jdbcType=CHAR},
+      </if>
+      <if test="record.productName3 != null">
+        product_name3 = #{record.productName3,jdbcType=CHAR},
+      </if>
+      <if test="record.productUsage3 != null">
+        product_usage3 = #{record.productUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productUnit3 != null">
+        product_unit3 = #{record.productUnit3,jdbcType=CHAR},
+      </if>
+      <if test="record.treatName != null">
+        treat_name = #{record.treatName,jdbcType=CHAR},
+      </if>
+      <if test="record.gasprofabri != null">
+        gasprofabri = #{record.gasprofabri,jdbcType=CHAR},
+      </if>
+      <if test="record.effi != null">
+        effi = #{record.effi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.activityMeas != null">
+        activity_meas = #{record.activityMeas,jdbcType=CHAR},
+      </if>
+      <if test="record.activity != null">
+        activity = #{record.activity,jdbcType=DOUBLE},
+      </if>
+      <if test="record.activityUnit != null">
+        activity_unit = #{record.activityUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.vocEmi != null">
+        voc_emi = #{record.vocEmi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.solventId != null">
+        solvent_id = #{record.solventId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update solvent_equ
+    set id = #{record.id,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=TINYINT},
+      gasequ_id = #{record.gasequId,jdbcType=INTEGER},
+      gasequ_name = #{record.gasequName,jdbcType=CHAR},
+      gasequ_fabri = #{record.gasequFabri,jdbcType=CHAR},
+      runtime = #{record.runtime,jdbcType=INTEGER},
+      material_name1 = #{record.materialName1,jdbcType=CHAR},
+      material_usage1 = #{record.materialUsage1,jdbcType=DOUBLE},
+      material_unit1 = #{record.materialUnit1,jdbcType=CHAR},
+      material_name2 = #{record.materialName2,jdbcType=CHAR},
+      material_usage2 = #{record.materialUsage2,jdbcType=DOUBLE},
+      material_unit2 = #{record.materialUnit2,jdbcType=CHAR},
+      material_name3 = #{record.materialName3,jdbcType=CHAR},
+      material_usage3 = #{record.materialUsage3,jdbcType=DOUBLE},
+      material_unit3 = #{record.materialUnit3,jdbcType=CHAR},
+      product_name1 = #{record.productName1,jdbcType=CHAR},
+      product_usage1 = #{record.productUsage1,jdbcType=DOUBLE},
+      product_unit1 = #{record.productUnit1,jdbcType=CHAR},
+      product_name2 = #{record.productName2,jdbcType=CHAR},
+      product_usage2 = #{record.productUsage2,jdbcType=DOUBLE},
+      product_unit2 = #{record.productUnit2,jdbcType=CHAR},
+      product_name3 = #{record.productName3,jdbcType=CHAR},
+      product_usage3 = #{record.productUsage3,jdbcType=DOUBLE},
+      product_unit3 = #{record.productUnit3,jdbcType=CHAR},
+      treat_name = #{record.treatName,jdbcType=CHAR},
+      gasprofabri = #{record.gasprofabri,jdbcType=CHAR},
+      effi = #{record.effi,jdbcType=DOUBLE},
+      activity_meas = #{record.activityMeas,jdbcType=CHAR},
+      activity = #{record.activity,jdbcType=DOUBLE},
+      activity_unit = #{record.activityUnit,jdbcType=CHAR},
+      voc_emi = #{record.vocEmi,jdbcType=DOUBLE},
+      solvent_id = #{record.solventId,jdbcType=INTEGER},
+      scccode = #{record.scccode,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.SolventEqu">
+    update solvent_equ
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=TINYINT},
+      </if>
+      <if test="gasequId != null">
+        gasequ_id = #{gasequId,jdbcType=INTEGER},
+      </if>
+      <if test="gasequName != null">
+        gasequ_name = #{gasequName,jdbcType=CHAR},
+      </if>
+      <if test="gasequFabri != null">
+        gasequ_fabri = #{gasequFabri,jdbcType=CHAR},
+      </if>
+      <if test="runtime != null">
+        runtime = #{runtime,jdbcType=INTEGER},
+      </if>
+      <if test="materialName1 != null">
+        material_name1 = #{materialName1,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage1 != null">
+        material_usage1 = #{materialUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit1 != null">
+        material_unit1 = #{materialUnit1,jdbcType=CHAR},
+      </if>
+      <if test="materialName2 != null">
+        material_name2 = #{materialName2,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage2 != null">
+        material_usage2 = #{materialUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit2 != null">
+        material_unit2 = #{materialUnit2,jdbcType=CHAR},
+      </if>
+      <if test="materialName3 != null">
+        material_name3 = #{materialName3,jdbcType=CHAR},
+      </if>
+      <if test="materialUsage3 != null">
+        material_usage3 = #{materialUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="materialUnit3 != null">
+        material_unit3 = #{materialUnit3,jdbcType=CHAR},
+      </if>
+      <if test="productName1 != null">
+        product_name1 = #{productName1,jdbcType=CHAR},
+      </if>
+      <if test="productUsage1 != null">
+        product_usage1 = #{productUsage1,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit1 != null">
+        product_unit1 = #{productUnit1,jdbcType=CHAR},
+      </if>
+      <if test="productName2 != null">
+        product_name2 = #{productName2,jdbcType=CHAR},
+      </if>
+      <if test="productUsage2 != null">
+        product_usage2 = #{productUsage2,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit2 != null">
+        product_unit2 = #{productUnit2,jdbcType=CHAR},
+      </if>
+      <if test="productName3 != null">
+        product_name3 = #{productName3,jdbcType=CHAR},
+      </if>
+      <if test="productUsage3 != null">
+        product_usage3 = #{productUsage3,jdbcType=DOUBLE},
+      </if>
+      <if test="productUnit3 != null">
+        product_unit3 = #{productUnit3,jdbcType=CHAR},
+      </if>
+      <if test="treatName != null">
+        treat_name = #{treatName,jdbcType=CHAR},
+      </if>
+      <if test="gasprofabri != null">
+        gasprofabri = #{gasprofabri,jdbcType=CHAR},
+      </if>
+      <if test="effi != null">
+        effi = #{effi,jdbcType=DOUBLE},
+      </if>
+      <if test="activityMeas != null">
+        activity_meas = #{activityMeas,jdbcType=CHAR},
+      </if>
+      <if test="activity != null">
+        activity = #{activity,jdbcType=DOUBLE},
+      </if>
+      <if test="activityUnit != null">
+        activity_unit = #{activityUnit,jdbcType=CHAR},
+      </if>
+      <if test="vocEmi != null">
+        voc_emi = #{vocEmi,jdbcType=DOUBLE},
+      </if>
+      <if test="solventId != null">
+        solvent_id = #{solventId,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.SolventEqu">
+    update solvent_equ
+    set number = #{number,jdbcType=TINYINT},
+      gasequ_id = #{gasequId,jdbcType=INTEGER},
+      gasequ_name = #{gasequName,jdbcType=CHAR},
+      gasequ_fabri = #{gasequFabri,jdbcType=CHAR},
+      runtime = #{runtime,jdbcType=INTEGER},
+      material_name1 = #{materialName1,jdbcType=CHAR},
+      material_usage1 = #{materialUsage1,jdbcType=DOUBLE},
+      material_unit1 = #{materialUnit1,jdbcType=CHAR},
+      material_name2 = #{materialName2,jdbcType=CHAR},
+      material_usage2 = #{materialUsage2,jdbcType=DOUBLE},
+      material_unit2 = #{materialUnit2,jdbcType=CHAR},
+      material_name3 = #{materialName3,jdbcType=CHAR},
+      material_usage3 = #{materialUsage3,jdbcType=DOUBLE},
+      material_unit3 = #{materialUnit3,jdbcType=CHAR},
+      product_name1 = #{productName1,jdbcType=CHAR},
+      product_usage1 = #{productUsage1,jdbcType=DOUBLE},
+      product_unit1 = #{productUnit1,jdbcType=CHAR},
+      product_name2 = #{productName2,jdbcType=CHAR},
+      product_usage2 = #{productUsage2,jdbcType=DOUBLE},
+      product_unit2 = #{productUnit2,jdbcType=CHAR},
+      product_name3 = #{productName3,jdbcType=CHAR},
+      product_usage3 = #{productUsage3,jdbcType=DOUBLE},
+      product_unit3 = #{productUnit3,jdbcType=CHAR},
+      treat_name = #{treatName,jdbcType=CHAR},
+      gasprofabri = #{gasprofabri,jdbcType=CHAR},
+      effi = #{effi,jdbcType=DOUBLE},
+      activity_meas = #{activityMeas,jdbcType=CHAR},
+      activity = #{activity,jdbcType=DOUBLE},
+      activity_unit = #{activityUnit,jdbcType=CHAR},
+      voc_emi = #{vocEmi,jdbcType=DOUBLE},
+      solvent_id = #{solventId,jdbcType=INTEGER},
+      scccode = #{scccode,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

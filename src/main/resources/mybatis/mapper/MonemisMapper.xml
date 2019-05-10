@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.MonemisMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Monemis">
+    <id column="CellID" jdbcType="CHAR" property="cellid" />
+    <id column="DateID" jdbcType="TIMESTAMP" property="dateid" />
+    <result column="mon_VOC" jdbcType="DOUBLE" property="monVoc" />
+    <result column="mon_NH3" jdbcType="DOUBLE" property="monNh3" />
+    <result column="mon_NO" jdbcType="DOUBLE" property="monNo" />
+    <result column="mon_NO2" jdbcType="DOUBLE" property="monNo2" />
+    <result column="mon_CO" jdbcType="DOUBLE" property="monCo" />
+    <result column="mon_SO2" jdbcType="DOUBLE" property="monSo2" />
+    <result column="mon_PM10" jdbcType="DOUBLE" property="monPm10" />
+    <result column="mon_PM25" jdbcType="DOUBLE" property="monPm25" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CellID, DateID, mon_VOC, mon_NH3, mon_NO, mon_NO2, mon_CO, mon_SO2, mon_PM10, mon_PM25
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.MonemisExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from monemis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.nankai.xining.bean.MonemisKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from monemis
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.nankai.xining.bean.MonemisKey">
+    delete from monemis
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.MonemisExample">
+    delete from monemis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Monemis">
+    insert into monemis (CellID, DateID, mon_VOC, 
+      mon_NH3, mon_NO, mon_NO2, 
+      mon_CO, mon_SO2, mon_PM10, 
+      mon_PM25)
+    values (#{cellid,jdbcType=CHAR}, #{dateid,jdbcType=TIMESTAMP}, #{monVoc,jdbcType=DOUBLE}, 
+      #{monNh3,jdbcType=DOUBLE}, #{monNo,jdbcType=DOUBLE}, #{monNo2,jdbcType=DOUBLE}, 
+      #{monCo,jdbcType=DOUBLE}, #{monSo2,jdbcType=DOUBLE}, #{monPm10,jdbcType=DOUBLE}, 
+      #{monPm25,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Monemis">
+    insert into monemis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cellid != null">
+        CellID,
+      </if>
+      <if test="dateid != null">
+        DateID,
+      </if>
+      <if test="monVoc != null">
+        mon_VOC,
+      </if>
+      <if test="monNh3 != null">
+        mon_NH3,
+      </if>
+      <if test="monNo != null">
+        mon_NO,
+      </if>
+      <if test="monNo2 != null">
+        mon_NO2,
+      </if>
+      <if test="monCo != null">
+        mon_CO,
+      </if>
+      <if test="monSo2 != null">
+        mon_SO2,
+      </if>
+      <if test="monPm10 != null">
+        mon_PM10,
+      </if>
+      <if test="monPm25 != null">
+        mon_PM25,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cellid != null">
+        #{cellid,jdbcType=CHAR},
+      </if>
+      <if test="dateid != null">
+        #{dateid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monVoc != null">
+        #{monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="monNh3 != null">
+        #{monNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo != null">
+        #{monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo2 != null">
+        #{monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monCo != null">
+        #{monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="monSo2 != null">
+        #{monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm10 != null">
+        #{monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm25 != null">
+        #{monPm25,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.MonemisExample" resultType="java.lang.Long">
+    select count(*) from monemis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update monemis
+    <set>
+      <if test="record.cellid != null">
+        CellID = #{record.cellid,jdbcType=CHAR},
+      </if>
+      <if test="record.dateid != null">
+        DateID = #{record.dateid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.monVoc != null">
+        mon_VOC = #{record.monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNh3 != null">
+        mon_NH3 = #{record.monNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNo != null">
+        mon_NO = #{record.monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNo2 != null">
+        mon_NO2 = #{record.monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monCo != null">
+        mon_CO = #{record.monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monSo2 != null">
+        mon_SO2 = #{record.monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monPm10 != null">
+        mon_PM10 = #{record.monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monPm25 != null">
+        mon_PM25 = #{record.monPm25,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update monemis
+    set CellID = #{record.cellid,jdbcType=CHAR},
+      DateID = #{record.dateid,jdbcType=TIMESTAMP},
+      mon_VOC = #{record.monVoc,jdbcType=DOUBLE},
+      mon_NH3 = #{record.monNh3,jdbcType=DOUBLE},
+      mon_NO = #{record.monNo,jdbcType=DOUBLE},
+      mon_NO2 = #{record.monNo2,jdbcType=DOUBLE},
+      mon_CO = #{record.monCo,jdbcType=DOUBLE},
+      mon_SO2 = #{record.monSo2,jdbcType=DOUBLE},
+      mon_PM10 = #{record.monPm10,jdbcType=DOUBLE},
+      mon_PM25 = #{record.monPm25,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Monemis">
+    update monemis
+    <set>
+      <if test="monVoc != null">
+        mon_VOC = #{monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="monNh3 != null">
+        mon_NH3 = #{monNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo != null">
+        mon_NO = #{monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo2 != null">
+        mon_NO2 = #{monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monCo != null">
+        mon_CO = #{monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="monSo2 != null">
+        mon_SO2 = #{monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm10 != null">
+        mon_PM10 = #{monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm25 != null">
+        mon_PM25 = #{monPm25,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Monemis">
+    update monemis
+    set mon_VOC = #{monVoc,jdbcType=DOUBLE},
+      mon_NH3 = #{monNh3,jdbcType=DOUBLE},
+      mon_NO = #{monNo,jdbcType=DOUBLE},
+      mon_NO2 = #{monNo2,jdbcType=DOUBLE},
+      mon_CO = #{monCo,jdbcType=DOUBLE},
+      mon_SO2 = #{monSo2,jdbcType=DOUBLE},
+      mon_PM10 = #{monPm10,jdbcType=DOUBLE},
+      mon_PM25 = #{monPm25,jdbcType=DOUBLE}
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

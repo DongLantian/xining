@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.KilnMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Kiln">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="EXHUST_ID" jdbcType="INTEGER" property="exhustId" />
+    <result column="TKILN_ID" jdbcType="INTEGER" property="tkilnId" />
+    <result column="NK_NO" jdbcType="INTEGER" property="nkNo" />
+    <result column="KILN_NO" jdbcType="CHAR" property="kilnNo" />
+    <result column="FUNCTION_Dec" jdbcType="VARCHAR" property="functionDec" />
+    <result column="FUNCTIO" jdbcType="CHAR" property="functio" />
+    <result column="MODEL_DEC" jdbcType="VARCHAR" property="modelDec" />
+    <result column="KILN_MODEL" jdbcType="CHAR" property="kilnModel" />
+    <result column="MODEL" jdbcType="VARCHAR" property="model" />
+    <result column="fueltype_dec" jdbcType="VARCHAR" property="fueltypeDec" />
+    <result column="fueltype" jdbcType="CHAR" property="fueltype" />
+    <result column="KILN_FUEL_AUSAGE" jdbcType="DOUBLE" property="kilnFuelAusage" />
+    <result column="KILN_FUEL_AUSAGEUNIT" jdbcType="VARCHAR" property="kilnFuelAusageunit" />
+    <result column="NITREREMOVEDEC" jdbcType="VARCHAR" property="nitreremovedec" />
+    <result column="NITREREMOVEID" jdbcType="INTEGER" property="nitreremoveid" />
+    <result column="DUSTREMOVEDEC" jdbcType="VARCHAR" property="dustremovedec" />
+    <result column="DUSTREMOVEID" jdbcType="INTEGER" property="dustremoveid" />
+    <result column="SULPHURREMOVEDEC" jdbcType="VARCHAR" property="sulphurremovedec" />
+    <result column="SULPHURREMOVEID" jdbcType="INTEGER" property="sulphurremoveid" />
+    <result column="EXF_NO" jdbcType="TINYINT" property="exfNo" />
+    <result column="COALASH" jdbcType="DOUBLE" property="coalash" />
+    <result column="coal_volatilisation" jdbcType="DOUBLE" property="coalVolatilisation" />
+    <result column="COALSULFUR" jdbcType="DOUBLE" property="coalsulfur" />
+    <result column="factor_pm10" jdbcType="DOUBLE" property="factorPm10" />
+    <result column="factor_status" jdbcType="TINYINT" property="factorStatus" />
+    <result column="PM10" jdbcType="DOUBLE" property="pm10" />
+    <result column="factor_pm25" jdbcType="DOUBLE" property="factorPm25" />
+    <result column="PM25" jdbcType="DOUBLE" property="pm25" />
+    <result column="factor_CO" jdbcType="DOUBLE" property="factorCo" />
+    <result column="CO" jdbcType="DOUBLE" property="co" />
+    <result column="factor_VOC" jdbcType="DOUBLE" property="factorVoc" />
+    <result column="VOC" jdbcType="DOUBLE" property="voc" />
+    <result column="factor_PM" jdbcType="DOUBLE" property="factorPm" />
+    <result column="PM" jdbcType="DOUBLE" property="pm" />
+    <result column="factor_SO2" jdbcType="DOUBLE" property="factorSo2" />
+    <result column="SO2" jdbcType="DOUBLE" property="so2" />
+    <result column="factor_NOX" jdbcType="DOUBLE" property="factorNox" />
+    <result column="NOX" jdbcType="DOUBLE" property="nox" />
+    <result column="factor_NH3" jdbcType="DOUBLE" property="factorNh3" />
+    <result column="NH3" jdbcType="DOUBLE" property="nh3" />
+    <result column="factor_OC" jdbcType="DOUBLE" property="factorOc" />
+    <result column="OC" jdbcType="DOUBLE" property="oc" />
+    <result column="factor_BC" jdbcType="DOUBLE" property="factorBc" />
+    <result column="BC" jdbcType="DOUBLE" property="bc" />
+    <result column="SCCCODE" jdbcType="CHAR" property="scccode" />
+    <result column="feiqiti" jdbcType="DOUBLE" property="feiqiti" />
+    <result column="so2out" jdbcType="DOUBLE" property="so2out" />
+    <result column="pmout" jdbcType="DOUBLE" property="pmout" />
+    <result column="noxout" jdbcType="DOUBLE" property="noxout" />
+    <result column="Jan_useamount" jdbcType="DOUBLE" property="janUseamount" />
+    <result column="Feb_useamount" jdbcType="DOUBLE" property="febUseamount" />
+    <result column="Mar_useamount" jdbcType="DOUBLE" property="marUseamount" />
+    <result column="Apr_useamount" jdbcType="DOUBLE" property="aprUseamount" />
+    <result column="May_useamount" jdbcType="DOUBLE" property="mayUseamount" />
+    <result column="June_useamount" jdbcType="DOUBLE" property="juneUseamount" />
+    <result column="July_useamount" jdbcType="DOUBLE" property="julyUseamount" />
+    <result column="aug_useamount" jdbcType="DOUBLE" property="augUseamount" />
+    <result column="sept_useamount" jdbcType="DOUBLE" property="septUseamount" />
+    <result column="oct_use_amount" jdbcType="DOUBLE" property="octUseAmount" />
+    <result column="nov_useamount" jdbcType="DOUBLE" property="novUseamount" />
+    <result column="dec_useamount" jdbcType="DOUBLE" property="decUseamount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, EXHUST_ID, TKILN_ID, NK_NO, KILN_NO, FUNCTION_Dec, FUNCTIO, MODEL_DEC, KILN_MODEL, 
+    MODEL, fueltype_dec, fueltype, KILN_FUEL_AUSAGE, KILN_FUEL_AUSAGEUNIT, NITREREMOVEDEC, 
+    NITREREMOVEID, DUSTREMOVEDEC, DUSTREMOVEID, SULPHURREMOVEDEC, SULPHURREMOVEID, EXF_NO, 
+    COALASH, coal_volatilisation, COALSULFUR, factor_pm10, factor_status, PM10, factor_pm25, 
+    PM25, factor_CO, CO, factor_VOC, VOC, factor_PM, PM, factor_SO2, SO2, factor_NOX, 
+    NOX, factor_NH3, NH3, factor_OC, OC, factor_BC, BC, SCCCODE, feiqiti, so2out, pmout, 
+    noxout, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, May_useamount, 
+    June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount, nov_useamount, 
+    dec_useamount
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.KilnExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from kiln
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from kiln
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from kiln
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.KilnExample">
+    delete from kiln
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Kiln">
+    insert into kiln (ID, EXHUST_ID, TKILN_ID, 
+      NK_NO, KILN_NO, FUNCTION_Dec, 
+      FUNCTIO, MODEL_DEC, KILN_MODEL, 
+      MODEL, fueltype_dec, fueltype, 
+      KILN_FUEL_AUSAGE, KILN_FUEL_AUSAGEUNIT, NITREREMOVEDEC, 
+      NITREREMOVEID, DUSTREMOVEDEC, DUSTREMOVEID, 
+      SULPHURREMOVEDEC, SULPHURREMOVEID, EXF_NO, 
+      COALASH, coal_volatilisation, COALSULFUR, 
+      factor_pm10, factor_status, PM10, 
+      factor_pm25, PM25, factor_CO, 
+      CO, factor_VOC, VOC, factor_PM, 
+      PM, factor_SO2, SO2, factor_NOX, 
+      NOX, factor_NH3, NH3, factor_OC, 
+      OC, factor_BC, BC, SCCCODE, 
+      feiqiti, so2out, pmout, 
+      noxout, Jan_useamount, Feb_useamount, 
+      Mar_useamount, Apr_useamount, May_useamount, 
+      June_useamount, July_useamount, aug_useamount, 
+      sept_useamount, oct_use_amount, nov_useamount, 
+      dec_useamount)
+    values (#{id,jdbcType=INTEGER}, #{exhustId,jdbcType=INTEGER}, #{tkilnId,jdbcType=INTEGER}, 
+      #{nkNo,jdbcType=INTEGER}, #{kilnNo,jdbcType=CHAR}, #{functionDec,jdbcType=VARCHAR}, 
+      #{functio,jdbcType=CHAR}, #{modelDec,jdbcType=VARCHAR}, #{kilnModel,jdbcType=CHAR}, 
+      #{model,jdbcType=VARCHAR}, #{fueltypeDec,jdbcType=VARCHAR}, #{fueltype,jdbcType=CHAR}, 
+      #{kilnFuelAusage,jdbcType=DOUBLE}, #{kilnFuelAusageunit,jdbcType=VARCHAR}, #{nitreremovedec,jdbcType=VARCHAR}, 
+      #{nitreremoveid,jdbcType=INTEGER}, #{dustremovedec,jdbcType=VARCHAR}, #{dustremoveid,jdbcType=INTEGER}, 
+      #{sulphurremovedec,jdbcType=VARCHAR}, #{sulphurremoveid,jdbcType=INTEGER}, #{exfNo,jdbcType=TINYINT}, 
+      #{coalash,jdbcType=DOUBLE}, #{coalVolatilisation,jdbcType=DOUBLE}, #{coalsulfur,jdbcType=DOUBLE}, 
+      #{factorPm10,jdbcType=DOUBLE}, #{factorStatus,jdbcType=TINYINT}, #{pm10,jdbcType=DOUBLE}, 
+      #{factorPm25,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, #{factorCo,jdbcType=DOUBLE}, 
+      #{co,jdbcType=DOUBLE}, #{factorVoc,jdbcType=DOUBLE}, #{voc,jdbcType=DOUBLE}, #{factorPm,jdbcType=DOUBLE}, 
+      #{pm,jdbcType=DOUBLE}, #{factorSo2,jdbcType=DOUBLE}, #{so2,jdbcType=DOUBLE}, #{factorNox,jdbcType=DOUBLE}, 
+      #{nox,jdbcType=DOUBLE}, #{factorNh3,jdbcType=DOUBLE}, #{nh3,jdbcType=DOUBLE}, #{factorOc,jdbcType=DOUBLE}, 
+      #{oc,jdbcType=DOUBLE}, #{factorBc,jdbcType=DOUBLE}, #{bc,jdbcType=DOUBLE}, #{scccode,jdbcType=CHAR}, 
+      #{feiqiti,jdbcType=DOUBLE}, #{so2out,jdbcType=DOUBLE}, #{pmout,jdbcType=DOUBLE}, 
+      #{noxout,jdbcType=DOUBLE}, #{janUseamount,jdbcType=DOUBLE}, #{febUseamount,jdbcType=DOUBLE}, 
+      #{marUseamount,jdbcType=DOUBLE}, #{aprUseamount,jdbcType=DOUBLE}, #{mayUseamount,jdbcType=DOUBLE}, 
+      #{juneUseamount,jdbcType=DOUBLE}, #{julyUseamount,jdbcType=DOUBLE}, #{augUseamount,jdbcType=DOUBLE}, 
+      #{septUseamount,jdbcType=DOUBLE}, #{octUseAmount,jdbcType=DOUBLE}, #{novUseamount,jdbcType=DOUBLE}, 
+      #{decUseamount,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Kiln">
+    insert into kiln
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="exhustId != null">
+        EXHUST_ID,
+      </if>
+      <if test="tkilnId != null">
+        TKILN_ID,
+      </if>
+      <if test="nkNo != null">
+        NK_NO,
+      </if>
+      <if test="kilnNo != null">
+        KILN_NO,
+      </if>
+      <if test="functionDec != null">
+        FUNCTION_Dec,
+      </if>
+      <if test="functio != null">
+        FUNCTIO,
+      </if>
+      <if test="modelDec != null">
+        MODEL_DEC,
+      </if>
+      <if test="kilnModel != null">
+        KILN_MODEL,
+      </if>
+      <if test="model != null">
+        MODEL,
+      </if>
+      <if test="fueltypeDec != null">
+        fueltype_dec,
+      </if>
+      <if test="fueltype != null">
+        fueltype,
+      </if>
+      <if test="kilnFuelAusage != null">
+        KILN_FUEL_AUSAGE,
+      </if>
+      <if test="kilnFuelAusageunit != null">
+        KILN_FUEL_AUSAGEUNIT,
+      </if>
+      <if test="nitreremovedec != null">
+        NITREREMOVEDEC,
+      </if>
+      <if test="nitreremoveid != null">
+        NITREREMOVEID,
+      </if>
+      <if test="dustremovedec != null">
+        DUSTREMOVEDEC,
+      </if>
+      <if test="dustremoveid != null">
+        DUSTREMOVEID,
+      </if>
+      <if test="sulphurremovedec != null">
+        SULPHURREMOVEDEC,
+      </if>
+      <if test="sulphurremoveid != null">
+        SULPHURREMOVEID,
+      </if>
+      <if test="exfNo != null">
+        EXF_NO,
+      </if>
+      <if test="coalash != null">
+        COALASH,
+      </if>
+      <if test="coalVolatilisation != null">
+        coal_volatilisation,
+      </if>
+      <if test="coalsulfur != null">
+        COALSULFUR,
+      </if>
+      <if test="factorPm10 != null">
+        factor_pm10,
+      </if>
+      <if test="factorStatus != null">
+        factor_status,
+      </if>
+      <if test="pm10 != null">
+        PM10,
+      </if>
+      <if test="factorPm25 != null">
+        factor_pm25,
+      </if>
+      <if test="pm25 != null">
+        PM25,
+      </if>
+      <if test="factorCo != null">
+        factor_CO,
+      </if>
+      <if test="co != null">
+        CO,
+      </if>
+      <if test="factorVoc != null">
+        factor_VOC,
+      </if>
+      <if test="voc != null">
+        VOC,
+      </if>
+      <if test="factorPm != null">
+        factor_PM,
+      </if>
+      <if test="pm != null">
+        PM,
+      </if>
+      <if test="factorSo2 != null">
+        factor_SO2,
+      </if>
+      <if test="so2 != null">
+        SO2,
+      </if>
+      <if test="factorNox != null">
+        factor_NOX,
+      </if>
+      <if test="nox != null">
+        NOX,
+      </if>
+      <if test="factorNh3 != null">
+        factor_NH3,
+      </if>
+      <if test="nh3 != null">
+        NH3,
+      </if>
+      <if test="factorOc != null">
+        factor_OC,
+      </if>
+      <if test="oc != null">
+        OC,
+      </if>
+      <if test="factorBc != null">
+        factor_BC,
+      </if>
+      <if test="bc != null">
+        BC,
+      </if>
+      <if test="scccode != null">
+        SCCCODE,
+      </if>
+      <if test="feiqiti != null">
+        feiqiti,
+      </if>
+      <if test="so2out != null">
+        so2out,
+      </if>
+      <if test="pmout != null">
+        pmout,
+      </if>
+      <if test="noxout != null">
+        noxout,
+      </if>
+      <if test="janUseamount != null">
+        Jan_useamount,
+      </if>
+      <if test="febUseamount != null">
+        Feb_useamount,
+      </if>
+      <if test="marUseamount != null">
+        Mar_useamount,
+      </if>
+      <if test="aprUseamount != null">
+        Apr_useamount,
+      </if>
+      <if test="mayUseamount != null">
+        May_useamount,
+      </if>
+      <if test="juneUseamount != null">
+        June_useamount,
+      </if>
+      <if test="julyUseamount != null">
+        July_useamount,
+      </if>
+      <if test="augUseamount != null">
+        aug_useamount,
+      </if>
+      <if test="septUseamount != null">
+        sept_useamount,
+      </if>
+      <if test="octUseAmount != null">
+        oct_use_amount,
+      </if>
+      <if test="novUseamount != null">
+        nov_useamount,
+      </if>
+      <if test="decUseamount != null">
+        dec_useamount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="exhustId != null">
+        #{exhustId,jdbcType=INTEGER},
+      </if>
+      <if test="tkilnId != null">
+        #{tkilnId,jdbcType=INTEGER},
+      </if>
+      <if test="nkNo != null">
+        #{nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="kilnNo != null">
+        #{kilnNo,jdbcType=CHAR},
+      </if>
+      <if test="functionDec != null">
+        #{functionDec,jdbcType=VARCHAR},
+      </if>
+      <if test="functio != null">
+        #{functio,jdbcType=CHAR},
+      </if>
+      <if test="modelDec != null">
+        #{modelDec,jdbcType=VARCHAR},
+      </if>
+      <if test="kilnModel != null">
+        #{kilnModel,jdbcType=CHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltypeDec != null">
+        #{fueltypeDec,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltype != null">
+        #{fueltype,jdbcType=CHAR},
+      </if>
+      <if test="kilnFuelAusage != null">
+        #{kilnFuelAusage,jdbcType=DOUBLE},
+      </if>
+      <if test="kilnFuelAusageunit != null">
+        #{kilnFuelAusageunit,jdbcType=VARCHAR},
+      </if>
+      <if test="nitreremovedec != null">
+        #{nitreremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="nitreremoveid != null">
+        #{nitreremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="dustremovedec != null">
+        #{dustremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="dustremoveid != null">
+        #{dustremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="sulphurremovedec != null">
+        #{sulphurremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="sulphurremoveid != null">
+        #{sulphurremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="exfNo != null">
+        #{exfNo,jdbcType=TINYINT},
+      </if>
+      <if test="coalash != null">
+        #{coalash,jdbcType=DOUBLE},
+      </if>
+      <if test="coalVolatilisation != null">
+        #{coalVolatilisation,jdbcType=DOUBLE},
+      </if>
+      <if test="coalsulfur != null">
+        #{coalsulfur,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm10 != null">
+        #{factorPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="factorStatus != null">
+        #{factorStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pm10 != null">
+        #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm25 != null">
+        #{factorPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="factorCo != null">
+        #{factorCo,jdbcType=DOUBLE},
+      </if>
+      <if test="co != null">
+        #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="factorVoc != null">
+        #{factorVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="voc != null">
+        #{voc,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm != null">
+        #{factorPm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm != null">
+        #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="factorSo2 != null">
+        #{factorSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="so2 != null">
+        #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="factorNox != null">
+        #{factorNox,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="factorNh3 != null">
+        #{factorNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3 != null">
+        #{nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="factorOc != null">
+        #{factorOc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="factorBc != null">
+        #{factorBc,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="feiqiti != null">
+        #{feiqiti,jdbcType=DOUBLE},
+      </if>
+      <if test="so2out != null">
+        #{so2out,jdbcType=DOUBLE},
+      </if>
+      <if test="pmout != null">
+        #{pmout,jdbcType=DOUBLE},
+      </if>
+      <if test="noxout != null">
+        #{noxout,jdbcType=DOUBLE},
+      </if>
+      <if test="janUseamount != null">
+        #{janUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="febUseamount != null">
+        #{febUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="marUseamount != null">
+        #{marUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="aprUseamount != null">
+        #{aprUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="mayUseamount != null">
+        #{mayUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="juneUseamount != null">
+        #{juneUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="julyUseamount != null">
+        #{julyUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="augUseamount != null">
+        #{augUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="septUseamount != null">
+        #{septUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="octUseAmount != null">
+        #{octUseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="novUseamount != null">
+        #{novUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="decUseamount != null">
+        #{decUseamount,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.KilnExample" resultType="java.lang.Long">
+    select count(*) from kiln
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update kiln
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.exhustId != null">
+        EXHUST_ID = #{record.exhustId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tkilnId != null">
+        TKILN_ID = #{record.tkilnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nkNo != null">
+        NK_NO = #{record.nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.kilnNo != null">
+        KILN_NO = #{record.kilnNo,jdbcType=CHAR},
+      </if>
+      <if test="record.functionDec != null">
+        FUNCTION_Dec = #{record.functionDec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.functio != null">
+        FUNCTIO = #{record.functio,jdbcType=CHAR},
+      </if>
+      <if test="record.modelDec != null">
+        MODEL_DEC = #{record.modelDec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kilnModel != null">
+        KILN_MODEL = #{record.kilnModel,jdbcType=CHAR},
+      </if>
+      <if test="record.model != null">
+        MODEL = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fueltypeDec != null">
+        fueltype_dec = #{record.fueltypeDec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fueltype != null">
+        fueltype = #{record.fueltype,jdbcType=CHAR},
+      </if>
+      <if test="record.kilnFuelAusage != null">
+        KILN_FUEL_AUSAGE = #{record.kilnFuelAusage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kilnFuelAusageunit != null">
+        KILN_FUEL_AUSAGEUNIT = #{record.kilnFuelAusageunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nitreremovedec != null">
+        NITREREMOVEDEC = #{record.nitreremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nitreremoveid != null">
+        NITREREMOVEID = #{record.nitreremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dustremovedec != null">
+        DUSTREMOVEDEC = #{record.dustremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dustremoveid != null">
+        DUSTREMOVEID = #{record.dustremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sulphurremovedec != null">
+        SULPHURREMOVEDEC = #{record.sulphurremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sulphurremoveid != null">
+        SULPHURREMOVEID = #{record.sulphurremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="record.exfNo != null">
+        EXF_NO = #{record.exfNo,jdbcType=TINYINT},
+      </if>
+      <if test="record.coalash != null">
+        COALASH = #{record.coalash,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coalVolatilisation != null">
+        coal_volatilisation = #{record.coalVolatilisation,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coalsulfur != null">
+        COALSULFUR = #{record.coalsulfur,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorPm10 != null">
+        factor_pm10 = #{record.factorPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorStatus != null">
+        factor_status = #{record.factorStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.pm10 != null">
+        PM10 = #{record.pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorPm25 != null">
+        factor_pm25 = #{record.factorPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25 != null">
+        PM25 = #{record.pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorCo != null">
+        factor_CO = #{record.factorCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.co != null">
+        CO = #{record.co,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorVoc != null">
+        factor_VOC = #{record.factorVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.voc != null">
+        VOC = #{record.voc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorPm != null">
+        factor_PM = #{record.factorPm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm != null">
+        PM = #{record.pm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorSo2 != null">
+        factor_SO2 = #{record.factorSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2 != null">
+        SO2 = #{record.so2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorNox != null">
+        factor_NOX = #{record.factorNox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nox != null">
+        NOX = #{record.nox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorNh3 != null">
+        factor_NH3 = #{record.factorNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3 != null">
+        NH3 = #{record.nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorOc != null">
+        factor_OC = #{record.factorOc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oc != null">
+        OC = #{record.oc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factorBc != null">
+        factor_BC = #{record.factorBc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bc != null">
+        BC = #{record.bc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.scccode != null">
+        SCCCODE = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.feiqiti != null">
+        feiqiti = #{record.feiqiti,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2out != null">
+        so2out = #{record.so2out,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pmout != null">
+        pmout = #{record.pmout,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxout != null">
+        noxout = #{record.noxout,jdbcType=DOUBLE},
+      </if>
+      <if test="record.janUseamount != null">
+        Jan_useamount = #{record.janUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.febUseamount != null">
+        Feb_useamount = #{record.febUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.marUseamount != null">
+        Mar_useamount = #{record.marUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aprUseamount != null">
+        Apr_useamount = #{record.aprUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mayUseamount != null">
+        May_useamount = #{record.mayUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.juneUseamount != null">
+        June_useamount = #{record.juneUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.julyUseamount != null">
+        July_useamount = #{record.julyUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.augUseamount != null">
+        aug_useamount = #{record.augUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.septUseamount != null">
+        sept_useamount = #{record.septUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.octUseAmount != null">
+        oct_use_amount = #{record.octUseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.novUseamount != null">
+        nov_useamount = #{record.novUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.decUseamount != null">
+        dec_useamount = #{record.decUseamount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update kiln
+    set ID = #{record.id,jdbcType=INTEGER},
+      EXHUST_ID = #{record.exhustId,jdbcType=INTEGER},
+      TKILN_ID = #{record.tkilnId,jdbcType=INTEGER},
+      NK_NO = #{record.nkNo,jdbcType=INTEGER},
+      KILN_NO = #{record.kilnNo,jdbcType=CHAR},
+      FUNCTION_Dec = #{record.functionDec,jdbcType=VARCHAR},
+      FUNCTIO = #{record.functio,jdbcType=CHAR},
+      MODEL_DEC = #{record.modelDec,jdbcType=VARCHAR},
+      KILN_MODEL = #{record.kilnModel,jdbcType=CHAR},
+      MODEL = #{record.model,jdbcType=VARCHAR},
+      fueltype_dec = #{record.fueltypeDec,jdbcType=VARCHAR},
+      fueltype = #{record.fueltype,jdbcType=CHAR},
+      KILN_FUEL_AUSAGE = #{record.kilnFuelAusage,jdbcType=DOUBLE},
+      KILN_FUEL_AUSAGEUNIT = #{record.kilnFuelAusageunit,jdbcType=VARCHAR},
+      NITREREMOVEDEC = #{record.nitreremovedec,jdbcType=VARCHAR},
+      NITREREMOVEID = #{record.nitreremoveid,jdbcType=INTEGER},
+      DUSTREMOVEDEC = #{record.dustremovedec,jdbcType=VARCHAR},
+      DUSTREMOVEID = #{record.dustremoveid,jdbcType=INTEGER},
+      SULPHURREMOVEDEC = #{record.sulphurremovedec,jdbcType=VARCHAR},
+      SULPHURREMOVEID = #{record.sulphurremoveid,jdbcType=INTEGER},
+      EXF_NO = #{record.exfNo,jdbcType=TINYINT},
+      COALASH = #{record.coalash,jdbcType=DOUBLE},
+      coal_volatilisation = #{record.coalVolatilisation,jdbcType=DOUBLE},
+      COALSULFUR = #{record.coalsulfur,jdbcType=DOUBLE},
+      factor_pm10 = #{record.factorPm10,jdbcType=DOUBLE},
+      factor_status = #{record.factorStatus,jdbcType=TINYINT},
+      PM10 = #{record.pm10,jdbcType=DOUBLE},
+      factor_pm25 = #{record.factorPm25,jdbcType=DOUBLE},
+      PM25 = #{record.pm25,jdbcType=DOUBLE},
+      factor_CO = #{record.factorCo,jdbcType=DOUBLE},
+      CO = #{record.co,jdbcType=DOUBLE},
+      factor_VOC = #{record.factorVoc,jdbcType=DOUBLE},
+      VOC = #{record.voc,jdbcType=DOUBLE},
+      factor_PM = #{record.factorPm,jdbcType=DOUBLE},
+      PM = #{record.pm,jdbcType=DOUBLE},
+      factor_SO2 = #{record.factorSo2,jdbcType=DOUBLE},
+      SO2 = #{record.so2,jdbcType=DOUBLE},
+      factor_NOX = #{record.factorNox,jdbcType=DOUBLE},
+      NOX = #{record.nox,jdbcType=DOUBLE},
+      factor_NH3 = #{record.factorNh3,jdbcType=DOUBLE},
+      NH3 = #{record.nh3,jdbcType=DOUBLE},
+      factor_OC = #{record.factorOc,jdbcType=DOUBLE},
+      OC = #{record.oc,jdbcType=DOUBLE},
+      factor_BC = #{record.factorBc,jdbcType=DOUBLE},
+      BC = #{record.bc,jdbcType=DOUBLE},
+      SCCCODE = #{record.scccode,jdbcType=CHAR},
+      feiqiti = #{record.feiqiti,jdbcType=DOUBLE},
+      so2out = #{record.so2out,jdbcType=DOUBLE},
+      pmout = #{record.pmout,jdbcType=DOUBLE},
+      noxout = #{record.noxout,jdbcType=DOUBLE},
+      Jan_useamount = #{record.janUseamount,jdbcType=DOUBLE},
+      Feb_useamount = #{record.febUseamount,jdbcType=DOUBLE},
+      Mar_useamount = #{record.marUseamount,jdbcType=DOUBLE},
+      Apr_useamount = #{record.aprUseamount,jdbcType=DOUBLE},
+      May_useamount = #{record.mayUseamount,jdbcType=DOUBLE},
+      June_useamount = #{record.juneUseamount,jdbcType=DOUBLE},
+      July_useamount = #{record.julyUseamount,jdbcType=DOUBLE},
+      aug_useamount = #{record.augUseamount,jdbcType=DOUBLE},
+      sept_useamount = #{record.septUseamount,jdbcType=DOUBLE},
+      oct_use_amount = #{record.octUseAmount,jdbcType=DOUBLE},
+      nov_useamount = #{record.novUseamount,jdbcType=DOUBLE},
+      dec_useamount = #{record.decUseamount,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Kiln">
+    update kiln
+    <set>
+      <if test="exhustId != null">
+        EXHUST_ID = #{exhustId,jdbcType=INTEGER},
+      </if>
+      <if test="tkilnId != null">
+        TKILN_ID = #{tkilnId,jdbcType=INTEGER},
+      </if>
+      <if test="nkNo != null">
+        NK_NO = #{nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="kilnNo != null">
+        KILN_NO = #{kilnNo,jdbcType=CHAR},
+      </if>
+      <if test="functionDec != null">
+        FUNCTION_Dec = #{functionDec,jdbcType=VARCHAR},
+      </if>
+      <if test="functio != null">
+        FUNCTIO = #{functio,jdbcType=CHAR},
+      </if>
+      <if test="modelDec != null">
+        MODEL_DEC = #{modelDec,jdbcType=VARCHAR},
+      </if>
+      <if test="kilnModel != null">
+        KILN_MODEL = #{kilnModel,jdbcType=CHAR},
+      </if>
+      <if test="model != null">
+        MODEL = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltypeDec != null">
+        fueltype_dec = #{fueltypeDec,jdbcType=VARCHAR},
+      </if>
+      <if test="fueltype != null">
+        fueltype = #{fueltype,jdbcType=CHAR},
+      </if>
+      <if test="kilnFuelAusage != null">
+        KILN_FUEL_AUSAGE = #{kilnFuelAusage,jdbcType=DOUBLE},
+      </if>
+      <if test="kilnFuelAusageunit != null">
+        KILN_FUEL_AUSAGEUNIT = #{kilnFuelAusageunit,jdbcType=VARCHAR},
+      </if>
+      <if test="nitreremovedec != null">
+        NITREREMOVEDEC = #{nitreremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="nitreremoveid != null">
+        NITREREMOVEID = #{nitreremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="dustremovedec != null">
+        DUSTREMOVEDEC = #{dustremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="dustremoveid != null">
+        DUSTREMOVEID = #{dustremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="sulphurremovedec != null">
+        SULPHURREMOVEDEC = #{sulphurremovedec,jdbcType=VARCHAR},
+      </if>
+      <if test="sulphurremoveid != null">
+        SULPHURREMOVEID = #{sulphurremoveid,jdbcType=INTEGER},
+      </if>
+      <if test="exfNo != null">
+        EXF_NO = #{exfNo,jdbcType=TINYINT},
+      </if>
+      <if test="coalash != null">
+        COALASH = #{coalash,jdbcType=DOUBLE},
+      </if>
+      <if test="coalVolatilisation != null">
+        coal_volatilisation = #{coalVolatilisation,jdbcType=DOUBLE},
+      </if>
+      <if test="coalsulfur != null">
+        COALSULFUR = #{coalsulfur,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm10 != null">
+        factor_pm10 = #{factorPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="factorStatus != null">
+        factor_status = #{factorStatus,jdbcType=TINYINT},
+      </if>
+      <if test="pm10 != null">
+        PM10 = #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm25 != null">
+        factor_pm25 = #{factorPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        PM25 = #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="factorCo != null">
+        factor_CO = #{factorCo,jdbcType=DOUBLE},
+      </if>
+      <if test="co != null">
+        CO = #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="factorVoc != null">
+        factor_VOC = #{factorVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="voc != null">
+        VOC = #{voc,jdbcType=DOUBLE},
+      </if>
+      <if test="factorPm != null">
+        factor_PM = #{factorPm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm != null">
+        PM = #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="factorSo2 != null">
+        factor_SO2 = #{factorSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="so2 != null">
+        SO2 = #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="factorNox != null">
+        factor_NOX = #{factorNox,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        NOX = #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="factorNh3 != null">
+        factor_NH3 = #{factorNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3 != null">
+        NH3 = #{nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="factorOc != null">
+        factor_OC = #{factorOc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        OC = #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="factorBc != null">
+        factor_BC = #{factorBc,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        BC = #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="scccode != null">
+        SCCCODE = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="feiqiti != null">
+        feiqiti = #{feiqiti,jdbcType=DOUBLE},
+      </if>
+      <if test="so2out != null">
+        so2out = #{so2out,jdbcType=DOUBLE},
+      </if>
+      <if test="pmout != null">
+        pmout = #{pmout,jdbcType=DOUBLE},
+      </if>
+      <if test="noxout != null">
+        noxout = #{noxout,jdbcType=DOUBLE},
+      </if>
+      <if test="janUseamount != null">
+        Jan_useamount = #{janUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="febUseamount != null">
+        Feb_useamount = #{febUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="marUseamount != null">
+        Mar_useamount = #{marUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="aprUseamount != null">
+        Apr_useamount = #{aprUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="mayUseamount != null">
+        May_useamount = #{mayUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="juneUseamount != null">
+        June_useamount = #{juneUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="julyUseamount != null">
+        July_useamount = #{julyUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="augUseamount != null">
+        aug_useamount = #{augUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="septUseamount != null">
+        sept_useamount = #{septUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="octUseAmount != null">
+        oct_use_amount = #{octUseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="novUseamount != null">
+        nov_useamount = #{novUseamount,jdbcType=DOUBLE},
+      </if>
+      <if test="decUseamount != null">
+        dec_useamount = #{decUseamount,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Kiln">
+    update kiln
+    set EXHUST_ID = #{exhustId,jdbcType=INTEGER},
+      TKILN_ID = #{tkilnId,jdbcType=INTEGER},
+      NK_NO = #{nkNo,jdbcType=INTEGER},
+      KILN_NO = #{kilnNo,jdbcType=CHAR},
+      FUNCTION_Dec = #{functionDec,jdbcType=VARCHAR},
+      FUNCTIO = #{functio,jdbcType=CHAR},
+      MODEL_DEC = #{modelDec,jdbcType=VARCHAR},
+      KILN_MODEL = #{kilnModel,jdbcType=CHAR},
+      MODEL = #{model,jdbcType=VARCHAR},
+      fueltype_dec = #{fueltypeDec,jdbcType=VARCHAR},
+      fueltype = #{fueltype,jdbcType=CHAR},
+      KILN_FUEL_AUSAGE = #{kilnFuelAusage,jdbcType=DOUBLE},
+      KILN_FUEL_AUSAGEUNIT = #{kilnFuelAusageunit,jdbcType=VARCHAR},
+      NITREREMOVEDEC = #{nitreremovedec,jdbcType=VARCHAR},
+      NITREREMOVEID = #{nitreremoveid,jdbcType=INTEGER},
+      DUSTREMOVEDEC = #{dustremovedec,jdbcType=VARCHAR},
+      DUSTREMOVEID = #{dustremoveid,jdbcType=INTEGER},
+      SULPHURREMOVEDEC = #{sulphurremovedec,jdbcType=VARCHAR},
+      SULPHURREMOVEID = #{sulphurremoveid,jdbcType=INTEGER},
+      EXF_NO = #{exfNo,jdbcType=TINYINT},
+      COALASH = #{coalash,jdbcType=DOUBLE},
+      coal_volatilisation = #{coalVolatilisation,jdbcType=DOUBLE},
+      COALSULFUR = #{coalsulfur,jdbcType=DOUBLE},
+      factor_pm10 = #{factorPm10,jdbcType=DOUBLE},
+      factor_status = #{factorStatus,jdbcType=TINYINT},
+      PM10 = #{pm10,jdbcType=DOUBLE},
+      factor_pm25 = #{factorPm25,jdbcType=DOUBLE},
+      PM25 = #{pm25,jdbcType=DOUBLE},
+      factor_CO = #{factorCo,jdbcType=DOUBLE},
+      CO = #{co,jdbcType=DOUBLE},
+      factor_VOC = #{factorVoc,jdbcType=DOUBLE},
+      VOC = #{voc,jdbcType=DOUBLE},
+      factor_PM = #{factorPm,jdbcType=DOUBLE},
+      PM = #{pm,jdbcType=DOUBLE},
+      factor_SO2 = #{factorSo2,jdbcType=DOUBLE},
+      SO2 = #{so2,jdbcType=DOUBLE},
+      factor_NOX = #{factorNox,jdbcType=DOUBLE},
+      NOX = #{nox,jdbcType=DOUBLE},
+      factor_NH3 = #{factorNh3,jdbcType=DOUBLE},
+      NH3 = #{nh3,jdbcType=DOUBLE},
+      factor_OC = #{factorOc,jdbcType=DOUBLE},
+      OC = #{oc,jdbcType=DOUBLE},
+      factor_BC = #{factorBc,jdbcType=DOUBLE},
+      BC = #{bc,jdbcType=DOUBLE},
+      SCCCODE = #{scccode,jdbcType=CHAR},
+      feiqiti = #{feiqiti,jdbcType=DOUBLE},
+      so2out = #{so2out,jdbcType=DOUBLE},
+      pmout = #{pmout,jdbcType=DOUBLE},
+      noxout = #{noxout,jdbcType=DOUBLE},
+      Jan_useamount = #{janUseamount,jdbcType=DOUBLE},
+      Feb_useamount = #{febUseamount,jdbcType=DOUBLE},
+      Mar_useamount = #{marUseamount,jdbcType=DOUBLE},
+      Apr_useamount = #{aprUseamount,jdbcType=DOUBLE},
+      May_useamount = #{mayUseamount,jdbcType=DOUBLE},
+      June_useamount = #{juneUseamount,jdbcType=DOUBLE},
+      July_useamount = #{julyUseamount,jdbcType=DOUBLE},
+      aug_useamount = #{augUseamount,jdbcType=DOUBLE},
+      sept_useamount = #{septUseamount,jdbcType=DOUBLE},
+      oct_use_amount = #{octUseAmount,jdbcType=DOUBLE},
+      nov_useamount = #{novUseamount,jdbcType=DOUBLE},
+      dec_useamount = #{decUseamount,jdbcType=DOUBLE}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.VocdeviceinfoMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Vocdeviceinfo">
+    <id column="vocdeviceid" jdbcType="INTEGER" property="vocdeviceid" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="vocdevicesurveyid" jdbcType="INTEGER" property="vocdevicesurveyid" />
+    <result column="section" jdbcType="VARCHAR" property="section" />
+    <result column="handleprocess" jdbcType="VARCHAR" property="handleprocess" />
+    <result column="yearruntime" jdbcType="DOUBLE" property="yearruntime" />
+    <result column="dayruntime" jdbcType="DOUBLE" property="dayruntime" />
+    <result column="preprocess" jdbcType="VARCHAR" property="preprocess" />
+    <result column="inconcentration" jdbcType="DOUBLE" property="inconcentration" />
+    <result column="inair" jdbcType="DOUBLE" property="inair" />
+    <result column="outconcentration" jdbcType="DOUBLE" property="outconcentration" />
+    <result column="outair" jdbcType="DOUBLE" property="outair" />
+    <result column="offefficiency" jdbcType="DOUBLE" property="offefficiency" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    vocdeviceid, factory_id, vocdevicesurveyid, section, handleprocess, yearruntime, 
+    dayruntime, preprocess, inconcentration, inair, outconcentration, outair, offefficiency, 
+    status
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.VocdeviceinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vocdeviceinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from vocdeviceinfo
+    where vocdeviceid = #{vocdeviceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from vocdeviceinfo
+    where vocdeviceid = #{vocdeviceid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.VocdeviceinfoExample">
+    delete from vocdeviceinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Vocdeviceinfo">
+    insert into vocdeviceinfo (vocdeviceid, factory_id, vocdevicesurveyid, 
+      section, handleprocess, yearruntime, 
+      dayruntime, preprocess, inconcentration, 
+      inair, outconcentration, outair, 
+      offefficiency, status)
+    values (#{vocdeviceid,jdbcType=INTEGER}, #{factoryId,jdbcType=INTEGER}, #{vocdevicesurveyid,jdbcType=INTEGER}, 
+      #{section,jdbcType=VARCHAR}, #{handleprocess,jdbcType=VARCHAR}, #{yearruntime,jdbcType=DOUBLE}, 
+      #{dayruntime,jdbcType=DOUBLE}, #{preprocess,jdbcType=VARCHAR}, #{inconcentration,jdbcType=DOUBLE}, 
+      #{inair,jdbcType=DOUBLE}, #{outconcentration,jdbcType=DOUBLE}, #{outair,jdbcType=DOUBLE}, 
+      #{offefficiency,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Vocdeviceinfo">
+    insert into vocdeviceinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vocdeviceid != null">
+        vocdeviceid,
+      </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
+      <if test="vocdevicesurveyid != null">
+        vocdevicesurveyid,
+      </if>
+      <if test="section != null">
+        section,
+      </if>
+      <if test="handleprocess != null">
+        handleprocess,
+      </if>
+      <if test="yearruntime != null">
+        yearruntime,
+      </if>
+      <if test="dayruntime != null">
+        dayruntime,
+      </if>
+      <if test="preprocess != null">
+        preprocess,
+      </if>
+      <if test="inconcentration != null">
+        inconcentration,
+      </if>
+      <if test="inair != null">
+        inair,
+      </if>
+      <if test="outconcentration != null">
+        outconcentration,
+      </if>
+      <if test="outair != null">
+        outair,
+      </if>
+      <if test="offefficiency != null">
+        offefficiency,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vocdeviceid != null">
+        #{vocdeviceid,jdbcType=INTEGER},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="vocdevicesurveyid != null">
+        #{vocdevicesurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="handleprocess != null">
+        #{handleprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="yearruntime != null">
+        #{yearruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="dayruntime != null">
+        #{dayruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="preprocess != null">
+        #{preprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="inconcentration != null">
+        #{inconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="inair != null">
+        #{inair,jdbcType=DOUBLE},
+      </if>
+      <if test="outconcentration != null">
+        #{outconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="outair != null">
+        #{outair,jdbcType=DOUBLE},
+      </if>
+      <if test="offefficiency != null">
+        #{offefficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.VocdeviceinfoExample" resultType="java.lang.Long">
+    select count(*) from vocdeviceinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update vocdeviceinfo
+    <set>
+      <if test="record.vocdeviceid != null">
+        vocdeviceid = #{record.vocdeviceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vocdevicesurveyid != null">
+        vocdevicesurveyid = #{record.vocdevicesurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.section != null">
+        section = #{record.section,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handleprocess != null">
+        handleprocess = #{record.handleprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearruntime != null">
+        yearruntime = #{record.yearruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dayruntime != null">
+        dayruntime = #{record.dayruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="record.preprocess != null">
+        preprocess = #{record.preprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inconcentration != null">
+        inconcentration = #{record.inconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.inair != null">
+        inair = #{record.inair,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outconcentration != null">
+        outconcentration = #{record.outconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outair != null">
+        outair = #{record.outair,jdbcType=DOUBLE},
+      </if>
+      <if test="record.offefficiency != null">
+        offefficiency = #{record.offefficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update vocdeviceinfo
+    set vocdeviceid = #{record.vocdeviceid,jdbcType=INTEGER},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      vocdevicesurveyid = #{record.vocdevicesurveyid,jdbcType=INTEGER},
+      section = #{record.section,jdbcType=VARCHAR},
+      handleprocess = #{record.handleprocess,jdbcType=VARCHAR},
+      yearruntime = #{record.yearruntime,jdbcType=DOUBLE},
+      dayruntime = #{record.dayruntime,jdbcType=DOUBLE},
+      preprocess = #{record.preprocess,jdbcType=VARCHAR},
+      inconcentration = #{record.inconcentration,jdbcType=DOUBLE},
+      inair = #{record.inair,jdbcType=DOUBLE},
+      outconcentration = #{record.outconcentration,jdbcType=DOUBLE},
+      outair = #{record.outair,jdbcType=DOUBLE},
+      offefficiency = #{record.offefficiency,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Vocdeviceinfo">
+    update vocdeviceinfo
+    <set>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="vocdevicesurveyid != null">
+        vocdevicesurveyid = #{vocdevicesurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="section != null">
+        section = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="handleprocess != null">
+        handleprocess = #{handleprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="yearruntime != null">
+        yearruntime = #{yearruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="dayruntime != null">
+        dayruntime = #{dayruntime,jdbcType=DOUBLE},
+      </if>
+      <if test="preprocess != null">
+        preprocess = #{preprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="inconcentration != null">
+        inconcentration = #{inconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="inair != null">
+        inair = #{inair,jdbcType=DOUBLE},
+      </if>
+      <if test="outconcentration != null">
+        outconcentration = #{outconcentration,jdbcType=DOUBLE},
+      </if>
+      <if test="outair != null">
+        outair = #{outair,jdbcType=DOUBLE},
+      </if>
+      <if test="offefficiency != null">
+        offefficiency = #{offefficiency,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where vocdeviceid = #{vocdeviceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Vocdeviceinfo">
+    update vocdeviceinfo
+    set factory_id = #{factoryId,jdbcType=INTEGER},
+      vocdevicesurveyid = #{vocdevicesurveyid,jdbcType=INTEGER},
+      section = #{section,jdbcType=VARCHAR},
+      handleprocess = #{handleprocess,jdbcType=VARCHAR},
+      yearruntime = #{yearruntime,jdbcType=DOUBLE},
+      dayruntime = #{dayruntime,jdbcType=DOUBLE},
+      preprocess = #{preprocess,jdbcType=VARCHAR},
+      inconcentration = #{inconcentration,jdbcType=DOUBLE},
+      inair = #{inair,jdbcType=DOUBLE},
+      outconcentration = #{outconcentration,jdbcType=DOUBLE},
+      outair = #{outair,jdbcType=DOUBLE},
+      offefficiency = #{offefficiency,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER}
+    where vocdeviceid = #{vocdeviceid,jdbcType=INTEGER}
+  </update>
+</mapper>

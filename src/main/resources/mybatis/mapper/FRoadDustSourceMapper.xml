@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.FRoadDustSourceMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.FRoadDustSource">
+    <id column="road_dustid" jdbcType="INTEGER" property="roadDustid" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+    <result column="factoryid" jdbcType="INTEGER" property="factoryid" />
+    <result column="company_name" jdbcType="CHAR" property="companyName" />
+    <result column="start_longitude" jdbcType="DOUBLE" property="startLongitude" />
+    <result column="start_latitude" jdbcType="DOUBLE" property="startLatitude" />
+    <result column="end_longitude" jdbcType="DOUBLE" property="endLongitude" />
+    <result column="end_latitude" jdbcType="DOUBLE" property="endLatitude" />
+    <result column="road_type" jdbcType="VARCHAR" property="roadType" />
+    <result column="path_length" jdbcType="DOUBLE" property="pathLength" />
+    <result column="ispave" jdbcType="VARCHAR" property="ispave" />
+    <result column="aver_width" jdbcType="DOUBLE" property="averWidth" />
+    <result column="aver_weight" jdbcType="DOUBLE" property="averWeight" />
+    <result column="car_flow" jdbcType="INTEGER" property="carFlow" />
+    <result column="aver_speed" jdbcType="DOUBLE" property="averSpeed" />
+    <result column="clear_time_install" jdbcType="DOUBLE" property="clearTimeInstall" />
+    <result column="clear_time_uninstall" jdbcType="DOUBLE" property="clearTimeUninstall" />
+    <result column="sweep_spring" jdbcType="DOUBLE" property="sweepSpring" />
+    <result column="sweep_summer" jdbcType="DOUBLE" property="sweepSummer" />
+    <result column="sweep_fall" jdbcType="DOUBLE" property="sweepFall" />
+    <result column="water_times_spring" jdbcType="DOUBLE" property="waterTimesSpring" />
+    <result column="water_times_summer" jdbcType="DOUBLE" property="waterTimesSummer" />
+    <result column="water_times_fall" jdbcType="DOUBLE" property="waterTimesFall" />
+    <result column="dust_suppression" jdbcType="INTEGER" property="dustSuppression" />
+    <result column="control_measures" jdbcType="VARCHAR" property="controlMeasures" />
+    <result column="pm10_factors" jdbcType="DOUBLE" property="pm10Factors" />
+    <result column="pm25_factors" jdbcType="DOUBLE" property="pm25Factors" />
+    <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
+    <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
+    <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
+    <result column="bc_emission" jdbcType="DOUBLE" property="bcEmission" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    road_dustid, scccode, factoryid, company_name, start_longitude, start_latitude, end_longitude, 
+    end_latitude, road_type, path_length, ispave, aver_width, aver_weight, car_flow, 
+    aver_speed, clear_time_install, clear_time_uninstall, sweep_spring, sweep_summer, 
+    sweep_fall, water_times_spring, water_times_summer, water_times_fall, dust_suppression, 
+    control_measures, pm10_factors, pm25_factors, pm25_emission, pm10_emission, oc_emission, 
+    bc_emission
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.FRoadDustSourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_road_dust_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_road_dust_source
+    where road_dustid = #{roadDustid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_road_dust_source
+    where road_dustid = #{roadDustid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.FRoadDustSourceExample">
+    delete from f_road_dust_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.FRoadDustSource">
+    insert into f_road_dust_source (road_dustid, scccode, factoryid, 
+      company_name, start_longitude, start_latitude, 
+      end_longitude, end_latitude, road_type, 
+      path_length, ispave, aver_width, 
+      aver_weight, car_flow, aver_speed, 
+      clear_time_install, clear_time_uninstall, sweep_spring, 
+      sweep_summer, sweep_fall, water_times_spring, 
+      water_times_summer, water_times_fall, dust_suppression, 
+      control_measures, pm10_factors, pm25_factors, 
+      pm25_emission, pm10_emission, oc_emission, 
+      bc_emission)
+    values (#{roadDustid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{factoryid,jdbcType=INTEGER}, 
+      #{companyName,jdbcType=CHAR}, #{startLongitude,jdbcType=DOUBLE}, #{startLatitude,jdbcType=DOUBLE}, 
+      #{endLongitude,jdbcType=DOUBLE}, #{endLatitude,jdbcType=DOUBLE}, #{roadType,jdbcType=VARCHAR}, 
+      #{pathLength,jdbcType=DOUBLE}, #{ispave,jdbcType=VARCHAR}, #{averWidth,jdbcType=DOUBLE}, 
+      #{averWeight,jdbcType=DOUBLE}, #{carFlow,jdbcType=INTEGER}, #{averSpeed,jdbcType=DOUBLE}, 
+      #{clearTimeInstall,jdbcType=DOUBLE}, #{clearTimeUninstall,jdbcType=DOUBLE}, #{sweepSpring,jdbcType=DOUBLE}, 
+      #{sweepSummer,jdbcType=DOUBLE}, #{sweepFall,jdbcType=DOUBLE}, #{waterTimesSpring,jdbcType=DOUBLE}, 
+      #{waterTimesSummer,jdbcType=DOUBLE}, #{waterTimesFall,jdbcType=DOUBLE}, #{dustSuppression,jdbcType=INTEGER}, 
+      #{controlMeasures,jdbcType=VARCHAR}, #{pm10Factors,jdbcType=DOUBLE}, #{pm25Factors,jdbcType=DOUBLE}, 
+      #{pm25Emission,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, 
+      #{bcEmission,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.FRoadDustSource">
+    insert into f_road_dust_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roadDustid != null">
+        road_dustid,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+      <if test="factoryid != null">
+        factoryid,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="startLongitude != null">
+        start_longitude,
+      </if>
+      <if test="startLatitude != null">
+        start_latitude,
+      </if>
+      <if test="endLongitude != null">
+        end_longitude,
+      </if>
+      <if test="endLatitude != null">
+        end_latitude,
+      </if>
+      <if test="roadType != null">
+        road_type,
+      </if>
+      <if test="pathLength != null">
+        path_length,
+      </if>
+      <if test="ispave != null">
+        ispave,
+      </if>
+      <if test="averWidth != null">
+        aver_width,
+      </if>
+      <if test="averWeight != null">
+        aver_weight,
+      </if>
+      <if test="carFlow != null">
+        car_flow,
+      </if>
+      <if test="averSpeed != null">
+        aver_speed,
+      </if>
+      <if test="clearTimeInstall != null">
+        clear_time_install,
+      </if>
+      <if test="clearTimeUninstall != null">
+        clear_time_uninstall,
+      </if>
+      <if test="sweepSpring != null">
+        sweep_spring,
+      </if>
+      <if test="sweepSummer != null">
+        sweep_summer,
+      </if>
+      <if test="sweepFall != null">
+        sweep_fall,
+      </if>
+      <if test="waterTimesSpring != null">
+        water_times_spring,
+      </if>
+      <if test="waterTimesSummer != null">
+        water_times_summer,
+      </if>
+      <if test="waterTimesFall != null">
+        water_times_fall,
+      </if>
+      <if test="dustSuppression != null">
+        dust_suppression,
+      </if>
+      <if test="controlMeasures != null">
+        control_measures,
+      </if>
+      <if test="pm10Factors != null">
+        pm10_factors,
+      </if>
+      <if test="pm25Factors != null">
+        pm25_factors,
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission,
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission,
+      </if>
+      <if test="ocEmission != null">
+        oc_emission,
+      </if>
+      <if test="bcEmission != null">
+        bc_emission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roadDustid != null">
+        #{roadDustid,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="factoryid != null">
+        #{factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=CHAR},
+      </if>
+      <if test="startLongitude != null">
+        #{startLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="startLatitude != null">
+        #{startLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="endLongitude != null">
+        #{endLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="endLatitude != null">
+        #{endLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="roadType != null">
+        #{roadType,jdbcType=VARCHAR},
+      </if>
+      <if test="pathLength != null">
+        #{pathLength,jdbcType=DOUBLE},
+      </if>
+      <if test="ispave != null">
+        #{ispave,jdbcType=VARCHAR},
+      </if>
+      <if test="averWidth != null">
+        #{averWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="averWeight != null">
+        #{averWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="carFlow != null">
+        #{carFlow,jdbcType=INTEGER},
+      </if>
+      <if test="averSpeed != null">
+        #{averSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="clearTimeInstall != null">
+        #{clearTimeInstall,jdbcType=DOUBLE},
+      </if>
+      <if test="clearTimeUninstall != null">
+        #{clearTimeUninstall,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepSpring != null">
+        #{sweepSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepSummer != null">
+        #{sweepSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepFall != null">
+        #{sweepFall,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesSpring != null">
+        #{waterTimesSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesSummer != null">
+        #{waterTimesSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesFall != null">
+        #{waterTimesFall,jdbcType=DOUBLE},
+      </if>
+      <if test="dustSuppression != null">
+        #{dustSuppression,jdbcType=INTEGER},
+      </if>
+      <if test="controlMeasures != null">
+        #{controlMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10Factors != null">
+        #{pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Factors != null">
+        #{pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        #{bcEmission,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.FRoadDustSourceExample" resultType="java.lang.Long">
+    select count(*) from f_road_dust_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update f_road_dust_source
+    <set>
+      <if test="record.roadDustid != null">
+        road_dustid = #{record.roadDustid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.factoryid != null">
+        factoryid = #{record.factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyName != null">
+        company_name = #{record.companyName,jdbcType=CHAR},
+      </if>
+      <if test="record.startLongitude != null">
+        start_longitude = #{record.startLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.startLatitude != null">
+        start_latitude = #{record.startLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.endLongitude != null">
+        end_longitude = #{record.endLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.endLatitude != null">
+        end_latitude = #{record.endLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.roadType != null">
+        road_type = #{record.roadType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pathLength != null">
+        path_length = #{record.pathLength,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ispave != null">
+        ispave = #{record.ispave,jdbcType=VARCHAR},
+      </if>
+      <if test="record.averWidth != null">
+        aver_width = #{record.averWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="record.averWeight != null">
+        aver_weight = #{record.averWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.carFlow != null">
+        car_flow = #{record.carFlow,jdbcType=INTEGER},
+      </if>
+      <if test="record.averSpeed != null">
+        aver_speed = #{record.averSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clearTimeInstall != null">
+        clear_time_install = #{record.clearTimeInstall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clearTimeUninstall != null">
+        clear_time_uninstall = #{record.clearTimeUninstall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sweepSpring != null">
+        sweep_spring = #{record.sweepSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sweepSummer != null">
+        sweep_summer = #{record.sweepSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sweepFall != null">
+        sweep_fall = #{record.sweepFall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterTimesSpring != null">
+        water_times_spring = #{record.waterTimesSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterTimesSummer != null">
+        water_times_summer = #{record.waterTimesSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="record.waterTimesFall != null">
+        water_times_fall = #{record.waterTimesFall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dustSuppression != null">
+        dust_suppression = #{record.dustSuppression,jdbcType=INTEGER},
+      </if>
+      <if test="record.controlMeasures != null">
+        control_measures = #{record.controlMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm10Factors != null">
+        pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Factors != null">
+        pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Emission != null">
+        pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Emission != null">
+        pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocEmission != null">
+        oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bcEmission != null">
+        bc_emission = #{record.bcEmission,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update f_road_dust_source
+    set road_dustid = #{record.roadDustid,jdbcType=INTEGER},
+      scccode = #{record.scccode,jdbcType=CHAR},
+      factoryid = #{record.factoryid,jdbcType=INTEGER},
+      company_name = #{record.companyName,jdbcType=CHAR},
+      start_longitude = #{record.startLongitude,jdbcType=DOUBLE},
+      start_latitude = #{record.startLatitude,jdbcType=DOUBLE},
+      end_longitude = #{record.endLongitude,jdbcType=DOUBLE},
+      end_latitude = #{record.endLatitude,jdbcType=DOUBLE},
+      road_type = #{record.roadType,jdbcType=VARCHAR},
+      path_length = #{record.pathLength,jdbcType=DOUBLE},
+      ispave = #{record.ispave,jdbcType=VARCHAR},
+      aver_width = #{record.averWidth,jdbcType=DOUBLE},
+      aver_weight = #{record.averWeight,jdbcType=DOUBLE},
+      car_flow = #{record.carFlow,jdbcType=INTEGER},
+      aver_speed = #{record.averSpeed,jdbcType=DOUBLE},
+      clear_time_install = #{record.clearTimeInstall,jdbcType=DOUBLE},
+      clear_time_uninstall = #{record.clearTimeUninstall,jdbcType=DOUBLE},
+      sweep_spring = #{record.sweepSpring,jdbcType=DOUBLE},
+      sweep_summer = #{record.sweepSummer,jdbcType=DOUBLE},
+      sweep_fall = #{record.sweepFall,jdbcType=DOUBLE},
+      water_times_spring = #{record.waterTimesSpring,jdbcType=DOUBLE},
+      water_times_summer = #{record.waterTimesSummer,jdbcType=DOUBLE},
+      water_times_fall = #{record.waterTimesFall,jdbcType=DOUBLE},
+      dust_suppression = #{record.dustSuppression,jdbcType=INTEGER},
+      control_measures = #{record.controlMeasures,jdbcType=VARCHAR},
+      pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
+      pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
+      pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      bc_emission = #{record.bcEmission,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.FRoadDustSource">
+    update f_road_dust_source
+    <set>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="factoryid != null">
+        factoryid = #{factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=CHAR},
+      </if>
+      <if test="startLongitude != null">
+        start_longitude = #{startLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="startLatitude != null">
+        start_latitude = #{startLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="endLongitude != null">
+        end_longitude = #{endLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="endLatitude != null">
+        end_latitude = #{endLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="roadType != null">
+        road_type = #{roadType,jdbcType=VARCHAR},
+      </if>
+      <if test="pathLength != null">
+        path_length = #{pathLength,jdbcType=DOUBLE},
+      </if>
+      <if test="ispave != null">
+        ispave = #{ispave,jdbcType=VARCHAR},
+      </if>
+      <if test="averWidth != null">
+        aver_width = #{averWidth,jdbcType=DOUBLE},
+      </if>
+      <if test="averWeight != null">
+        aver_weight = #{averWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="carFlow != null">
+        car_flow = #{carFlow,jdbcType=INTEGER},
+      </if>
+      <if test="averSpeed != null">
+        aver_speed = #{averSpeed,jdbcType=DOUBLE},
+      </if>
+      <if test="clearTimeInstall != null">
+        clear_time_install = #{clearTimeInstall,jdbcType=DOUBLE},
+      </if>
+      <if test="clearTimeUninstall != null">
+        clear_time_uninstall = #{clearTimeUninstall,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepSpring != null">
+        sweep_spring = #{sweepSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepSummer != null">
+        sweep_summer = #{sweepSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="sweepFall != null">
+        sweep_fall = #{sweepFall,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesSpring != null">
+        water_times_spring = #{waterTimesSpring,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesSummer != null">
+        water_times_summer = #{waterTimesSummer,jdbcType=DOUBLE},
+      </if>
+      <if test="waterTimesFall != null">
+        water_times_fall = #{waterTimesFall,jdbcType=DOUBLE},
+      </if>
+      <if test="dustSuppression != null">
+        dust_suppression = #{dustSuppression,jdbcType=INTEGER},
+      </if>
+      <if test="controlMeasures != null">
+        control_measures = #{controlMeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="pm10Factors != null">
+        pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Factors != null">
+        pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        bc_emission = #{bcEmission,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where road_dustid = #{roadDustid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.FRoadDustSource">
+    update f_road_dust_source
+    set scccode = #{scccode,jdbcType=CHAR},
+      factoryid = #{factoryid,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=CHAR},
+      start_longitude = #{startLongitude,jdbcType=DOUBLE},
+      start_latitude = #{startLatitude,jdbcType=DOUBLE},
+      end_longitude = #{endLongitude,jdbcType=DOUBLE},
+      end_latitude = #{endLatitude,jdbcType=DOUBLE},
+      road_type = #{roadType,jdbcType=VARCHAR},
+      path_length = #{pathLength,jdbcType=DOUBLE},
+      ispave = #{ispave,jdbcType=VARCHAR},
+      aver_width = #{averWidth,jdbcType=DOUBLE},
+      aver_weight = #{averWeight,jdbcType=DOUBLE},
+      car_flow = #{carFlow,jdbcType=INTEGER},
+      aver_speed = #{averSpeed,jdbcType=DOUBLE},
+      clear_time_install = #{clearTimeInstall,jdbcType=DOUBLE},
+      clear_time_uninstall = #{clearTimeUninstall,jdbcType=DOUBLE},
+      sweep_spring = #{sweepSpring,jdbcType=DOUBLE},
+      sweep_summer = #{sweepSummer,jdbcType=DOUBLE},
+      sweep_fall = #{sweepFall,jdbcType=DOUBLE},
+      water_times_spring = #{waterTimesSpring,jdbcType=DOUBLE},
+      water_times_summer = #{waterTimesSummer,jdbcType=DOUBLE},
+      water_times_fall = #{waterTimesFall,jdbcType=DOUBLE},
+      dust_suppression = #{dustSuppression,jdbcType=INTEGER},
+      control_measures = #{controlMeasures,jdbcType=VARCHAR},
+      pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
+      pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
+      pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      bc_emission = #{bcEmission,jdbcType=DOUBLE}
+    where road_dustid = #{roadDustid,jdbcType=INTEGER}
+  </update>
+</mapper>

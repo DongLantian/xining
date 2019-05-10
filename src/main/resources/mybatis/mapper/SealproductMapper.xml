@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.SealproductMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Sealproduct">
+    <id column="productid" jdbcType="INTEGER" property="productid" />
+    <result column="sealpointsurveyid" jdbcType="INTEGER" property="sealpointsurveyid" />
+    <result column="productname" jdbcType="VARCHAR" property="productname" />
+    <result column="downprocess" jdbcType="VARCHAR" property="downprocess" />
+    <result column="production" jdbcType="DOUBLE" property="production" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    productid, sealpointsurveyid, productname, downprocess, production, factory_id, status
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.SealproductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sealproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sealproduct
+    where productid = #{productid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sealproduct
+    where productid = #{productid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.SealproductExample">
+    delete from sealproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Sealproduct">
+    insert into sealproduct (productid, sealpointsurveyid, productname, 
+      downprocess, production, factory_id, 
+      status)
+    values (#{productid,jdbcType=INTEGER}, #{sealpointsurveyid,jdbcType=INTEGER}, #{productname,jdbcType=VARCHAR}, 
+      #{downprocess,jdbcType=VARCHAR}, #{production,jdbcType=DOUBLE}, #{factoryId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Sealproduct">
+    insert into sealproduct
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="sealpointsurveyid != null">
+        sealpointsurveyid,
+      </if>
+      <if test="productname != null">
+        productname,
+      </if>
+      <if test="downprocess != null">
+        downprocess,
+      </if>
+      <if test="production != null">
+        production,
+      </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productid != null">
+        #{productid,jdbcType=INTEGER},
+      </if>
+      <if test="sealpointsurveyid != null">
+        #{sealpointsurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null">
+        #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="downprocess != null">
+        #{downprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="production != null">
+        #{production,jdbcType=DOUBLE},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.SealproductExample" resultType="java.lang.Long">
+    select count(*) from sealproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sealproduct
+    <set>
+      <if test="record.productid != null">
+        productid = #{record.productid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sealpointsurveyid != null">
+        sealpointsurveyid = #{record.sealpointsurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="record.productname != null">
+        productname = #{record.productname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downprocess != null">
+        downprocess = #{record.downprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.production != null">
+        production = #{record.production,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sealproduct
+    set productid = #{record.productid,jdbcType=INTEGER},
+      sealpointsurveyid = #{record.sealpointsurveyid,jdbcType=INTEGER},
+      productname = #{record.productname,jdbcType=VARCHAR},
+      downprocess = #{record.downprocess,jdbcType=VARCHAR},
+      production = #{record.production,jdbcType=DOUBLE},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Sealproduct">
+    update sealproduct
+    <set>
+      <if test="sealpointsurveyid != null">
+        sealpointsurveyid = #{sealpointsurveyid,jdbcType=INTEGER},
+      </if>
+      <if test="productname != null">
+        productname = #{productname,jdbcType=VARCHAR},
+      </if>
+      <if test="downprocess != null">
+        downprocess = #{downprocess,jdbcType=VARCHAR},
+      </if>
+      <if test="production != null">
+        production = #{production,jdbcType=DOUBLE},
+      </if>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Sealproduct">
+    update sealproduct
+    set sealpointsurveyid = #{sealpointsurveyid,jdbcType=INTEGER},
+      productname = #{productname,jdbcType=VARCHAR},
+      downprocess = #{downprocess,jdbcType=VARCHAR},
+      production = #{production,jdbcType=DOUBLE},
+      factory_id = #{factoryId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER}
+    where productid = #{productid,jdbcType=INTEGER}
+  </update>
+</mapper>

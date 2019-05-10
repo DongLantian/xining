@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.Wyguding20160901sccMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Wyguding20160901scc">
+    <id column="XJ_SCC" jdbcType="CHAR" property="xjScc" />
+    <result column="CO" jdbcType="DOUBLE" property="co" />
+    <result column="NOX" jdbcType="DOUBLE" property="nox" />
+    <result column="SO2" jdbcType="DOUBLE" property="so2" />
+    <result column="VOCs" jdbcType="DOUBLE" property="vocs" />
+    <result column="PM25" jdbcType="DOUBLE" property="pm25" />
+    <result column="PM10" jdbcType="DOUBLE" property="pm10" />
+    <result column="BC" jdbcType="DOUBLE" property="bc" />
+    <result column="OC" jdbcType="DOUBLE" property="oc" />
+    <result column="UNIT" jdbcType="DOUBLE" property="unit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    XJ_SCC, CO, NOX, SO2, VOCs, PM25, PM10, BC, OC, UNIT
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.Wyguding20160901sccExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wyguding20160901scc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wyguding20160901scc
+    where XJ_SCC = #{xjScc,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wyguding20160901scc
+    where XJ_SCC = #{xjScc,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.Wyguding20160901sccExample">
+    delete from wyguding20160901scc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Wyguding20160901scc">
+    insert into wyguding20160901scc (XJ_SCC, CO, NOX, SO2, 
+      VOCs, PM25, PM10, BC, 
+      OC, UNIT)
+    values (#{xjScc,jdbcType=CHAR}, #{co,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, #{so2,jdbcType=DOUBLE}, 
+      #{vocs,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, #{pm10,jdbcType=DOUBLE}, #{bc,jdbcType=DOUBLE}, 
+      #{oc,jdbcType=DOUBLE}, #{unit,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Wyguding20160901scc">
+    insert into wyguding20160901scc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="xjScc != null">
+        XJ_SCC,
+      </if>
+      <if test="co != null">
+        CO,
+      </if>
+      <if test="nox != null">
+        NOX,
+      </if>
+      <if test="so2 != null">
+        SO2,
+      </if>
+      <if test="vocs != null">
+        VOCs,
+      </if>
+      <if test="pm25 != null">
+        PM25,
+      </if>
+      <if test="pm10 != null">
+        PM10,
+      </if>
+      <if test="bc != null">
+        BC,
+      </if>
+      <if test="oc != null">
+        OC,
+      </if>
+      <if test="unit != null">
+        UNIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="xjScc != null">
+        #{xjScc,jdbcType=CHAR},
+      </if>
+      <if test="co != null">
+        #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="so2 != null">
+        #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="vocs != null">
+        #{vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.Wyguding20160901sccExample" resultType="java.lang.Long">
+    select count(*) from wyguding20160901scc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wyguding20160901scc
+    <set>
+      <if test="record.xjScc != null">
+        XJ_SCC = #{record.xjScc,jdbcType=CHAR},
+      </if>
+      <if test="record.co != null">
+        CO = #{record.co,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nox != null">
+        NOX = #{record.nox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2 != null">
+        SO2 = #{record.so2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocs != null">
+        VOCs = #{record.vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25 != null">
+        PM25 = #{record.pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10 != null">
+        PM10 = #{record.pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bc != null">
+        BC = #{record.bc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oc != null">
+        OC = #{record.oc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.unit != null">
+        UNIT = #{record.unit,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wyguding20160901scc
+    set XJ_SCC = #{record.xjScc,jdbcType=CHAR},
+      CO = #{record.co,jdbcType=DOUBLE},
+      NOX = #{record.nox,jdbcType=DOUBLE},
+      SO2 = #{record.so2,jdbcType=DOUBLE},
+      VOCs = #{record.vocs,jdbcType=DOUBLE},
+      PM25 = #{record.pm25,jdbcType=DOUBLE},
+      PM10 = #{record.pm10,jdbcType=DOUBLE},
+      BC = #{record.bc,jdbcType=DOUBLE},
+      OC = #{record.oc,jdbcType=DOUBLE},
+      UNIT = #{record.unit,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Wyguding20160901scc">
+    update wyguding20160901scc
+    <set>
+      <if test="co != null">
+        CO = #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        NOX = #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="so2 != null">
+        SO2 = #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="vocs != null">
+        VOCs = #{vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        PM25 = #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        PM10 = #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        BC = #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        OC = #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null">
+        UNIT = #{unit,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where XJ_SCC = #{xjScc,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Wyguding20160901scc">
+    update wyguding20160901scc
+    set CO = #{co,jdbcType=DOUBLE},
+      NOX = #{nox,jdbcType=DOUBLE},
+      SO2 = #{so2,jdbcType=DOUBLE},
+      VOCs = #{vocs,jdbcType=DOUBLE},
+      PM25 = #{pm25,jdbcType=DOUBLE},
+      PM10 = #{pm10,jdbcType=DOUBLE},
+      BC = #{bc,jdbcType=DOUBLE},
+      OC = #{oc,jdbcType=DOUBLE},
+      UNIT = #{unit,jdbcType=DOUBLE}
+    where XJ_SCC = #{xjScc,jdbcType=CHAR}
+  </update>
+</mapper>

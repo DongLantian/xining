@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.GdInfoMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.GdInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="boiler_id" jdbcType="INTEGER" property="boilerId" />
+    <result column="boiler_func" jdbcType="CHAR" property="boilerFunc" />
+    <result column="boiler_tons" jdbcType="DOUBLE" property="boilerTons" />
+    <result column="fuel_type" jdbcType="CHAR" property="fuelType" />
+    <result column="fuel_use" jdbcType="DOUBLE" property="fuelUse" />
+    <result column="fuel_unit" jdbcType="CHAR" property="fuelUnit" />
+    <result column="exf_id" jdbcType="INTEGER" property="exfId" />
+    <result column="exf_height" jdbcType="DOUBLE" property="exfHeight" />
+    <result column="exf_diam" jdbcType="DOUBLE" property="exfDiam" />
+    <result column="exf_temp" jdbcType="DOUBLE" property="exfTemp" />
+    <result column="exf_velo" jdbcType="DOUBLE" property="exfVelo" />
+    <result column="exf_latitude" jdbcType="DOUBLE" property="exfLatitude" />
+    <result column="exf_longitude" jdbcType="DOUBLE" property="exfLongitude" />
+    <result column="plant_id" jdbcType="CHAR" property="plantId" />
+    <result column="county_id" jdbcType="CHAR" property="countyId" />
+    <result column="industry_id" jdbcType="CHAR" property="industryId" />
+    <result column="gdyear" jdbcType="CHAR" property="gdyear" />
+    <result column="pm_fac" jdbcType="DOUBLE" property="pmFac" />
+    <result column="pm10_fac" jdbcType="DOUBLE" property="pm10Fac" />
+    <result column="pm25_fac" jdbcType="DOUBLE" property="pm25Fac" />
+    <result column="voc_fac" jdbcType="DOUBLE" property="vocFac" />
+    <result column="co_fac" jdbcType="DOUBLE" property="coFac" />
+    <result column="nox_fac" jdbcType="DOUBLE" property="noxFac" />
+    <result column="nh3_fac" jdbcType="DOUBLE" property="nh3Fac" />
+    <result column="so2_fac" jdbcType="DOUBLE" property="so2Fac" />
+    <result column="oc_fac" jdbcType="DOUBLE" property="ocFac" />
+    <result column="bc_fac" jdbcType="DOUBLE" property="bcFac" />
+    <result column="scc" jdbcType="CHAR" property="scc" />
+    <result column="dr_id" jdbcType="INTEGER" property="drId" />
+    <result column="sr_id" jdbcType="INTEGER" property="srId" />
+    <result column="nr_id" jdbcType="INTEGER" property="nrId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, boiler_id, boiler_func, boiler_tons, fuel_type, fuel_use, fuel_unit, exf_id, 
+    exf_height, exf_diam, exf_temp, exf_velo, exf_latitude, exf_longitude, plant_id, 
+    county_id, industry_id, gdyear, pm_fac, pm10_fac, pm25_fac, voc_fac, co_fac, nox_fac, 
+    nh3_fac, so2_fac, oc_fac, bc_fac, scc, dr_id, sr_id, nr_id
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.GdInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gd_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gd_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gd_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.GdInfoExample">
+    delete from gd_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.GdInfo">
+    insert into gd_info (id, boiler_id, boiler_func, 
+      boiler_tons, fuel_type, fuel_use, 
+      fuel_unit, exf_id, exf_height, 
+      exf_diam, exf_temp, exf_velo, 
+      exf_latitude, exf_longitude, plant_id, 
+      county_id, industry_id, gdyear, 
+      pm_fac, pm10_fac, pm25_fac, 
+      voc_fac, co_fac, nox_fac, 
+      nh3_fac, so2_fac, oc_fac, 
+      bc_fac, scc, dr_id, sr_id, 
+      nr_id)
+    values (#{id,jdbcType=INTEGER}, #{boilerId,jdbcType=INTEGER}, #{boilerFunc,jdbcType=CHAR}, 
+      #{boilerTons,jdbcType=DOUBLE}, #{fuelType,jdbcType=CHAR}, #{fuelUse,jdbcType=DOUBLE}, 
+      #{fuelUnit,jdbcType=CHAR}, #{exfId,jdbcType=INTEGER}, #{exfHeight,jdbcType=DOUBLE}, 
+      #{exfDiam,jdbcType=DOUBLE}, #{exfTemp,jdbcType=DOUBLE}, #{exfVelo,jdbcType=DOUBLE}, 
+      #{exfLatitude,jdbcType=DOUBLE}, #{exfLongitude,jdbcType=DOUBLE}, #{plantId,jdbcType=CHAR}, 
+      #{countyId,jdbcType=CHAR}, #{industryId,jdbcType=CHAR}, #{gdyear,jdbcType=CHAR}, 
+      #{pmFac,jdbcType=DOUBLE}, #{pm10Fac,jdbcType=DOUBLE}, #{pm25Fac,jdbcType=DOUBLE}, 
+      #{vocFac,jdbcType=DOUBLE}, #{coFac,jdbcType=DOUBLE}, #{noxFac,jdbcType=DOUBLE}, 
+      #{nh3Fac,jdbcType=DOUBLE}, #{so2Fac,jdbcType=DOUBLE}, #{ocFac,jdbcType=DOUBLE}, 
+      #{bcFac,jdbcType=DOUBLE}, #{scc,jdbcType=CHAR}, #{drId,jdbcType=INTEGER}, #{srId,jdbcType=INTEGER}, 
+      #{nrId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.GdInfo">
+    insert into gd_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="boilerId != null">
+        boiler_id,
+      </if>
+      <if test="boilerFunc != null">
+        boiler_func,
+      </if>
+      <if test="boilerTons != null">
+        boiler_tons,
+      </if>
+      <if test="fuelType != null">
+        fuel_type,
+      </if>
+      <if test="fuelUse != null">
+        fuel_use,
+      </if>
+      <if test="fuelUnit != null">
+        fuel_unit,
+      </if>
+      <if test="exfId != null">
+        exf_id,
+      </if>
+      <if test="exfHeight != null">
+        exf_height,
+      </if>
+      <if test="exfDiam != null">
+        exf_diam,
+      </if>
+      <if test="exfTemp != null">
+        exf_temp,
+      </if>
+      <if test="exfVelo != null">
+        exf_velo,
+      </if>
+      <if test="exfLatitude != null">
+        exf_latitude,
+      </if>
+      <if test="exfLongitude != null">
+        exf_longitude,
+      </if>
+      <if test="plantId != null">
+        plant_id,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="industryId != null">
+        industry_id,
+      </if>
+      <if test="gdyear != null">
+        gdyear,
+      </if>
+      <if test="pmFac != null">
+        pm_fac,
+      </if>
+      <if test="pm10Fac != null">
+        pm10_fac,
+      </if>
+      <if test="pm25Fac != null">
+        pm25_fac,
+      </if>
+      <if test="vocFac != null">
+        voc_fac,
+      </if>
+      <if test="coFac != null">
+        co_fac,
+      </if>
+      <if test="noxFac != null">
+        nox_fac,
+      </if>
+      <if test="nh3Fac != null">
+        nh3_fac,
+      </if>
+      <if test="so2Fac != null">
+        so2_fac,
+      </if>
+      <if test="ocFac != null">
+        oc_fac,
+      </if>
+      <if test="bcFac != null">
+        bc_fac,
+      </if>
+      <if test="scc != null">
+        scc,
+      </if>
+      <if test="drId != null">
+        dr_id,
+      </if>
+      <if test="srId != null">
+        sr_id,
+      </if>
+      <if test="nrId != null">
+        nr_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="boilerId != null">
+        #{boilerId,jdbcType=INTEGER},
+      </if>
+      <if test="boilerFunc != null">
+        #{boilerFunc,jdbcType=CHAR},
+      </if>
+      <if test="boilerTons != null">
+        #{boilerTons,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelType != null">
+        #{fuelType,jdbcType=CHAR},
+      </if>
+      <if test="fuelUse != null">
+        #{fuelUse,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelUnit != null">
+        #{fuelUnit,jdbcType=CHAR},
+      </if>
+      <if test="exfId != null">
+        #{exfId,jdbcType=INTEGER},
+      </if>
+      <if test="exfHeight != null">
+        #{exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="exfDiam != null">
+        #{exfDiam,jdbcType=DOUBLE},
+      </if>
+      <if test="exfTemp != null">
+        #{exfTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="exfVelo != null">
+        #{exfVelo,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLatitude != null">
+        #{exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLongitude != null">
+        #{exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="plantId != null">
+        #{plantId,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="industryId != null">
+        #{industryId,jdbcType=CHAR},
+      </if>
+      <if test="gdyear != null">
+        #{gdyear,jdbcType=CHAR},
+      </if>
+      <if test="pmFac != null">
+        #{pmFac,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Fac != null">
+        #{pm10Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Fac != null">
+        #{pm25Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="vocFac != null">
+        #{vocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="coFac != null">
+        #{coFac,jdbcType=DOUBLE},
+      </if>
+      <if test="noxFac != null">
+        #{noxFac,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Fac != null">
+        #{nh3Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Fac != null">
+        #{so2Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="ocFac != null">
+        #{ocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="bcFac != null">
+        #{bcFac,jdbcType=DOUBLE},
+      </if>
+      <if test="scc != null">
+        #{scc,jdbcType=CHAR},
+      </if>
+      <if test="drId != null">
+        #{drId,jdbcType=INTEGER},
+      </if>
+      <if test="srId != null">
+        #{srId,jdbcType=INTEGER},
+      </if>
+      <if test="nrId != null">
+        #{nrId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.GdInfoExample" resultType="java.lang.Long">
+    select count(*) from gd_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gd_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.boilerId != null">
+        boiler_id = #{record.boilerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.boilerFunc != null">
+        boiler_func = #{record.boilerFunc,jdbcType=CHAR},
+      </if>
+      <if test="record.boilerTons != null">
+        boiler_tons = #{record.boilerTons,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelType != null">
+        fuel_type = #{record.fuelType,jdbcType=CHAR},
+      </if>
+      <if test="record.fuelUse != null">
+        fuel_use = #{record.fuelUse,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelUnit != null">
+        fuel_unit = #{record.fuelUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.exfId != null">
+        exf_id = #{record.exfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.exfHeight != null">
+        exf_height = #{record.exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfDiam != null">
+        exf_diam = #{record.exfDiam,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfTemp != null">
+        exf_temp = #{record.exfTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfVelo != null">
+        exf_velo = #{record.exfVelo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfLatitude != null">
+        exf_latitude = #{record.exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfLongitude != null">
+        exf_longitude = #{record.exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.plantId != null">
+        plant_id = #{record.plantId,jdbcType=CHAR},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=CHAR},
+      </if>
+      <if test="record.industryId != null">
+        industry_id = #{record.industryId,jdbcType=CHAR},
+      </if>
+      <if test="record.gdyear != null">
+        gdyear = #{record.gdyear,jdbcType=CHAR},
+      </if>
+      <if test="record.pmFac != null">
+        pm_fac = #{record.pmFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Fac != null">
+        pm10_fac = #{record.pm10Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Fac != null">
+        pm25_fac = #{record.pm25Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocFac != null">
+        voc_fac = #{record.vocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coFac != null">
+        co_fac = #{record.coFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxFac != null">
+        nox_fac = #{record.noxFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Fac != null">
+        nh3_fac = #{record.nh3Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Fac != null">
+        so2_fac = #{record.so2Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocFac != null">
+        oc_fac = #{record.ocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bcFac != null">
+        bc_fac = #{record.bcFac,jdbcType=DOUBLE},
+      </if>
+      <if test="record.scc != null">
+        scc = #{record.scc,jdbcType=CHAR},
+      </if>
+      <if test="record.drId != null">
+        dr_id = #{record.drId,jdbcType=INTEGER},
+      </if>
+      <if test="record.srId != null">
+        sr_id = #{record.srId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nrId != null">
+        nr_id = #{record.nrId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gd_info
+    set id = #{record.id,jdbcType=INTEGER},
+      boiler_id = #{record.boilerId,jdbcType=INTEGER},
+      boiler_func = #{record.boilerFunc,jdbcType=CHAR},
+      boiler_tons = #{record.boilerTons,jdbcType=DOUBLE},
+      fuel_type = #{record.fuelType,jdbcType=CHAR},
+      fuel_use = #{record.fuelUse,jdbcType=DOUBLE},
+      fuel_unit = #{record.fuelUnit,jdbcType=CHAR},
+      exf_id = #{record.exfId,jdbcType=INTEGER},
+      exf_height = #{record.exfHeight,jdbcType=DOUBLE},
+      exf_diam = #{record.exfDiam,jdbcType=DOUBLE},
+      exf_temp = #{record.exfTemp,jdbcType=DOUBLE},
+      exf_velo = #{record.exfVelo,jdbcType=DOUBLE},
+      exf_latitude = #{record.exfLatitude,jdbcType=DOUBLE},
+      exf_longitude = #{record.exfLongitude,jdbcType=DOUBLE},
+      plant_id = #{record.plantId,jdbcType=CHAR},
+      county_id = #{record.countyId,jdbcType=CHAR},
+      industry_id = #{record.industryId,jdbcType=CHAR},
+      gdyear = #{record.gdyear,jdbcType=CHAR},
+      pm_fac = #{record.pmFac,jdbcType=DOUBLE},
+      pm10_fac = #{record.pm10Fac,jdbcType=DOUBLE},
+      pm25_fac = #{record.pm25Fac,jdbcType=DOUBLE},
+      voc_fac = #{record.vocFac,jdbcType=DOUBLE},
+      co_fac = #{record.coFac,jdbcType=DOUBLE},
+      nox_fac = #{record.noxFac,jdbcType=DOUBLE},
+      nh3_fac = #{record.nh3Fac,jdbcType=DOUBLE},
+      so2_fac = #{record.so2Fac,jdbcType=DOUBLE},
+      oc_fac = #{record.ocFac,jdbcType=DOUBLE},
+      bc_fac = #{record.bcFac,jdbcType=DOUBLE},
+      scc = #{record.scc,jdbcType=CHAR},
+      dr_id = #{record.drId,jdbcType=INTEGER},
+      sr_id = #{record.srId,jdbcType=INTEGER},
+      nr_id = #{record.nrId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.GdInfo">
+    update gd_info
+    <set>
+      <if test="boilerId != null">
+        boiler_id = #{boilerId,jdbcType=INTEGER},
+      </if>
+      <if test="boilerFunc != null">
+        boiler_func = #{boilerFunc,jdbcType=CHAR},
+      </if>
+      <if test="boilerTons != null">
+        boiler_tons = #{boilerTons,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelType != null">
+        fuel_type = #{fuelType,jdbcType=CHAR},
+      </if>
+      <if test="fuelUse != null">
+        fuel_use = #{fuelUse,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelUnit != null">
+        fuel_unit = #{fuelUnit,jdbcType=CHAR},
+      </if>
+      <if test="exfId != null">
+        exf_id = #{exfId,jdbcType=INTEGER},
+      </if>
+      <if test="exfHeight != null">
+        exf_height = #{exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="exfDiam != null">
+        exf_diam = #{exfDiam,jdbcType=DOUBLE},
+      </if>
+      <if test="exfTemp != null">
+        exf_temp = #{exfTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="exfVelo != null">
+        exf_velo = #{exfVelo,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLatitude != null">
+        exf_latitude = #{exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLongitude != null">
+        exf_longitude = #{exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="plantId != null">
+        plant_id = #{plantId,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="industryId != null">
+        industry_id = #{industryId,jdbcType=CHAR},
+      </if>
+      <if test="gdyear != null">
+        gdyear = #{gdyear,jdbcType=CHAR},
+      </if>
+      <if test="pmFac != null">
+        pm_fac = #{pmFac,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Fac != null">
+        pm10_fac = #{pm10Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Fac != null">
+        pm25_fac = #{pm25Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="vocFac != null">
+        voc_fac = #{vocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="coFac != null">
+        co_fac = #{coFac,jdbcType=DOUBLE},
+      </if>
+      <if test="noxFac != null">
+        nox_fac = #{noxFac,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Fac != null">
+        nh3_fac = #{nh3Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Fac != null">
+        so2_fac = #{so2Fac,jdbcType=DOUBLE},
+      </if>
+      <if test="ocFac != null">
+        oc_fac = #{ocFac,jdbcType=DOUBLE},
+      </if>
+      <if test="bcFac != null">
+        bc_fac = #{bcFac,jdbcType=DOUBLE},
+      </if>
+      <if test="scc != null">
+        scc = #{scc,jdbcType=CHAR},
+      </if>
+      <if test="drId != null">
+        dr_id = #{drId,jdbcType=INTEGER},
+      </if>
+      <if test="srId != null">
+        sr_id = #{srId,jdbcType=INTEGER},
+      </if>
+      <if test="nrId != null">
+        nr_id = #{nrId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.GdInfo">
+    update gd_info
+    set boiler_id = #{boilerId,jdbcType=INTEGER},
+      boiler_func = #{boilerFunc,jdbcType=CHAR},
+      boiler_tons = #{boilerTons,jdbcType=DOUBLE},
+      fuel_type = #{fuelType,jdbcType=CHAR},
+      fuel_use = #{fuelUse,jdbcType=DOUBLE},
+      fuel_unit = #{fuelUnit,jdbcType=CHAR},
+      exf_id = #{exfId,jdbcType=INTEGER},
+      exf_height = #{exfHeight,jdbcType=DOUBLE},
+      exf_diam = #{exfDiam,jdbcType=DOUBLE},
+      exf_temp = #{exfTemp,jdbcType=DOUBLE},
+      exf_velo = #{exfVelo,jdbcType=DOUBLE},
+      exf_latitude = #{exfLatitude,jdbcType=DOUBLE},
+      exf_longitude = #{exfLongitude,jdbcType=DOUBLE},
+      plant_id = #{plantId,jdbcType=CHAR},
+      county_id = #{countyId,jdbcType=CHAR},
+      industry_id = #{industryId,jdbcType=CHAR},
+      gdyear = #{gdyear,jdbcType=CHAR},
+      pm_fac = #{pmFac,jdbcType=DOUBLE},
+      pm10_fac = #{pm10Fac,jdbcType=DOUBLE},
+      pm25_fac = #{pm25Fac,jdbcType=DOUBLE},
+      voc_fac = #{vocFac,jdbcType=DOUBLE},
+      co_fac = #{coFac,jdbcType=DOUBLE},
+      nox_fac = #{noxFac,jdbcType=DOUBLE},
+      nh3_fac = #{nh3Fac,jdbcType=DOUBLE},
+      so2_fac = #{so2Fac,jdbcType=DOUBLE},
+      oc_fac = #{ocFac,jdbcType=DOUBLE},
+      bc_fac = #{bcFac,jdbcType=DOUBLE},
+      scc = #{scc,jdbcType=CHAR},
+      dr_id = #{drId,jdbcType=INTEGER},
+      sr_id = #{srId,jdbcType=INTEGER},
+      nr_id = #{nrId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

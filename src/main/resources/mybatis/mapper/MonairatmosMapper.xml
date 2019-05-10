@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.MonairatmosMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Monairatmos">
+    <id column="CellID" jdbcType="CHAR" property="cellid" />
+    <id column="DateID" jdbcType="TIMESTAMP" property="dateid" />
+    <result column="mon_CO" jdbcType="DOUBLE" property="monCo" />
+    <result column="mon_SO2" jdbcType="DOUBLE" property="monSo2" />
+    <result column="mon_O3" jdbcType="DOUBLE" property="monO3" />
+    <result column="mon_NO" jdbcType="DOUBLE" property="monNo" />
+    <result column="mon_NO2" jdbcType="DOUBLE" property="monNo2" />
+    <result column="mon_NOX" jdbcType="DOUBLE" property="monNox" />
+    <result column="mon_PM25" jdbcType="DOUBLE" property="monPm25" />
+    <result column="mon_PM10" jdbcType="DOUBLE" property="monPm10" />
+    <result column="mon_VOC" jdbcType="DOUBLE" property="monVoc" />
+    <result column="mon_monSSURE" jdbcType="DOUBLE" property="monMonssure" />
+    <result column="mon_TEMP" jdbcType="DOUBLE" property="monTemp" />
+    <result column="mon_WS" jdbcType="DOUBLE" property="monWs" />
+    <result column="mon_WD" jdbcType="DOUBLE" property="monWd" />
+    <result column="mon_RH" jdbcType="DOUBLE" property="monRh" />
+    <result column="mon_haze" jdbcType="INTEGER" property="monHaze" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CellID, DateID, mon_CO, mon_SO2, mon_O3, mon_NO, mon_NO2, mon_NOX, mon_PM25, mon_PM10, 
+    mon_VOC, mon_monSSURE, mon_TEMP, mon_WS, mon_WD, mon_RH, mon_haze
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.MonairatmosExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from monairatmos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.nankai.xining.bean.MonairatmosKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from monairatmos
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.nankai.xining.bean.MonairatmosKey">
+    delete from monairatmos
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.MonairatmosExample">
+    delete from monairatmos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Monairatmos">
+    insert into monairatmos (CellID, DateID, mon_CO, 
+      mon_SO2, mon_O3, mon_NO, 
+      mon_NO2, mon_NOX, mon_PM25, 
+      mon_PM10, mon_VOC, mon_monSSURE, 
+      mon_TEMP, mon_WS, mon_WD, 
+      mon_RH, mon_haze)
+    values (#{cellid,jdbcType=CHAR}, #{dateid,jdbcType=TIMESTAMP}, #{monCo,jdbcType=DOUBLE}, 
+      #{monSo2,jdbcType=DOUBLE}, #{monO3,jdbcType=DOUBLE}, #{monNo,jdbcType=DOUBLE}, 
+      #{monNo2,jdbcType=DOUBLE}, #{monNox,jdbcType=DOUBLE}, #{monPm25,jdbcType=DOUBLE}, 
+      #{monPm10,jdbcType=DOUBLE}, #{monVoc,jdbcType=DOUBLE}, #{monMonssure,jdbcType=DOUBLE}, 
+      #{monTemp,jdbcType=DOUBLE}, #{monWs,jdbcType=DOUBLE}, #{monWd,jdbcType=DOUBLE}, 
+      #{monRh,jdbcType=DOUBLE}, #{monHaze,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Monairatmos">
+    insert into monairatmos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cellid != null">
+        CellID,
+      </if>
+      <if test="dateid != null">
+        DateID,
+      </if>
+      <if test="monCo != null">
+        mon_CO,
+      </if>
+      <if test="monSo2 != null">
+        mon_SO2,
+      </if>
+      <if test="monO3 != null">
+        mon_O3,
+      </if>
+      <if test="monNo != null">
+        mon_NO,
+      </if>
+      <if test="monNo2 != null">
+        mon_NO2,
+      </if>
+      <if test="monNox != null">
+        mon_NOX,
+      </if>
+      <if test="monPm25 != null">
+        mon_PM25,
+      </if>
+      <if test="monPm10 != null">
+        mon_PM10,
+      </if>
+      <if test="monVoc != null">
+        mon_VOC,
+      </if>
+      <if test="monMonssure != null">
+        mon_monSSURE,
+      </if>
+      <if test="monTemp != null">
+        mon_TEMP,
+      </if>
+      <if test="monWs != null">
+        mon_WS,
+      </if>
+      <if test="monWd != null">
+        mon_WD,
+      </if>
+      <if test="monRh != null">
+        mon_RH,
+      </if>
+      <if test="monHaze != null">
+        mon_haze,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cellid != null">
+        #{cellid,jdbcType=CHAR},
+      </if>
+      <if test="dateid != null">
+        #{dateid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="monCo != null">
+        #{monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="monSo2 != null">
+        #{monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monO3 != null">
+        #{monO3,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo != null">
+        #{monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo2 != null">
+        #{monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monNox != null">
+        #{monNox,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm25 != null">
+        #{monPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm10 != null">
+        #{monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="monVoc != null">
+        #{monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="monMonssure != null">
+        #{monMonssure,jdbcType=DOUBLE},
+      </if>
+      <if test="monTemp != null">
+        #{monTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="monWs != null">
+        #{monWs,jdbcType=DOUBLE},
+      </if>
+      <if test="monWd != null">
+        #{monWd,jdbcType=DOUBLE},
+      </if>
+      <if test="monRh != null">
+        #{monRh,jdbcType=DOUBLE},
+      </if>
+      <if test="monHaze != null">
+        #{monHaze,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.MonairatmosExample" resultType="java.lang.Long">
+    select count(*) from monairatmos
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update monairatmos
+    <set>
+      <if test="record.cellid != null">
+        CellID = #{record.cellid,jdbcType=CHAR},
+      </if>
+      <if test="record.dateid != null">
+        DateID = #{record.dateid,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.monCo != null">
+        mon_CO = #{record.monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monSo2 != null">
+        mon_SO2 = #{record.monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monO3 != null">
+        mon_O3 = #{record.monO3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNo != null">
+        mon_NO = #{record.monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNo2 != null">
+        mon_NO2 = #{record.monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monNox != null">
+        mon_NOX = #{record.monNox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monPm25 != null">
+        mon_PM25 = #{record.monPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monPm10 != null">
+        mon_PM10 = #{record.monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monVoc != null">
+        mon_VOC = #{record.monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monMonssure != null">
+        mon_monSSURE = #{record.monMonssure,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monTemp != null">
+        mon_TEMP = #{record.monTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monWs != null">
+        mon_WS = #{record.monWs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monWd != null">
+        mon_WD = #{record.monWd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monRh != null">
+        mon_RH = #{record.monRh,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monHaze != null">
+        mon_haze = #{record.monHaze,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update monairatmos
+    set CellID = #{record.cellid,jdbcType=CHAR},
+      DateID = #{record.dateid,jdbcType=TIMESTAMP},
+      mon_CO = #{record.monCo,jdbcType=DOUBLE},
+      mon_SO2 = #{record.monSo2,jdbcType=DOUBLE},
+      mon_O3 = #{record.monO3,jdbcType=DOUBLE},
+      mon_NO = #{record.monNo,jdbcType=DOUBLE},
+      mon_NO2 = #{record.monNo2,jdbcType=DOUBLE},
+      mon_NOX = #{record.monNox,jdbcType=DOUBLE},
+      mon_PM25 = #{record.monPm25,jdbcType=DOUBLE},
+      mon_PM10 = #{record.monPm10,jdbcType=DOUBLE},
+      mon_VOC = #{record.monVoc,jdbcType=DOUBLE},
+      mon_monSSURE = #{record.monMonssure,jdbcType=DOUBLE},
+      mon_TEMP = #{record.monTemp,jdbcType=DOUBLE},
+      mon_WS = #{record.monWs,jdbcType=DOUBLE},
+      mon_WD = #{record.monWd,jdbcType=DOUBLE},
+      mon_RH = #{record.monRh,jdbcType=DOUBLE},
+      mon_haze = #{record.monHaze,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Monairatmos">
+    update monairatmos
+    <set>
+      <if test="monCo != null">
+        mon_CO = #{monCo,jdbcType=DOUBLE},
+      </if>
+      <if test="monSo2 != null">
+        mon_SO2 = #{monSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monO3 != null">
+        mon_O3 = #{monO3,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo != null">
+        mon_NO = #{monNo,jdbcType=DOUBLE},
+      </if>
+      <if test="monNo2 != null">
+        mon_NO2 = #{monNo2,jdbcType=DOUBLE},
+      </if>
+      <if test="monNox != null">
+        mon_NOX = #{monNox,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm25 != null">
+        mon_PM25 = #{monPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="monPm10 != null">
+        mon_PM10 = #{monPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="monVoc != null">
+        mon_VOC = #{monVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="monMonssure != null">
+        mon_monSSURE = #{monMonssure,jdbcType=DOUBLE},
+      </if>
+      <if test="monTemp != null">
+        mon_TEMP = #{monTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="monWs != null">
+        mon_WS = #{monWs,jdbcType=DOUBLE},
+      </if>
+      <if test="monWd != null">
+        mon_WD = #{monWd,jdbcType=DOUBLE},
+      </if>
+      <if test="monRh != null">
+        mon_RH = #{monRh,jdbcType=DOUBLE},
+      </if>
+      <if test="monHaze != null">
+        mon_haze = #{monHaze,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Monairatmos">
+    update monairatmos
+    set mon_CO = #{monCo,jdbcType=DOUBLE},
+      mon_SO2 = #{monSo2,jdbcType=DOUBLE},
+      mon_O3 = #{monO3,jdbcType=DOUBLE},
+      mon_NO = #{monNo,jdbcType=DOUBLE},
+      mon_NO2 = #{monNo2,jdbcType=DOUBLE},
+      mon_NOX = #{monNox,jdbcType=DOUBLE},
+      mon_PM25 = #{monPm25,jdbcType=DOUBLE},
+      mon_PM10 = #{monPm10,jdbcType=DOUBLE},
+      mon_VOC = #{monVoc,jdbcType=DOUBLE},
+      mon_monSSURE = #{monMonssure,jdbcType=DOUBLE},
+      mon_TEMP = #{monTemp,jdbcType=DOUBLE},
+      mon_WS = #{monWs,jdbcType=DOUBLE},
+      mon_WD = #{monWd,jdbcType=DOUBLE},
+      mon_RH = #{monRh,jdbcType=DOUBLE},
+      mon_haze = #{monHaze,jdbcType=INTEGER}
+    where CellID = #{cellid,jdbcType=CHAR}
+      and DateID = #{dateid,jdbcType=TIMESTAMP}
+  </update>
+</mapper>

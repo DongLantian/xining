@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.NaturalSourceMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.NaturalSource">
+    <id column="nt_id" jdbcType="INTEGER" property="ntId" />
+    <result column="nt_year" jdbcType="INTEGER" property="ntYear" />
+    <result column="nt_month" jdbcType="INTEGER" property="ntMonth" />
+    <result column="nt_hour" jdbcType="INTEGER" property="ntHour" />
+    <result column="nt_row" jdbcType="INTEGER" property="ntRow" />
+    <result column="nt_col" jdbcType="INTEGER" property="ntCol" />
+    <result column="nt_area" jdbcType="DOUBLE" property="ntArea" />
+    <result column="nt_voc" jdbcType="DOUBLE" property="ntVoc" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    nt_id, nt_year, nt_month, nt_hour, nt_row, nt_col, nt_area, nt_voc
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.NaturalSourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from natural_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from natural_source
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from natural_source
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.NaturalSourceExample">
+    delete from natural_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.NaturalSource">
+    insert into natural_source (nt_id, nt_year, nt_month, 
+      nt_hour, nt_row, nt_col, 
+      nt_area, nt_voc)
+    values (#{ntId,jdbcType=INTEGER}, #{ntYear,jdbcType=INTEGER}, #{ntMonth,jdbcType=INTEGER}, 
+      #{ntHour,jdbcType=INTEGER}, #{ntRow,jdbcType=INTEGER}, #{ntCol,jdbcType=INTEGER}, 
+      #{ntArea,jdbcType=DOUBLE}, #{ntVoc,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.NaturalSource">
+    insert into natural_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ntId != null">
+        nt_id,
+      </if>
+      <if test="ntYear != null">
+        nt_year,
+      </if>
+      <if test="ntMonth != null">
+        nt_month,
+      </if>
+      <if test="ntHour != null">
+        nt_hour,
+      </if>
+      <if test="ntRow != null">
+        nt_row,
+      </if>
+      <if test="ntCol != null">
+        nt_col,
+      </if>
+      <if test="ntArea != null">
+        nt_area,
+      </if>
+      <if test="ntVoc != null">
+        nt_voc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ntId != null">
+        #{ntId,jdbcType=INTEGER},
+      </if>
+      <if test="ntYear != null">
+        #{ntYear,jdbcType=INTEGER},
+      </if>
+      <if test="ntMonth != null">
+        #{ntMonth,jdbcType=INTEGER},
+      </if>
+      <if test="ntHour != null">
+        #{ntHour,jdbcType=INTEGER},
+      </if>
+      <if test="ntRow != null">
+        #{ntRow,jdbcType=INTEGER},
+      </if>
+      <if test="ntCol != null">
+        #{ntCol,jdbcType=INTEGER},
+      </if>
+      <if test="ntArea != null">
+        #{ntArea,jdbcType=DOUBLE},
+      </if>
+      <if test="ntVoc != null">
+        #{ntVoc,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.NaturalSourceExample" resultType="java.lang.Long">
+    select count(*) from natural_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update natural_source
+    <set>
+      <if test="record.ntId != null">
+        nt_id = #{record.ntId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntYear != null">
+        nt_year = #{record.ntYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntMonth != null">
+        nt_month = #{record.ntMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntHour != null">
+        nt_hour = #{record.ntHour,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntRow != null">
+        nt_row = #{record.ntRow,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntCol != null">
+        nt_col = #{record.ntCol,jdbcType=INTEGER},
+      </if>
+      <if test="record.ntArea != null">
+        nt_area = #{record.ntArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ntVoc != null">
+        nt_voc = #{record.ntVoc,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update natural_source
+    set nt_id = #{record.ntId,jdbcType=INTEGER},
+      nt_year = #{record.ntYear,jdbcType=INTEGER},
+      nt_month = #{record.ntMonth,jdbcType=INTEGER},
+      nt_hour = #{record.ntHour,jdbcType=INTEGER},
+      nt_row = #{record.ntRow,jdbcType=INTEGER},
+      nt_col = #{record.ntCol,jdbcType=INTEGER},
+      nt_area = #{record.ntArea,jdbcType=DOUBLE},
+      nt_voc = #{record.ntVoc,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.NaturalSource">
+    update natural_source
+    <set>
+      <if test="ntYear != null">
+        nt_year = #{ntYear,jdbcType=INTEGER},
+      </if>
+      <if test="ntMonth != null">
+        nt_month = #{ntMonth,jdbcType=INTEGER},
+      </if>
+      <if test="ntHour != null">
+        nt_hour = #{ntHour,jdbcType=INTEGER},
+      </if>
+      <if test="ntRow != null">
+        nt_row = #{ntRow,jdbcType=INTEGER},
+      </if>
+      <if test="ntCol != null">
+        nt_col = #{ntCol,jdbcType=INTEGER},
+      </if>
+      <if test="ntArea != null">
+        nt_area = #{ntArea,jdbcType=DOUBLE},
+      </if>
+      <if test="ntVoc != null">
+        nt_voc = #{ntVoc,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.NaturalSource">
+    update natural_source
+    set nt_year = #{ntYear,jdbcType=INTEGER},
+      nt_month = #{ntMonth,jdbcType=INTEGER},
+      nt_hour = #{ntHour,jdbcType=INTEGER},
+      nt_row = #{ntRow,jdbcType=INTEGER},
+      nt_col = #{ntCol,jdbcType=INTEGER},
+      nt_area = #{ntArea,jdbcType=DOUBLE},
+      nt_voc = #{ntVoc,jdbcType=DOUBLE}
+    where nt_id = #{ntId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.XjtimeMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Xjtime">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="scc2" jdbcType="VARCHAR" property="scc2" />
+    <result column="scc1" jdbcType="VARCHAR" property="scc1" />
+    <result column="scc2id" jdbcType="INTEGER" property="scc2id" />
+    <result column="january" jdbcType="DOUBLE" property="january" />
+    <result column="february" jdbcType="DOUBLE" property="february" />
+    <result column="march" jdbcType="DOUBLE" property="march" />
+    <result column="april" jdbcType="DOUBLE" property="april" />
+    <result column="may" jdbcType="DOUBLE" property="may" />
+    <result column="july" jdbcType="DOUBLE" property="july" />
+    <result column="june" jdbcType="DOUBLE" property="june" />
+    <result column="august" jdbcType="DOUBLE" property="august" />
+    <result column="september" jdbcType="DOUBLE" property="september" />
+    <result column="october" jdbcType="DOUBLE" property="october" />
+    <result column="november" jdbcType="DOUBLE" property="november" />
+    <result column="december" jdbcType="DOUBLE" property="december" />
+    <result column="total" jdbcType="DOUBLE" property="total" />
+    <result column="monday" jdbcType="DOUBLE" property="monday" />
+    <result column="tuesday" jdbcType="DOUBLE" property="tuesday" />
+    <result column="wednesday" jdbcType="DOUBLE" property="wednesday" />
+    <result column="thursday" jdbcType="DOUBLE" property="thursday" />
+    <result column="friday" jdbcType="DOUBLE" property="friday" />
+    <result column="saturday" jdbcType="DOUBLE" property="saturday" />
+    <result column="sunday" jdbcType="DOUBLE" property="sunday" />
+    <result column="onehour" jdbcType="DOUBLE" property="onehour" />
+    <result column="twohour" jdbcType="DOUBLE" property="twohour" />
+    <result column="threehour" jdbcType="DOUBLE" property="threehour" />
+    <result column="fourhour" jdbcType="DOUBLE" property="fourhour" />
+    <result column="fivehour" jdbcType="DOUBLE" property="fivehour" />
+    <result column="sixhour" jdbcType="DOUBLE" property="sixhour" />
+    <result column="sevenhour" jdbcType="DOUBLE" property="sevenhour" />
+    <result column="eighthour" jdbcType="DOUBLE" property="eighthour" />
+    <result column="ninehour" jdbcType="DOUBLE" property="ninehour" />
+    <result column="tenhour" jdbcType="DOUBLE" property="tenhour" />
+    <result column="elevenhour" jdbcType="DOUBLE" property="elevenhour" />
+    <result column="twelvehour" jdbcType="DOUBLE" property="twelvehour" />
+    <result column="thirteenhour" jdbcType="DOUBLE" property="thirteenhour" />
+    <result column="fourteenhour" jdbcType="DOUBLE" property="fourteenhour" />
+    <result column="fifteenhour" jdbcType="DOUBLE" property="fifteenhour" />
+    <result column="sixteenhour" jdbcType="DOUBLE" property="sixteenhour" />
+    <result column="seventeenhour" jdbcType="DOUBLE" property="seventeenhour" />
+    <result column="eighteenhour" jdbcType="DOUBLE" property="eighteenhour" />
+    <result column="nineteenhour" jdbcType="DOUBLE" property="nineteenhour" />
+    <result column="twentyhour" jdbcType="DOUBLE" property="twentyhour" />
+    <result column="twentyonehour" jdbcType="DOUBLE" property="twentyonehour" />
+    <result column="twentytwohour" jdbcType="DOUBLE" property="twentytwohour" />
+    <result column="twentythreehour" jdbcType="DOUBLE" property="twentythreehour" />
+    <result column="twentyfourhour" jdbcType="DOUBLE" property="twentyfourhour" />
+    <result column="totalweekxls" jdbcType="DOUBLE" property="totalweekxls" />
+    <result column="totaldayxls" jdbcType="DOUBLE" property="totaldayxls" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, scc2, scc1, scc2id, january, february, march, april, may, july, june, august, 
+    september, october, november, december, total, monday, tuesday, wednesday, thursday, 
+    friday, saturday, sunday, onehour, twohour, threehour, fourhour, fivehour, sixhour, 
+    sevenhour, eighthour, ninehour, tenhour, elevenhour, twelvehour, thirteenhour, fourteenhour, 
+    fifteenhour, sixteenhour, seventeenhour, eighteenhour, nineteenhour, twentyhour, 
+    twentyonehour, twentytwohour, twentythreehour, twentyfourhour, totalweekxls, totaldayxls
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.XjtimeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xjtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xjtime
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xjtime
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.XjtimeExample">
+    delete from xjtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Xjtime">
+    insert into xjtime (id, scc2, scc1, 
+      scc2id, january, february, 
+      march, april, may, july, 
+      june, august, september, 
+      october, november, december, 
+      total, monday, tuesday, 
+      wednesday, thursday, friday, 
+      saturday, sunday, onehour, 
+      twohour, threehour, fourhour, 
+      fivehour, sixhour, sevenhour, 
+      eighthour, ninehour, tenhour, 
+      elevenhour, twelvehour, thirteenhour, 
+      fourteenhour, fifteenhour, sixteenhour, 
+      seventeenhour, eighteenhour, nineteenhour, 
+      twentyhour, twentyonehour, twentytwohour, 
+      twentythreehour, twentyfourhour, totalweekxls, 
+      totaldayxls)
+    values (#{id,jdbcType=INTEGER}, #{scc2,jdbcType=VARCHAR}, #{scc1,jdbcType=VARCHAR}, 
+      #{scc2id,jdbcType=INTEGER}, #{january,jdbcType=DOUBLE}, #{february,jdbcType=DOUBLE}, 
+      #{march,jdbcType=DOUBLE}, #{april,jdbcType=DOUBLE}, #{may,jdbcType=DOUBLE}, #{july,jdbcType=DOUBLE}, 
+      #{june,jdbcType=DOUBLE}, #{august,jdbcType=DOUBLE}, #{september,jdbcType=DOUBLE}, 
+      #{october,jdbcType=DOUBLE}, #{november,jdbcType=DOUBLE}, #{december,jdbcType=DOUBLE}, 
+      #{total,jdbcType=DOUBLE}, #{monday,jdbcType=DOUBLE}, #{tuesday,jdbcType=DOUBLE}, 
+      #{wednesday,jdbcType=DOUBLE}, #{thursday,jdbcType=DOUBLE}, #{friday,jdbcType=DOUBLE}, 
+      #{saturday,jdbcType=DOUBLE}, #{sunday,jdbcType=DOUBLE}, #{onehour,jdbcType=DOUBLE}, 
+      #{twohour,jdbcType=DOUBLE}, #{threehour,jdbcType=DOUBLE}, #{fourhour,jdbcType=DOUBLE}, 
+      #{fivehour,jdbcType=DOUBLE}, #{sixhour,jdbcType=DOUBLE}, #{sevenhour,jdbcType=DOUBLE}, 
+      #{eighthour,jdbcType=DOUBLE}, #{ninehour,jdbcType=DOUBLE}, #{tenhour,jdbcType=DOUBLE}, 
+      #{elevenhour,jdbcType=DOUBLE}, #{twelvehour,jdbcType=DOUBLE}, #{thirteenhour,jdbcType=DOUBLE}, 
+      #{fourteenhour,jdbcType=DOUBLE}, #{fifteenhour,jdbcType=DOUBLE}, #{sixteenhour,jdbcType=DOUBLE}, 
+      #{seventeenhour,jdbcType=DOUBLE}, #{eighteenhour,jdbcType=DOUBLE}, #{nineteenhour,jdbcType=DOUBLE}, 
+      #{twentyhour,jdbcType=DOUBLE}, #{twentyonehour,jdbcType=DOUBLE}, #{twentytwohour,jdbcType=DOUBLE}, 
+      #{twentythreehour,jdbcType=DOUBLE}, #{twentyfourhour,jdbcType=DOUBLE}, #{totalweekxls,jdbcType=DOUBLE}, 
+      #{totaldayxls,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Xjtime">
+    insert into xjtime
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scc2 != null">
+        scc2,
+      </if>
+      <if test="scc1 != null">
+        scc1,
+      </if>
+      <if test="scc2id != null">
+        scc2id,
+      </if>
+      <if test="january != null">
+        january,
+      </if>
+      <if test="february != null">
+        february,
+      </if>
+      <if test="march != null">
+        march,
+      </if>
+      <if test="april != null">
+        april,
+      </if>
+      <if test="may != null">
+        may,
+      </if>
+      <if test="july != null">
+        july,
+      </if>
+      <if test="june != null">
+        june,
+      </if>
+      <if test="august != null">
+        august,
+      </if>
+      <if test="september != null">
+        september,
+      </if>
+      <if test="october != null">
+        october,
+      </if>
+      <if test="november != null">
+        november,
+      </if>
+      <if test="december != null">
+        december,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="monday != null">
+        monday,
+      </if>
+      <if test="tuesday != null">
+        tuesday,
+      </if>
+      <if test="wednesday != null">
+        wednesday,
+      </if>
+      <if test="thursday != null">
+        thursday,
+      </if>
+      <if test="friday != null">
+        friday,
+      </if>
+      <if test="saturday != null">
+        saturday,
+      </if>
+      <if test="sunday != null">
+        sunday,
+      </if>
+      <if test="onehour != null">
+        onehour,
+      </if>
+      <if test="twohour != null">
+        twohour,
+      </if>
+      <if test="threehour != null">
+        threehour,
+      </if>
+      <if test="fourhour != null">
+        fourhour,
+      </if>
+      <if test="fivehour != null">
+        fivehour,
+      </if>
+      <if test="sixhour != null">
+        sixhour,
+      </if>
+      <if test="sevenhour != null">
+        sevenhour,
+      </if>
+      <if test="eighthour != null">
+        eighthour,
+      </if>
+      <if test="ninehour != null">
+        ninehour,
+      </if>
+      <if test="tenhour != null">
+        tenhour,
+      </if>
+      <if test="elevenhour != null">
+        elevenhour,
+      </if>
+      <if test="twelvehour != null">
+        twelvehour,
+      </if>
+      <if test="thirteenhour != null">
+        thirteenhour,
+      </if>
+      <if test="fourteenhour != null">
+        fourteenhour,
+      </if>
+      <if test="fifteenhour != null">
+        fifteenhour,
+      </if>
+      <if test="sixteenhour != null">
+        sixteenhour,
+      </if>
+      <if test="seventeenhour != null">
+        seventeenhour,
+      </if>
+      <if test="eighteenhour != null">
+        eighteenhour,
+      </if>
+      <if test="nineteenhour != null">
+        nineteenhour,
+      </if>
+      <if test="twentyhour != null">
+        twentyhour,
+      </if>
+      <if test="twentyonehour != null">
+        twentyonehour,
+      </if>
+      <if test="twentytwohour != null">
+        twentytwohour,
+      </if>
+      <if test="twentythreehour != null">
+        twentythreehour,
+      </if>
+      <if test="twentyfourhour != null">
+        twentyfourhour,
+      </if>
+      <if test="totalweekxls != null">
+        totalweekxls,
+      </if>
+      <if test="totaldayxls != null">
+        totaldayxls,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scc2 != null">
+        #{scc2,jdbcType=VARCHAR},
+      </if>
+      <if test="scc1 != null">
+        #{scc1,jdbcType=VARCHAR},
+      </if>
+      <if test="scc2id != null">
+        #{scc2id,jdbcType=INTEGER},
+      </if>
+      <if test="january != null">
+        #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null">
+        #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null">
+        #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null">
+        #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null">
+        #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null">
+        #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null">
+        #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null">
+        #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null">
+        #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null">
+        #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null">
+        #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null">
+        #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="monday != null">
+        #{monday,jdbcType=DOUBLE},
+      </if>
+      <if test="tuesday != null">
+        #{tuesday,jdbcType=DOUBLE},
+      </if>
+      <if test="wednesday != null">
+        #{wednesday,jdbcType=DOUBLE},
+      </if>
+      <if test="thursday != null">
+        #{thursday,jdbcType=DOUBLE},
+      </if>
+      <if test="friday != null">
+        #{friday,jdbcType=DOUBLE},
+      </if>
+      <if test="saturday != null">
+        #{saturday,jdbcType=DOUBLE},
+      </if>
+      <if test="sunday != null">
+        #{sunday,jdbcType=DOUBLE},
+      </if>
+      <if test="onehour != null">
+        #{onehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twohour != null">
+        #{twohour,jdbcType=DOUBLE},
+      </if>
+      <if test="threehour != null">
+        #{threehour,jdbcType=DOUBLE},
+      </if>
+      <if test="fourhour != null">
+        #{fourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fivehour != null">
+        #{fivehour,jdbcType=DOUBLE},
+      </if>
+      <if test="sixhour != null">
+        #{sixhour,jdbcType=DOUBLE},
+      </if>
+      <if test="sevenhour != null">
+        #{sevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="eighthour != null">
+        #{eighthour,jdbcType=DOUBLE},
+      </if>
+      <if test="ninehour != null">
+        #{ninehour,jdbcType=DOUBLE},
+      </if>
+      <if test="tenhour != null">
+        #{tenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="elevenhour != null">
+        #{elevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twelvehour != null">
+        #{twelvehour,jdbcType=DOUBLE},
+      </if>
+      <if test="thirteenhour != null">
+        #{thirteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fourteenhour != null">
+        #{fourteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fifteenhour != null">
+        #{fifteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="sixteenhour != null">
+        #{sixteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="seventeenhour != null">
+        #{seventeenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="eighteenhour != null">
+        #{eighteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="nineteenhour != null">
+        #{nineteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyhour != null">
+        #{twentyhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyonehour != null">
+        #{twentyonehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentytwohour != null">
+        #{twentytwohour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentythreehour != null">
+        #{twentythreehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyfourhour != null">
+        #{twentyfourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="totalweekxls != null">
+        #{totalweekxls,jdbcType=DOUBLE},
+      </if>
+      <if test="totaldayxls != null">
+        #{totaldayxls,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.XjtimeExample" resultType="java.lang.Long">
+    select count(*) from xjtime
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xjtime
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.scc2 != null">
+        scc2 = #{record.scc2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scc1 != null">
+        scc1 = #{record.scc1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scc2id != null">
+        scc2id = #{record.scc2id,jdbcType=INTEGER},
+      </if>
+      <if test="record.january != null">
+        january = #{record.january,jdbcType=DOUBLE},
+      </if>
+      <if test="record.february != null">
+        february = #{record.february,jdbcType=DOUBLE},
+      </if>
+      <if test="record.march != null">
+        march = #{record.march,jdbcType=DOUBLE},
+      </if>
+      <if test="record.april != null">
+        april = #{record.april,jdbcType=DOUBLE},
+      </if>
+      <if test="record.may != null">
+        may = #{record.may,jdbcType=DOUBLE},
+      </if>
+      <if test="record.july != null">
+        july = #{record.july,jdbcType=DOUBLE},
+      </if>
+      <if test="record.june != null">
+        june = #{record.june,jdbcType=DOUBLE},
+      </if>
+      <if test="record.august != null">
+        august = #{record.august,jdbcType=DOUBLE},
+      </if>
+      <if test="record.september != null">
+        september = #{record.september,jdbcType=DOUBLE},
+      </if>
+      <if test="record.october != null">
+        october = #{record.october,jdbcType=DOUBLE},
+      </if>
+      <if test="record.november != null">
+        november = #{record.november,jdbcType=DOUBLE},
+      </if>
+      <if test="record.december != null">
+        december = #{record.december,jdbcType=DOUBLE},
+      </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=DOUBLE},
+      </if>
+      <if test="record.monday != null">
+        monday = #{record.monday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tuesday != null">
+        tuesday = #{record.tuesday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wednesday != null">
+        wednesday = #{record.wednesday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.thursday != null">
+        thursday = #{record.thursday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.friday != null">
+        friday = #{record.friday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.saturday != null">
+        saturday = #{record.saturday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sunday != null">
+        sunday = #{record.sunday,jdbcType=DOUBLE},
+      </if>
+      <if test="record.onehour != null">
+        onehour = #{record.onehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twohour != null">
+        twohour = #{record.twohour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.threehour != null">
+        threehour = #{record.threehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fourhour != null">
+        fourhour = #{record.fourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fivehour != null">
+        fivehour = #{record.fivehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sixhour != null">
+        sixhour = #{record.sixhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sevenhour != null">
+        sevenhour = #{record.sevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.eighthour != null">
+        eighthour = #{record.eighthour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ninehour != null">
+        ninehour = #{record.ninehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tenhour != null">
+        tenhour = #{record.tenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.elevenhour != null">
+        elevenhour = #{record.elevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twelvehour != null">
+        twelvehour = #{record.twelvehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.thirteenhour != null">
+        thirteenhour = #{record.thirteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fourteenhour != null">
+        fourteenhour = #{record.fourteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fifteenhour != null">
+        fifteenhour = #{record.fifteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sixteenhour != null">
+        sixteenhour = #{record.sixteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.seventeenhour != null">
+        seventeenhour = #{record.seventeenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.eighteenhour != null">
+        eighteenhour = #{record.eighteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nineteenhour != null">
+        nineteenhour = #{record.nineteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twentyhour != null">
+        twentyhour = #{record.twentyhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twentyonehour != null">
+        twentyonehour = #{record.twentyonehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twentytwohour != null">
+        twentytwohour = #{record.twentytwohour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twentythreehour != null">
+        twentythreehour = #{record.twentythreehour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.twentyfourhour != null">
+        twentyfourhour = #{record.twentyfourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalweekxls != null">
+        totalweekxls = #{record.totalweekxls,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totaldayxls != null">
+        totaldayxls = #{record.totaldayxls,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xjtime
+    set id = #{record.id,jdbcType=INTEGER},
+      scc2 = #{record.scc2,jdbcType=VARCHAR},
+      scc1 = #{record.scc1,jdbcType=VARCHAR},
+      scc2id = #{record.scc2id,jdbcType=INTEGER},
+      january = #{record.january,jdbcType=DOUBLE},
+      february = #{record.february,jdbcType=DOUBLE},
+      march = #{record.march,jdbcType=DOUBLE},
+      april = #{record.april,jdbcType=DOUBLE},
+      may = #{record.may,jdbcType=DOUBLE},
+      july = #{record.july,jdbcType=DOUBLE},
+      june = #{record.june,jdbcType=DOUBLE},
+      august = #{record.august,jdbcType=DOUBLE},
+      september = #{record.september,jdbcType=DOUBLE},
+      october = #{record.october,jdbcType=DOUBLE},
+      november = #{record.november,jdbcType=DOUBLE},
+      december = #{record.december,jdbcType=DOUBLE},
+      total = #{record.total,jdbcType=DOUBLE},
+      monday = #{record.monday,jdbcType=DOUBLE},
+      tuesday = #{record.tuesday,jdbcType=DOUBLE},
+      wednesday = #{record.wednesday,jdbcType=DOUBLE},
+      thursday = #{record.thursday,jdbcType=DOUBLE},
+      friday = #{record.friday,jdbcType=DOUBLE},
+      saturday = #{record.saturday,jdbcType=DOUBLE},
+      sunday = #{record.sunday,jdbcType=DOUBLE},
+      onehour = #{record.onehour,jdbcType=DOUBLE},
+      twohour = #{record.twohour,jdbcType=DOUBLE},
+      threehour = #{record.threehour,jdbcType=DOUBLE},
+      fourhour = #{record.fourhour,jdbcType=DOUBLE},
+      fivehour = #{record.fivehour,jdbcType=DOUBLE},
+      sixhour = #{record.sixhour,jdbcType=DOUBLE},
+      sevenhour = #{record.sevenhour,jdbcType=DOUBLE},
+      eighthour = #{record.eighthour,jdbcType=DOUBLE},
+      ninehour = #{record.ninehour,jdbcType=DOUBLE},
+      tenhour = #{record.tenhour,jdbcType=DOUBLE},
+      elevenhour = #{record.elevenhour,jdbcType=DOUBLE},
+      twelvehour = #{record.twelvehour,jdbcType=DOUBLE},
+      thirteenhour = #{record.thirteenhour,jdbcType=DOUBLE},
+      fourteenhour = #{record.fourteenhour,jdbcType=DOUBLE},
+      fifteenhour = #{record.fifteenhour,jdbcType=DOUBLE},
+      sixteenhour = #{record.sixteenhour,jdbcType=DOUBLE},
+      seventeenhour = #{record.seventeenhour,jdbcType=DOUBLE},
+      eighteenhour = #{record.eighteenhour,jdbcType=DOUBLE},
+      nineteenhour = #{record.nineteenhour,jdbcType=DOUBLE},
+      twentyhour = #{record.twentyhour,jdbcType=DOUBLE},
+      twentyonehour = #{record.twentyonehour,jdbcType=DOUBLE},
+      twentytwohour = #{record.twentytwohour,jdbcType=DOUBLE},
+      twentythreehour = #{record.twentythreehour,jdbcType=DOUBLE},
+      twentyfourhour = #{record.twentyfourhour,jdbcType=DOUBLE},
+      totalweekxls = #{record.totalweekxls,jdbcType=DOUBLE},
+      totaldayxls = #{record.totaldayxls,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Xjtime">
+    update xjtime
+    <set>
+      <if test="scc2 != null">
+        scc2 = #{scc2,jdbcType=VARCHAR},
+      </if>
+      <if test="scc1 != null">
+        scc1 = #{scc1,jdbcType=VARCHAR},
+      </if>
+      <if test="scc2id != null">
+        scc2id = #{scc2id,jdbcType=INTEGER},
+      </if>
+      <if test="january != null">
+        january = #{january,jdbcType=DOUBLE},
+      </if>
+      <if test="february != null">
+        february = #{february,jdbcType=DOUBLE},
+      </if>
+      <if test="march != null">
+        march = #{march,jdbcType=DOUBLE},
+      </if>
+      <if test="april != null">
+        april = #{april,jdbcType=DOUBLE},
+      </if>
+      <if test="may != null">
+        may = #{may,jdbcType=DOUBLE},
+      </if>
+      <if test="july != null">
+        july = #{july,jdbcType=DOUBLE},
+      </if>
+      <if test="june != null">
+        june = #{june,jdbcType=DOUBLE},
+      </if>
+      <if test="august != null">
+        august = #{august,jdbcType=DOUBLE},
+      </if>
+      <if test="september != null">
+        september = #{september,jdbcType=DOUBLE},
+      </if>
+      <if test="october != null">
+        october = #{october,jdbcType=DOUBLE},
+      </if>
+      <if test="november != null">
+        november = #{november,jdbcType=DOUBLE},
+      </if>
+      <if test="december != null">
+        december = #{december,jdbcType=DOUBLE},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="monday != null">
+        monday = #{monday,jdbcType=DOUBLE},
+      </if>
+      <if test="tuesday != null">
+        tuesday = #{tuesday,jdbcType=DOUBLE},
+      </if>
+      <if test="wednesday != null">
+        wednesday = #{wednesday,jdbcType=DOUBLE},
+      </if>
+      <if test="thursday != null">
+        thursday = #{thursday,jdbcType=DOUBLE},
+      </if>
+      <if test="friday != null">
+        friday = #{friday,jdbcType=DOUBLE},
+      </if>
+      <if test="saturday != null">
+        saturday = #{saturday,jdbcType=DOUBLE},
+      </if>
+      <if test="sunday != null">
+        sunday = #{sunday,jdbcType=DOUBLE},
+      </if>
+      <if test="onehour != null">
+        onehour = #{onehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twohour != null">
+        twohour = #{twohour,jdbcType=DOUBLE},
+      </if>
+      <if test="threehour != null">
+        threehour = #{threehour,jdbcType=DOUBLE},
+      </if>
+      <if test="fourhour != null">
+        fourhour = #{fourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fivehour != null">
+        fivehour = #{fivehour,jdbcType=DOUBLE},
+      </if>
+      <if test="sixhour != null">
+        sixhour = #{sixhour,jdbcType=DOUBLE},
+      </if>
+      <if test="sevenhour != null">
+        sevenhour = #{sevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="eighthour != null">
+        eighthour = #{eighthour,jdbcType=DOUBLE},
+      </if>
+      <if test="ninehour != null">
+        ninehour = #{ninehour,jdbcType=DOUBLE},
+      </if>
+      <if test="tenhour != null">
+        tenhour = #{tenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="elevenhour != null">
+        elevenhour = #{elevenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twelvehour != null">
+        twelvehour = #{twelvehour,jdbcType=DOUBLE},
+      </if>
+      <if test="thirteenhour != null">
+        thirteenhour = #{thirteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fourteenhour != null">
+        fourteenhour = #{fourteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="fifteenhour != null">
+        fifteenhour = #{fifteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="sixteenhour != null">
+        sixteenhour = #{sixteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="seventeenhour != null">
+        seventeenhour = #{seventeenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="eighteenhour != null">
+        eighteenhour = #{eighteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="nineteenhour != null">
+        nineteenhour = #{nineteenhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyhour != null">
+        twentyhour = #{twentyhour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyonehour != null">
+        twentyonehour = #{twentyonehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentytwohour != null">
+        twentytwohour = #{twentytwohour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentythreehour != null">
+        twentythreehour = #{twentythreehour,jdbcType=DOUBLE},
+      </if>
+      <if test="twentyfourhour != null">
+        twentyfourhour = #{twentyfourhour,jdbcType=DOUBLE},
+      </if>
+      <if test="totalweekxls != null">
+        totalweekxls = #{totalweekxls,jdbcType=DOUBLE},
+      </if>
+      <if test="totaldayxls != null">
+        totaldayxls = #{totaldayxls,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Xjtime">
+    update xjtime
+    set scc2 = #{scc2,jdbcType=VARCHAR},
+      scc1 = #{scc1,jdbcType=VARCHAR},
+      scc2id = #{scc2id,jdbcType=INTEGER},
+      january = #{january,jdbcType=DOUBLE},
+      february = #{february,jdbcType=DOUBLE},
+      march = #{march,jdbcType=DOUBLE},
+      april = #{april,jdbcType=DOUBLE},
+      may = #{may,jdbcType=DOUBLE},
+      july = #{july,jdbcType=DOUBLE},
+      june = #{june,jdbcType=DOUBLE},
+      august = #{august,jdbcType=DOUBLE},
+      september = #{september,jdbcType=DOUBLE},
+      october = #{october,jdbcType=DOUBLE},
+      november = #{november,jdbcType=DOUBLE},
+      december = #{december,jdbcType=DOUBLE},
+      total = #{total,jdbcType=DOUBLE},
+      monday = #{monday,jdbcType=DOUBLE},
+      tuesday = #{tuesday,jdbcType=DOUBLE},
+      wednesday = #{wednesday,jdbcType=DOUBLE},
+      thursday = #{thursday,jdbcType=DOUBLE},
+      friday = #{friday,jdbcType=DOUBLE},
+      saturday = #{saturday,jdbcType=DOUBLE},
+      sunday = #{sunday,jdbcType=DOUBLE},
+      onehour = #{onehour,jdbcType=DOUBLE},
+      twohour = #{twohour,jdbcType=DOUBLE},
+      threehour = #{threehour,jdbcType=DOUBLE},
+      fourhour = #{fourhour,jdbcType=DOUBLE},
+      fivehour = #{fivehour,jdbcType=DOUBLE},
+      sixhour = #{sixhour,jdbcType=DOUBLE},
+      sevenhour = #{sevenhour,jdbcType=DOUBLE},
+      eighthour = #{eighthour,jdbcType=DOUBLE},
+      ninehour = #{ninehour,jdbcType=DOUBLE},
+      tenhour = #{tenhour,jdbcType=DOUBLE},
+      elevenhour = #{elevenhour,jdbcType=DOUBLE},
+      twelvehour = #{twelvehour,jdbcType=DOUBLE},
+      thirteenhour = #{thirteenhour,jdbcType=DOUBLE},
+      fourteenhour = #{fourteenhour,jdbcType=DOUBLE},
+      fifteenhour = #{fifteenhour,jdbcType=DOUBLE},
+      sixteenhour = #{sixteenhour,jdbcType=DOUBLE},
+      seventeenhour = #{seventeenhour,jdbcType=DOUBLE},
+      eighteenhour = #{eighteenhour,jdbcType=DOUBLE},
+      nineteenhour = #{nineteenhour,jdbcType=DOUBLE},
+      twentyhour = #{twentyhour,jdbcType=DOUBLE},
+      twentyonehour = #{twentyonehour,jdbcType=DOUBLE},
+      twentytwohour = #{twentytwohour,jdbcType=DOUBLE},
+      twentythreehour = #{twentythreehour,jdbcType=DOUBLE},
+      twentyfourhour = #{twentyfourhour,jdbcType=DOUBLE},
+      totalweekxls = #{totalweekxls,jdbcType=DOUBLE},
+      totaldayxls = #{totaldayxls,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

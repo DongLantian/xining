@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.ReferenceMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Reference">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="k_tsp" jdbcType="DOUBLE" property="kTsp" />
+    <result column="k_pm10" jdbcType="DOUBLE" property="kPm10" />
+    <result column="k_pm25" jdbcType="DOUBLE" property="kPm25" />
+    <result column="vkc" jdbcType="DOUBLE" property="vkc" />
+    <result column="velocity_height" jdbcType="DOUBLE" property="velocityHeight" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, k_tsp, k_pm10, k_pm25, vkc, velocity_height
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.ReferenceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from reference
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reference
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from reference
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.ReferenceExample">
+    delete from reference
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Reference">
+    insert into reference (id, k_tsp, k_pm10, 
+      k_pm25, vkc, velocity_height
+      )
+    values (#{id,jdbcType=INTEGER}, #{kTsp,jdbcType=DOUBLE}, #{kPm10,jdbcType=DOUBLE}, 
+      #{kPm25,jdbcType=DOUBLE}, #{vkc,jdbcType=DOUBLE}, #{velocityHeight,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Reference">
+    insert into reference
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="kTsp != null">
+        k_tsp,
+      </if>
+      <if test="kPm10 != null">
+        k_pm10,
+      </if>
+      <if test="kPm25 != null">
+        k_pm25,
+      </if>
+      <if test="vkc != null">
+        vkc,
+      </if>
+      <if test="velocityHeight != null">
+        velocity_height,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="kTsp != null">
+        #{kTsp,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm10 != null">
+        #{kPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm25 != null">
+        #{kPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="vkc != null">
+        #{vkc,jdbcType=DOUBLE},
+      </if>
+      <if test="velocityHeight != null">
+        #{velocityHeight,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.ReferenceExample" resultType="java.lang.Long">
+    select count(*) from reference
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update reference
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.kTsp != null">
+        k_tsp = #{record.kTsp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kPm10 != null">
+        k_pm10 = #{record.kPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kPm25 != null">
+        k_pm25 = #{record.kPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vkc != null">
+        vkc = #{record.vkc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.velocityHeight != null">
+        velocity_height = #{record.velocityHeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update reference
+    set id = #{record.id,jdbcType=INTEGER},
+      k_tsp = #{record.kTsp,jdbcType=DOUBLE},
+      k_pm10 = #{record.kPm10,jdbcType=DOUBLE},
+      k_pm25 = #{record.kPm25,jdbcType=DOUBLE},
+      vkc = #{record.vkc,jdbcType=DOUBLE},
+      velocity_height = #{record.velocityHeight,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Reference">
+    update reference
+    <set>
+      <if test="kTsp != null">
+        k_tsp = #{kTsp,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm10 != null">
+        k_pm10 = #{kPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm25 != null">
+        k_pm25 = #{kPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="vkc != null">
+        vkc = #{vkc,jdbcType=DOUBLE},
+      </if>
+      <if test="velocityHeight != null">
+        velocity_height = #{velocityHeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Reference">
+    update reference
+    set k_tsp = #{kTsp,jdbcType=DOUBLE},
+      k_pm10 = #{kPm10,jdbcType=DOUBLE},
+      k_pm25 = #{kPm25,jdbcType=DOUBLE},
+      vkc = #{vkc,jdbcType=DOUBLE},
+      velocity_height = #{velocityHeight,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

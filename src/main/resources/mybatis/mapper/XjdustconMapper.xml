@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.XjdustconMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Xjdustcon">
+    <id column="dustcontrl_id" jdbcType="INTEGER" property="dustcontrlId" />
+    <result column="controlname" jdbcType="VARCHAR" property="controlname" />
+    <result column="object" jdbcType="INTEGER" property="object" />
+    <result column="dc_tspeffi" jdbcType="DOUBLE" property="dcTspeffi" />
+    <result column="dc_pm25effi" jdbcType="DOUBLE" property="dcPm25effi" />
+    <result column="dc_pm10effi" jdbcType="DOUBLE" property="dcPm10effi" />
+    <result column="dc_voceffi" jdbcType="DOUBLE" property="dcVoceffi" />
+    <result column="dc_nh3effi" jdbcType="DOUBLE" property="dcNh3effi" />
+    <result column="dc_so2effi" jdbcType="DOUBLE" property="dcSo2effi" />
+    <result column="dc_coeffi" jdbcType="DOUBLE" property="dcCoeffi" />
+    <result column="dc_oceffi" jdbcType="DOUBLE" property="dcOceffi" />
+    <result column="dc_bceffi" jdbcType="DOUBLE" property="dcBceffi" />
+    <result column="dc_noxeffi" jdbcType="DOUBLE" property="dcNoxeffi" />
+    <result column="dusttype" jdbcType="INTEGER" property="dusttype" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nankai.xining.bean.Xjdustcon">
+    <result column="dustcon_note" jdbcType="LONGVARCHAR" property="dustconNote" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dustcontrl_id, controlname, object, dc_tspeffi, dc_pm25effi, dc_pm10effi, dc_voceffi, 
+    dc_nh3effi, dc_so2effi, dc_coeffi, dc_oceffi, dc_bceffi, dc_noxeffi, dusttype
+  </sql>
+  <sql id="Blob_Column_List">
+    dustcon_note
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.nankai.xining.bean.XjdustconExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xjdustcon
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.XjdustconExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xjdustcon
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xjdustcon
+    where dustcontrl_id = #{dustcontrlId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xjdustcon
+    where dustcontrl_id = #{dustcontrlId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.XjdustconExample">
+    delete from xjdustcon
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Xjdustcon">
+    insert into xjdustcon (dustcontrl_id, controlname, object, 
+      dc_tspeffi, dc_pm25effi, dc_pm10effi, 
+      dc_voceffi, dc_nh3effi, dc_so2effi, 
+      dc_coeffi, dc_oceffi, dc_bceffi, 
+      dc_noxeffi, dusttype, dustcon_note
+      )
+    values (#{dustcontrlId,jdbcType=INTEGER}, #{controlname,jdbcType=VARCHAR}, #{object,jdbcType=INTEGER}, 
+      #{dcTspeffi,jdbcType=DOUBLE}, #{dcPm25effi,jdbcType=DOUBLE}, #{dcPm10effi,jdbcType=DOUBLE}, 
+      #{dcVoceffi,jdbcType=DOUBLE}, #{dcNh3effi,jdbcType=DOUBLE}, #{dcSo2effi,jdbcType=DOUBLE}, 
+      #{dcCoeffi,jdbcType=DOUBLE}, #{dcOceffi,jdbcType=DOUBLE}, #{dcBceffi,jdbcType=DOUBLE}, 
+      #{dcNoxeffi,jdbcType=DOUBLE}, #{dusttype,jdbcType=INTEGER}, #{dustconNote,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Xjdustcon">
+    insert into xjdustcon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dustcontrlId != null">
+        dustcontrl_id,
+      </if>
+      <if test="controlname != null">
+        controlname,
+      </if>
+      <if test="object != null">
+        object,
+      </if>
+      <if test="dcTspeffi != null">
+        dc_tspeffi,
+      </if>
+      <if test="dcPm25effi != null">
+        dc_pm25effi,
+      </if>
+      <if test="dcPm10effi != null">
+        dc_pm10effi,
+      </if>
+      <if test="dcVoceffi != null">
+        dc_voceffi,
+      </if>
+      <if test="dcNh3effi != null">
+        dc_nh3effi,
+      </if>
+      <if test="dcSo2effi != null">
+        dc_so2effi,
+      </if>
+      <if test="dcCoeffi != null">
+        dc_coeffi,
+      </if>
+      <if test="dcOceffi != null">
+        dc_oceffi,
+      </if>
+      <if test="dcBceffi != null">
+        dc_bceffi,
+      </if>
+      <if test="dcNoxeffi != null">
+        dc_noxeffi,
+      </if>
+      <if test="dusttype != null">
+        dusttype,
+      </if>
+      <if test="dustconNote != null">
+        dustcon_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dustcontrlId != null">
+        #{dustcontrlId,jdbcType=INTEGER},
+      </if>
+      <if test="controlname != null">
+        #{controlname,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null">
+        #{object,jdbcType=INTEGER},
+      </if>
+      <if test="dcTspeffi != null">
+        #{dcTspeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcPm25effi != null">
+        #{dcPm25effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcPm10effi != null">
+        #{dcPm10effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcVoceffi != null">
+        #{dcVoceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcNh3effi != null">
+        #{dcNh3effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcSo2effi != null">
+        #{dcSo2effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcCoeffi != null">
+        #{dcCoeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcOceffi != null">
+        #{dcOceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcBceffi != null">
+        #{dcBceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcNoxeffi != null">
+        #{dcNoxeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dusttype != null">
+        #{dusttype,jdbcType=INTEGER},
+      </if>
+      <if test="dustconNote != null">
+        #{dustconNote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.XjdustconExample" resultType="java.lang.Long">
+    select count(*) from xjdustcon
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xjdustcon
+    <set>
+      <if test="record.dustcontrlId != null">
+        dustcontrl_id = #{record.dustcontrlId,jdbcType=INTEGER},
+      </if>
+      <if test="record.controlname != null">
+        controlname = #{record.controlname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.object != null">
+        object = #{record.object,jdbcType=INTEGER},
+      </if>
+      <if test="record.dcTspeffi != null">
+        dc_tspeffi = #{record.dcTspeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcPm25effi != null">
+        dc_pm25effi = #{record.dcPm25effi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcPm10effi != null">
+        dc_pm10effi = #{record.dcPm10effi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcVoceffi != null">
+        dc_voceffi = #{record.dcVoceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcNh3effi != null">
+        dc_nh3effi = #{record.dcNh3effi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcSo2effi != null">
+        dc_so2effi = #{record.dcSo2effi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcCoeffi != null">
+        dc_coeffi = #{record.dcCoeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcOceffi != null">
+        dc_oceffi = #{record.dcOceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcBceffi != null">
+        dc_bceffi = #{record.dcBceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dcNoxeffi != null">
+        dc_noxeffi = #{record.dcNoxeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dusttype != null">
+        dusttype = #{record.dusttype,jdbcType=INTEGER},
+      </if>
+      <if test="record.dustconNote != null">
+        dustcon_note = #{record.dustconNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update xjdustcon
+    set dustcontrl_id = #{record.dustcontrlId,jdbcType=INTEGER},
+      controlname = #{record.controlname,jdbcType=VARCHAR},
+      object = #{record.object,jdbcType=INTEGER},
+      dc_tspeffi = #{record.dcTspeffi,jdbcType=DOUBLE},
+      dc_pm25effi = #{record.dcPm25effi,jdbcType=DOUBLE},
+      dc_pm10effi = #{record.dcPm10effi,jdbcType=DOUBLE},
+      dc_voceffi = #{record.dcVoceffi,jdbcType=DOUBLE},
+      dc_nh3effi = #{record.dcNh3effi,jdbcType=DOUBLE},
+      dc_so2effi = #{record.dcSo2effi,jdbcType=DOUBLE},
+      dc_coeffi = #{record.dcCoeffi,jdbcType=DOUBLE},
+      dc_oceffi = #{record.dcOceffi,jdbcType=DOUBLE},
+      dc_bceffi = #{record.dcBceffi,jdbcType=DOUBLE},
+      dc_noxeffi = #{record.dcNoxeffi,jdbcType=DOUBLE},
+      dusttype = #{record.dusttype,jdbcType=INTEGER},
+      dustcon_note = #{record.dustconNote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xjdustcon
+    set dustcontrl_id = #{record.dustcontrlId,jdbcType=INTEGER},
+      controlname = #{record.controlname,jdbcType=VARCHAR},
+      object = #{record.object,jdbcType=INTEGER},
+      dc_tspeffi = #{record.dcTspeffi,jdbcType=DOUBLE},
+      dc_pm25effi = #{record.dcPm25effi,jdbcType=DOUBLE},
+      dc_pm10effi = #{record.dcPm10effi,jdbcType=DOUBLE},
+      dc_voceffi = #{record.dcVoceffi,jdbcType=DOUBLE},
+      dc_nh3effi = #{record.dcNh3effi,jdbcType=DOUBLE},
+      dc_so2effi = #{record.dcSo2effi,jdbcType=DOUBLE},
+      dc_coeffi = #{record.dcCoeffi,jdbcType=DOUBLE},
+      dc_oceffi = #{record.dcOceffi,jdbcType=DOUBLE},
+      dc_bceffi = #{record.dcBceffi,jdbcType=DOUBLE},
+      dc_noxeffi = #{record.dcNoxeffi,jdbcType=DOUBLE},
+      dusttype = #{record.dusttype,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Xjdustcon">
+    update xjdustcon
+    <set>
+      <if test="controlname != null">
+        controlname = #{controlname,jdbcType=VARCHAR},
+      </if>
+      <if test="object != null">
+        object = #{object,jdbcType=INTEGER},
+      </if>
+      <if test="dcTspeffi != null">
+        dc_tspeffi = #{dcTspeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcPm25effi != null">
+        dc_pm25effi = #{dcPm25effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcPm10effi != null">
+        dc_pm10effi = #{dcPm10effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcVoceffi != null">
+        dc_voceffi = #{dcVoceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcNh3effi != null">
+        dc_nh3effi = #{dcNh3effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcSo2effi != null">
+        dc_so2effi = #{dcSo2effi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcCoeffi != null">
+        dc_coeffi = #{dcCoeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcOceffi != null">
+        dc_oceffi = #{dcOceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcBceffi != null">
+        dc_bceffi = #{dcBceffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dcNoxeffi != null">
+        dc_noxeffi = #{dcNoxeffi,jdbcType=DOUBLE},
+      </if>
+      <if test="dusttype != null">
+        dusttype = #{dusttype,jdbcType=INTEGER},
+      </if>
+      <if test="dustconNote != null">
+        dustcon_note = #{dustconNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where dustcontrl_id = #{dustcontrlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nankai.xining.bean.Xjdustcon">
+    update xjdustcon
+    set controlname = #{controlname,jdbcType=VARCHAR},
+      object = #{object,jdbcType=INTEGER},
+      dc_tspeffi = #{dcTspeffi,jdbcType=DOUBLE},
+      dc_pm25effi = #{dcPm25effi,jdbcType=DOUBLE},
+      dc_pm10effi = #{dcPm10effi,jdbcType=DOUBLE},
+      dc_voceffi = #{dcVoceffi,jdbcType=DOUBLE},
+      dc_nh3effi = #{dcNh3effi,jdbcType=DOUBLE},
+      dc_so2effi = #{dcSo2effi,jdbcType=DOUBLE},
+      dc_coeffi = #{dcCoeffi,jdbcType=DOUBLE},
+      dc_oceffi = #{dcOceffi,jdbcType=DOUBLE},
+      dc_bceffi = #{dcBceffi,jdbcType=DOUBLE},
+      dc_noxeffi = #{dcNoxeffi,jdbcType=DOUBLE},
+      dusttype = #{dusttype,jdbcType=INTEGER},
+      dustcon_note = #{dustconNote,jdbcType=LONGVARCHAR}
+    where dustcontrl_id = #{dustcontrlId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Xjdustcon">
+    update xjdustcon
+    set controlname = #{controlname,jdbcType=VARCHAR},
+      object = #{object,jdbcType=INTEGER},
+      dc_tspeffi = #{dcTspeffi,jdbcType=DOUBLE},
+      dc_pm25effi = #{dcPm25effi,jdbcType=DOUBLE},
+      dc_pm10effi = #{dcPm10effi,jdbcType=DOUBLE},
+      dc_voceffi = #{dcVoceffi,jdbcType=DOUBLE},
+      dc_nh3effi = #{dcNh3effi,jdbcType=DOUBLE},
+      dc_so2effi = #{dcSo2effi,jdbcType=DOUBLE},
+      dc_coeffi = #{dcCoeffi,jdbcType=DOUBLE},
+      dc_oceffi = #{dcOceffi,jdbcType=DOUBLE},
+      dc_bceffi = #{dcBceffi,jdbcType=DOUBLE},
+      dc_noxeffi = #{dcNoxeffi,jdbcType=DOUBLE},
+      dusttype = #{dusttype,jdbcType=INTEGER}
+    where dustcontrl_id = #{dustcontrlId,jdbcType=INTEGER}
+  </update>
+</mapper>

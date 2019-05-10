@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.CountyMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.County">
+    <id column="COUNTY_ID" jdbcType="CHAR" property="countyId" />
+    <result column="provice_code" jdbcType="CHAR" property="proviceCode" />
+    <result column="city_code" jdbcType="CHAR" property="cityCode" />
+    <result column="COUNTY_NAME" jdbcType="CHAR" property="countyName" />
+    <result column="TOTALGRIDS" jdbcType="INTEGER" property="totalgrids" />
+    <result column="XMAX" jdbcType="DOUBLE" property="xmax" />
+    <result column="XMIN" jdbcType="DOUBLE" property="xmin" />
+    <result column="YMAX" jdbcType="DOUBLE" property="ymax" />
+    <result column="YMIN" jdbcType="DOUBLE" property="ymin" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COUNTY_ID, provice_code, city_code, COUNTY_NAME, TOTALGRIDS, XMAX, XMIN, YMAX, YMIN
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.CountyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from county
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from county
+    where COUNTY_ID = #{countyId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from county
+    where COUNTY_ID = #{countyId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.CountyExample">
+    delete from county
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.County">
+    insert into county (COUNTY_ID, provice_code, city_code, 
+      COUNTY_NAME, TOTALGRIDS, XMAX, 
+      XMIN, YMAX, YMIN)
+    values (#{countyId,jdbcType=CHAR}, #{proviceCode,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR}, 
+      #{countyName,jdbcType=CHAR}, #{totalgrids,jdbcType=INTEGER}, #{xmax,jdbcType=DOUBLE}, 
+      #{xmin,jdbcType=DOUBLE}, #{ymax,jdbcType=DOUBLE}, #{ymin,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.County">
+    insert into county
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="countyId != null">
+        COUNTY_ID,
+      </if>
+      <if test="proviceCode != null">
+        provice_code,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="countyName != null">
+        COUNTY_NAME,
+      </if>
+      <if test="totalgrids != null">
+        TOTALGRIDS,
+      </if>
+      <if test="xmax != null">
+        XMAX,
+      </if>
+      <if test="xmin != null">
+        XMIN,
+      </if>
+      <if test="ymax != null">
+        YMAX,
+      </if>
+      <if test="ymin != null">
+        YMIN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="countyId != null">
+        #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="proviceCode != null">
+        #{proviceCode,jdbcType=CHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=CHAR},
+      </if>
+      <if test="countyName != null">
+        #{countyName,jdbcType=CHAR},
+      </if>
+      <if test="totalgrids != null">
+        #{totalgrids,jdbcType=INTEGER},
+      </if>
+      <if test="xmax != null">
+        #{xmax,jdbcType=DOUBLE},
+      </if>
+      <if test="xmin != null">
+        #{xmin,jdbcType=DOUBLE},
+      </if>
+      <if test="ymax != null">
+        #{ymax,jdbcType=DOUBLE},
+      </if>
+      <if test="ymin != null">
+        #{ymin,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.CountyExample" resultType="java.lang.Long">
+    select count(*) from county
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update county
+    <set>
+      <if test="record.countyId != null">
+        COUNTY_ID = #{record.countyId,jdbcType=CHAR},
+      </if>
+      <if test="record.proviceCode != null">
+        provice_code = #{record.proviceCode,jdbcType=CHAR},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=CHAR},
+      </if>
+      <if test="record.countyName != null">
+        COUNTY_NAME = #{record.countyName,jdbcType=CHAR},
+      </if>
+      <if test="record.totalgrids != null">
+        TOTALGRIDS = #{record.totalgrids,jdbcType=INTEGER},
+      </if>
+      <if test="record.xmax != null">
+        XMAX = #{record.xmax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.xmin != null">
+        XMIN = #{record.xmin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ymax != null">
+        YMAX = #{record.ymax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ymin != null">
+        YMIN = #{record.ymin,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update county
+    set COUNTY_ID = #{record.countyId,jdbcType=CHAR},
+      provice_code = #{record.proviceCode,jdbcType=CHAR},
+      city_code = #{record.cityCode,jdbcType=CHAR},
+      COUNTY_NAME = #{record.countyName,jdbcType=CHAR},
+      TOTALGRIDS = #{record.totalgrids,jdbcType=INTEGER},
+      XMAX = #{record.xmax,jdbcType=DOUBLE},
+      XMIN = #{record.xmin,jdbcType=DOUBLE},
+      YMAX = #{record.ymax,jdbcType=DOUBLE},
+      YMIN = #{record.ymin,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.County">
+    update county
+    <set>
+      <if test="proviceCode != null">
+        provice_code = #{proviceCode,jdbcType=CHAR},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=CHAR},
+      </if>
+      <if test="countyName != null">
+        COUNTY_NAME = #{countyName,jdbcType=CHAR},
+      </if>
+      <if test="totalgrids != null">
+        TOTALGRIDS = #{totalgrids,jdbcType=INTEGER},
+      </if>
+      <if test="xmax != null">
+        XMAX = #{xmax,jdbcType=DOUBLE},
+      </if>
+      <if test="xmin != null">
+        XMIN = #{xmin,jdbcType=DOUBLE},
+      </if>
+      <if test="ymax != null">
+        YMAX = #{ymax,jdbcType=DOUBLE},
+      </if>
+      <if test="ymin != null">
+        YMIN = #{ymin,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where COUNTY_ID = #{countyId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.County">
+    update county
+    set provice_code = #{proviceCode,jdbcType=CHAR},
+      city_code = #{cityCode,jdbcType=CHAR},
+      COUNTY_NAME = #{countyName,jdbcType=CHAR},
+      TOTALGRIDS = #{totalgrids,jdbcType=INTEGER},
+      XMAX = #{xmax,jdbcType=DOUBLE},
+      XMIN = #{xmin,jdbcType=DOUBLE},
+      YMAX = #{ymax,jdbcType=DOUBLE},
+      YMIN = #{ymin,jdbcType=DOUBLE}
+    where COUNTY_ID = #{countyId,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.WasteDisposalTempMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.WasteDisposalTemp">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="scc" jdbcType="CHAR" property="scc" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="treatment" jdbcType="CHAR" property="treatment" />
+    <result column="waste_type2" jdbcType="CHAR" property="wasteType2" />
+    <result column="waste_type3" jdbcType="CHAR" property="wasteType3" />
+    <result column="waste_tech" jdbcType="CHAR" property="wasteTech" />
+    <result column="longitude1" jdbcType="DOUBLE" property="longitude1" />
+    <result column="latitude1" jdbcType="DOUBLE" property="latitude1" />
+    <result column="longitude2" jdbcType="DOUBLE" property="longitude2" />
+    <result column="latitude2" jdbcType="DOUBLE" property="latitude2" />
+    <result column="longitude3" jdbcType="DOUBLE" property="longitude3" />
+    <result column="latitude3" jdbcType="DOUBLE" property="latitude3" />
+    <result column="longitude4" jdbcType="DOUBLE" property="longitude4" />
+    <result column="latitude4" jdbcType="DOUBLE" property="latitude4" />
+    <result column="wwater_cap" jdbcType="DOUBLE" property="wwaterCap" />
+    <result column="wwater_unit" jdbcType="CHAR" property="wwaterUnit" />
+    <result column="wlandfill_cap" jdbcType="DOUBLE" property="wlandfillCap" />
+    <result column="wlandfill_unit" jdbcType="CHAR" property="wlandfillUnit" />
+    <result column="wcompost_cap" jdbcType="DOUBLE" property="wcompostCap" />
+    <result column="wcompost_unit" jdbcType="CHAR" property="wcompostUnit" />
+    <result column="wfire_cap" jdbcType="DOUBLE" property="wfireCap" />
+    <result column="wfire_unit" jdbcType="CHAR" property="wfireUnit" />
+    <result column="nh3_factor" jdbcType="DOUBLE" property="nh3Factor" />
+    <result column="nh3_funit" jdbcType="CHAR" property="nh3Funit" />
+    <result column="voc_factor" jdbcType="DOUBLE" property="vocFactor" />
+    <result column="voc_funit" jdbcType="CHAR" property="vocFunit" />
+    <result column="nh3_emission" jdbcType="DOUBLE" property="nh3Emission" />
+    <result column="nh3_unit" jdbcType="CHAR" property="nh3Unit" />
+    <result column="voc_emisson" jdbcType="DOUBLE" property="vocEmisson" />
+    <result column="voc_unit" jdbcType="CHAR" property="vocUnit" />
+    <result column="status" jdbcType="BIT" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, scc, factory_id, treatment, waste_type2, waste_type3, waste_tech, longitude1, 
+    latitude1, longitude2, latitude2, longitude3, latitude3, longitude4, latitude4, wwater_cap, 
+    wwater_unit, wlandfill_cap, wlandfill_unit, wcompost_cap, wcompost_unit, wfire_cap, 
+    wfire_unit, nh3_factor, nh3_funit, voc_factor, voc_funit, nh3_emission, nh3_unit, 
+    voc_emisson, voc_unit, status
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.WasteDisposalTempExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from waste_disposal_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from waste_disposal_temp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from waste_disposal_temp
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.WasteDisposalTempExample">
+    delete from waste_disposal_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.WasteDisposalTemp">
+    insert into waste_disposal_temp (id, scc, factory_id, 
+      treatment, waste_type2, waste_type3, 
+      waste_tech, longitude1, latitude1, 
+      longitude2, latitude2, longitude3, 
+      latitude3, longitude4, latitude4, 
+      wwater_cap, wwater_unit, wlandfill_cap, 
+      wlandfill_unit, wcompost_cap, wcompost_unit, 
+      wfire_cap, wfire_unit, nh3_factor, 
+      nh3_funit, voc_factor, voc_funit, 
+      nh3_emission, nh3_unit, voc_emisson, 
+      voc_unit, status)
+    values (#{id,jdbcType=INTEGER}, #{scc,jdbcType=CHAR}, #{factoryId,jdbcType=INTEGER}, 
+      #{treatment,jdbcType=CHAR}, #{wasteType2,jdbcType=CHAR}, #{wasteType3,jdbcType=CHAR}, 
+      #{wasteTech,jdbcType=CHAR}, #{longitude1,jdbcType=DOUBLE}, #{latitude1,jdbcType=DOUBLE}, 
+      #{longitude2,jdbcType=DOUBLE}, #{latitude2,jdbcType=DOUBLE}, #{longitude3,jdbcType=DOUBLE}, 
+      #{latitude3,jdbcType=DOUBLE}, #{longitude4,jdbcType=DOUBLE}, #{latitude4,jdbcType=DOUBLE}, 
+      #{wwaterCap,jdbcType=DOUBLE}, #{wwaterUnit,jdbcType=CHAR}, #{wlandfillCap,jdbcType=DOUBLE}, 
+      #{wlandfillUnit,jdbcType=CHAR}, #{wcompostCap,jdbcType=DOUBLE}, #{wcompostUnit,jdbcType=CHAR}, 
+      #{wfireCap,jdbcType=DOUBLE}, #{wfireUnit,jdbcType=CHAR}, #{nh3Factor,jdbcType=DOUBLE}, 
+      #{nh3Funit,jdbcType=CHAR}, #{vocFactor,jdbcType=DOUBLE}, #{vocFunit,jdbcType=CHAR}, 
+      #{nh3Emission,jdbcType=DOUBLE}, #{nh3Unit,jdbcType=CHAR}, #{vocEmisson,jdbcType=DOUBLE}, 
+      #{vocUnit,jdbcType=CHAR}, #{status,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.WasteDisposalTemp">
+    insert into waste_disposal_temp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="scc != null">
+        scc,
+      </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
+      <if test="treatment != null">
+        treatment,
+      </if>
+      <if test="wasteType2 != null">
+        waste_type2,
+      </if>
+      <if test="wasteType3 != null">
+        waste_type3,
+      </if>
+      <if test="wasteTech != null">
+        waste_tech,
+      </if>
+      <if test="longitude1 != null">
+        longitude1,
+      </if>
+      <if test="latitude1 != null">
+        latitude1,
+      </if>
+      <if test="longitude2 != null">
+        longitude2,
+      </if>
+      <if test="latitude2 != null">
+        latitude2,
+      </if>
+      <if test="longitude3 != null">
+        longitude3,
+      </if>
+      <if test="latitude3 != null">
+        latitude3,
+      </if>
+      <if test="longitude4 != null">
+        longitude4,
+      </if>
+      <if test="latitude4 != null">
+        latitude4,
+      </if>
+      <if test="wwaterCap != null">
+        wwater_cap,
+      </if>
+      <if test="wwaterUnit != null">
+        wwater_unit,
+      </if>
+      <if test="wlandfillCap != null">
+        wlandfill_cap,
+      </if>
+      <if test="wlandfillUnit != null">
+        wlandfill_unit,
+      </if>
+      <if test="wcompostCap != null">
+        wcompost_cap,
+      </if>
+      <if test="wcompostUnit != null">
+        wcompost_unit,
+      </if>
+      <if test="wfireCap != null">
+        wfire_cap,
+      </if>
+      <if test="wfireUnit != null">
+        wfire_unit,
+      </if>
+      <if test="nh3Factor != null">
+        nh3_factor,
+      </if>
+      <if test="nh3Funit != null">
+        nh3_funit,
+      </if>
+      <if test="vocFactor != null">
+        voc_factor,
+      </if>
+      <if test="vocFunit != null">
+        voc_funit,
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission,
+      </if>
+      <if test="nh3Unit != null">
+        nh3_unit,
+      </if>
+      <if test="vocEmisson != null">
+        voc_emisson,
+      </if>
+      <if test="vocUnit != null">
+        voc_unit,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="scc != null">
+        #{scc,jdbcType=CHAR},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="treatment != null">
+        #{treatment,jdbcType=CHAR},
+      </if>
+      <if test="wasteType2 != null">
+        #{wasteType2,jdbcType=CHAR},
+      </if>
+      <if test="wasteType3 != null">
+        #{wasteType3,jdbcType=CHAR},
+      </if>
+      <if test="wasteTech != null">
+        #{wasteTech,jdbcType=CHAR},
+      </if>
+      <if test="longitude1 != null">
+        #{longitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude1 != null">
+        #{latitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude2 != null">
+        #{longitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude2 != null">
+        #{latitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude3 != null">
+        #{longitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude3 != null">
+        #{latitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude4 != null">
+        #{longitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude4 != null">
+        #{latitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="wwaterCap != null">
+        #{wwaterCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wwaterUnit != null">
+        #{wwaterUnit,jdbcType=CHAR},
+      </if>
+      <if test="wlandfillCap != null">
+        #{wlandfillCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wlandfillUnit != null">
+        #{wlandfillUnit,jdbcType=CHAR},
+      </if>
+      <if test="wcompostCap != null">
+        #{wcompostCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wcompostUnit != null">
+        #{wcompostUnit,jdbcType=CHAR},
+      </if>
+      <if test="wfireCap != null">
+        #{wfireCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wfireUnit != null">
+        #{wfireUnit,jdbcType=CHAR},
+      </if>
+      <if test="nh3Factor != null">
+        #{nh3Factor,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Funit != null">
+        #{nh3Funit,jdbcType=CHAR},
+      </if>
+      <if test="vocFactor != null">
+        #{vocFactor,jdbcType=DOUBLE},
+      </if>
+      <if test="vocFunit != null">
+        #{vocFunit,jdbcType=CHAR},
+      </if>
+      <if test="nh3Emission != null">
+        #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Unit != null">
+        #{nh3Unit,jdbcType=CHAR},
+      </if>
+      <if test="vocEmisson != null">
+        #{vocEmisson,jdbcType=DOUBLE},
+      </if>
+      <if test="vocUnit != null">
+        #{vocUnit,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.WasteDisposalTempExample" resultType="java.lang.Long">
+    select count(*) from waste_disposal_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update waste_disposal_temp
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.scc != null">
+        scc = #{record.scc,jdbcType=CHAR},
+      </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.treatment != null">
+        treatment = #{record.treatment,jdbcType=CHAR},
+      </if>
+      <if test="record.wasteType2 != null">
+        waste_type2 = #{record.wasteType2,jdbcType=CHAR},
+      </if>
+      <if test="record.wasteType3 != null">
+        waste_type3 = #{record.wasteType3,jdbcType=CHAR},
+      </if>
+      <if test="record.wasteTech != null">
+        waste_tech = #{record.wasteTech,jdbcType=CHAR},
+      </if>
+      <if test="record.longitude1 != null">
+        longitude1 = #{record.longitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude1 != null">
+        latitude1 = #{record.latitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.longitude2 != null">
+        longitude2 = #{record.longitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude2 != null">
+        latitude2 = #{record.latitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.longitude3 != null">
+        longitude3 = #{record.longitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude3 != null">
+        latitude3 = #{record.latitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.longitude4 != null">
+        longitude4 = #{record.longitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude4 != null">
+        latitude4 = #{record.latitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wwaterCap != null">
+        wwater_cap = #{record.wwaterCap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wwaterUnit != null">
+        wwater_unit = #{record.wwaterUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.wlandfillCap != null">
+        wlandfill_cap = #{record.wlandfillCap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wlandfillUnit != null">
+        wlandfill_unit = #{record.wlandfillUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.wcompostCap != null">
+        wcompost_cap = #{record.wcompostCap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wcompostUnit != null">
+        wcompost_unit = #{record.wcompostUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.wfireCap != null">
+        wfire_cap = #{record.wfireCap,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wfireUnit != null">
+        wfire_unit = #{record.wfireUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.nh3Factor != null">
+        nh3_factor = #{record.nh3Factor,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Funit != null">
+        nh3_funit = #{record.nh3Funit,jdbcType=CHAR},
+      </if>
+      <if test="record.vocFactor != null">
+        voc_factor = #{record.vocFactor,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocFunit != null">
+        voc_funit = #{record.vocFunit,jdbcType=CHAR},
+      </if>
+      <if test="record.nh3Emission != null">
+        nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Unit != null">
+        nh3_unit = #{record.nh3Unit,jdbcType=CHAR},
+      </if>
+      <if test="record.vocEmisson != null">
+        voc_emisson = #{record.vocEmisson,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocUnit != null">
+        voc_unit = #{record.vocUnit,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update waste_disposal_temp
+    set id = #{record.id,jdbcType=INTEGER},
+      scc = #{record.scc,jdbcType=CHAR},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      treatment = #{record.treatment,jdbcType=CHAR},
+      waste_type2 = #{record.wasteType2,jdbcType=CHAR},
+      waste_type3 = #{record.wasteType3,jdbcType=CHAR},
+      waste_tech = #{record.wasteTech,jdbcType=CHAR},
+      longitude1 = #{record.longitude1,jdbcType=DOUBLE},
+      latitude1 = #{record.latitude1,jdbcType=DOUBLE},
+      longitude2 = #{record.longitude2,jdbcType=DOUBLE},
+      latitude2 = #{record.latitude2,jdbcType=DOUBLE},
+      longitude3 = #{record.longitude3,jdbcType=DOUBLE},
+      latitude3 = #{record.latitude3,jdbcType=DOUBLE},
+      longitude4 = #{record.longitude4,jdbcType=DOUBLE},
+      latitude4 = #{record.latitude4,jdbcType=DOUBLE},
+      wwater_cap = #{record.wwaterCap,jdbcType=DOUBLE},
+      wwater_unit = #{record.wwaterUnit,jdbcType=CHAR},
+      wlandfill_cap = #{record.wlandfillCap,jdbcType=DOUBLE},
+      wlandfill_unit = #{record.wlandfillUnit,jdbcType=CHAR},
+      wcompost_cap = #{record.wcompostCap,jdbcType=DOUBLE},
+      wcompost_unit = #{record.wcompostUnit,jdbcType=CHAR},
+      wfire_cap = #{record.wfireCap,jdbcType=DOUBLE},
+      wfire_unit = #{record.wfireUnit,jdbcType=CHAR},
+      nh3_factor = #{record.nh3Factor,jdbcType=DOUBLE},
+      nh3_funit = #{record.nh3Funit,jdbcType=CHAR},
+      voc_factor = #{record.vocFactor,jdbcType=DOUBLE},
+      voc_funit = #{record.vocFunit,jdbcType=CHAR},
+      nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      nh3_unit = #{record.nh3Unit,jdbcType=CHAR},
+      voc_emisson = #{record.vocEmisson,jdbcType=DOUBLE},
+      voc_unit = #{record.vocUnit,jdbcType=CHAR},
+      status = #{record.status,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.WasteDisposalTemp">
+    update waste_disposal_temp
+    <set>
+      <if test="scc != null">
+        scc = #{scc,jdbcType=CHAR},
+      </if>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="treatment != null">
+        treatment = #{treatment,jdbcType=CHAR},
+      </if>
+      <if test="wasteType2 != null">
+        waste_type2 = #{wasteType2,jdbcType=CHAR},
+      </if>
+      <if test="wasteType3 != null">
+        waste_type3 = #{wasteType3,jdbcType=CHAR},
+      </if>
+      <if test="wasteTech != null">
+        waste_tech = #{wasteTech,jdbcType=CHAR},
+      </if>
+      <if test="longitude1 != null">
+        longitude1 = #{longitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude1 != null">
+        latitude1 = #{latitude1,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude2 != null">
+        longitude2 = #{longitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude2 != null">
+        latitude2 = #{latitude2,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude3 != null">
+        longitude3 = #{longitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude3 != null">
+        latitude3 = #{latitude3,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude4 != null">
+        longitude4 = #{longitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude4 != null">
+        latitude4 = #{latitude4,jdbcType=DOUBLE},
+      </if>
+      <if test="wwaterCap != null">
+        wwater_cap = #{wwaterCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wwaterUnit != null">
+        wwater_unit = #{wwaterUnit,jdbcType=CHAR},
+      </if>
+      <if test="wlandfillCap != null">
+        wlandfill_cap = #{wlandfillCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wlandfillUnit != null">
+        wlandfill_unit = #{wlandfillUnit,jdbcType=CHAR},
+      </if>
+      <if test="wcompostCap != null">
+        wcompost_cap = #{wcompostCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wcompostUnit != null">
+        wcompost_unit = #{wcompostUnit,jdbcType=CHAR},
+      </if>
+      <if test="wfireCap != null">
+        wfire_cap = #{wfireCap,jdbcType=DOUBLE},
+      </if>
+      <if test="wfireUnit != null">
+        wfire_unit = #{wfireUnit,jdbcType=CHAR},
+      </if>
+      <if test="nh3Factor != null">
+        nh3_factor = #{nh3Factor,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Funit != null">
+        nh3_funit = #{nh3Funit,jdbcType=CHAR},
+      </if>
+      <if test="vocFactor != null">
+        voc_factor = #{vocFactor,jdbcType=DOUBLE},
+      </if>
+      <if test="vocFunit != null">
+        voc_funit = #{vocFunit,jdbcType=CHAR},
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Unit != null">
+        nh3_unit = #{nh3Unit,jdbcType=CHAR},
+      </if>
+      <if test="vocEmisson != null">
+        voc_emisson = #{vocEmisson,jdbcType=DOUBLE},
+      </if>
+      <if test="vocUnit != null">
+        voc_unit = #{vocUnit,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.WasteDisposalTemp">
+    update waste_disposal_temp
+    set scc = #{scc,jdbcType=CHAR},
+      factory_id = #{factoryId,jdbcType=INTEGER},
+      treatment = #{treatment,jdbcType=CHAR},
+      waste_type2 = #{wasteType2,jdbcType=CHAR},
+      waste_type3 = #{wasteType3,jdbcType=CHAR},
+      waste_tech = #{wasteTech,jdbcType=CHAR},
+      longitude1 = #{longitude1,jdbcType=DOUBLE},
+      latitude1 = #{latitude1,jdbcType=DOUBLE},
+      longitude2 = #{longitude2,jdbcType=DOUBLE},
+      latitude2 = #{latitude2,jdbcType=DOUBLE},
+      longitude3 = #{longitude3,jdbcType=DOUBLE},
+      latitude3 = #{latitude3,jdbcType=DOUBLE},
+      longitude4 = #{longitude4,jdbcType=DOUBLE},
+      latitude4 = #{latitude4,jdbcType=DOUBLE},
+      wwater_cap = #{wwaterCap,jdbcType=DOUBLE},
+      wwater_unit = #{wwaterUnit,jdbcType=CHAR},
+      wlandfill_cap = #{wlandfillCap,jdbcType=DOUBLE},
+      wlandfill_unit = #{wlandfillUnit,jdbcType=CHAR},
+      wcompost_cap = #{wcompostCap,jdbcType=DOUBLE},
+      wcompost_unit = #{wcompostUnit,jdbcType=CHAR},
+      wfire_cap = #{wfireCap,jdbcType=DOUBLE},
+      wfire_unit = #{wfireUnit,jdbcType=CHAR},
+      nh3_factor = #{nh3Factor,jdbcType=DOUBLE},
+      nh3_funit = #{nh3Funit,jdbcType=CHAR},
+      voc_factor = #{vocFactor,jdbcType=DOUBLE},
+      voc_funit = #{vocFunit,jdbcType=CHAR},
+      nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      nh3_unit = #{nh3Unit,jdbcType=CHAR},
+      voc_emisson = #{vocEmisson,jdbcType=DOUBLE},
+      voc_unit = #{vocUnit,jdbcType=CHAR},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

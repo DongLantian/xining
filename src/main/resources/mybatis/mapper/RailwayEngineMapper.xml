@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.RailwayEngineMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.RailwayEngine">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="year" jdbcType="CHAR" property="year" />
+    <result column="county_id" jdbcType="CHAR" property="countyId" />
+    <result column="scc_code" jdbcType="CHAR" property="sccCode" />
+    <result column="source_descrip" jdbcType="VARCHAR" property="sourceDescrip" />
+    <result column="fuel_annual_usage" jdbcType="DOUBLE" property="fuelAnnualUsage" />
+    <result column="fuel_sulfur_content" jdbcType="DOUBLE" property="fuelSulfurContent" />
+    <result column="fuel_type" jdbcType="CHAR" property="fuelType" />
+    <result column="annal_average_mileage" jdbcType="DOUBLE" property="annalAverageMileage" />
+    <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
+    <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
+    <result column="co_emission" jdbcType="DOUBLE" property="coEmission" />
+    <result column="so2_emission" jdbcType="DOUBLE" property="so2Emission" />
+    <result column="nox_emission" jdbcType="DOUBLE" property="noxEmission" />
+    <result column="vocs_emission" jdbcType="DOUBLE" property="vocsEmission" />
+    <result column="bc_emission" jdbcType="DOUBLE" property="bcEmission" />
+    <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
+    <result column="nh3_emission" jdbcType="DOUBLE" property="nh3Emission" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, year, county_id, scc_code, source_descrip, fuel_annual_usage, fuel_sulfur_content, 
+    fuel_type, annal_average_mileage, pm10_emission, pm25_emission, co_emission, so2_emission, 
+    nox_emission, vocs_emission, bc_emission, oc_emission, nh3_emission
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.RailwayEngineExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from railway_engine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from railway_engine
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from railway_engine
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.RailwayEngineExample">
+    delete from railway_engine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.RailwayEngine">
+    insert into railway_engine (id, year, county_id, 
+      scc_code, source_descrip, fuel_annual_usage, 
+      fuel_sulfur_content, fuel_type, annal_average_mileage, 
+      pm10_emission, pm25_emission, co_emission, 
+      so2_emission, nox_emission, vocs_emission, 
+      bc_emission, oc_emission, nh3_emission
+      )
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=CHAR}, #{countyId,jdbcType=CHAR}, 
+      #{sccCode,jdbcType=CHAR}, #{sourceDescrip,jdbcType=VARCHAR}, #{fuelAnnualUsage,jdbcType=DOUBLE}, 
+      #{fuelSulfurContent,jdbcType=DOUBLE}, #{fuelType,jdbcType=CHAR}, #{annalAverageMileage,jdbcType=DOUBLE}, 
+      #{pm10Emission,jdbcType=DOUBLE}, #{pm25Emission,jdbcType=DOUBLE}, #{coEmission,jdbcType=DOUBLE}, 
+      #{so2Emission,jdbcType=DOUBLE}, #{noxEmission,jdbcType=DOUBLE}, #{vocsEmission,jdbcType=DOUBLE}, 
+      #{bcEmission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, #{nh3Emission,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.RailwayEngine">
+    insert into railway_engine
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="sccCode != null">
+        scc_code,
+      </if>
+      <if test="sourceDescrip != null">
+        source_descrip,
+      </if>
+      <if test="fuelAnnualUsage != null">
+        fuel_annual_usage,
+      </if>
+      <if test="fuelSulfurContent != null">
+        fuel_sulfur_content,
+      </if>
+      <if test="fuelType != null">
+        fuel_type,
+      </if>
+      <if test="annalAverageMileage != null">
+        annal_average_mileage,
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission,
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission,
+      </if>
+      <if test="coEmission != null">
+        co_emission,
+      </if>
+      <if test="so2Emission != null">
+        so2_emission,
+      </if>
+      <if test="noxEmission != null">
+        nox_emission,
+      </if>
+      <if test="vocsEmission != null">
+        vocs_emission,
+      </if>
+      <if test="bcEmission != null">
+        bc_emission,
+      </if>
+      <if test="ocEmission != null">
+        oc_emission,
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="sccCode != null">
+        #{sccCode,jdbcType=CHAR},
+      </if>
+      <if test="sourceDescrip != null">
+        #{sourceDescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelAnnualUsage != null">
+        #{fuelAnnualUsage,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelSulfurContent != null">
+        #{fuelSulfurContent,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelType != null">
+        #{fuelType,jdbcType=CHAR},
+      </if>
+      <if test="annalAverageMileage != null">
+        #{annalAverageMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsEmission != null">
+        #{vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        #{bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.RailwayEngineExample" resultType="java.lang.Long">
+    select count(*) from railway_engine
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update railway_engine
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=CHAR},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=CHAR},
+      </if>
+      <if test="record.sccCode != null">
+        scc_code = #{record.sccCode,jdbcType=CHAR},
+      </if>
+      <if test="record.sourceDescrip != null">
+        source_descrip = #{record.sourceDescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuelAnnualUsage != null">
+        fuel_annual_usage = #{record.fuelAnnualUsage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelSulfurContent != null">
+        fuel_sulfur_content = #{record.fuelSulfurContent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fuelType != null">
+        fuel_type = #{record.fuelType,jdbcType=CHAR},
+      </if>
+      <if test="record.annalAverageMileage != null">
+        annal_average_mileage = #{record.annalAverageMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Emission != null">
+        pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Emission != null">
+        pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coEmission != null">
+        co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Emission != null">
+        so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxEmission != null">
+        nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocsEmission != null">
+        vocs_emission = #{record.vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bcEmission != null">
+        bc_emission = #{record.bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocEmission != null">
+        oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Emission != null">
+        nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update railway_engine
+    set id = #{record.id,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=CHAR},
+      county_id = #{record.countyId,jdbcType=CHAR},
+      scc_code = #{record.sccCode,jdbcType=CHAR},
+      source_descrip = #{record.sourceDescrip,jdbcType=VARCHAR},
+      fuel_annual_usage = #{record.fuelAnnualUsage,jdbcType=DOUBLE},
+      fuel_sulfur_content = #{record.fuelSulfurContent,jdbcType=DOUBLE},
+      fuel_type = #{record.fuelType,jdbcType=CHAR},
+      annal_average_mileage = #{record.annalAverageMileage,jdbcType=DOUBLE},
+      pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      vocs_emission = #{record.vocsEmission,jdbcType=DOUBLE},
+      bc_emission = #{record.bcEmission,jdbcType=DOUBLE},
+      oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.RailwayEngine">
+    update railway_engine
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="sccCode != null">
+        scc_code = #{sccCode,jdbcType=CHAR},
+      </if>
+      <if test="sourceDescrip != null">
+        source_descrip = #{sourceDescrip,jdbcType=VARCHAR},
+      </if>
+      <if test="fuelAnnualUsage != null">
+        fuel_annual_usage = #{fuelAnnualUsage,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelSulfurContent != null">
+        fuel_sulfur_content = #{fuelSulfurContent,jdbcType=DOUBLE},
+      </if>
+      <if test="fuelType != null">
+        fuel_type = #{fuelType,jdbcType=CHAR},
+      </if>
+      <if test="annalAverageMileage != null">
+        annal_average_mileage = #{annalAverageMileage,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        co_emission = #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsEmission != null">
+        vocs_emission = #{vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        bc_emission = #{bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.RailwayEngine">
+    update railway_engine
+    set year = #{year,jdbcType=CHAR},
+      county_id = #{countyId,jdbcType=CHAR},
+      scc_code = #{sccCode,jdbcType=CHAR},
+      source_descrip = #{sourceDescrip,jdbcType=VARCHAR},
+      fuel_annual_usage = #{fuelAnnualUsage,jdbcType=DOUBLE},
+      fuel_sulfur_content = #{fuelSulfurContent,jdbcType=DOUBLE},
+      fuel_type = #{fuelType,jdbcType=CHAR},
+      annal_average_mileage = #{annalAverageMileage,jdbcType=DOUBLE},
+      pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      co_emission = #{coEmission,jdbcType=DOUBLE},
+      so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      vocs_emission = #{vocsEmission,jdbcType=DOUBLE},
+      bc_emission = #{bcEmission,jdbcType=DOUBLE},
+      oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      nh3_emission = #{nh3Emission,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

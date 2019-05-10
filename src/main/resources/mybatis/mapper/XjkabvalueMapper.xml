@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.XjkabvalueMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Xjkabvalue">
+    <id column="sd_kabvalueid" jdbcType="INTEGER" property="sdKabvalueid" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+    <result column="k_pm25value" jdbcType="DOUBLE" property="kPm25value" />
+    <result column="k_pm10value" jdbcType="DOUBLE" property="kPm10value" />
+    <result column="k_vocvalue" jdbcType="DOUBLE" property="kVocvalue" />
+    <result column="k_nh3value" jdbcType="DOUBLE" property="kNh3value" />
+    <result column="k_so2value" jdbcType="DOUBLE" property="kSo2value" />
+    <result column="k_covalue" jdbcType="DOUBLE" property="kCovalue" />
+    <result column="k_ocvalue" jdbcType="DOUBLE" property="kOcvalue" />
+    <result column="k_bcvalue" jdbcType="DOUBLE" property="kBcvalue" />
+    <result column="k_noxvalue" jdbcType="DOUBLE" property="kNoxvalue" />
+    <result column="a_pm25value" jdbcType="DOUBLE" property="aPm25value" />
+    <result column="a_pm10value" jdbcType="DOUBLE" property="aPm10value" />
+    <result column="a_vocvalue" jdbcType="DOUBLE" property="aVocvalue" />
+    <result column="a_nh3value" jdbcType="DOUBLE" property="aNh3value" />
+    <result column="a_so2value" jdbcType="DOUBLE" property="aSo2value" />
+    <result column="a_covalue" jdbcType="DOUBLE" property="aCovalue" />
+    <result column="a_ocvalue" jdbcType="DOUBLE" property="aOcvalue" />
+    <result column="a_bcvalue" jdbcType="DOUBLE" property="aBcvalue" />
+    <result column="a_noxvalue" jdbcType="DOUBLE" property="aNoxvalue" />
+    <result column="b_pm10value" jdbcType="DOUBLE" property="bPm10value" />
+    <result column="b_vocvalue" jdbcType="DOUBLE" property="bVocvalue" />
+    <result column="b_nh3value" jdbcType="DOUBLE" property="bNh3value" />
+    <result column="b_so2value" jdbcType="DOUBLE" property="bSo2value" />
+    <result column="b_covalue" jdbcType="DOUBLE" property="bCovalue" />
+    <result column="b_ocvalue" jdbcType="DOUBLE" property="bOcvalue" />
+    <result column="b_bcvalue" jdbcType="DOUBLE" property="bBcvalue" />
+    <result column="b_noxvalue" jdbcType="DOUBLE" property="bNoxvalue" />
+    <result column="b_pm25value" jdbcType="DOUBLE" property="bPm25value" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sd_kabvalueid, scccode, k_pm25value, k_pm10value, k_vocvalue, k_nh3value, k_so2value, 
+    k_covalue, k_ocvalue, k_bcvalue, k_noxvalue, a_pm25value, a_pm10value, a_vocvalue, 
+    a_nh3value, a_so2value, a_covalue, a_ocvalue, a_bcvalue, a_noxvalue, b_pm10value, 
+    b_vocvalue, b_nh3value, b_so2value, b_covalue, b_ocvalue, b_bcvalue, b_noxvalue, 
+    b_pm25value
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.XjkabvalueExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xjkabvalue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xjkabvalue
+    where sd_kabvalueid = #{sdKabvalueid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xjkabvalue
+    where sd_kabvalueid = #{sdKabvalueid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.XjkabvalueExample">
+    delete from xjkabvalue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Xjkabvalue">
+    insert into xjkabvalue (sd_kabvalueid, scccode, k_pm25value, 
+      k_pm10value, k_vocvalue, k_nh3value, 
+      k_so2value, k_covalue, k_ocvalue, 
+      k_bcvalue, k_noxvalue, a_pm25value, 
+      a_pm10value, a_vocvalue, a_nh3value, 
+      a_so2value, a_covalue, a_ocvalue, 
+      a_bcvalue, a_noxvalue, b_pm10value, 
+      b_vocvalue, b_nh3value, b_so2value, 
+      b_covalue, b_ocvalue, b_bcvalue, 
+      b_noxvalue, b_pm25value)
+    values (#{sdKabvalueid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{kPm25value,jdbcType=DOUBLE}, 
+      #{kPm10value,jdbcType=DOUBLE}, #{kVocvalue,jdbcType=DOUBLE}, #{kNh3value,jdbcType=DOUBLE}, 
+      #{kSo2value,jdbcType=DOUBLE}, #{kCovalue,jdbcType=DOUBLE}, #{kOcvalue,jdbcType=DOUBLE}, 
+      #{kBcvalue,jdbcType=DOUBLE}, #{kNoxvalue,jdbcType=DOUBLE}, #{aPm25value,jdbcType=DOUBLE}, 
+      #{aPm10value,jdbcType=DOUBLE}, #{aVocvalue,jdbcType=DOUBLE}, #{aNh3value,jdbcType=DOUBLE}, 
+      #{aSo2value,jdbcType=DOUBLE}, #{aCovalue,jdbcType=DOUBLE}, #{aOcvalue,jdbcType=DOUBLE}, 
+      #{aBcvalue,jdbcType=DOUBLE}, #{aNoxvalue,jdbcType=DOUBLE}, #{bPm10value,jdbcType=DOUBLE}, 
+      #{bVocvalue,jdbcType=DOUBLE}, #{bNh3value,jdbcType=DOUBLE}, #{bSo2value,jdbcType=DOUBLE}, 
+      #{bCovalue,jdbcType=DOUBLE}, #{bOcvalue,jdbcType=DOUBLE}, #{bBcvalue,jdbcType=DOUBLE}, 
+      #{bNoxvalue,jdbcType=DOUBLE}, #{bPm25value,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Xjkabvalue">
+    insert into xjkabvalue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sdKabvalueid != null">
+        sd_kabvalueid,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+      <if test="kPm25value != null">
+        k_pm25value,
+      </if>
+      <if test="kPm10value != null">
+        k_pm10value,
+      </if>
+      <if test="kVocvalue != null">
+        k_vocvalue,
+      </if>
+      <if test="kNh3value != null">
+        k_nh3value,
+      </if>
+      <if test="kSo2value != null">
+        k_so2value,
+      </if>
+      <if test="kCovalue != null">
+        k_covalue,
+      </if>
+      <if test="kOcvalue != null">
+        k_ocvalue,
+      </if>
+      <if test="kBcvalue != null">
+        k_bcvalue,
+      </if>
+      <if test="kNoxvalue != null">
+        k_noxvalue,
+      </if>
+      <if test="aPm25value != null">
+        a_pm25value,
+      </if>
+      <if test="aPm10value != null">
+        a_pm10value,
+      </if>
+      <if test="aVocvalue != null">
+        a_vocvalue,
+      </if>
+      <if test="aNh3value != null">
+        a_nh3value,
+      </if>
+      <if test="aSo2value != null">
+        a_so2value,
+      </if>
+      <if test="aCovalue != null">
+        a_covalue,
+      </if>
+      <if test="aOcvalue != null">
+        a_ocvalue,
+      </if>
+      <if test="aBcvalue != null">
+        a_bcvalue,
+      </if>
+      <if test="aNoxvalue != null">
+        a_noxvalue,
+      </if>
+      <if test="bPm10value != null">
+        b_pm10value,
+      </if>
+      <if test="bVocvalue != null">
+        b_vocvalue,
+      </if>
+      <if test="bNh3value != null">
+        b_nh3value,
+      </if>
+      <if test="bSo2value != null">
+        b_so2value,
+      </if>
+      <if test="bCovalue != null">
+        b_covalue,
+      </if>
+      <if test="bOcvalue != null">
+        b_ocvalue,
+      </if>
+      <if test="bBcvalue != null">
+        b_bcvalue,
+      </if>
+      <if test="bNoxvalue != null">
+        b_noxvalue,
+      </if>
+      <if test="bPm25value != null">
+        b_pm25value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sdKabvalueid != null">
+        #{sdKabvalueid,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="kPm25value != null">
+        #{kPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm10value != null">
+        #{kPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="kVocvalue != null">
+        #{kVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kNh3value != null">
+        #{kNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="kSo2value != null">
+        #{kSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="kCovalue != null">
+        #{kCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kOcvalue != null">
+        #{kOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kBcvalue != null">
+        #{kBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kNoxvalue != null">
+        #{kNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aPm25value != null">
+        #{aPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="aPm10value != null">
+        #{aPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="aVocvalue != null">
+        #{aVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aNh3value != null">
+        #{aNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="aSo2value != null">
+        #{aSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="aCovalue != null">
+        #{aCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aOcvalue != null">
+        #{aOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aBcvalue != null">
+        #{aBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aNoxvalue != null">
+        #{aNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bPm10value != null">
+        #{bPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="bVocvalue != null">
+        #{bVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bNh3value != null">
+        #{bNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="bSo2value != null">
+        #{bSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="bCovalue != null">
+        #{bCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bOcvalue != null">
+        #{bOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bBcvalue != null">
+        #{bBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bNoxvalue != null">
+        #{bNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bPm25value != null">
+        #{bPm25value,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.XjkabvalueExample" resultType="java.lang.Long">
+    select count(*) from xjkabvalue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xjkabvalue
+    <set>
+      <if test="record.sdKabvalueid != null">
+        sd_kabvalueid = #{record.sdKabvalueid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.kPm25value != null">
+        k_pm25value = #{record.kPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kPm10value != null">
+        k_pm10value = #{record.kPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kVocvalue != null">
+        k_vocvalue = #{record.kVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kNh3value != null">
+        k_nh3value = #{record.kNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kSo2value != null">
+        k_so2value = #{record.kSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kCovalue != null">
+        k_covalue = #{record.kCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kOcvalue != null">
+        k_ocvalue = #{record.kOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kBcvalue != null">
+        k_bcvalue = #{record.kBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.kNoxvalue != null">
+        k_noxvalue = #{record.kNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aPm25value != null">
+        a_pm25value = #{record.aPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aPm10value != null">
+        a_pm10value = #{record.aPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aVocvalue != null">
+        a_vocvalue = #{record.aVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aNh3value != null">
+        a_nh3value = #{record.aNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aSo2value != null">
+        a_so2value = #{record.aSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aCovalue != null">
+        a_covalue = #{record.aCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aOcvalue != null">
+        a_ocvalue = #{record.aOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aBcvalue != null">
+        a_bcvalue = #{record.aBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aNoxvalue != null">
+        a_noxvalue = #{record.aNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bPm10value != null">
+        b_pm10value = #{record.bPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bVocvalue != null">
+        b_vocvalue = #{record.bVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bNh3value != null">
+        b_nh3value = #{record.bNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bSo2value != null">
+        b_so2value = #{record.bSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bCovalue != null">
+        b_covalue = #{record.bCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bOcvalue != null">
+        b_ocvalue = #{record.bOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bBcvalue != null">
+        b_bcvalue = #{record.bBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bNoxvalue != null">
+        b_noxvalue = #{record.bNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bPm25value != null">
+        b_pm25value = #{record.bPm25value,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xjkabvalue
+    set sd_kabvalueid = #{record.sdKabvalueid,jdbcType=INTEGER},
+      scccode = #{record.scccode,jdbcType=CHAR},
+      k_pm25value = #{record.kPm25value,jdbcType=DOUBLE},
+      k_pm10value = #{record.kPm10value,jdbcType=DOUBLE},
+      k_vocvalue = #{record.kVocvalue,jdbcType=DOUBLE},
+      k_nh3value = #{record.kNh3value,jdbcType=DOUBLE},
+      k_so2value = #{record.kSo2value,jdbcType=DOUBLE},
+      k_covalue = #{record.kCovalue,jdbcType=DOUBLE},
+      k_ocvalue = #{record.kOcvalue,jdbcType=DOUBLE},
+      k_bcvalue = #{record.kBcvalue,jdbcType=DOUBLE},
+      k_noxvalue = #{record.kNoxvalue,jdbcType=DOUBLE},
+      a_pm25value = #{record.aPm25value,jdbcType=DOUBLE},
+      a_pm10value = #{record.aPm10value,jdbcType=DOUBLE},
+      a_vocvalue = #{record.aVocvalue,jdbcType=DOUBLE},
+      a_nh3value = #{record.aNh3value,jdbcType=DOUBLE},
+      a_so2value = #{record.aSo2value,jdbcType=DOUBLE},
+      a_covalue = #{record.aCovalue,jdbcType=DOUBLE},
+      a_ocvalue = #{record.aOcvalue,jdbcType=DOUBLE},
+      a_bcvalue = #{record.aBcvalue,jdbcType=DOUBLE},
+      a_noxvalue = #{record.aNoxvalue,jdbcType=DOUBLE},
+      b_pm10value = #{record.bPm10value,jdbcType=DOUBLE},
+      b_vocvalue = #{record.bVocvalue,jdbcType=DOUBLE},
+      b_nh3value = #{record.bNh3value,jdbcType=DOUBLE},
+      b_so2value = #{record.bSo2value,jdbcType=DOUBLE},
+      b_covalue = #{record.bCovalue,jdbcType=DOUBLE},
+      b_ocvalue = #{record.bOcvalue,jdbcType=DOUBLE},
+      b_bcvalue = #{record.bBcvalue,jdbcType=DOUBLE},
+      b_noxvalue = #{record.bNoxvalue,jdbcType=DOUBLE},
+      b_pm25value = #{record.bPm25value,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Xjkabvalue">
+    update xjkabvalue
+    <set>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="kPm25value != null">
+        k_pm25value = #{kPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="kPm10value != null">
+        k_pm10value = #{kPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="kVocvalue != null">
+        k_vocvalue = #{kVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kNh3value != null">
+        k_nh3value = #{kNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="kSo2value != null">
+        k_so2value = #{kSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="kCovalue != null">
+        k_covalue = #{kCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kOcvalue != null">
+        k_ocvalue = #{kOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kBcvalue != null">
+        k_bcvalue = #{kBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="kNoxvalue != null">
+        k_noxvalue = #{kNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aPm25value != null">
+        a_pm25value = #{aPm25value,jdbcType=DOUBLE},
+      </if>
+      <if test="aPm10value != null">
+        a_pm10value = #{aPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="aVocvalue != null">
+        a_vocvalue = #{aVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aNh3value != null">
+        a_nh3value = #{aNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="aSo2value != null">
+        a_so2value = #{aSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="aCovalue != null">
+        a_covalue = #{aCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aOcvalue != null">
+        a_ocvalue = #{aOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aBcvalue != null">
+        a_bcvalue = #{aBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="aNoxvalue != null">
+        a_noxvalue = #{aNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bPm10value != null">
+        b_pm10value = #{bPm10value,jdbcType=DOUBLE},
+      </if>
+      <if test="bVocvalue != null">
+        b_vocvalue = #{bVocvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bNh3value != null">
+        b_nh3value = #{bNh3value,jdbcType=DOUBLE},
+      </if>
+      <if test="bSo2value != null">
+        b_so2value = #{bSo2value,jdbcType=DOUBLE},
+      </if>
+      <if test="bCovalue != null">
+        b_covalue = #{bCovalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bOcvalue != null">
+        b_ocvalue = #{bOcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bBcvalue != null">
+        b_bcvalue = #{bBcvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bNoxvalue != null">
+        b_noxvalue = #{bNoxvalue,jdbcType=DOUBLE},
+      </if>
+      <if test="bPm25value != null">
+        b_pm25value = #{bPm25value,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where sd_kabvalueid = #{sdKabvalueid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Xjkabvalue">
+    update xjkabvalue
+    set scccode = #{scccode,jdbcType=CHAR},
+      k_pm25value = #{kPm25value,jdbcType=DOUBLE},
+      k_pm10value = #{kPm10value,jdbcType=DOUBLE},
+      k_vocvalue = #{kVocvalue,jdbcType=DOUBLE},
+      k_nh3value = #{kNh3value,jdbcType=DOUBLE},
+      k_so2value = #{kSo2value,jdbcType=DOUBLE},
+      k_covalue = #{kCovalue,jdbcType=DOUBLE},
+      k_ocvalue = #{kOcvalue,jdbcType=DOUBLE},
+      k_bcvalue = #{kBcvalue,jdbcType=DOUBLE},
+      k_noxvalue = #{kNoxvalue,jdbcType=DOUBLE},
+      a_pm25value = #{aPm25value,jdbcType=DOUBLE},
+      a_pm10value = #{aPm10value,jdbcType=DOUBLE},
+      a_vocvalue = #{aVocvalue,jdbcType=DOUBLE},
+      a_nh3value = #{aNh3value,jdbcType=DOUBLE},
+      a_so2value = #{aSo2value,jdbcType=DOUBLE},
+      a_covalue = #{aCovalue,jdbcType=DOUBLE},
+      a_ocvalue = #{aOcvalue,jdbcType=DOUBLE},
+      a_bcvalue = #{aBcvalue,jdbcType=DOUBLE},
+      a_noxvalue = #{aNoxvalue,jdbcType=DOUBLE},
+      b_pm10value = #{bPm10value,jdbcType=DOUBLE},
+      b_vocvalue = #{bVocvalue,jdbcType=DOUBLE},
+      b_nh3value = #{bNh3value,jdbcType=DOUBLE},
+      b_so2value = #{bSo2value,jdbcType=DOUBLE},
+      b_covalue = #{bCovalue,jdbcType=DOUBLE},
+      b_ocvalue = #{bOcvalue,jdbcType=DOUBLE},
+      b_bcvalue = #{bBcvalue,jdbcType=DOUBLE},
+      b_noxvalue = #{bNoxvalue,jdbcType=DOUBLE},
+      b_pm25value = #{bPm25value,jdbcType=DOUBLE}
+    where sd_kabvalueid = #{sdKabvalueid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.LoadingfactorMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Loadingfactor">
+    <id column="factorid" jdbcType="INTEGER" property="factorid" />
+    <result column="operaid" jdbcType="INTEGER" property="operaid" />
+    <result column="factor" jdbcType="DOUBLE" property="factor" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    factorid, operaid, factor
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.LoadingfactorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from loadingfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loadingfactor
+    where factorid = #{factorid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from loadingfactor
+    where factorid = #{factorid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.LoadingfactorExample">
+    delete from loadingfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Loadingfactor">
+    insert into loadingfactor (factorid, operaid, factor
+      )
+    values (#{factorid,jdbcType=INTEGER}, #{operaid,jdbcType=INTEGER}, #{factor,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Loadingfactor">
+    insert into loadingfactor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="factorid != null">
+        factorid,
+      </if>
+      <if test="operaid != null">
+        operaid,
+      </if>
+      <if test="factor != null">
+        factor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="factorid != null">
+        #{factorid,jdbcType=INTEGER},
+      </if>
+      <if test="operaid != null">
+        #{operaid,jdbcType=INTEGER},
+      </if>
+      <if test="factor != null">
+        #{factor,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.LoadingfactorExample" resultType="java.lang.Long">
+    select count(*) from loadingfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update loadingfactor
+    <set>
+      <if test="record.factorid != null">
+        factorid = #{record.factorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.operaid != null">
+        operaid = #{record.operaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.factor != null">
+        factor = #{record.factor,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update loadingfactor
+    set factorid = #{record.factorid,jdbcType=INTEGER},
+      operaid = #{record.operaid,jdbcType=INTEGER},
+      factor = #{record.factor,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Loadingfactor">
+    update loadingfactor
+    <set>
+      <if test="operaid != null">
+        operaid = #{operaid,jdbcType=INTEGER},
+      </if>
+      <if test="factor != null">
+        factor = #{factor,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where factorid = #{factorid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Loadingfactor">
+    update loadingfactor
+    set operaid = #{operaid,jdbcType=INTEGER},
+      factor = #{factor,jdbcType=DOUBLE}
+    where factorid = #{factorid,jdbcType=INTEGER}
+  </update>
+</mapper>

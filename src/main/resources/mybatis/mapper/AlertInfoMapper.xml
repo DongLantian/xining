@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.AlertInfoMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.AlertInfo">
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
+    <result column="a_to" jdbcType="INTEGER" property="aTo" />
+    <result column="a_time" jdbcType="TIMESTAMP" property="aTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nankai.xining.bean.AlertInfo">
+    <result column="a_info" jdbcType="LONGVARCHAR" property="aInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    a_id, a_to, a_time
+  </sql>
+  <sql id="Blob_Column_List">
+    a_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.nankai.xining.bean.AlertInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alert_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.AlertInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from alert_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from alert_info
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from alert_info
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.AlertInfoExample">
+    delete from alert_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.AlertInfo">
+    insert into alert_info (a_id, a_to, a_time, 
+      a_info)
+    values (#{aId,jdbcType=INTEGER}, #{aTo,jdbcType=INTEGER}, #{aTime,jdbcType=TIMESTAMP}, 
+      #{aInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.AlertInfo">
+    insert into alert_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        a_id,
+      </if>
+      <if test="aTo != null">
+        a_to,
+      </if>
+      <if test="aTime != null">
+        a_time,
+      </if>
+      <if test="aInfo != null">
+        a_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aId != null">
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="aTo != null">
+        #{aTo,jdbcType=INTEGER},
+      </if>
+      <if test="aTime != null">
+        #{aTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aInfo != null">
+        #{aInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.AlertInfoExample" resultType="java.lang.Long">
+    select count(*) from alert_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update alert_info
+    <set>
+      <if test="record.aId != null">
+        a_id = #{record.aId,jdbcType=INTEGER},
+      </if>
+      <if test="record.aTo != null">
+        a_to = #{record.aTo,jdbcType=INTEGER},
+      </if>
+      <if test="record.aTime != null">
+        a_time = #{record.aTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.aInfo != null">
+        a_info = #{record.aInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update alert_info
+    set a_id = #{record.aId,jdbcType=INTEGER},
+      a_to = #{record.aTo,jdbcType=INTEGER},
+      a_time = #{record.aTime,jdbcType=TIMESTAMP},
+      a_info = #{record.aInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update alert_info
+    set a_id = #{record.aId,jdbcType=INTEGER},
+      a_to = #{record.aTo,jdbcType=INTEGER},
+      a_time = #{record.aTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.AlertInfo">
+    update alert_info
+    <set>
+      <if test="aTo != null">
+        a_to = #{aTo,jdbcType=INTEGER},
+      </if>
+      <if test="aTime != null">
+        a_time = #{aTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aInfo != null">
+        a_info = #{aInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nankai.xining.bean.AlertInfo">
+    update alert_info
+    set a_to = #{aTo,jdbcType=INTEGER},
+      a_time = #{aTime,jdbcType=TIMESTAMP},
+      a_info = #{aInfo,jdbcType=LONGVARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.AlertInfo">
+    update alert_info
+    set a_to = #{aTo,jdbcType=INTEGER},
+      a_time = #{aTime,jdbcType=TIMESTAMP}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>

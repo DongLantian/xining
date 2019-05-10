@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.IndustryfactorMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Industryfactor">
+    <id column="industryfactorid" jdbcType="INTEGER" property="industryfactorid" />
+    <result column="industryname" jdbcType="VARCHAR" property="industryname" />
+    <result column="evalate_pm" jdbcType="DOUBLE" property="evalatePm" />
+    <result column="evalate_nox" jdbcType="DOUBLE" property="evalateNox" />
+    <result column="evalate_so2" jdbcType="DOUBLE" property="evalateSo2" />
+    <result column="local_pm10" jdbcType="DOUBLE" property="localPm10" />
+    <result column="local_pm25" jdbcType="DOUBLE" property="localPm25" />
+    <result column="reference_ocs" jdbcType="DOUBLE" property="referenceOcs" />
+    <result column="reference_co" jdbcType="DOUBLE" property="referenceCo" />
+    <result column="fueltypeid" jdbcType="INTEGER" property="fueltypeid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    industryfactorid, industryname, evalate_pm, evalate_nox, evalate_so2, local_pm10, 
+    local_pm25, reference_ocs, reference_co, fueltypeid
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.IndustryfactorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from industryfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from industryfactor
+    where industryfactorid = #{industryfactorid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from industryfactor
+    where industryfactorid = #{industryfactorid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.IndustryfactorExample">
+    delete from industryfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Industryfactor">
+    insert into industryfactor (industryfactorid, industryname, evalate_pm, 
+      evalate_nox, evalate_so2, local_pm10, 
+      local_pm25, reference_ocs, reference_co, 
+      fueltypeid)
+    values (#{industryfactorid,jdbcType=INTEGER}, #{industryname,jdbcType=VARCHAR}, #{evalatePm,jdbcType=DOUBLE}, 
+      #{evalateNox,jdbcType=DOUBLE}, #{evalateSo2,jdbcType=DOUBLE}, #{localPm10,jdbcType=DOUBLE}, 
+      #{localPm25,jdbcType=DOUBLE}, #{referenceOcs,jdbcType=DOUBLE}, #{referenceCo,jdbcType=DOUBLE}, 
+      #{fueltypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Industryfactor">
+    insert into industryfactor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="industryfactorid != null">
+        industryfactorid,
+      </if>
+      <if test="industryname != null">
+        industryname,
+      </if>
+      <if test="evalatePm != null">
+        evalate_pm,
+      </if>
+      <if test="evalateNox != null">
+        evalate_nox,
+      </if>
+      <if test="evalateSo2 != null">
+        evalate_so2,
+      </if>
+      <if test="localPm10 != null">
+        local_pm10,
+      </if>
+      <if test="localPm25 != null">
+        local_pm25,
+      </if>
+      <if test="referenceOcs != null">
+        reference_ocs,
+      </if>
+      <if test="referenceCo != null">
+        reference_co,
+      </if>
+      <if test="fueltypeid != null">
+        fueltypeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="industryfactorid != null">
+        #{industryfactorid,jdbcType=INTEGER},
+      </if>
+      <if test="industryname != null">
+        #{industryname,jdbcType=VARCHAR},
+      </if>
+      <if test="evalatePm != null">
+        #{evalatePm,jdbcType=DOUBLE},
+      </if>
+      <if test="evalateNox != null">
+        #{evalateNox,jdbcType=DOUBLE},
+      </if>
+      <if test="evalateSo2 != null">
+        #{evalateSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="localPm10 != null">
+        #{localPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="localPm25 != null">
+        #{localPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="referenceOcs != null">
+        #{referenceOcs,jdbcType=DOUBLE},
+      </if>
+      <if test="referenceCo != null">
+        #{referenceCo,jdbcType=DOUBLE},
+      </if>
+      <if test="fueltypeid != null">
+        #{fueltypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.IndustryfactorExample" resultType="java.lang.Long">
+    select count(*) from industryfactor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update industryfactor
+    <set>
+      <if test="record.industryfactorid != null">
+        industryfactorid = #{record.industryfactorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.industryname != null">
+        industryname = #{record.industryname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.evalatePm != null">
+        evalate_pm = #{record.evalatePm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.evalateNox != null">
+        evalate_nox = #{record.evalateNox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.evalateSo2 != null">
+        evalate_so2 = #{record.evalateSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.localPm10 != null">
+        local_pm10 = #{record.localPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.localPm25 != null">
+        local_pm25 = #{record.localPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.referenceOcs != null">
+        reference_ocs = #{record.referenceOcs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.referenceCo != null">
+        reference_co = #{record.referenceCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fueltypeid != null">
+        fueltypeid = #{record.fueltypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update industryfactor
+    set industryfactorid = #{record.industryfactorid,jdbcType=INTEGER},
+      industryname = #{record.industryname,jdbcType=VARCHAR},
+      evalate_pm = #{record.evalatePm,jdbcType=DOUBLE},
+      evalate_nox = #{record.evalateNox,jdbcType=DOUBLE},
+      evalate_so2 = #{record.evalateSo2,jdbcType=DOUBLE},
+      local_pm10 = #{record.localPm10,jdbcType=DOUBLE},
+      local_pm25 = #{record.localPm25,jdbcType=DOUBLE},
+      reference_ocs = #{record.referenceOcs,jdbcType=DOUBLE},
+      reference_co = #{record.referenceCo,jdbcType=DOUBLE},
+      fueltypeid = #{record.fueltypeid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Industryfactor">
+    update industryfactor
+    <set>
+      <if test="industryname != null">
+        industryname = #{industryname,jdbcType=VARCHAR},
+      </if>
+      <if test="evalatePm != null">
+        evalate_pm = #{evalatePm,jdbcType=DOUBLE},
+      </if>
+      <if test="evalateNox != null">
+        evalate_nox = #{evalateNox,jdbcType=DOUBLE},
+      </if>
+      <if test="evalateSo2 != null">
+        evalate_so2 = #{evalateSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="localPm10 != null">
+        local_pm10 = #{localPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="localPm25 != null">
+        local_pm25 = #{localPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="referenceOcs != null">
+        reference_ocs = #{referenceOcs,jdbcType=DOUBLE},
+      </if>
+      <if test="referenceCo != null">
+        reference_co = #{referenceCo,jdbcType=DOUBLE},
+      </if>
+      <if test="fueltypeid != null">
+        fueltypeid = #{fueltypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where industryfactorid = #{industryfactorid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Industryfactor">
+    update industryfactor
+    set industryname = #{industryname,jdbcType=VARCHAR},
+      evalate_pm = #{evalatePm,jdbcType=DOUBLE},
+      evalate_nox = #{evalateNox,jdbcType=DOUBLE},
+      evalate_so2 = #{evalateSo2,jdbcType=DOUBLE},
+      local_pm10 = #{localPm10,jdbcType=DOUBLE},
+      local_pm25 = #{localPm25,jdbcType=DOUBLE},
+      reference_ocs = #{referenceOcs,jdbcType=DOUBLE},
+      reference_co = #{referenceCo,jdbcType=DOUBLE},
+      fueltypeid = #{fueltypeid,jdbcType=INTEGER}
+    where industryfactorid = #{industryfactorid,jdbcType=INTEGER}
+  </update>
+</mapper>

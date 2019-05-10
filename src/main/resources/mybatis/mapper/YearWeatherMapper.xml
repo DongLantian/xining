@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.YearWeatherMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.YearWeather">
+    <id column="yw_id" jdbcType="INTEGER" property="ywId" />
+    <result column="county" jdbcType="CHAR" property="county" />
+    <result column="y_rainfall" jdbcType="DOUBLE" property="yRainfall" />
+    <result column="y_temp" jdbcType="DOUBLE" property="yTemp" />
+    <result column="y_poration" jdbcType="DOUBLE" property="yPoration" />
+    <result column="y_windrate" jdbcType="DOUBLE" property="yWindrate" />
+    <result column="rainfall_threshold" jdbcType="INTEGER" property="rainfallThreshold" />
+    <result column="dusttype" jdbcType="BIT" property="dusttype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    yw_id, county, y_rainfall, y_temp, y_poration, y_windrate, rainfall_threshold, dusttype
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.YearWeatherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from year_weather
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from year_weather
+    where yw_id = #{ywId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from year_weather
+    where yw_id = #{ywId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.YearWeatherExample">
+    delete from year_weather
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.YearWeather">
+    insert into year_weather (yw_id, county, y_rainfall, 
+      y_temp, y_poration, y_windrate, 
+      rainfall_threshold, dusttype)
+    values (#{ywId,jdbcType=INTEGER}, #{county,jdbcType=CHAR}, #{yRainfall,jdbcType=DOUBLE}, 
+      #{yTemp,jdbcType=DOUBLE}, #{yPoration,jdbcType=DOUBLE}, #{yWindrate,jdbcType=DOUBLE}, 
+      #{rainfallThreshold,jdbcType=INTEGER}, #{dusttype,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.YearWeather">
+    insert into year_weather
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ywId != null">
+        yw_id,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="yRainfall != null">
+        y_rainfall,
+      </if>
+      <if test="yTemp != null">
+        y_temp,
+      </if>
+      <if test="yPoration != null">
+        y_poration,
+      </if>
+      <if test="yWindrate != null">
+        y_windrate,
+      </if>
+      <if test="rainfallThreshold != null">
+        rainfall_threshold,
+      </if>
+      <if test="dusttype != null">
+        dusttype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ywId != null">
+        #{ywId,jdbcType=INTEGER},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=CHAR},
+      </if>
+      <if test="yRainfall != null">
+        #{yRainfall,jdbcType=DOUBLE},
+      </if>
+      <if test="yTemp != null">
+        #{yTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="yPoration != null">
+        #{yPoration,jdbcType=DOUBLE},
+      </if>
+      <if test="yWindrate != null">
+        #{yWindrate,jdbcType=DOUBLE},
+      </if>
+      <if test="rainfallThreshold != null">
+        #{rainfallThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="dusttype != null">
+        #{dusttype,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.YearWeatherExample" resultType="java.lang.Long">
+    select count(*) from year_weather
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update year_weather
+    <set>
+      <if test="record.ywId != null">
+        yw_id = #{record.ywId,jdbcType=INTEGER},
+      </if>
+      <if test="record.county != null">
+        county = #{record.county,jdbcType=CHAR},
+      </if>
+      <if test="record.yRainfall != null">
+        y_rainfall = #{record.yRainfall,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yTemp != null">
+        y_temp = #{record.yTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yPoration != null">
+        y_poration = #{record.yPoration,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yWindrate != null">
+        y_windrate = #{record.yWindrate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.rainfallThreshold != null">
+        rainfall_threshold = #{record.rainfallThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="record.dusttype != null">
+        dusttype = #{record.dusttype,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update year_weather
+    set yw_id = #{record.ywId,jdbcType=INTEGER},
+      county = #{record.county,jdbcType=CHAR},
+      y_rainfall = #{record.yRainfall,jdbcType=DOUBLE},
+      y_temp = #{record.yTemp,jdbcType=DOUBLE},
+      y_poration = #{record.yPoration,jdbcType=DOUBLE},
+      y_windrate = #{record.yWindrate,jdbcType=DOUBLE},
+      rainfall_threshold = #{record.rainfallThreshold,jdbcType=INTEGER},
+      dusttype = #{record.dusttype,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.YearWeather">
+    update year_weather
+    <set>
+      <if test="county != null">
+        county = #{county,jdbcType=CHAR},
+      </if>
+      <if test="yRainfall != null">
+        y_rainfall = #{yRainfall,jdbcType=DOUBLE},
+      </if>
+      <if test="yTemp != null">
+        y_temp = #{yTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="yPoration != null">
+        y_poration = #{yPoration,jdbcType=DOUBLE},
+      </if>
+      <if test="yWindrate != null">
+        y_windrate = #{yWindrate,jdbcType=DOUBLE},
+      </if>
+      <if test="rainfallThreshold != null">
+        rainfall_threshold = #{rainfallThreshold,jdbcType=INTEGER},
+      </if>
+      <if test="dusttype != null">
+        dusttype = #{dusttype,jdbcType=BIT},
+      </if>
+    </set>
+    where yw_id = #{ywId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.YearWeather">
+    update year_weather
+    set county = #{county,jdbcType=CHAR},
+      y_rainfall = #{yRainfall,jdbcType=DOUBLE},
+      y_temp = #{yTemp,jdbcType=DOUBLE},
+      y_poration = #{yPoration,jdbcType=DOUBLE},
+      y_windrate = #{yWindrate,jdbcType=DOUBLE},
+      rainfall_threshold = #{rainfallThreshold,jdbcType=INTEGER},
+      dusttype = #{dusttype,jdbcType=BIT}
+    where yw_id = #{ywId,jdbcType=INTEGER}
+  </update>
+</mapper>

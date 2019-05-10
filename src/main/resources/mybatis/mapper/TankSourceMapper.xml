@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.TankSourceMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.TankSource">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="year" jdbcType="CHAR" property="year" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+    <result column="source_discrip" jdbcType="VARCHAR" property="sourceDiscrip" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="tank_name" jdbcType="VARCHAR" property="tankName" />
+    <result column="tank_type" jdbcType="VARCHAR" property="tankType" />
+    <result column="material_type" jdbcType="VARCHAR" property="materialType" />
+    <result column="material_name" jdbcType="VARCHAR" property="materialName" />
+    <result column="emission" jdbcType="DOUBLE" property="emission" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, year, scccode, source_discrip, company_id, t_id, tank_name, tank_type, material_type, 
+    material_name, emission, flag
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.TankSourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tank_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tank_source
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tank_source
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.TankSourceExample">
+    delete from tank_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.TankSource">
+    insert into tank_source (id, year, scccode, 
+      source_discrip, company_id, t_id, 
+      tank_name, tank_type, material_type, 
+      material_name, emission, flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{year,jdbcType=CHAR}, #{scccode,jdbcType=CHAR}, 
+      #{sourceDiscrip,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}, #{tId,jdbcType=INTEGER}, 
+      #{tankName,jdbcType=VARCHAR}, #{tankType,jdbcType=VARCHAR}, #{materialType,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{emission,jdbcType=DOUBLE}, #{flag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.TankSource">
+    insert into tank_source
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+      <if test="sourceDiscrip != null">
+        source_discrip,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tankName != null">
+        tank_name,
+      </if>
+      <if test="tankType != null">
+        tank_type,
+      </if>
+      <if test="materialType != null">
+        material_type,
+      </if>
+      <if test="materialName != null">
+        material_name,
+      </if>
+      <if test="emission != null">
+        emission,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=CHAR},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="sourceDiscrip != null">
+        #{sourceDiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tankName != null">
+        #{tankName,jdbcType=VARCHAR},
+      </if>
+      <if test="tankType != null">
+        #{tankType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null">
+        #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        #{emission,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.TankSourceExample" resultType="java.lang.Long">
+    select count(*) from tank_source
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tank_source
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=CHAR},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.sourceDiscrip != null">
+        source_discrip = #{record.sourceDiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null">
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tankName != null">
+        tank_name = #{record.tankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tankType != null">
+        tank_type = #{record.tankType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialType != null">
+        material_type = #{record.materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null">
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emission != null">
+        emission = #{record.emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tank_source
+    set id = #{record.id,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=CHAR},
+      scccode = #{record.scccode,jdbcType=CHAR},
+      source_discrip = #{record.sourceDiscrip,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      t_id = #{record.tId,jdbcType=INTEGER},
+      tank_name = #{record.tankName,jdbcType=VARCHAR},
+      tank_type = #{record.tankType,jdbcType=VARCHAR},
+      material_type = #{record.materialType,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      emission = #{record.emission,jdbcType=DOUBLE},
+      flag = #{record.flag,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.TankSource">
+    update tank_source
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=CHAR},
+      </if>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="sourceDiscrip != null">
+        source_discrip = #{sourceDiscrip,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tankName != null">
+        tank_name = #{tankName,jdbcType=VARCHAR},
+      </if>
+      <if test="tankType != null">
+        tank_type = #{tankType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialType != null">
+        material_type = #{materialType,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="emission != null">
+        emission = #{emission,jdbcType=DOUBLE},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.TankSource">
+    update tank_source
+    set year = #{year,jdbcType=CHAR},
+      scccode = #{scccode,jdbcType=CHAR},
+      source_discrip = #{sourceDiscrip,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      t_id = #{tId,jdbcType=INTEGER},
+      tank_name = #{tankName,jdbcType=VARCHAR},
+      tank_type = #{tankType,jdbcType=VARCHAR},
+      material_type = #{materialType,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      emission = #{emission,jdbcType=DOUBLE},
+      flag = #{flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

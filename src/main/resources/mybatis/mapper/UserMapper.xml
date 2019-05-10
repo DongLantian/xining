@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.UserMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="work_phone" jdbcType="VARCHAR" property="workPhone" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="identity_file" jdbcType="VARCHAR" property="identityFile" />
+    <result column="fac_no" jdbcType="VARCHAR" property="facNo" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nankai.xining.bean.User">
+    <result column="notes" jdbcType="LONGVARCHAR" property="notes" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, role_id, nickname, email, password, real_name, work_phone, phone_number, 
+    status, identity_file, fac_no
+  </sql>
+  <sql id="Blob_Column_List">
+    notes
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.nankai.xining.bean.UserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.User">
+    insert into user (user_id, role_id, nickname, 
+      email, password, real_name, 
+      work_phone, phone_number, status, 
+      identity_file, fac_no, notes
+      )
+    values (#{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{workPhone,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{identityFile,jdbcType=VARCHAR}, #{facNo,jdbcType=VARCHAR}, #{notes,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="workPhone != null">
+        work_phone,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="identityFile != null">
+        identity_file,
+      </if>
+      <if test="facNo != null">
+        fac_no,
+      </if>
+      <if test="notes != null">
+        notes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null">
+        #{workPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="identityFile != null">
+        #{identityFile,jdbcType=VARCHAR},
+      </if>
+      <if test="facNo != null">
+        #{facNo,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleId != null">
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPhone != null">
+        work_phone = #{record.workPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.identityFile != null">
+        identity_file = #{record.identityFile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facNo != null">
+        fac_no = #{record.facNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null">
+        notes = #{record.notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      work_phone = #{record.workPhone,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      identity_file = #{record.identityFile,jdbcType=VARCHAR},
+      fac_no = #{record.facNo,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      work_phone = #{record.workPhone,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      identity_file = #{record.identityFile,jdbcType=VARCHAR},
+      fac_no = #{record.facNo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.User">
+    update user
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="workPhone != null">
+        work_phone = #{workPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="identityFile != null">
+        identity_file = #{identityFile,jdbcType=VARCHAR},
+      </if>
+      <if test="facNo != null">
+        fac_no = #{facNo,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null">
+        notes = #{notes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nankai.xining.bean.User">
+    update user
+    set role_id = #{roleId,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      work_phone = #{workPhone,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      identity_file = #{identityFile,jdbcType=VARCHAR},
+      fac_no = #{facNo,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=LONGVARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.User">
+    update user
+    set role_id = #{roleId,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      work_phone = #{workPhone,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      identity_file = #{identityFile,jdbcType=VARCHAR},
+      fac_no = #{facNo,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

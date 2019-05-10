@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.MeasureDealdustMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.MeasureDealdust">
+    <id column="dealdustid" jdbcType="INTEGER" property="dealdustid" />
+    <result column="dealtype" jdbcType="VARCHAR" property="dealtype" />
+    <result column="pm" jdbcType="DOUBLE" property="pm" />
+    <result column="pm10" jdbcType="DOUBLE" property="pm10" />
+    <result column="pm25" jdbcType="DOUBLE" property="pm25" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dealdustid, dealtype, pm, pm10, pm25
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.MeasureDealdustExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from measure_dealdust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from measure_dealdust
+    where dealdustid = #{dealdustid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from measure_dealdust
+    where dealdustid = #{dealdustid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.MeasureDealdustExample">
+    delete from measure_dealdust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.MeasureDealdust">
+    insert into measure_dealdust (dealdustid, dealtype, pm, 
+      pm10, pm25)
+    values (#{dealdustid,jdbcType=INTEGER}, #{dealtype,jdbcType=VARCHAR}, #{pm,jdbcType=DOUBLE}, 
+      #{pm10,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.MeasureDealdust">
+    insert into measure_dealdust
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dealdustid != null">
+        dealdustid,
+      </if>
+      <if test="dealtype != null">
+        dealtype,
+      </if>
+      <if test="pm != null">
+        pm,
+      </if>
+      <if test="pm10 != null">
+        pm10,
+      </if>
+      <if test="pm25 != null">
+        pm25,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dealdustid != null">
+        #{dealdustid,jdbcType=INTEGER},
+      </if>
+      <if test="dealtype != null">
+        #{dealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null">
+        #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        #{pm25,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.MeasureDealdustExample" resultType="java.lang.Long">
+    select count(*) from measure_dealdust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update measure_dealdust
+    <set>
+      <if test="record.dealdustid != null">
+        dealdustid = #{record.dealdustid,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealtype != null">
+        dealtype = #{record.dealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pm != null">
+        pm = #{record.pm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10 != null">
+        pm10 = #{record.pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25 != null">
+        pm25 = #{record.pm25,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update measure_dealdust
+    set dealdustid = #{record.dealdustid,jdbcType=INTEGER},
+      dealtype = #{record.dealtype,jdbcType=VARCHAR},
+      pm = #{record.pm,jdbcType=DOUBLE},
+      pm10 = #{record.pm10,jdbcType=DOUBLE},
+      pm25 = #{record.pm25,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.MeasureDealdust">
+    update measure_dealdust
+    <set>
+      <if test="dealtype != null">
+        dealtype = #{dealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pm != null">
+        pm = #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        pm10 = #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        pm25 = #{pm25,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where dealdustid = #{dealdustid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.MeasureDealdust">
+    update measure_dealdust
+    set dealtype = #{dealtype,jdbcType=VARCHAR},
+      pm = #{pm,jdbcType=DOUBLE},
+      pm10 = #{pm10,jdbcType=DOUBLE},
+      pm25 = #{pm25,jdbcType=DOUBLE}
+    where dealdustid = #{dealdustid,jdbcType=INTEGER}
+  </update>
+</mapper>

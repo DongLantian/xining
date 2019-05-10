@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.XjsoildustMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Xjsoildust">
+    <id column="sd_id" jdbcType="INTEGER" property="sdId" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+    <result column="county_id" jdbcType="CHAR" property="countyId" />
+    <result column="sd_year" jdbcType="CHAR" property="sdYear" />
+    <result column="sd_takemeasures" jdbcType="VARCHAR" property="sdTakemeasures" />
+    <result column="sd_utype" jdbcType="VARCHAR" property="sdUtype" />
+    <result column="sd_soiltype" jdbcType="VARCHAR" property="sdSoiltype" />
+    <result column="sd_area" jdbcType="DOUBLE" property="sdArea" />
+    <result column="soilindexpm25" jdbcType="DOUBLE" property="soilindexpm25" />
+    <result column="soilindexpm10" jdbcType="DOUBLE" property="soilindexpm10" />
+    <result column="surindex" jdbcType="DOUBLE" property="surindex" />
+    <result column="noindex" jdbcType="DOUBLE" property="noindex" />
+    <result column="pindex" jdbcType="DOUBLE" property="pindex" />
+    <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
+    <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
+    <result column="voc_emission" jdbcType="DOUBLE" property="vocEmission" />
+    <result column="nh3_emission" jdbcType="DOUBLE" property="nh3Emission" />
+    <result column="so2_emission" jdbcType="DOUBLE" property="so2Emission" />
+    <result column="co_emission" jdbcType="DOUBLE" property="coEmission" />
+    <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
+    <result column="bc_emission" jdbcType="DOUBLE" property="bcEmission" />
+    <result column="nox_emission" jdbcType="DOUBLE" property="noxEmission" />
+    <result column="pm25_max" jdbcType="DOUBLE" property="pm25Max" />
+    <result column="pm10_max" jdbcType="DOUBLE" property="pm10Max" />
+    <result column="voc_max" jdbcType="DOUBLE" property="vocMax" />
+    <result column="nh3_max" jdbcType="DOUBLE" property="nh3Max" />
+    <result column="so2_max" jdbcType="DOUBLE" property="so2Max" />
+    <result column="co_max" jdbcType="DOUBLE" property="coMax" />
+    <result column="oc_max" jdbcType="DOUBLE" property="ocMax" />
+    <result column="bc_max" jdbcType="DOUBLE" property="bcMax" />
+    <result column="nox_max" jdbcType="DOUBLE" property="noxMax" />
+    <result column="scc_describe" jdbcType="VARCHAR" property="sccDescribe" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sd_id, scccode, county_id, sd_year, sd_takemeasures, sd_utype, sd_soiltype, sd_area, 
+    soilindexpm25, soilindexpm10, surindex, noindex, pindex, pm25_emission, pm10_emission, 
+    voc_emission, nh3_emission, so2_emission, co_emission, oc_emission, bc_emission, 
+    nox_emission, pm25_max, pm10_max, voc_max, nh3_max, so2_max, co_max, oc_max, bc_max, 
+    nox_max, scc_describe, flag
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.XjsoildustExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xjsoildust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xjsoildust
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xjsoildust
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.XjsoildustExample">
+    delete from xjsoildust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Xjsoildust">
+    insert into xjsoildust (sd_id, scccode, county_id, 
+      sd_year, sd_takemeasures, sd_utype, 
+      sd_soiltype, sd_area, soilindexpm25, 
+      soilindexpm10, surindex, noindex, 
+      pindex, pm25_emission, pm10_emission, 
+      voc_emission, nh3_emission, so2_emission, 
+      co_emission, oc_emission, bc_emission, 
+      nox_emission, pm25_max, pm10_max, 
+      voc_max, nh3_max, so2_max, 
+      co_max, oc_max, bc_max, nox_max, 
+      scc_describe, flag)
+    values (#{sdId,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{countyId,jdbcType=CHAR}, 
+      #{sdYear,jdbcType=CHAR}, #{sdTakemeasures,jdbcType=VARCHAR}, #{sdUtype,jdbcType=VARCHAR}, 
+      #{sdSoiltype,jdbcType=VARCHAR}, #{sdArea,jdbcType=DOUBLE}, #{soilindexpm25,jdbcType=DOUBLE}, 
+      #{soilindexpm10,jdbcType=DOUBLE}, #{surindex,jdbcType=DOUBLE}, #{noindex,jdbcType=DOUBLE}, 
+      #{pindex,jdbcType=DOUBLE}, #{pm25Emission,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, 
+      #{vocEmission,jdbcType=DOUBLE}, #{nh3Emission,jdbcType=DOUBLE}, #{so2Emission,jdbcType=DOUBLE}, 
+      #{coEmission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, #{bcEmission,jdbcType=DOUBLE}, 
+      #{noxEmission,jdbcType=DOUBLE}, #{pm25Max,jdbcType=DOUBLE}, #{pm10Max,jdbcType=DOUBLE}, 
+      #{vocMax,jdbcType=DOUBLE}, #{nh3Max,jdbcType=DOUBLE}, #{so2Max,jdbcType=DOUBLE}, 
+      #{coMax,jdbcType=DOUBLE}, #{ocMax,jdbcType=DOUBLE}, #{bcMax,jdbcType=DOUBLE}, #{noxMax,jdbcType=DOUBLE}, 
+      #{sccDescribe,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Xjsoildust">
+    insert into xjsoildust
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sdId != null">
+        sd_id,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="sdYear != null">
+        sd_year,
+      </if>
+      <if test="sdTakemeasures != null">
+        sd_takemeasures,
+      </if>
+      <if test="sdUtype != null">
+        sd_utype,
+      </if>
+      <if test="sdSoiltype != null">
+        sd_soiltype,
+      </if>
+      <if test="sdArea != null">
+        sd_area,
+      </if>
+      <if test="soilindexpm25 != null">
+        soilindexpm25,
+      </if>
+      <if test="soilindexpm10 != null">
+        soilindexpm10,
+      </if>
+      <if test="surindex != null">
+        surindex,
+      </if>
+      <if test="noindex != null">
+        noindex,
+      </if>
+      <if test="pindex != null">
+        pindex,
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission,
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission,
+      </if>
+      <if test="vocEmission != null">
+        voc_emission,
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission,
+      </if>
+      <if test="so2Emission != null">
+        so2_emission,
+      </if>
+      <if test="coEmission != null">
+        co_emission,
+      </if>
+      <if test="ocEmission != null">
+        oc_emission,
+      </if>
+      <if test="bcEmission != null">
+        bc_emission,
+      </if>
+      <if test="noxEmission != null">
+        nox_emission,
+      </if>
+      <if test="pm25Max != null">
+        pm25_max,
+      </if>
+      <if test="pm10Max != null">
+        pm10_max,
+      </if>
+      <if test="vocMax != null">
+        voc_max,
+      </if>
+      <if test="nh3Max != null">
+        nh3_max,
+      </if>
+      <if test="so2Max != null">
+        so2_max,
+      </if>
+      <if test="coMax != null">
+        co_max,
+      </if>
+      <if test="ocMax != null">
+        oc_max,
+      </if>
+      <if test="bcMax != null">
+        bc_max,
+      </if>
+      <if test="noxMax != null">
+        nox_max,
+      </if>
+      <if test="sccDescribe != null">
+        scc_describe,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sdId != null">
+        #{sdId,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="sdYear != null">
+        #{sdYear,jdbcType=CHAR},
+      </if>
+      <if test="sdTakemeasures != null">
+        #{sdTakemeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="sdUtype != null">
+        #{sdUtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sdSoiltype != null">
+        #{sdSoiltype,jdbcType=VARCHAR},
+      </if>
+      <if test="sdArea != null">
+        #{sdArea,jdbcType=DOUBLE},
+      </if>
+      <if test="soilindexpm25 != null">
+        #{soilindexpm25,jdbcType=DOUBLE},
+      </if>
+      <if test="soilindexpm10 != null">
+        #{soilindexpm10,jdbcType=DOUBLE},
+      </if>
+      <if test="surindex != null">
+        #{surindex,jdbcType=DOUBLE},
+      </if>
+      <if test="noindex != null">
+        #{noindex,jdbcType=DOUBLE},
+      </if>
+      <if test="pindex != null">
+        #{pindex,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocEmission != null">
+        #{vocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        #{bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Max != null">
+        #{pm25Max,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Max != null">
+        #{pm10Max,jdbcType=DOUBLE},
+      </if>
+      <if test="vocMax != null">
+        #{vocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Max != null">
+        #{nh3Max,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Max != null">
+        #{so2Max,jdbcType=DOUBLE},
+      </if>
+      <if test="coMax != null">
+        #{coMax,jdbcType=DOUBLE},
+      </if>
+      <if test="ocMax != null">
+        #{ocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="bcMax != null">
+        #{bcMax,jdbcType=DOUBLE},
+      </if>
+      <if test="noxMax != null">
+        #{noxMax,jdbcType=DOUBLE},
+      </if>
+      <if test="sccDescribe != null">
+        #{sccDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.XjsoildustExample" resultType="java.lang.Long">
+    select count(*) from xjsoildust
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xjsoildust
+    <set>
+      <if test="record.sdId != null">
+        sd_id = #{record.sdId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=CHAR},
+      </if>
+      <if test="record.sdYear != null">
+        sd_year = #{record.sdYear,jdbcType=CHAR},
+      </if>
+      <if test="record.sdTakemeasures != null">
+        sd_takemeasures = #{record.sdTakemeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdUtype != null">
+        sd_utype = #{record.sdUtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdSoiltype != null">
+        sd_soiltype = #{record.sdSoiltype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdArea != null">
+        sd_area = #{record.sdArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.soilindexpm25 != null">
+        soilindexpm25 = #{record.soilindexpm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.soilindexpm10 != null">
+        soilindexpm10 = #{record.soilindexpm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.surindex != null">
+        surindex = #{record.surindex,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noindex != null">
+        noindex = #{record.noindex,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pindex != null">
+        pindex = #{record.pindex,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Emission != null">
+        pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Emission != null">
+        pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocEmission != null">
+        voc_emission = #{record.vocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Emission != null">
+        nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Emission != null">
+        so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coEmission != null">
+        co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocEmission != null">
+        oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bcEmission != null">
+        bc_emission = #{record.bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxEmission != null">
+        nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Max != null">
+        pm25_max = #{record.pm25Max,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Max != null">
+        pm10_max = #{record.pm10Max,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocMax != null">
+        voc_max = #{record.vocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Max != null">
+        nh3_max = #{record.nh3Max,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Max != null">
+        so2_max = #{record.so2Max,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coMax != null">
+        co_max = #{record.coMax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocMax != null">
+        oc_max = #{record.ocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bcMax != null">
+        bc_max = #{record.bcMax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxMax != null">
+        nox_max = #{record.noxMax,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sccDescribe != null">
+        scc_describe = #{record.sccDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xjsoildust
+    set sd_id = #{record.sdId,jdbcType=INTEGER},
+      scccode = #{record.scccode,jdbcType=CHAR},
+      county_id = #{record.countyId,jdbcType=CHAR},
+      sd_year = #{record.sdYear,jdbcType=CHAR},
+      sd_takemeasures = #{record.sdTakemeasures,jdbcType=VARCHAR},
+      sd_utype = #{record.sdUtype,jdbcType=VARCHAR},
+      sd_soiltype = #{record.sdSoiltype,jdbcType=VARCHAR},
+      sd_area = #{record.sdArea,jdbcType=DOUBLE},
+      soilindexpm25 = #{record.soilindexpm25,jdbcType=DOUBLE},
+      soilindexpm10 = #{record.soilindexpm10,jdbcType=DOUBLE},
+      surindex = #{record.surindex,jdbcType=DOUBLE},
+      noindex = #{record.noindex,jdbcType=DOUBLE},
+      pindex = #{record.pindex,jdbcType=DOUBLE},
+      pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      voc_emission = #{record.vocEmission,jdbcType=DOUBLE},
+      nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      bc_emission = #{record.bcEmission,jdbcType=DOUBLE},
+      nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      pm25_max = #{record.pm25Max,jdbcType=DOUBLE},
+      pm10_max = #{record.pm10Max,jdbcType=DOUBLE},
+      voc_max = #{record.vocMax,jdbcType=DOUBLE},
+      nh3_max = #{record.nh3Max,jdbcType=DOUBLE},
+      so2_max = #{record.so2Max,jdbcType=DOUBLE},
+      co_max = #{record.coMax,jdbcType=DOUBLE},
+      oc_max = #{record.ocMax,jdbcType=DOUBLE},
+      bc_max = #{record.bcMax,jdbcType=DOUBLE},
+      nox_max = #{record.noxMax,jdbcType=DOUBLE},
+      scc_describe = #{record.sccDescribe,jdbcType=VARCHAR},
+      flag = #{record.flag,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Xjsoildust">
+    update xjsoildust
+    <set>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=CHAR},
+      </if>
+      <if test="sdYear != null">
+        sd_year = #{sdYear,jdbcType=CHAR},
+      </if>
+      <if test="sdTakemeasures != null">
+        sd_takemeasures = #{sdTakemeasures,jdbcType=VARCHAR},
+      </if>
+      <if test="sdUtype != null">
+        sd_utype = #{sdUtype,jdbcType=VARCHAR},
+      </if>
+      <if test="sdSoiltype != null">
+        sd_soiltype = #{sdSoiltype,jdbcType=VARCHAR},
+      </if>
+      <if test="sdArea != null">
+        sd_area = #{sdArea,jdbcType=DOUBLE},
+      </if>
+      <if test="soilindexpm25 != null">
+        soilindexpm25 = #{soilindexpm25,jdbcType=DOUBLE},
+      </if>
+      <if test="soilindexpm10 != null">
+        soilindexpm10 = #{soilindexpm10,jdbcType=DOUBLE},
+      </if>
+      <if test="surindex != null">
+        surindex = #{surindex,jdbcType=DOUBLE},
+      </if>
+      <if test="noindex != null">
+        noindex = #{noindex,jdbcType=DOUBLE},
+      </if>
+      <if test="pindex != null">
+        pindex = #{pindex,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocEmission != null">
+        voc_emission = #{vocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        co_emission = #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="bcEmission != null">
+        bc_emission = #{bcEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Max != null">
+        pm25_max = #{pm25Max,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Max != null">
+        pm10_max = #{pm10Max,jdbcType=DOUBLE},
+      </if>
+      <if test="vocMax != null">
+        voc_max = #{vocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Max != null">
+        nh3_max = #{nh3Max,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Max != null">
+        so2_max = #{so2Max,jdbcType=DOUBLE},
+      </if>
+      <if test="coMax != null">
+        co_max = #{coMax,jdbcType=DOUBLE},
+      </if>
+      <if test="ocMax != null">
+        oc_max = #{ocMax,jdbcType=DOUBLE},
+      </if>
+      <if test="bcMax != null">
+        bc_max = #{bcMax,jdbcType=DOUBLE},
+      </if>
+      <if test="noxMax != null">
+        nox_max = #{noxMax,jdbcType=DOUBLE},
+      </if>
+      <if test="sccDescribe != null">
+        scc_describe = #{sccDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Xjsoildust">
+    update xjsoildust
+    set scccode = #{scccode,jdbcType=CHAR},
+      county_id = #{countyId,jdbcType=CHAR},
+      sd_year = #{sdYear,jdbcType=CHAR},
+      sd_takemeasures = #{sdTakemeasures,jdbcType=VARCHAR},
+      sd_utype = #{sdUtype,jdbcType=VARCHAR},
+      sd_soiltype = #{sdSoiltype,jdbcType=VARCHAR},
+      sd_area = #{sdArea,jdbcType=DOUBLE},
+      soilindexpm25 = #{soilindexpm25,jdbcType=DOUBLE},
+      soilindexpm10 = #{soilindexpm10,jdbcType=DOUBLE},
+      surindex = #{surindex,jdbcType=DOUBLE},
+      noindex = #{noindex,jdbcType=DOUBLE},
+      pindex = #{pindex,jdbcType=DOUBLE},
+      pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      voc_emission = #{vocEmission,jdbcType=DOUBLE},
+      nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      co_emission = #{coEmission,jdbcType=DOUBLE},
+      oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      bc_emission = #{bcEmission,jdbcType=DOUBLE},
+      nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      pm25_max = #{pm25Max,jdbcType=DOUBLE},
+      pm10_max = #{pm10Max,jdbcType=DOUBLE},
+      voc_max = #{vocMax,jdbcType=DOUBLE},
+      nh3_max = #{nh3Max,jdbcType=DOUBLE},
+      so2_max = #{so2Max,jdbcType=DOUBLE},
+      co_max = #{coMax,jdbcType=DOUBLE},
+      oc_max = #{ocMax,jdbcType=DOUBLE},
+      bc_max = #{bcMax,jdbcType=DOUBLE},
+      nox_max = #{noxMax,jdbcType=DOUBLE},
+      scc_describe = #{sccDescribe,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER}
+    where sd_id = #{sdId,jdbcType=INTEGER}
+  </update>
+</mapper>

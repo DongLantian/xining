@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.GistotalpercentMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Gistotalpercent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="county_id" jdbcType="VARCHAR" property="countyId" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="sourcetype" jdbcType="VARCHAR" property="sourcetype" />
+    <result column="so2" jdbcType="DOUBLE" property="so2" />
+    <result column="vocs" jdbcType="DOUBLE" property="vocs" />
+    <result column="co" jdbcType="DOUBLE" property="co" />
+    <result column="nh3" jdbcType="DOUBLE" property="nh3" />
+    <result column="pm" jdbcType="DOUBLE" property="pm" />
+    <result column="pm25" jdbcType="DOUBLE" property="pm25" />
+    <result column="pm10" jdbcType="DOUBLE" property="pm10" />
+    <result column="nox" jdbcType="DOUBLE" property="nox" />
+    <result column="bc" jdbcType="DOUBLE" property="bc" />
+    <result column="oc" jdbcType="DOUBLE" property="oc" />
+    <result column="hc" jdbcType="DOUBLE" property="hc" />
+    <result column="ec" jdbcType="DOUBLE" property="ec" />
+    <result column="everypercent" jdbcType="DOUBLE" property="everypercent" />
+    <result column="everytype" jdbcType="VARCHAR" property="everytype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, county_id, year, sourcetype, so2, vocs, co, nh3, pm, pm25, pm10, nox, bc, oc, 
+    hc, ec, everypercent, everytype
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.GistotalpercentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gistotalpercent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gistotalpercent
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gistotalpercent
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.GistotalpercentExample">
+    delete from gistotalpercent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Gistotalpercent">
+    insert into gistotalpercent (id, county_id, year, 
+      sourcetype, so2, vocs, 
+      co, nh3, pm, pm25, 
+      pm10, nox, bc, oc, 
+      hc, ec, everypercent, 
+      everytype)
+    values (#{id,jdbcType=INTEGER}, #{countyId,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+      #{sourcetype,jdbcType=VARCHAR}, #{so2,jdbcType=DOUBLE}, #{vocs,jdbcType=DOUBLE}, 
+      #{co,jdbcType=DOUBLE}, #{nh3,jdbcType=DOUBLE}, #{pm,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, 
+      #{pm10,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, #{bc,jdbcType=DOUBLE}, #{oc,jdbcType=DOUBLE}, 
+      #{hc,jdbcType=DOUBLE}, #{ec,jdbcType=DOUBLE}, #{everypercent,jdbcType=DOUBLE}, 
+      #{everytype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Gistotalpercent">
+    insert into gistotalpercent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="sourcetype != null">
+        sourcetype,
+      </if>
+      <if test="so2 != null">
+        so2,
+      </if>
+      <if test="vocs != null">
+        vocs,
+      </if>
+      <if test="co != null">
+        co,
+      </if>
+      <if test="nh3 != null">
+        nh3,
+      </if>
+      <if test="pm != null">
+        pm,
+      </if>
+      <if test="pm25 != null">
+        pm25,
+      </if>
+      <if test="pm10 != null">
+        pm10,
+      </if>
+      <if test="nox != null">
+        nox,
+      </if>
+      <if test="bc != null">
+        bc,
+      </if>
+      <if test="oc != null">
+        oc,
+      </if>
+      <if test="hc != null">
+        hc,
+      </if>
+      <if test="ec != null">
+        ec,
+      </if>
+      <if test="everypercent != null">
+        everypercent,
+      </if>
+      <if test="everytype != null">
+        everytype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcetype != null">
+        #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null">
+        #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="vocs != null">
+        #{vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="co != null">
+        #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3 != null">
+        #{nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm != null">
+        #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="hc != null">
+        #{hc,jdbcType=DOUBLE},
+      </if>
+      <if test="ec != null">
+        #{ec,jdbcType=DOUBLE},
+      </if>
+      <if test="everypercent != null">
+        #{everypercent,jdbcType=DOUBLE},
+      </if>
+      <if test="everytype != null">
+        #{everytype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.GistotalpercentExample" resultType="java.lang.Long">
+    select count(*) from gistotalpercent
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gistotalpercent
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourcetype != null">
+        sourcetype = #{record.sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.so2 != null">
+        so2 = #{record.so2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocs != null">
+        vocs = #{record.vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="record.co != null">
+        co = #{record.co,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3 != null">
+        nh3 = #{record.nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm != null">
+        pm = #{record.pm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25 != null">
+        pm25 = #{record.pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10 != null">
+        pm10 = #{record.pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nox != null">
+        nox = #{record.nox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bc != null">
+        bc = #{record.bc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oc != null">
+        oc = #{record.oc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hc != null">
+        hc = #{record.hc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ec != null">
+        ec = #{record.ec,jdbcType=DOUBLE},
+      </if>
+      <if test="record.everypercent != null">
+        everypercent = #{record.everypercent,jdbcType=DOUBLE},
+      </if>
+      <if test="record.everytype != null">
+        everytype = #{record.everytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gistotalpercent
+    set id = #{record.id,jdbcType=INTEGER},
+      county_id = #{record.countyId,jdbcType=VARCHAR},
+      year = #{record.year,jdbcType=VARCHAR},
+      sourcetype = #{record.sourcetype,jdbcType=VARCHAR},
+      so2 = #{record.so2,jdbcType=DOUBLE},
+      vocs = #{record.vocs,jdbcType=DOUBLE},
+      co = #{record.co,jdbcType=DOUBLE},
+      nh3 = #{record.nh3,jdbcType=DOUBLE},
+      pm = #{record.pm,jdbcType=DOUBLE},
+      pm25 = #{record.pm25,jdbcType=DOUBLE},
+      pm10 = #{record.pm10,jdbcType=DOUBLE},
+      nox = #{record.nox,jdbcType=DOUBLE},
+      bc = #{record.bc,jdbcType=DOUBLE},
+      oc = #{record.oc,jdbcType=DOUBLE},
+      hc = #{record.hc,jdbcType=DOUBLE},
+      ec = #{record.ec,jdbcType=DOUBLE},
+      everypercent = #{record.everypercent,jdbcType=DOUBLE},
+      everytype = #{record.everytype,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Gistotalpercent">
+    update gistotalpercent
+    <set>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        year = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcetype != null">
+        sourcetype = #{sourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="so2 != null">
+        so2 = #{so2,jdbcType=DOUBLE},
+      </if>
+      <if test="vocs != null">
+        vocs = #{vocs,jdbcType=DOUBLE},
+      </if>
+      <if test="co != null">
+        co = #{co,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3 != null">
+        nh3 = #{nh3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm != null">
+        pm = #{pm,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25 != null">
+        pm25 = #{pm25,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10 != null">
+        pm10 = #{pm10,jdbcType=DOUBLE},
+      </if>
+      <if test="nox != null">
+        nox = #{nox,jdbcType=DOUBLE},
+      </if>
+      <if test="bc != null">
+        bc = #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="oc != null">
+        oc = #{oc,jdbcType=DOUBLE},
+      </if>
+      <if test="hc != null">
+        hc = #{hc,jdbcType=DOUBLE},
+      </if>
+      <if test="ec != null">
+        ec = #{ec,jdbcType=DOUBLE},
+      </if>
+      <if test="everypercent != null">
+        everypercent = #{everypercent,jdbcType=DOUBLE},
+      </if>
+      <if test="everytype != null">
+        everytype = #{everytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Gistotalpercent">
+    update gistotalpercent
+    set county_id = #{countyId,jdbcType=VARCHAR},
+      year = #{year,jdbcType=VARCHAR},
+      sourcetype = #{sourcetype,jdbcType=VARCHAR},
+      so2 = #{so2,jdbcType=DOUBLE},
+      vocs = #{vocs,jdbcType=DOUBLE},
+      co = #{co,jdbcType=DOUBLE},
+      nh3 = #{nh3,jdbcType=DOUBLE},
+      pm = #{pm,jdbcType=DOUBLE},
+      pm25 = #{pm25,jdbcType=DOUBLE},
+      pm10 = #{pm10,jdbcType=DOUBLE},
+      nox = #{nox,jdbcType=DOUBLE},
+      bc = #{bc,jdbcType=DOUBLE},
+      oc = #{oc,jdbcType=DOUBLE},
+      hc = #{hc,jdbcType=DOUBLE},
+      ec = #{ec,jdbcType=DOUBLE},
+      everypercent = #{everypercent,jdbcType=DOUBLE},
+      everytype = #{everytype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.ExhaustTempMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.ExhaustTemp">
+    <id column="EXF_ID" jdbcType="INTEGER" property="exfId" />
+    <result column="NK_NO" jdbcType="INTEGER" property="nkNo" />
+    <result column="EXF_NO" jdbcType="CHAR" property="exfNo" />
+    <result column="EXF_MATERIAL" jdbcType="CHAR" property="exfMaterial" />
+    <result column="EXF_HEIGHT" jdbcType="DOUBLE" property="exfHeight" />
+    <result column="SMOKE_OUTD" jdbcType="DOUBLE" property="smokeOutd" />
+    <result column="SMOKE_O_UTTE_M" jdbcType="DOUBLE" property="smokeOUtteM" />
+    <result column="SMOKE_OUTV" jdbcType="DOUBLE" property="smokeOutv" />
+    <result column="SMOKE_OUTA" jdbcType="DOUBLE" property="smokeOuta" />
+    <result column="EXF_LONGITUDE" jdbcType="DOUBLE" property="exfLongitude" />
+    <result column="EXF_LATITUDE" jdbcType="DOUBLE" property="exfLatitude" />
+    <result column="EXF_PM10" jdbcType="DOUBLE" property="exfPm10" />
+    <result column="EXF_PM25" jdbcType="DOUBLE" property="exfPm25" />
+    <result column="EXF_CO" jdbcType="DOUBLE" property="exfCo" />
+    <result column="EXF_NH3" jdbcType="DOUBLE" property="exfNh3" />
+    <result column="EXF_VOC" jdbcType="DOUBLE" property="exfVoc" />
+    <result column="MEASURE_NH3" jdbcType="DOUBLE" property="measureNh3" />
+    <result column="MEASURE_NOX" jdbcType="DOUBLE" property="measureNox" />
+    <result column="MEASURE_BC" jdbcType="DOUBLE" property="measureBc" />
+    <result column="MEASURE_CO" jdbcType="DOUBLE" property="measureCo" />
+    <result column="MEASURE_OC" jdbcType="DOUBLE" property="measureOc" />
+    <result column="MEASURE_SO2" jdbcType="DOUBLE" property="measureSo2" />
+    <result column="MEASURE_PM25" jdbcType="DOUBLE" property="measurePm25" />
+    <result column="MEASURE_VOC" jdbcType="DOUBLE" property="measureVoc" />
+    <result column="MEASURE_PM" jdbcType="DOUBLE" property="measurePm" />
+    <result column="MEASURE_PM10" jdbcType="DOUBLE" property="measurePm10" />
+    <result column="EXF_PM" jdbcType="DOUBLE" property="exfPm" />
+    <result column="EXF_SO2" jdbcType="DOUBLE" property="exfSo2" />
+    <result column="EXF_NOX" jdbcType="DOUBLE" property="exfNox" />
+    <result column="exf_oc" jdbcType="DOUBLE" property="exfOc" />
+    <result column="exf_bc" jdbcType="DOUBLE" property="exfBc" />
+    <result column="FACTORY_ID" jdbcType="INTEGER" property="factoryId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    EXF_ID, NK_NO, EXF_NO, EXF_MATERIAL, EXF_HEIGHT, SMOKE_OUTD, SMOKE_O_UTTE_M, SMOKE_OUTV, 
+    SMOKE_OUTA, EXF_LONGITUDE, EXF_LATITUDE, EXF_PM10, EXF_PM25, EXF_CO, EXF_NH3, EXF_VOC, 
+    MEASURE_NH3, MEASURE_NOX, MEASURE_BC, MEASURE_CO, MEASURE_OC, MEASURE_SO2, MEASURE_PM25, 
+    MEASURE_VOC, MEASURE_PM, MEASURE_PM10, EXF_PM, EXF_SO2, EXF_NOX, exf_oc, exf_bc, 
+    FACTORY_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.ExhaustTempExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exhaust_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exhaust_temp
+    where EXF_ID = #{exfId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exhaust_temp
+    where EXF_ID = #{exfId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.ExhaustTempExample">
+    delete from exhaust_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.ExhaustTemp">
+    insert into exhaust_temp (EXF_ID, NK_NO, EXF_NO, 
+      EXF_MATERIAL, EXF_HEIGHT, SMOKE_OUTD, 
+      SMOKE_O_UTTE_M, SMOKE_OUTV, SMOKE_OUTA, 
+      EXF_LONGITUDE, EXF_LATITUDE, EXF_PM10, 
+      EXF_PM25, EXF_CO, EXF_NH3, 
+      EXF_VOC, MEASURE_NH3, MEASURE_NOX, 
+      MEASURE_BC, MEASURE_CO, MEASURE_OC, 
+      MEASURE_SO2, MEASURE_PM25, MEASURE_VOC, 
+      MEASURE_PM, MEASURE_PM10, EXF_PM, 
+      EXF_SO2, EXF_NOX, exf_oc, 
+      exf_bc, FACTORY_ID)
+    values (#{exfId,jdbcType=INTEGER}, #{nkNo,jdbcType=INTEGER}, #{exfNo,jdbcType=CHAR}, 
+      #{exfMaterial,jdbcType=CHAR}, #{exfHeight,jdbcType=DOUBLE}, #{smokeOutd,jdbcType=DOUBLE}, 
+      #{smokeOUtteM,jdbcType=DOUBLE}, #{smokeOutv,jdbcType=DOUBLE}, #{smokeOuta,jdbcType=DOUBLE}, 
+      #{exfLongitude,jdbcType=DOUBLE}, #{exfLatitude,jdbcType=DOUBLE}, #{exfPm10,jdbcType=DOUBLE}, 
+      #{exfPm25,jdbcType=DOUBLE}, #{exfCo,jdbcType=DOUBLE}, #{exfNh3,jdbcType=DOUBLE}, 
+      #{exfVoc,jdbcType=DOUBLE}, #{measureNh3,jdbcType=DOUBLE}, #{measureNox,jdbcType=DOUBLE}, 
+      #{measureBc,jdbcType=DOUBLE}, #{measureCo,jdbcType=DOUBLE}, #{measureOc,jdbcType=DOUBLE}, 
+      #{measureSo2,jdbcType=DOUBLE}, #{measurePm25,jdbcType=DOUBLE}, #{measureVoc,jdbcType=DOUBLE}, 
+      #{measurePm,jdbcType=DOUBLE}, #{measurePm10,jdbcType=DOUBLE}, #{exfPm,jdbcType=DOUBLE}, 
+      #{exfSo2,jdbcType=DOUBLE}, #{exfNox,jdbcType=DOUBLE}, #{exfOc,jdbcType=DOUBLE}, 
+      #{exfBc,jdbcType=DOUBLE}, #{factoryId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.ExhaustTemp">
+    insert into exhaust_temp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="exfId != null">
+        EXF_ID,
+      </if>
+      <if test="nkNo != null">
+        NK_NO,
+      </if>
+      <if test="exfNo != null">
+        EXF_NO,
+      </if>
+      <if test="exfMaterial != null">
+        EXF_MATERIAL,
+      </if>
+      <if test="exfHeight != null">
+        EXF_HEIGHT,
+      </if>
+      <if test="smokeOutd != null">
+        SMOKE_OUTD,
+      </if>
+      <if test="smokeOUtteM != null">
+        SMOKE_O_UTTE_M,
+      </if>
+      <if test="smokeOutv != null">
+        SMOKE_OUTV,
+      </if>
+      <if test="smokeOuta != null">
+        SMOKE_OUTA,
+      </if>
+      <if test="exfLongitude != null">
+        EXF_LONGITUDE,
+      </if>
+      <if test="exfLatitude != null">
+        EXF_LATITUDE,
+      </if>
+      <if test="exfPm10 != null">
+        EXF_PM10,
+      </if>
+      <if test="exfPm25 != null">
+        EXF_PM25,
+      </if>
+      <if test="exfCo != null">
+        EXF_CO,
+      </if>
+      <if test="exfNh3 != null">
+        EXF_NH3,
+      </if>
+      <if test="exfVoc != null">
+        EXF_VOC,
+      </if>
+      <if test="measureNh3 != null">
+        MEASURE_NH3,
+      </if>
+      <if test="measureNox != null">
+        MEASURE_NOX,
+      </if>
+      <if test="measureBc != null">
+        MEASURE_BC,
+      </if>
+      <if test="measureCo != null">
+        MEASURE_CO,
+      </if>
+      <if test="measureOc != null">
+        MEASURE_OC,
+      </if>
+      <if test="measureSo2 != null">
+        MEASURE_SO2,
+      </if>
+      <if test="measurePm25 != null">
+        MEASURE_PM25,
+      </if>
+      <if test="measureVoc != null">
+        MEASURE_VOC,
+      </if>
+      <if test="measurePm != null">
+        MEASURE_PM,
+      </if>
+      <if test="measurePm10 != null">
+        MEASURE_PM10,
+      </if>
+      <if test="exfPm != null">
+        EXF_PM,
+      </if>
+      <if test="exfSo2 != null">
+        EXF_SO2,
+      </if>
+      <if test="exfNox != null">
+        EXF_NOX,
+      </if>
+      <if test="exfOc != null">
+        exf_oc,
+      </if>
+      <if test="exfBc != null">
+        exf_bc,
+      </if>
+      <if test="factoryId != null">
+        FACTORY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="exfId != null">
+        #{exfId,jdbcType=INTEGER},
+      </if>
+      <if test="nkNo != null">
+        #{nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="exfNo != null">
+        #{exfNo,jdbcType=CHAR},
+      </if>
+      <if test="exfMaterial != null">
+        #{exfMaterial,jdbcType=CHAR},
+      </if>
+      <if test="exfHeight != null">
+        #{exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOutd != null">
+        #{smokeOutd,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOUtteM != null">
+        #{smokeOUtteM,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOutv != null">
+        #{smokeOutv,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOuta != null">
+        #{smokeOuta,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLongitude != null">
+        #{exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLatitude != null">
+        #{exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm10 != null">
+        #{exfPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm25 != null">
+        #{exfPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="exfCo != null">
+        #{exfCo,jdbcType=DOUBLE},
+      </if>
+      <if test="exfNh3 != null">
+        #{exfNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="exfVoc != null">
+        #{exfVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureNh3 != null">
+        #{measureNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="measureNox != null">
+        #{measureNox,jdbcType=DOUBLE},
+      </if>
+      <if test="measureBc != null">
+        #{measureBc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureCo != null">
+        #{measureCo,jdbcType=DOUBLE},
+      </if>
+      <if test="measureOc != null">
+        #{measureOc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureSo2 != null">
+        #{measureSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm25 != null">
+        #{measurePm25,jdbcType=DOUBLE},
+      </if>
+      <if test="measureVoc != null">
+        #{measureVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm != null">
+        #{measurePm,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm10 != null">
+        #{measurePm10,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm != null">
+        #{exfPm,jdbcType=DOUBLE},
+      </if>
+      <if test="exfSo2 != null">
+        #{exfSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="exfNox != null">
+        #{exfNox,jdbcType=DOUBLE},
+      </if>
+      <if test="exfOc != null">
+        #{exfOc,jdbcType=DOUBLE},
+      </if>
+      <if test="exfBc != null">
+        #{exfBc,jdbcType=DOUBLE},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.ExhaustTempExample" resultType="java.lang.Long">
+    select count(*) from exhaust_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exhaust_temp
+    <set>
+      <if test="record.exfId != null">
+        EXF_ID = #{record.exfId,jdbcType=INTEGER},
+      </if>
+      <if test="record.nkNo != null">
+        NK_NO = #{record.nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.exfNo != null">
+        EXF_NO = #{record.exfNo,jdbcType=CHAR},
+      </if>
+      <if test="record.exfMaterial != null">
+        EXF_MATERIAL = #{record.exfMaterial,jdbcType=CHAR},
+      </if>
+      <if test="record.exfHeight != null">
+        EXF_HEIGHT = #{record.exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.smokeOutd != null">
+        SMOKE_OUTD = #{record.smokeOutd,jdbcType=DOUBLE},
+      </if>
+      <if test="record.smokeOUtteM != null">
+        SMOKE_O_UTTE_M = #{record.smokeOUtteM,jdbcType=DOUBLE},
+      </if>
+      <if test="record.smokeOutv != null">
+        SMOKE_OUTV = #{record.smokeOutv,jdbcType=DOUBLE},
+      </if>
+      <if test="record.smokeOuta != null">
+        SMOKE_OUTA = #{record.smokeOuta,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfLongitude != null">
+        EXF_LONGITUDE = #{record.exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfLatitude != null">
+        EXF_LATITUDE = #{record.exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfPm10 != null">
+        EXF_PM10 = #{record.exfPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfPm25 != null">
+        EXF_PM25 = #{record.exfPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfCo != null">
+        EXF_CO = #{record.exfCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfNh3 != null">
+        EXF_NH3 = #{record.exfNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfVoc != null">
+        EXF_VOC = #{record.exfVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureNh3 != null">
+        MEASURE_NH3 = #{record.measureNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureNox != null">
+        MEASURE_NOX = #{record.measureNox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureBc != null">
+        MEASURE_BC = #{record.measureBc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureCo != null">
+        MEASURE_CO = #{record.measureCo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureOc != null">
+        MEASURE_OC = #{record.measureOc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureSo2 != null">
+        MEASURE_SO2 = #{record.measureSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measurePm25 != null">
+        MEASURE_PM25 = #{record.measurePm25,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measureVoc != null">
+        MEASURE_VOC = #{record.measureVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measurePm != null">
+        MEASURE_PM = #{record.measurePm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.measurePm10 != null">
+        MEASURE_PM10 = #{record.measurePm10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfPm != null">
+        EXF_PM = #{record.exfPm,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfSo2 != null">
+        EXF_SO2 = #{record.exfSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfNox != null">
+        EXF_NOX = #{record.exfNox,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfOc != null">
+        exf_oc = #{record.exfOc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.exfBc != null">
+        exf_bc = #{record.exfBc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.factoryId != null">
+        FACTORY_ID = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exhaust_temp
+    set EXF_ID = #{record.exfId,jdbcType=INTEGER},
+      NK_NO = #{record.nkNo,jdbcType=INTEGER},
+      EXF_NO = #{record.exfNo,jdbcType=CHAR},
+      EXF_MATERIAL = #{record.exfMaterial,jdbcType=CHAR},
+      EXF_HEIGHT = #{record.exfHeight,jdbcType=DOUBLE},
+      SMOKE_OUTD = #{record.smokeOutd,jdbcType=DOUBLE},
+      SMOKE_O_UTTE_M = #{record.smokeOUtteM,jdbcType=DOUBLE},
+      SMOKE_OUTV = #{record.smokeOutv,jdbcType=DOUBLE},
+      SMOKE_OUTA = #{record.smokeOuta,jdbcType=DOUBLE},
+      EXF_LONGITUDE = #{record.exfLongitude,jdbcType=DOUBLE},
+      EXF_LATITUDE = #{record.exfLatitude,jdbcType=DOUBLE},
+      EXF_PM10 = #{record.exfPm10,jdbcType=DOUBLE},
+      EXF_PM25 = #{record.exfPm25,jdbcType=DOUBLE},
+      EXF_CO = #{record.exfCo,jdbcType=DOUBLE},
+      EXF_NH3 = #{record.exfNh3,jdbcType=DOUBLE},
+      EXF_VOC = #{record.exfVoc,jdbcType=DOUBLE},
+      MEASURE_NH3 = #{record.measureNh3,jdbcType=DOUBLE},
+      MEASURE_NOX = #{record.measureNox,jdbcType=DOUBLE},
+      MEASURE_BC = #{record.measureBc,jdbcType=DOUBLE},
+      MEASURE_CO = #{record.measureCo,jdbcType=DOUBLE},
+      MEASURE_OC = #{record.measureOc,jdbcType=DOUBLE},
+      MEASURE_SO2 = #{record.measureSo2,jdbcType=DOUBLE},
+      MEASURE_PM25 = #{record.measurePm25,jdbcType=DOUBLE},
+      MEASURE_VOC = #{record.measureVoc,jdbcType=DOUBLE},
+      MEASURE_PM = #{record.measurePm,jdbcType=DOUBLE},
+      MEASURE_PM10 = #{record.measurePm10,jdbcType=DOUBLE},
+      EXF_PM = #{record.exfPm,jdbcType=DOUBLE},
+      EXF_SO2 = #{record.exfSo2,jdbcType=DOUBLE},
+      EXF_NOX = #{record.exfNox,jdbcType=DOUBLE},
+      exf_oc = #{record.exfOc,jdbcType=DOUBLE},
+      exf_bc = #{record.exfBc,jdbcType=DOUBLE},
+      FACTORY_ID = #{record.factoryId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.ExhaustTemp">
+    update exhaust_temp
+    <set>
+      <if test="nkNo != null">
+        NK_NO = #{nkNo,jdbcType=INTEGER},
+      </if>
+      <if test="exfNo != null">
+        EXF_NO = #{exfNo,jdbcType=CHAR},
+      </if>
+      <if test="exfMaterial != null">
+        EXF_MATERIAL = #{exfMaterial,jdbcType=CHAR},
+      </if>
+      <if test="exfHeight != null">
+        EXF_HEIGHT = #{exfHeight,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOutd != null">
+        SMOKE_OUTD = #{smokeOutd,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOUtteM != null">
+        SMOKE_O_UTTE_M = #{smokeOUtteM,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOutv != null">
+        SMOKE_OUTV = #{smokeOutv,jdbcType=DOUBLE},
+      </if>
+      <if test="smokeOuta != null">
+        SMOKE_OUTA = #{smokeOuta,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLongitude != null">
+        EXF_LONGITUDE = #{exfLongitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfLatitude != null">
+        EXF_LATITUDE = #{exfLatitude,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm10 != null">
+        EXF_PM10 = #{exfPm10,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm25 != null">
+        EXF_PM25 = #{exfPm25,jdbcType=DOUBLE},
+      </if>
+      <if test="exfCo != null">
+        EXF_CO = #{exfCo,jdbcType=DOUBLE},
+      </if>
+      <if test="exfNh3 != null">
+        EXF_NH3 = #{exfNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="exfVoc != null">
+        EXF_VOC = #{exfVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureNh3 != null">
+        MEASURE_NH3 = #{measureNh3,jdbcType=DOUBLE},
+      </if>
+      <if test="measureNox != null">
+        MEASURE_NOX = #{measureNox,jdbcType=DOUBLE},
+      </if>
+      <if test="measureBc != null">
+        MEASURE_BC = #{measureBc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureCo != null">
+        MEASURE_CO = #{measureCo,jdbcType=DOUBLE},
+      </if>
+      <if test="measureOc != null">
+        MEASURE_OC = #{measureOc,jdbcType=DOUBLE},
+      </if>
+      <if test="measureSo2 != null">
+        MEASURE_SO2 = #{measureSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm25 != null">
+        MEASURE_PM25 = #{measurePm25,jdbcType=DOUBLE},
+      </if>
+      <if test="measureVoc != null">
+        MEASURE_VOC = #{measureVoc,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm != null">
+        MEASURE_PM = #{measurePm,jdbcType=DOUBLE},
+      </if>
+      <if test="measurePm10 != null">
+        MEASURE_PM10 = #{measurePm10,jdbcType=DOUBLE},
+      </if>
+      <if test="exfPm != null">
+        EXF_PM = #{exfPm,jdbcType=DOUBLE},
+      </if>
+      <if test="exfSo2 != null">
+        EXF_SO2 = #{exfSo2,jdbcType=DOUBLE},
+      </if>
+      <if test="exfNox != null">
+        EXF_NOX = #{exfNox,jdbcType=DOUBLE},
+      </if>
+      <if test="exfOc != null">
+        exf_oc = #{exfOc,jdbcType=DOUBLE},
+      </if>
+      <if test="exfBc != null">
+        exf_bc = #{exfBc,jdbcType=DOUBLE},
+      </if>
+      <if test="factoryId != null">
+        FACTORY_ID = #{factoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where EXF_ID = #{exfId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.ExhaustTemp">
+    update exhaust_temp
+    set NK_NO = #{nkNo,jdbcType=INTEGER},
+      EXF_NO = #{exfNo,jdbcType=CHAR},
+      EXF_MATERIAL = #{exfMaterial,jdbcType=CHAR},
+      EXF_HEIGHT = #{exfHeight,jdbcType=DOUBLE},
+      SMOKE_OUTD = #{smokeOutd,jdbcType=DOUBLE},
+      SMOKE_O_UTTE_M = #{smokeOUtteM,jdbcType=DOUBLE},
+      SMOKE_OUTV = #{smokeOutv,jdbcType=DOUBLE},
+      SMOKE_OUTA = #{smokeOuta,jdbcType=DOUBLE},
+      EXF_LONGITUDE = #{exfLongitude,jdbcType=DOUBLE},
+      EXF_LATITUDE = #{exfLatitude,jdbcType=DOUBLE},
+      EXF_PM10 = #{exfPm10,jdbcType=DOUBLE},
+      EXF_PM25 = #{exfPm25,jdbcType=DOUBLE},
+      EXF_CO = #{exfCo,jdbcType=DOUBLE},
+      EXF_NH3 = #{exfNh3,jdbcType=DOUBLE},
+      EXF_VOC = #{exfVoc,jdbcType=DOUBLE},
+      MEASURE_NH3 = #{measureNh3,jdbcType=DOUBLE},
+      MEASURE_NOX = #{measureNox,jdbcType=DOUBLE},
+      MEASURE_BC = #{measureBc,jdbcType=DOUBLE},
+      MEASURE_CO = #{measureCo,jdbcType=DOUBLE},
+      MEASURE_OC = #{measureOc,jdbcType=DOUBLE},
+      MEASURE_SO2 = #{measureSo2,jdbcType=DOUBLE},
+      MEASURE_PM25 = #{measurePm25,jdbcType=DOUBLE},
+      MEASURE_VOC = #{measureVoc,jdbcType=DOUBLE},
+      MEASURE_PM = #{measurePm,jdbcType=DOUBLE},
+      MEASURE_PM10 = #{measurePm10,jdbcType=DOUBLE},
+      EXF_PM = #{exfPm,jdbcType=DOUBLE},
+      EXF_SO2 = #{exfSo2,jdbcType=DOUBLE},
+      EXF_NOX = #{exfNox,jdbcType=DOUBLE},
+      exf_oc = #{exfOc,jdbcType=DOUBLE},
+      exf_bc = #{exfBc,jdbcType=DOUBLE},
+      FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+    where EXF_ID = #{exfId,jdbcType=INTEGER}
+  </update>
+</mapper>

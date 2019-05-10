@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.StationinfoMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Stationinfo">
+    <id column="stationid" jdbcType="INTEGER" property="stationid" />
+    <result column="stationName" jdbcType="VARCHAR" property="stationname" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="county_id" jdbcType="VARCHAR" property="countyId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stationid, stationName, address, type, longitude, latitude, county_id
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.StationinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stationinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stationinfo
+    where stationid = #{stationid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from stationinfo
+    where stationid = #{stationid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.StationinfoExample">
+    delete from stationinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.Stationinfo">
+    insert into stationinfo (stationid, stationName, address, 
+      type, longitude, latitude, 
+      county_id)
+    values (#{stationid,jdbcType=INTEGER}, #{stationname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{countyId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.Stationinfo">
+    insert into stationinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stationid != null">
+        stationid,
+      </if>
+      <if test="stationname != null">
+        stationName,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="countyId != null">
+        county_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stationid != null">
+        #{stationid,jdbcType=INTEGER},
+      </if>
+      <if test="stationname != null">
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null">
+        #{countyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.StationinfoExample" resultType="java.lang.Long">
+    select count(*) from stationinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stationinfo
+    <set>
+      <if test="record.stationid != null">
+        stationid = #{record.stationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationname != null">
+        stationName = #{record.stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countyId != null">
+        county_id = #{record.countyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stationinfo
+    set stationid = #{record.stationid,jdbcType=INTEGER},
+      stationName = #{record.stationname,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      longitude = #{record.longitude,jdbcType=VARCHAR},
+      latitude = #{record.latitude,jdbcType=VARCHAR},
+      county_id = #{record.countyId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.Stationinfo">
+    update stationinfo
+    <set>
+      <if test="stationname != null">
+        stationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="countyId != null">
+        county_id = #{countyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stationid = #{stationid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Stationinfo">
+    update stationinfo
+    set stationName = #{stationname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      county_id = #{countyId,jdbcType=VARCHAR}
+    where stationid = #{stationid,jdbcType=INTEGER}
+  </update>
+</mapper>

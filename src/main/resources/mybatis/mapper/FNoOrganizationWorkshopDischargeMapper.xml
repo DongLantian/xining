@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.FNoOrganizationWorkshopDischargeMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.FNoOrganizationWorkshopDischarge">
+    <id column="wsid" jdbcType="INTEGER" property="wsid" />
+    <result column="workshopid" jdbcType="INTEGER" property="workshopid" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
+    <result column="factoryid" jdbcType="INTEGER" property="factoryid" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="production_use" jdbcType="CHAR" property="productionUse" />
+    <result column="workshop_area" jdbcType="DOUBLE" property="workshopArea" />
+    <result column="pm10_factors" jdbcType="DOUBLE" property="pm10Factors" />
+    <result column="pm25_factors" jdbcType="DOUBLE" property="pm25Factors" />
+    <result column="oc_factors" jdbcType="DOUBLE" property="ocFactors" />
+    <result column="ec_factors" jdbcType="DOUBLE" property="ecFactors" />
+    <result column="so2_factors" jdbcType="DOUBLE" property="so2Factors" />
+    <result column="nox_factors" jdbcType="DOUBLE" property="noxFactors" />
+    <result column="co_factors" jdbcType="DOUBLE" property="coFactors" />
+    <result column="nh3_factors" jdbcType="DOUBLE" property="nh3Factors" />
+    <result column="vocs_factors" jdbcType="DOUBLE" property="vocsFactors" />
+    <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
+    <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
+    <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
+    <result column="ec_emission" jdbcType="DOUBLE" property="ecEmission" />
+    <result column="so2_emission" jdbcType="DOUBLE" property="so2Emission" />
+    <result column="nox_emission" jdbcType="DOUBLE" property="noxEmission" />
+    <result column="co_emission" jdbcType="DOUBLE" property="coEmission" />
+    <result column="nh3_emission" jdbcType="DOUBLE" property="nh3Emission" />
+    <result column="vocs_emission" jdbcType="DOUBLE" property="vocsEmission" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    wsid, workshopid, scccode, factoryid, longitude, latitude, production_use, workshop_area, 
+    pm10_factors, pm25_factors, oc_factors, ec_factors, so2_factors, nox_factors, co_factors, 
+    nh3_factors, vocs_factors, pm10_emission, pm25_emission, oc_emission, ec_emission, 
+    so2_emission, nox_emission, co_emission, nh3_emission, vocs_emission, status
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischargeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_no_organization_workshop_discharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_no_organization_workshop_discharge
+    where wsid = #{wsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_no_organization_workshop_discharge
+    where wsid = #{wsid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischargeExample">
+    delete from f_no_organization_workshop_discharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischarge">
+    insert into f_no_organization_workshop_discharge (wsid, workshopid, scccode, 
+      factoryid, longitude, latitude, 
+      production_use, workshop_area, pm10_factors, 
+      pm25_factors, oc_factors, ec_factors, 
+      so2_factors, nox_factors, co_factors, 
+      nh3_factors, vocs_factors, pm10_emission, 
+      pm25_emission, oc_emission, ec_emission, 
+      so2_emission, nox_emission, co_emission, 
+      nh3_emission, vocs_emission, status
+      )
+    values (#{wsid,jdbcType=INTEGER}, #{workshopid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, 
+      #{factoryid,jdbcType=INTEGER}, #{longitude,jdbcType=DOUBLE}, #{latitude,jdbcType=DOUBLE}, 
+      #{productionUse,jdbcType=CHAR}, #{workshopArea,jdbcType=DOUBLE}, #{pm10Factors,jdbcType=DOUBLE}, 
+      #{pm25Factors,jdbcType=DOUBLE}, #{ocFactors,jdbcType=DOUBLE}, #{ecFactors,jdbcType=DOUBLE}, 
+      #{so2Factors,jdbcType=DOUBLE}, #{noxFactors,jdbcType=DOUBLE}, #{coFactors,jdbcType=DOUBLE}, 
+      #{nh3Factors,jdbcType=DOUBLE}, #{vocsFactors,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, 
+      #{pm25Emission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, #{ecEmission,jdbcType=DOUBLE}, 
+      #{so2Emission,jdbcType=DOUBLE}, #{noxEmission,jdbcType=DOUBLE}, #{coEmission,jdbcType=DOUBLE}, 
+      #{nh3Emission,jdbcType=DOUBLE}, #{vocsEmission,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischarge">
+    insert into f_no_organization_workshop_discharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wsid != null">
+        wsid,
+      </if>
+      <if test="workshopid != null">
+        workshopid,
+      </if>
+      <if test="scccode != null">
+        scccode,
+      </if>
+      <if test="factoryid != null">
+        factoryid,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="productionUse != null">
+        production_use,
+      </if>
+      <if test="workshopArea != null">
+        workshop_area,
+      </if>
+      <if test="pm10Factors != null">
+        pm10_factors,
+      </if>
+      <if test="pm25Factors != null">
+        pm25_factors,
+      </if>
+      <if test="ocFactors != null">
+        oc_factors,
+      </if>
+      <if test="ecFactors != null">
+        ec_factors,
+      </if>
+      <if test="so2Factors != null">
+        so2_factors,
+      </if>
+      <if test="noxFactors != null">
+        nox_factors,
+      </if>
+      <if test="coFactors != null">
+        co_factors,
+      </if>
+      <if test="nh3Factors != null">
+        nh3_factors,
+      </if>
+      <if test="vocsFactors != null">
+        vocs_factors,
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission,
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission,
+      </if>
+      <if test="ocEmission != null">
+        oc_emission,
+      </if>
+      <if test="ecEmission != null">
+        ec_emission,
+      </if>
+      <if test="so2Emission != null">
+        so2_emission,
+      </if>
+      <if test="noxEmission != null">
+        nox_emission,
+      </if>
+      <if test="coEmission != null">
+        co_emission,
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission,
+      </if>
+      <if test="vocsEmission != null">
+        vocs_emission,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wsid != null">
+        #{wsid,jdbcType=INTEGER},
+      </if>
+      <if test="workshopid != null">
+        #{workshopid,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="factoryid != null">
+        #{factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="productionUse != null">
+        #{productionUse,jdbcType=CHAR},
+      </if>
+      <if test="workshopArea != null">
+        #{workshopArea,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Factors != null">
+        #{pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Factors != null">
+        #{pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="ocFactors != null">
+        #{ocFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="ecFactors != null">
+        #{ecFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Factors != null">
+        #{so2Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="noxFactors != null">
+        #{noxFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="coFactors != null">
+        #{coFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Factors != null">
+        #{nh3Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsFactors != null">
+        #{vocsFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ecEmission != null">
+        #{ecEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsEmission != null">
+        #{vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischargeExample" resultType="java.lang.Long">
+    select count(*) from f_no_organization_workshop_discharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update f_no_organization_workshop_discharge
+    <set>
+      <if test="record.wsid != null">
+        wsid = #{record.wsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.workshopid != null">
+        workshopid = #{record.workshopid,jdbcType=INTEGER},
+      </if>
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
+      </if>
+      <if test="record.factoryid != null">
+        factoryid = #{record.factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productionUse != null">
+        production_use = #{record.productionUse,jdbcType=CHAR},
+      </if>
+      <if test="record.workshopArea != null">
+        workshop_area = #{record.workshopArea,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Factors != null">
+        pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Factors != null">
+        pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocFactors != null">
+        oc_factors = #{record.ocFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ecFactors != null">
+        ec_factors = #{record.ecFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Factors != null">
+        so2_factors = #{record.so2Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxFactors != null">
+        nox_factors = #{record.noxFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coFactors != null">
+        co_factors = #{record.coFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Factors != null">
+        nh3_factors = #{record.nh3Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocsFactors != null">
+        vocs_factors = #{record.vocsFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10Emission != null">
+        pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25Emission != null">
+        pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ocEmission != null">
+        oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ecEmission != null">
+        ec_emission = #{record.ecEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2Emission != null">
+        so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noxEmission != null">
+        nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coEmission != null">
+        co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nh3Emission != null">
+        nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.vocsEmission != null">
+        vocs_emission = #{record.vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update f_no_organization_workshop_discharge
+    set wsid = #{record.wsid,jdbcType=INTEGER},
+      workshopid = #{record.workshopid,jdbcType=INTEGER},
+      scccode = #{record.scccode,jdbcType=CHAR},
+      factoryid = #{record.factoryid,jdbcType=INTEGER},
+      longitude = #{record.longitude,jdbcType=DOUBLE},
+      latitude = #{record.latitude,jdbcType=DOUBLE},
+      production_use = #{record.productionUse,jdbcType=CHAR},
+      workshop_area = #{record.workshopArea,jdbcType=DOUBLE},
+      pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
+      pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
+      oc_factors = #{record.ocFactors,jdbcType=DOUBLE},
+      ec_factors = #{record.ecFactors,jdbcType=DOUBLE},
+      so2_factors = #{record.so2Factors,jdbcType=DOUBLE},
+      nox_factors = #{record.noxFactors,jdbcType=DOUBLE},
+      co_factors = #{record.coFactors,jdbcType=DOUBLE},
+      nh3_factors = #{record.nh3Factors,jdbcType=DOUBLE},
+      vocs_factors = #{record.vocsFactors,jdbcType=DOUBLE},
+      pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
+      pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
+      oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
+      ec_emission = #{record.ecEmission,jdbcType=DOUBLE},
+      so2_emission = #{record.so2Emission,jdbcType=DOUBLE},
+      nox_emission = #{record.noxEmission,jdbcType=DOUBLE},
+      co_emission = #{record.coEmission,jdbcType=DOUBLE},
+      nh3_emission = #{record.nh3Emission,jdbcType=DOUBLE},
+      vocs_emission = #{record.vocsEmission,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischarge">
+    update f_no_organization_workshop_discharge
+    <set>
+      <if test="workshopid != null">
+        workshopid = #{workshopid,jdbcType=INTEGER},
+      </if>
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
+      </if>
+      <if test="factoryid != null">
+        factoryid = #{factoryid,jdbcType=INTEGER},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="productionUse != null">
+        production_use = #{productionUse,jdbcType=CHAR},
+      </if>
+      <if test="workshopArea != null">
+        workshop_area = #{workshopArea,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Factors != null">
+        pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Factors != null">
+        pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="ocFactors != null">
+        oc_factors = #{ocFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="ecFactors != null">
+        ec_factors = #{ecFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Factors != null">
+        so2_factors = #{so2Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="noxFactors != null">
+        nox_factors = #{noxFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="coFactors != null">
+        co_factors = #{coFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Factors != null">
+        nh3_factors = #{nh3Factors,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsFactors != null">
+        vocs_factors = #{vocsFactors,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10Emission != null">
+        pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25Emission != null">
+        pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="ocEmission != null">
+        oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="ecEmission != null">
+        ec_emission = #{ecEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="so2Emission != null">
+        so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="noxEmission != null">
+        nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="coEmission != null">
+        co_emission = #{coEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="nh3Emission != null">
+        nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      </if>
+      <if test="vocsEmission != null">
+        vocs_emission = #{vocsEmission,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where wsid = #{wsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.FNoOrganizationWorkshopDischarge">
+    update f_no_organization_workshop_discharge
+    set workshopid = #{workshopid,jdbcType=INTEGER},
+      scccode = #{scccode,jdbcType=CHAR},
+      factoryid = #{factoryid,jdbcType=INTEGER},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      production_use = #{productionUse,jdbcType=CHAR},
+      workshop_area = #{workshopArea,jdbcType=DOUBLE},
+      pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
+      pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
+      oc_factors = #{ocFactors,jdbcType=DOUBLE},
+      ec_factors = #{ecFactors,jdbcType=DOUBLE},
+      so2_factors = #{so2Factors,jdbcType=DOUBLE},
+      nox_factors = #{noxFactors,jdbcType=DOUBLE},
+      co_factors = #{coFactors,jdbcType=DOUBLE},
+      nh3_factors = #{nh3Factors,jdbcType=DOUBLE},
+      vocs_factors = #{vocsFactors,jdbcType=DOUBLE},
+      pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
+      pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
+      oc_emission = #{ocEmission,jdbcType=DOUBLE},
+      ec_emission = #{ecEmission,jdbcType=DOUBLE},
+      so2_emission = #{so2Emission,jdbcType=DOUBLE},
+      nox_emission = #{noxEmission,jdbcType=DOUBLE},
+      co_emission = #{coEmission,jdbcType=DOUBLE},
+      nh3_emission = #{nh3Emission,jdbcType=DOUBLE},
+      vocs_emission = #{vocsEmission,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER}
+    where wsid = #{wsid,jdbcType=INTEGER}
+  </update>
+</mapper>

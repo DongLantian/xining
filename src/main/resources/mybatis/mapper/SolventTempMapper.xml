@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.SolventTempMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.SolventTemp">
+    <id column="solvent_id" jdbcType="INTEGER" property="solventId" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="last_checked_time" jdbcType="TIMESTAMP" property="lastCheckedTime" />
+    <result column="last_changed_time" jdbcType="TIMESTAMP" property="lastChangedTime" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nankai.xining.bean.SolventTemp">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    solvent_id, factory_id, status, last_checked_time, last_changed_time, total_num
+  </sql>
+  <sql id="Blob_Column_List">
+    note
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.nankai.xining.bean.SolventTempExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from solvent_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.SolventTempExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from solvent_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from solvent_temp
+    where solvent_id = #{solventId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from solvent_temp
+    where solvent_id = #{solventId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.SolventTempExample">
+    delete from solvent_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.SolventTemp">
+    insert into solvent_temp (solvent_id, factory_id, status, 
+      last_checked_time, last_changed_time, total_num, 
+      note)
+    values (#{solventId,jdbcType=INTEGER}, #{factoryId,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, 
+      #{lastCheckedTime,jdbcType=TIMESTAMP}, #{lastChangedTime,jdbcType=TIMESTAMP}, #{totalNum,jdbcType=INTEGER}, 
+      #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.SolventTemp">
+    insert into solvent_temp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="solventId != null">
+        solvent_id,
+      </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="lastCheckedTime != null">
+        last_checked_time,
+      </if>
+      <if test="lastChangedTime != null">
+        last_changed_time,
+      </if>
+      <if test="totalNum != null">
+        total_num,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="solventId != null">
+        #{solventId,jdbcType=INTEGER},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="lastCheckedTime != null">
+        #{lastCheckedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastChangedTime != null">
+        #{lastChangedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalNum != null">
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.SolventTempExample" resultType="java.lang.Long">
+    select count(*) from solvent_temp
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update solvent_temp
+    <set>
+      <if test="record.solventId != null">
+        solvent_id = #{record.solventId,jdbcType=INTEGER},
+      </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.lastCheckedTime != null">
+        last_checked_time = #{record.lastCheckedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastChangedTime != null">
+        last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalNum != null">
+        total_num = #{record.totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update solvent_temp
+    set solvent_id = #{record.solventId,jdbcType=INTEGER},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=SMALLINT},
+      last_checked_time = #{record.lastCheckedTime,jdbcType=TIMESTAMP},
+      last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
+      total_num = #{record.totalNum,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update solvent_temp
+    set solvent_id = #{record.solventId,jdbcType=INTEGER},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=SMALLINT},
+      last_checked_time = #{record.lastCheckedTime,jdbcType=TIMESTAMP},
+      last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
+      total_num = #{record.totalNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.SolventTemp">
+    update solvent_temp
+    <set>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="lastCheckedTime != null">
+        last_checked_time = #{lastCheckedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastChangedTime != null">
+        last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalNum != null">
+        total_num = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where solvent_id = #{solventId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nankai.xining.bean.SolventTemp">
+    update solvent_temp
+    set factory_id = #{factoryId,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT},
+      last_checked_time = #{lastCheckedTime,jdbcType=TIMESTAMP},
+      last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
+      total_num = #{totalNum,jdbcType=INTEGER},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where solvent_id = #{solventId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.SolventTemp">
+    update solvent_temp
+    set factory_id = #{factoryId,jdbcType=INTEGER},
+      status = #{status,jdbcType=SMALLINT},
+      last_checked_time = #{lastCheckedTime,jdbcType=TIMESTAMP},
+      last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
+      total_num = #{totalNum,jdbcType=INTEGER}
+    where solvent_id = #{solventId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.ActivityMMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.ActivityM">
+    <id column="month_id" jdbcType="INTEGER" property="monthId" />
+    <result column="january" jdbcType="INTEGER" property="january" />
+    <result column="february" jdbcType="INTEGER" property="february" />
+    <result column="march" jdbcType="INTEGER" property="march" />
+    <result column="april" jdbcType="INTEGER" property="april" />
+    <result column="may" jdbcType="INTEGER" property="may" />
+    <result column="june" jdbcType="INTEGER" property="june" />
+    <result column="july" jdbcType="INTEGER" property="july" />
+    <result column="august" jdbcType="INTEGER" property="august" />
+    <result column="september" jdbcType="INTEGER" property="september" />
+    <result column="october" jdbcType="INTEGER" property="october" />
+    <result column="november" jdbcType="INTEGER" property="november" />
+    <result column="december" jdbcType="INTEGER" property="december" />
+    <result column="total_month" jdbcType="INTEGER" property="totalMonth" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    month_id, january, february, march, april, may, june, july, august, september, october, 
+    november, december, total_month
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.ActivityMExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity_m
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from activity_m
+    where month_id = #{monthId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity_m
+    where month_id = #{monthId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.ActivityMExample">
+    delete from activity_m
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.ActivityM">
+    insert into activity_m (month_id, january, february, 
+      march, april, may, 
+      june, july, august, 
+      september, october, november, 
+      december, total_month)
+    values (#{monthId,jdbcType=INTEGER}, #{january,jdbcType=INTEGER}, #{february,jdbcType=INTEGER}, 
+      #{march,jdbcType=INTEGER}, #{april,jdbcType=INTEGER}, #{may,jdbcType=INTEGER}, 
+      #{june,jdbcType=INTEGER}, #{july,jdbcType=INTEGER}, #{august,jdbcType=INTEGER}, 
+      #{september,jdbcType=INTEGER}, #{october,jdbcType=INTEGER}, #{november,jdbcType=INTEGER}, 
+      #{december,jdbcType=INTEGER}, #{totalMonth,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.ActivityM">
+    insert into activity_m
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        month_id,
+      </if>
+      <if test="january != null">
+        january,
+      </if>
+      <if test="february != null">
+        february,
+      </if>
+      <if test="march != null">
+        march,
+      </if>
+      <if test="april != null">
+        april,
+      </if>
+      <if test="may != null">
+        may,
+      </if>
+      <if test="june != null">
+        june,
+      </if>
+      <if test="july != null">
+        july,
+      </if>
+      <if test="august != null">
+        august,
+      </if>
+      <if test="september != null">
+        september,
+      </if>
+      <if test="october != null">
+        october,
+      </if>
+      <if test="november != null">
+        november,
+      </if>
+      <if test="december != null">
+        december,
+      </if>
+      <if test="totalMonth != null">
+        total_month,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=INTEGER},
+      </if>
+      <if test="january != null">
+        #{january,jdbcType=INTEGER},
+      </if>
+      <if test="february != null">
+        #{february,jdbcType=INTEGER},
+      </if>
+      <if test="march != null">
+        #{march,jdbcType=INTEGER},
+      </if>
+      <if test="april != null">
+        #{april,jdbcType=INTEGER},
+      </if>
+      <if test="may != null">
+        #{may,jdbcType=INTEGER},
+      </if>
+      <if test="june != null">
+        #{june,jdbcType=INTEGER},
+      </if>
+      <if test="july != null">
+        #{july,jdbcType=INTEGER},
+      </if>
+      <if test="august != null">
+        #{august,jdbcType=INTEGER},
+      </if>
+      <if test="september != null">
+        #{september,jdbcType=INTEGER},
+      </if>
+      <if test="october != null">
+        #{october,jdbcType=INTEGER},
+      </if>
+      <if test="november != null">
+        #{november,jdbcType=INTEGER},
+      </if>
+      <if test="december != null">
+        #{december,jdbcType=INTEGER},
+      </if>
+      <if test="totalMonth != null">
+        #{totalMonth,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.ActivityMExample" resultType="java.lang.Long">
+    select count(*) from activity_m
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update activity_m
+    <set>
+      <if test="record.monthId != null">
+        month_id = #{record.monthId,jdbcType=INTEGER},
+      </if>
+      <if test="record.january != null">
+        january = #{record.january,jdbcType=INTEGER},
+      </if>
+      <if test="record.february != null">
+        february = #{record.february,jdbcType=INTEGER},
+      </if>
+      <if test="record.march != null">
+        march = #{record.march,jdbcType=INTEGER},
+      </if>
+      <if test="record.april != null">
+        april = #{record.april,jdbcType=INTEGER},
+      </if>
+      <if test="record.may != null">
+        may = #{record.may,jdbcType=INTEGER},
+      </if>
+      <if test="record.june != null">
+        june = #{record.june,jdbcType=INTEGER},
+      </if>
+      <if test="record.july != null">
+        july = #{record.july,jdbcType=INTEGER},
+      </if>
+      <if test="record.august != null">
+        august = #{record.august,jdbcType=INTEGER},
+      </if>
+      <if test="record.september != null">
+        september = #{record.september,jdbcType=INTEGER},
+      </if>
+      <if test="record.october != null">
+        october = #{record.october,jdbcType=INTEGER},
+      </if>
+      <if test="record.november != null">
+        november = #{record.november,jdbcType=INTEGER},
+      </if>
+      <if test="record.december != null">
+        december = #{record.december,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalMonth != null">
+        total_month = #{record.totalMonth,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update activity_m
+    set month_id = #{record.monthId,jdbcType=INTEGER},
+      january = #{record.january,jdbcType=INTEGER},
+      february = #{record.february,jdbcType=INTEGER},
+      march = #{record.march,jdbcType=INTEGER},
+      april = #{record.april,jdbcType=INTEGER},
+      may = #{record.may,jdbcType=INTEGER},
+      june = #{record.june,jdbcType=INTEGER},
+      july = #{record.july,jdbcType=INTEGER},
+      august = #{record.august,jdbcType=INTEGER},
+      september = #{record.september,jdbcType=INTEGER},
+      october = #{record.october,jdbcType=INTEGER},
+      november = #{record.november,jdbcType=INTEGER},
+      december = #{record.december,jdbcType=INTEGER},
+      total_month = #{record.totalMonth,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.ActivityM">
+    update activity_m
+    <set>
+      <if test="january != null">
+        january = #{january,jdbcType=INTEGER},
+      </if>
+      <if test="february != null">
+        february = #{february,jdbcType=INTEGER},
+      </if>
+      <if test="march != null">
+        march = #{march,jdbcType=INTEGER},
+      </if>
+      <if test="april != null">
+        april = #{april,jdbcType=INTEGER},
+      </if>
+      <if test="may != null">
+        may = #{may,jdbcType=INTEGER},
+      </if>
+      <if test="june != null">
+        june = #{june,jdbcType=INTEGER},
+      </if>
+      <if test="july != null">
+        july = #{july,jdbcType=INTEGER},
+      </if>
+      <if test="august != null">
+        august = #{august,jdbcType=INTEGER},
+      </if>
+      <if test="september != null">
+        september = #{september,jdbcType=INTEGER},
+      </if>
+      <if test="october != null">
+        october = #{october,jdbcType=INTEGER},
+      </if>
+      <if test="november != null">
+        november = #{november,jdbcType=INTEGER},
+      </if>
+      <if test="december != null">
+        december = #{december,jdbcType=INTEGER},
+      </if>
+      <if test="totalMonth != null">
+        total_month = #{totalMonth,jdbcType=INTEGER},
+      </if>
+    </set>
+    where month_id = #{monthId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.ActivityM">
+    update activity_m
+    set january = #{january,jdbcType=INTEGER},
+      february = #{february,jdbcType=INTEGER},
+      march = #{march,jdbcType=INTEGER},
+      april = #{april,jdbcType=INTEGER},
+      may = #{may,jdbcType=INTEGER},
+      june = #{june,jdbcType=INTEGER},
+      july = #{july,jdbcType=INTEGER},
+      august = #{august,jdbcType=INTEGER},
+      september = #{september,jdbcType=INTEGER},
+      october = #{october,jdbcType=INTEGER},
+      november = #{november,jdbcType=INTEGER},
+      december = #{december,jdbcType=INTEGER},
+      total_month = #{totalMonth,jdbcType=INTEGER}
+    where month_id = #{monthId,jdbcType=INTEGER}
+  </update>
+</mapper>

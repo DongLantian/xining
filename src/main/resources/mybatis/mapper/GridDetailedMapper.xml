@@ -1,0 +1,3198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nankai.xining.repository.GridDetailedMapper">
+  <resultMap id="BaseResultMap" type="com.nankai.xining.bean.GridDetailed">
+    <id column="gridid" jdbcType="INTEGER" property="gridid" />
+    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="row" jdbcType="INTEGER" property="row" />
+    <result column="col" jdbcType="INTEGER" property="col" />
+    <result column="pm10A1" jdbcType="DOUBLE" property="pm10a1" />
+    <result column="pm10A2" jdbcType="DOUBLE" property="pm10a2" />
+    <result column="pm10A3" jdbcType="DOUBLE" property="pm10a3" />
+    <result column="pm10A4" jdbcType="DOUBLE" property="pm10a4" />
+    <result column="pm10A5" jdbcType="DOUBLE" property="pm10a5" />
+    <result column="pm10A6" jdbcType="DOUBLE" property="pm10a6" />
+    <result column="pm10A7" jdbcType="DOUBLE" property="pm10a7" />
+    <result column="pm10A8" jdbcType="DOUBLE" property="pm10a8" />
+    <result column="pm10A9" jdbcType="DOUBLE" property="pm10a9" />
+    <result column="pm10A10" jdbcType="DOUBLE" property="pm10a10" />
+    <result column="pm10A11" jdbcType="DOUBLE" property="pm10a11" />
+    <result column="pm10A12" jdbcType="DOUBLE" property="pm10a12" />
+    <result column="pm10A13" jdbcType="DOUBLE" property="pm10a13" />
+    <result column="pm10A14" jdbcType="DOUBLE" property="pm10a14" />
+    <result column="pm10A15" jdbcType="DOUBLE" property="pm10a15" />
+    <result column="pm10A16" jdbcType="DOUBLE" property="pm10a16" />
+    <result column="pm10A17" jdbcType="DOUBLE" property="pm10a17" />
+    <result column="pm10A18" jdbcType="DOUBLE" property="pm10a18" />
+    <result column="pm10A19" jdbcType="DOUBLE" property="pm10a19" />
+    <result column="pm10A20" jdbcType="DOUBLE" property="pm10a20" />
+    <result column="pm10A21" jdbcType="DOUBLE" property="pm10a21" />
+    <result column="pm10A22" jdbcType="DOUBLE" property="pm10a22" />
+    <result column="pm10A23" jdbcType="DOUBLE" property="pm10a23" />
+    <result column="pm10A24" jdbcType="DOUBLE" property="pm10a24" />
+    <result column="pm25A1" jdbcType="DOUBLE" property="pm25a1" />
+    <result column="pm25A2" jdbcType="DOUBLE" property="pm25a2" />
+    <result column="pm25A3" jdbcType="DOUBLE" property="pm25a3" />
+    <result column="pm25A4" jdbcType="DOUBLE" property="pm25a4" />
+    <result column="pm25A5" jdbcType="DOUBLE" property="pm25a5" />
+    <result column="pm25A6" jdbcType="DOUBLE" property="pm25a6" />
+    <result column="pm25A7" jdbcType="DOUBLE" property="pm25a7" />
+    <result column="pm25A8" jdbcType="DOUBLE" property="pm25a8" />
+    <result column="pm25A9" jdbcType="DOUBLE" property="pm25a9" />
+    <result column="pm25A10" jdbcType="DOUBLE" property="pm25a10" />
+    <result column="pm25A11" jdbcType="DOUBLE" property="pm25a11" />
+    <result column="pm25A12" jdbcType="DOUBLE" property="pm25a12" />
+    <result column="pm25A13" jdbcType="DOUBLE" property="pm25a13" />
+    <result column="pm25A14" jdbcType="DOUBLE" property="pm25a14" />
+    <result column="pm25A15" jdbcType="DOUBLE" property="pm25a15" />
+    <result column="pm25A16" jdbcType="DOUBLE" property="pm25a16" />
+    <result column="pm25A17" jdbcType="DOUBLE" property="pm25a17" />
+    <result column="pm25A18" jdbcType="DOUBLE" property="pm25a18" />
+    <result column="pm25A19" jdbcType="DOUBLE" property="pm25a19" />
+    <result column="pm25A20" jdbcType="DOUBLE" property="pm25a20" />
+    <result column="pm25A21" jdbcType="DOUBLE" property="pm25a21" />
+    <result column="pm25A22" jdbcType="DOUBLE" property="pm25a22" />
+    <result column="pm25A23" jdbcType="DOUBLE" property="pm25a23" />
+    <result column="pm25A24" jdbcType="DOUBLE" property="pm25a24" />
+    <result column="hcA1" jdbcType="DOUBLE" property="hca1" />
+    <result column="hcA2" jdbcType="DOUBLE" property="hca2" />
+    <result column="hcA3" jdbcType="DOUBLE" property="hca3" />
+    <result column="hcA4" jdbcType="DOUBLE" property="hca4" />
+    <result column="hcA5" jdbcType="DOUBLE" property="hca5" />
+    <result column="hcA6" jdbcType="DOUBLE" property="hca6" />
+    <result column="hcA7" jdbcType="DOUBLE" property="hca7" />
+    <result column="hcA8" jdbcType="DOUBLE" property="hca8" />
+    <result column="hcA9" jdbcType="DOUBLE" property="hca9" />
+    <result column="hcA10" jdbcType="DOUBLE" property="hca10" />
+    <result column="hcA11" jdbcType="DOUBLE" property="hca11" />
+    <result column="hcA12" jdbcType="DOUBLE" property="hca12" />
+    <result column="hcA13" jdbcType="DOUBLE" property="hca13" />
+    <result column="hcA14" jdbcType="DOUBLE" property="hca14" />
+    <result column="hcA15" jdbcType="DOUBLE" property="hca15" />
+    <result column="hcA16" jdbcType="DOUBLE" property="hca16" />
+    <result column="hcA17" jdbcType="DOUBLE" property="hca17" />
+    <result column="hcA18" jdbcType="DOUBLE" property="hca18" />
+    <result column="hcA19" jdbcType="DOUBLE" property="hca19" />
+    <result column="hcA20" jdbcType="DOUBLE" property="hca20" />
+    <result column="hcA21" jdbcType="DOUBLE" property="hca21" />
+    <result column="hcA22" jdbcType="DOUBLE" property="hca22" />
+    <result column="hcA23" jdbcType="DOUBLE" property="hca23" />
+    <result column="hcA24" jdbcType="DOUBLE" property="hca24" />
+    <result column="noA1" jdbcType="DOUBLE" property="noa1" />
+    <result column="noA2" jdbcType="DOUBLE" property="noa2" />
+    <result column="noA3" jdbcType="DOUBLE" property="noa3" />
+    <result column="noA4" jdbcType="DOUBLE" property="noa4" />
+    <result column="noA5" jdbcType="DOUBLE" property="noa5" />
+    <result column="noA6" jdbcType="DOUBLE" property="noa6" />
+    <result column="noA7" jdbcType="DOUBLE" property="noa7" />
+    <result column="noA8" jdbcType="DOUBLE" property="noa8" />
+    <result column="noA9" jdbcType="DOUBLE" property="noa9" />
+    <result column="noA10" jdbcType="DOUBLE" property="noa10" />
+    <result column="noA11" jdbcType="DOUBLE" property="noa11" />
+    <result column="noA12" jdbcType="DOUBLE" property="noa12" />
+    <result column="noA13" jdbcType="DOUBLE" property="noa13" />
+    <result column="noA14" jdbcType="DOUBLE" property="noa14" />
+    <result column="noA15" jdbcType="DOUBLE" property="noa15" />
+    <result column="noA16" jdbcType="DOUBLE" property="noa16" />
+    <result column="noA17" jdbcType="DOUBLE" property="noa17" />
+    <result column="noA18" jdbcType="DOUBLE" property="noa18" />
+    <result column="noA19" jdbcType="DOUBLE" property="noa19" />
+    <result column="noA20" jdbcType="DOUBLE" property="noa20" />
+    <result column="noA21" jdbcType="DOUBLE" property="noa21" />
+    <result column="noA22" jdbcType="DOUBLE" property="noa22" />
+    <result column="noA23" jdbcType="DOUBLE" property="noa23" />
+    <result column="noA24" jdbcType="DOUBLE" property="noa24" />
+    <result column="coA1" jdbcType="DOUBLE" property="coa1" />
+    <result column="coA2" jdbcType="DOUBLE" property="coa2" />
+    <result column="coA3" jdbcType="DOUBLE" property="coa3" />
+    <result column="coA4" jdbcType="DOUBLE" property="coa4" />
+    <result column="coA5" jdbcType="DOUBLE" property="coa5" />
+    <result column="coA6" jdbcType="DOUBLE" property="coa6" />
+    <result column="coA7" jdbcType="DOUBLE" property="coa7" />
+    <result column="coA8" jdbcType="DOUBLE" property="coa8" />
+    <result column="coA9" jdbcType="DOUBLE" property="coa9" />
+    <result column="coA10" jdbcType="DOUBLE" property="coa10" />
+    <result column="coA11" jdbcType="DOUBLE" property="coa11" />
+    <result column="coA12" jdbcType="DOUBLE" property="coa12" />
+    <result column="coA13" jdbcType="DOUBLE" property="coa13" />
+    <result column="coA14" jdbcType="DOUBLE" property="coa14" />
+    <result column="coA15" jdbcType="DOUBLE" property="coa15" />
+    <result column="coA16" jdbcType="DOUBLE" property="coa16" />
+    <result column="coA17" jdbcType="DOUBLE" property="coa17" />
+    <result column="coA18" jdbcType="DOUBLE" property="coa18" />
+    <result column="coA19" jdbcType="DOUBLE" property="coa19" />
+    <result column="coA20" jdbcType="DOUBLE" property="coa20" />
+    <result column="coA21" jdbcType="DOUBLE" property="coa21" />
+    <result column="coA22" jdbcType="DOUBLE" property="coa22" />
+    <result column="coA23" jdbcType="DOUBLE" property="coa23" />
+    <result column="coA24" jdbcType="DOUBLE" property="coa24" />
+    <result column="so2A1" jdbcType="DOUBLE" property="so2a1" />
+    <result column="so2A2" jdbcType="DOUBLE" property="so2a2" />
+    <result column="so2A3" jdbcType="DOUBLE" property="so2a3" />
+    <result column="so2A4" jdbcType="DOUBLE" property="so2a4" />
+    <result column="so2A5" jdbcType="DOUBLE" property="so2a5" />
+    <result column="so2A6" jdbcType="DOUBLE" property="so2a6" />
+    <result column="so2A7" jdbcType="DOUBLE" property="so2a7" />
+    <result column="so2A8" jdbcType="DOUBLE" property="so2a8" />
+    <result column="so2A9" jdbcType="DOUBLE" property="so2a9" />
+    <result column="so2A10" jdbcType="DOUBLE" property="so2a10" />
+    <result column="so2A11" jdbcType="DOUBLE" property="so2a11" />
+    <result column="so2A12" jdbcType="DOUBLE" property="so2a12" />
+    <result column="so2A13" jdbcType="DOUBLE" property="so2a13" />
+    <result column="so2A14" jdbcType="DOUBLE" property="so2a14" />
+    <result column="so2A15" jdbcType="DOUBLE" property="so2a15" />
+    <result column="so2A16" jdbcType="DOUBLE" property="so2a16" />
+    <result column="so2A17" jdbcType="DOUBLE" property="so2a17" />
+    <result column="so2A18" jdbcType="DOUBLE" property="so2a18" />
+    <result column="so2A19" jdbcType="DOUBLE" property="so2a19" />
+    <result column="so2A20" jdbcType="DOUBLE" property="so2a20" />
+    <result column="so2A21" jdbcType="DOUBLE" property="so2a21" />
+    <result column="so2A22" jdbcType="DOUBLE" property="so2a22" />
+    <result column="so2A23" jdbcType="DOUBLE" property="so2a23" />
+    <result column="so2A24" jdbcType="DOUBLE" property="so2a24" />
+    <result column="bcA1" jdbcType="DOUBLE" property="bca1" />
+    <result column="bcA2" jdbcType="DOUBLE" property="bca2" />
+    <result column="bcA3" jdbcType="DOUBLE" property="bca3" />
+    <result column="bcA4" jdbcType="DOUBLE" property="bca4" />
+    <result column="bcA5" jdbcType="DOUBLE" property="bca5" />
+    <result column="bcA6" jdbcType="DOUBLE" property="bca6" />
+    <result column="bcA7" jdbcType="DOUBLE" property="bca7" />
+    <result column="bcA8" jdbcType="DOUBLE" property="bca8" />
+    <result column="bcA9" jdbcType="DOUBLE" property="bca9" />
+    <result column="bcA10" jdbcType="DOUBLE" property="bca10" />
+    <result column="bcA11" jdbcType="DOUBLE" property="bca11" />
+    <result column="bcA12" jdbcType="DOUBLE" property="bca12" />
+    <result column="bcA13" jdbcType="DOUBLE" property="bca13" />
+    <result column="bcA14" jdbcType="DOUBLE" property="bca14" />
+    <result column="bcA15" jdbcType="DOUBLE" property="bca15" />
+    <result column="bcA16" jdbcType="DOUBLE" property="bca16" />
+    <result column="bcA17" jdbcType="DOUBLE" property="bca17" />
+    <result column="bcA18" jdbcType="DOUBLE" property="bca18" />
+    <result column="bcA19" jdbcType="DOUBLE" property="bca19" />
+    <result column="bcA20" jdbcType="DOUBLE" property="bca20" />
+    <result column="bcA21" jdbcType="DOUBLE" property="bca21" />
+    <result column="bcA22" jdbcType="DOUBLE" property="bca22" />
+    <result column="bcA23" jdbcType="DOUBLE" property="bca23" />
+    <result column="bcA24" jdbcType="DOUBLE" property="bca24" />
+    <result column="ocA1" jdbcType="DOUBLE" property="oca1" />
+    <result column="ocA2" jdbcType="DOUBLE" property="oca2" />
+    <result column="ocA3" jdbcType="DOUBLE" property="oca3" />
+    <result column="ocA4" jdbcType="DOUBLE" property="oca4" />
+    <result column="ocA5" jdbcType="DOUBLE" property="oca5" />
+    <result column="ocA6" jdbcType="DOUBLE" property="oca6" />
+    <result column="ocA7" jdbcType="DOUBLE" property="oca7" />
+    <result column="ocA8" jdbcType="DOUBLE" property="oca8" />
+    <result column="ocA9" jdbcType="DOUBLE" property="oca9" />
+    <result column="ocA10" jdbcType="DOUBLE" property="oca10" />
+    <result column="ocA11" jdbcType="DOUBLE" property="oca11" />
+    <result column="ocA12" jdbcType="DOUBLE" property="oca12" />
+    <result column="ocA13" jdbcType="DOUBLE" property="oca13" />
+    <result column="ocA14" jdbcType="DOUBLE" property="oca14" />
+    <result column="ocA15" jdbcType="DOUBLE" property="oca15" />
+    <result column="ocA16" jdbcType="DOUBLE" property="oca16" />
+    <result column="ocA17" jdbcType="DOUBLE" property="oca17" />
+    <result column="ocA18" jdbcType="DOUBLE" property="oca18" />
+    <result column="ocA19" jdbcType="DOUBLE" property="oca19" />
+    <result column="ocA20" jdbcType="DOUBLE" property="oca20" />
+    <result column="ocA21" jdbcType="DOUBLE" property="oca21" />
+    <result column="ocA22" jdbcType="DOUBLE" property="oca22" />
+    <result column="ocA23" jdbcType="DOUBLE" property="oca23" />
+    <result column="ocA24" jdbcType="DOUBLE" property="oca24" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    gridid, year, row, col, pm10A1, pm10A2, pm10A3, pm10A4, pm10A5, pm10A6, pm10A7, pm10A8, 
+    pm10A9, pm10A10, pm10A11, pm10A12, pm10A13, pm10A14, pm10A15, pm10A16, pm10A17, pm10A18, 
+    pm10A19, pm10A20, pm10A21, pm10A22, pm10A23, pm10A24, pm25A1, pm25A2, pm25A3, pm25A4, 
+    pm25A5, pm25A6, pm25A7, pm25A8, pm25A9, pm25A10, pm25A11, pm25A12, pm25A13, pm25A14, 
+    pm25A15, pm25A16, pm25A17, pm25A18, pm25A19, pm25A20, pm25A21, pm25A22, pm25A23, 
+    pm25A24, hcA1, hcA2, hcA3, hcA4, hcA5, hcA6, hcA7, hcA8, hcA9, hcA10, hcA11, hcA12, 
+    hcA13, hcA14, hcA15, hcA16, hcA17, hcA18, hcA19, hcA20, hcA21, hcA22, hcA23, hcA24, 
+    noA1, noA2, noA3, noA4, noA5, noA6, noA7, noA8, noA9, noA10, noA11, noA12, noA13, 
+    noA14, noA15, noA16, noA17, noA18, noA19, noA20, noA21, noA22, noA23, noA24, coA1, 
+    coA2, coA3, coA4, coA5, coA6, coA7, coA8, coA9, coA10, coA11, coA12, coA13, coA14, 
+    coA15, coA16, coA17, coA18, coA19, coA20, coA21, coA22, coA23, coA24, so2A1, so2A2, 
+    so2A3, so2A4, so2A5, so2A6, so2A7, so2A8, so2A9, so2A10, so2A11, so2A12, so2A13, 
+    so2A14, so2A15, so2A16, so2A17, so2A18, so2A19, so2A20, so2A21, so2A22, so2A23, so2A24, 
+    bcA1, bcA2, bcA3, bcA4, bcA5, bcA6, bcA7, bcA8, bcA9, bcA10, bcA11, bcA12, bcA13, 
+    bcA14, bcA15, bcA16, bcA17, bcA18, bcA19, bcA20, bcA21, bcA22, bcA23, bcA24, ocA1, 
+    ocA2, ocA3, ocA4, ocA5, ocA6, ocA7, ocA8, ocA9, ocA10, ocA11, ocA12, ocA13, ocA14, 
+    ocA15, ocA16, ocA17, ocA18, ocA19, ocA20, ocA21, ocA22, ocA23, ocA24
+  </sql>
+  <select id="selectByExample" parameterType="com.nankai.xining.bean.GridDetailedExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from grid_detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from grid_detailed
+    where gridid = #{gridid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from grid_detailed
+    where gridid = #{gridid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nankai.xining.bean.GridDetailedExample">
+    delete from grid_detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nankai.xining.bean.GridDetailed">
+    insert into grid_detailed (gridid, year, row, 
+      col, pm10A1, pm10A2, 
+      pm10A3, pm10A4, pm10A5, 
+      pm10A6, pm10A7, pm10A8, 
+      pm10A9, pm10A10, pm10A11, 
+      pm10A12, pm10A13, pm10A14, 
+      pm10A15, pm10A16, pm10A17, 
+      pm10A18, pm10A19, pm10A20, 
+      pm10A21, pm10A22, pm10A23, 
+      pm10A24, pm25A1, pm25A2, 
+      pm25A3, pm25A4, pm25A5, 
+      pm25A6, pm25A7, pm25A8, 
+      pm25A9, pm25A10, pm25A11, 
+      pm25A12, pm25A13, pm25A14, 
+      pm25A15, pm25A16, pm25A17, 
+      pm25A18, pm25A19, pm25A20, 
+      pm25A21, pm25A22, pm25A23, 
+      pm25A24, hcA1, hcA2, hcA3, 
+      hcA4, hcA5, hcA6, hcA7, 
+      hcA8, hcA9, hcA10, hcA11, 
+      hcA12, hcA13, hcA14, hcA15, 
+      hcA16, hcA17, hcA18, hcA19, 
+      hcA20, hcA21, hcA22, hcA23, 
+      hcA24, noA1, noA2, noA3, 
+      noA4, noA5, noA6, noA7, 
+      noA8, noA9, noA10, noA11, 
+      noA12, noA13, noA14, noA15, 
+      noA16, noA17, noA18, noA19, 
+      noA20, noA21, noA22, noA23, 
+      noA24, coA1, coA2, coA3, 
+      coA4, coA5, coA6, coA7, 
+      coA8, coA9, coA10, coA11, 
+      coA12, coA13, coA14, coA15, 
+      coA16, coA17, coA18, coA19, 
+      coA20, coA21, coA22, coA23, 
+      coA24, so2A1, so2A2, so2A3, 
+      so2A4, so2A5, so2A6, so2A7, 
+      so2A8, so2A9, so2A10, 
+      so2A11, so2A12, so2A13, 
+      so2A14, so2A15, so2A16, 
+      so2A17, so2A18, so2A19, 
+      so2A20, so2A21, so2A22, 
+      so2A23, so2A24, bcA1, 
+      bcA2, bcA3, bcA4, bcA5, 
+      bcA6, bcA7, bcA8, bcA9, 
+      bcA10, bcA11, bcA12, bcA13, 
+      bcA14, bcA15, bcA16, bcA17, 
+      bcA18, bcA19, bcA20, bcA21, 
+      bcA22, bcA23, bcA24, ocA1, 
+      ocA2, ocA3, ocA4, ocA5, 
+      ocA6, ocA7, ocA8, ocA9, 
+      ocA10, ocA11, ocA12, ocA13, 
+      ocA14, ocA15, ocA16, ocA17, 
+      ocA18, ocA19, ocA20, ocA21, 
+      ocA22, ocA23, ocA24)
+    values (#{gridid,jdbcType=INTEGER}, #{year,jdbcType=INTEGER}, #{row,jdbcType=INTEGER}, 
+      #{col,jdbcType=INTEGER}, #{pm10a1,jdbcType=DOUBLE}, #{pm10a2,jdbcType=DOUBLE}, 
+      #{pm10a3,jdbcType=DOUBLE}, #{pm10a4,jdbcType=DOUBLE}, #{pm10a5,jdbcType=DOUBLE}, 
+      #{pm10a6,jdbcType=DOUBLE}, #{pm10a7,jdbcType=DOUBLE}, #{pm10a8,jdbcType=DOUBLE}, 
+      #{pm10a9,jdbcType=DOUBLE}, #{pm10a10,jdbcType=DOUBLE}, #{pm10a11,jdbcType=DOUBLE}, 
+      #{pm10a12,jdbcType=DOUBLE}, #{pm10a13,jdbcType=DOUBLE}, #{pm10a14,jdbcType=DOUBLE}, 
+      #{pm10a15,jdbcType=DOUBLE}, #{pm10a16,jdbcType=DOUBLE}, #{pm10a17,jdbcType=DOUBLE}, 
+      #{pm10a18,jdbcType=DOUBLE}, #{pm10a19,jdbcType=DOUBLE}, #{pm10a20,jdbcType=DOUBLE}, 
+      #{pm10a21,jdbcType=DOUBLE}, #{pm10a22,jdbcType=DOUBLE}, #{pm10a23,jdbcType=DOUBLE}, 
+      #{pm10a24,jdbcType=DOUBLE}, #{pm25a1,jdbcType=DOUBLE}, #{pm25a2,jdbcType=DOUBLE}, 
+      #{pm25a3,jdbcType=DOUBLE}, #{pm25a4,jdbcType=DOUBLE}, #{pm25a5,jdbcType=DOUBLE}, 
+      #{pm25a6,jdbcType=DOUBLE}, #{pm25a7,jdbcType=DOUBLE}, #{pm25a8,jdbcType=DOUBLE}, 
+      #{pm25a9,jdbcType=DOUBLE}, #{pm25a10,jdbcType=DOUBLE}, #{pm25a11,jdbcType=DOUBLE}, 
+      #{pm25a12,jdbcType=DOUBLE}, #{pm25a13,jdbcType=DOUBLE}, #{pm25a14,jdbcType=DOUBLE}, 
+      #{pm25a15,jdbcType=DOUBLE}, #{pm25a16,jdbcType=DOUBLE}, #{pm25a17,jdbcType=DOUBLE}, 
+      #{pm25a18,jdbcType=DOUBLE}, #{pm25a19,jdbcType=DOUBLE}, #{pm25a20,jdbcType=DOUBLE}, 
+      #{pm25a21,jdbcType=DOUBLE}, #{pm25a22,jdbcType=DOUBLE}, #{pm25a23,jdbcType=DOUBLE}, 
+      #{pm25a24,jdbcType=DOUBLE}, #{hca1,jdbcType=DOUBLE}, #{hca2,jdbcType=DOUBLE}, #{hca3,jdbcType=DOUBLE}, 
+      #{hca4,jdbcType=DOUBLE}, #{hca5,jdbcType=DOUBLE}, #{hca6,jdbcType=DOUBLE}, #{hca7,jdbcType=DOUBLE}, 
+      #{hca8,jdbcType=DOUBLE}, #{hca9,jdbcType=DOUBLE}, #{hca10,jdbcType=DOUBLE}, #{hca11,jdbcType=DOUBLE}, 
+      #{hca12,jdbcType=DOUBLE}, #{hca13,jdbcType=DOUBLE}, #{hca14,jdbcType=DOUBLE}, #{hca15,jdbcType=DOUBLE}, 
+      #{hca16,jdbcType=DOUBLE}, #{hca17,jdbcType=DOUBLE}, #{hca18,jdbcType=DOUBLE}, #{hca19,jdbcType=DOUBLE}, 
+      #{hca20,jdbcType=DOUBLE}, #{hca21,jdbcType=DOUBLE}, #{hca22,jdbcType=DOUBLE}, #{hca23,jdbcType=DOUBLE}, 
+      #{hca24,jdbcType=DOUBLE}, #{noa1,jdbcType=DOUBLE}, #{noa2,jdbcType=DOUBLE}, #{noa3,jdbcType=DOUBLE}, 
+      #{noa4,jdbcType=DOUBLE}, #{noa5,jdbcType=DOUBLE}, #{noa6,jdbcType=DOUBLE}, #{noa7,jdbcType=DOUBLE}, 
+      #{noa8,jdbcType=DOUBLE}, #{noa9,jdbcType=DOUBLE}, #{noa10,jdbcType=DOUBLE}, #{noa11,jdbcType=DOUBLE}, 
+      #{noa12,jdbcType=DOUBLE}, #{noa13,jdbcType=DOUBLE}, #{noa14,jdbcType=DOUBLE}, #{noa15,jdbcType=DOUBLE}, 
+      #{noa16,jdbcType=DOUBLE}, #{noa17,jdbcType=DOUBLE}, #{noa18,jdbcType=DOUBLE}, #{noa19,jdbcType=DOUBLE}, 
+      #{noa20,jdbcType=DOUBLE}, #{noa21,jdbcType=DOUBLE}, #{noa22,jdbcType=DOUBLE}, #{noa23,jdbcType=DOUBLE}, 
+      #{noa24,jdbcType=DOUBLE}, #{coa1,jdbcType=DOUBLE}, #{coa2,jdbcType=DOUBLE}, #{coa3,jdbcType=DOUBLE}, 
+      #{coa4,jdbcType=DOUBLE}, #{coa5,jdbcType=DOUBLE}, #{coa6,jdbcType=DOUBLE}, #{coa7,jdbcType=DOUBLE}, 
+      #{coa8,jdbcType=DOUBLE}, #{coa9,jdbcType=DOUBLE}, #{coa10,jdbcType=DOUBLE}, #{coa11,jdbcType=DOUBLE}, 
+      #{coa12,jdbcType=DOUBLE}, #{coa13,jdbcType=DOUBLE}, #{coa14,jdbcType=DOUBLE}, #{coa15,jdbcType=DOUBLE}, 
+      #{coa16,jdbcType=DOUBLE}, #{coa17,jdbcType=DOUBLE}, #{coa18,jdbcType=DOUBLE}, #{coa19,jdbcType=DOUBLE}, 
+      #{coa20,jdbcType=DOUBLE}, #{coa21,jdbcType=DOUBLE}, #{coa22,jdbcType=DOUBLE}, #{coa23,jdbcType=DOUBLE}, 
+      #{coa24,jdbcType=DOUBLE}, #{so2a1,jdbcType=DOUBLE}, #{so2a2,jdbcType=DOUBLE}, #{so2a3,jdbcType=DOUBLE}, 
+      #{so2a4,jdbcType=DOUBLE}, #{so2a5,jdbcType=DOUBLE}, #{so2a6,jdbcType=DOUBLE}, #{so2a7,jdbcType=DOUBLE}, 
+      #{so2a8,jdbcType=DOUBLE}, #{so2a9,jdbcType=DOUBLE}, #{so2a10,jdbcType=DOUBLE}, 
+      #{so2a11,jdbcType=DOUBLE}, #{so2a12,jdbcType=DOUBLE}, #{so2a13,jdbcType=DOUBLE}, 
+      #{so2a14,jdbcType=DOUBLE}, #{so2a15,jdbcType=DOUBLE}, #{so2a16,jdbcType=DOUBLE}, 
+      #{so2a17,jdbcType=DOUBLE}, #{so2a18,jdbcType=DOUBLE}, #{so2a19,jdbcType=DOUBLE}, 
+      #{so2a20,jdbcType=DOUBLE}, #{so2a21,jdbcType=DOUBLE}, #{so2a22,jdbcType=DOUBLE}, 
+      #{so2a23,jdbcType=DOUBLE}, #{so2a24,jdbcType=DOUBLE}, #{bca1,jdbcType=DOUBLE}, 
+      #{bca2,jdbcType=DOUBLE}, #{bca3,jdbcType=DOUBLE}, #{bca4,jdbcType=DOUBLE}, #{bca5,jdbcType=DOUBLE}, 
+      #{bca6,jdbcType=DOUBLE}, #{bca7,jdbcType=DOUBLE}, #{bca8,jdbcType=DOUBLE}, #{bca9,jdbcType=DOUBLE}, 
+      #{bca10,jdbcType=DOUBLE}, #{bca11,jdbcType=DOUBLE}, #{bca12,jdbcType=DOUBLE}, #{bca13,jdbcType=DOUBLE}, 
+      #{bca14,jdbcType=DOUBLE}, #{bca15,jdbcType=DOUBLE}, #{bca16,jdbcType=DOUBLE}, #{bca17,jdbcType=DOUBLE}, 
+      #{bca18,jdbcType=DOUBLE}, #{bca19,jdbcType=DOUBLE}, #{bca20,jdbcType=DOUBLE}, #{bca21,jdbcType=DOUBLE}, 
+      #{bca22,jdbcType=DOUBLE}, #{bca23,jdbcType=DOUBLE}, #{bca24,jdbcType=DOUBLE}, #{oca1,jdbcType=DOUBLE}, 
+      #{oca2,jdbcType=DOUBLE}, #{oca3,jdbcType=DOUBLE}, #{oca4,jdbcType=DOUBLE}, #{oca5,jdbcType=DOUBLE}, 
+      #{oca6,jdbcType=DOUBLE}, #{oca7,jdbcType=DOUBLE}, #{oca8,jdbcType=DOUBLE}, #{oca9,jdbcType=DOUBLE}, 
+      #{oca10,jdbcType=DOUBLE}, #{oca11,jdbcType=DOUBLE}, #{oca12,jdbcType=DOUBLE}, #{oca13,jdbcType=DOUBLE}, 
+      #{oca14,jdbcType=DOUBLE}, #{oca15,jdbcType=DOUBLE}, #{oca16,jdbcType=DOUBLE}, #{oca17,jdbcType=DOUBLE}, 
+      #{oca18,jdbcType=DOUBLE}, #{oca19,jdbcType=DOUBLE}, #{oca20,jdbcType=DOUBLE}, #{oca21,jdbcType=DOUBLE}, 
+      #{oca22,jdbcType=DOUBLE}, #{oca23,jdbcType=DOUBLE}, #{oca24,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nankai.xining.bean.GridDetailed">
+    insert into grid_detailed
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gridid != null">
+        gridid,
+      </if>
+      <if test="year != null">
+        year,
+      </if>
+      <if test="row != null">
+        row,
+      </if>
+      <if test="col != null">
+        col,
+      </if>
+      <if test="pm10a1 != null">
+        pm10A1,
+      </if>
+      <if test="pm10a2 != null">
+        pm10A2,
+      </if>
+      <if test="pm10a3 != null">
+        pm10A3,
+      </if>
+      <if test="pm10a4 != null">
+        pm10A4,
+      </if>
+      <if test="pm10a5 != null">
+        pm10A5,
+      </if>
+      <if test="pm10a6 != null">
+        pm10A6,
+      </if>
+      <if test="pm10a7 != null">
+        pm10A7,
+      </if>
+      <if test="pm10a8 != null">
+        pm10A8,
+      </if>
+      <if test="pm10a9 != null">
+        pm10A9,
+      </if>
+      <if test="pm10a10 != null">
+        pm10A10,
+      </if>
+      <if test="pm10a11 != null">
+        pm10A11,
+      </if>
+      <if test="pm10a12 != null">
+        pm10A12,
+      </if>
+      <if test="pm10a13 != null">
+        pm10A13,
+      </if>
+      <if test="pm10a14 != null">
+        pm10A14,
+      </if>
+      <if test="pm10a15 != null">
+        pm10A15,
+      </if>
+      <if test="pm10a16 != null">
+        pm10A16,
+      </if>
+      <if test="pm10a17 != null">
+        pm10A17,
+      </if>
+      <if test="pm10a18 != null">
+        pm10A18,
+      </if>
+      <if test="pm10a19 != null">
+        pm10A19,
+      </if>
+      <if test="pm10a20 != null">
+        pm10A20,
+      </if>
+      <if test="pm10a21 != null">
+        pm10A21,
+      </if>
+      <if test="pm10a22 != null">
+        pm10A22,
+      </if>
+      <if test="pm10a23 != null">
+        pm10A23,
+      </if>
+      <if test="pm10a24 != null">
+        pm10A24,
+      </if>
+      <if test="pm25a1 != null">
+        pm25A1,
+      </if>
+      <if test="pm25a2 != null">
+        pm25A2,
+      </if>
+      <if test="pm25a3 != null">
+        pm25A3,
+      </if>
+      <if test="pm25a4 != null">
+        pm25A4,
+      </if>
+      <if test="pm25a5 != null">
+        pm25A5,
+      </if>
+      <if test="pm25a6 != null">
+        pm25A6,
+      </if>
+      <if test="pm25a7 != null">
+        pm25A7,
+      </if>
+      <if test="pm25a8 != null">
+        pm25A8,
+      </if>
+      <if test="pm25a9 != null">
+        pm25A9,
+      </if>
+      <if test="pm25a10 != null">
+        pm25A10,
+      </if>
+      <if test="pm25a11 != null">
+        pm25A11,
+      </if>
+      <if test="pm25a12 != null">
+        pm25A12,
+      </if>
+      <if test="pm25a13 != null">
+        pm25A13,
+      </if>
+      <if test="pm25a14 != null">
+        pm25A14,
+      </if>
+      <if test="pm25a15 != null">
+        pm25A15,
+      </if>
+      <if test="pm25a16 != null">
+        pm25A16,
+      </if>
+      <if test="pm25a17 != null">
+        pm25A17,
+      </if>
+      <if test="pm25a18 != null">
+        pm25A18,
+      </if>
+      <if test="pm25a19 != null">
+        pm25A19,
+      </if>
+      <if test="pm25a20 != null">
+        pm25A20,
+      </if>
+      <if test="pm25a21 != null">
+        pm25A21,
+      </if>
+      <if test="pm25a22 != null">
+        pm25A22,
+      </if>
+      <if test="pm25a23 != null">
+        pm25A23,
+      </if>
+      <if test="pm25a24 != null">
+        pm25A24,
+      </if>
+      <if test="hca1 != null">
+        hcA1,
+      </if>
+      <if test="hca2 != null">
+        hcA2,
+      </if>
+      <if test="hca3 != null">
+        hcA3,
+      </if>
+      <if test="hca4 != null">
+        hcA4,
+      </if>
+      <if test="hca5 != null">
+        hcA5,
+      </if>
+      <if test="hca6 != null">
+        hcA6,
+      </if>
+      <if test="hca7 != null">
+        hcA7,
+      </if>
+      <if test="hca8 != null">
+        hcA8,
+      </if>
+      <if test="hca9 != null">
+        hcA9,
+      </if>
+      <if test="hca10 != null">
+        hcA10,
+      </if>
+      <if test="hca11 != null">
+        hcA11,
+      </if>
+      <if test="hca12 != null">
+        hcA12,
+      </if>
+      <if test="hca13 != null">
+        hcA13,
+      </if>
+      <if test="hca14 != null">
+        hcA14,
+      </if>
+      <if test="hca15 != null">
+        hcA15,
+      </if>
+      <if test="hca16 != null">
+        hcA16,
+      </if>
+      <if test="hca17 != null">
+        hcA17,
+      </if>
+      <if test="hca18 != null">
+        hcA18,
+      </if>
+      <if test="hca19 != null">
+        hcA19,
+      </if>
+      <if test="hca20 != null">
+        hcA20,
+      </if>
+      <if test="hca21 != null">
+        hcA21,
+      </if>
+      <if test="hca22 != null">
+        hcA22,
+      </if>
+      <if test="hca23 != null">
+        hcA23,
+      </if>
+      <if test="hca24 != null">
+        hcA24,
+      </if>
+      <if test="noa1 != null">
+        noA1,
+      </if>
+      <if test="noa2 != null">
+        noA2,
+      </if>
+      <if test="noa3 != null">
+        noA3,
+      </if>
+      <if test="noa4 != null">
+        noA4,
+      </if>
+      <if test="noa5 != null">
+        noA5,
+      </if>
+      <if test="noa6 != null">
+        noA6,
+      </if>
+      <if test="noa7 != null">
+        noA7,
+      </if>
+      <if test="noa8 != null">
+        noA8,
+      </if>
+      <if test="noa9 != null">
+        noA9,
+      </if>
+      <if test="noa10 != null">
+        noA10,
+      </if>
+      <if test="noa11 != null">
+        noA11,
+      </if>
+      <if test="noa12 != null">
+        noA12,
+      </if>
+      <if test="noa13 != null">
+        noA13,
+      </if>
+      <if test="noa14 != null">
+        noA14,
+      </if>
+      <if test="noa15 != null">
+        noA15,
+      </if>
+      <if test="noa16 != null">
+        noA16,
+      </if>
+      <if test="noa17 != null">
+        noA17,
+      </if>
+      <if test="noa18 != null">
+        noA18,
+      </if>
+      <if test="noa19 != null">
+        noA19,
+      </if>
+      <if test="noa20 != null">
+        noA20,
+      </if>
+      <if test="noa21 != null">
+        noA21,
+      </if>
+      <if test="noa22 != null">
+        noA22,
+      </if>
+      <if test="noa23 != null">
+        noA23,
+      </if>
+      <if test="noa24 != null">
+        noA24,
+      </if>
+      <if test="coa1 != null">
+        coA1,
+      </if>
+      <if test="coa2 != null">
+        coA2,
+      </if>
+      <if test="coa3 != null">
+        coA3,
+      </if>
+      <if test="coa4 != null">
+        coA4,
+      </if>
+      <if test="coa5 != null">
+        coA5,
+      </if>
+      <if test="coa6 != null">
+        coA6,
+      </if>
+      <if test="coa7 != null">
+        coA7,
+      </if>
+      <if test="coa8 != null">
+        coA8,
+      </if>
+      <if test="coa9 != null">
+        coA9,
+      </if>
+      <if test="coa10 != null">
+        coA10,
+      </if>
+      <if test="coa11 != null">
+        coA11,
+      </if>
+      <if test="coa12 != null">
+        coA12,
+      </if>
+      <if test="coa13 != null">
+        coA13,
+      </if>
+      <if test="coa14 != null">
+        coA14,
+      </if>
+      <if test="coa15 != null">
+        coA15,
+      </if>
+      <if test="coa16 != null">
+        coA16,
+      </if>
+      <if test="coa17 != null">
+        coA17,
+      </if>
+      <if test="coa18 != null">
+        coA18,
+      </if>
+      <if test="coa19 != null">
+        coA19,
+      </if>
+      <if test="coa20 != null">
+        coA20,
+      </if>
+      <if test="coa21 != null">
+        coA21,
+      </if>
+      <if test="coa22 != null">
+        coA22,
+      </if>
+      <if test="coa23 != null">
+        coA23,
+      </if>
+      <if test="coa24 != null">
+        coA24,
+      </if>
+      <if test="so2a1 != null">
+        so2A1,
+      </if>
+      <if test="so2a2 != null">
+        so2A2,
+      </if>
+      <if test="so2a3 != null">
+        so2A3,
+      </if>
+      <if test="so2a4 != null">
+        so2A4,
+      </if>
+      <if test="so2a5 != null">
+        so2A5,
+      </if>
+      <if test="so2a6 != null">
+        so2A6,
+      </if>
+      <if test="so2a7 != null">
+        so2A7,
+      </if>
+      <if test="so2a8 != null">
+        so2A8,
+      </if>
+      <if test="so2a9 != null">
+        so2A9,
+      </if>
+      <if test="so2a10 != null">
+        so2A10,
+      </if>
+      <if test="so2a11 != null">
+        so2A11,
+      </if>
+      <if test="so2a12 != null">
+        so2A12,
+      </if>
+      <if test="so2a13 != null">
+        so2A13,
+      </if>
+      <if test="so2a14 != null">
+        so2A14,
+      </if>
+      <if test="so2a15 != null">
+        so2A15,
+      </if>
+      <if test="so2a16 != null">
+        so2A16,
+      </if>
+      <if test="so2a17 != null">
+        so2A17,
+      </if>
+      <if test="so2a18 != null">
+        so2A18,
+      </if>
+      <if test="so2a19 != null">
+        so2A19,
+      </if>
+      <if test="so2a20 != null">
+        so2A20,
+      </if>
+      <if test="so2a21 != null">
+        so2A21,
+      </if>
+      <if test="so2a22 != null">
+        so2A22,
+      </if>
+      <if test="so2a23 != null">
+        so2A23,
+      </if>
+      <if test="so2a24 != null">
+        so2A24,
+      </if>
+      <if test="bca1 != null">
+        bcA1,
+      </if>
+      <if test="bca2 != null">
+        bcA2,
+      </if>
+      <if test="bca3 != null">
+        bcA3,
+      </if>
+      <if test="bca4 != null">
+        bcA4,
+      </if>
+      <if test="bca5 != null">
+        bcA5,
+      </if>
+      <if test="bca6 != null">
+        bcA6,
+      </if>
+      <if test="bca7 != null">
+        bcA7,
+      </if>
+      <if test="bca8 != null">
+        bcA8,
+      </if>
+      <if test="bca9 != null">
+        bcA9,
+      </if>
+      <if test="bca10 != null">
+        bcA10,
+      </if>
+      <if test="bca11 != null">
+        bcA11,
+      </if>
+      <if test="bca12 != null">
+        bcA12,
+      </if>
+      <if test="bca13 != null">
+        bcA13,
+      </if>
+      <if test="bca14 != null">
+        bcA14,
+      </if>
+      <if test="bca15 != null">
+        bcA15,
+      </if>
+      <if test="bca16 != null">
+        bcA16,
+      </if>
+      <if test="bca17 != null">
+        bcA17,
+      </if>
+      <if test="bca18 != null">
+        bcA18,
+      </if>
+      <if test="bca19 != null">
+        bcA19,
+      </if>
+      <if test="bca20 != null">
+        bcA20,
+      </if>
+      <if test="bca21 != null">
+        bcA21,
+      </if>
+      <if test="bca22 != null">
+        bcA22,
+      </if>
+      <if test="bca23 != null">
+        bcA23,
+      </if>
+      <if test="bca24 != null">
+        bcA24,
+      </if>
+      <if test="oca1 != null">
+        ocA1,
+      </if>
+      <if test="oca2 != null">
+        ocA2,
+      </if>
+      <if test="oca3 != null">
+        ocA3,
+      </if>
+      <if test="oca4 != null">
+        ocA4,
+      </if>
+      <if test="oca5 != null">
+        ocA5,
+      </if>
+      <if test="oca6 != null">
+        ocA6,
+      </if>
+      <if test="oca7 != null">
+        ocA7,
+      </if>
+      <if test="oca8 != null">
+        ocA8,
+      </if>
+      <if test="oca9 != null">
+        ocA9,
+      </if>
+      <if test="oca10 != null">
+        ocA10,
+      </if>
+      <if test="oca11 != null">
+        ocA11,
+      </if>
+      <if test="oca12 != null">
+        ocA12,
+      </if>
+      <if test="oca13 != null">
+        ocA13,
+      </if>
+      <if test="oca14 != null">
+        ocA14,
+      </if>
+      <if test="oca15 != null">
+        ocA15,
+      </if>
+      <if test="oca16 != null">
+        ocA16,
+      </if>
+      <if test="oca17 != null">
+        ocA17,
+      </if>
+      <if test="oca18 != null">
+        ocA18,
+      </if>
+      <if test="oca19 != null">
+        ocA19,
+      </if>
+      <if test="oca20 != null">
+        ocA20,
+      </if>
+      <if test="oca21 != null">
+        ocA21,
+      </if>
+      <if test="oca22 != null">
+        ocA22,
+      </if>
+      <if test="oca23 != null">
+        ocA23,
+      </if>
+      <if test="oca24 != null">
+        ocA24,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gridid != null">
+        #{gridid,jdbcType=INTEGER},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        #{row,jdbcType=INTEGER},
+      </if>
+      <if test="col != null">
+        #{col,jdbcType=INTEGER},
+      </if>
+      <if test="pm10a1 != null">
+        #{pm10a1,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a2 != null">
+        #{pm10a2,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a3 != null">
+        #{pm10a3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a4 != null">
+        #{pm10a4,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a5 != null">
+        #{pm10a5,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a6 != null">
+        #{pm10a6,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a7 != null">
+        #{pm10a7,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a8 != null">
+        #{pm10a8,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a9 != null">
+        #{pm10a9,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a10 != null">
+        #{pm10a10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a11 != null">
+        #{pm10a11,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a12 != null">
+        #{pm10a12,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a13 != null">
+        #{pm10a13,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a14 != null">
+        #{pm10a14,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a15 != null">
+        #{pm10a15,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a16 != null">
+        #{pm10a16,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a17 != null">
+        #{pm10a17,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a18 != null">
+        #{pm10a18,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a19 != null">
+        #{pm10a19,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a20 != null">
+        #{pm10a20,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a21 != null">
+        #{pm10a21,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a22 != null">
+        #{pm10a22,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a23 != null">
+        #{pm10a23,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a24 != null">
+        #{pm10a24,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a1 != null">
+        #{pm25a1,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a2 != null">
+        #{pm25a2,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a3 != null">
+        #{pm25a3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a4 != null">
+        #{pm25a4,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a5 != null">
+        #{pm25a5,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a6 != null">
+        #{pm25a6,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a7 != null">
+        #{pm25a7,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a8 != null">
+        #{pm25a8,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a9 != null">
+        #{pm25a9,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a10 != null">
+        #{pm25a10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a11 != null">
+        #{pm25a11,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a12 != null">
+        #{pm25a12,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a13 != null">
+        #{pm25a13,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a14 != null">
+        #{pm25a14,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a15 != null">
+        #{pm25a15,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a16 != null">
+        #{pm25a16,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a17 != null">
+        #{pm25a17,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a18 != null">
+        #{pm25a18,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a19 != null">
+        #{pm25a19,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a20 != null">
+        #{pm25a20,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a21 != null">
+        #{pm25a21,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a22 != null">
+        #{pm25a22,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a23 != null">
+        #{pm25a23,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a24 != null">
+        #{pm25a24,jdbcType=DOUBLE},
+      </if>
+      <if test="hca1 != null">
+        #{hca1,jdbcType=DOUBLE},
+      </if>
+      <if test="hca2 != null">
+        #{hca2,jdbcType=DOUBLE},
+      </if>
+      <if test="hca3 != null">
+        #{hca3,jdbcType=DOUBLE},
+      </if>
+      <if test="hca4 != null">
+        #{hca4,jdbcType=DOUBLE},
+      </if>
+      <if test="hca5 != null">
+        #{hca5,jdbcType=DOUBLE},
+      </if>
+      <if test="hca6 != null">
+        #{hca6,jdbcType=DOUBLE},
+      </if>
+      <if test="hca7 != null">
+        #{hca7,jdbcType=DOUBLE},
+      </if>
+      <if test="hca8 != null">
+        #{hca8,jdbcType=DOUBLE},
+      </if>
+      <if test="hca9 != null">
+        #{hca9,jdbcType=DOUBLE},
+      </if>
+      <if test="hca10 != null">
+        #{hca10,jdbcType=DOUBLE},
+      </if>
+      <if test="hca11 != null">
+        #{hca11,jdbcType=DOUBLE},
+      </if>
+      <if test="hca12 != null">
+        #{hca12,jdbcType=DOUBLE},
+      </if>
+      <if test="hca13 != null">
+        #{hca13,jdbcType=DOUBLE},
+      </if>
+      <if test="hca14 != null">
+        #{hca14,jdbcType=DOUBLE},
+      </if>
+      <if test="hca15 != null">
+        #{hca15,jdbcType=DOUBLE},
+      </if>
+      <if test="hca16 != null">
+        #{hca16,jdbcType=DOUBLE},
+      </if>
+      <if test="hca17 != null">
+        #{hca17,jdbcType=DOUBLE},
+      </if>
+      <if test="hca18 != null">
+        #{hca18,jdbcType=DOUBLE},
+      </if>
+      <if test="hca19 != null">
+        #{hca19,jdbcType=DOUBLE},
+      </if>
+      <if test="hca20 != null">
+        #{hca20,jdbcType=DOUBLE},
+      </if>
+      <if test="hca21 != null">
+        #{hca21,jdbcType=DOUBLE},
+      </if>
+      <if test="hca22 != null">
+        #{hca22,jdbcType=DOUBLE},
+      </if>
+      <if test="hca23 != null">
+        #{hca23,jdbcType=DOUBLE},
+      </if>
+      <if test="hca24 != null">
+        #{hca24,jdbcType=DOUBLE},
+      </if>
+      <if test="noa1 != null">
+        #{noa1,jdbcType=DOUBLE},
+      </if>
+      <if test="noa2 != null">
+        #{noa2,jdbcType=DOUBLE},
+      </if>
+      <if test="noa3 != null">
+        #{noa3,jdbcType=DOUBLE},
+      </if>
+      <if test="noa4 != null">
+        #{noa4,jdbcType=DOUBLE},
+      </if>
+      <if test="noa5 != null">
+        #{noa5,jdbcType=DOUBLE},
+      </if>
+      <if test="noa6 != null">
+        #{noa6,jdbcType=DOUBLE},
+      </if>
+      <if test="noa7 != null">
+        #{noa7,jdbcType=DOUBLE},
+      </if>
+      <if test="noa8 != null">
+        #{noa8,jdbcType=DOUBLE},
+      </if>
+      <if test="noa9 != null">
+        #{noa9,jdbcType=DOUBLE},
+      </if>
+      <if test="noa10 != null">
+        #{noa10,jdbcType=DOUBLE},
+      </if>
+      <if test="noa11 != null">
+        #{noa11,jdbcType=DOUBLE},
+      </if>
+      <if test="noa12 != null">
+        #{noa12,jdbcType=DOUBLE},
+      </if>
+      <if test="noa13 != null">
+        #{noa13,jdbcType=DOUBLE},
+      </if>
+      <if test="noa14 != null">
+        #{noa14,jdbcType=DOUBLE},
+      </if>
+      <if test="noa15 != null">
+        #{noa15,jdbcType=DOUBLE},
+      </if>
+      <if test="noa16 != null">
+        #{noa16,jdbcType=DOUBLE},
+      </if>
+      <if test="noa17 != null">
+        #{noa17,jdbcType=DOUBLE},
+      </if>
+      <if test="noa18 != null">
+        #{noa18,jdbcType=DOUBLE},
+      </if>
+      <if test="noa19 != null">
+        #{noa19,jdbcType=DOUBLE},
+      </if>
+      <if test="noa20 != null">
+        #{noa20,jdbcType=DOUBLE},
+      </if>
+      <if test="noa21 != null">
+        #{noa21,jdbcType=DOUBLE},
+      </if>
+      <if test="noa22 != null">
+        #{noa22,jdbcType=DOUBLE},
+      </if>
+      <if test="noa23 != null">
+        #{noa23,jdbcType=DOUBLE},
+      </if>
+      <if test="noa24 != null">
+        #{noa24,jdbcType=DOUBLE},
+      </if>
+      <if test="coa1 != null">
+        #{coa1,jdbcType=DOUBLE},
+      </if>
+      <if test="coa2 != null">
+        #{coa2,jdbcType=DOUBLE},
+      </if>
+      <if test="coa3 != null">
+        #{coa3,jdbcType=DOUBLE},
+      </if>
+      <if test="coa4 != null">
+        #{coa4,jdbcType=DOUBLE},
+      </if>
+      <if test="coa5 != null">
+        #{coa5,jdbcType=DOUBLE},
+      </if>
+      <if test="coa6 != null">
+        #{coa6,jdbcType=DOUBLE},
+      </if>
+      <if test="coa7 != null">
+        #{coa7,jdbcType=DOUBLE},
+      </if>
+      <if test="coa8 != null">
+        #{coa8,jdbcType=DOUBLE},
+      </if>
+      <if test="coa9 != null">
+        #{coa9,jdbcType=DOUBLE},
+      </if>
+      <if test="coa10 != null">
+        #{coa10,jdbcType=DOUBLE},
+      </if>
+      <if test="coa11 != null">
+        #{coa11,jdbcType=DOUBLE},
+      </if>
+      <if test="coa12 != null">
+        #{coa12,jdbcType=DOUBLE},
+      </if>
+      <if test="coa13 != null">
+        #{coa13,jdbcType=DOUBLE},
+      </if>
+      <if test="coa14 != null">
+        #{coa14,jdbcType=DOUBLE},
+      </if>
+      <if test="coa15 != null">
+        #{coa15,jdbcType=DOUBLE},
+      </if>
+      <if test="coa16 != null">
+        #{coa16,jdbcType=DOUBLE},
+      </if>
+      <if test="coa17 != null">
+        #{coa17,jdbcType=DOUBLE},
+      </if>
+      <if test="coa18 != null">
+        #{coa18,jdbcType=DOUBLE},
+      </if>
+      <if test="coa19 != null">
+        #{coa19,jdbcType=DOUBLE},
+      </if>
+      <if test="coa20 != null">
+        #{coa20,jdbcType=DOUBLE},
+      </if>
+      <if test="coa21 != null">
+        #{coa21,jdbcType=DOUBLE},
+      </if>
+      <if test="coa22 != null">
+        #{coa22,jdbcType=DOUBLE},
+      </if>
+      <if test="coa23 != null">
+        #{coa23,jdbcType=DOUBLE},
+      </if>
+      <if test="coa24 != null">
+        #{coa24,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a1 != null">
+        #{so2a1,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a2 != null">
+        #{so2a2,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a3 != null">
+        #{so2a3,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a4 != null">
+        #{so2a4,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a5 != null">
+        #{so2a5,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a6 != null">
+        #{so2a6,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a7 != null">
+        #{so2a7,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a8 != null">
+        #{so2a8,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a9 != null">
+        #{so2a9,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a10 != null">
+        #{so2a10,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a11 != null">
+        #{so2a11,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a12 != null">
+        #{so2a12,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a13 != null">
+        #{so2a13,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a14 != null">
+        #{so2a14,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a15 != null">
+        #{so2a15,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a16 != null">
+        #{so2a16,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a17 != null">
+        #{so2a17,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a18 != null">
+        #{so2a18,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a19 != null">
+        #{so2a19,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a20 != null">
+        #{so2a20,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a21 != null">
+        #{so2a21,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a22 != null">
+        #{so2a22,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a23 != null">
+        #{so2a23,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a24 != null">
+        #{so2a24,jdbcType=DOUBLE},
+      </if>
+      <if test="bca1 != null">
+        #{bca1,jdbcType=DOUBLE},
+      </if>
+      <if test="bca2 != null">
+        #{bca2,jdbcType=DOUBLE},
+      </if>
+      <if test="bca3 != null">
+        #{bca3,jdbcType=DOUBLE},
+      </if>
+      <if test="bca4 != null">
+        #{bca4,jdbcType=DOUBLE},
+      </if>
+      <if test="bca5 != null">
+        #{bca5,jdbcType=DOUBLE},
+      </if>
+      <if test="bca6 != null">
+        #{bca6,jdbcType=DOUBLE},
+      </if>
+      <if test="bca7 != null">
+        #{bca7,jdbcType=DOUBLE},
+      </if>
+      <if test="bca8 != null">
+        #{bca8,jdbcType=DOUBLE},
+      </if>
+      <if test="bca9 != null">
+        #{bca9,jdbcType=DOUBLE},
+      </if>
+      <if test="bca10 != null">
+        #{bca10,jdbcType=DOUBLE},
+      </if>
+      <if test="bca11 != null">
+        #{bca11,jdbcType=DOUBLE},
+      </if>
+      <if test="bca12 != null">
+        #{bca12,jdbcType=DOUBLE},
+      </if>
+      <if test="bca13 != null">
+        #{bca13,jdbcType=DOUBLE},
+      </if>
+      <if test="bca14 != null">
+        #{bca14,jdbcType=DOUBLE},
+      </if>
+      <if test="bca15 != null">
+        #{bca15,jdbcType=DOUBLE},
+      </if>
+      <if test="bca16 != null">
+        #{bca16,jdbcType=DOUBLE},
+      </if>
+      <if test="bca17 != null">
+        #{bca17,jdbcType=DOUBLE},
+      </if>
+      <if test="bca18 != null">
+        #{bca18,jdbcType=DOUBLE},
+      </if>
+      <if test="bca19 != null">
+        #{bca19,jdbcType=DOUBLE},
+      </if>
+      <if test="bca20 != null">
+        #{bca20,jdbcType=DOUBLE},
+      </if>
+      <if test="bca21 != null">
+        #{bca21,jdbcType=DOUBLE},
+      </if>
+      <if test="bca22 != null">
+        #{bca22,jdbcType=DOUBLE},
+      </if>
+      <if test="bca23 != null">
+        #{bca23,jdbcType=DOUBLE},
+      </if>
+      <if test="bca24 != null">
+        #{bca24,jdbcType=DOUBLE},
+      </if>
+      <if test="oca1 != null">
+        #{oca1,jdbcType=DOUBLE},
+      </if>
+      <if test="oca2 != null">
+        #{oca2,jdbcType=DOUBLE},
+      </if>
+      <if test="oca3 != null">
+        #{oca3,jdbcType=DOUBLE},
+      </if>
+      <if test="oca4 != null">
+        #{oca4,jdbcType=DOUBLE},
+      </if>
+      <if test="oca5 != null">
+        #{oca5,jdbcType=DOUBLE},
+      </if>
+      <if test="oca6 != null">
+        #{oca6,jdbcType=DOUBLE},
+      </if>
+      <if test="oca7 != null">
+        #{oca7,jdbcType=DOUBLE},
+      </if>
+      <if test="oca8 != null">
+        #{oca8,jdbcType=DOUBLE},
+      </if>
+      <if test="oca9 != null">
+        #{oca9,jdbcType=DOUBLE},
+      </if>
+      <if test="oca10 != null">
+        #{oca10,jdbcType=DOUBLE},
+      </if>
+      <if test="oca11 != null">
+        #{oca11,jdbcType=DOUBLE},
+      </if>
+      <if test="oca12 != null">
+        #{oca12,jdbcType=DOUBLE},
+      </if>
+      <if test="oca13 != null">
+        #{oca13,jdbcType=DOUBLE},
+      </if>
+      <if test="oca14 != null">
+        #{oca14,jdbcType=DOUBLE},
+      </if>
+      <if test="oca15 != null">
+        #{oca15,jdbcType=DOUBLE},
+      </if>
+      <if test="oca16 != null">
+        #{oca16,jdbcType=DOUBLE},
+      </if>
+      <if test="oca17 != null">
+        #{oca17,jdbcType=DOUBLE},
+      </if>
+      <if test="oca18 != null">
+        #{oca18,jdbcType=DOUBLE},
+      </if>
+      <if test="oca19 != null">
+        #{oca19,jdbcType=DOUBLE},
+      </if>
+      <if test="oca20 != null">
+        #{oca20,jdbcType=DOUBLE},
+      </if>
+      <if test="oca21 != null">
+        #{oca21,jdbcType=DOUBLE},
+      </if>
+      <if test="oca22 != null">
+        #{oca22,jdbcType=DOUBLE},
+      </if>
+      <if test="oca23 != null">
+        #{oca23,jdbcType=DOUBLE},
+      </if>
+      <if test="oca24 != null">
+        #{oca24,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nankai.xining.bean.GridDetailedExample" resultType="java.lang.Long">
+    select count(*) from grid_detailed
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update grid_detailed
+    <set>
+      <if test="record.gridid != null">
+        gridid = #{record.gridid,jdbcType=INTEGER},
+      </if>
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=INTEGER},
+      </if>
+      <if test="record.row != null">
+        row = #{record.row,jdbcType=INTEGER},
+      </if>
+      <if test="record.col != null">
+        col = #{record.col,jdbcType=INTEGER},
+      </if>
+      <if test="record.pm10a1 != null">
+        pm10A1 = #{record.pm10a1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a2 != null">
+        pm10A2 = #{record.pm10a2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a3 != null">
+        pm10A3 = #{record.pm10a3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a4 != null">
+        pm10A4 = #{record.pm10a4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a5 != null">
+        pm10A5 = #{record.pm10a5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a6 != null">
+        pm10A6 = #{record.pm10a6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a7 != null">
+        pm10A7 = #{record.pm10a7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a8 != null">
+        pm10A8 = #{record.pm10a8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a9 != null">
+        pm10A9 = #{record.pm10a9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a10 != null">
+        pm10A10 = #{record.pm10a10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a11 != null">
+        pm10A11 = #{record.pm10a11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a12 != null">
+        pm10A12 = #{record.pm10a12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a13 != null">
+        pm10A13 = #{record.pm10a13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a14 != null">
+        pm10A14 = #{record.pm10a14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a15 != null">
+        pm10A15 = #{record.pm10a15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a16 != null">
+        pm10A16 = #{record.pm10a16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a17 != null">
+        pm10A17 = #{record.pm10a17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a18 != null">
+        pm10A18 = #{record.pm10a18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a19 != null">
+        pm10A19 = #{record.pm10a19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a20 != null">
+        pm10A20 = #{record.pm10a20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a21 != null">
+        pm10A21 = #{record.pm10a21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a22 != null">
+        pm10A22 = #{record.pm10a22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a23 != null">
+        pm10A23 = #{record.pm10a23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm10a24 != null">
+        pm10A24 = #{record.pm10a24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a1 != null">
+        pm25A1 = #{record.pm25a1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a2 != null">
+        pm25A2 = #{record.pm25a2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a3 != null">
+        pm25A3 = #{record.pm25a3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a4 != null">
+        pm25A4 = #{record.pm25a4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a5 != null">
+        pm25A5 = #{record.pm25a5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a6 != null">
+        pm25A6 = #{record.pm25a6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a7 != null">
+        pm25A7 = #{record.pm25a7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a8 != null">
+        pm25A8 = #{record.pm25a8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a9 != null">
+        pm25A9 = #{record.pm25a9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a10 != null">
+        pm25A10 = #{record.pm25a10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a11 != null">
+        pm25A11 = #{record.pm25a11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a12 != null">
+        pm25A12 = #{record.pm25a12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a13 != null">
+        pm25A13 = #{record.pm25a13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a14 != null">
+        pm25A14 = #{record.pm25a14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a15 != null">
+        pm25A15 = #{record.pm25a15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a16 != null">
+        pm25A16 = #{record.pm25a16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a17 != null">
+        pm25A17 = #{record.pm25a17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a18 != null">
+        pm25A18 = #{record.pm25a18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a19 != null">
+        pm25A19 = #{record.pm25a19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a20 != null">
+        pm25A20 = #{record.pm25a20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a21 != null">
+        pm25A21 = #{record.pm25a21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a22 != null">
+        pm25A22 = #{record.pm25a22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a23 != null">
+        pm25A23 = #{record.pm25a23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pm25a24 != null">
+        pm25A24 = #{record.pm25a24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca1 != null">
+        hcA1 = #{record.hca1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca2 != null">
+        hcA2 = #{record.hca2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca3 != null">
+        hcA3 = #{record.hca3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca4 != null">
+        hcA4 = #{record.hca4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca5 != null">
+        hcA5 = #{record.hca5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca6 != null">
+        hcA6 = #{record.hca6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca7 != null">
+        hcA7 = #{record.hca7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca8 != null">
+        hcA8 = #{record.hca8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca9 != null">
+        hcA9 = #{record.hca9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca10 != null">
+        hcA10 = #{record.hca10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca11 != null">
+        hcA11 = #{record.hca11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca12 != null">
+        hcA12 = #{record.hca12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca13 != null">
+        hcA13 = #{record.hca13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca14 != null">
+        hcA14 = #{record.hca14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca15 != null">
+        hcA15 = #{record.hca15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca16 != null">
+        hcA16 = #{record.hca16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca17 != null">
+        hcA17 = #{record.hca17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca18 != null">
+        hcA18 = #{record.hca18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca19 != null">
+        hcA19 = #{record.hca19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca20 != null">
+        hcA20 = #{record.hca20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca21 != null">
+        hcA21 = #{record.hca21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca22 != null">
+        hcA22 = #{record.hca22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca23 != null">
+        hcA23 = #{record.hca23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hca24 != null">
+        hcA24 = #{record.hca24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa1 != null">
+        noA1 = #{record.noa1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa2 != null">
+        noA2 = #{record.noa2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa3 != null">
+        noA3 = #{record.noa3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa4 != null">
+        noA4 = #{record.noa4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa5 != null">
+        noA5 = #{record.noa5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa6 != null">
+        noA6 = #{record.noa6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa7 != null">
+        noA7 = #{record.noa7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa8 != null">
+        noA8 = #{record.noa8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa9 != null">
+        noA9 = #{record.noa9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa10 != null">
+        noA10 = #{record.noa10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa11 != null">
+        noA11 = #{record.noa11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa12 != null">
+        noA12 = #{record.noa12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa13 != null">
+        noA13 = #{record.noa13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa14 != null">
+        noA14 = #{record.noa14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa15 != null">
+        noA15 = #{record.noa15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa16 != null">
+        noA16 = #{record.noa16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa17 != null">
+        noA17 = #{record.noa17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa18 != null">
+        noA18 = #{record.noa18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa19 != null">
+        noA19 = #{record.noa19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa20 != null">
+        noA20 = #{record.noa20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa21 != null">
+        noA21 = #{record.noa21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa22 != null">
+        noA22 = #{record.noa22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa23 != null">
+        noA23 = #{record.noa23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.noa24 != null">
+        noA24 = #{record.noa24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa1 != null">
+        coA1 = #{record.coa1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa2 != null">
+        coA2 = #{record.coa2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa3 != null">
+        coA3 = #{record.coa3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa4 != null">
+        coA4 = #{record.coa4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa5 != null">
+        coA5 = #{record.coa5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa6 != null">
+        coA6 = #{record.coa6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa7 != null">
+        coA7 = #{record.coa7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa8 != null">
+        coA8 = #{record.coa8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa9 != null">
+        coA9 = #{record.coa9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa10 != null">
+        coA10 = #{record.coa10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa11 != null">
+        coA11 = #{record.coa11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa12 != null">
+        coA12 = #{record.coa12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa13 != null">
+        coA13 = #{record.coa13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa14 != null">
+        coA14 = #{record.coa14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa15 != null">
+        coA15 = #{record.coa15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa16 != null">
+        coA16 = #{record.coa16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa17 != null">
+        coA17 = #{record.coa17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa18 != null">
+        coA18 = #{record.coa18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa19 != null">
+        coA19 = #{record.coa19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa20 != null">
+        coA20 = #{record.coa20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa21 != null">
+        coA21 = #{record.coa21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa22 != null">
+        coA22 = #{record.coa22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa23 != null">
+        coA23 = #{record.coa23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coa24 != null">
+        coA24 = #{record.coa24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a1 != null">
+        so2A1 = #{record.so2a1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a2 != null">
+        so2A2 = #{record.so2a2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a3 != null">
+        so2A3 = #{record.so2a3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a4 != null">
+        so2A4 = #{record.so2a4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a5 != null">
+        so2A5 = #{record.so2a5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a6 != null">
+        so2A6 = #{record.so2a6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a7 != null">
+        so2A7 = #{record.so2a7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a8 != null">
+        so2A8 = #{record.so2a8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a9 != null">
+        so2A9 = #{record.so2a9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a10 != null">
+        so2A10 = #{record.so2a10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a11 != null">
+        so2A11 = #{record.so2a11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a12 != null">
+        so2A12 = #{record.so2a12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a13 != null">
+        so2A13 = #{record.so2a13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a14 != null">
+        so2A14 = #{record.so2a14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a15 != null">
+        so2A15 = #{record.so2a15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a16 != null">
+        so2A16 = #{record.so2a16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a17 != null">
+        so2A17 = #{record.so2a17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a18 != null">
+        so2A18 = #{record.so2a18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a19 != null">
+        so2A19 = #{record.so2a19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a20 != null">
+        so2A20 = #{record.so2a20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a21 != null">
+        so2A21 = #{record.so2a21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a22 != null">
+        so2A22 = #{record.so2a22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a23 != null">
+        so2A23 = #{record.so2a23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.so2a24 != null">
+        so2A24 = #{record.so2a24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca1 != null">
+        bcA1 = #{record.bca1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca2 != null">
+        bcA2 = #{record.bca2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca3 != null">
+        bcA3 = #{record.bca3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca4 != null">
+        bcA4 = #{record.bca4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca5 != null">
+        bcA5 = #{record.bca5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca6 != null">
+        bcA6 = #{record.bca6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca7 != null">
+        bcA7 = #{record.bca7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca8 != null">
+        bcA8 = #{record.bca8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca9 != null">
+        bcA9 = #{record.bca9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca10 != null">
+        bcA10 = #{record.bca10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca11 != null">
+        bcA11 = #{record.bca11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca12 != null">
+        bcA12 = #{record.bca12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca13 != null">
+        bcA13 = #{record.bca13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca14 != null">
+        bcA14 = #{record.bca14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca15 != null">
+        bcA15 = #{record.bca15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca16 != null">
+        bcA16 = #{record.bca16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca17 != null">
+        bcA17 = #{record.bca17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca18 != null">
+        bcA18 = #{record.bca18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca19 != null">
+        bcA19 = #{record.bca19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca20 != null">
+        bcA20 = #{record.bca20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca21 != null">
+        bcA21 = #{record.bca21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca22 != null">
+        bcA22 = #{record.bca22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca23 != null">
+        bcA23 = #{record.bca23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.bca24 != null">
+        bcA24 = #{record.bca24,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca1 != null">
+        ocA1 = #{record.oca1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca2 != null">
+        ocA2 = #{record.oca2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca3 != null">
+        ocA3 = #{record.oca3,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca4 != null">
+        ocA4 = #{record.oca4,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca5 != null">
+        ocA5 = #{record.oca5,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca6 != null">
+        ocA6 = #{record.oca6,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca7 != null">
+        ocA7 = #{record.oca7,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca8 != null">
+        ocA8 = #{record.oca8,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca9 != null">
+        ocA9 = #{record.oca9,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca10 != null">
+        ocA10 = #{record.oca10,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca11 != null">
+        ocA11 = #{record.oca11,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca12 != null">
+        ocA12 = #{record.oca12,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca13 != null">
+        ocA13 = #{record.oca13,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca14 != null">
+        ocA14 = #{record.oca14,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca15 != null">
+        ocA15 = #{record.oca15,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca16 != null">
+        ocA16 = #{record.oca16,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca17 != null">
+        ocA17 = #{record.oca17,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca18 != null">
+        ocA18 = #{record.oca18,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca19 != null">
+        ocA19 = #{record.oca19,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca20 != null">
+        ocA20 = #{record.oca20,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca21 != null">
+        ocA21 = #{record.oca21,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca22 != null">
+        ocA22 = #{record.oca22,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca23 != null">
+        ocA23 = #{record.oca23,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oca24 != null">
+        ocA24 = #{record.oca24,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update grid_detailed
+    set gridid = #{record.gridid,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=INTEGER},
+      row = #{record.row,jdbcType=INTEGER},
+      col = #{record.col,jdbcType=INTEGER},
+      pm10A1 = #{record.pm10a1,jdbcType=DOUBLE},
+      pm10A2 = #{record.pm10a2,jdbcType=DOUBLE},
+      pm10A3 = #{record.pm10a3,jdbcType=DOUBLE},
+      pm10A4 = #{record.pm10a4,jdbcType=DOUBLE},
+      pm10A5 = #{record.pm10a5,jdbcType=DOUBLE},
+      pm10A6 = #{record.pm10a6,jdbcType=DOUBLE},
+      pm10A7 = #{record.pm10a7,jdbcType=DOUBLE},
+      pm10A8 = #{record.pm10a8,jdbcType=DOUBLE},
+      pm10A9 = #{record.pm10a9,jdbcType=DOUBLE},
+      pm10A10 = #{record.pm10a10,jdbcType=DOUBLE},
+      pm10A11 = #{record.pm10a11,jdbcType=DOUBLE},
+      pm10A12 = #{record.pm10a12,jdbcType=DOUBLE},
+      pm10A13 = #{record.pm10a13,jdbcType=DOUBLE},
+      pm10A14 = #{record.pm10a14,jdbcType=DOUBLE},
+      pm10A15 = #{record.pm10a15,jdbcType=DOUBLE},
+      pm10A16 = #{record.pm10a16,jdbcType=DOUBLE},
+      pm10A17 = #{record.pm10a17,jdbcType=DOUBLE},
+      pm10A18 = #{record.pm10a18,jdbcType=DOUBLE},
+      pm10A19 = #{record.pm10a19,jdbcType=DOUBLE},
+      pm10A20 = #{record.pm10a20,jdbcType=DOUBLE},
+      pm10A21 = #{record.pm10a21,jdbcType=DOUBLE},
+      pm10A22 = #{record.pm10a22,jdbcType=DOUBLE},
+      pm10A23 = #{record.pm10a23,jdbcType=DOUBLE},
+      pm10A24 = #{record.pm10a24,jdbcType=DOUBLE},
+      pm25A1 = #{record.pm25a1,jdbcType=DOUBLE},
+      pm25A2 = #{record.pm25a2,jdbcType=DOUBLE},
+      pm25A3 = #{record.pm25a3,jdbcType=DOUBLE},
+      pm25A4 = #{record.pm25a4,jdbcType=DOUBLE},
+      pm25A5 = #{record.pm25a5,jdbcType=DOUBLE},
+      pm25A6 = #{record.pm25a6,jdbcType=DOUBLE},
+      pm25A7 = #{record.pm25a7,jdbcType=DOUBLE},
+      pm25A8 = #{record.pm25a8,jdbcType=DOUBLE},
+      pm25A9 = #{record.pm25a9,jdbcType=DOUBLE},
+      pm25A10 = #{record.pm25a10,jdbcType=DOUBLE},
+      pm25A11 = #{record.pm25a11,jdbcType=DOUBLE},
+      pm25A12 = #{record.pm25a12,jdbcType=DOUBLE},
+      pm25A13 = #{record.pm25a13,jdbcType=DOUBLE},
+      pm25A14 = #{record.pm25a14,jdbcType=DOUBLE},
+      pm25A15 = #{record.pm25a15,jdbcType=DOUBLE},
+      pm25A16 = #{record.pm25a16,jdbcType=DOUBLE},
+      pm25A17 = #{record.pm25a17,jdbcType=DOUBLE},
+      pm25A18 = #{record.pm25a18,jdbcType=DOUBLE},
+      pm25A19 = #{record.pm25a19,jdbcType=DOUBLE},
+      pm25A20 = #{record.pm25a20,jdbcType=DOUBLE},
+      pm25A21 = #{record.pm25a21,jdbcType=DOUBLE},
+      pm25A22 = #{record.pm25a22,jdbcType=DOUBLE},
+      pm25A23 = #{record.pm25a23,jdbcType=DOUBLE},
+      pm25A24 = #{record.pm25a24,jdbcType=DOUBLE},
+      hcA1 = #{record.hca1,jdbcType=DOUBLE},
+      hcA2 = #{record.hca2,jdbcType=DOUBLE},
+      hcA3 = #{record.hca3,jdbcType=DOUBLE},
+      hcA4 = #{record.hca4,jdbcType=DOUBLE},
+      hcA5 = #{record.hca5,jdbcType=DOUBLE},
+      hcA6 = #{record.hca6,jdbcType=DOUBLE},
+      hcA7 = #{record.hca7,jdbcType=DOUBLE},
+      hcA8 = #{record.hca8,jdbcType=DOUBLE},
+      hcA9 = #{record.hca9,jdbcType=DOUBLE},
+      hcA10 = #{record.hca10,jdbcType=DOUBLE},
+      hcA11 = #{record.hca11,jdbcType=DOUBLE},
+      hcA12 = #{record.hca12,jdbcType=DOUBLE},
+      hcA13 = #{record.hca13,jdbcType=DOUBLE},
+      hcA14 = #{record.hca14,jdbcType=DOUBLE},
+      hcA15 = #{record.hca15,jdbcType=DOUBLE},
+      hcA16 = #{record.hca16,jdbcType=DOUBLE},
+      hcA17 = #{record.hca17,jdbcType=DOUBLE},
+      hcA18 = #{record.hca18,jdbcType=DOUBLE},
+      hcA19 = #{record.hca19,jdbcType=DOUBLE},
+      hcA20 = #{record.hca20,jdbcType=DOUBLE},
+      hcA21 = #{record.hca21,jdbcType=DOUBLE},
+      hcA22 = #{record.hca22,jdbcType=DOUBLE},
+      hcA23 = #{record.hca23,jdbcType=DOUBLE},
+      hcA24 = #{record.hca24,jdbcType=DOUBLE},
+      noA1 = #{record.noa1,jdbcType=DOUBLE},
+      noA2 = #{record.noa2,jdbcType=DOUBLE},
+      noA3 = #{record.noa3,jdbcType=DOUBLE},
+      noA4 = #{record.noa4,jdbcType=DOUBLE},
+      noA5 = #{record.noa5,jdbcType=DOUBLE},
+      noA6 = #{record.noa6,jdbcType=DOUBLE},
+      noA7 = #{record.noa7,jdbcType=DOUBLE},
+      noA8 = #{record.noa8,jdbcType=DOUBLE},
+      noA9 = #{record.noa9,jdbcType=DOUBLE},
+      noA10 = #{record.noa10,jdbcType=DOUBLE},
+      noA11 = #{record.noa11,jdbcType=DOUBLE},
+      noA12 = #{record.noa12,jdbcType=DOUBLE},
+      noA13 = #{record.noa13,jdbcType=DOUBLE},
+      noA14 = #{record.noa14,jdbcType=DOUBLE},
+      noA15 = #{record.noa15,jdbcType=DOUBLE},
+      noA16 = #{record.noa16,jdbcType=DOUBLE},
+      noA17 = #{record.noa17,jdbcType=DOUBLE},
+      noA18 = #{record.noa18,jdbcType=DOUBLE},
+      noA19 = #{record.noa19,jdbcType=DOUBLE},
+      noA20 = #{record.noa20,jdbcType=DOUBLE},
+      noA21 = #{record.noa21,jdbcType=DOUBLE},
+      noA22 = #{record.noa22,jdbcType=DOUBLE},
+      noA23 = #{record.noa23,jdbcType=DOUBLE},
+      noA24 = #{record.noa24,jdbcType=DOUBLE},
+      coA1 = #{record.coa1,jdbcType=DOUBLE},
+      coA2 = #{record.coa2,jdbcType=DOUBLE},
+      coA3 = #{record.coa3,jdbcType=DOUBLE},
+      coA4 = #{record.coa4,jdbcType=DOUBLE},
+      coA5 = #{record.coa5,jdbcType=DOUBLE},
+      coA6 = #{record.coa6,jdbcType=DOUBLE},
+      coA7 = #{record.coa7,jdbcType=DOUBLE},
+      coA8 = #{record.coa8,jdbcType=DOUBLE},
+      coA9 = #{record.coa9,jdbcType=DOUBLE},
+      coA10 = #{record.coa10,jdbcType=DOUBLE},
+      coA11 = #{record.coa11,jdbcType=DOUBLE},
+      coA12 = #{record.coa12,jdbcType=DOUBLE},
+      coA13 = #{record.coa13,jdbcType=DOUBLE},
+      coA14 = #{record.coa14,jdbcType=DOUBLE},
+      coA15 = #{record.coa15,jdbcType=DOUBLE},
+      coA16 = #{record.coa16,jdbcType=DOUBLE},
+      coA17 = #{record.coa17,jdbcType=DOUBLE},
+      coA18 = #{record.coa18,jdbcType=DOUBLE},
+      coA19 = #{record.coa19,jdbcType=DOUBLE},
+      coA20 = #{record.coa20,jdbcType=DOUBLE},
+      coA21 = #{record.coa21,jdbcType=DOUBLE},
+      coA22 = #{record.coa22,jdbcType=DOUBLE},
+      coA23 = #{record.coa23,jdbcType=DOUBLE},
+      coA24 = #{record.coa24,jdbcType=DOUBLE},
+      so2A1 = #{record.so2a1,jdbcType=DOUBLE},
+      so2A2 = #{record.so2a2,jdbcType=DOUBLE},
+      so2A3 = #{record.so2a3,jdbcType=DOUBLE},
+      so2A4 = #{record.so2a4,jdbcType=DOUBLE},
+      so2A5 = #{record.so2a5,jdbcType=DOUBLE},
+      so2A6 = #{record.so2a6,jdbcType=DOUBLE},
+      so2A7 = #{record.so2a7,jdbcType=DOUBLE},
+      so2A8 = #{record.so2a8,jdbcType=DOUBLE},
+      so2A9 = #{record.so2a9,jdbcType=DOUBLE},
+      so2A10 = #{record.so2a10,jdbcType=DOUBLE},
+      so2A11 = #{record.so2a11,jdbcType=DOUBLE},
+      so2A12 = #{record.so2a12,jdbcType=DOUBLE},
+      so2A13 = #{record.so2a13,jdbcType=DOUBLE},
+      so2A14 = #{record.so2a14,jdbcType=DOUBLE},
+      so2A15 = #{record.so2a15,jdbcType=DOUBLE},
+      so2A16 = #{record.so2a16,jdbcType=DOUBLE},
+      so2A17 = #{record.so2a17,jdbcType=DOUBLE},
+      so2A18 = #{record.so2a18,jdbcType=DOUBLE},
+      so2A19 = #{record.so2a19,jdbcType=DOUBLE},
+      so2A20 = #{record.so2a20,jdbcType=DOUBLE},
+      so2A21 = #{record.so2a21,jdbcType=DOUBLE},
+      so2A22 = #{record.so2a22,jdbcType=DOUBLE},
+      so2A23 = #{record.so2a23,jdbcType=DOUBLE},
+      so2A24 = #{record.so2a24,jdbcType=DOUBLE},
+      bcA1 = #{record.bca1,jdbcType=DOUBLE},
+      bcA2 = #{record.bca2,jdbcType=DOUBLE},
+      bcA3 = #{record.bca3,jdbcType=DOUBLE},
+      bcA4 = #{record.bca4,jdbcType=DOUBLE},
+      bcA5 = #{record.bca5,jdbcType=DOUBLE},
+      bcA6 = #{record.bca6,jdbcType=DOUBLE},
+      bcA7 = #{record.bca7,jdbcType=DOUBLE},
+      bcA8 = #{record.bca8,jdbcType=DOUBLE},
+      bcA9 = #{record.bca9,jdbcType=DOUBLE},
+      bcA10 = #{record.bca10,jdbcType=DOUBLE},
+      bcA11 = #{record.bca11,jdbcType=DOUBLE},
+      bcA12 = #{record.bca12,jdbcType=DOUBLE},
+      bcA13 = #{record.bca13,jdbcType=DOUBLE},
+      bcA14 = #{record.bca14,jdbcType=DOUBLE},
+      bcA15 = #{record.bca15,jdbcType=DOUBLE},
+      bcA16 = #{record.bca16,jdbcType=DOUBLE},
+      bcA17 = #{record.bca17,jdbcType=DOUBLE},
+      bcA18 = #{record.bca18,jdbcType=DOUBLE},
+      bcA19 = #{record.bca19,jdbcType=DOUBLE},
+      bcA20 = #{record.bca20,jdbcType=DOUBLE},
+      bcA21 = #{record.bca21,jdbcType=DOUBLE},
+      bcA22 = #{record.bca22,jdbcType=DOUBLE},
+      bcA23 = #{record.bca23,jdbcType=DOUBLE},
+      bcA24 = #{record.bca24,jdbcType=DOUBLE},
+      ocA1 = #{record.oca1,jdbcType=DOUBLE},
+      ocA2 = #{record.oca2,jdbcType=DOUBLE},
+      ocA3 = #{record.oca3,jdbcType=DOUBLE},
+      ocA4 = #{record.oca4,jdbcType=DOUBLE},
+      ocA5 = #{record.oca5,jdbcType=DOUBLE},
+      ocA6 = #{record.oca6,jdbcType=DOUBLE},
+      ocA7 = #{record.oca7,jdbcType=DOUBLE},
+      ocA8 = #{record.oca8,jdbcType=DOUBLE},
+      ocA9 = #{record.oca9,jdbcType=DOUBLE},
+      ocA10 = #{record.oca10,jdbcType=DOUBLE},
+      ocA11 = #{record.oca11,jdbcType=DOUBLE},
+      ocA12 = #{record.oca12,jdbcType=DOUBLE},
+      ocA13 = #{record.oca13,jdbcType=DOUBLE},
+      ocA14 = #{record.oca14,jdbcType=DOUBLE},
+      ocA15 = #{record.oca15,jdbcType=DOUBLE},
+      ocA16 = #{record.oca16,jdbcType=DOUBLE},
+      ocA17 = #{record.oca17,jdbcType=DOUBLE},
+      ocA18 = #{record.oca18,jdbcType=DOUBLE},
+      ocA19 = #{record.oca19,jdbcType=DOUBLE},
+      ocA20 = #{record.oca20,jdbcType=DOUBLE},
+      ocA21 = #{record.oca21,jdbcType=DOUBLE},
+      ocA22 = #{record.oca22,jdbcType=DOUBLE},
+      ocA23 = #{record.oca23,jdbcType=DOUBLE},
+      ocA24 = #{record.oca24,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.GridDetailed">
+    update grid_detailed
+    <set>
+      <if test="year != null">
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="row != null">
+        row = #{row,jdbcType=INTEGER},
+      </if>
+      <if test="col != null">
+        col = #{col,jdbcType=INTEGER},
+      </if>
+      <if test="pm10a1 != null">
+        pm10A1 = #{pm10a1,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a2 != null">
+        pm10A2 = #{pm10a2,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a3 != null">
+        pm10A3 = #{pm10a3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a4 != null">
+        pm10A4 = #{pm10a4,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a5 != null">
+        pm10A5 = #{pm10a5,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a6 != null">
+        pm10A6 = #{pm10a6,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a7 != null">
+        pm10A7 = #{pm10a7,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a8 != null">
+        pm10A8 = #{pm10a8,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a9 != null">
+        pm10A9 = #{pm10a9,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a10 != null">
+        pm10A10 = #{pm10a10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a11 != null">
+        pm10A11 = #{pm10a11,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a12 != null">
+        pm10A12 = #{pm10a12,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a13 != null">
+        pm10A13 = #{pm10a13,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a14 != null">
+        pm10A14 = #{pm10a14,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a15 != null">
+        pm10A15 = #{pm10a15,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a16 != null">
+        pm10A16 = #{pm10a16,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a17 != null">
+        pm10A17 = #{pm10a17,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a18 != null">
+        pm10A18 = #{pm10a18,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a19 != null">
+        pm10A19 = #{pm10a19,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a20 != null">
+        pm10A20 = #{pm10a20,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a21 != null">
+        pm10A21 = #{pm10a21,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a22 != null">
+        pm10A22 = #{pm10a22,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a23 != null">
+        pm10A23 = #{pm10a23,jdbcType=DOUBLE},
+      </if>
+      <if test="pm10a24 != null">
+        pm10A24 = #{pm10a24,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a1 != null">
+        pm25A1 = #{pm25a1,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a2 != null">
+        pm25A2 = #{pm25a2,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a3 != null">
+        pm25A3 = #{pm25a3,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a4 != null">
+        pm25A4 = #{pm25a4,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a5 != null">
+        pm25A5 = #{pm25a5,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a6 != null">
+        pm25A6 = #{pm25a6,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a7 != null">
+        pm25A7 = #{pm25a7,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a8 != null">
+        pm25A8 = #{pm25a8,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a9 != null">
+        pm25A9 = #{pm25a9,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a10 != null">
+        pm25A10 = #{pm25a10,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a11 != null">
+        pm25A11 = #{pm25a11,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a12 != null">
+        pm25A12 = #{pm25a12,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a13 != null">
+        pm25A13 = #{pm25a13,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a14 != null">
+        pm25A14 = #{pm25a14,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a15 != null">
+        pm25A15 = #{pm25a15,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a16 != null">
+        pm25A16 = #{pm25a16,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a17 != null">
+        pm25A17 = #{pm25a17,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a18 != null">
+        pm25A18 = #{pm25a18,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a19 != null">
+        pm25A19 = #{pm25a19,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a20 != null">
+        pm25A20 = #{pm25a20,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a21 != null">
+        pm25A21 = #{pm25a21,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a22 != null">
+        pm25A22 = #{pm25a22,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a23 != null">
+        pm25A23 = #{pm25a23,jdbcType=DOUBLE},
+      </if>
+      <if test="pm25a24 != null">
+        pm25A24 = #{pm25a24,jdbcType=DOUBLE},
+      </if>
+      <if test="hca1 != null">
+        hcA1 = #{hca1,jdbcType=DOUBLE},
+      </if>
+      <if test="hca2 != null">
+        hcA2 = #{hca2,jdbcType=DOUBLE},
+      </if>
+      <if test="hca3 != null">
+        hcA3 = #{hca3,jdbcType=DOUBLE},
+      </if>
+      <if test="hca4 != null">
+        hcA4 = #{hca4,jdbcType=DOUBLE},
+      </if>
+      <if test="hca5 != null">
+        hcA5 = #{hca5,jdbcType=DOUBLE},
+      </if>
+      <if test="hca6 != null">
+        hcA6 = #{hca6,jdbcType=DOUBLE},
+      </if>
+      <if test="hca7 != null">
+        hcA7 = #{hca7,jdbcType=DOUBLE},
+      </if>
+      <if test="hca8 != null">
+        hcA8 = #{hca8,jdbcType=DOUBLE},
+      </if>
+      <if test="hca9 != null">
+        hcA9 = #{hca9,jdbcType=DOUBLE},
+      </if>
+      <if test="hca10 != null">
+        hcA10 = #{hca10,jdbcType=DOUBLE},
+      </if>
+      <if test="hca11 != null">
+        hcA11 = #{hca11,jdbcType=DOUBLE},
+      </if>
+      <if test="hca12 != null">
+        hcA12 = #{hca12,jdbcType=DOUBLE},
+      </if>
+      <if test="hca13 != null">
+        hcA13 = #{hca13,jdbcType=DOUBLE},
+      </if>
+      <if test="hca14 != null">
+        hcA14 = #{hca14,jdbcType=DOUBLE},
+      </if>
+      <if test="hca15 != null">
+        hcA15 = #{hca15,jdbcType=DOUBLE},
+      </if>
+      <if test="hca16 != null">
+        hcA16 = #{hca16,jdbcType=DOUBLE},
+      </if>
+      <if test="hca17 != null">
+        hcA17 = #{hca17,jdbcType=DOUBLE},
+      </if>
+      <if test="hca18 != null">
+        hcA18 = #{hca18,jdbcType=DOUBLE},
+      </if>
+      <if test="hca19 != null">
+        hcA19 = #{hca19,jdbcType=DOUBLE},
+      </if>
+      <if test="hca20 != null">
+        hcA20 = #{hca20,jdbcType=DOUBLE},
+      </if>
+      <if test="hca21 != null">
+        hcA21 = #{hca21,jdbcType=DOUBLE},
+      </if>
+      <if test="hca22 != null">
+        hcA22 = #{hca22,jdbcType=DOUBLE},
+      </if>
+      <if test="hca23 != null">
+        hcA23 = #{hca23,jdbcType=DOUBLE},
+      </if>
+      <if test="hca24 != null">
+        hcA24 = #{hca24,jdbcType=DOUBLE},
+      </if>
+      <if test="noa1 != null">
+        noA1 = #{noa1,jdbcType=DOUBLE},
+      </if>
+      <if test="noa2 != null">
+        noA2 = #{noa2,jdbcType=DOUBLE},
+      </if>
+      <if test="noa3 != null">
+        noA3 = #{noa3,jdbcType=DOUBLE},
+      </if>
+      <if test="noa4 != null">
+        noA4 = #{noa4,jdbcType=DOUBLE},
+      </if>
+      <if test="noa5 != null">
+        noA5 = #{noa5,jdbcType=DOUBLE},
+      </if>
+      <if test="noa6 != null">
+        noA6 = #{noa6,jdbcType=DOUBLE},
+      </if>
+      <if test="noa7 != null">
+        noA7 = #{noa7,jdbcType=DOUBLE},
+      </if>
+      <if test="noa8 != null">
+        noA8 = #{noa8,jdbcType=DOUBLE},
+      </if>
+      <if test="noa9 != null">
+        noA9 = #{noa9,jdbcType=DOUBLE},
+      </if>
+      <if test="noa10 != null">
+        noA10 = #{noa10,jdbcType=DOUBLE},
+      </if>
+      <if test="noa11 != null">
+        noA11 = #{noa11,jdbcType=DOUBLE},
+      </if>
+      <if test="noa12 != null">
+        noA12 = #{noa12,jdbcType=DOUBLE},
+      </if>
+      <if test="noa13 != null">
+        noA13 = #{noa13,jdbcType=DOUBLE},
+      </if>
+      <if test="noa14 != null">
+        noA14 = #{noa14,jdbcType=DOUBLE},
+      </if>
+      <if test="noa15 != null">
+        noA15 = #{noa15,jdbcType=DOUBLE},
+      </if>
+      <if test="noa16 != null">
+        noA16 = #{noa16,jdbcType=DOUBLE},
+      </if>
+      <if test="noa17 != null">
+        noA17 = #{noa17,jdbcType=DOUBLE},
+      </if>
+      <if test="noa18 != null">
+        noA18 = #{noa18,jdbcType=DOUBLE},
+      </if>
+      <if test="noa19 != null">
+        noA19 = #{noa19,jdbcType=DOUBLE},
+      </if>
+      <if test="noa20 != null">
+        noA20 = #{noa20,jdbcType=DOUBLE},
+      </if>
+      <if test="noa21 != null">
+        noA21 = #{noa21,jdbcType=DOUBLE},
+      </if>
+      <if test="noa22 != null">
+        noA22 = #{noa22,jdbcType=DOUBLE},
+      </if>
+      <if test="noa23 != null">
+        noA23 = #{noa23,jdbcType=DOUBLE},
+      </if>
+      <if test="noa24 != null">
+        noA24 = #{noa24,jdbcType=DOUBLE},
+      </if>
+      <if test="coa1 != null">
+        coA1 = #{coa1,jdbcType=DOUBLE},
+      </if>
+      <if test="coa2 != null">
+        coA2 = #{coa2,jdbcType=DOUBLE},
+      </if>
+      <if test="coa3 != null">
+        coA3 = #{coa3,jdbcType=DOUBLE},
+      </if>
+      <if test="coa4 != null">
+        coA4 = #{coa4,jdbcType=DOUBLE},
+      </if>
+      <if test="coa5 != null">
+        coA5 = #{coa5,jdbcType=DOUBLE},
+      </if>
+      <if test="coa6 != null">
+        coA6 = #{coa6,jdbcType=DOUBLE},
+      </if>
+      <if test="coa7 != null">
+        coA7 = #{coa7,jdbcType=DOUBLE},
+      </if>
+      <if test="coa8 != null">
+        coA8 = #{coa8,jdbcType=DOUBLE},
+      </if>
+      <if test="coa9 != null">
+        coA9 = #{coa9,jdbcType=DOUBLE},
+      </if>
+      <if test="coa10 != null">
+        coA10 = #{coa10,jdbcType=DOUBLE},
+      </if>
+      <if test="coa11 != null">
+        coA11 = #{coa11,jdbcType=DOUBLE},
+      </if>
+      <if test="coa12 != null">
+        coA12 = #{coa12,jdbcType=DOUBLE},
+      </if>
+      <if test="coa13 != null">
+        coA13 = #{coa13,jdbcType=DOUBLE},
+      </if>
+      <if test="coa14 != null">
+        coA14 = #{coa14,jdbcType=DOUBLE},
+      </if>
+      <if test="coa15 != null">
+        coA15 = #{coa15,jdbcType=DOUBLE},
+      </if>
+      <if test="coa16 != null">
+        coA16 = #{coa16,jdbcType=DOUBLE},
+      </if>
+      <if test="coa17 != null">
+        coA17 = #{coa17,jdbcType=DOUBLE},
+      </if>
+      <if test="coa18 != null">
+        coA18 = #{coa18,jdbcType=DOUBLE},
+      </if>
+      <if test="coa19 != null">
+        coA19 = #{coa19,jdbcType=DOUBLE},
+      </if>
+      <if test="coa20 != null">
+        coA20 = #{coa20,jdbcType=DOUBLE},
+      </if>
+      <if test="coa21 != null">
+        coA21 = #{coa21,jdbcType=DOUBLE},
+      </if>
+      <if test="coa22 != null">
+        coA22 = #{coa22,jdbcType=DOUBLE},
+      </if>
+      <if test="coa23 != null">
+        coA23 = #{coa23,jdbcType=DOUBLE},
+      </if>
+      <if test="coa24 != null">
+        coA24 = #{coa24,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a1 != null">
+        so2A1 = #{so2a1,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a2 != null">
+        so2A2 = #{so2a2,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a3 != null">
+        so2A3 = #{so2a3,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a4 != null">
+        so2A4 = #{so2a4,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a5 != null">
+        so2A5 = #{so2a5,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a6 != null">
+        so2A6 = #{so2a6,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a7 != null">
+        so2A7 = #{so2a7,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a8 != null">
+        so2A8 = #{so2a8,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a9 != null">
+        so2A9 = #{so2a9,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a10 != null">
+        so2A10 = #{so2a10,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a11 != null">
+        so2A11 = #{so2a11,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a12 != null">
+        so2A12 = #{so2a12,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a13 != null">
+        so2A13 = #{so2a13,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a14 != null">
+        so2A14 = #{so2a14,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a15 != null">
+        so2A15 = #{so2a15,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a16 != null">
+        so2A16 = #{so2a16,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a17 != null">
+        so2A17 = #{so2a17,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a18 != null">
+        so2A18 = #{so2a18,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a19 != null">
+        so2A19 = #{so2a19,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a20 != null">
+        so2A20 = #{so2a20,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a21 != null">
+        so2A21 = #{so2a21,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a22 != null">
+        so2A22 = #{so2a22,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a23 != null">
+        so2A23 = #{so2a23,jdbcType=DOUBLE},
+      </if>
+      <if test="so2a24 != null">
+        so2A24 = #{so2a24,jdbcType=DOUBLE},
+      </if>
+      <if test="bca1 != null">
+        bcA1 = #{bca1,jdbcType=DOUBLE},
+      </if>
+      <if test="bca2 != null">
+        bcA2 = #{bca2,jdbcType=DOUBLE},
+      </if>
+      <if test="bca3 != null">
+        bcA3 = #{bca3,jdbcType=DOUBLE},
+      </if>
+      <if test="bca4 != null">
+        bcA4 = #{bca4,jdbcType=DOUBLE},
+      </if>
+      <if test="bca5 != null">
+        bcA5 = #{bca5,jdbcType=DOUBLE},
+      </if>
+      <if test="bca6 != null">
+        bcA6 = #{bca6,jdbcType=DOUBLE},
+      </if>
+      <if test="bca7 != null">
+        bcA7 = #{bca7,jdbcType=DOUBLE},
+      </if>
+      <if test="bca8 != null">
+        bcA8 = #{bca8,jdbcType=DOUBLE},
+      </if>
+      <if test="bca9 != null">
+        bcA9 = #{bca9,jdbcType=DOUBLE},
+      </if>
+      <if test="bca10 != null">
+        bcA10 = #{bca10,jdbcType=DOUBLE},
+      </if>
+      <if test="bca11 != null">
+        bcA11 = #{bca11,jdbcType=DOUBLE},
+      </if>
+      <if test="bca12 != null">
+        bcA12 = #{bca12,jdbcType=DOUBLE},
+      </if>
+      <if test="bca13 != null">
+        bcA13 = #{bca13,jdbcType=DOUBLE},
+      </if>
+      <if test="bca14 != null">
+        bcA14 = #{bca14,jdbcType=DOUBLE},
+      </if>
+      <if test="bca15 != null">
+        bcA15 = #{bca15,jdbcType=DOUBLE},
+      </if>
+      <if test="bca16 != null">
+        bcA16 = #{bca16,jdbcType=DOUBLE},
+      </if>
+      <if test="bca17 != null">
+        bcA17 = #{bca17,jdbcType=DOUBLE},
+      </if>
+      <if test="bca18 != null">
+        bcA18 = #{bca18,jdbcType=DOUBLE},
+      </if>
+      <if test="bca19 != null">
+        bcA19 = #{bca19,jdbcType=DOUBLE},
+      </if>
+      <if test="bca20 != null">
+        bcA20 = #{bca20,jdbcType=DOUBLE},
+      </if>
+      <if test="bca21 != null">
+        bcA21 = #{bca21,jdbcType=DOUBLE},
+      </if>
+      <if test="bca22 != null">
+        bcA22 = #{bca22,jdbcType=DOUBLE},
+      </if>
+      <if test="bca23 != null">
+        bcA23 = #{bca23,jdbcType=DOUBLE},
+      </if>
+      <if test="bca24 != null">
+        bcA24 = #{bca24,jdbcType=DOUBLE},
+      </if>
+      <if test="oca1 != null">
+        ocA1 = #{oca1,jdbcType=DOUBLE},
+      </if>
+      <if test="oca2 != null">
+        ocA2 = #{oca2,jdbcType=DOUBLE},
+      </if>
+      <if test="oca3 != null">
+        ocA3 = #{oca3,jdbcType=DOUBLE},
+      </if>
+      <if test="oca4 != null">
+        ocA4 = #{oca4,jdbcType=DOUBLE},
+      </if>
+      <if test="oca5 != null">
+        ocA5 = #{oca5,jdbcType=DOUBLE},
+      </if>
+      <if test="oca6 != null">
+        ocA6 = #{oca6,jdbcType=DOUBLE},
+      </if>
+      <if test="oca7 != null">
+        ocA7 = #{oca7,jdbcType=DOUBLE},
+      </if>
+      <if test="oca8 != null">
+        ocA8 = #{oca8,jdbcType=DOUBLE},
+      </if>
+      <if test="oca9 != null">
+        ocA9 = #{oca9,jdbcType=DOUBLE},
+      </if>
+      <if test="oca10 != null">
+        ocA10 = #{oca10,jdbcType=DOUBLE},
+      </if>
+      <if test="oca11 != null">
+        ocA11 = #{oca11,jdbcType=DOUBLE},
+      </if>
+      <if test="oca12 != null">
+        ocA12 = #{oca12,jdbcType=DOUBLE},
+      </if>
+      <if test="oca13 != null">
+        ocA13 = #{oca13,jdbcType=DOUBLE},
+      </if>
+      <if test="oca14 != null">
+        ocA14 = #{oca14,jdbcType=DOUBLE},
+      </if>
+      <if test="oca15 != null">
+        ocA15 = #{oca15,jdbcType=DOUBLE},
+      </if>
+      <if test="oca16 != null">
+        ocA16 = #{oca16,jdbcType=DOUBLE},
+      </if>
+      <if test="oca17 != null">
+        ocA17 = #{oca17,jdbcType=DOUBLE},
+      </if>
+      <if test="oca18 != null">
+        ocA18 = #{oca18,jdbcType=DOUBLE},
+      </if>
+      <if test="oca19 != null">
+        ocA19 = #{oca19,jdbcType=DOUBLE},
+      </if>
+      <if test="oca20 != null">
+        ocA20 = #{oca20,jdbcType=DOUBLE},
+      </if>
+      <if test="oca21 != null">
+        ocA21 = #{oca21,jdbcType=DOUBLE},
+      </if>
+      <if test="oca22 != null">
+        ocA22 = #{oca22,jdbcType=DOUBLE},
+      </if>
+      <if test="oca23 != null">
+        ocA23 = #{oca23,jdbcType=DOUBLE},
+      </if>
+      <if test="oca24 != null">
+        ocA24 = #{oca24,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where gridid = #{gridid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.GridDetailed">
+    update grid_detailed
+    set year = #{year,jdbcType=INTEGER},
+      row = #{row,jdbcType=INTEGER},
+      col = #{col,jdbcType=INTEGER},
+      pm10A1 = #{pm10a1,jdbcType=DOUBLE},
+      pm10A2 = #{pm10a2,jdbcType=DOUBLE},
+      pm10A3 = #{pm10a3,jdbcType=DOUBLE},
+      pm10A4 = #{pm10a4,jdbcType=DOUBLE},
+      pm10A5 = #{pm10a5,jdbcType=DOUBLE},
+      pm10A6 = #{pm10a6,jdbcType=DOUBLE},
+      pm10A7 = #{pm10a7,jdbcType=DOUBLE},
+      pm10A8 = #{pm10a8,jdbcType=DOUBLE},
+      pm10A9 = #{pm10a9,jdbcType=DOUBLE},
+      pm10A10 = #{pm10a10,jdbcType=DOUBLE},
+      pm10A11 = #{pm10a11,jdbcType=DOUBLE},
+      pm10A12 = #{pm10a12,jdbcType=DOUBLE},
+      pm10A13 = #{pm10a13,jdbcType=DOUBLE},
+      pm10A14 = #{pm10a14,jdbcType=DOUBLE},
+      pm10A15 = #{pm10a15,jdbcType=DOUBLE},
+      pm10A16 = #{pm10a16,jdbcType=DOUBLE},
+      pm10A17 = #{pm10a17,jdbcType=DOUBLE},
+      pm10A18 = #{pm10a18,jdbcType=DOUBLE},
+      pm10A19 = #{pm10a19,jdbcType=DOUBLE},
+      pm10A20 = #{pm10a20,jdbcType=DOUBLE},
+      pm10A21 = #{pm10a21,jdbcType=DOUBLE},
+      pm10A22 = #{pm10a22,jdbcType=DOUBLE},
+      pm10A23 = #{pm10a23,jdbcType=DOUBLE},
+      pm10A24 = #{pm10a24,jdbcType=DOUBLE},
+      pm25A1 = #{pm25a1,jdbcType=DOUBLE},
+      pm25A2 = #{pm25a2,jdbcType=DOUBLE},
+      pm25A3 = #{pm25a3,jdbcType=DOUBLE},
+      pm25A4 = #{pm25a4,jdbcType=DOUBLE},
+      pm25A5 = #{pm25a5,jdbcType=DOUBLE},
+      pm25A6 = #{pm25a6,jdbcType=DOUBLE},
+      pm25A7 = #{pm25a7,jdbcType=DOUBLE},
+      pm25A8 = #{pm25a8,jdbcType=DOUBLE},
+      pm25A9 = #{pm25a9,jdbcType=DOUBLE},
+      pm25A10 = #{pm25a10,jdbcType=DOUBLE},
+      pm25A11 = #{pm25a11,jdbcType=DOUBLE},
+      pm25A12 = #{pm25a12,jdbcType=DOUBLE},
+      pm25A13 = #{pm25a13,jdbcType=DOUBLE},
+      pm25A14 = #{pm25a14,jdbcType=DOUBLE},
+      pm25A15 = #{pm25a15,jdbcType=DOUBLE},
+      pm25A16 = #{pm25a16,jdbcType=DOUBLE},
+      pm25A17 = #{pm25a17,jdbcType=DOUBLE},
+      pm25A18 = #{pm25a18,jdbcType=DOUBLE},
+      pm25A19 = #{pm25a19,jdbcType=DOUBLE},
+      pm25A20 = #{pm25a20,jdbcType=DOUBLE},
+      pm25A21 = #{pm25a21,jdbcType=DOUBLE},
+      pm25A22 = #{pm25a22,jdbcType=DOUBLE},
+      pm25A23 = #{pm25a23,jdbcType=DOUBLE},
+      pm25A24 = #{pm25a24,jdbcType=DOUBLE},
+      hcA1 = #{hca1,jdbcType=DOUBLE},
+      hcA2 = #{hca2,jdbcType=DOUBLE},
+      hcA3 = #{hca3,jdbcType=DOUBLE},
+      hcA4 = #{hca4,jdbcType=DOUBLE},
+      hcA5 = #{hca5,jdbcType=DOUBLE},
+      hcA6 = #{hca6,jdbcType=DOUBLE},
+      hcA7 = #{hca7,jdbcType=DOUBLE},
+      hcA8 = #{hca8,jdbcType=DOUBLE},
+      hcA9 = #{hca9,jdbcType=DOUBLE},
+      hcA10 = #{hca10,jdbcType=DOUBLE},
+      hcA11 = #{hca11,jdbcType=DOUBLE},
+      hcA12 = #{hca12,jdbcType=DOUBLE},
+      hcA13 = #{hca13,jdbcType=DOUBLE},
+      hcA14 = #{hca14,jdbcType=DOUBLE},
+      hcA15 = #{hca15,jdbcType=DOUBLE},
+      hcA16 = #{hca16,jdbcType=DOUBLE},
+      hcA17 = #{hca17,jdbcType=DOUBLE},
+      hcA18 = #{hca18,jdbcType=DOUBLE},
+      hcA19 = #{hca19,jdbcType=DOUBLE},
+      hcA20 = #{hca20,jdbcType=DOUBLE},
+      hcA21 = #{hca21,jdbcType=DOUBLE},
+      hcA22 = #{hca22,jdbcType=DOUBLE},
+      hcA23 = #{hca23,jdbcType=DOUBLE},
+      hcA24 = #{hca24,jdbcType=DOUBLE},
+      noA1 = #{noa1,jdbcType=DOUBLE},
+      noA2 = #{noa2,jdbcType=DOUBLE},
+      noA3 = #{noa3,jdbcType=DOUBLE},
+      noA4 = #{noa4,jdbcType=DOUBLE},
+      noA5 = #{noa5,jdbcType=DOUBLE},
+      noA6 = #{noa6,jdbcType=DOUBLE},
+      noA7 = #{noa7,jdbcType=DOUBLE},
+      noA8 = #{noa8,jdbcType=DOUBLE},
+      noA9 = #{noa9,jdbcType=DOUBLE},
+      noA10 = #{noa10,jdbcType=DOUBLE},
+      noA11 = #{noa11,jdbcType=DOUBLE},
+      noA12 = #{noa12,jdbcType=DOUBLE},
+      noA13 = #{noa13,jdbcType=DOUBLE},
+      noA14 = #{noa14,jdbcType=DOUBLE},
+      noA15 = #{noa15,jdbcType=DOUBLE},
+      noA16 = #{noa16,jdbcType=DOUBLE},
+      noA17 = #{noa17,jdbcType=DOUBLE},
+      noA18 = #{noa18,jdbcType=DOUBLE},
+      noA19 = #{noa19,jdbcType=DOUBLE},
+      noA20 = #{noa20,jdbcType=DOUBLE},
+      noA21 = #{noa21,jdbcType=DOUBLE},
+      noA22 = #{noa22,jdbcType=DOUBLE},
+      noA23 = #{noa23,jdbcType=DOUBLE},
+      noA24 = #{noa24,jdbcType=DOUBLE},
+      coA1 = #{coa1,jdbcType=DOUBLE},
+      coA2 = #{coa2,jdbcType=DOUBLE},
+      coA3 = #{coa3,jdbcType=DOUBLE},
+      coA4 = #{coa4,jdbcType=DOUBLE},
+      coA5 = #{coa5,jdbcType=DOUBLE},
+      coA6 = #{coa6,jdbcType=DOUBLE},
+      coA7 = #{coa7,jdbcType=DOUBLE},
+      coA8 = #{coa8,jdbcType=DOUBLE},
+      coA9 = #{coa9,jdbcType=DOUBLE},
+      coA10 = #{coa10,jdbcType=DOUBLE},
+      coA11 = #{coa11,jdbcType=DOUBLE},
+      coA12 = #{coa12,jdbcType=DOUBLE},
+      coA13 = #{coa13,jdbcType=DOUBLE},
+      coA14 = #{coa14,jdbcType=DOUBLE},
+      coA15 = #{coa15,jdbcType=DOUBLE},
+      coA16 = #{coa16,jdbcType=DOUBLE},
+      coA17 = #{coa17,jdbcType=DOUBLE},
+      coA18 = #{coa18,jdbcType=DOUBLE},
+      coA19 = #{coa19,jdbcType=DOUBLE},
+      coA20 = #{coa20,jdbcType=DOUBLE},
+      coA21 = #{coa21,jdbcType=DOUBLE},
+      coA22 = #{coa22,jdbcType=DOUBLE},
+      coA23 = #{coa23,jdbcType=DOUBLE},
+      coA24 = #{coa24,jdbcType=DOUBLE},
+      so2A1 = #{so2a1,jdbcType=DOUBLE},
+      so2A2 = #{so2a2,jdbcType=DOUBLE},
+      so2A3 = #{so2a3,jdbcType=DOUBLE},
+      so2A4 = #{so2a4,jdbcType=DOUBLE},
+      so2A5 = #{so2a5,jdbcType=DOUBLE},
+      so2A6 = #{so2a6,jdbcType=DOUBLE},
+      so2A7 = #{so2a7,jdbcType=DOUBLE},
+      so2A8 = #{so2a8,jdbcType=DOUBLE},
+      so2A9 = #{so2a9,jdbcType=DOUBLE},
+      so2A10 = #{so2a10,jdbcType=DOUBLE},
+      so2A11 = #{so2a11,jdbcType=DOUBLE},
+      so2A12 = #{so2a12,jdbcType=DOUBLE},
+      so2A13 = #{so2a13,jdbcType=DOUBLE},
+      so2A14 = #{so2a14,jdbcType=DOUBLE},
+      so2A15 = #{so2a15,jdbcType=DOUBLE},
+      so2A16 = #{so2a16,jdbcType=DOUBLE},
+      so2A17 = #{so2a17,jdbcType=DOUBLE},
+      so2A18 = #{so2a18,jdbcType=DOUBLE},
+      so2A19 = #{so2a19,jdbcType=DOUBLE},
+      so2A20 = #{so2a20,jdbcType=DOUBLE},
+      so2A21 = #{so2a21,jdbcType=DOUBLE},
+      so2A22 = #{so2a22,jdbcType=DOUBLE},
+      so2A23 = #{so2a23,jdbcType=DOUBLE},
+      so2A24 = #{so2a24,jdbcType=DOUBLE},
+      bcA1 = #{bca1,jdbcType=DOUBLE},
+      bcA2 = #{bca2,jdbcType=DOUBLE},
+      bcA3 = #{bca3,jdbcType=DOUBLE},
+      bcA4 = #{bca4,jdbcType=DOUBLE},
+      bcA5 = #{bca5,jdbcType=DOUBLE},
+      bcA6 = #{bca6,jdbcType=DOUBLE},
+      bcA7 = #{bca7,jdbcType=DOUBLE},
+      bcA8 = #{bca8,jdbcType=DOUBLE},
+      bcA9 = #{bca9,jdbcType=DOUBLE},
+      bcA10 = #{bca10,jdbcType=DOUBLE},
+      bcA11 = #{bca11,jdbcType=DOUBLE},
+      bcA12 = #{bca12,jdbcType=DOUBLE},
+      bcA13 = #{bca13,jdbcType=DOUBLE},
+      bcA14 = #{bca14,jdbcType=DOUBLE},
+      bcA15 = #{bca15,jdbcType=DOUBLE},
+      bcA16 = #{bca16,jdbcType=DOUBLE},
+      bcA17 = #{bca17,jdbcType=DOUBLE},
+      bcA18 = #{bca18,jdbcType=DOUBLE},
+      bcA19 = #{bca19,jdbcType=DOUBLE},
+      bcA20 = #{bca20,jdbcType=DOUBLE},
+      bcA21 = #{bca21,jdbcType=DOUBLE},
+      bcA22 = #{bca22,jdbcType=DOUBLE},
+      bcA23 = #{bca23,jdbcType=DOUBLE},
+      bcA24 = #{bca24,jdbcType=DOUBLE},
+      ocA1 = #{oca1,jdbcType=DOUBLE},
+      ocA2 = #{oca2,jdbcType=DOUBLE},
+      ocA3 = #{oca3,jdbcType=DOUBLE},
+      ocA4 = #{oca4,jdbcType=DOUBLE},
+      ocA5 = #{oca5,jdbcType=DOUBLE},
+      ocA6 = #{oca6,jdbcType=DOUBLE},
+      ocA7 = #{oca7,jdbcType=DOUBLE},
+      ocA8 = #{oca8,jdbcType=DOUBLE},
+      ocA9 = #{oca9,jdbcType=DOUBLE},
+      ocA10 = #{oca10,jdbcType=DOUBLE},
+      ocA11 = #{oca11,jdbcType=DOUBLE},
+      ocA12 = #{oca12,jdbcType=DOUBLE},
+      ocA13 = #{oca13,jdbcType=DOUBLE},
+      ocA14 = #{oca14,jdbcType=DOUBLE},
+      ocA15 = #{oca15,jdbcType=DOUBLE},
+      ocA16 = #{oca16,jdbcType=DOUBLE},
+      ocA17 = #{oca17,jdbcType=DOUBLE},
+      ocA18 = #{oca18,jdbcType=DOUBLE},
+      ocA19 = #{oca19,jdbcType=DOUBLE},
+      ocA20 = #{oca20,jdbcType=DOUBLE},
+      ocA21 = #{oca21,jdbcType=DOUBLE},
+      ocA22 = #{oca22,jdbcType=DOUBLE},
+      ocA23 = #{oca23,jdbcType=DOUBLE},
+      ocA24 = #{oca24,jdbcType=DOUBLE}
+    where gridid = #{gridid,jdbcType=INTEGER}
+  </update>
+</mapper>
