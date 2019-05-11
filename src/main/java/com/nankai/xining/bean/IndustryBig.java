@@ -1,5 +1,7 @@
 package com.nankai.xining.bean;
 
+import org.springframework.stereotype.Repository;
+
 import java.io.Serializable;
 
 public class IndustryBig implements Serializable {

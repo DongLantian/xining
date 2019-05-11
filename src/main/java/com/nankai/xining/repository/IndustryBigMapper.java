@@ -4,7 +4,9 @@ import com.nankai.xining.bean.IndustryBig;
 import com.nankai.xining.bean.IndustryBigExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IndustryBigMapper {
     long countByExample(IndustryBigExample example);
 

@@ -15,7 +15,7 @@
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
-    <!--JAVASCRIPT-->
+    <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
     <!--Page Load Progress Bar [ OPTIONAL ]-->
@@ -31,6 +31,27 @@
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
+    <!--JAVASCRIPT myself-->
+    <!--=================================================-->
+    <script th:src="@{/js/enterpriseInfo.js}"></script>
+
+    <!--STYLE CSS-->
+    <!--=================================================-->
+    <style type="text/css">
+        label {
+            color: black;
+            padding-top: 5px;
+            font-size: 15px;
+            font-family: Consolas;
+        }
+        input[type=text], select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+
+    </style>
 </head>
 
 <!--<body class="container">
@@ -49,7 +70,7 @@
             <!--Brand logo & name-->
             <!--================================-->
             <div class="navbar-header" style="height: 50px;">
-                <a href="index.html" class="navbar-brand">
+                <a href="#" class="navbar-brand">
                     <img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">
                     <div class="brand-title">
                         <span class="brand-text">填报目录</span>
@@ -160,22 +181,12 @@
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <div id="page-title">
                 <h1 class="page-header text-overflow">企业信息</h1>
-
-                <!--Searchbox-->
-                <div class="searchbox">
-                    <div class="input-group custom-search-form">
-                        <input type="text" class="form-control" placeholder="Search..">
-                        <span class="input-group-btn">
-                                <button class="text-muted" type="button"><i class="ti-search"></i></button>
-                            </span>
-                    </div>
-                </div>
             </div>
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <!--End page title-->
 
 
-            <!--Breadcrumb-->
+            <!--二级标题-->
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
             <ol class="breadcrumb">
 
@@ -184,34 +195,31 @@
             </ol>
             <hr>
             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-            <!--End breadcrumb-->
+            <!--End 二级标题-->
 
 
 
             <!--注意啦！开始啦！-->
             <!--主要内容写在这里-->
             <!--===================================================-->
-            <div class="page-content" style="margin-left: 60px;">
+            <div class="page-content" style="margin-left: 60px;" th:object="${session.factoryInfo}">
 
 
                 <form id="factoryForm" name="factoryForm" method="post"
-                      style="display: inline;"
-                      action='<c:url value="/pages/Factory/addFac.do"/>'>
+                      style="display: inline;">
                     <div class="row" style="height: 40px;">
-                        <div class="col-md-12">
+                        <div class="col-md-12" >
                             <!-- PAGE CONTENT BEGINS -->
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         机构代码
                                     </label>
 
                                     <div class="col-md-8">
-                                        <label id='factotyno'
-                                               style="font-size: 15px; margin-top: 3px;">
-                                            ${item.factoryNo1}
+                                        <label id='factotyno' th:text="*{factoryNo1}"
+                                               style="font-size: 15px; margin-top: 3px; font-weight: bold;">
                                         </label>
                                     </div>
                                 </div>
@@ -220,15 +228,14 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-1">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         企业名称
                                     </label>
                                     <div class="col-md-8">
-                                        <label id='factoryName'
-                                               style="font-size: 15px; margin-top: 3px;">
-                                            ${item.factoryName}
-                                        </label>
+                                        <input type="text" id="factoryName" name="factoryName"
+                                               class="form-control" th:value="*{factoryName}"
+                                                style="height: 25px; width: 170px;"
+                                               onchange="ischanged('kilnuse')"/>
                                     </div>
                                 </div>
                             </div>
@@ -237,30 +244,28 @@
                     <div class="row" style="height: 40px;">
                         <div class="col-md-12">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                <div class="form-group" >
+                                    <label class="col-md-4 control-label no-padding-right">
                                         曾用名
                                     </label>
                                     <div class="col-md-8">
 
                                         <input type="text" id="factoryUsedname"
                                                name="factoryUsedname" class="form-control"
-                                               style="height: 25px; width: 170px;" value="${item.factoryUsedname}" Onchange="ischanged('kilnuse')"/>
+                                               style="height: 25px; width: 170px;" th:value="*{factoryUsedname}" Onchange="ischanged('kilnuse')"/>
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-4">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         污染源类型<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <select name="sourceType" id="sourceType"  class="form-control"
-                                                style="width: 173px; height: 30px;" value="${item.sourceType}" Onchange="ischanged('kilnuse')">
-                                            <option value="">请选择</option>
+                                        <select name="sourceType" id="sourceType"
+                                                style="width: 173px; height: 30px;" th:value="*{sourceType}" Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">请选择</option>
                                             <option value="废气国控">废气国控</option>
                                             <option value="废气市控">废气市控</option>
                                             <option value="废气市控">废气省控</option>
@@ -277,15 +282,14 @@
                             <!-- PAGE CONTENT BEGINS -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-1">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         行业大分类<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <select name="industryBigid" id="industryBigid" onchange="industrysmall(this.value)" class="form-control"
-                                                style="width: 173px; height: 30px;" value="${item.industryBigid}">
-                                            <option value="">请选择</option>
+                                        <select name="industryBigid" id="industryBigid" onchange="industrysmall(this.value)"
+                                                style="width: 173px; height: 30px;" th:value="*{industryBigid}">
+                                            <option disabled="disabled">请选择</option>
 
 
                                         </select>
@@ -300,9 +304,9 @@
                                     </label>
 
                                     <div class="col-md-8">
-                                        <select name="industryId" id="industryId"  class="form-control"
-                                                style="width: 173px; height: 30px;" value="${item.industryId}" Onchange="ischanged('kilnuse')">
-                                            <option value="">请选择</option>
+                                        <select name="industryId" id="industryId"
+                                                style="width: 173px; height: 30px;" th:value="*{industryId}" Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">请选择</option>
 
                                         </select>
 
@@ -316,29 +320,27 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         法定代表人<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="legalperson" class="form-control"
                                                style="height: 25px; width: 170px;"
-                                               value="${item.legalperson}" Onchange="ischanged('kilnuse')"/>
+                                               th:value="*{legalperson}" Onchange="ischanged('kilnuse')"/>
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         企业规模<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <select name="factorySize" id="factorySize"  class="form-control"
-                                                style="width: 173px; height: 30px;" value="${item.factorySize}" Onchange="ischanged('kilnuse')">
-                                            <option value="">请选择</option>
+                                        <select name="factorySize" id="factorySize"
+                                                style="width: 173px; height: 30px;" th:value="*{factorySize}" Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">请选择</option>
                                             <option value="1">小型企业</option>
                                             <option value="2">中小型企业</option>
                                             <option value="3">中型企业</option>
@@ -357,30 +359,28 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         注册省份
                                     </label>
                                     <div class="col-md-8">
                                         <input type="text"  class="form-control"
                                                style="height: 25px; width: 170px;" readonly="readonly"
-                                               value="新疆" />
+                                               value="青海" />
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         注册城市<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
 
                                         <select name="countyRegisterCity" id="countyRegisterCity"
-                                                class="form-control"
+
                                                 style="width: 173px; height: 30px;" onchange="changeCity(this.value,'countyidRegister','')">
-                                            <option value="">请选择
+                                            <option disabled="disabled">请选择
                                             </option>
                                         </select>
 
@@ -394,16 +394,15 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         注册行政区<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
 
                                         <select name="countyidRegister" id="countyidRegister"
-                                                class="form-control"
+
                                                 style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
-                                            <option value="">
+                                            <option disabled="disabled">
                                                 请选择
                                             </option>
                                         </select>
@@ -414,15 +413,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
 
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         注册详细地址<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="addressRegister" class="form-control"
                                                style="height: 25px; width: 170px;"
-                                               value="${item.addressRegister}" Onchange="ischanged('kilnuse')"/>
+                                               th:value="*{addressRegister}" Onchange="ischanged('kilnuse')"/>
                                     </div>
                                 </div>
                             </div>
@@ -434,30 +432,28 @@
                             <!-- PAGE CONTENT BEGINS -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         实际省份
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" class="form-control"
                                                style="height: 25px; width: 170px;" readonly="readonly"
-                                               value="新疆" />
+                                               value="青海" />
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         实际城市<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
                                         <select name="countyCity" id="countyCity"
-                                                class="form-control"
+
                                                 style="width: 173px; height: 30px;"  onchange="changeCity(this.value,'countyId','')">
-                                            <option value="" >
+                                            <option disabled="disabled" >
                                                 请选择
                                             </option>
                                         </select>
@@ -470,17 +466,16 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         实际行政区<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
 
                                         <select name="countyId" id="countyId"
-                                                class="form-control"
+
                                                 style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
-                                            <option value="">
+                                            <option disabled="disabled">
                                                 请选择
                                             </option>
                                         </select>
@@ -490,15 +485,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         实际详细地址<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="address" class="form-control"
                                                style="height: 25px; width: 170px;"
-                                               value="${item.address}" Onchange="ischanged('kilnuse')"/>
+                                               th:value="*{address}" Onchange="ischanged('kilnuse')"/>
                                     </div>
                                 </div>
                             </div>
@@ -509,13 +503,12 @@
                             <!-- PAGE CONTENT BEGINS -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         企业经度<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <input value="${item.factoryLongitude}" type="text"
-                                               id="factoryLongitude"
+                                        <input th:value="*{factoryLongitude}" type="text"
+                                               id="factoryLongitude" class="form-control"
                                                onblur="checklon(this.id)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
@@ -530,7 +523,7 @@
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input value="${item.factoryLatitude}" type="text"
+                                        <input th:value="*{factoryLatitude}" type="text" class="form-control"
                                                onblur="checklat(this.id)"  id="factoryLatitude"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -545,24 +538,22 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-2">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         填报内容的年份
                                     </label>
                                     <div class="col-md-8">
-                                        <a style="color:red">${item.year}</a>
+                                        <a th:text="*{year}" style="color:red;font-size: 15px;"></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-2">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产总值(万元)<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <input value="${item.totalOutput}" type="text"
-                                               id="totalOutput"
+                                        <input th:value="*{totalOutput}" type="text"
+                                               id="totalOutput" class="form-control"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"/>
@@ -576,13 +567,12 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-2">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         年生产天数(整数)<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <input value="${item.yearDays}" type="text"
-                                               id="yearDays"
+                                        <input th:value="*{yearDays}" type="text"
+                                               id="yearDays" class="form-control"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,365,'年生产天数')" />
@@ -591,13 +581,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-2">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         日生产小时数(整数)<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <input value="${item.daysHours}" type="text"
-                                               id="daysHours"
+                                        <input th:value="*{daysHours}" type="text"
+                                               id="daysHours" class="form-control"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,24,'日生产小时数')" />
@@ -612,13 +601,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-2">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         年用电量(万千瓦时)<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
-                                        <input value="${item.powerAmount}" type="text"
-                                               id="powerAmount"
+                                        <input th:value="*{powerAmount}" type="text"
+                                               id="powerAmount" class="form-control"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')" />
@@ -636,28 +624,26 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         统计负责人<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="principalName" class="form-control" Onchange="ischanged('kilnuse')"
-                                               value="${item.principalName}" style="height: 25px; width: 170px;" />
+                                               th:value="*{principalName}" style="height: 25px; width: 170px;" />
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         固定电话
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="principalPhone" class="form-control" Onchange="ischanged('kilnuse')"
-                                               style="height: 25px; width: 170px;" value="${item.principalPhone}"
+                                               style="height: 25px; width: 170px;" th:value="*{principalPhone}"
                                                onblur="checkpphone(this.id);" />
                                     </div>
                                 </div>
@@ -669,27 +655,25 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-1">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         移动电话<a style="color:red">*</a>
                                     </label>
                                     <div class="col-md-8">
                                         <input type="text" id="principalMobile" class="form-control" Onchange="ischanged('kilnuse')"
-                                               style="height: 25px; width: 170px;" value="${item.principalMobile}"
+                                               style="height: 25px; width: 170px;" th:value="*{principalMobile}"
                                                onblur="checkpmobile(this.id);" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         电子邮箱<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="principalEmail" class="form-control"
-                                               style="height: 25px; width: 170px;" value="${item.principalEmail}"
+                                               style="height: 25px; width: 170px;" th:value="*{principalEmail}"
                                                onblur="checkpemail(this.id);" Onchange="ischanged('kilnuse')"/>
 
                                     </div>
@@ -699,8 +683,8 @@
 
                         </div>
                     </div>
-
-                    <div class="row" style="height: 40px;" id="preparerrow1">
+                    <br><hr>
+                    <div class="row" style="height: 40px;margin-left: 5px;" id="preparerrow1">
                         <div class="col-md-12">
                             <a style="color: red">生产厂区四至拐点经纬度指的是工厂面积拐点的经纬度，企业厂区面积小于1平方千米的，不用填报四至拐点经纬度,其他企业至少填写四个角落的经纬度</a>
                         </div>
@@ -711,13 +695,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度1<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon1" value="${item.lon1}"
+                                        <input type="text" id="lon1" th:value="*{lon1}" class="form-control"
                                                onblur="checklonfour1(this.id,0)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
@@ -729,13 +712,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度1<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat1"  value="${item.lat1}"
+                                        <input type="text" id="lat1"  th:value="*{lat1}" class="form-control"
                                                onblur="checklatfour1(this.id,0)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -751,14 +733,13 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度2<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon2"  value="${item.lon2}"
-
+                                        <input type="text" id="lon2"  th:value="*{lon2}"
+                                               class="form-control"
                                                onblur="checklonfour1(this.id,1)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
@@ -768,13 +749,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度2<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat2"  value="${item.lat2}"
+                                        <input type="text" id="lat2"  th:value="*{lat2}" class="form-control"
                                                onblur="checklatfour1(this.id,1)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -790,13 +770,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度3<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon3" value="${item.lon3}"
+                                        <input type="text" id="lon3" th:value="*{lon3}" class="form-control"
 
                                                onblur="checklonfour1(this.id,2)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -807,13 +786,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度3<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat3"  value="${item.lat3}"
+                                        <input type="text" id="lat3"  th:value="*{lat3}" class="form-control"
                                                onblur="checklatfour1(this.id,2)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -829,13 +807,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度4<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon4"  value="${item.lon4}"
+                                        <input type="text" id="lon4"  th:value="*{lon4}" class="form-control"
 
                                                onblur="checklonfour1(this.id,3)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -846,13 +823,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度4<a style="color:red">*</a>
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat4" class="form-control"  value="${item.lat4}"
+                                        <input type="text" id="lat4"   th:value="*{lat4}" class="form-control"
                                                onblur="checklatfour1(this.id,3)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -870,13 +846,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度5
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon5"  value="${item.lon5}"
+                                        <input type="text" id="lon5"  th:value="*{lon5}" class="form-control"
 
                                                onblur="checklonfour1(this.id,4)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -887,13 +862,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度5
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat5" class="form-control" value="${item.lat5}"
+                                        <input type="text" id="lat5" class="form-control" th:value="*{lat5}"
                                                onblur="checklatfour1(this.id,4)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -909,13 +883,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度6
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon6"  value="${item.lon6}"
+                                        <input type="text" id="lon6"  th:value="*{lon6}" class="form-control"
 
                                                onblur="checklonfour1(this.id,5)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -926,14 +899,13 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度6
                                     </label>
 
                                     <div class="col-md-8">
                                         <input type="text" id="lat6" class="form-control"
-                                               style="height: 25px; width: 170px;" value="${item.lat6}"
+                                               style="height: 25px; width: 170px;" th:value="*{lat6}"
 
                                                onblur="checklatfour1(this.id,5);"   onkeyup="if(isNaN(value))execCommand('undo')"
                                                onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
@@ -949,13 +921,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点经度7
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lon7"  value="${item.lon7}"
+                                        <input type="text" id="lon7"  th:value="*{lon7}" class="form-control"
 
                                                onblur="checklonfour1(this.id,6)" style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -966,13 +937,12 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right"
-                                           for="form-field-3">
+                                    <label class="col-md-4 control-label no-padding-right">
                                         生产厂区四至拐点纬度7
                                     </label>
 
                                     <div class="col-md-8">
-                                        <input type="text" id="lat7" class="form-control" value="${item.lat7}"
+                                        <input type="text" id="lat7" class="form-control" th:value="*{lat7}"
                                                onblur="checklatfour1(this.id,6)"
                                                style="height: 25px; margin-top: 3px; width: 170px;"
                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -993,31 +963,29 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
-                                               for="form-field-3">
+                                        <label class="col-md-4 control-label no-padding-right">
                                             填报状态(无需填写)：
                                         </label>
 
                                         <div class="col-md-8">
                                             <input type="text" id="status" disabled="disabled"
-                                                   class="form-control"
-                                                   style="height: 25px; width: 170px;color: red" />
+                                                   value="只填写基本信息" class="form-control"
+                                                   style="height: 25px; width: 170px;">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <br>
                     <div class="row" >
 
 
-                        <div style="text-align: center;">
+                        <div style="margin-left: 450px;">
                             <button type="button" class="btn btn-primary"
-                                    style="width:80px;line-height:8px;margin-left:15px;"
                                     onclick="addFactory();">
                                 <label style="font-size: 16px; color:white">
-                                    保&nbsp;存
+                                    保存修改
                                 </label>
                             </button>
                             <input type="hidden" name="malert" id="malert" value='0'>
@@ -1025,7 +993,6 @@
                     </div>
                     <!-- /.page-footer -->
                 </form>
-
 
             </div>
             <!--===================================================-->
@@ -1040,7 +1007,7 @@
         <!-- =================================================================================== -->
         <!--左侧导航栏-->
         <!--===================================================-->
-        <nav id="mainnav-container">
+        <nav id="mainnav-container" style="font-size: 14px;font-family: 'Microsoft Himalaya';">
             <div id="mainnav">
 
                 <!--Menu-->
@@ -1288,7 +1255,18 @@
 </div>
 <!--===================================================-->
 <!-- END OF CONTAINER -->
-
+<!--===============================================================-->
+<!--向js中提供session中的参数-->
+<div th:object="${session.factoryInfo}">
+    <p id="getfactorySize" th:text="*{factorySize}" hidden="hidden"></p>
+    <p id="getsourceType" th:text="*{sourceType}" hidden="hidden"></p>
+    <p id="getindustryBigid" th:text="*{industryBigid}" hidden="hidden"></p>
+    <p id="getindustryId" th:text="*{industryId}" hidden="hidden"></p>
+    <p id="getcountyRegisterCity" th:text="*{countyRegisterCity}" hidden="hidden"></p>
+    <p id="getcountyidRegister" th:text="*{countyidRegister}" hidden="hidden"></p>
+    <p id="getcountyCity" th:text="*{countyCity}" hidden="hidden"></p>
+    <p id="getcountyId" th:text="*{countyId}" hidden="hidden"></p>
+</div>
 
 
 </body>

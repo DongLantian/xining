@@ -4,7 +4,9 @@ import com.nankai.xining.bean.City;
 import com.nankai.xining.bean.CityExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CityMapper {
     long countByExample(CityExample example);
 

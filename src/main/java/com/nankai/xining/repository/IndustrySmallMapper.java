@@ -3,9 +3,11 @@ package com.nankai.xining.repository;
 import com.nankai.xining.bean.IndustrySmall;
 import com.nankai.xining.bean.IndustrySmallExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface IndustrySmallMapper {
     long countByExample(IndustrySmallExample example);
 

@@ -4,7 +4,9 @@ import com.nankai.xining.bean.County;
 import com.nankai.xining.bean.CountyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CountyMapper {
     long countByExample(CountyExample example);
 
