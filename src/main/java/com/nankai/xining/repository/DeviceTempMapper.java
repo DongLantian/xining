@@ -4,7 +4,9 @@ import com.nankai.xining.bean.DeviceTemp;
 import com.nankai.xining.bean.DeviceTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeviceTempMapper {
     long countByExample(DeviceTempExample example);
 

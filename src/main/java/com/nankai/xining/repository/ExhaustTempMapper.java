@@ -4,7 +4,9 @@ import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.bean.ExhaustTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ExhaustTempMapper {
     long countByExample(ExhaustTempExample example);
 

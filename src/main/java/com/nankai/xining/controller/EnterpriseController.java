@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description: **
@@ -31,12 +34,38 @@ public class EnterpriseController {
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(HttpSession session){
         //工厂ID。暂未实现登录，做测试用
-        session.setAttribute("clientfactoryid","17200");
+        session.setAttribute("clientfactoryid","17203");
 
-        Factory factoryInfo = enterpriseService.gerFactoryInfo(17200);
+        Factory factoryInfo = enterpriseService.getFactoryInfo(17203);
         session.setAttribute("factoryInfo",factoryInfo);
 
         return "/user/enterpriseInfo";
+    }
+
+    /**
+     * 保存更新企业信息
+     * @param factory
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "enterpriseUpdate")
+    @ResponseBody
+    public Map<String,Integer> updateEnterpriseInfo(Factory factory,HttpSession session){
+        Map resultStatus = new HashMap();
+        Integer m_factoryInteger= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+
+        if(m_factoryInteger!=null){
+            Factory resultFactory=enterpriseService.updateFactory(factory,m_factoryInteger);
+            if (resultFactory!=null){
+                session.setAttribute("factoryInfo",resultFactory);
+                resultStatus.put("status",1);//成功
+            }else {
+                resultStatus.put("status",2);//更新失败
+            }
+        }else{
+            resultStatus.put("status",0);//factoryID不存在
+        }
+        return resultStatus;
     }
 
     /**

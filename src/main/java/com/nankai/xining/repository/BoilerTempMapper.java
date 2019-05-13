@@ -4,7 +4,9 @@ import com.nankai.xining.bean.BoilerTemp;
 import com.nankai.xining.bean.BoilerTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BoilerTempMapper {
     long countByExample(BoilerTempExample example);
 
