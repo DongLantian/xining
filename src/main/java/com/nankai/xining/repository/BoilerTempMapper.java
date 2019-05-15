@@ -20,6 +20,8 @@ public interface BoilerTempMapper {
 
     List<BoilerTemp> selectByExample(BoilerTempExample example);
 
+    List<BoilerTemp> selectByFactoryIdWithJoin(@Param("factoryId")Integer factoryId);
+
     BoilerTemp selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") BoilerTemp record, @Param("example") BoilerTempExample example);

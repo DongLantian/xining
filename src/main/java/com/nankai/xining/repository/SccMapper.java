@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Scc;
 import com.nankai.xining.bean.SccExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SccMapper {
     long countByExample(SccExample example);
 

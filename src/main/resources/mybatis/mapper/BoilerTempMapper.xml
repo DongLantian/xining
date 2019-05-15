@@ -1169,4 +1169,20 @@
       dec_useamount = #{decUseamount,jdbcType=DOUBLE}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自定义SQL：根据工厂ID查询锅炉（连接烟囱表）-->
+  <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT ID, TBOILER_ID, NO, FUNCTION_DEC, FUNCTIO, version, MODELDEC, MODEL, TONS, FUELTYPEDEC,
+      FUELTYPE, COALASH, COALSULFUR, COMBUSTIONSYSTEM, FUEL_AUSAGE, FUEL_AUSAGEUNIT, EXHUST_ID,
+      b.EXF_NO, b.NK_NO, dustremove_dec, dustremove_id, sulphurremove_dec, sulphurremove_id,
+      nitreremove_dec, nitreremove_id, factor_pm10, pm10, factor_co, factor_pm25, pm25,
+      factor_voc, co, voc, factor_pm, pm, factor_so2, so2, factor_nox, nox, factor_nh3,
+      nh3, factor_oc, oc, factor_status, factor_bc, bc, scc, machine_no, coal_volatilisation,
+      installed_capacity, feiqiti, so2out, noxout, pmout, Jan_useamount, Feb_useamount,
+      Mar_useamount, Apr_useamount, May_useamount, June_useamount, July_useamount, aug_useamount,
+      sept_useamount, oct_use_amount, nov_useamount, dec_useamount
+    from boiler_temp b join exhaust_temp e on b.EXHUST_ID = e.EXF_ID
+    WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+  </select>
+
 </mapper>
