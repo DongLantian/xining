@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>锅炉信息</title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/nifty.min.css}" rel="stylesheet">
+    <link th:href="@{/themify-icons/themify-icons.min.css}" rel="stylesheet" >
+
+    <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
+
+    <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <!--JAVASCRIPT libiaries-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link th:href="@{/css/pace.min.css}" rel="stylesheet">
+    <script th:src="@{/js/pace.min.js}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script  th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
+    <script  th:src="@{/js/user.js}"></script>
+    <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/js/bootstrapPage.js}"></script>
+
+    <script th:src="@{/js/nifty.min.js}"></script>
+
+    <!--JAVASCRIPT myself-->
+    <!--=================================================-->
+    <script th:src="@{/js/boiler.js}"></script>
+
+    <!--STYLE CSS-->
+    <!--=================================================-->
+    <style type="text/css">
+        label {
+            color: black;
+            padding-top: 5px;
+            font-size: 15px;
+            font-family: Consolas;
+        }
+        input[type=text], select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+
+    </style>
+</head>
+
+<!--<body class="container">
+
+
+</body>-->
+
+<body>
+<div id="container" class="effect aside-float aside-bright mainnav-fixed mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed" style="height: 50px;">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header" style="height: 50px;">
+                <a href="#" class="navbar-brand">
+                    <img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">填报目录</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content clearfix">
+                <ul class="nav navbar-top-links pull-left">
+
+                    <!--Navigation toogle button-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li class="tgl-menu-btn" style="height: 50px;">
+                        <a class="mainnav-toggle" href="#">
+                            <i class="ti-view-list icon-lg"></i>
+                        </a>
+                    </li>
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End Navigation toogle button-->
+
+                </ul>
+
+                <ul class="nav  pull-left">
+
+                    <!--标题-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <div style="margin-left: 30px; padding-top: 5px;">
+                        	<span class="text-2x text-bold" style="color: darkslategray; ">西宁市大气污染源清单管理系统
+                        	</span>
+                    </div>
+
+
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End 标题-->
+
+                </ul>
+
+                <ul class="nav navbar-top-links pull-right">
+
+                    <!--User dropdown-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li id="dropdown-user" class="dropdown" >
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" style="height: 50px;">
+                                <span class="pull-right">
+                                    <!-- You may use image instead of an icon.
+                                    <!-- <img class="img-circle img-user media-object" src="img/av1.png" alt="Profile Picture"> -->
+                                    <i class="ti-face-smile ic-user"></i>
+                                </span>
+                            <div class="username hidden-xs">管理员</div>
+                        </a>
+
+
+                        <div class="dropdown-menu dropdown-menu-right panel-default" style="width: 200px;">
+                            <!-- User dropdown menu -->
+                            <ul class="head-list">
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-user icon-fw icon-lg"></i> 用户信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-settings icon-fw icon-lg"></i> 设置
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Dropdown footer -->
+                            <div class="pad-all text-right">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="ti-unlock icon-fw"></i> 注销
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End user dropdown-->
+
+                    <li>
+                        <a href="#" class="aside-toggle navbar-aside-icon" style="height: 50px;">
+                            <i class="pci-ver-dots"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+    <!--===================================================-->
+    <!--END NAVBAR-->
+
+    <!-- 内容大区块 -->
+    <!-- =================================================================================== -->
+    <div class="boxed" >
+
+        <!--CONTENT CONTAINER-->
+        <!--===================================================-->
+        <div id="content-container">
+
+            <!--Page Title-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div id="page-title">
+                <h1 class="page-header text-overflow">锅炉</h1>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End page title-->
+
+
+            <!--二级标题-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <ol class="breadcrumb">
+
+                <li>目录</li>
+                <li class="active">锅炉</li>
+            </ol>
+            <hr>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End 二级标题-->
+
+
+
+            <!--注意啦！开始啦！-->
+            <!--主要内容写在这里-->
+            <!--===================================================-->
+            <div class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
+
+                <div id="exfDom">
+
+                    <h1>锅炉列表</h1>
+                    <div style="height: 200px;">
+
+                        <!--锅炉信息放到modelandview中，在页面映射时完成-->
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>锅炉ID</th>
+                                <th>锅炉序号</th>
+                                <th>锅炉编号</th>
+                                <th>锅炉类型</th>
+                                <th>修改锅炉信息</th>
+                                <th>删除该锅炉</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  th:each="boiler : ${boilerList}">
+                                <th scope="row" th:text="${boiler.id}">1</th>
+                                <td th:text="${boiler.nkNo}">neo</td>
+                                <td th:text="${boiler.no}">neo</td>
+                                <td th:text="${boiler.modeldec}">Otto</td>
+                                <td><button th:value="${boiler.id}" @click="editBoiler($event)" class="btn btn-info btn-sm">编辑</button></td>
+                                <td><button th:value="${boiler.id}" @click="delBoiler($event)" class="btn btn-danger btn-sm">删除</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!--===============================================================================================-->
+                    <div style="height: 80px;">
+                        <div style="float: left;height: 60px;">
+                            <input id="boilerCount" hidden="hidden" th:value="${boilerCount}"></input>
+                            <script>
+                                var count = document.getElementById("boilerCount").value;
+                                document.write(Pager({
+                                    totalCount:count, 		//总条数为150
+                                    pageSize:3,    			//每页显示3条内容，默认10
+                                    buttonSize:10,   		//显示size个按钮，默认10
+                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
+                                    className:'pagination', //分页的样式
+                                    prevButton:'上一页',     //上一页按钮
+                                    nextButton:'下一页',     //下一页按钮
+                                    firstButton:'首页',      //第一页按钮
+                                    lastButton:'末页',       //最后一页按钮
+
+                                }));
+                            </script>
+                        </div>
+                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
+                            <span style="font-weight: bold;color: cornflowerblue;">共有<span th:text="${boilerCount}">0</span>个锅炉。。。</span>
+                        </div>
+                    </div><br><br><hr>
+                    <!--=======================修改锅炉Panel，默认隐藏=================================-->
+                    <div id="updatePanel" class="panel panel-info"  style="margin-right: 60px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">修改锅炉信息（带*号为必填项）</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>在这里修改锅炉信息后点击确认按钮提交修改...</p>
+
+                            <div class="page-content">
+
+                                <div class="page-content">
+                                    <div class="row">
+                                        <span style="font-size:26px;">{{boiler.nkNo}}号锅炉</span>
+                                    </div>
+                                    <div class="row" style="height: 40px;">
+                                        <div class="col-xs-12">
+                                            <a style="color: red;font-size:20px;">如果企业没有相应项，请填写0</a>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="height: 55px;">
+                                        <div class="col-xs-12">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉用途
+                                                        <a style="color: red;">****</a>
+                                                    </label>
+                                                    <input type="hidden" name="functio_input" id="updatefunctio_input"
+                                                           v-model="boiler.functio"  />
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="updatefunctio" v-model="boiler.functio"
+                                                                style="width: 170px;"
+                                                                Onchange="clientscc3('10',this.value,'updatefueltype','updatemodel');ischanged('qe3')" />
+                                                            <option value="">
+                                                                请选择
+                                                            </option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉所用燃料类型
+                                                        <a style="color: red;">***</a>
+                                                    </label>
+
+
+                                                    <input type="hidden" name="fueltype_input" id="updatefueltype_input"
+                                                           v-model="boiler.fueltype" >
+                                                    <div class="col-md-7">
+                                                        <select id="updatefueltype"  v-model="boiler.fueltype"
+                                                                style="width: 170px;"
+                                                                onchange="clientscc4('10','updatefunctio',this.value,'updatemodel');ischanged('qe3')" />
+
+                                                            <option disabled="disabled">
+                                                                请先选择锅炉用途
+                                                            </option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉类型
+                                                        <a style="color: red;">**</a>
+                                                    </label>
+                                                    <input type="hidden" name="model_input" id="updatemodel_input"
+                                                           v-model="boiler.model">
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="updatemodel" style="width: 170px;"
+                                                                v-model="boiler.model"
+                                                                Onchange="ischanged('model')" />
+
+                                                            <option disabled="disabled">
+                                                                请先选择锅炉燃料类型
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <!-- PAGE CONTENT BEGINS -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        机组编号<a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatemachineNo"
+                                                               v-model="boiler.machineNo"  class="col-md-10"
+                                                               Onchange="ischanged('no')" style="width: 170px;"
+                                                               maxlength="15" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        装机容量(单位:兆瓦)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updateinstalledCapacity"
+                                                               v-model="boiler.installedCapacity"
+                                                               onblur="IsChangeNew(this.id,0,2500,'装机容量')" alt="p4x3p2s"
+                                                               class="check1" style="width: 170px;" placeholder="0-2500MW"
+                                                               Onchange="ischanged('model')" />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <!-- PAGE CONTENT BEGINS -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉编号(只填数字#)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updateno" v-model="boiler.no"   alt="p3x3p0s"
+                                                               class="check1" 	Onchange="ischanged('no')" style="width: 170px;"
+                                                               onkeyup="checkRate(this.id);" maxlength="20" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉设备型号
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updateversion" v-model="boiler.version"
+                                                               class="col-md-10" Onchange="ischanged('no')" maxlength="25"
+                                                               style="width: 170px;" onblur="TestLen(this.id,20)" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉吨位(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatetons" v-model="boiler.tons"
+                                                               alt="p4x3p2s" class="check1"
+                                                               onblur="IsChangeNew(this.id,0,5000,'锅炉吨位')"
+                                                               style="width: 170px;"
+                                                               placeholder="0-5000" Onchange="ischanged('no')"/>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        对应烟囱
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <input type="hidden" name="mchimney_input" id="updatemchimney_input"
+                                                           v-model="boiler.exhustId" >
+                                                    <div class="col-md-7">
+
+                                                        <select id="updatemchimney"
+
+                                                                Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-xs-12" style="height: 40px">
+                                                <div class="form-group">
+                                                    <p align="center" id="updateexaust_info"></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+
+                                                        燃料灰分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatecoalash"
+                                                               v-model="boiler.coalash"
+                                                               onblur="IsChangeNew(this.id,0,45,'燃煤灰分')"  alt="p2x3p2s"
+                                                               class="check1" style="width: 170px;" placeholder="0~45"
+                                                               Onchange="ischanged('model')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+
+                                                        燃料硫分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatecoalsulfur"
+                                                               v-model="boiler.coalsulfur"  alt="p2x3p2s"
+                                                               class="check1" Onchange="ischanged('no')"
+                                                               onblur="IsChangeNew(this.id,0,3,'燃煤硫分')"
+                                                               style="width: 170px;" placeholder="0~3"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料挥发分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatecoalVolatilisation" Onchange="ischanged('model')"
+                                                               v-model="boiler.coalVolatilisation"  alt="p2x3p2s" class="check1"   placeholder="0~50"
+                                                               onblur="IsChangeNew(this.id,0,50,'煤炭挥发分')" style="width: 170px;" onkeyup="checkNum(this);"/>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃烧方式
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <input type="hidden" name="combustionsystem_input"
+                                                           id="updatecombustionsystem_input" style="width: 170px;"
+                                                           v-model="boiler.combustionsystem"
+                                                           onblur="TestLen(this.id,10)" />
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="updatecombustionsystem" v-model="boiler.combustionsystem"
+                                                                Onchange="ischanged('model')" style="width: 170px;" />
+                                                        <option disabled="disabled">
+                                                            无
+                                                        </option>
+                                                        <option value="层燃">
+                                                            层燃
+                                                        </option>
+                                                        <option value="室燃">
+                                                            室燃
+                                                        </option>
+                                                        <option value="循环流化床">
+                                                            循环流化床
+                                                        </option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5">
+                                                        燃料年使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatefuelAusage" style="width: 170px;"
+                                                               v-model="boiler.fuelAusage" class="check1"
+                                                               alt="p7x3p4s" onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
+                                                        />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料年用量单位
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="hidden" name="fuelAusageunit_input"
+                                                               id="updatefuelAusageunit_input"
+                                                               v-model="boiler.fuelAusageunit"  style="width: 170px;" />
+                                                        <select id="updatefuelAusageunit" v-model="boiler.fuelAusageunit"
+                                                                data-placeholder="Choose a Country..."
+                                                                Onchange="ischanged('model')" style="width: 170px;">
+                                                            <option disabled="disabled">
+                                                                请选择
+                                                            </option>
+                                                            <option value="吨">
+                                                                吨
+                                                            </option>
+                                                            <option value="万立方米">
+                                                                万立方米
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 no-padding-right">
+                                                        废气排放量(万立方米)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatefeiqiti" v-model="boiler.feiqiti"
+                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                               Onchange="ischanged('feiqiti')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        二氧化硫排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updateso2out" v-model="boiler.so2out"
+                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                               style="width: 170px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        氮氧化物排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatenoxout" v-model="boiler.noxout"
+                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                               Onchange="ischanged('feiqiti')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        烟粉尘排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="updatepmout" v-model="boiler.pmout"
+                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                               style="width: 170px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top:15px;">
+
+                                            <div class="form-group">
+                                                <a style="color: red;">燃料月份使用量的单位和燃料总使用量单位一致</a>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料一月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.janUseamount" type="text"
+                                                               id="updatejanUseamount" class="check1" alt="p0x3p4s"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料二月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.febUseamount"  type="text"
+                                                               id="updatefebUseamount" class="check1" alt="p0x3p4s"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料三月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.marUseamount" type="text"
+                                                               id="updatemarUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料四月份使用量<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.aprUseamount" type="text"
+                                                               id="updateaprUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料五月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.mayUseamount"  type="text"
+                                                               id="updatemayUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料六月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.juneUseamount" type="text"
+                                                               id="updatejuneUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料七月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.julyUseamount" type="text"
+                                                               id="updatejulyUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料八月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.augUseamount" type="text"
+                                                               id="updateaugUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料九月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.septUseamount" type="text"
+                                                               id="updateseptUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.octUseAmount" type="text"
+                                                               id="updateoctUseAmount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十一月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.novUseamount"  type="text"
+                                                               id="updatenovUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十二月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input v-model="boiler.decUseamount"  type="text"
+                                                               id="updatedecUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="page-header" style="margin-top: 100px;">
+                                        <h1>
+
+                                            <small> <i class="icon-double-angle-right"></i> <b>废气处理信息</b>
+                                            </small>
+                                        </h1>
+                                    </div>
+                                    <!-- /.page-header -->
+                                    <div class="col-xs-12">
+                                        <div class="col-md-4">
+                                            <div class="form-group" id="updatedust_div">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    除尘方式
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="updatedustremoveId" name="dustremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('dustremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    脱硫方式
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="updatesulphurremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    脱硝方式
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="updatenitreremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br><br><br><br>
+
+
+                                    <div class="row" style="margin: 0 auto; text-align: center;">
+                                        <button id="updateBoiler" onclick="updatedata();" class="btn btn-info btn-lg">确认修改锅炉信息</button>
+                                    </div><br>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!--==============增加锅炉Panel=====================================================-->
+                    <div id="addPanel" class="panel panel-bordered-primary" style="margin-right: 60px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">添加锅炉（带*号为必填项）</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>在这里添加锅炉...</p><br>
+                            <div class="page-content">
+
+                                <div class="page-content">
+
+                                    <div class="row" style="height: 40px;">
+                                        <div class="col-xs-12">
+                                            <a style="color: red;font-size:20px;">如果企业没有相应项，请填写0</a>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="height: 55px;">
+                                        <div class="col-xs-12">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉用途
+                                                        <a style="color: red;">****</a>
+                                                    </label>
+                                                    <input type="hidden" name="functio_input" id="functio_input"
+                                                           value='${cur_boiler.functio}' />
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="functio" style="width: 170px;"
+                                                                Onchange="clientscc3('10',this.value,'fueltype','model');ischanged('qe3')" />
+
+
+                                                            <option value="">
+                                                                请选择
+                                                            </option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉所用燃料类型
+                                                        <a style="color: red;">***</a>
+                                                    </label>
+
+
+                                                    <input type="hidden" name="fueltype_input" id="fueltype_input"
+                                                           value="${cur_boiler.fueltype}">
+                                                    <div class="col-md-7">
+                                                        <select id="fueltype" style="width: 170px;"
+                                                                onchange="clientscc4('10','functio',this.value,'model');ischanged('qe3')" />
+
+                                                            <option disabled="disabled">
+                                                                请先选择锅炉用途
+                                                            </option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉类型
+                                                        <a style="color: red;">**</a>
+                                                    </label>
+                                                    <input type="hidden" name="model_input" id="model_input"
+                                                           value="${cur_boiler.model}">
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="model" style="width: 170px;"
+                                                                Onchange="ischanged('model')" />
+
+                                                            <option disabled="disabled">
+                                                                请先选择锅炉燃料类型
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <!-- PAGE CONTENT BEGINS -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        机组编号<a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="machineNo"
+                                                               value="${cur_boiler.machineNo}" class="col-md-10"
+                                                               Onchange="ischanged('no')" style="width: 170px;"
+                                                               maxlength="15" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        装机容量(单位:兆瓦)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="installedCapacity"
+                                                               value="${cur_boiler.installedCapacity}"
+                                                               onblur="IsChangeNew(this.id,0,2500,'装机容量')" alt="p4x3p2s"
+                                                               class="check1" style="width: 170px;" placeholder="0-2500MW"
+                                                               Onchange="ischanged('model')" />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <!-- PAGE CONTENT BEGINS -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉编号(只填数字#)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="no" value="${cur_boiler.no}"  alt="p3x3p0s"
+                                                               class="check1" 	Onchange="ischanged('no')" style="width: 170px;"
+                                                               onkeyup="checkRate(this.id);" maxlength="20" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉设备型号
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="version" value="${cur_boiler.version}"
+                                                               class="col-md-10" Onchange="ischanged('no')" maxlength="25"
+                                                               style="width: 170px;" onblur="TestLen(this.id,20)" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        锅炉吨位(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="tons" value="${cur_boiler.tons}"
+                                                               alt="p4x3p2s" class="check1"
+                                                               onblur="IsChangeNew(this.id,0,5000,'锅炉吨位')"
+                                                               style="width: 170px;"
+                                                               placeholder="0-5000" Onchange="ischanged('no')"/>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        对应烟囱
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <input type="hidden" name="mchimney_input" id="mchimney_input"
+                                                           value="${cur_boiler.exhustId}">
+                                                    <div class="col-md-7">
+
+                                                        <select id="mchimney"
+
+                                                                Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-xs-12" style="height: 40px">
+                                                <div class="form-group">
+                                                    <p align="center" id="exaust_info"></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+
+                                                        燃料灰分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="coalash"
+                                                               value="${cur_boiler.coalash}"
+                                                               onblur="IsChangeNew(this.id,0,45,'燃煤灰分')"  alt="p2x3p2s"
+                                                               class="check1" style="width: 170px;" placeholder="0~45"
+                                                               Onchange="ischanged('model')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+
+                                                        燃料硫分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="coalsulfur"
+                                                               value="${cur_boiler.coalsulfur}" alt="p2x3p2s"
+                                                               class="check1" Onchange="ischanged('no')"
+                                                               onblur="IsChangeNew(this.id,0,3,'燃煤硫分')"
+                                                               style="width: 170px;" placeholder="0~3"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料挥发分(单位:%)<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="coalVolatilisation" Onchange="ischanged('model')"
+                                                               value="${cur_boiler.coalVolatilisation}" alt="p2x3p2s" class="check1"   placeholder="0~50"
+                                                               onblur="IsChangeNew(this.id,0,50,'煤炭挥发分')" style="width: 170px;" onkeyup="checkNum(this);"/>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃烧方式
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <input type="hidden" name="combustionsystem_input"
+                                                           id="combustionsystem_input" style="width: 170px;"
+                                                           value="${cur_boiler.combustionsystem}"
+                                                           onblur="TestLen(this.id,10)" />
+                                                    <div class="col-md-7">
+                                                        <select class="col-xs-12" id="combustionsystem"
+                                                                Onchange="ischanged('model')" style="width: 170px;" />
+                                                        <option value="">
+                                                            无
+                                                        </option>
+                                                        <option value="层燃">
+                                                            层燃
+                                                        </option>
+                                                        <option value="室燃">
+                                                            室燃
+                                                        </option>
+                                                        <option value="循环流化床">
+                                                            循环流化床
+                                                        </option>
+
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5">
+                                                        燃料年使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="fuelAusage" style="width: 170px;"
+                                                               value="${cur_boiler.fuelAusage}" class="check1"
+                                                               alt="p7x3p4s" onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
+                                                        />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料年用量单位
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input type="hidden" name="fuelAusageunit_input"
+                                                               id="fuelAusageunit_input"
+                                                               value="${cur_boiler.fuelAusageunit}" style="width: 170px;" />
+                                                        <select id="fuelAusageunit"
+                                                                data-placeholder="Choose a Country..."
+                                                                Onchange="ischanged('model')" style="width: 170px;">
+                                                            <option value="">
+                                                                请选择
+                                                            </option>
+                                                            <option value="吨">
+                                                                吨
+                                                            </option>
+                                                            <option value="万立方米">
+                                                                万立方米
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 no-padding-right">
+                                                        废气排放量(万立方米)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="feiqiti" value="${cur_boiler.feiqiti}"
+                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                               Onchange="ischanged('feiqiti')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        二氧化硫排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="so2out" value="${cur_boiler.so2out}"
+                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                               style="width: 170px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        氮氧化物排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="noxout" value="${cur_boiler.noxout}"
+                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                               Onchange="ischanged('feiqiti')" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        烟粉尘排放量(吨)
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+                                                    <div class="col-md-7">
+                                                        <input type="text" id="pmout" value="${cur_boiler.pmout}"
+                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                               style="width: 170px;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" style="margin-top:15px;">
+
+                                            <div class="form-group">
+                                                <a style="color: red;">燃料月份使用量的单位和燃料总使用量单位一致</a>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料一月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.janUseamount}" type="text"
+                                                               id="janUseamount" class="check1" alt="p0x3p4s"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料二月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.febUseamount}" type="text"
+                                                               id="febUseamount" class="check1" alt="p0x3p4s"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料三月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.marUseamount}" type="text"
+                                                               id="marUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料四月份使用量<a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.aprUseamount}" type="text"
+                                                               id="aprUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料五月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.mayUseamount}" type="text"
+                                                               id="mayUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料六月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.juneUseamount}" type="text"
+                                                               id="juneUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料七月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.julyUseamount}" type="text"
+                                                               id="julyUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料八月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.augUseamount}" type="text"
+                                                               id="augUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料九月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.septUseamount}" type="text"
+                                                               id="septUseamount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.octUseAmount}" type="text"
+                                                               id="octUseAmount" class="check1" alt="p0x3p4s"
+
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十一月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.novUseamount}" type="text"
+                                                               id="novUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-5 control-label no-padding-right">
+                                                        燃料十二月份使用量
+                                                        <a style="color: red;">*</a>
+                                                    </label>
+
+                                                    <div class="col-md-7">
+                                                        <input value="${cur_boiler.decUseamount}" type="text"
+                                                               id="decUseamount" class="check1" alt="p0x3p4s"
+                                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                               Onchange="ischanged('kilnuse')"
+                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="page-header" style="margin-top: 100px;">
+                                        <h1>
+
+                                            <small> <i class="icon-double-angle-right"></i> <b>废气处理信息</b>
+                                            </small>
+                                        </h1>
+                                    </div>
+                                    <!-- /.page-header -->
+                                    <div class="col-xs-12">
+                                        <div class="col-md-4">
+                                            <div class="form-group" id="dust_div">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    除尘方式
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="dustremoveId" name="dustremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('dustremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    脱硫方式
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="sulphurremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    脱硝方式
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <select class="col-md-7" id="nitreremoveId"
+                                                            style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><br><br><br><br>
+
+
+                                    <div class="row" style="margin: 0 auto; text-align: center;">
+                                        <button id="addBoiler" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                    </div><br>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!--===================================================-->
+            <!--结束！  主要内容-->
+
+
+        </div>
+        <!--===================================================-->
+        <!--END CONTENT CONTAINER-->
+
+
+        <!-- =================================================================================== -->
+        <!--左侧导航栏-->
+        <!--===================================================-->
+        <nav id="mainnav-container" style="font-size: 14px;font-family: 'Microsoft Himalaya';">
+            <div id="mainnav">
+
+                <!--Menu-->
+                <!--================================-->
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul id="mainnav-menu" class="list-group">
+                                <!--Category name-->
+                                <!-- <li class="list-header">Submenus</li> -->
+                                <li>
+                                    <a href="/Client/enterpriseInfo">
+                                        <i class="ion-information-circled"></i>
+                                        <span class="menu-title">企业信息</span>
+                                    </a>
+                                </li>
+                                <li class="list-divider"></li>
+                                <li>
+                                    <a href="/Client/exhaust">
+                                        <i class="ion-bonfire"></i>
+                                        <span class="menu-title">烟囱（排气筒）</span>
+                                    </a>
+                                </li>
+
+                                <li class="active-link">
+                                    <a href="/Client/boilershell">
+                                        <i class="ion-fireball"></i>
+                                        <span class="menu-title"><strong>锅炉</strong></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Client/kilnshell">
+                                        <i class="ion-fireball"></i>
+                                        <span class="menu-title">窑炉</span>
+                                    </a>
+                                </li>
+                                <li class="list-divider"></li>
+
+                                <!--一级菜单：设备生产原料及产品-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-wallet"></i>
+                                        <span class="menu-title">设备生产原料及产品
+						                    </span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--二级菜单-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/device">生产工艺装置</a></li>
+                                        <li><a href="/Client/raw">原料信息</a></li>
+                                        <li><a href="/Client/product">产品信息</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-wallet"></i>
+                                        <span class="menu-title">
+												溶剂使用原料及产品
+											</span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/solventraw">原料信息</a></li>
+                                        <li><a href="/Client/solventproduct">产品信息</a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/Client/wastedevice">
+                                        <i class="ion-wrench"></i>
+                                        <span class="menu-title">废弃物处理设备</span>
+                                    </a>
+                                </li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-support"></i>
+                                        <span class="menu-title">
+												生产辅助设施
+											</span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/auxiliaryroaddust">工厂道路信息</a></li>
+                                        <li><a href="/Client/auxiliaryconstructiondust">工厂施工信息</a></li>
+                                        <li><a href="/Client/auxiliaryyarddust">工厂堆场信息</a></li>
+                                        <li><a href="/Client/auxiliarybaresoildust">工厂裸土信息</a></li>
+                                        <li><a href="/Client/auxiliaryWorkshop">工厂车间信息</a></li>
+                                    </ul>
+                                </li>
+                                <li class="list-divider"></li>
+                                <div id="wg-server" class="hide-small mainnav-widget-content" style="height: 100px;">
+
+                                </div>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!--================================-->
+                <!--End 菜单-->
+            </div>
+        </nav>
+        <!--===================================================-->
+        <!--END 左侧导航栏-->
+        <!-- =================================================================================== -->
+
+
+        <!-- =================================================================================== -->
+        <!--右侧菜单-->
+        <aside id="aside-container">
+            <div id="aside">
+                <div class="nano">
+                    <div class="nano-content">
+
+                        <!--Nav tabs-->
+                        <!--================================-->
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active">
+                                <a href="#demo-asd-tab-1" data-toggle="tab">
+                                    <i class="ti-comments"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#demo-asd-tab-2" data-toggle="tab">
+                                    <i class="ti-info-alt"></i>
+                                    Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#demo-asd-tab-3" data-toggle="tab">
+                                    <i class="ti-settings"></i>
+                                    Settings
+                                </a>
+                            </li>
+                        </ul>
+                        <!--================================-->
+                        <!--End nav tabs-->
+
+
+
+                        <!-- Tabs Content -->
+                        <!--================================-->
+                        <div class="tab-content">
+
+                            <!--First tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade in active" id="demo-asd-tab-1">
+                                <p class="pad-all text-lg">First tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <!--End first tab-->
+
+
+                            <!--Second tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade" id="demo-asd-tab-2">
+                                <p class="pad-all text-lg">Second tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--End second tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+                            <!--Third tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade" id="demo-asd-tab-3">
+                                <p class="pad-all text-lg">Third tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!--===================================================-->
+        <!--END 右侧菜单-->
+
+    </div>
+
+    <!-- =================================================================================== -->
+
+    <!-- 底部 -->
+    <!--===================================================-->
+    <footer id="footer">
+
+        <!-- Visible when footer positions are fixed -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="show-fixed pull-right">
+            You have <a href="#" class="text-bold text-main"><span class="label label-danger">3</span> pending action.</a>
+        </div>
+
+
+
+        <!-- Visible when footer positions are static -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="hide-fixed pull-right pad-rgt">
+            智能信息系统研究室
+        </div>
+
+
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <p class="pad-lft">&#0169; 2019 南开大学</p>
+
+
+
+    </footer>
+    <!--===================================================-->
+    <!-- END FOOTER -->
+
+
+    <!-- 到最上面按钮 -->
+    <!--===================================================-->
+    <button class="scroll-top btn">
+        <i class="pci-chevron chevron-up"></i>
+    </button>
+    <!--===================================================-->
+
+
+
+</div>
+<!--===================================================-->
+<!-- END OF CONTAINER -->
+<!--===============================================================-->
+<!--向js中提供session中的参数-->
+<!--<div th:object="${session.factoryInfo}">
+</div>-->
+
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>废弃物处理-设备</title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/nifty.min.css}" rel="stylesheet">
+    <link th:href="@{/themify-icons/themify-icons.min.css}" rel="stylesheet" >
+
+    <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
+
+    <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <!--JAVASCRIPT libiaries-->
+    <!--=================================================-->
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link th:href="@{/css/pace.min.css}" rel="stylesheet">
+    <script th:src="@{/js/pace.min.js}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script  th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
+    <script  th:src="@{/js/user.js}"></script>
+    <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/js/bootstrapPage.js}"></script>
+
+    <script th:src="@{/js/nifty.min.js}"></script>
+
+    <!--JAVASCRIPT myself-->
+    <!--=================================================-->
+    <!--<script th:src="@{/js/enterpriseInfo.js}"></script>-->
+
+    <!--STYLE CSS-->
+    <!--=================================================-->
+    <style type="text/css">
+        label {
+            color: black;
+            padding-top: 5px;
+            font-size: 15px;
+            font-family: Consolas;
+        }
+        input[type=text], select {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+
+    </style>
+</head>
+
+<!--<body class="container">
+
+
+</body>-->
+
+<body>
+<div id="container" class="effect aside-float aside-bright mainnav-fixed mainnav-lg">
+
+    <!--NAVBAR-->
+    <!--===================================================-->
+    <header id="navbar">
+        <div id="navbar-container" class="boxed" style="height: 50px;">
+
+            <!--Brand logo & name-->
+            <!--================================-->
+            <div class="navbar-header" style="height: 50px;">
+                <a href="#" class="navbar-brand">
+                    <img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">
+                    <div class="brand-title">
+                        <span class="brand-text">填报目录</span>
+                    </div>
+                </a>
+            </div>
+            <!--================================-->
+            <!--End brand logo & name-->
+
+
+            <!--Navbar Dropdown-->
+            <!--================================-->
+            <div class="navbar-content clearfix">
+                <ul class="nav navbar-top-links pull-left">
+
+                    <!--Navigation toogle button-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li class="tgl-menu-btn" style="height: 50px;">
+                        <a class="mainnav-toggle" href="#">
+                            <i class="ti-view-list icon-lg"></i>
+                        </a>
+                    </li>
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End Navigation toogle button-->
+
+                </ul>
+
+                <ul class="nav  pull-left">
+
+                    <!--标题-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <div style="margin-left: 30px; padding-top: 5px;">
+                        	<span class="text-2x text-bold" style="color: darkslategray; ">西宁市大气污染源清单管理系统
+                        	</span>
+                    </div>
+
+
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End 标题-->
+
+                </ul>
+
+                <ul class="nav navbar-top-links pull-right">
+
+                    <!--User dropdown-->
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <li id="dropdown-user" class="dropdown" >
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" style="height: 50px;">
+                                <span class="pull-right">
+                                    <!-- You may use image instead of an icon.
+                                    <!-- <img class="img-circle img-user media-object" src="img/av1.png" alt="Profile Picture"> -->
+                                    <i class="ti-face-smile ic-user"></i>
+                                </span>
+                            <div class="username hidden-xs">管理员</div>
+                        </a>
+
+
+                        <div class="dropdown-menu dropdown-menu-right panel-default" style="width: 200px;">
+                            <!-- User dropdown menu -->
+                            <ul class="head-list">
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-user icon-fw icon-lg"></i> 用户信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-settings icon-fw icon-lg"></i> 设置
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Dropdown footer -->
+                            <div class="pad-all text-right">
+                                <a href="#" class="btn btn-primary">
+                                    <i class="ti-unlock icon-fw"></i> 注销
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                    <!--End user dropdown-->
+
+                    <li>
+                        <a href="#" class="aside-toggle navbar-aside-icon" style="height: 50px;">
+                            <i class="pci-ver-dots"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--================================-->
+            <!--End Navbar Dropdown-->
+
+        </div>
+    </header>
+    <!--===================================================-->
+    <!--END NAVBAR-->
+
+    <!-- 内容大区块 -->
+    <!-- =================================================================================== -->
+    <div class="boxed" >
+
+        <!--CONTENT CONTAINER-->
+        <!--===================================================-->
+        <div id="content-container">
+
+            <!--Page Title-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <div id="page-title">
+                <h1 class="page-header text-overflow">废弃物处理设备</h1>
+            </div>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End page title-->
+
+
+            <!--二级标题-->
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <ol class="breadcrumb">
+
+                <li>目录</li>
+                <li class="active">废弃物处理设备</li>
+            </ol>
+            <hr>
+            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+            <!--End 二级标题-->
+
+
+
+            <!--注意啦！开始啦！-->
+            <!--主要内容写在这里-->
+            <!--===================================================-->
+            <div class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
+
+
+
+            </div>
+            <!--===================================================-->
+            <!--结束！  主要内容-->
+
+
+        </div>
+        <!--===================================================-->
+        <!--END CONTENT CONTAINER-->
+
+
+        <!-- =================================================================================== -->
+        <!--左侧导航栏-->
+        <!--===================================================-->
+        <nav id="mainnav-container" style="font-size: 14px;font-family: 'Microsoft Himalaya';">
+            <div id="mainnav">
+
+                <!--Menu-->
+                <!--================================-->
+                <div id="mainnav-menu-wrap">
+                    <div class="nano">
+                        <div class="nano-content">
+                            <ul id="mainnav-menu" class="list-group">
+                                <!--Category name-->
+                                <!-- <li class="list-header">Submenus</li> -->
+                                <li>
+                                    <a href="/Client/enterpriseInfo">
+                                        <i class="ion-information-circled"></i>
+                                        <span class="menu-title">企业信息</span>
+                                    </a>
+                                </li>
+                                <li class="list-divider"></li>
+                                <li>
+                                    <a href="/Client/exhaust">
+                                        <i class="ion-bonfire"></i>
+                                        <span class="menu-title">烟囱（排气筒）</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Client/boilershell">
+                                        <i class="ion-fireball"></i>
+                                        <span class="menu-title">锅炉</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/Client/kilnshell">
+                                        <i class="ion-fireball"></i>
+                                        <span class="menu-title">窑炉</span>
+                                    </a>
+                                </li>
+                                <li class="list-divider"></li>
+
+                                <!--一级菜单：设备生产原料及产品-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-wallet"></i>
+                                        <span class="menu-title">设备生产原料及产品
+						                    </span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--二级菜单-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/device">生产工艺装置</a></li>
+                                        <li><a href="/Client/raw">原料信息</a></li>
+                                        <li><a href="/Client/product">产品信息</a></li>
+                                    </ul>
+                                </li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-wallet"></i>
+                                        <span class="menu-title">
+												溶剂使用原料及产品
+											</span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/solventraw">原料信息</a></li>
+                                        <li><a href="/Client/solventproduct">产品信息</a></li>
+
+                                    </ul>
+                                </li>
+                                <li class="active-link">
+                                    <a href="/Client/wastedevice">
+                                        <i class="ion-wrench"></i>
+                                        <span class="menu-title">废弃物处理设备</span>
+                                    </a>
+                                </li>
+
+                                <!--Menu list item-->
+                                <li>
+                                    <a href="#">
+                                        <i class="ti-support"></i>
+                                        <span class="menu-title">
+												生产辅助设施
+											</span>
+                                        <i class="arrow"></i>
+                                    </a>
+
+                                    <!--Submenu-->
+                                    <ul class="collapse">
+                                        <li><a href="/Client/auxiliaryroaddust">工厂道路信息</a></li>
+                                        <li><a href="/Client/auxiliaryconstructiondust">工厂施工信息</a></li>
+                                        <li><a href="/Client/auxiliaryyarddust">工厂堆场信息</a></li>
+                                        <li><a href="/Client/auxiliarybaresoildust">工厂裸土信息</a></li>
+                                        <li><a href="/Client/auxiliaryWorkshop">工厂车间信息</a></li>
+                                    </ul>
+                                </li>
+                                <li class="list-divider"></li>
+                                <div id="wg-server" class="hide-small mainnav-widget-content" style="height: 100px;">
+
+                                </div>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!--================================-->
+                <!--End 菜单-->
+            </div>
+        </nav>
+        <!--===================================================-->
+        <!--END 左侧导航栏-->
+        <!-- =================================================================================== -->
+
+
+        <!-- =================================================================================== -->
+        <!--右侧菜单-->
+        <aside id="aside-container">
+            <div id="aside">
+                <div class="nano">
+                    <div class="nano-content">
+
+                        <!--Nav tabs-->
+                        <!--================================-->
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="active">
+                                <a href="#demo-asd-tab-1" data-toggle="tab">
+                                    <i class="ti-comments"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#demo-asd-tab-2" data-toggle="tab">
+                                    <i class="ti-info-alt"></i>
+                                    Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#demo-asd-tab-3" data-toggle="tab">
+                                    <i class="ti-settings"></i>
+                                    Settings
+                                </a>
+                            </li>
+                        </ul>
+                        <!--================================-->
+                        <!--End nav tabs-->
+
+
+
+                        <!-- Tabs Content -->
+                        <!--================================-->
+                        <div class="tab-content">
+
+                            <!--First tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade in active" id="demo-asd-tab-1">
+                                <p class="pad-all text-lg">First tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <!--End first tab-->
+
+
+                            <!--Second tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade" id="demo-asd-tab-2">
+                                <p class="pad-all text-lg">Second tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--End second tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+
+                            <!--Third tab-->
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            <div class="tab-pane fade" id="demo-asd-tab-3">
+                                <p class="pad-all text-lg">Third tab</p>
+                                <div class="pad-hor">
+
+                                </div>
+                            </div>
+                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!--===================================================-->
+        <!--END 右侧菜单-->
+
+    </div>
+
+    <!-- =================================================================================== -->
+
+    <!-- 底部 -->
+    <!--===================================================-->
+    <footer id="footer">
+
+        <!-- Visible when footer positions are fixed -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="show-fixed pull-right">
+            You have <a href="#" class="text-bold text-main"><span class="label label-danger">3</span> pending action.</a>
+        </div>
+
+
+
+        <!-- Visible when footer positions are static -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="hide-fixed pull-right pad-rgt">
+            智能信息系统研究室
+        </div>
+
+
+
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <p class="pad-lft">&#0169; 2019 南开大学</p>
+
+
+
+    </footer>
+    <!--===================================================-->
+    <!-- END FOOTER -->
+
+
+    <!-- 到最上面按钮 -->
+    <!--===================================================-->
+    <button class="scroll-top btn">
+        <i class="pci-chevron chevron-up"></i>
+    </button>
+    <!--===================================================-->
+
+
+
+</div>
+<!--===================================================-->
+<!-- END OF CONTAINER -->
+<!--===============================================================-->
+<!--向js中提供session中的参数-->
+<!--<div th:object="${session.factoryInfo}">
+</div>-->
+
+
+</body>
+
+
+
+</html>
