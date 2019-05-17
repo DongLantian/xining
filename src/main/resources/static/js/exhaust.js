@@ -90,56 +90,73 @@ $(function () {
 
     })
 
+
     //修改烟囱信息
     $("#updateExhaust").click(function () {
-        // ajax请求。
-        $.ajax({
-            type:"post",
-            dataType : "json",
-            url : "/exhaust/updateExhaust", //要访问的后台地址
-            contentType:"application/json",
-            data : JSON.stringify(app.exhaust), //直接传递对象给controller，
-                                             // 需将json对象转化成字符流,必须声明dataType和contentType
-                                             // 同时controller中注解requestbody
+        if (checkvalue("update")){
+            // ajax请求。
+            $.ajax({
+                type:"post",
+                dataType : "json",
+                url : "/exhaust/updateExhaust", //要访问的后台地址
+                contentType:"application/json",
+                data : JSON.stringify(app.exhaust), //直接传递对象给controller，
+                // 需将json对象转化成字符流,必须声明dataType和contentType
+                // 同时controller中注解requestbody
 
-            success : function(reponseData) { //reponseData为返回的数据
-                if (reponseData.isUpdate){
-                    app.exhaust=reponseData.exhaust;
-                    $.niftyNoty({
-                        type: "success",
-                        container : "page",
-                        title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                        message : "<p style='font-size: 16px;'>烟囱信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
-                        timer : 5000
-                    });
-                    setTimeout(function(){
-                        window.location.reload();//刷新当前页面.
-                    },6000);
-                }else {
-                    $.niftyNoty({
-                        type: "warning",
-                        container : "floating",
-                        title : "<br><p style='font-size: 16px;'>失败！！！</p>",
-                        message : "请重新填写信息并提交修改。。。",
-                        timer : 6000
-                    });
+                success : function(reponseData) { //reponseData为返回的数据
+                    if (reponseData.isUpdate){
+                        app.exhaust=reponseData.exhaust;
+                        $.niftyNoty({
+                            type: "success",
+                            container : "page",
+                            title : "<br><p style='font-size: 17px;'>成功！！！</p>",
+                            message : "<p style='font-size: 16px;'>烟囱信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
+                            timer : 5000
+                        });
+                        setTimeout(function(){
+                            window.location.reload();//刷新当前页面.
+                        },6000);
+                    }else {
+                        $.niftyNoty({
+                            type: "warning",
+                            container : "floating",
+                            title : "<br><p style='font-size: 16px;'>失败！！！</p>",
+                            message : "请重新填写信息并提交修改。。。",
+                            timer : 6000
+                        });
+                    }
+
+                },
+
+                error : function(XMLResponse) {
+                    alert("失败");
+
                 }
+            });
+        }else {
+            //必填项有空值，不可以提交
+            $.niftyNoty({
+                type: "warning",
+                container : "floating",
+                title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>"
+            });
+        }
 
-            },
-
-            error : function(XMLResponse) {
-                alert("失败");
-
-            }
-        });
     });
 });
 
 
 //自定义函数：检查必填项是否为空
-function  checkvalue() {
-    var ids = new Array("material", "exfheight", "smoke_outd", "smoke_outtem",
-        "smoke_outv", "smokeOuta","longitude","latitude");
+function  checkvalue(type) {
+    var ids;
+    if (type=="add"){
+        ids = new Array("material", "exfheight", "smoke_outd", "smoke_outtem",
+            "smoke_outv", "smokeOuta","longitude","latitude");
+    }else if(type="update"){
+        ids = new Array("materialUpdate", "exfheightUpdate", "smoke_outdUpdate", "smoke_outtemUpdate",
+            "smoke_outvUpdate", "smokeOutaUpdate","longitudeUpdate","latitudeUpdate");
+    }
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
         if ($("#"+ids[i]).val().length==0){
@@ -155,7 +172,7 @@ function  checkvalue() {
 }
 //自定义函数：增加烟囱
 function updatedata() {
-    if (checkvalue()){
+    if (checkvalue("add")){
         //必填项不为空，可以提交
         var material = document.getElementById("material").value;
         var exfheight = document.getElementById("exfheight").value;

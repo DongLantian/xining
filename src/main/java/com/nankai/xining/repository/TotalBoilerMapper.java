@@ -4,7 +4,9 @@ import com.nankai.xining.bean.TotalBoiler;
 import com.nankai.xining.bean.TotalBoilerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TotalBoilerMapper {
     long countByExample(TotalBoilerExample example);
 

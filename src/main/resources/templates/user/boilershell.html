@@ -34,6 +34,8 @@
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
     <script th:src="@{/js/boiler.js}"></script>
+    <script th:src="@{/js/SccLoad.js}"></script>
+    <script th:src="@{/js/removeStyleLoad.js}"></script>
 
     <!--STYLE CSS-->
     <!--=================================================-->
@@ -255,7 +257,7 @@
                             </script>
                         </div>
                         <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;color: cornflowerblue;">共有<span th:text="${boilerCount}">0</span>个锅炉。。。</span>
+                            <span style="font-weight: bold;">共有<span th:text="${boilerCount}">0</span>个锅炉。。。</span>
                         </div>
                     </div><br><br><hr>
                     <!--=======================修改锅炉Panel，默认隐藏=================================-->
@@ -286,19 +288,17 @@
                                                         锅炉用途
                                                         <a style="color: red;">****</a>
                                                     </label>
-                                                    <input type="hidden" name="functio_input" id="updatefunctio_input"
-                                                           v-model="boiler.functio"  />
+                                                    <input type="hidden" name="functio_input" id="updatefunctio_input" v-model="boiler.functio" />
                                                     <div class="col-md-7">
-                                                        <select class="col-xs-12" id="updatefunctio" v-model="boiler.functio"
+                                                        <select class="col-xs-12" id="updatefunctio"
                                                                 style="width: 170px;"
                                                                 Onchange="clientscc3('10',this.value,'updatefueltype','updatemodel');ischanged('qe3')" />
-                                                            <option value="">
+                                                            <option disabled="disabled">
                                                                 请选择
                                                             </option>
-
-
                                                         </select>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -309,13 +309,9 @@
                                                         锅炉所用燃料类型
                                                         <a style="color: red;">***</a>
                                                     </label>
-
-
-                                                    <input type="hidden" name="fueltype_input" id="updatefueltype_input"
-                                                           v-model="boiler.fueltype" >
+                                                    <input type="hidden" name="fueltype_input" id="updatefueltype_input" v-model="boiler.fueltype" />
                                                     <div class="col-md-7">
-                                                        <select id="updatefueltype"  v-model="boiler.fueltype"
-                                                                style="width: 170px;"
+                                                        <select id="updatefueltype" style="width: 170px;"
                                                                 onchange="clientscc4('10','updatefunctio',this.value,'updatemodel');ischanged('qe3')" />
 
                                                             <option disabled="disabled">
@@ -325,7 +321,7 @@
                                                         </select>
 
                                                     </div>
-
+                                                    {{boiler.fueltype}}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -334,11 +330,9 @@
                                                         锅炉类型
                                                         <a style="color: red;">**</a>
                                                     </label>
-                                                    <input type="hidden" name="model_input" id="updatemodel_input"
-                                                           v-model="boiler.model">
+                                                    <input type="hidden" name="model_input" id="updatemodel_input" v-model="boiler.model" />
                                                     <div class="col-md-7">
-                                                        <select class="col-xs-12" id="updatemodel" style="width: 170px;"
-                                                                v-model="boiler.model"
+                                                        <select id="updatemodel" style="width: 170px;"
                                                                 Onchange="ischanged('model')" />
 
                                                             <option disabled="disabled">
@@ -346,6 +340,7 @@
                                                             </option>
                                                         </select>
                                                     </div>
+                                                    {{boiler.model}}
                                                 </div>
                                             </div>
                                         </div>
@@ -449,10 +444,11 @@
                                                            v-model="boiler.exhustId" >
                                                     <div class="col-md-7">
 
-                                                        <select id="updatemchimney"
-
+                                                        <select id="updatemchimney"  v-model="boiler.exhustId"
                                                                 Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
-
+                                                            <option value="">
+                                                                请选择
+                                                            </option>
                                                         </select>
 
                                                     </div>
@@ -535,7 +531,7 @@
                                                     <div class="col-md-7">
                                                         <select class="col-xs-12" id="updatecombustionsystem" v-model="boiler.combustionsystem"
                                                                 Onchange="ischanged('model')" style="width: 170px;" />
-                                                        <option disabled="disabled">
+                                                        <option value="" selected="selected">
                                                             无
                                                         </option>
                                                         <option value="层燃">
@@ -591,7 +587,7 @@
                                                             <option disabled="disabled">
                                                                 请选择
                                                             </option>
-                                                            <option value="吨">
+                                                            <option value="吨" selected="selected">
                                                                 吨
                                                             </option>
                                                             <option value="万立方米">
@@ -916,7 +912,11 @@
                                                 </label>
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="updatedustremoveId" name="dustremoveId"
+                                                            v-model="boiler.dustremoveId"
                                                             style="width: 70%;" Onchange="ischanged('dustremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -930,7 +930,11 @@
 
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="updatesulphurremoveId"
+                                                            v-model="boiler.sulphurremoveId"
                                                             style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -944,7 +948,11 @@
 
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="updatenitreremoveId"
+                                                            v-model="boiler.nitreremoveId"
                                                             style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -988,8 +996,7 @@
                                                         锅炉用途
                                                         <a style="color: red;">****</a>
                                                     </label>
-                                                    <input type="hidden" name="functio_input" id="functio_input"
-                                                           value='${cur_boiler.functio}' />
+                                                    <input type="hidden" name="functio_input" id="functio_input"/>
                                                     <div class="col-md-7">
                                                         <select class="col-xs-12" id="functio" style="width: 170px;"
                                                                 Onchange="clientscc3('10',this.value,'fueltype','model');ischanged('qe3')" />
@@ -1014,8 +1021,7 @@
                                                     </label>
 
 
-                                                    <input type="hidden" name="fueltype_input" id="fueltype_input"
-                                                           value="${cur_boiler.fueltype}">
+                                                    <input type="hidden" name="fueltype_input" id="fueltype_input">
                                                     <div class="col-md-7">
                                                         <select id="fueltype" style="width: 170px;"
                                                                 onchange="clientscc4('10','functio',this.value,'model');ischanged('qe3')" />
@@ -1036,8 +1042,7 @@
                                                         锅炉类型
                                                         <a style="color: red;">**</a>
                                                     </label>
-                                                    <input type="hidden" name="model_input" id="model_input"
-                                                           value="${cur_boiler.model}">
+                                                    <input type="hidden" name="model_input" id="model_input">
                                                     <div class="col-md-7">
                                                         <select class="col-xs-12" id="model" style="width: 170px;"
                                                                 Onchange="ischanged('model')" />
@@ -1058,8 +1063,7 @@
                                                         机组编号<a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="machineNo"
-                                                               value="${cur_boiler.machineNo}" class="col-md-10"
+                                                        <input type="text" id="machineNo" class="col-md-10"
                                                                Onchange="ischanged('no')" style="width: 170px;"
                                                                maxlength="15" />
 
@@ -1074,7 +1078,6 @@
 
                                                     <div class="col-md-7">
                                                         <input type="text" id="installedCapacity"
-                                                               value="${cur_boiler.installedCapacity}"
                                                                onblur="IsChangeNew(this.id,0,2500,'装机容量')" alt="p4x3p2s"
                                                                class="check1" style="width: 170px;" placeholder="0-2500MW"
                                                                Onchange="ischanged('model')" />
@@ -1093,7 +1096,7 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="no" value="${cur_boiler.no}"  alt="p3x3p0s"
+                                                        <input type="text" id="no"   alt="p3x3p0s"
                                                                class="check1" 	Onchange="ischanged('no')" style="width: 170px;"
                                                                onkeyup="checkRate(this.id);" maxlength="20" />
                                                     </div>
@@ -1107,7 +1110,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="version" value="${cur_boiler.version}"
+                                                        <input type="text" id="version"
                                                                class="col-md-10" Onchange="ischanged('no')" maxlength="25"
                                                                style="width: 170px;" onblur="TestLen(this.id,20)" />
                                                     </div>
@@ -1130,7 +1133,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="tons" value="${cur_boiler.tons}"
+                                                        <input type="text" id="tons"
                                                                alt="p4x3p2s" class="check1"
                                                                onblur="IsChangeNew(this.id,0,5000,'锅炉吨位')"
                                                                style="width: 170px;"
@@ -1146,13 +1149,14 @@
                                                         对应烟囱
                                                         <a style="color: red;">*</a>
                                                     </label>
-                                                    <input type="hidden" name="mchimney_input" id="mchimney_input"
-                                                           value="${cur_boiler.exhustId}">
+                                                    <input type="hidden" name="mchimney_input" id="mchimney_input"/>
                                                     <div class="col-md-7">
 
                                                         <select id="mchimney"
-
                                                                 Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
+                                                            <option value="">
+                                                                请选择
+                                                            </option>
 
                                                         </select>
 
@@ -1178,7 +1182,6 @@
                                                     </label>
                                                     <div class="col-md-7">
                                                         <input type="text" id="coalash"
-                                                               value="${cur_boiler.coalash}"
                                                                onblur="IsChangeNew(this.id,0,45,'燃煤灰分')"  alt="p2x3p2s"
                                                                class="check1" style="width: 170px;" placeholder="0~45"
                                                                Onchange="ischanged('model')" />
@@ -1194,8 +1197,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="coalsulfur"
-                                                               value="${cur_boiler.coalsulfur}" alt="p2x3p2s"
+                                                        <input type="text" id="coalsulfur" alt="p2x3p2s"
                                                                class="check1" Onchange="ischanged('no')"
                                                                onblur="IsChangeNew(this.id,0,3,'燃煤硫分')"
                                                                style="width: 170px;" placeholder="0~3"
@@ -1215,7 +1217,7 @@
 
                                                     <div class="col-md-7">
                                                         <input type="text" id="coalVolatilisation" Onchange="ischanged('model')"
-                                                               value="${cur_boiler.coalVolatilisation}" alt="p2x3p2s" class="check1"   placeholder="0~50"
+                                                                alt="p2x3p2s" class="check1"   placeholder="0~50"
                                                                onblur="IsChangeNew(this.id,0,50,'煤炭挥发分')" style="width: 170px;" onkeyup="checkNum(this);"/>
                                                     </div>
                                                 </div>
@@ -1231,12 +1233,11 @@
                                                     </label>
                                                     <input type="hidden" name="combustionsystem_input"
                                                            id="combustionsystem_input" style="width: 170px;"
-                                                           value="${cur_boiler.combustionsystem}"
                                                            onblur="TestLen(this.id,10)" />
                                                     <div class="col-md-7">
                                                         <select class="col-xs-12" id="combustionsystem"
                                                                 Onchange="ischanged('model')" style="width: 170px;" />
-                                                        <option value="">
+                                                        <option value="" selected="selected">
                                                             无
                                                         </option>
                                                         <option value="层燃">
@@ -1265,8 +1266,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="fuelAusage" style="width: 170px;"
-                                                               value="${cur_boiler.fuelAusage}" class="check1"
+                                                        <input type="text" id="fuelAusage" style="width: 170px;" class="check1"
                                                                alt="p7x3p4s" onchange="ischanged('kilnuse')"
                                                                onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
                                                         />
@@ -1284,15 +1284,14 @@
 
                                                     <div class="col-md-7">
                                                         <input type="hidden" name="fuelAusageunit_input"
-                                                               id="fuelAusageunit_input"
-                                                               value="${cur_boiler.fuelAusageunit}" style="width: 170px;" />
+                                                               id="fuelAusageunit_input" style="width: 170px;" />
                                                         <select id="fuelAusageunit"
                                                                 data-placeholder="Choose a Country..."
                                                                 Onchange="ischanged('model')" style="width: 170px;">
-                                                            <option value="">
+                                                            <option disabled="disabled">
                                                                 请选择
                                                             </option>
-                                                            <option value="吨">
+                                                            <option value="吨" selected="selected">
                                                                 吨
                                                             </option>
                                                             <option value="万立方米">
@@ -1312,7 +1311,7 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="feiqiti" value="${cur_boiler.feiqiti}"
+                                                        <input type="text" id="feiqiti"
                                                                alt="p9x3p5s" class="check1" style="width: 170px;"
                                                                Onchange="ischanged('feiqiti')" />
                                                     </div>
@@ -1325,7 +1324,7 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="so2out" value="${cur_boiler.so2out}"
+                                                        <input type="text" id="so2out"
                                                                alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
                                                                style="width: 170px;" />
                                                     </div>
@@ -1340,7 +1339,7 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="noxout" value="${cur_boiler.noxout}"
+                                                        <input type="text" id="noxout"
                                                                alt="p9x3p5s" class="check1" style="width: 170px;"
                                                                Onchange="ischanged('feiqiti')" />
                                                     </div>
@@ -1353,7 +1352,7 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="pmout" value="${cur_boiler.pmout}"
+                                                        <input type="text" id="pmout"
                                                                alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
                                                                style="width: 170px;" />
                                                     </div>
@@ -1376,7 +1375,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.janUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="janUseamount" class="check1" alt="p0x3p4s"
                                                                Onchange="ischanged('kilnuse')"
                                                                onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
@@ -1392,7 +1391,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.febUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="febUseamount" class="check1" alt="p0x3p4s"
                                                                Onchange="ischanged('kilnuse')"
                                                                onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
@@ -1410,7 +1409,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.marUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="marUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -1427,7 +1426,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.aprUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="aprUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1448,7 +1447,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.mayUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="mayUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1467,7 +1466,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.juneUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="juneUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1488,7 +1487,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.julyUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="julyUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1507,7 +1506,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.augUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="augUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1528,7 +1527,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.septUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="septUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1547,7 +1546,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.octUseAmount}" type="text"
+                                                        <input  type="text"
                                                                id="octUseAmount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
@@ -1568,7 +1567,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.novUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="novUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -1586,7 +1585,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input value="${cur_boiler.decUseamount}" type="text"
+                                                        <input  type="text"
                                                                id="decUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -1618,6 +1617,9 @@
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="dustremoveId" name="dustremoveId"
                                                             style="width: 70%;" Onchange="ischanged('dustremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1632,6 +1634,9 @@
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="sulphurremoveId"
                                                             style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1646,6 +1651,9 @@
                                                 <div class="col-md-7">
                                                     <select class="col-md-7" id="nitreremoveId"
                                                             style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                        <option value="">
+                                                            请选择
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>

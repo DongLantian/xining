@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Sulphurremove;
 import com.nankai.xining.bean.SulphurremoveExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SulphurremoveMapper {
     long countByExample(SulphurremoveExample example);
 

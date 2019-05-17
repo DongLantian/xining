@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Dustremove;
 import com.nankai.xining.bean.DustremoveExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DustremoveMapper {
     long countByExample(DustremoveExample example);
 

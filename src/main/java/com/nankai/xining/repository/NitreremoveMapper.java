@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Nitreremove;
 import com.nankai.xining.bean.NitreremoveExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface NitreremoveMapper {
     long countByExample(NitreremoveExample example);
 

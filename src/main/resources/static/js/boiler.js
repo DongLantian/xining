@@ -29,24 +29,22 @@ $(function () {
 
         }
     });
-    /*//锅炉所用燃料类型菜单初始化
+
+    //烟囱下拉菜单初始化
     $.ajax({
         type:"post",
         dataType : "json",
-        url : "/scc/loadSelectB", //要访问的后台地址
-        data : {
-            scc1ID: '10',
-            scc2ID: '01'
-        },                             //要发送的数据，采用josn格式
+        url : "/common/getExhaustList", //要访问的后台地址
+        data : {},                             //要发送的数据，采用josn格式
 
         success : function(list) { //list为返回的数据
             //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
             $.each(list,function (index,item) {
                 var $option = $("<option></option>");
-                $option.attr("value", item.scc3);
-                $option.text(item.description+'('+item.scc3+')');
-                $("#updatefueltype").append($option);
-                $("#fueltype").append("<option value="+item.scc3+">"+item.description+"("+item.scc3+")</option>");
+                $option.attr("value", item.exfId);
+                $option.text('烟囱'+item.nkNo+'号');
+                $("#updatemchimney").append($option);
+                $("#mchimney").append("<option value="+item.exfId+">烟囱"+item.nkNo+"号</option>");
             })
         },
         error : function(XMLResponse) {
@@ -54,41 +52,12 @@ $(function () {
 
         }
     });
-    //锅炉类型菜单初始化
-    $.ajax({
-        type:"post",
-        dataType : "json",
-        url : "/scc/loadSelectC", //要访问的后台地址
-        data : {
-            scc1ID: '10',
-            scc2ID: '01',
-            scc3ID: '110'
-        },                             //要发送的数据，采用josn格式
 
-        success : function(list) { //list为返回的数据
-            //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-            $.each(list,function (index,item) {
-                var $option = $("<option></option>");
-                $option.attr("value", item.scc4);
-                $option.text(item.description+'('+item.scc4+')');
-                $("#updatemodel").append($option);
-                $("#model").append("<option value="+item.scc4+">"+item.description+"("+item.scc4+")</option>");
-            })
-        },
-        error : function(XMLResponse) {
-            alert(XMLResponse.responseText);
-
-        }
-    });
-*/
-
-
+    //使用Vue控制页面元素：用于编辑和删除功能
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            message: "Hello啊！",
-            ID: "",
-            boiler: ""
+            boiler: {}
         },
         methods:{
             delExhaust:function (e) {
@@ -155,16 +124,30 @@ $(function () {
 
                     success : function(data) { //data为返回的数据
                         app.boiler=data;
+                        $("#updatefunctio_input").val(data.functio);
+                        $("#updatefueltype_input").val(data.fueltype);
+                        $("#updatemodel_input").val(data.model);
+                        $("#updatefunctio").val(data.functio);
                         clientscc3('10',data.functio,'updatefueltype','updatemodel');
-                        //编辑时获取不到functioID。解决方法为：修改这个函数，直接传入ID，两个下拉框在js中注册事件。
-                        clientscc4('10','updatefunctio',data.fueltype,'updatemodel');
-                    },
+                        clientscc4('10','updatefunctio_input',data.fueltype,'updatemodel');
 
+                        app.initSelect();
+                    },
                     error : function(XMLResponse) {
                         alert("没有");
 
                     }
                 });
+
+
+            },
+            initSelect:function () {
+                setTimeout(function () {
+                    var fuelInput = $("#updatefueltype_input").val();
+                    var modelInput = $("#updatemodel_input").val();
+                    $("#updatefueltype").val(fuelInput);
+                    $("#updatemodel").val(modelInput);
+                },1000)
             }
 
         }
@@ -218,9 +201,25 @@ $(function () {
 
 
 //自定义函数：检查必填项是否为空
-function  checkvalue() {
-    var ids = new Array("material", "exfheight", "smoke_outd", "smoke_outtem",
-        "smoke_outv", "smokeOuta","longitude","latitude");
+function  checkvalue(type) {
+    var ids;
+    if (type=="add"){
+        ids = new Array("functio", "fueltype", "model", "no", "version",
+            "tons", "coalsulfur", "combustionsystem", "fuelAusage",
+            "fuelAusageunit", "mchimney", "feiqiti", "so2out", "noxout",
+            "pmout","coalash","coalVolatilisation","machineNo","installedCapacity",
+            "janUseamount", "febUseamount","marUseamount",
+            "aprUseamount","mayUseamount","juneUseamount",
+            "julyUseamount","augUseamount","septUseamount","octUseAmount","novUseamount","decUseamount");
+    }else if(type="update"){
+        ids = new Array("updatefunctio", "updatefueltype", "updatemodel", "updateno", "updateversion",
+            "updatetons", "updatecoalsulfur", "updatecombustionsystem", "updatefuelAusage",
+            "updatefuelAusageunit", "updatemchimney", "updatefeiqiti", "updateso2out", "updatenoxout",
+            "updatepmout","updatecoalash","updatecoalVolatilisation","updatemachineNo","updateinstalledCapacity",
+            "updatejanUseamount", "updatefebUseamount","updatemarUseamount",
+            "updateaprUseamount","updatemayUseamount","updatejuneUseamount",
+            "updatejulyUseamount","updateaugUseamount","updateseptUseamount","updateoctUseAmount","updatenovUseamount","updatedecUseamount");
+    }
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
         if ($("#"+ids[i]).val().length==0){
@@ -234,33 +233,107 @@ function  checkvalue() {
         return true;
 
 }
-//自定义函数：增加烟囱
+
+//自定义函数：增加锅炉
 function updatedata() {
-    if (checkvalue()){
+    /*checkvalue("add")*/
+    if (1){
         //必填项不为空，可以提交
-        var material = document.getElementById("material").value;
-        var exfheight = document.getElementById("exfheight").value;
-        var smoke_outtem = document.getElementById("smoke_outtem").value;
-        var smoke_outd = document.getElementById("smoke_outd").value;
-        var smoke_outv = document.getElementById("smoke_outv").value;
-        var longitude = document.getElementById("longitude").value;
-        var latitude = document.getElementById("latitude").value;
-        var smokeOuta = parseInt(document.getElementById("smokeOuta").value);
+        var functio = document.getElementById("functio").value;
+        var functiondec = $("#functio").find("option:selected").text();
+        var fueltype = document.getElementById("fueltype").value;
+        var fueltypeDec = $("#fueltype").find("option:selected").text();
+        var model = document.getElementById("model").value;
+        var modelDec = $("#model").find("option:selected").text();
+
+        var no = document.getElementById("no").value;
+        var version = document.getElementById("version").value;
+        var tons = document.getElementById("tons").value;
+        var coalsulfur = document.getElementById("coalsulfur").value;
+        var combustionsystem = document.getElementById("combustionsystem").value;
+        var fuelAusage = document.getElementById("fuelAusage").value;
+        var fuelAusageunit = document.getElementById("fuelAusageunit").value;
+        var chimney = parseInt(document.getElementById("mchimney").value);
+        var so2out = document.getElementById("so2out").value;
+        var feiqiti = document.getElementById("feiqiti").value;
+        var noxout = document.getElementById("noxout").value;
+        var pmout = document.getElementById("pmout").value;
+
+        var coalash = document.getElementById("coalash").value;
+        var coalVolatilisation = document.getElementById("coalVolatilisation").value;
+        var machineNo = document.getElementById("machineNo").value;
+        var installedCapacity = document.getElementById("installedCapacity").value;
+
+        var janUseamount = document.getElementById("janUseamount").value;
+        var febUseamount = document.getElementById("febUseamount").value;
+        var marUseamount = document.getElementById("marUseamount").value;
+        var aprUseamount = document.getElementById("aprUseamount").value;
+        var mayUseamount = document.getElementById("mayUseamount").value;
+        var juneUseamount = document.getElementById("juneUseamount").value;
+        var julyUseamount = document.getElementById("julyUseamount").value;
+        var augUseamount = document.getElementById("augUseamount").value;
+        var septUseamount = document.getElementById("septUseamount").value;
+        var octUseAmount = document.getElementById("octUseAmount").value;
+        var novUseamount = document.getElementById("novUseamount").value;
+        var decUseamount = document.getElementById("decUseamount").value;
+
+        var dustremoveId = document.getElementById("dustremoveId").value;
+        var sulfurId = document.getElementById("sulphurremoveId").value;
+        var nitreId = document.getElementById("nitreremoveId").value;
+        var dustremoveDec = $("#dustremoveId").find("option:selected").text();
+        var sulphurremoveDec = $("#sulphurremoveId").find("option:selected").text();
+        var nitreremoveDec = $("#nitreremoveId").find("option:selected").text();
+
+        var chimneynkno = parseInt($("#mchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
 
         // ajax请求。
         $.ajax({
             type:"post",
             dataType : "json",
-            url : "/exhaust/addExhaust", //要访问的后台地址
+            url : "/boiler/addBoiler", //要访问的后台地址
             data : {
-                exfMaterial : material,
-                exfHeight : exfheight,
-                smokeOutd : smoke_outd,
-                smokeOUtteM : smoke_outtem,
-                smokeOutv : smoke_outv,
-                exfLongitude : longitude,
-                exfLatitude : latitude,
-                smokeOuta : smokeOuta
+                isnew : 0,
+                functio : functio,
+                functionDec : functiondec,
+                model : model,
+                tons : tons,
+                installedCapacity : installedCapacity,
+                coalVolatilisation : coalVolatilisation,
+                machineNo : machineNo,
+                fueltype : fueltype,
+                coalash : coalash,
+                coalsulfur : coalsulfur,
+                noxout : noxout,
+                pmout : pmout,
+                feiqiti : feiqiti,
+                so2out : so2out,
+                sulphurremoveDec : sulphurremoveDec,
+                dustremoveDec : dustremoveDec,
+                modeldec : modelDec,
+                fueltypedec : fueltypeDec,
+                nitreremoveDec : nitreremoveDec,
+                combustionsystem : combustionsystem,
+                fuelAusage : fuelAusage,
+                fuelAusageunit : fuelAusageunit,
+                version : version,
+                dustremoveId : dustremoveId,
+                sulphurremoveId : sulfurId,
+                nitreremoveId : nitreId,
+                no : no,
+                janUseamount : janUseamount,
+                febUseamount : febUseamount,
+                marUseamount : marUseamount,
+                aprUseamount : aprUseamount,
+                mayUseamount : mayUseamount,
+                juneUseamount : juneUseamount,
+                julyUseamount : julyUseamount,
+                augUseamount : augUseamount,
+                septUseamount : septUseamount,
+                octUseAmount : octUseAmount,
+                novUseamount : novUseamount,
+                decUseamount : decUseamount,
+                exhustId : chimney,
+                exfNo : chimneynkno
             }, //要发送的数据，采用josn格式
 
             success : function(data) { //data为返回的数据
@@ -302,83 +375,6 @@ function updatedata() {
 
 }
 
-//动态更新scc下拉菜单方法
-//动态更新下一级菜单：点击当前下拉菜单事件；点击编辑事件；
 
-//根据第一级菜单的选项更新第二级
-function clientscc3(scc1,scc2,selectB,selectC) {
-    $("#"+selectB).empty();
-    $("#"+selectB).append("<option value=''>请选择</option>");
-    $("#"+selectC).empty();
-    $("#"+selectC).append("<option disabled='disabled'>请先选择锅炉燃料类型</option>");
-    if (scc2!=""){
-        //锅炉所用燃料类型菜单初始化
-        $.ajax({
-            type:"post",
-            dataType : "json",
-            url : "/scc/loadSelectB", //要访问的后台地址
-            data : {
-                scc1ID: scc1,
-                scc2ID: scc2
-            },                             //要发送的数据，采用josn格式
 
-            success : function(list) { //list为返回的数据
-                //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-                $.each(list,function (index,item) {
-                    var $option = $("<option></option>");
-                    $option.attr("value", item.scc3);
-                    $option.text(item.description+'('+item.scc3+')');
-                    $("#"+selectB).append($option);
-                })
-            },
-            error : function(XMLResponse) {
-                alert(XMLResponse.responseText);
 
-            }
-        });
-    }else {
-        $("#"+selectB).empty();
-        $("#"+selectB).append("<option disabled='disabled'>请先选择锅炉用途</option>");
-        $("#"+selectC).empty();
-        $("#"+selectC).append("<option disabled='disabled'>请先选择锅炉燃料类型</option>");
-    }
-
-}
-
-//根据第二级菜单的选项更新第三级
-function clientscc4(scc1,selectA,scc3,selectC) {
-    $("#"+selectC).empty();
-    $("#"+selectC).append("<option value=''>请选择</option>");
-    var scc2 = $("#"+selectA).val();
-    if (scc3!=""){
-        //锅炉类型菜单初始化
-        $.ajax({
-            type:"post",
-            dataType : "json",
-            url : "/scc/loadSelectC", //要访问的后台地址
-            data : {
-                scc1ID: scc1,
-                scc2ID: scc2,
-                scc3ID: scc3
-            },                             //要发送的数据，采用josn格式
-
-            success : function(list) { //list为返回的数据
-                //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-                $.each(list,function (index,item) {
-                    var $option = $("<option></option>");
-                    $option.attr("value", item.scc4);
-                    $option.text(item.description+'('+item.scc4+')');
-                    $("#"+selectC).append($option);
-                })
-            },
-            error : function(XMLResponse) {
-                alert(XMLResponse.responseText);
-
-            }
-        });
-    }else {
-        $("#"+selectC).empty();
-        $("#"+selectC).append("<option disabled='disabled'>请先选择锅炉燃料类型</option>");
-    }
-
-}

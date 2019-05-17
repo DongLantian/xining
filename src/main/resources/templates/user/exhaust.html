@@ -252,7 +252,7 @@
                             </script>
                         </div>
                         <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;color: cornflowerblue;">共有<span th:text="${exhaustCount}"></span>个烟囱。。。</span>
+                            <span style="font-weight: bold;">共有<span th:text="${exhaustCount}"></span>个烟囱。。。</span>
                         </div>
                     </div><br><br><hr>
                     <!--=======================修改烟囱Panel，默认隐藏=================================-->
@@ -293,7 +293,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="materialUpdate" name="material"
+                                                <input type="text" id="materialUpdate" name="material" value="123"
                                                        class="form-control" v-model="exhaust.exfMaterial"
                                                        Onchange="ischanged('material')"
                                                        onblur="TestLen(this.id,10)" />
