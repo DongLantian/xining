@@ -254,6 +254,9 @@
                         <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
                             <span style="font-weight: bold;">共有<span th:text="${exhaustCount}"></span>个烟囱。。。</span>
                         </div>
+                        <div style="float:right;margin-right: 120px;">
+                            <button id="addBtn" class="btn btn-primary btn-lg">添加烟囱</button>
+                        </div>
                     </div><br><br><hr>
                     <!--=======================修改烟囱Panel，默认隐藏=================================-->
                     <div id="updatePanel" class="panel panel-info" hidden="hidden" style="margin-right: 60px;">
@@ -458,7 +461,7 @@
                     </div>
 
                     <!--==============增加烟囱Panel=====================================================-->
-                    <div id="addPanel" class="panel panel-bordered-primary" style="margin-right: 60px;">
+                    <div id="addPanel" hidden="hidden" class="panel panel-bordered-primary" style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">添加烟囱（带*号为必填项）</h3>
                         </div>

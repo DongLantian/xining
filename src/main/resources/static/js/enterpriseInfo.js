@@ -180,7 +180,7 @@ function  checkvalue() {
         "principalEmail","lon1","lat1","lon2","lat2","lon3","lat3","lon4","lat4");
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
-        if ($("#"+ids[i]).val().length==0){
+        if ($.trim($("#"+ids[i]).val()).length==0){
             hasEmpty=1;
             break;
         }
@@ -322,7 +322,8 @@ function addFactory() {
         $.niftyNoty({
             type: "warning",
             container : "floating",
-            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。</p>"
+            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。</p>",
+            timer : 5000
         });
     }
 

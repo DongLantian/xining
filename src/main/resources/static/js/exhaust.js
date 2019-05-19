@@ -63,6 +63,7 @@ $(function () {
             },
             editExhaust:function(e) {
                 $("#updatePanel").removeAttr("hidden");
+                $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 // ajax请求。
@@ -144,6 +145,13 @@ $(function () {
         }
 
     });
+
+    //添加烟囱按钮事件
+    $("#addBtn").click(function () {
+        $("#addPanel").removeAttr("hidden");
+        $("#updatePanel").attr("hidden","hidden");
+    });
+
 });
 
 
@@ -159,7 +167,7 @@ function  checkvalue(type) {
     }
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
-        if ($("#"+ids[i]).val().length==0){
+        if ($.trim($("#"+ids[i]).val()).length==0){
             hasEmpty=1;
             break;
         }
@@ -232,7 +240,8 @@ function updatedata() {
         $.niftyNoty({
             type: "warning",
             container : "floating",
-            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>"
+            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>",
+            timer : 5000
         });
     }
 

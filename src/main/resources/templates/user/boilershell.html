@@ -15,6 +15,8 @@
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/validator/bootstrapValidator.min.css}" rel="stylesheet">
+
     <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
@@ -28,6 +30,10 @@
     <script  th:src="@{/js/user.js}"></script>
     <script  th:src="@{/js/bootstrap.js}"></script>
     <script  th:src="@{/js/bootstrapPage.js}"></script>
+    <!--<script  th:src="@{/plugins/jqueryValidator/jquery.validate.min.js}"></script>
+    <script  th:src="@{/plugins/jqueryValidator/messages_zh.js}"></script>-->
+    <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
+    <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
@@ -51,7 +57,6 @@
             border-radius: 4px;
             font-size: 15px;
         }
-
 
     </style>
 </head>
@@ -259,9 +264,12 @@
                         <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
                             <span style="font-weight: bold;">共有<span th:text="${boilerCount}">0</span>个锅炉。。。</span>
                         </div>
+                        <div style="float:right;margin-right: 120px;">
+                            <button id="addBtn" class="btn btn-primary btn-lg">添加锅炉</button>
+                        </div>
                     </div><br><br><hr>
                     <!--=======================修改锅炉Panel，默认隐藏=================================-->
-                    <div id="updatePanel" class="panel panel-info"  style="margin-right: 60px;">
+                    <div id="updatePanel" class="panel panel-info" hidden="hidden"  style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">修改锅炉信息（带*号为必填项）</h3>
                         </div>
@@ -290,7 +298,7 @@
                                                     </label>
                                                     <input type="hidden" name="functio_input" id="updatefunctio_input" v-model="boiler.functio" />
                                                     <div class="col-md-7">
-                                                        <select class="col-xs-12" id="updatefunctio"
+                                                        <select class="col-xs-12" id="updatefunctio" name="updatefunctio"
                                                                 style="width: 170px;"
                                                                 Onchange="clientscc3('10',this.value,'updatefueltype','updatemodel');ischanged('qe3')" />
                                                             <option disabled="disabled">
@@ -311,7 +319,7 @@
                                                     </label>
                                                     <input type="hidden" name="fueltype_input" id="updatefueltype_input" v-model="boiler.fueltype" />
                                                     <div class="col-md-7">
-                                                        <select id="updatefueltype" style="width: 170px;"
+                                                        <select id="updatefueltype" name="updatefueltype" style="width: 170px;"
                                                                 onchange="clientscc4('10','updatefunctio',this.value,'updatemodel');ischanged('qe3')" />
 
                                                             <option disabled="disabled">
@@ -321,7 +329,6 @@
                                                         </select>
 
                                                     </div>
-                                                    {{boiler.fueltype}}
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -332,7 +339,7 @@
                                                     </label>
                                                     <input type="hidden" name="model_input" id="updatemodel_input" v-model="boiler.model" />
                                                     <div class="col-md-7">
-                                                        <select id="updatemodel" style="width: 170px;"
+                                                        <select id="updatemodel" name="updatemodel" style="width: 170px;"
                                                                 Onchange="ischanged('model')" />
 
                                                             <option disabled="disabled">
@@ -340,7 +347,6 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                    {{boiler.model}}
                                                 </div>
                                             </div>
                                         </div>
@@ -352,7 +358,7 @@
                                                         机组编号<a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatemachineNo"
+                                                        <input type="text" id="updatemachineNo" name="updatemachineNo"
                                                                v-model="boiler.machineNo"  class="col-md-10"
                                                                Onchange="ischanged('no')" style="width: 170px;"
                                                                maxlength="15" />
@@ -367,10 +373,10 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updateinstalledCapacity"
+                                                        <input type="text" id="updateinstalledCapacity" name="updateinstalledCapacity"
                                                                v-model="boiler.installedCapacity"
                                                                onblur="IsChangeNew(this.id,0,2500,'装机容量')" alt="p4x3p2s"
-                                                               class="check1" style="width: 170px;" placeholder="0-2500MW"
+                                                               class="col-md-10" style="width: 170px;" placeholder="0-2500MW"
                                                                Onchange="ischanged('model')" />
 
                                                     </div>
@@ -387,8 +393,8 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updateno" v-model="boiler.no"   alt="p3x3p0s"
-                                                               class="check1" 	Onchange="ischanged('no')" style="width: 170px;"
+                                                        <input type="text" id="updateno" name="updateno" v-model="boiler.no"   alt="p3x3p0s"
+                                                               class="col-md-10" 	Onchange="ischanged('no')" style="width: 170px;"
                                                                onkeyup="checkRate(this.id);" maxlength="20" />
                                                     </div>
                                                 </div>
@@ -401,7 +407,7 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updateversion" v-model="boiler.version"
+                                                        <input type="text" id="updateversion" name="updateversion" v-model="boiler.version"
                                                                class="col-md-10" Onchange="ischanged('no')" maxlength="25"
                                                                style="width: 170px;" onblur="TestLen(this.id,20)" />
                                                     </div>
@@ -424,8 +430,8 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatetons" v-model="boiler.tons"
-                                                               alt="p4x3p2s" class="check1"
+                                                        <input type="text" id="updatetons" name="updatetons"  v-model="boiler.tons"
+                                                               alt="p4x3p2s" class="col-md-10"
                                                                onblur="IsChangeNew(this.id,0,5000,'锅炉吨位')"
                                                                style="width: 170px;"
                                                                placeholder="0-5000" Onchange="ischanged('no')"/>
@@ -444,8 +450,8 @@
                                                            v-model="boiler.exhustId" >
                                                     <div class="col-md-7">
 
-                                                        <select id="updatemchimney"  v-model="boiler.exhustId"
-                                                                Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
+                                                        <select id="updatemchimney" name="updatemchimney"  v-model="boiler.exhustId"
+                                                                Onchange="exhaustModel(this.value,'update');ischanged('no')" style="width: 170px;">
                                                             <option value="">
                                                                 请选择
                                                             </option>
@@ -472,10 +478,10 @@
                                                         燃料灰分(单位:%)<a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatecoalash"
+                                                        <input type="text" id="updatecoalash" name="updatecoalash"
                                                                v-model="boiler.coalash"
                                                                onblur="IsChangeNew(this.id,0,45,'燃煤灰分')"  alt="p2x3p2s"
-                                                               class="check1" style="width: 170px;" placeholder="0~45"
+                                                               class="col-md-10" style="width: 170px;" placeholder="0~45"
                                                                Onchange="ischanged('model')" />
 
                                                     </div>
@@ -489,9 +495,9 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatecoalsulfur"
+                                                        <input type="text" id="updatecoalsulfur" name="updatecoalsulfur"
                                                                v-model="boiler.coalsulfur"  alt="p2x3p2s"
-                                                               class="check1" Onchange="ischanged('no')"
+                                                               class="col-md-10" Onchange="ischanged('no')"
                                                                onblur="IsChangeNew(this.id,0,3,'燃煤硫分')"
                                                                style="width: 170px;" placeholder="0~3"
                                                         />
@@ -509,8 +515,8 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatecoalVolatilisation" Onchange="ischanged('model')"
-                                                               v-model="boiler.coalVolatilisation"  alt="p2x3p2s" class="check1"   placeholder="0~50"
+                                                        <input type="text" id="updatecoalVolatilisation" name="updatecoalVolatilisation" Onchange="ischanged('model')"
+                                                               v-model="boiler.coalVolatilisation"  alt="p2x3p2s" class="col-md-10"   placeholder="0~50"
                                                                onblur="IsChangeNew(this.id,0,50,'煤炭挥发分')" style="width: 170px;" onkeyup="checkNum(this);"/>
                                                     </div>
                                                 </div>
@@ -529,9 +535,9 @@
                                                            v-model="boiler.combustionsystem"
                                                            onblur="TestLen(this.id,10)" />
                                                     <div class="col-md-7">
-                                                        <select class="col-xs-12" id="updatecombustionsystem" v-model="boiler.combustionsystem"
+                                                        <select class="col-xs-12" id="updatecombustionsystem" name="updatecombustionsystem" v-model="boiler.combustionsystem"
                                                                 Onchange="ischanged('model')" style="width: 170px;" />
-                                                        <option value="" selected="selected">
+                                                        <option value="">
                                                             无
                                                         </option>
                                                         <option value="层燃">
@@ -560,8 +566,8 @@
                                                     </label>
 
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatefuelAusage" style="width: 170px;"
-                                                               v-model="boiler.fuelAusage" class="check1"
+                                                        <input type="text" id="updatefuelAusage" name="updatefuelAusage" style="width: 170px;"
+                                                               v-model="boiler.fuelAusage" class="col-md-10"
                                                                alt="p7x3p4s" onchange="ischanged('kilnuse')"
                                                                onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
                                                         />
@@ -581,13 +587,13 @@
                                                         <input type="hidden" name="fuelAusageunit_input"
                                                                id="updatefuelAusageunit_input"
                                                                v-model="boiler.fuelAusageunit"  style="width: 170px;" />
-                                                        <select id="updatefuelAusageunit" v-model="boiler.fuelAusageunit"
+                                                        <select id="updatefuelAusageunit" name="updatefuelAusageunit" v-model="boiler.fuelAusageunit"
                                                                 data-placeholder="Choose a Country..."
                                                                 Onchange="ischanged('model')" style="width: 170px;">
                                                             <option disabled="disabled">
                                                                 请选择
                                                             </option>
-                                                            <option value="吨" selected="selected">
+                                                            <option value="吨">
                                                                 吨
                                                             </option>
                                                             <option value="万立方米">
@@ -607,8 +613,8 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatefeiqiti" v-model="boiler.feiqiti"
-                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                        <input type="text" id="updatefeiqiti" name="updatefeiqiti" v-model="boiler.feiqiti"
+                                                               alt="p9x3p5s" class="col-md-10" style="width: 170px;"
                                                                Onchange="ischanged('feiqiti')" />
                                                     </div>
                                                 </div>
@@ -620,8 +626,8 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updateso2out" v-model="boiler.so2out"
-                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                        <input type="text" id="updateso2out" name="updateso2out" v-model="boiler.so2out"
+                                                               alt="p9x3p5s" class="col-md-10" Onchange="ischanged('kilnuse')"
                                                                style="width: 170px;" />
                                                     </div>
                                                 </div>
@@ -635,8 +641,8 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatenoxout" v-model="boiler.noxout"
-                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
+                                                        <input type="text" id="updatenoxout" name="updatenoxout" v-model="boiler.noxout"
+                                                               alt="p9x3p5s" class="col-md-10" style="width: 170px;"
                                                                Onchange="ischanged('feiqiti')" />
                                                     </div>
                                                 </div>
@@ -648,8 +654,8 @@
                                                         <a style="color: red;">*</a>
                                                     </label>
                                                     <div class="col-md-7">
-                                                        <input type="text" id="updatepmout" v-model="boiler.pmout"
-                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
+                                                        <input type="text" id="updatepmout" name="updatepmout" v-model="boiler.pmout"
+                                                               alt="p9x3p5s" class="col-md-10" Onchange="ischanged('kilnuse')"
                                                                style="width: 170px;" />
                                                     </div>
                                                 </div>
@@ -672,9 +678,9 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.janUseamount" type="text"
-                                                               id="updatejanUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatejanUseamount" name="updatejanUseamount" class="check1" alt="p0x3p4s"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -688,9 +694,9 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.febUseamount"  type="text"
-                                                               id="updatefebUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatefebUseamount" name="updatefebUseamount" class="check1" alt="p0x3p4s"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -706,11 +712,11 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.marUseamount" type="text"
-                                                               id="updatemarUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatemarUseamount" name="updatemarUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -723,12 +729,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.aprUseamount" type="text"
-                                                               id="updateaprUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updateaprUseamount" name="updateaprUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -744,12 +750,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.mayUseamount"  type="text"
-                                                               id="updatemayUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatemayUseamount" name="updatemayUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -763,12 +769,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.juneUseamount" type="text"
-                                                               id="updatejuneUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatejuneUseamount" name="updatejuneUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -784,12 +790,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.julyUseamount" type="text"
-                                                               id="updatejulyUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatejulyUseamount" name="updatejulyUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -803,12 +809,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.augUseamount" type="text"
-                                                               id="updateaugUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updateaugUseamount" name="updateaugUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -824,12 +830,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.septUseamount" type="text"
-                                                               id="updateseptUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updateseptUseamount" name="updateseptUseamount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -843,12 +849,12 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.octUseAmount" type="text"
-                                                               id="updateoctUseAmount" class="check1" alt="p0x3p4s"
+                                                               id="updateoctUseAmount" name="updateoctUseAmount" class="check1" alt="p0x3p4s"
 
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -864,11 +870,11 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.novUseamount"  type="text"
-                                                               id="updatenovUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatenovUseamount" name="updatenovUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -882,11 +888,11 @@
 
                                                     <div class="col-md-7">
                                                         <input v-model="boiler.decUseamount"  type="text"
-                                                               id="updatedecUseamount" class="check1" alt="p0x3p4s"
+                                                               id="updatedecUseamount" name="updatedecUseamount" class="check1" alt="p0x3p4s"
                                                                onkeyup="if(isNaN(value))execCommand('undo')"
                                                                onafterpaste="if(isNaN(value))execCommand('undo')"
                                                                Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
+                                                               onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatejanUseamount')" />
 
                                                     </div>
                                                 </div>
@@ -914,8 +920,8 @@
                                                     <select class="col-md-7" id="updatedustremoveId" name="dustremoveId"
                                                             v-model="boiler.dustremoveId"
                                                             style="width: 70%;" Onchange="ischanged('dustremoveId')" />
-                                                        <option value="">
-                                                            请选择
+                                                        <option value=null>
+                                                            无
                                                         </option>
                                                     </select>
                                                 </div>
@@ -932,8 +938,8 @@
                                                     <select class="col-md-7" id="updatesulphurremoveId"
                                                             v-model="boiler.sulphurremoveId"
                                                             style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
-                                                        <option value="">
-                                                            请选择
+                                                        <option value=null>
+                                                            无
                                                         </option>
                                                     </select>
                                                 </div>
@@ -950,8 +956,8 @@
                                                     <select class="col-md-7" id="updatenitreremoveId"
                                                             v-model="boiler.nitreremoveId"
                                                             style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
-                                                        <option value="">
-                                                            请选择
+                                                        <option value=null>
+                                                            无
                                                         </option>
                                                     </select>
                                                 </div>
@@ -961,7 +967,7 @@
 
 
                                     <div class="row" style="margin: 0 auto; text-align: center;">
-                                        <button id="updateBoiler" onclick="updatedata();" class="btn btn-info btn-lg">确认修改锅炉信息</button>
+                                        <button id="updateBoiler" class="btn btn-info btn-lg">确认修改锅炉信息</button>
                                     </div><br>
                                 </div>
 
@@ -972,7 +978,7 @@
                     </div>
 
                     <!--==============增加锅炉Panel=====================================================-->
-                    <div id="addPanel" class="panel panel-bordered-primary" style="margin-right: 60px;">
+                    <div id="addPanel" hidden="hidden" class="panel panel-bordered-primary"  style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">添加锅炉（带*号为必填项）</h3>
                         </div>
@@ -980,693 +986,664 @@
                             <p>在这里添加锅炉...</p><br>
                             <div class="page-content">
 
-                                <div class="page-content">
-
-                                    <div class="row" style="height: 40px;">
-                                        <div class="col-xs-12">
-                                            <a style="color: red;font-size:20px;">如果企业没有相应项，请填写0</a>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="height: 55px;">
-                                        <div class="col-xs-12">
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉用途
-                                                        <a style="color: red;">****</a>
-                                                    </label>
-                                                    <input type="hidden" name="functio_input" id="functio_input"/>
-                                                    <div class="col-md-7">
-                                                        <select class="col-xs-12" id="functio" style="width: 170px;"
-                                                                Onchange="clientscc3('10',this.value,'fueltype','model');ischanged('qe3')" />
-
-
-                                                            <option value="">
-                                                                请选择
-                                                            </option>
-
-
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉所用燃料类型
-                                                        <a style="color: red;">***</a>
-                                                    </label>
-
-
-                                                    <input type="hidden" name="fueltype_input" id="fueltype_input">
-                                                    <div class="col-md-7">
-                                                        <select id="fueltype" style="width: 170px;"
-                                                                onchange="clientscc4('10','functio',this.value,'model');ischanged('qe3')" />
-
-                                                            <option disabled="disabled">
-                                                                请先选择锅炉用途
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉类型
-                                                        <a style="color: red;">**</a>
-                                                    </label>
-                                                    <input type="hidden" name="model_input" id="model_input">
-                                                    <div class="col-md-7">
-                                                        <select class="col-xs-12" id="model" style="width: 170px;"
-                                                                Onchange="ischanged('model')" />
-
-                                                            <option disabled="disabled">
-                                                                请先选择锅炉燃料类型
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <!-- PAGE CONTENT BEGINS -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        机组编号<a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="machineNo" class="col-md-10"
-                                                               Onchange="ischanged('no')" style="width: 170px;"
-                                                               maxlength="15" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        装机容量(单位:兆瓦)<a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="installedCapacity"
-                                                               onblur="IsChangeNew(this.id,0,2500,'装机容量')" alt="p4x3p2s"
-                                                               class="check1" style="width: 170px;" placeholder="0-2500MW"
-                                                               Onchange="ischanged('model')" />
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <!-- PAGE CONTENT BEGINS -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉编号(只填数字#)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="no"   alt="p3x3p0s"
-                                                               class="check1" 	Onchange="ischanged('no')" style="width: 170px;"
-                                                               onkeyup="checkRate(this.id);" maxlength="20" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉设备型号
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="version"
-                                                               class="col-md-10" Onchange="ischanged('no')" maxlength="25"
-                                                               style="width: 170px;" onblur="TestLen(this.id,20)" />
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-
-
-
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        锅炉吨位(吨)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="tons"
-                                                               alt="p4x3p2s" class="check1"
-                                                               onblur="IsChangeNew(this.id,0,5000,'锅炉吨位')"
-                                                               style="width: 170px;"
-                                                               placeholder="0-5000" Onchange="ischanged('no')"/>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        对应烟囱
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <input type="hidden" name="mchimney_input" id="mchimney_input"/>
-                                                    <div class="col-md-7">
-
-                                                        <select id="mchimney"
-                                                                Onchange="exhaustModel();ischanged('no')" style="width: 170px;">
-                                                            <option value="">
-                                                                请选择
-                                                            </option>
-
-                                                        </select>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-xs-12" style="height: 40px">
-                                                <div class="form-group">
-                                                    <p align="center" id="exaust_info"></p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-
-                                                        燃料灰分(单位:%)<a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="coalash"
-                                                               onblur="IsChangeNew(this.id,0,45,'燃煤灰分')"  alt="p2x3p2s"
-                                                               class="check1" style="width: 170px;" placeholder="0~45"
-                                                               Onchange="ischanged('model')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-
-                                                        燃料硫分(单位:%)<a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="coalsulfur" alt="p2x3p2s"
-                                                               class="check1" Onchange="ischanged('no')"
-                                                               onblur="IsChangeNew(this.id,0,3,'燃煤硫分')"
-                                                               style="width: 170px;" placeholder="0~3"
-                                                        />
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料挥发分(单位:%)<a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="coalVolatilisation" Onchange="ischanged('model')"
-                                                                alt="p2x3p2s" class="check1"   placeholder="0~50"
-                                                               onblur="IsChangeNew(this.id,0,50,'煤炭挥发分')" style="width: 170px;" onkeyup="checkNum(this);"/>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div class="col-md-6">
-
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃烧方式
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <input type="hidden" name="combustionsystem_input"
-                                                           id="combustionsystem_input" style="width: 170px;"
-                                                           onblur="TestLen(this.id,10)" />
-                                                    <div class="col-md-7">
-                                                        <select class="col-xs-12" id="combustionsystem"
-                                                                Onchange="ischanged('model')" style="width: 170px;" />
-                                                        <option value="" selected="selected">
-                                                            无
-                                                        </option>
-                                                        <option value="层燃">
-                                                            层燃
-                                                        </option>
-                                                        <option value="室燃">
-                                                            室燃
-                                                        </option>
-                                                        <option value="循环流化床">
-                                                            循环流化床
-                                                        </option>
-
-                                                        </select>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5">
-                                                        燃料年使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="fuelAusage" style="width: 170px;" class="check1"
-                                                               alt="p7x3p4s" onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
-                                                        />
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料年用量单位
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input type="hidden" name="fuelAusageunit_input"
-                                                               id="fuelAusageunit_input" style="width: 170px;" />
-                                                        <select id="fuelAusageunit"
-                                                                data-placeholder="Choose a Country..."
-                                                                Onchange="ischanged('model')" style="width: 170px;">
-                                                            <option disabled="disabled">
-                                                                请选择
-                                                            </option>
-                                                            <option value="吨" selected="selected">
-                                                                吨
-                                                            </option>
-                                                            <option value="万立方米">
-                                                                万立方米
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 no-padding-right">
-                                                        废气排放量(万立方米)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="feiqiti"
-                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
-                                                               Onchange="ischanged('feiqiti')" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        二氧化硫排放量(吨)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="so2out"
-                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
-                                                               style="width: 170px;" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        氮氧化物排放量(吨)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="noxout"
-                                                               alt="p9x3p5s" class="check1" style="width: 170px;"
-                                                               Onchange="ischanged('feiqiti')" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        烟粉尘排放量(吨)
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-                                                    <div class="col-md-7">
-                                                        <input type="text" id="pmout"
-                                                               alt="p9x3p5s" class="check1" Onchange="ischanged('kilnuse')"
-                                                               style="width: 170px;" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12" style="margin-top:15px;">
-
-                                            <div class="form-group">
-                                                <a style="color: red;">燃料月份使用量的单位和燃料总使用量单位一致</a>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料一月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="janUseamount" class="check1" alt="p0x3p4s"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料二月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="febUseamount" class="check1" alt="p0x3p4s"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料三月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="marUseamount" class="check1" alt="p0x3p4s"
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料四月份使用量<a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="aprUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料五月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="mayUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料六月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="juneUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料七月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="julyUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料八月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="augUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料九月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="septUseamount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料十月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="octUseAmount" class="check1" alt="p0x3p4s"
-
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料十一月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="novUseamount" class="check1" alt="p0x3p4s"
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="col-md-5 control-label no-padding-right">
-                                                        燃料十二月份使用量
-                                                        <a style="color: red;">*</a>
-                                                    </label>
-
-                                                    <div class="col-md-7">
-                                                        <input  type="text"
-                                                               id="decUseamount" class="check1" alt="p0x3p4s"
-                                                               onkeyup="if(isNaN(value))execCommand('undo')"
-                                                               onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                               Onchange="ischanged('kilnuse')"
-                                                               onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="page-header" style="margin-top: 100px;">
-                                        <h1>
-
-                                            <small> <i class="icon-double-angle-right"></i> <b>废气处理信息</b>
-                                            </small>
-                                        </h1>
-                                    </div>
-                                    <!-- /.page-header -->
+                                <div class="row" style="height: 40px;">
                                     <div class="col-xs-12">
-                                        <div class="col-md-4">
-                                            <div class="form-group" id="dust_div">
-                                                <label class="col-md-5 control-label no-padding-right">
-                                                    除尘方式
-                                                </label>
-                                                <div class="col-md-7">
-                                                    <select class="col-md-7" id="dustremoveId" name="dustremoveId"
-                                                            style="width: 70%;" Onchange="ischanged('dustremoveId')" />
-                                                        <option value="">
-                                                            请选择
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a style="color: red;font-size:20px;">如果企业没有相应项，请填写0</a>
+                                    </div>
+                                </div>
+                                <div class="row" style="height: 55px;">
+                                    <div class="col-xs-12">
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label no-padding-right">
-                                                    脱硫方式
+                                                    锅炉用途
+                                                    <a style="color: red;">****</a>
                                                 </label>
-
+                                                <input type="hidden" name="functio_input" id="functio_input"/>
                                                 <div class="col-md-7">
-                                                    <select class="col-md-7" id="sulphurremoveId"
-                                                            style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
-                                                        <option value="">
-                                                            请选择
-                                                        </option>
+                                                    <select class="col-xs-12" id="functio" name="functio" style="width: 170px;"
+                                                            Onchange="clientscc3('10',this.value,'fueltype','model');ischanged('qe3')" />
+
+
+                                                    <option value="">
+                                                        请选择
+                                                    </option>
+
+
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-4">
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label no-padding-right">
-                                                    脱硝方式
+                                                    锅炉所用燃料类型
+                                                    <a style="color: red;">***</a>
+                                                </label>
+
+
+                                                <input type="hidden" name="fueltype_input" id="fueltype_input">
+                                                <div class="col-md-7">
+                                                    <select id="fueltype" name="fueltype" style="width: 170px;" class="col-md-10"
+                                                            onchange="clientscc4('10','functio',this.value,'model');ischanged('qe3')" />
+
+                                                    <option disabled="disabled">
+                                                        请先选择锅炉用途
+                                                    </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    锅炉类型
+                                                    <a style="color: red;">**</a>
+                                                </label>
+                                                <input type="hidden" name="model_input" id="model_input">
+                                                <div class="col-md-7">
+                                                    <select class="col-xs-12" id="model" name="model" style="width: 170px;"
+                                                            Onchange="ischanged('model')" />
+
+                                                    <option disabled="disabled">
+                                                        请先选择锅炉燃料类型
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    机组编号<a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="machineNo" class="col-md-10" name="machineNo"
+                                                           style="width: 170px;" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    装机容量(单位:兆瓦)<a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <select class="col-md-7" id="nitreremoveId"
-                                                            style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                    <input type="text" id="installedCapacity" name="installedCapacity"  alt="p4x3p2s"
+                                                           class="col-md-10" style="width: 170px;" placeholder="0-2500MW"
+                                                           Onchange="ischanged('model')" />
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <!-- PAGE CONTENT BEGINS -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    锅炉编号(只填数字#)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="no" name="no"   alt="p3x3p0s"
+                                                           class="col-md-10" 	Onchange="ischanged('no')" style="width: 170px;"
+                                                           onkeyup="checkRate(this.id);" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    锅炉设备型号
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="text" id="version" name="version"
+                                                           class="col-md-10" style="width: 170px;"  />
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    锅炉吨位(吨)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="text" id="tons" name="tons"
+                                                           alt="p4x3p2s" class="col-md-10"
+                                                           style="width: 170px;"
+                                                           placeholder="0-5000" Onchange="ischanged('no')"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    对应烟囱
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="mchimney_input" id="mchimney_input"/>
+                                                <div class="col-md-7">
+
+                                                    <select id="mchimney" name="mchimney" class="col-md-10"
+                                                            Onchange="exhaustModel(this.value,'');ischanged('no')" style="width: 170px;">
                                                         <option value="">
                                                             请选择
+                                                        </option>
+
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12" style="height: 40px">
+                                            <div class="form-group">
+                                                <p align="center" id="exaust_info"></p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+
+                                                    燃料灰分(单位:%)<a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="coalash"  name="coalash"
+                                                           class="col-md-10"  placeholder="0~45" style="width: 170px;"/>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+
+                                                    燃料硫分(单位:%)<a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="text" id="coalsulfur" name="coalsulfur" alt="p2x3p2s"
+                                                           class="col-md-10"
+                                                           style="width: 170px;" placeholder="0~3"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料挥发分(单位:%)<a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="text" id="coalVolatilisation" name="coalVolatilisation"
+                                                           alt="p2x3p2s" class="col-md-10"   placeholder="0~50" style="width: 170px;"/>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃烧方式
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="combustionsystem_input"
+                                                       id="combustionsystem_input" style="width: 170px;"
+                                                       onblur="TestLen(this.id,10)" />
+                                                <div class="col-md-7">
+                                                    <select class="col-xs-12" id="combustionsystem" name="combustionsystem"
+                                                             style="width: 170px;" required>
+                                                    <option value="" selected="selected">
+                                                        无
+                                                    </option>
+                                                    <option value="层燃">
+                                                        层燃
+                                                    </option>
+                                                    <option value="室燃">
+                                                        室燃
+                                                    </option>
+                                                    <option value="循环流化床">
+                                                        循环流化床
+                                                    </option>
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料年使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="text" id="fuelAusage" name="fuelAusage" style="width: 170px;"
+                                                           class="col-md-10" alt="p7x3p4s"
+                                                           onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','fuelAusage')"
+                                                    />
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料年用量单位
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input type="hidden" name="fuelAusageunit_input"
+                                                           id="fuelAusageunit_input" style="width: 170px;"/>
+                                                    <select id="fuelAusageunit" name="fuelAusageunit" style="width: 170px;" required>
+                                                        <option disabled="disabled">
+                                                            请选择
+                                                        </option>
+                                                        <option value="吨" selected="selected">
+                                                            吨
+                                                        </option>
+                                                        <option value="万立方米">
+                                                            万立方米
                                                         </option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div><br><br><br><br>
 
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    废气排放量(万立方米)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="feiqiti" name="feiqiti"
+                                                           alt="p9x3p5s" class="col-md-10" style="width: 170px;"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    二氧化硫排放量(吨)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="so2out" name="so2out"
+                                                           alt="p9x3p5s" class="col-md-10" Onchange="ischanged('kilnuse')"
+                                                           style="width: 170px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    氮氧化物排放量(吨)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="noxout" name="noxout"
+                                                           alt="p9x3p5s" class="col-md-10" style="width: 170px;"
+                                                           Onchange="ischanged('feiqiti')" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    烟粉尘排放量(吨)
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-7">
+                                                    <input type="text" id="pmout" name="pmout"
+                                                           alt="p9x3p5s" class="col-md-10" Onchange="ischanged('kilnuse')"
+                                                           style="width: 170px;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12" style="margin-top:15px;">
 
-                                    <div class="row" style="margin: 0 auto; text-align: center;">
-                                        <button id="addBoiler" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
-                                    </div><br>
+                                        <div class="form-group">
+                                            <a style="color: red;">燃料月份使用量的单位和燃料总使用量单位一致</a>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料一月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="janUseamount" name="janUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料二月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="febUseamount" name="febUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料三月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="marUseamount" name="marUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料四月份使用量<a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="aprUseamount" name="aprUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料五月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="mayUseamount" name="mayUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料六月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="juneUseamount" name="juneUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料七月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="julyUseamount" name="julyUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料八月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="augUseamount" name="augUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料九月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="septUseamount" name="septUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料十月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="octUseAmount" name="octUseAmount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料十一月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="novUseamount" name="novUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label no-padding-right">
+                                                    燃料十二月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-7">
+                                                    <input  type="text"
+                                                            id="decUseamount" name="decUseamount" class="check1" alt="p0x3p4s"
+                                                            onkeyup="if(isNaN(value))execCommand('undo')"
+                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                            onblur="sumall('fuelAusage','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
+
+                                <div class="page-header" style="margin-top: 100px;">
+                                    <h1>
+
+                                        <small> <i class="icon-double-angle-right"></i> <b>废气处理信息</b>
+                                        </small>
+                                    </h1>
+                                </div>
+                                <!-- /.page-header -->
+                                <div class="col-xs-12">
+                                    <div class="col-md-4">
+                                        <div class="form-group" id="dust_div">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                除尘方式
+                                            </label>
+                                            <div class="col-md-7">
+                                                <select class="col-md-7" id="dustremoveId" name="dustremoveId"
+                                                        style="width: 70%;" Onchange="ischanged('dustremoveId')" />
+                                                <option value="">
+                                                    无
+                                                </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                脱硫方式
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select class="col-md-7" id="sulphurremoveId"
+                                                        style="width: 70%;" Onchange="ischanged('sulphurremoveId')" />
+                                                <option value="">
+                                                    无
+                                                </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                脱硝方式
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select class="col-md-7" id="nitreremoveId"
+                                                        style="width: 70%;" Onchange="ischanged('nitreremoveId')" />
+                                                <option value="">
+                                                    无
+                                                </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br><br><br><br>
+                                <div class="row" style="margin: 0 auto; text-align: center;">
+                                    <button id="addBoiler" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                </div><br>
+
                             </div>
+
+
                         </div>
                     </div>
 

@@ -3,11 +3,10 @@ package com.nankai.xining.controller;
 import com.nankai.xining.bean.BoilerTemp;
 import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.service.BoilerService;
+import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -25,6 +24,7 @@ public class BoilerController {
 
     @Autowired
     BoilerService boilerService;
+
 
     @RequestMapping(value = "/getBoiler")
     @ResponseBody
@@ -46,6 +46,38 @@ public class BoilerController {
             }
         }else {
             result.put("isAdd",false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/updateBoiler")
+    @ResponseBody
+    public Map<String,Object> updateBoiler(@RequestBody BoilerTemp boilerTemp,HttpSession session){
+        HashMap result = new HashMap();
+        Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        if (boilerService.updateBoiler(boilerTemp)){
+            LastChangedTimeSet.setLastChangedTime(factoryID);
+            result.put("isUpdate",true);
+            result.put("boiler",boilerTemp);
+        }else {
+            result.put("isUpdate",false);
+            result.put("boiler",boilerTemp);
+        }
+        return result;
+    }
+
+
+    @RequestMapping(value = "/delBoiler")
+    @ResponseBody
+    public Map<String,String> delBoiler(int boilerID,HttpSession session) throws Exception{
+        HashMap result = new HashMap();
+        Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        int delFlag = boilerService.deleteBoiler(boilerID,factoryID);
+        if (delFlag==1){
+            LastChangedTimeSet.setLastChangedTime(factoryID);
+            result.put("isDel","success");
+        }else {
+            result.put("isDel","fail");
         }
         return result;
     }

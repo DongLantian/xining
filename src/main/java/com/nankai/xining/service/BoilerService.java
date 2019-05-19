@@ -4,8 +4,10 @@ import com.nankai.xining.bean.*;
 import com.nankai.xining.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +30,9 @@ public class BoilerService {
 
     @Autowired
     TotalBoilerTempMapper totalBoilerTempMapper;
+
+    @Autowired
+    FactoryMapper factoryMapper;
 
     /**
      * 根据企业ID查询锅炉信息列表
@@ -55,6 +60,7 @@ public class BoilerService {
      * @param m_factoryId
      * @return
      */
+    @Transactional
     public boolean addBoiler(BoilerTemp boilerTemp, Integer m_factoryId) {
 
         //设置锅炉编号，需要先找出锅炉表中该工厂下编号最大的锅炉
@@ -124,9 +130,71 @@ public class BoilerService {
         boilerTemp.setTboilerId(tboilerID);
 
         if (flag){
-            if (boilerTempMapper.insert(boilerTemp)!=0) return true;
+            if (boilerTempMapper.insertSelective(boilerTemp)!=0) {
+                //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
+                Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
+                Date now = new Date();
+                fac.setLastChangedTime(now);
+                factoryMapper.updateByPrimaryKeySelective(fac);
+
+                return true;
+            }
             else return false;
         }else
             return false;
+    }
+
+    /**
+     * 更新选中的烟囱信息
+     * @param boilerTemp
+     * @return
+     */
+    @Transactional
+    public boolean updateBoiler(BoilerTemp boilerTemp) {
+        //初始化boilerTemp
+        Double fuelAuseage = boilerTemp.getFuelAusage();
+        String StrSCC="10"+boilerTemp.getFunctio()+boilerTemp.getFueltype()+boilerTemp.getModel();
+        Scc scc = sccMapper.selectByPrimaryKey(StrSCC);
+        boilerTemp.setBc((scc.getBc()*fuelAuseage)/100);
+        boilerTemp.setCo((scc.getCo()*fuelAuseage)/100);
+        boilerTemp.setNh3((scc.getNh3()*fuelAuseage)/100);
+        boilerTemp.setPm((scc.getPm()*fuelAuseage)/100);
+        boilerTemp.setOc((scc.getOc()*fuelAuseage)/100);
+        boilerTemp.setPm10((scc.getPm10()*fuelAuseage)/100);
+        boilerTemp.setPm25((scc.getPm25()*fuelAuseage)/100);
+        boilerTemp.setSo2((scc.getSo2()*fuelAuseage)/100);
+        boilerTemp.setNox((scc.getNox()*fuelAuseage)/100);
+        boilerTemp.setVoc((scc.getVocs()*fuelAuseage)/100);
+        boilerTemp.setScc(StrSCC);
+        if (boilerTempMapper.updateByPrimaryKey(boilerTemp)!=0){
+            return true;
+        }else
+            return false;
+    }
+
+
+    /**
+     * 删除锅炉
+     * @param boilerID
+     * @param factoryID
+     * @return
+     */
+    @Transactional
+    public int deleteBoiler(int boilerID, Integer factoryID) {
+        //删除锅炉的同时更改total表
+        if (boilerTempMapper.deleteByPrimaryKey(boilerID)!=0){
+            //更新total_boiler数据
+            TotalBoilerTempExample totalBoilerTempExample = new TotalBoilerTempExample();
+            TotalBoilerTempExample.Criteria totalBcriteria = totalBoilerTempExample.createCriteria();
+            totalBcriteria.andFactoryIdEqualTo(factoryID);
+            List<TotalBoilerTemp> totalBoilerTemp = totalBoilerTempMapper.selectByExample(totalBoilerTempExample);
+            TotalBoilerTemp totalBoilerTemp1 = totalBoilerTemp.get(0);
+            totalBoilerTemp1.setTboilerNum(totalBoilerTemp1.getTboilerNum()-1);
+            totalBoilerTempMapper.updateByPrimaryKey(totalBoilerTemp1);
+            return 1;
+        }else {
+            return 0;
+        }
+
     }
 }
