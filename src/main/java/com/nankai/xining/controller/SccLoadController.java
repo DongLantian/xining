@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * @Description: **
+ * @Description: Scc三级下拉列表工具，用于加载scc2、scc3、scc4表中的数据
  * @Author: 董兰天
  * @Date: 2019-05-15 18:53
  */

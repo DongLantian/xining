@@ -1107,4 +1107,21 @@
       dec_useamount = #{decUseamount,jdbcType=DOUBLE}
     where ID = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自定义SQL：根据工厂ID查询窑炉（连接烟囱表）-->
+  <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT ID, EXHUST_ID, TKILN_ID, k.NK_NO, KILN_NO, KILN_MODEL, FUNCTION_dec, FUNCTIO, fueltype_dec,
+      fueltype, MODEL_DEC, MODEL, KILN_FUEL_AUSAGE, KILN_FUEL_AUSAGEUNIT, NITREREMOVEID_DEC,
+      NITREREMOVEID, DUSTREMOVEID_DEC, DUSTREMOVEID, SULPHURREMOVEID_DEC, SULPHURREMOVEID,
+      k.EXF_NO, COALASH, coal_volatilisation, COALSULFUR, factor_pm25, factor_pm10, PM10,
+      PM25, factor_pm, factor_co, CO, factor_voc, VOC, PM, factor_so2, SO2, factor_nox,
+      NOX, factor_nh3, NH3, factor_oc, OC, factor_status, factor_bc, BC, SCCCODE, so2out,
+      noxout, pmout, feiqiti, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount,
+      May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount,
+      nov_useamount, dec_useamount
+    from kiln_temp k join exhaust_temp e on k.EXHUST_ID = e.EXF_ID
+    WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+  </select>
+
+
 </mapper>

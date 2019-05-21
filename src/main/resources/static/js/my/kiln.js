@@ -1,7 +1,4 @@
 $(function () {
-    // $("#app").html("nihao");
-    // var u = $("#modelUser").val();
-    // 定义Vue对象，与页面中元素绑定
 
     //1.页面加载时：初始化Scc第一级下拉菜单（update和add同时初始化）
 
@@ -11,7 +8,7 @@ $(function () {
         dataType : "json",
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
-            scc1ID: '10'
+            scc1ID: '11'
         },                             //要发送的数据，采用josn格式
 
         success : function(list) { //list为返回的数据
@@ -53,6 +50,7 @@ $(function () {
         }
     });
 
+    // 定义Vue对象，与页面中元素绑定
     //使用Vue控制页面元素：用于编辑和删除功能
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
@@ -103,7 +101,7 @@ $(function () {
                     });
                 }
             },
-            editBoiler:function(e) {
+            editKiln:function(e) {
                 $("#updatePanel").removeAttr("hidden");
                 $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
@@ -786,6 +784,13 @@ function updatedata() {
                 timer : 5000
             });
         }
+    }else {
+        $.niftyNoty({
+            type: "warning",
+            container : "floating",
+            title : "<br><p style='font-size: 18px;'>存在非法数据，请根据提示修改。</p>",
+            timer : 5000
+        });
     }
 
 }

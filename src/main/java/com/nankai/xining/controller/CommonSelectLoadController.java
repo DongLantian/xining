@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
- * @Description: **
+ * @Description: 通用下拉列表加载工具，用于加载烟囱、除尘方式、脱硫方式、脱硝方式下拉列表
  * @Author: 董兰天
  * @Date: 2019-05-17 16:55
  */

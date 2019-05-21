@@ -6,7 +6,7 @@ function clientscc3(scc1,scc2,selectB,selectC) {
     $("#"+selectB).empty();
     $("#"+selectB).append("<option value=''>请选择</option>");
     $("#"+selectC).empty();
-    $("#"+selectC).append("<option value=''>请先选择锅炉燃料类型</option>");
+    $("#"+selectC).append("<option value=''>请先选择上一类型</option>");
     if (scc2!=""){
         var defaultscc3;
         //锅炉所用燃料类型菜单初始化
@@ -38,9 +38,9 @@ function clientscc3(scc1,scc2,selectB,selectC) {
         $("#"+selectB).val(defaultscc3);
     }else {
         $("#"+selectB).empty();
-        $("#"+selectB).append("<option value=''>请先选择锅炉用途</option>");
+        $("#"+selectB).append("<option value=''>请先选择用途</option>");
         $("#"+selectC).empty();
-        $("#"+selectC).append("<option value=''>请先选择锅炉燃料类型</option>");
+        $("#"+selectC).append("<option value=''>请先选择上一类型</option>");
     }
 
 }
@@ -79,7 +79,7 @@ function clientscc4(scc1,selectA,scc3,selectC) {
         });
     }else {
         $("#"+selectC).empty();
-        $("#"+selectC).append("<option value=''>请先选择锅炉燃料类型</option>");
+        $("#"+selectC).append("<option value=''>请先选择上一类型</option>");
     }
 
 }

@@ -5,8 +5,10 @@ import com.github.pagehelper.PageInfo;
 import com.nankai.xining.bean.BoilerTemp;
 import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.bean.Factory;
+import com.nankai.xining.bean.KilnTemp;
 import com.nankai.xining.service.BoilerService;
 import com.nankai.xining.service.ExhaustService;
+import com.nankai.xining.service.KilnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,9 @@ public class PagesMappingController {
 
     @Autowired
     BoilerService boilerService;
+
+    @Autowired
+    KilnService kilnService;
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -96,7 +101,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/kilnshell")
-    public String kilnshell(){
+    public String kilnshell(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<KilnTemp> kilnList = kilnService.selectKilnListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(kilnList);
+        model.addAttribute("kilnList",pageResult.getList());
+        model.addAttribute("kilnCount",pageResult.getTotal());
+
         return "/user/kilnshell";
     }
 

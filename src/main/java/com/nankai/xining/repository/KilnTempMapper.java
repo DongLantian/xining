@@ -29,4 +29,6 @@ public interface KilnTempMapper {
     int updateByPrimaryKeySelective(KilnTemp record);
 
     int updateByPrimaryKey(KilnTemp record);
+
+    List<KilnTemp> selectByFactoryIdWithJoin(int factoryId);
 }
