@@ -55,7 +55,7 @@ $(function () {
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            boiler: {}
+            kiln: {}
         },
         methods:{
             delBoiler:function (e) {
@@ -110,19 +110,19 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
-                    url : "/boiler/getBoiler", //要访问的后台地址
+                    url : "/kiln/getKiln", //要访问的后台地址
                     data : {
-                        boilerID : curID
+                        kilnID : curID
                     }, //要发送的数据，采用josn格式
 
                     success : function(data) { //data为返回的数据
-                        app.boiler=data;
+                        app.kiln=data;
                         $("#updatefunctio_input").val(data.functio);
                         $("#updatefueltype_input").val(data.fueltype);
                         $("#updatemodel_input").val(data.model);
                         $("#updatefunctio").val(data.functio);
-                        clientscc3('10',data.functio,'updatefueltype','updatemodel');
-                        clientscc4('10','updatefunctio_input',data.fueltype,'updatemodel');
+                        clientscc3('11',data.functio,'updatefueltype','updatemodel');
+                        clientscc4('11','updatefunctio_input',data.fueltype,'updatemodel');
 
                         app.initSelect();
                     },
@@ -244,40 +244,11 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            machineNo: {
+            kilnModel: {
                 validators: {
                     notEmpty: {},
                     stringLength: {
-                        max: 50
-                    }
-                }
-            },
-            installedCapacity:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            no:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            version: {
-                validators: {
-                    notEmpty: {},
-                    stringLength: {
-                        max: 100
-                    }
-                }
-            },
-            tons:{
-                validators: {
-                    notEmpty: {},
-                    between: {
-                        min: 0,
-                        max: 5000
+                        max: 20
                     }
                 }
             },
@@ -437,40 +408,11 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            updatemachineNo: {
+            updatekilnModel: {
                 validators: {
                     notEmpty: {},
                     stringLength: {
-                        max: 50
-                    }
-                }
-            },
-            updateinstalledCapacity:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            updateno:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updateversion: {
-                validators: {
-                    notEmpty: {},
-                    stringLength: {
-                        max: 100
-                    }
-                }
-            },
-            updatetons:{
-                validators: {
-                    notEmpty: {},
-                    between: {
-                        min: 0,
-                        max: 5000
+                        max: 20
                     }
                 }
             },
@@ -604,6 +546,7 @@ $(function () {
                 }
             }
         }
+
     });
 
 });
@@ -613,21 +556,17 @@ $(function () {
 function  checkvalue(type) {
     var ids;
     if (type=="add"){
-        ids = new Array("functio", "fueltype", "model", "no", "version",
-            "tons", "coalsulfur",  "fuelAusage",
-            "fuelAusageunit", "mchimney", "feiqiti", "so2out", "noxout",
-            "pmout","coalash","coalVolatilisation","machineNo","installedCapacity",
-            "janUseamount", "febUseamount","marUseamount",
-            "aprUseamount","mayUseamount","juneUseamount",
-            "julyUseamount","augUseamount","septUseamount","octUseAmount","novUseamount","decUseamount");
+        ids = new Array("functio","fueltype","model", "kilnModel", "mchimney",
+            "fuelAusage","coalash","coalsulfur","coalVolatilisation", "fuelAusageunit","feiqiti","so2out","noxout","pmout",
+            "janUseamount","febUseamount","marUseamount","aprUseamount","mayUseamount",
+            "juneUseamount","julyUseamount","augUseamount","septUseamount","octUseAmount",
+            "novUseamount","decUseamount");
     }else if(type="update"){
-        ids = new Array("updatefunctio", "updatefueltype", "updatemodel", "updateno", "updateversion",
-            "updatetons", "updatecoalsulfur", "updatefuelAusage",
-            "updatefuelAusageunit", "updatemchimney", "updatefeiqiti", "updateso2out", "updatenoxout",
-            "updatepmout","updatecoalash","updatecoalVolatilisation","updatemachineNo","updateinstalledCapacity",
-            "updatejanUseamount", "updatefebUseamount","updatemarUseamount",
-            "updateaprUseamount","updatemayUseamount","updatejuneUseamount",
-            "updatejulyUseamount","updateaugUseamount","updateseptUseamount","updateoctUseAmount","updatenovUseamount","updatedecUseamount");
+        ids = new Array("updatefunctio","updatefueltype","updatemodel", "updatekilnModel", "updatemchimney",
+            "updatefuelAusage","updatecoalash","updatecoalsulfur","updatecoalVolatilisation", "updatefuelAusageunit","updatefeiqiti","updateso2out","updatenoxout","updatepmout",
+            "updatejanUseamount","updatefebUseamount","updatemarUseamount","updateaprUseamount","updatemayUseamount",
+            "updatejuneUseamount","updatejulyUseamount","updateaugUseamount","updateseptUseamount","updateoctUseAmount",
+            "updatenovUseamount","updatedecUseamount");
     }
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
@@ -701,7 +640,7 @@ function updatedata() {
             $.ajax({
                 type:"post",
                 dataType : "json",
-                url : "/boiler/addBoiler", //要访问的后台地址
+                url : "//", //要访问的后台地址
                 data : {
                     isnew : 0,
                     functio : functio,
@@ -848,7 +787,7 @@ function exhaustModel(exhustId,select){
  * @param {Object} self 当前被检测的ID
  * 12个月份之和<=总
  */
-function sumall(total,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,s,self){
+function sumall(total,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12){
     // alert(123)
     var b = new Array(13);
     b[1]= document.getElementById(a1).value;

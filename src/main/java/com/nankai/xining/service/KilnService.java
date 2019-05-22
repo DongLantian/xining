@@ -28,4 +28,14 @@ public class KilnService {
         List<KilnTemp> kilnTempList = kilnTempMapper.selectByFactoryIdWithJoin(factoryId);
         return kilnTempList;
     }
+
+
+    /**
+     * 根据ID查询窑炉
+     * @param kilnID
+     * @return
+     */
+    public KilnTemp selectKilnByID(Integer kilnID) {
+        return kilnTempMapper.selectByPrimaryKey(kilnID);
+    }
 }
