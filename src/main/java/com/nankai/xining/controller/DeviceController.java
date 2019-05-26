@@ -1,7 +1,7 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.KilnTemp;
-import com.nankai.xining.service.KilnService;
+import com.nankai.xining.bean.DeviceTemp;
+import com.nankai.xining.service.DeviceService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,31 +17,31 @@ import java.util.Map;
 /**
  * @Description: **
  * @Author: 董兰天
- * @Date: 2019-05-21 20:55
+ * @Date: 2019-05-26 14:31
  */
 
 @Controller
-@RequestMapping(value = "/kiln")
-public class KilnController {
+@RequestMapping(value = "/device")
+public class DeviceController {
 
     @Autowired
-    KilnService kilnService;
+    DeviceService deviceService;
 
 
-    @RequestMapping(value = "/getKiln")
+    @RequestMapping(value = "/getDevice")
     @ResponseBody
-    public KilnTemp getKiln(Integer kilnID){
-        return kilnService.selectKilnByID(kilnID);
+    public DeviceTemp getDevice(Integer deviceID){
+        return deviceService.selectDeviceByID(deviceID);
     }
 
 
-    @RequestMapping(value = "/addKiln", method = {RequestMethod.POST})
+    @RequestMapping(value = "/addDevice", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addKiln(KilnTemp kilnTemp, HttpSession session){
+    public Map<String,Object> addDevice(DeviceTemp deviceTemp, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (kilnService.addKiln(kilnTemp,factoryId)){
+            if (deviceService.addDevice(deviceTemp,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -53,30 +53,30 @@ public class KilnController {
     }
 
 
-    @RequestMapping(value = "/updateKiln")
+
+    @RequestMapping(value = "/updateDevice")
     @ResponseBody
-    public Map<String,Object> updateBoiler(@RequestBody KilnTemp kilnTemp, HttpSession session){
+    public Map<String,Object> updateDevice(@RequestBody DeviceTemp deviceTemp, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (kilnService.updateKiln(kilnTemp)){
+        if (deviceService.updateDevice(deviceTemp)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("kiln",kilnTemp);
+            result.put("device",deviceTemp);
         }else {
             result.put("isUpdate",false);
-            result.put("kiln",kilnTemp);
+            result.put("device",deviceTemp);
         }
         return result;
     }
 
 
-
-    @RequestMapping(value = "/delKiln")
+    @RequestMapping(value = "/delDevice")
     @ResponseBody
-    public Map<String,String> delKiln(int kilnID,HttpSession session) throws Exception{
+    public Map<String,String> delDevice(int deviceID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = kilnService.deleteKiln(kilnID,factoryID);
+        int delFlag = deviceService.deleteDevice(deviceID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");
@@ -85,5 +85,7 @@ public class KilnController {
         }
         return result;
     }
+
+
 
 }

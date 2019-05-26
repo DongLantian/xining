@@ -4,7 +4,9 @@ import com.nankai.xining.bean.TotalKilnTemp;
 import com.nankai.xining.bean.TotalKilnTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TotalKilnTempMapper {
     long countByExample(TotalKilnTempExample example);
 

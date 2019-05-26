@@ -81,8 +81,12 @@ public class ExhaustService {
         ExhaustTempExample.Criteria criteria = exhaustTempExample.createCriteria();
         criteria.andFactoryIdEqualTo(m_factoryId);
         List<ExhaustTemp> exhaustList = exhaustTempMapper.selectByExample(exhaustTempExample);
-        ExhaustTemp maxNumExhaust = exhaustList.get(0);
-        int curMaxNum = maxNumExhaust.getNkNo();
+        int curMaxNum=0;
+        if (exhaustList.size()!=0){
+            ExhaustTemp maxNumExhaust = exhaustList.get(0);
+            curMaxNum = maxNumExhaust.getNkNo();
+        }
+
 
         exhaustTemp.setNkNo(curMaxNum+1);
         exhaustTemp.setFactoryId(m_factoryId);

@@ -59,47 +59,68 @@ $(function () {
         },
         methods:{
             delBoiler:function (e) {
-                var r=confirm("删除后该锅炉编号将不可用！如锅炉信息有误可点击编辑按钮进行修改。。。请确认是否删除该锅炉？？？");
-                if (r==true)
-                {
-                    var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
-                    var curID = cur.value;      //获取button的value，即exhaust.exfId值
-                    $.ajax({
-                        type:"post",
-                        dataType : "json",
-                        url : "/boiler/delBoiler", //要访问的后台地址
-                        data : {
-                            boilerID : curID
-                        }, //要发送的数据，采用josn格式
+                var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
+                var curID = cur.value;      //获取button的value，即exhaust.exfId值
 
-                        success : function(data) { //data为返回的数据
-                            if (data.isDel=="success"){
-                                $.niftyNoty({
-                                    type: "success",
-                                    container : "page",
-                                    title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                    message : "<p style='font-size: 16px;'>锅炉已删除。。。6秒后自动刷新页面。。。</p>",
-                                    timer : 5000
-                                });
-                                setTimeout(function(){
-                                    window.location.reload();//刷新当前页面.
-                                },6000);
-                            }else {
-                                $.niftyNoty({
-                                    type: "warning",
-                                    container : "page",
-                                    title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>",
-                                    timer : 5000
-                                });
-                            }
+                bootbox.confirm({
+                    message : "<p style='font-size: 16px;'>删除该锅炉后此编号将不可用！</p>" +
+                    "<p style='font-size: 16px;'>如锅炉信息有误可点击编辑按钮进行修改。。。</p>" +
+                    "<p style='font-size: 16px;'>请确认是否删除该锅炉？？？</p>",
+                    buttons: {
+                        confirm: {
+                            label: "确认删除"
                         },
+                        cancel: {
+                            label: "不删了，谢谢"
+                        }
+                    },
+                    callback : function(result) {
+                        //Callback function here
+                        if (result){
+                            //确认后
+                            $.ajax({
+                                type:"post",
+                                dataType : "json",
+                                url : "/boiler/delBoiler", //要访问的后台地址
+                                data : {
+                                    boilerID : curID
+                                }, //要发送的数据，采用josn格式
 
-                        error : function(XMLResponse) {
-                            alert("出了点问题。");
+                                success : function(data) { //data为返回的数据
+                                    if (data.isDel=="success"){
+                                        $.niftyNoty({
+                                            type: "success",
+                                            container : "page",
+                                            title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
+                                            message : "<p style='font-size: 16px;'>锅炉已删除。。。6秒后自动刷新页面。。。</p>",
+                                            timer : 5000
+                                        });
+                                        setTimeout(function(){
+                                            window.location.reload();//刷新当前页面.
+                                        },6000);
+                                    }else {
+                                        $.niftyNoty({
+                                            type: "warning",
+                                            container : "page",
+                                            title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>",
+                                            timer : 5000
+                                        });
+                                    }
+                                },
+
+                                error : function(XMLResponse) {
+                                    alert("出了点问题。");
+
+                                }
+                            });
+
+                        }else {
+                            //取消后，什么也不做
 
                         }
-                    });
-                }
+                    }
+                });
+
             },
             editBoiler:function(e) {
                 $("#updatePanel").removeAttr("hidden");
@@ -168,6 +189,7 @@ $(function () {
                 app.boiler.dustremoveDec = $("#updatedustremoveId").find("option:selected").text();
                 app.boiler.sulphurremoveDec = $("#updatesulphurremoveId").find("option:selected").text();
                 app.boiler.nitreremoveDec = $("#updatenitreremoveId").find("option:selected").text();
+                app.boiler.exfNo = parseInt($("#updatemchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
                 // ajax请求。
                 $.ajax({
                     type:"post",
@@ -210,13 +232,10 @@ $(function () {
                 });
             }else {
                 //必填项有空值，不可以提交
-                $.niftyNoty({
-                    type: "warning",
-                    container : "floating",
-                    title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>",
-                    timer : 5000
-                });
+                bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
             }
+        }else {
+            bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。。。</p>");
         }
     });
 
@@ -703,7 +722,6 @@ function updatedata() {
                 dataType : "json",
                 url : "/boiler/addBoiler", //要访问的后台地址
                 data : {
-                    isnew : 0,
                     functio : functio,
                     functionDec : functiondec,
                     model : model,
@@ -777,20 +795,10 @@ function updatedata() {
             });
         }else {
             //必填项有空值，不可以提交
-            $.niftyNoty({
-                type: "warning",
-                container : "floating",
-                title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>",
-                timer : 5000
-            });
+            bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
         }
     }else {
-        $.niftyNoty({
-            type: "warning",
-            container : "floating",
-            title : "<br><p style='font-size: 18px;'>存在非法数据，请根据提示修改。</p>",
-            timer : 5000
-        });
+        bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。。。</p>");
     }
 
 }

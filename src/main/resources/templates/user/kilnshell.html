@@ -34,6 +34,7 @@
     <script  th:src="@{/js/bootstrapPage.js}"></script>
     <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
     <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
@@ -272,6 +273,7 @@
                         <div style="float:right;margin-right: 120px;">
                             <button id="addBtn" class="btn btn-primary btn-lg">添加窑炉</button>
                         </div>
+
                     </div><br><br><hr>
                     <!--=======================修改窑炉Panel，默认隐藏=================================-->
                     <div id="updatePanel" class="panel panel-info" hidden="hidden"  style="margin-right: 60px;">
@@ -281,7 +283,9 @@
                         <div class="panel-body">
                             <p>在这里修改窑炉信息后点击确认按钮提交修改...</p>
                             <div class="page-content">
-
+                                <div class="row">
+                                    <span style="font-size:26px;">{{kiln.nkNo}}号窑炉</span>
+                                </div>
                                 <div class="row" style="height: 40px;">
 
                                     <div class="col-xs-12">
@@ -302,7 +306,7 @@
 
                                                 <select class="col-md-12 form-control" id="updatefunctio" name="updatefunctio"
                                                         style="width: 200px;"
-                                                        Onchange="clientscc3('11',this.value,'fueltype','model')" />
+                                                        Onchange="clientscc3('11',this.value,'updatefueltype','updatemodel')" />
                                                 <option value="">
                                                     请选择
                                                 </option>
@@ -329,7 +333,7 @@
                                             <div class="col-md-7">
                                                 <select class="col-md-10 form-control" id="updatefueltype" name="updatefueltype"
                                                         style="width: 200px;"
-                                                        onchange="clientscc4('11','functio',this.value,'model');" />
+                                                        onchange="clientscc4('11','updatefunctio',this.value,'updatemodel');" />
                                                 <option disabled="disabled">
                                                     请先选择窑炉用途
                                                 </option>
@@ -781,9 +785,9 @@
                                                 除尘方式
                                             </label>
                                             <div class="col-md-8">
-                                                <select id="updatedustremoveId" name="updatedustremoveId" class="form-control"
-                                                        style="width: 170px;"  />
-                                                <option value="">
+                                                <select id="updatedustremoveId" name="updatedustremoveId" v-model="kiln.dustremoveid"
+                                                        class="form-control" style="width: 170px;"  />
+                                                <option value=null>
                                                     无
                                                 </option>
                                                 </select>
@@ -798,8 +802,9 @@
                                             </label>
 
                                             <div class="col-md-8">
-                                                <select id="updatesulphurremoveId" name="updatesulphurremoveId" style="width: 170px;" class="form-control"/>
-                                                <option value="">
+                                                <select id="updatesulphurremoveId" name="updatesulphurremoveId" v-model="kiln.sulphurremoveid"
+                                                        style="width: 170px;" class="form-control"/>
+                                                <option value=null>
                                                     无
                                                 </option>
                                                 </select>
@@ -814,8 +819,9 @@
                                             </label>
 
                                             <div class="col-md-8">
-                                                <select id="updatenitreremoveId" name="updatenitreremoveId" style="width: 170px;" class="form-control"/>
-                                                <option value="">
+                                                <select id="updatenitreremoveId" name="updatenitreremoveId" v-model="kiln.nitreremoveid"
+                                                        style="width: 170px;" class="form-control"/>
+                                                <option value=null>
                                                     无
                                                 </option>
                                                 </select>
@@ -825,7 +831,7 @@
                                 </div><br><br><br><br><br>
 
                                 <div style="margin: 0 auto; text-align: center;">
-                                    <button id="updateKiln" onclick="updatedata();" class="btn btn-info btn-lg">确认修改窑炉信息</button>
+                                    <button id="updateKiln" class="btn btn-info btn-lg">确认修改窑炉信息</button>
                                 </div><br>
 
                             </div>
@@ -834,7 +840,7 @@
                     </div>
 
                     <!--==============增加窑炉Panel=====================================================-->
-                    <div id="addPanel"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
+                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">添加窑炉（带*号为必填项）</h3>
                         </div>
@@ -1384,7 +1390,7 @@
                                 </div><br><br><br><br><br>
 
                                 <div style="margin: 0 auto; text-align: center;">
-                                    <button id="addBoiler" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                    <button id="addKiln" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
                                 </div><br>
 
                             </div>
@@ -1664,9 +1670,6 @@
 <!--===================================================-->
 <!-- END OF CONTAINER -->
 <!--===============================================================-->
-<!--向js中提供session中的参数-->
-<!--<div th:object="${session.factoryInfo}">
-</div>-->
 
 
 </body>

@@ -13,53 +13,75 @@ $(function () {
         },
         methods:{
             delExhaust:function (e) {
-                var r=confirm("删除后该烟囱编号将不可用！如烟囱信息有误可点击编辑按钮进行修改。。。请确认是否删除该烟囱？？？");
-                if (r==true)
-                {
-                    var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
-                    var curID = cur.value;      //获取button的value，即exhaust.exfId值
-                    $.ajax({
-                        type:"post",
-                        dataType : "json",
-                        url : "/exhaust/delExhaust", //要访问的后台地址
-                        data : {
-                            exhaustID : curID
-                        }, //要发送的数据，采用josn格式
+                var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
+                var curID = cur.value;      //获取button的value，即exhaust.exfId值
 
-                        success : function(data) { //data为返回的数据
-                            if (data.isDel=="success"){
-                                $.niftyNoty({
-                                    type: "success",
-                                    container : "page",
-                                    title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                    message : "<p style='font-size: 16px;'>烟囱已删除。。。6秒后自动刷新页面。。。</p>",
-                                    timer : 5000
-                                });
-                                setTimeout(function(){
-                                    window.location.reload();//刷新当前页面.
-                                },6000);
-                            }else if (data.isDel=="constraint"){
-                                $.niftyNoty({
-                                    type: "warning",
-                                    container : "floating",
-                                    title : "<br><p style='font-size: 18px;'>删除失败！！！有其他设备选择了该烟囱！！！</p>",
-                                    timer : 10000
-                                });
-                            }else {
-                                $.niftyNoty({
-                                    type: "warning",
-                                    container : "page",
-                                    title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>"
-                                });
-                            }
+                bootbox.confirm({
+                    message : "<p style='font-size: 16px;'>删除该烟囱后此编号将不可用！</p>" +
+                    "<p style='font-size: 16px;'>如烟囱信息有误可点击编辑按钮进行修改。。。</p>" +
+                    "<p style='font-size: 16px;'>请确认是否删除该烟囱？？？</p>",
+                    buttons: {
+                        confirm: {
+                            label: "确认删除"
                         },
+                        cancel: {
+                            label: "不删了，谢谢"
+                        }
+                    },
+                    callback : function(result) {
+                        //Callback function here
+                        if (result){
+                            //确认后
+                            $.ajax({
+                                type:"post",
+                                dataType : "json",
+                                url : "/exhaust/delExhaust", //要访问的后台地址
+                                data : {
+                                    exhaustID : curID
+                                }, //要发送的数据，采用josn格式
 
-                        error : function(XMLResponse) {
-                            alert("出了点问题。");
+                                success : function(data) { //data为返回的数据
+                                    if (data.isDel=="success"){
+                                        $.niftyNoty({
+                                            type: "success",
+                                            container : "page",
+                                            title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
+                                            message : "<p style='font-size: 16px;'>烟囱已删除。。。6秒后自动刷新页面。。。</p>",
+                                            timer : 5000
+                                        });
+                                        setTimeout(function(){
+                                            window.location.reload();//刷新当前页面.
+                                        },6000);
+                                    }else if (data.isDel=="constraint"){
+                                        $.niftyNoty({
+                                            type: "warning",
+                                            container : "floating",
+                                            title : "<br><p style='font-size: 18px;'>删除失败！！！有其他设备选择了该烟囱！！！</p>",
+                                            timer : 10000
+                                        });
+                                    }else {
+                                        $.niftyNoty({
+                                            type: "warning",
+                                            container : "page",
+                                            title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>"
+                                        });
+                                    }
+                                },
+
+                                error : function(XMLResponse) {
+                                    alert("出了点问题。");
+
+                                }
+                            });
+
+
+                        }else {
+                            //取消后，什么也不做
 
                         }
-                    });
-                }
+                    }
+                });
+
             },
             editExhaust:function(e) {
                 $("#updatePanel").removeAttr("hidden");
@@ -137,11 +159,7 @@ $(function () {
             });
         }else {
             //必填项有空值，不可以提交
-            $.niftyNoty({
-                type: "warning",
-                container : "floating",
-                title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>"
-            });
+            bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
         }
 
     });
@@ -237,12 +255,7 @@ function updatedata() {
         });
     }else {
         //必填项有空值，不可以提交
-        $.niftyNoty({
-            type: "warning",
-            container : "floating",
-            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。。。</p>",
-            timer : 5000
-        });
+        bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
     }
 
 }

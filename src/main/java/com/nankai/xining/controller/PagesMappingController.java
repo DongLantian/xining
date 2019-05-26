@@ -2,11 +2,9 @@ package com.nankai.xining.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.nankai.xining.bean.BoilerTemp;
-import com.nankai.xining.bean.ExhaustTemp;
-import com.nankai.xining.bean.Factory;
-import com.nankai.xining.bean.KilnTemp;
+import com.nankai.xining.bean.*;
 import com.nankai.xining.service.BoilerService;
+import com.nankai.xining.service.DeviceService;
 import com.nankai.xining.service.ExhaustService;
 import com.nankai.xining.service.KilnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +35,9 @@ public class PagesMappingController {
 
     @Autowired
     KilnService kilnService;
+
+    @Autowired
+    DeviceService deviceService;
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -83,7 +84,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/device")
-    public String device(){
+    public String device(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<DeviceTemp> deviceList = deviceService.selectDeviceListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(deviceList);
+        model.addAttribute("deviceList",pageResult.getList());
+        model.addAttribute("deviceCount",pageResult.getTotal());
+
         return "/user/device";
     }
 

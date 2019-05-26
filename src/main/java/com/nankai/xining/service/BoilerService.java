@@ -78,8 +78,12 @@ public class BoilerService {
         BoilerTempExample.Criteria criteria = boilerTempExample.createCriteria();
         criteria.andExhustIdIn(exhaustIDList);
         List<BoilerTemp> boilerTempList = boilerTempMapper.selectByExample(boilerTempExample);
-        BoilerTemp maxNumBoiler = boilerTempList.get(0);
-        int curMaxNum = maxNumBoiler.getNkNo();
+        int curMaxNum=0;
+        if (boilerTempList.size()!=0){
+            BoilerTemp maxNumBoiler = boilerTempList.get(0);
+            curMaxNum = maxNumBoiler.getNkNo();
+        }
+
 
         boilerTemp.setNkNo(curMaxNum+1);
 
@@ -90,7 +94,7 @@ public class BoilerService {
         List<TotalBoilerTemp> totalBoilerTemp = totalBoilerTempMapper.selectByExample(totalBoilerTempExample);
         Integer tboilerID = -1;
         boolean flag=true;
-        if (totalBoilerTemp.get(0)!=null){
+        if (totalBoilerTemp.size()!=0){
             //表中有总数记录，直接加一
             TotalBoilerTemp totalBoilerTemp1 = totalBoilerTemp.get(0);
             tboilerID = totalBoilerTemp1.getTboilerId();

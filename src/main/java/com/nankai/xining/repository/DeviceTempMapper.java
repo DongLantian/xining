@@ -29,4 +29,6 @@ public interface DeviceTempMapper {
     int updateByPrimaryKeySelective(DeviceTemp record);
 
     int updateByPrimaryKey(DeviceTemp record);
+
+    List<DeviceTemp> selectByFactoryIdWithJoin(int factoryId);
 }

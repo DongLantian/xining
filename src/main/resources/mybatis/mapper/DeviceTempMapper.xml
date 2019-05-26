@@ -320,4 +320,16 @@
       design_unit = #{designUnit,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <!--自定义SQL：根据工厂ID查询设备（连接烟囱表）-->
+  <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT id, d.nk_no, productrawtotal_id, name, device_no, device_flow, design_power, practical_power,
+      EXHUST_ID, EXHUST_NO, yearrun_days, design_unit
+    from device_temp d join exhaust_temp e on d.EXHUST_ID = e.EXF_ID
+    WHERE FACTORY_ID  = #{factoryId,jdbcType=INTEGER}
+  </select>
+
+
 </mapper>
