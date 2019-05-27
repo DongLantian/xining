@@ -8,7 +8,6 @@ function clientscc3(scc1,scc2,selectB,selectC) {
     $("#"+selectC).empty();
     $("#"+selectC).append("<option value=''>请先选择上一类型</option>");
     if (scc2!=""){
-        var defaultscc3;
         //锅炉所用燃料类型菜单初始化
         $.ajax({
             type:"post",
@@ -26,8 +25,6 @@ function clientscc3(scc1,scc2,selectB,selectC) {
                     $option.attr("value", item.scc3);
                     $option.text(item.description+'('+item.scc3+')');
                     $("#"+selectB).append($option);
-                    //$("#"+selectB).append("<option value="+item.scc3+">"+item.description+"("+item.scc3+")</option>");
-                    defaultscc3=item.scc3;
                 });
             },
             error : function(XMLResponse) {
@@ -35,7 +32,6 @@ function clientscc3(scc1,scc2,selectB,selectC) {
 
             }
         });
-        $("#"+selectB).val(defaultscc3);
     }else {
         $("#"+selectB).empty();
         $("#"+selectB).append("<option value=''>请先选择用途</option>");
@@ -68,8 +64,6 @@ function clientscc4(scc1,selectA,scc3,selectC) {
                     $option.attr("value", item.scc4);
                     $option.text(item.description+'('+item.scc4+')');
                     $("#"+selectC).append($option);
-                    //$("#"+selectC).append("<option value="+item.scc4+">"+item.description+"("+item.scc4+")</option>");
-                    defaultscc4=item.scc4;
                 })
             },
             error : function(XMLResponse) {

@@ -1,10 +1,7 @@
 package com.nankai.xining.service;
 
 import com.nankai.xining.bean.*;
-import com.nankai.xining.repository.DeviceTempMapper;
-import com.nankai.xining.repository.ExhaustTempMapper;
-import com.nankai.xining.repository.FactoryMapper;
-import com.nankai.xining.repository.TotalProductrawTempMapper;
+import com.nankai.xining.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +29,9 @@ public class DeviceService {
 
     @Autowired
     FactoryMapper factoryMapper;
+
+    @Autowired
+    DeviceRawTempMapper deviceRawTempMapper;
 
 
     /**
@@ -143,20 +143,31 @@ public class DeviceService {
      * @return
      */
     public int deleteDevice(int deviceID, Integer factoryID) {
-        //删除设备的同时更改total表
-        if (deviceTempMapper.deleteByPrimaryKey(deviceID)!=0){
-            //更新total_productraw_temp数据
-            TotalProductrawTempExample totalProductrawTempExample = new TotalProductrawTempExample();
-            TotalProductrawTempExample.Criteria totalPcriteria = totalProductrawTempExample.createCriteria();
-            totalPcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalProductrawTemp> totalProductrawTempList = totalProductrawTempMapper.selectByExample(totalProductrawTempExample);
-            TotalProductrawTemp totalProductrawTemp = totalProductrawTempList.get(0);
-            totalProductrawTemp.setDeviceNum(totalProductrawTemp.getDeviceNum()-1);
-            totalProductrawTempMapper.updateByPrimaryKey(totalProductrawTemp);
-            return 1;
+        //首先验证有没有原料选择了该设备
+        DeviceRawTempExample deviceRawTempExample = new DeviceRawTempExample();
+        DeviceRawTempExample.Criteria criteria = deviceRawTempExample.createCriteria();
+        criteria.andDeviceIdEqualTo(deviceID);
+        List<DeviceRawTemp> deviceRawTempList = deviceRawTempMapper.selectByExample(deviceRawTempExample);
+        if (deviceRawTempList.isEmpty()){
+            //没有原料选择了该设备
+            //删除设备的同时更改total表
+            if (deviceTempMapper.deleteByPrimaryKey(deviceID)!=0){
+                //更新total_productraw_temp数据
+                TotalProductrawTempExample totalProductrawTempExample = new TotalProductrawTempExample();
+                TotalProductrawTempExample.Criteria totalPcriteria = totalProductrawTempExample.createCriteria();
+                totalPcriteria.andFactoryIdEqualTo(factoryID);
+                List<TotalProductrawTemp> totalProductrawTempList = totalProductrawTempMapper.selectByExample(totalProductrawTempExample);
+                TotalProductrawTemp totalProductrawTemp = totalProductrawTempList.get(0);
+                totalProductrawTemp.setDeviceNum(totalProductrawTemp.getDeviceNum()-1);
+                totalProductrawTempMapper.updateByPrimaryKey(totalProductrawTemp);
+                return 1;
+            }else {
+                return 0;
+            }
         }else {
-            return 0;
+            return -1;
         }
+
     }
 
     /**

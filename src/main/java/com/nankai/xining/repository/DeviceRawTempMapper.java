@@ -4,7 +4,9 @@ import com.nankai.xining.bean.DeviceRawTemp;
 import com.nankai.xining.bean.DeviceRawTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DeviceRawTempMapper {
     long countByExample(DeviceRawTempExample example);
 
@@ -27,4 +29,6 @@ public interface DeviceRawTempMapper {
     int updateByPrimaryKeySelective(DeviceRawTemp record);
 
     int updateByPrimaryKey(DeviceRawTemp record);
+
+    List<DeviceRawTemp> selectByFactoryIdWithJoin(int factoryId);
 }

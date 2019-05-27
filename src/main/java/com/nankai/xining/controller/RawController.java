@@ -1,7 +1,7 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.DeviceTemp;
-import com.nankai.xining.service.DeviceService;
+import com.nankai.xining.bean.DeviceRawTemp;
+import com.nankai.xining.service.RawService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,31 +17,30 @@ import java.util.Map;
 /**
  * @Description: **
  * @Author: 董兰天
- * @Date: 2019-05-26 14:31
+ * @Date: 2019-05-27 11:00
  */
 
 @Controller
-@RequestMapping(value = "/device")
-public class DeviceController {
+@RequestMapping(value = "/raw")
+public class RawController {
 
     @Autowired
-    DeviceService deviceService;
+    RawService rawService;
 
 
-    @RequestMapping(value = "/getDevice")
+    @RequestMapping(value = "/getRaw")
     @ResponseBody
-    public DeviceTemp getDevice(Integer deviceID){
-        return deviceService.selectDeviceByID(deviceID);
+    public DeviceRawTemp getRaw(Integer rawID){
+        return rawService.selectRawByID(rawID);
     }
 
-
-    @RequestMapping(value = "/addDevice", method = {RequestMethod.POST})
+    @RequestMapping(value = "/addRaw", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addDevice(DeviceTemp deviceTemp, HttpSession session){
+    public Map<String,Object> addKiln(DeviceRawTemp deviceRawTemp, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (deviceService.addDevice(deviceTemp,factoryId)){
+            if (rawService.addRaw(deviceRawTemp,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -54,39 +53,37 @@ public class DeviceController {
 
 
 
-    @RequestMapping(value = "/updateDevice")
+
+    @RequestMapping(value = "/updateRaw")
     @ResponseBody
-    public Map<String,Object> updateDevice(@RequestBody DeviceTemp deviceTemp, HttpSession session){
+    public Map<String,Object> updateRaw(@RequestBody DeviceRawTemp deviceRawTemp, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (deviceService.updateDevice(deviceTemp)){
+        if (rawService.updateRaw(deviceRawTemp)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("device",deviceTemp);
+            result.put("raw",deviceRawTemp);
         }else {
             result.put("isUpdate",false);
-            result.put("device",deviceTemp);
+            result.put("raw",deviceRawTemp);
         }
         return result;
     }
 
 
-    @RequestMapping(value = "/delDevice")
+    @RequestMapping(value = "/delRaw")
     @ResponseBody
-    public Map<String,String> delDevice(int deviceID,HttpSession session) throws Exception{
+    public Map<String,String> delRaw(int rawID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = deviceService.deleteDevice(deviceID,factoryID);
+        int delFlag = rawService.deleteRaw(rawID,factoryID);
         if (delFlag==1){
+            LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");
-        }else if (delFlag==-1){
-            result.put("isDel","constraint");
-        }else if (delFlag==0){
+        }else {
             result.put("isDel","fail");
         }
         return result;
     }
-
-
 
 }

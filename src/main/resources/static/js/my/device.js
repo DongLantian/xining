@@ -71,6 +71,13 @@ $(function () {
                                         setTimeout(function(){
                                             window.location.reload();//刷新当前页面.
                                         },6000);
+                                    }else if (data.isDel=="constraint"){
+                                        $.niftyNoty({
+                                            type: "warning",
+                                            container : "floating",
+                                            title : "<br><p style='font-size: 18px;'>删除失败！！！有原料选择了该设备！！！</p>",
+                                            timer : 10000
+                                        });
                                     }else {
                                         $.niftyNoty({
                                             type: "warning",

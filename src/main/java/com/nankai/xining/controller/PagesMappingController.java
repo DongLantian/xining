@@ -3,10 +3,7 @@ package com.nankai.xining.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.nankai.xining.bean.*;
-import com.nankai.xining.service.BoilerService;
-import com.nankai.xining.service.DeviceService;
-import com.nankai.xining.service.ExhaustService;
-import com.nankai.xining.service.KilnService;
+import com.nankai.xining.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +35,9 @@ public class PagesMappingController {
 
     @Autowired
     DeviceService deviceService;
+
+    @Autowired
+    RawService rawService;
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -130,7 +130,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/raw")
-    public String raw(){
+    public String raw(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<DeviceRawTemp> deviceRawList = rawService.selectRawListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(deviceRawList);
+        model.addAttribute("rawList",pageResult.getList());
+        model.addAttribute("rawCount",pageResult.getTotal());
+
         return "/user/raw";
     }
 

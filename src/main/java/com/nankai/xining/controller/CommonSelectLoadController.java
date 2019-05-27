@@ -1,10 +1,8 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.Dustremove;
-import com.nankai.xining.bean.ExhaustTemp;
-import com.nankai.xining.bean.Nitreremove;
-import com.nankai.xining.bean.Sulphurremove;
+import com.nankai.xining.bean.*;
 import com.nankai.xining.service.CommonSelectLoadService;
+import com.nankai.xining.service.DeviceService;
 import com.nankai.xining.service.ExhaustService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,9 @@ public class CommonSelectLoadController {
     @Autowired
     ExhaustService exhaustService;
 
+    @Autowired
+    DeviceService deviceService;
+
 
 
     @RequestMapping(value = "/getExhaustList")
@@ -37,7 +38,15 @@ public class CommonSelectLoadController {
     public List<ExhaustTemp> getExhaustList(HttpSession session){
         int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         List<ExhaustTemp> exhaustList = exhaustService.selectExhaustListByFactoryId(factoryId);
-        return exhaustService.selectExhaustListByFactoryId(factoryId);
+        return exhaustList;
+    }
+
+    @RequestMapping(value = "/getDeviceList")
+    @ResponseBody
+    public List<DeviceTemp> getDeviceList(HttpSession session){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        List<DeviceTemp> deviceList = deviceService.selectDeviceListByFactoryId(factoryId);
+        return deviceList;
     }
 
     @RequestMapping(value = "/getDustremoveList")
