@@ -1,7 +1,7 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.DeviceRawTemp;
-import com.nankai.xining.service.RawService;
+import com.nankai.xining.bean.DeviceProductTemp;
+import com.nankai.xining.service.DeviceProductService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,30 +17,35 @@ import java.util.Map;
 /**
  * @Description: **
  * @Author: 董兰天
- * @Date: 2019-05-27 11:00
+ * @Date: 2019-05-29 16:06
  */
 
 @Controller
-@RequestMapping(value = "/raw")
-public class RawController {
+@RequestMapping(value = "/deviceProduct")
+public class DeviceProductController {
 
     @Autowired
-    RawService rawService;
+    DeviceProductService deviceProductService;
 
 
-    @RequestMapping(value = "/getRaw")
+
+
+
+    @RequestMapping(value = "/getProduct")
     @ResponseBody
-    public DeviceRawTemp getRaw(Integer rawID){
-        return rawService.selectRawByID(rawID);
+    public DeviceProductTemp getProduct(Integer productID){
+        return deviceProductService.selectProductByID(productID);
     }
 
-    @RequestMapping(value = "/addRaw", method = {RequestMethod.POST})
+
+
+    @RequestMapping(value = "/addProduct", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addKiln(DeviceRawTemp deviceRawTemp, HttpSession session){
+    public Map<String,Object> addProduct(DeviceProductTemp deviceProductTemp, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (rawService.addRaw(deviceRawTemp,factoryId)){
+            if (deviceProductService.addProduct(deviceProductTemp,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -52,31 +57,30 @@ public class RawController {
     }
 
 
-
-
-    @RequestMapping(value = "/updateRaw")
+    @RequestMapping(value = "/updateProduct")
     @ResponseBody
-    public Map<String,Object> updateRaw(@RequestBody DeviceRawTemp deviceRawTemp, HttpSession session){
+    public Map<String,Object> updateProduct(@RequestBody DeviceProductTemp deviceProductTemp, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (rawService.updateRaw(deviceRawTemp)){
+        if (deviceProductService.updateProduct(deviceProductTemp)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("raw",deviceRawTemp);
+            result.put("product",deviceProductTemp);
         }else {
             result.put("isUpdate",false);
-            result.put("raw",deviceRawTemp);
+            result.put("product",deviceProductTemp);
         }
         return result;
     }
 
 
-    @RequestMapping(value = "/delRaw")
+
+    @RequestMapping(value = "/delProduct")
     @ResponseBody
-    public Map<String,String> delRaw(int rawID,HttpSession session) throws Exception{
+    public Map<String,String> delProduct(int productID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = rawService.deleteRaw(rawID,factoryID);
+        int delFlag = deviceProductService.deleteProduct(productID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");
@@ -85,5 +89,6 @@ public class RawController {
         }
         return result;
     }
+
 
 }

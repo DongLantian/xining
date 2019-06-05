@@ -966,7 +966,7 @@
   </update>
 
 
-  <!--自定义SQL：根据工厂ID查询窑炉（连接烟囱表）-->
+  <!--自定义SQL：根据工厂ID查询原料（连接设备表和烟囱表）-->
   <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT drt.id, drt.nk_no, mname, unit, musage, scc2_dec, scc2, scc4_dec, scc4, scc_code, scc3_dec,
         scc3, drt.device_no, devicetotal_id, device_id, factor_nox, nox, factor_co, co, factor_pm10,

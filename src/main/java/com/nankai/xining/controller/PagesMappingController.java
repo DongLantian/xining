@@ -37,7 +37,11 @@ public class PagesMappingController {
     DeviceService deviceService;
 
     @Autowired
-    RawService rawService;
+    DeviceRawService deviceRawService;
+
+    @Autowired
+    DeviceProductService deviceProductService;
+
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -125,7 +129,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/product")
-    public String product(){
+    public String product(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<DeviceProductTemp> deviceProductTempList = deviceProductService.selectProductListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(deviceProductTempList);
+        model.addAttribute("productList",pageResult.getList());
+        model.addAttribute("productCount",pageResult.getTotal());
+
         return "/user/product";
     }
 
@@ -134,7 +147,7 @@ public class PagesMappingController {
         int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         //获取第1页，3条内容，默认查询数据库中记录的总数count
         PageHelper.startPage(page, PAGE_SIZE);
-        List<DeviceRawTemp> deviceRawList = rawService.selectRawListByFactoryId(factoryId);
+        List<DeviceRawTemp> deviceRawList = deviceRawService.selectRawListByFactoryId(factoryId);
         //用PageInfo对结果进行包装
         PageInfo pageResult = new PageInfo(deviceRawList);
         model.addAttribute("rawList",pageResult.getList());

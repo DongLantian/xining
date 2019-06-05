@@ -501,6 +501,73 @@ function  checkvalue(type) {
 
 }
 
+/*
+var ids = new Array("activitiesCategory", "nameCategory",
+			"drainageProcess", "uint", "annualOutput", "janUseamount",
+			"febUseamount", "marUseamount", "aprUseamount", "mayUseamount",
+			"juneUseamount", "julyUseamount", "augUseamount", "septUseamount",
+			"octUseAmount", "novUseamount", "decUseamount");
+var name = document.getElementById("name").value;
+	var scc2 = document.getElementById("activitiesCategory").value;
+	var scc2Dec = $("#activitiesCategory").find("option:selected").text();
+	var usage = document.getElementById("annualOutput").value;
+	var unit = document.getElementById("uint").value;
+	var scc4 = document.getElementById("drainageProcess").value;
+	var scc4Dec = $("#drainageProcess").find("option:selected").text();
+	var scc3 = document.getElementById("nameCategory").value;
+	var scc3Dec = $("#nameCategory").find("option:selected").text();
+	var m_pages = parseInt(document.getElementById("page").value);
+	var cjnub = m_pages;//表示保存设备m_pages
+	var janUseamount = document.getElementById("janUseamount").value;
+	var febUseamount = document.getElementById("febUseamount").value;
+	var marUseamount = document.getElementById("marUseamount").value;
+	var aprUseamount = document.getElementById("aprUseamount").value;
+	var mayUseamount = document.getElementById("mayUseamount").value;
+	var juneUseamount = document.getElementById("juneUseamount").value;
+	var julyUseamount = document.getElementById("julyUseamount").value;
+
+	var augUseamount = document.getElementById("augUseamount").value;
+	var septUseamount = document.getElementById("septUseamount").value;
+
+	var octUseAmount = document.getElementById("octUseAmount").value;
+	var novUseamount = document.getElementById("novUseamount").value;
+	var decUseamount = document.getElementById("decUseamount").value;
+	var gasNo = document.getElementById("gasNo").value;
+	var gasPre = document.getElementById("gasPre").value;
+	var gasVocs = document.getElementById("gasVocs").value;
+	var treatPre = document.getElementById("treatPre").value;
+	$.post("ajax/RongjiRawTemp/updatedb.do", {
+		isnew : 1,
+		scc2Dec : scc2Dec,
+		scc3Dec : scc3Dec,
+		scc4Dec : scc4Dec,
+		mname : name,
+		scc2 : scc2,
+		scc3 : scc3,
+		musage : usage,
+		unit : unit,
+		scc4 : scc4,
+		nkNo : cjnub,
+		cjnub : cjnub,
+		janUseamount : janUseamount,
+		febUseamount : febUseamount,
+		marUseamount : marUseamount,
+		aprUseamount : aprUseamount,
+		mayUseamount : mayUseamount,
+		juneUseamount : juneUseamount,
+		julyUseamount : julyUseamount,
+		augUseamount : augUseamount,
+		septUseamount : septUseamount,
+		octUseAmount : octUseAmount,
+		novUseamount : novUseamount,
+		decUseamount : decUseamount,
+		gasNo : gasNo,
+		gasPre : gasPre,
+		gasVocs : gasVocs,
+		treatPre : treatPre
+* */
+
+
 //自定义函数：增加原料
 function updatedata() {
     var bootstrapValidator = $("#addPanel").data('bootstrapValidator');

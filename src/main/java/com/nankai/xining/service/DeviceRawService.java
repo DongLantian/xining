@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @Service
-public class RawService {
+public class DeviceRawService {
 
     @Autowired
     DeviceRawTempMapper deviceRawTempMapper;
@@ -179,6 +179,8 @@ public class RawService {
      * @return
      */
     public boolean updateRaw(DeviceRawTemp deviceRawTemp) {
+        String StrSCC="11"+deviceRawTemp.getScc2()+deviceRawTemp.getScc3()+deviceRawTemp.getScc4();
+        deviceRawTemp.setSccCode(StrSCC);
         if (deviceRawTempMapper.updateByPrimaryKey(deviceRawTemp)!=0) return true;
         else return false;
     }

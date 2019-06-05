@@ -55,16 +55,16 @@ $(function () {
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            raw: {}
+            product: {}
         },
         methods:{
-            delRaw:function (e) {
+            delProduct:function (e) {
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 bootbox.confirm({
-                    message : "<p style='font-size: 16px;'>删除该原料后此编号将不可用！</p>" +
-                    "<p style='font-size: 16px;'>如原料信息有误可点击编辑按钮进行修改。。。</p>" +
-                    "<p style='font-size: 16px;'>请确认是否删除该原料？？？</p>",
+                    message : "<p style='font-size: 16px;'>删除该产品后此编号将不可用！</p>" +
+                    "<p style='font-size: 16px;'>如产品信息有误可点击编辑按钮进行修改。。。</p>" +
+                    "<p style='font-size: 16px;'>请确认是否删除该产品？？？</p>",
                     buttons: {
                         confirm: {
                             label: "确认删除"
@@ -80,9 +80,9 @@ $(function () {
                             $.ajax({
                                 type:"post",
                                 dataType : "json",
-                                url : "/raw/delRaw", //要访问的后台地址
+                                url : "/deviceProduct/delProduct", //要访问的后台地址
                                 data : {
-                                    rawID : curID
+                                    productID : curID
                                 }, //要发送的数据，采用josn格式
 
                                 success : function(data) { //data为返回的数据
@@ -91,7 +91,7 @@ $(function () {
                                             type: "success",
                                             container : "page",
                                             title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>原料已删除。。。6秒后自动刷新页面。。。</p>",
+                                            message : "<p style='font-size: 16px;'>产品已删除。。。6秒后自动刷新页面。。。</p>",
                                             timer : 5000
                                         });
                                         setTimeout(function(){
@@ -118,7 +118,7 @@ $(function () {
                     }
                 });
             },
-            editRaw:function(e) {
+            editProduct:function(e) {
                 $("#updatePanel").removeAttr("hidden");
                 $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
@@ -127,19 +127,19 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
-                    url : "/raw/getRaw", //要访问的后台地址
+                    url : "/deviceProduct/getProduct", //要访问的后台地址
                     data : {
-                        rawID : curID
+                        productID : curID
                     }, //要发送的数据，采用josn格式
 
                     success : function(data) { //data为返回的数据
-                        app.raw=data;
-                        $("#updateactivitiesCategory_input").val(data.scc2);
-                        $("#updatenameCategory_input").val(data.scc3);
-                        $("#updatedrainageProcess_input").val(data.scc4);
-                        $("#updateactivitiesCategory").val(data.scc2);
-                        clientscc3('11',data.scc2,'updatenameCategory','updatedrainageProcess');
-                        clientscc4('11','updateactivitiesCategory',data.scc3,'updatedrainageProcess');
+                        app.product=data;
+                        $("#updateactivitiesCategory_input").val(data.activitiesCategory);
+                        $("#updatenameCategory_input").val(data.nameCategory);
+                        $("#updatedrainageProcess_input").val(data.drainageProcess);
+                        $("#updateactivitiesCategory").val(data.activitiesCategory);
+                        clientscc3('11',data.activitiesCategory,'updatenameCategory','updatedrainageProcess');
+                        clientscc4('11','updateactivitiesCategory',data.nameCategory,'updatedrainageProcess');
 
                         app.initSelect();
                     },
@@ -153,10 +153,10 @@ $(function () {
             },
             initSelect:function () {
                 setTimeout(function () {
-                    var scc3Input = $("#updatenameCategory_input").val();
-                    var scc4Input = $("#updatedrainageProcess_input").val();
-                    $("#updatenameCategory").val(scc3Input);
-                    $("#updatedrainageProcess").val(scc4Input);
+                    var nameCategoryInput = $("#updatenameCategory_input").val();
+                    var drainageProcessInput = $("#updatedrainageProcess_input").val();
+                    $("#updatenameCategory").val(nameCategoryInput);
+                    $("#updatedrainageProcess").val(drainageProcessInput);
                 },1000)
             }
 
@@ -172,37 +172,37 @@ $(function () {
 
 
     //修改窑炉信息
-    $("#updateRaw").click(function () {
+    $("#updateProduct").click(function () {
         var bootstrapValidator = $("#updatePanel").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
             if (checkvalue("update")){
                 //可以提交
-                app.raw.scc2 = $("#updateactivitiesCategory").val();
-                app.raw.scc3 = $("#updatenameCategory").val();
-                app.raw.scc4 = $("#updatedrainageProcess").val();
-                app.raw.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.raw.scc3Dec = $("#updatenameCategory").find("option:selected").text();
-                app.raw.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
-                app.raw.deviceNo = parseInt($("#updatedeviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
+                app.product.activitiesCategory = $("#updateactivitiesCategory").val();
+                app.product.nameCategory = $("#updatenameCategory").val();
+                app.product.drainageProcess = $("#updatedrainageProcess").val();
+                app.product.activitiesCategoryDec = $("#updateactivitiesCategory").find("option:selected").text();
+                app.product.nameCategoryDec = $("#updatenameCategory").find("option:selected").text();
+                app.product.drainageProcessDec = $("#updatedrainageProcess").find("option:selected").text();
+                app.product.deviceNo = parseInt($("#updatedeviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
                 // ajax请求。
                 $.ajax({
                     type:"post",
                     dataType : "json",
-                    url : "/raw/updateRaw", //要访问的后台地址
+                    url : "/deviceProduct/updateProduct", //要访问的后台地址
                     contentType:"application/json",
-                    data : JSON.stringify(app.raw), //直接传递对象给controller，
+                    data : JSON.stringify(app.product), //直接传递对象给controller，
                     // 需将json对象转化成字符流,必须声明dataType和contentType
                     // 同时controller中注解requestbody
 
                     success : function(reponseData) { //reponseData为返回的数据
                         if (reponseData.isUpdate){
-                            app.raw=reponseData.raw;
+                            app.product=reponseData.product;
                             $.niftyNoty({
                                 type: "success",
                                 container : "page",
                                 title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                                message : "<p style='font-size: 16px;'>原料信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
+                                message : "<p style='font-size: 16px;'>产品信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
                                 timer : 5000
                             });
                             setTimeout(function(){
@@ -258,13 +258,6 @@ $(function () {
                     notEmpty: {},
                     stringLength: {
                         max: 20
-                    }
-                }
-            },
-            gasNo: {
-                validators: {
-                    stringLength: {
-                        max: 15
                     }
                 }
             },
@@ -381,13 +374,6 @@ $(function () {
                     }
                 }
             },
-            updategasNo: {
-                validators: {
-                    stringLength: {
-                        max: 15
-                    }
-                }
-            },
             updateannualOutput:{
                 validators: {
                     notEmpty: {},
@@ -501,7 +487,7 @@ function  checkvalue(type) {
 
 }
 
-//自定义函数：增加原料
+//自定义函数：增加产品
 function updatedata() {
     var bootstrapValidator = $("#addPanel").data('bootstrapValidator');
     bootstrapValidator.validate();
@@ -509,23 +495,17 @@ function updatedata() {
         if (checkvalue("add")){
 
             //必填项不为空，可以提交
-            var scc2 = document.getElementById("activitiesCategory").value;
-            var scc2Dec=$("#activitiesCategory").find("option:selected").text();
-            var scc3 = document.getElementById("nameCategory").value;
-            var scc3Dec=$("#nameCategory").find("option:selected").text();
-            var scc4 = document.getElementById("drainageProcess").value;
-            var scc4Dec=$("#drainageProcess").find("option:selected").text();
+            var activitiesCategory = document.getElementById("activitiesCategory").value;
+            var activitiesCategoryDec = $("#activitiesCategory").find("option:selected").text();
+            var drainageProcess = document.getElementById("drainageProcess").value;
+            var drainageProcessDec = $("#drainageProcess").find("option:selected").text();
+            var nameCategory = document.getElementById("nameCategory").value;
+            var nameCategoryDec = $("#nameCategory").find("option:selected").text();
             var name = document.getElementById("name").value;
-            var usage = document.getElementById("annualOutput").value;
             var unit = document.getElementById("uint").value;
+            var annualOutput = document.getElementById("annualOutput").value;
             var deviceId = document.getElementById("deviceno").value;
             var deviceNo = parseInt($("#deviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
-            var gasNo= document.getElementById("gasNo").value;
-            var gasPre= document.getElementById("gasPre").value;
-            var gasVocs= document.getElementById("gasVocs").value;
-            var treatPre= document.getElementById("treatPre").value;
-            var treatNo= document.getElementById("treatNo").value;
-
             var janUseamount= document.getElementById("janUseamount").value;
             var febUseamount= document.getElementById("febUseamount").value;
             var marUseamount= document.getElementById("marUseamount").value;
@@ -544,7 +524,7 @@ function updatedata() {
             $.ajax({
                 type:"post",
                 dataType : "json",
-                url : "/raw/addRaw", //要访问的后台地址
+                url : "/deviceProduct/addProduct", //要访问的后台地址
                 data : {
                     janUseamount:janUseamount,
                     febUseamount:febUseamount,
@@ -558,21 +538,16 @@ function updatedata() {
                     octUseAmount:octUseAmount,
                     novUseamount:novUseamount,
                     decUseamount:decUseamount,
-                    gasNo:gasNo,
-                    gasPre:gasPre,
-                    gasVocs:gasVocs,
-                    treatNo:treatNo,
-                    treatPre:treatPre,
-                    mname : name,
-                    scc2 : scc2,
-                    scc2Dec:scc2Dec,
-                    scc3Dec:scc3Dec,
-                    scc4Dec:scc4Dec,
+                    activitiesCategory : activitiesCategory,
+                    activitiesCategoryDec : activitiesCategoryDec,
+                    nameCategory : nameCategory,
+                    nameCategoryDec : nameCategoryDec,
+                    drainageProcessDec : drainageProcessDec,
+                    drainageProcess : drainageProcess,
+                    name : name,
+                    annualOutput : annualOutput,
+                    uint : unit,
                     deviceNo : deviceNo,
-                    scc3 : scc3,
-                    musage : usage,
-                    unit : unit,
-                    scc4 : scc4,
                     deviceId: deviceId
 
                 }, //要发送的数据，采用josn格式

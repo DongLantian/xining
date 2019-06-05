@@ -902,4 +902,22 @@
       danwei = #{danwei,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <!--自定义SQL：根据工厂ID查询产品（连接设备表和烟囱表）-->
+  <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT dpt.id, dpt.nk_no, devicetotal_id, dpt.device_no, device_id, activities_category_dec, activities_category,
+      name_category_dec, name_category, dpt.name, drainage_process_dec, drainage_process, uint,
+      annual_output, scc_code, factor_nox, nox, factor_co, co, factor_status, factor_pm10,
+      pm10, factor_pm25, pm25, factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3,
+      nh3, factor_oc, oc, factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount,
+      May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount,
+      nov_useamount, dec_useamount, danwei
+    from device_product_temp dpt join device_temp d on dpt.device_id = d.id
+                             join exhaust_temp e on d.EXHUST_ID = e.EXF_ID
+    WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+  </select>
+
+
+
 </mapper>

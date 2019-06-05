@@ -222,7 +222,7 @@
                     <h1>原料列表</h1>
                     <div style="height: 200px;">
 
-                        &lt;!&ndash;原料信息放到modelandview中，在页面映射时完成&ndash;&gt;
+                        <!--原料信息放到modelandview中，在页面映射时完成-->
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -238,8 +238,8 @@
                             <tr  th:each="raw : ${rawList}">
                                 <th scope="row" th:text="${raw.id}">1</th>
                                 <td th:text="${raw.nkNo}">neo</td>
-                                <td th:text="${raw.kilnNo}">neo</td>
-                                <td th:text="${raw.modelDec}">Otto</td>
+                                <td th:text="${raw.scc4Dec}">neo</td>
+                                <td th:text="${raw.mname}">Otto</td>
                                 <td><button th:value="${raw.id}" @click="editRaw($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${raw.id}" @click="delRaw($event)" class="btn btn-danger btn-sm">删除</button></td>
                             </tr>
@@ -247,7 +247,7 @@
                         </table>
 
                     </div>
-                    &lt;!&ndash;===============================================================================================&ndash;&gt;
+                    <!--===============================================================================================-->
                     <div style="height: 80px;">
                         <div style="float: left;height: 60px;">
                             <input id="rawCount" hidden="hidden" th:value="${rawCount}"></input>
@@ -275,8 +275,8 @@
                         </div>
 
                     </div><br><br><hr>
-                    &lt;!&ndash;=======================修改原料Panel，默认隐藏=================================&ndash;&gt;
-                    <div id="updatePanel" class="panel panel-info"   style="margin-right: 60px;">
+                    <!--=======================修改原料Panel，默认隐藏=================================-->
+                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">修改原料信息（带*号为必填项）</h3>
                         </div>
@@ -306,7 +306,7 @@
                                                         请选择
                                                     </option>
                                                     </select>
-                                                    &lt;!&ndash;  a class="col-md-1" style="color: red;">*</a>&ndash;&gt;
+
                                                 </div>
 
 
@@ -424,7 +424,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <select id="updatedeviceno" name="updatedeviceno"
+                                                    <select id="updatedeviceno" name="updatedeviceno" v-model="raw.deviceId"
                                                             class="form-control">
 
                                                     </select>
@@ -734,18 +734,18 @@
 
                                 </div>
                                 <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
-                                    <button id="updateKiln" class="btn btn-info btn-lg">确认修改原料信息</button>
+                                    <button id="updateRaw" class="btn btn-info btn-lg">确认修改原料信息</button>
                                 </div><br>
 
                             </div>
 
-                            &lt;!&ndash;End page-content&ndash;&gt;
+                            <!--End page-content-->
 
                         </div>
                     </div>
 
-                    &lt;!&ndash;==============增加原料Panel=====================================================&ndash;&gt;
-                    <div id="addPanel"   class="panel panel-bordered-primary"  style="margin-right: 60px;">
+                    <!--==============增加原料Panel=====================================================-->
+                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">添加原料（带*号为必填项）</h3>
                         </div>
@@ -774,7 +774,6 @@
                                                             请选择
                                                         </option>
                                                     </select>
-                                                    &lt;!&ndash;  a class="col-md-1" style="color: red;">*</a>&ndash;&gt;
                                                 </div>
 
 
@@ -905,9 +904,8 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input class="form-control"
+                                                    <input class="form-control" type="text"
                                                            id="gasNo" name="gasNo"
-                                                            
                                                     />
 
                                                 </div>
@@ -1199,21 +1197,21 @@
 
                                 </div>
                                 <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
-                                    <button id="addKiln" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                    <button id="addRaw" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
                                 </div><br>
 
                             </div>
 
-                            &lt;!&ndash;End page-content&ndash;&gt;
+                            <!--End page-content-->
 
                         </div>
 
-                        &lt;!&ndash;End panel-body&ndash;&gt;
+                        <!--End panel-body-->
 
 
                     </div>
 
-                    &lt;!&ndash;End addPanel&ndash;&gt;
+                    <!--End addPanel-->
 
                 </div>
 
