@@ -4,7 +4,9 @@ import com.nankai.xining.bean.TotalRongjiTemp;
 import com.nankai.xining.bean.TotalRongjiTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TotalRongjiTempMapper {
     long countByExample(TotalRongjiTempExample example);
 

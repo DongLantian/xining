@@ -268,6 +268,21 @@ $(function () {
                     }
                 }
             },
+            gasPre:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            gasVocs:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            treatPre:{
+                validators: {
+                    numeric: {}
+                }
+            },
             annualOutput:{
                 validators: {
                     notEmpty: {},
@@ -386,6 +401,21 @@ $(function () {
                     stringLength: {
                         max: 15
                     }
+                }
+            },
+            updategasPre:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            updategasVocs:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            updatetreatPre:{
+                validators: {
+                    numeric: {}
                 }
             },
             updateannualOutput:{
@@ -615,39 +645,6 @@ function updatedata() {
 
 }
 
-//自定义函数：选中烟囱时显示烟囱参数
-function exhaustModel(exhustId,select){
-
-    if(exhustId!=''){
-        $.ajax({
-            type:"get",
-            dataType : "json",
-            url : "/exhaust/getExhaust", //要访问的后台地址
-            data : {
-                exhaustID : exhustId
-            }, //要发送的数据，采用josn格式
-            success : function(data) { //data为返回的数据
-                if (select=="update"){
-
-                    $("#updateexaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }else {
-                    $("#exaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }
-            }
-        });
-
-    } else {
-        document.getElementById("exaust_info").innerHTML = "<b style='color:purple'></b>";
-    }
-}
 
 
 /***

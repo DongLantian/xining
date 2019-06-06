@@ -9,12 +9,15 @@
     <!--=================================================-->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-select.min.css}" rel="stylesheet">
     <link th:href="@{/css/nifty.min.css}" rel="stylesheet">
     <link th:href="@{/themify-icons/themify-icons.min.css}" rel="stylesheet" >
 
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/validator/bootstrapValidator.min.css}" rel="stylesheet">
+
     <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
@@ -27,26 +30,35 @@
     <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
     <script  th:src="@{/js/user.js}"></script>
     <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/js/bootstrap-select.min.js}"></script>
     <script  th:src="@{/js/bootstrapPage.js}"></script>
+    <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
+    <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
-    <!--<script th:src="@{/js/enterpriseInfo.js}"></script>-->
+    <script th:src="@{/js/my/solventraw.js}"></script>
+    <script th:src="@{/js/my/SccLoad.js}"></script>
 
     <!--STYLE CSS-->
     <!--=================================================-->
     <style type="text/css">
         label {
             color: black;
-            padding-top: 5px;
+            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
         input[type=text], select {
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 15px;
+        }
+        option{
             font-size: 15px;
         }
 
@@ -223,13 +235,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr  th:each="raw : ${rawList}">
-                                <th scope="row" th:text="${raw.id}">1</th>
-                                <td th:text="${raw.nkNo}">neo</td>
-                                <td th:text="${raw.scc4Dec}">neo</td>
-                                <td th:text="${raw.mname}">Otto</td>
-                                <td><button th:value="${raw.id}" @click="editRaw($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${raw.id}" @click="delRaw($event)" class="btn btn-danger btn-sm">删除</button></td>
+                            <tr  th:each="solventraw : ${solventrawList}">
+                                <th scope="row" th:text="${solventraw.id}">1</th>
+                                <td th:text="${solventraw.nkNo}">neo</td>
+                                <td th:text="${solventraw.scc4Dec}">neo</td>
+                                <td th:text="${solventraw.mname}">Otto</td>
+                                <td><button th:value="${solventraw.id}" @click="editsolventRaw($event)" class="btn btn-info btn-sm">编辑</button></td>
+                                <td><button th:value="${solventraw.id}" @click="delsolventRaw($event)" class="btn btn-danger btn-sm">删除</button></td>
                             </tr>
                             </tbody>
                         </table>
@@ -238,9 +250,9 @@
                     <!--===============================================================================================-->
                     <div style="height: 80px;">
                         <div style="float: left;height: 60px;">
-                            <input id="rawCount" hidden="hidden" th:value="${rawCount}"></input>
+                            <input id="solventrawCount" hidden="hidden" th:value="${solventrawCount}"></input>
                             <script>
-                                var count = document.getElementById("rawCount").value;
+                                var count = document.getElementById("solventrawCount").value;
                                 document.write(Pager({
                                     totalCount:count, 		//总条数为150
                                     pageSize:3,    			//每页显示3条内容，默认10
@@ -256,7 +268,7 @@
                             </script>
                         </div>
                         <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${rawCount}">0</span>个原料。。。</span>
+                            <span style="font-weight: bold;">共有<span th:text="${solventrawCount}">0</span>个原料。。。</span>
                         </div>
                         <div style="float:right;margin-right: 120px;">
                             <button id="addBtn" class="btn btn-primary btn-lg">添加原料</button>
@@ -271,6 +283,421 @@
                         <div class="panel-body">
                             <p>在这里修改原料信息后点击确认按钮提交修改...</p>
 
+                            <div class="page-content">
+
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    生产活动类别
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="updateactivitiesCategory_input"
+                                                       id="updateactivitiesCategory_input" v-model="solventraw.scc2" />
+
+                                                <div class="col-md-8">
+
+                                                    <select id="updateactivitiesCategory" name="updateactivitiesCategory"  class="form-control"
+                                                            Onchange="clientscc3('14',this.value,'updatenameCategory','updatedrainageProcess')" />
+                                                    </select>
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料名称/类别
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="updatenameCategory_input"
+                                                       id="updatenameCategory_input" v-model="solventraw.scc3" />
+
+
+                                                <div class="col-md-8">
+                                                    <select id="updatenameCategory" name="updatenameCategory"   class="form-control"
+                                                            Onchange="clientscc4('14','updateactivitiesCategory',this.value,'updatedrainageProcess')" />
+                                                    <option disabled="disabled">
+                                                        请先选择生产活动类别
+                                                    </option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    生产/排污工艺
+                                                    <a style="color: red;">*</a>
+
+                                                </label>
+                                                <input type="hidden" name="updatedrainageProcess_input"
+                                                       id="updatedrainageProcess_input" v-model="solventraw.scc4" />
+
+                                                <div class="col-md-8">
+                                                    <select id="updatedrainageProcess" name="updatedrainageProcess"   class="form-control" />
+                                                    <option disabled="disabled">
+                                                        请先选择原料名称/类别
+                                                    </option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料备注
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" id="updatename" name="updatename"  class="form-control" v-model="solventraw.mname"/>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right"
+                                                       for="annualOutput">
+                                                    年使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="updateannualOutput" id="updateannualOutput"
+                                                           class="form-control"
+                                                           v-model="solventraw.musage"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right"
+                                                       for="uint">
+                                                    计量单位
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="updateuint" name="updateuint"  class="form-control"  v-model="solventraw.unit"/>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-xs-12">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    集气设施编号
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.gasNo" type="text"
+                                                           class="form-control"  id="updategasNo" name="updategasNo"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    集气效率(%)
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.gasPre" type="text"
+                                                           class="form-control"  id="updategasPre" name="updategasPre"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原辅料VOCs含量(%)
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.gasVocs" type="text"
+                                                           class="form-control"  id="updategasVocs" name="updategasVocs"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    治理设施VOCs去除率(%)
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.treatPre" type="text"
+                                                           class="form-control"  id="updatetreatPre" name="updatetreatPre"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-12">
+                                        <a style="color: red;">原料月份使用量的单位和原料总使用量单位一致</a>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料一月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.janUseamount" type="text"
+                                                           id="updatejanUseamount" name="updatejanUseamount" class="form-control"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料二月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.febUseamount" type="text"
+                                                           id="updatefebUseamount" name="updatefebUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料三月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.marUseamount" type="text"
+                                                           id="updatemarUseamount" name="updatemarUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料四月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.aprUseamount" type="text"
+                                                           id="updateaprUseamount" name="updateaprUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料五月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.mayUseamount" type="text"
+                                                           id="updatemayUseamount" name="updatemayUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料六月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.juneUseamount" type="text"
+                                                           id="updatejuneUseamount" name="updatejuneUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料七月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.julyUseamount" type="text"
+                                                           id="updatejulyUseamount" name="updatejulyUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料八月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.augUseamount" type="text"
+                                                           id="updateaugUseamount" name="updateaugUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料九月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.septUseamount" type="text"
+                                                           id="updateseptUseamount" name="updateseptUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料十月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.octUseAmount" type="text"
+                                                           id="updateoctUseAmount" name="updateoctUseAmount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料十一月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.novUseamount" type="text"
+                                                           id="updatenovUseamount" name="updatenovUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    原料十二月份使用量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventraw.decUseamount" type="text"
+                                                           id="updatedecUseamount" name="updatedecUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                                    <button id="updatesolventRaw"  class="btn btn-info btn-lg">确认修改原料信息</button>
+                                </div><br>
+
+                            </div>
 
 
                             <!--End page-content-->
@@ -287,52 +714,27 @@
                             <p>在这里添加原料...</p><br>
 
                             <div class="page-content">
-                                <div class="page-header">
-                                    <h1>
-                                        <b>企业信息</b>
-                                        <small> <i class="icon-double-angle-right"></i> 概要信息 </small>
-                                    </h1>
-                                </div>
-                                <!-- /.page-header -->
+                                
 
-                                <%@ include file="/client/public_com.jsp"%>
-
-
-
-
-
-                                <div class="page-header" style="margin-top: 20px;">
-                                    <h1>
-                                        <b id="NO"></b>
-
-                                        <small> <i class="icon-double-angle-right"></i> <b>基础信息</b>
-                                        </small>
-                                    </h1>
-                                    <h3 style="color: red;margin-top:15px;">
-                                        本页面未填报完成，不能保存和填报下一个页面
-                                    </h3>
-                                </div>
-                                <!-- /.page-header -->
-
-                                <div class="row" style="height: 11px;">
+                                <div class="row">
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                "
-                                                for="activitiesCategory">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                 生产活动类别
                                                 <a style="color: red;">*</a>
                                                 </label>
                                                 <input type="hidden" name="activitiesCategory_input"
-                                                       id="activitiesCategory_input" value='${cur_rongji.scc2}' />
+                                                       id="activitiesCategory_input"  />
 
                                                 <div class="col-md-8">
 
-                                                    <select id="activitiesCategory" style="width: 300px;"
+                                                    <select id="activitiesCategory" name="activitiesCategory"  class="form-control"
                                                             Onchange="clientscc3('14',this.value,'nameCategory','drainageProcess')" />
+                                                    <option value="">
+                                                        请选择
+                                                    </option>
                                                     </select>
-                                                    <!--  a class="col-md-1" style="color: red;">*</a>-->
                                                 </div>
 
 
@@ -342,18 +744,20 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="nameCategory">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料名称/类别
                                                     <a style="color: red;">*</a>
                                                 </label>
-                                                <input type="hidden" name="nameCategory_input"
-                                                       id="nameCategory_input" value='${cur_rongji.scc3}' />
+                                                <input type="hidden" name="nameCategory_input"  
+                                                       id="nameCategory_input"  />
 
 
                                                 <div class="col-md-8">
-                                                    <select id="nameCategory" style="width: 300px;"
+                                                    <select id="nameCategory" name="nameCategory"   class="form-control"
                                                             Onchange="clientscc4('14','activitiesCategory',this.value,'drainageProcess')" />
+                                                    <option disabled="disabled">
+                                                        请先选择生产活动类别
+                                                    </option>
                                                     </select>
 
                                                 </div>
@@ -365,17 +769,19 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="drainageProcess">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     生产/排污工艺
                                                     <a style="color: red;">*</a>
 
                                                 </label>
                                                 <input type="hidden" name="drainageProcess_input"
-                                                       id="drainageProcess_input" value='${cur_rongji.scc4}' />
+                                                       id="drainageProcess_input"  />
 
                                                 <div class="col-md-8">
-                                                    <select id="drainageProcess" style="width: 300px" />
+                                                    <select id="drainageProcess" name="drainageProcess"   class="form-control" />
+                                                    <option disabled="disabled">
+                                                        请先选择原料名称/类别
+                                                    </option>
                                                     </select>
 
                                                 </div>
@@ -383,14 +789,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="name">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料备注
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input type="text" id="name" value="${cur_rongji.mname}"
-                                                           Onchange="ischanged('deviceFlow')" style="width: 300px;" />
+                                                    <input type="text" id="name" name="name"  class="form-control" />
 
                                                 </div>
 
@@ -409,10 +813,8 @@
                                                 </label>
                                                 <div class="col-md-8">
                                                     <input type="text" name="annualOutput" id="annualOutput"
-                                                           Onchange="ischanged('deviceFlow')" class="check1"
-                                                           alt="p9x3p4s" value="${cur_rongji.musage}"
-                                                           style="width: 300px;"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','annualOutput')" />
+                                                            class="form-control"
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -425,8 +827,7 @@
                                                     <a style="color: red;">*</a>
                                                 </label>
                                                 <div class="col-md-8">
-                                                    <input type="text" id="uint" value="${cur_rongji.unit}"
-                                                           Onchange="ischanged('uint')" style="width: 300px;" />
+                                                    <input type="text" id="uint" name="uint"  class="form-control"  />
 
                                                 </div>
 
@@ -440,14 +841,12 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     集气设施编号
                                                 </label>
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.gasNo}" type="text" maxlength="15"
-                                                           class="check1" alt="p3x3p0s" id="gasNo"
-                                                           Onchange="ischanged('deviceFlow')" style="width: 300px;" />
+                                                    <input  type="text" 
+                                                           class="form-control"  id="gasNo" name="gasNo"/>
 
                                                 </div>
                                             </div>
@@ -455,15 +854,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     集气效率(%)
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.gasPre}" type="text"
-                                                           class="check1" alt="p2x3p2s" id="gasPre"
-                                                           Onchange="ischanged('deviceFlow')" style="width: 300px;" />
+                                                    <input  type="text"
+                                                           class="form-control"  id="gasPre" name="gasPre"/>
 
                                                 </div>
                                             </div>
@@ -474,15 +871,13 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原辅料VOCs含量(%)
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.gasVocs}" type="text"
-                                                           class="check1" alt="p2x3p2s" id="gasVocs"
-                                                           Onchange="ischanged('deviceFlow')" style="width: 300px;" />
+                                                    <input  type="text"
+                                                           class="form-control"  id="gasVocs" name="gasVocs"/>
 
                                                 </div>
                                             </div>
@@ -490,15 +885,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     治理设施VOCs去除率(%)
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.treatPre}" type="text"
-                                                           class="check1" alt="p2x3p2s" id="treatPre"
-                                                           Onchange="ischanged('deviceFlow')" style="width: 300px;" />
+                                                    <input  type="text"
+                                                           class="form-control"  id="treatPre" name="treatPre"/>
 
                                                 </div>
                                             </div>
@@ -507,63 +900,41 @@
                                     </div>
 
 
-                                    <!-- <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="col-md-4 control-label no-padding-right"
-                                                            for="form-field-1">
-                                                            治理设施编号：
-                                                        </label>
-
-                                                        <div class="col-md-8">
-                                                            <input value="${cur_rongji.treatNo}" type="text"
-                                                                id="treatNo"
-                                                                 style="width: 300px;"
-                                                                />
-
-                                                        </div>
-                                                    </div>
-
-                                                </div> -->
+                                    
 
 
-                                    <div class="col-md-12" style="height: 30px; font-size: 15px;margin-top:15px;">
+                                    <div class="col-md-12">
                                         <a style="color: red;">原料月份使用量的单位和原料总使用量单位一致</a>
                                     </div>
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料一月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.janUseamount}" type="text"
-                                                           id="janUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','janUseamount')" />
+                                                    <input  type="text"
+                                                           id="janUseamount" name="janUseamount" class="form-control"
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料二月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.febUseamount}" type="text"
-                                                           id="febUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="febUseamount" name="febUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','febUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
 
                                                 </div>
@@ -573,20 +944,17 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料三月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.marUseamount}" type="text"
-                                                           id="marUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="marUseamount" name="marUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','marUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
 
                                                 </div>
@@ -594,20 +962,17 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料四月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.aprUseamount}" type="text"
-                                                           id="aprUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="aprUseamount" name="aprUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','aprUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -616,40 +981,34 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料五月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.mayUseamount}" type="text"
-                                                           id="mayUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="mayUseamount" name="mayUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','mayUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料六月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.juneUseamount}" type="text"
-                                                           id="juneUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="juneUseamount" name="juneUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','juneUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -658,40 +1017,34 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料七月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.julyUseamount}" type="text"
-                                                           id="julyUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="julyUseamount" name="julyUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','julyUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料八月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.augUseamount}" type="text"
-                                                           id="augUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="augUseamount" name="augUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','augUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -700,40 +1053,34 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料九月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.septUseamount}" type="text"
-                                                           id="septUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="septUseamount" name="septUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','septUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料十月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.octUseAmount}" type="text"
-                                                           id="octUseAmount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="octUseAmount" name="octUseAmount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','octUseAmount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -742,40 +1089,34 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料十一月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.novUseamount}" type="text"
-                                                           id="novUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="novUseamount" name="novUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','novUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right"
-                                                       for="form-field-1">
+                                                <label class="col-md-4 control-label no-padding-right">
                                                     原料十二月份使用量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.decUseamount}" type="text"
-                                                           id="decUseamount" class="check1" alt="p6x3p4s"
-                                                           style="height: 25px; margin-top: 3px; width: 170px;"
+                                                    <input  type="text"
+                                                           id="decUseamount" name="decUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           Onchange="ischanged('deviceFlow')"
-                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount','使用量','decUseamount')" />
+                                                           onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
                                                 </div>
                                             </div>
@@ -783,52 +1124,11 @@
                                     </div>
 
 
-
-                                    <div class="row" style="margin: 0 auto; text-align: center">
-                                        <div class="col-xs-12">
-                                            <!--  img  border="0" src="img/btn1.png" style="margin-left:60px;" /-->
-
-                                            <!--  img  border="0" src="img/btn2.png" style="margin-left:100px;" /-->
-                                            <ul class="pager">
-                                                <li class="col-md-3">
-                                                    <a href="javascript:void(0);" id="prepage"
-                                                       style="font-weight: bold;" onclick="pre();">&larr; 填报上一个</a>
-                                                </li>
-                                                <div class="col-md-3">
-                                                    <li>
-                                                        <a href="javascript:void(0);" style="font-weight: bold;"
-                                                           onclick="updatedata();">保存</a>
-                                                    </li>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <li>
-                                                        <a href="javascript:void(0);" style="font-weight: bold;"
-                                                           onclick="cancel();">放弃当前页面</a>
-                                                    </li>
-                                                </div>
-                                                <li class="col-md-3">
-                                                    <a href="javascript:void(0);" id="nextpage"
-                                                       style="font-weight: bold;" onclick="next();">填报下一个
-                                                        &rarr;</a>
-                                                </li>
-                                                <input type="hidden" name="page" id="page">
-                                                <input type="hidden" name="newpage" id="newpage">
-                                                <input type="hidden" name="malert" id="malert" value='0'>
-                                                <%@ include file="/client/detele.jsp"%>
-                                                <input type="hidden" name="mId" id="mId"
-                                                       value='${cur_rongji.id}'>
-
-                                            </ul>
-
-
-                                        </div>
-                                        <%@ include file="/client/public_end.jsp"%>
-                                    </div>
-
-
                                 </div>
-                                <!-- /.page-content -->
-                                <div class="clearfloat"></div>
+                                <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                                    <button id="addsolventRaw" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                </div><br>
+                                
                             </div>
 
                             <!--End page-content-->

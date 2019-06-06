@@ -8,7 +8,7 @@ $(function () {
         dataType : "json",
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
-            scc1ID: '11'
+            scc1ID: '14'
         },                             //要发送的数据，采用josn格式
 
         success : function(list) { //list为返回的数据
@@ -27,35 +27,13 @@ $(function () {
         }
     });
 
-    //设备下拉菜单初始化
-    $.ajax({
-        type:"post",
-        dataType : "json",
-        url : "/common/getDeviceList", //要访问的后台地址
-        data : {},                             //要发送的数据，采用josn格式
-
-        success : function(list) { //list为返回的数据
-            //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-            $.each(list,function (index,item) {
-                var $option = $("<option></option>");
-                $option.attr("value", item.id);
-                $option.text('设备'+item.nkNo+'号');
-                $("#updatedeviceno").append($option);
-                $("#deviceno").append("<option value="+item.id+">设备"+item.nkNo+"号</option>");
-            })
-        },
-        error : function(XMLResponse) {
-            alert(XMLResponse.responseText);
-
-        }
-    });
 
     // 定义Vue对象，与页面中元素绑定
     //使用Vue控制页面元素：用于编辑和删除功能
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            product: {}
+            solventproduct: {}
         },
         methods:{
             delProduct:function (e) {

@@ -42,6 +42,9 @@ public class PagesMappingController {
     @Autowired
     DeviceProductService deviceProductService;
 
+    @Autowired
+    SolventRawService solventRawService;
+
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -162,7 +165,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/solventraw")
-    public String solventraw(){
+    public String solventraw(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<RongjiRawTemp> solventRawList = solventRawService.selectRawListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(solventRawList);
+        model.addAttribute("solventrawList",pageResult.getList());
+        model.addAttribute("solventrawCount",pageResult.getTotal());
+
         return "/user/solventraw";
     }
 

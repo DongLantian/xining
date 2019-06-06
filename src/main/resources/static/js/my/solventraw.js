@@ -8,7 +8,7 @@ $(function () {
         dataType : "json",
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
-            scc1ID: '11'
+            scc1ID: '14'
         },                             //要发送的数据，采用josn格式
 
         success : function(list) { //list为返回的数据
@@ -27,38 +27,15 @@ $(function () {
         }
     });
 
-    //设备下拉菜单初始化
-    $.ajax({
-        type:"post",
-        dataType : "json",
-        url : "/common/getDeviceList", //要访问的后台地址
-        data : {},                             //要发送的数据，采用josn格式
-
-        success : function(list) { //list为返回的数据
-            //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-            $.each(list,function (index,item) {
-                var $option = $("<option></option>");
-                $option.attr("value", item.id);
-                $option.text('设备'+item.nkNo+'号');
-                $("#updatedeviceno").append($option);
-                $("#deviceno").append("<option value="+item.id+">设备"+item.nkNo+"号</option>");
-            })
-        },
-        error : function(XMLResponse) {
-            alert(XMLResponse.responseText);
-
-        }
-    });
-
     // 定义Vue对象，与页面中元素绑定
     //使用Vue控制页面元素：用于编辑和删除功能
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            raw: {}
+            solventraw: {}
         },
         methods:{
-            delRaw:function (e) {
+            delsolventRaw:function (e) {
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 bootbox.confirm({
@@ -80,9 +57,9 @@ $(function () {
                             $.ajax({
                                 type:"post",
                                 dataType : "json",
-                                url : "/raw/delRaw", //要访问的后台地址
+                                url : "/solventraw/delsolventRaw", //要访问的后台地址
                                 data : {
-                                    rawID : curID
+                                    solventrawID : curID
                                 }, //要发送的数据，采用josn格式
 
                                 success : function(data) { //data为返回的数据
@@ -118,7 +95,7 @@ $(function () {
                     }
                 });
             },
-            editRaw:function(e) {
+            editsolventRaw:function(e) {
                 $("#updatePanel").removeAttr("hidden");
                 $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
@@ -127,19 +104,19 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
-                    url : "/raw/getRaw", //要访问的后台地址
+                    url : "/solventraw/getsolventRaw", //要访问的后台地址
                     data : {
-                        rawID : curID
+                        solventrawID : curID
                     }, //要发送的数据，采用josn格式
 
                     success : function(data) { //data为返回的数据
-                        app.raw=data;
+                        app.solventraw=data;
                         $("#updateactivitiesCategory_input").val(data.scc2);
                         $("#updatenameCategory_input").val(data.scc3);
                         $("#updatedrainageProcess_input").val(data.scc4);
                         $("#updateactivitiesCategory").val(data.scc2);
-                        clientscc3('11',data.scc2,'updatenameCategory','updatedrainageProcess');
-                        clientscc4('11','updateactivitiesCategory',data.scc3,'updatedrainageProcess');
+                        clientscc3('14',data.scc2,'updatenameCategory','updatedrainageProcess');
+                        clientscc4('14','updateactivitiesCategory',data.scc3,'updatedrainageProcess');
 
                         app.initSelect();
                     },
@@ -172,32 +149,31 @@ $(function () {
 
 
     //修改窑炉信息
-    $("#updateRaw").click(function () {
+    $("#updatesolventRaw").click(function () {
         var bootstrapValidator = $("#updatePanel").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
             if (checkvalue("update")){
                 //可以提交
-                app.raw.scc2 = $("#updateactivitiesCategory").val();
-                app.raw.scc3 = $("#updatenameCategory").val();
-                app.raw.scc4 = $("#updatedrainageProcess").val();
-                app.raw.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.raw.scc3Dec = $("#updatenameCategory").find("option:selected").text();
-                app.raw.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
-                app.raw.deviceNo = parseInt($("#updatedeviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
+                app.solventraw.scc2 = $("#updateactivitiesCategory").val();
+                app.solventraw.scc3 = $("#updatenameCategory").val();
+                app.solventraw.scc4 = $("#updatedrainageProcess").val();
+                app.solventraw.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
+                app.solventraw.scc3Dec = $("#updatenameCategory").find("option:selected").text();
+                app.solventraw.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
                 // ajax请求。
                 $.ajax({
                     type:"post",
                     dataType : "json",
-                    url : "/raw/updateRaw", //要访问的后台地址
+                    url : "/solventraw/updatesolventRaw", //要访问的后台地址
                     contentType:"application/json",
-                    data : JSON.stringify(app.raw), //直接传递对象给controller，
+                    data : JSON.stringify(app.solventraw), //直接传递对象给controller，
                     // 需将json对象转化成字符流,必须声明dataType和contentType
                     // 同时controller中注解requestbody
 
                     success : function(reponseData) { //reponseData为返回的数据
                         if (reponseData.isUpdate){
-                            app.raw=reponseData.raw;
+                            app.solventraw=reponseData.solventraw;
                             $.niftyNoty({
                                 type: "success",
                                 container : "page",
@@ -248,11 +224,6 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            deviceno:{
-                validators: {
-                    notEmpty: {}
-                }
-            },
             uint: {
                 validators: {
                     notEmpty: {},
@@ -266,6 +237,21 @@ $(function () {
                     stringLength: {
                         max: 15
                     }
+                }
+            },
+            gasPre:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            gasVocs:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            treatPre:{
+                validators: {
+                    numeric: {}
                 }
             },
             annualOutput:{
@@ -368,11 +354,6 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            updatedeviceno:{
-                validators: {
-                    notEmpty: {}
-                }
-            },
             updateuint: {
                 validators: {
                     notEmpty: {},
@@ -386,6 +367,21 @@ $(function () {
                     stringLength: {
                         max: 15
                     }
+                }
+            },
+            updategasPre:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            updategasVocs:{
+                validators: {
+                    numeric: {}
+                }
+            },
+            updatetreatPre:{
+                validators: {
+                    numeric: {}
                 }
             },
             updateannualOutput:{
@@ -478,12 +474,12 @@ function  checkvalue(type) {
     var ids;
     if (type=="add"){
         ids = new Array("activitiesCategory", "nameCategory",
-            "drainageProcess","deviceno", "uint", "annualOutput",
+            "drainageProcess", "uint", "annualOutput",
             "janUseamount","febUseamount","marUseamount","aprUseamount","mayUseamount","juneUseamount",
             "julyUseamount","augUseamount","septUseamount","octUseAmount","novUseamount","decUseamount");
     }else if(type="update"){
         ids = new Array("updateactivitiesCategory", "updatenameCategory",
-            "updatedrainageProcess","updatedeviceno", "updateuint", "updateannualOutput",
+            "updatedrainageProcess", "updateuint", "updateannualOutput",
             "updatejanUseamount","updatefebUseamount","updatemarUseamount","updateaprUseamount","updatemayUseamount","updatejuneUseamount",
             "updatejulyUseamount","updateaugUseamount","updateseptUseamount","updateoctUseAmount","updatenovUseamount","updatedecUseamount");
     }
@@ -500,72 +496,6 @@ function  checkvalue(type) {
         return true;
 
 }
-
-/*
-var ids = new Array("activitiesCategory", "nameCategory",
-			"drainageProcess", "uint", "annualOutput", "janUseamount",
-			"febUseamount", "marUseamount", "aprUseamount", "mayUseamount",
-			"juneUseamount", "julyUseamount", "augUseamount", "septUseamount",
-			"octUseAmount", "novUseamount", "decUseamount");
-var name = document.getElementById("name").value;
-	var scc2 = document.getElementById("activitiesCategory").value;
-	var scc2Dec = $("#activitiesCategory").find("option:selected").text();
-	var usage = document.getElementById("annualOutput").value;
-	var unit = document.getElementById("uint").value;
-	var scc4 = document.getElementById("drainageProcess").value;
-	var scc4Dec = $("#drainageProcess").find("option:selected").text();
-	var scc3 = document.getElementById("nameCategory").value;
-	var scc3Dec = $("#nameCategory").find("option:selected").text();
-	var m_pages = parseInt(document.getElementById("page").value);
-	var cjnub = m_pages;//表示保存设备m_pages
-	var janUseamount = document.getElementById("janUseamount").value;
-	var febUseamount = document.getElementById("febUseamount").value;
-	var marUseamount = document.getElementById("marUseamount").value;
-	var aprUseamount = document.getElementById("aprUseamount").value;
-	var mayUseamount = document.getElementById("mayUseamount").value;
-	var juneUseamount = document.getElementById("juneUseamount").value;
-	var julyUseamount = document.getElementById("julyUseamount").value;
-
-	var augUseamount = document.getElementById("augUseamount").value;
-	var septUseamount = document.getElementById("septUseamount").value;
-
-	var octUseAmount = document.getElementById("octUseAmount").value;
-	var novUseamount = document.getElementById("novUseamount").value;
-	var decUseamount = document.getElementById("decUseamount").value;
-	var gasNo = document.getElementById("gasNo").value;
-	var gasPre = document.getElementById("gasPre").value;
-	var gasVocs = document.getElementById("gasVocs").value;
-	var treatPre = document.getElementById("treatPre").value;
-	$.post("ajax/RongjiRawTemp/updatedb.do", {
-		isnew : 1,
-		scc2Dec : scc2Dec,
-		scc3Dec : scc3Dec,
-		scc4Dec : scc4Dec,
-		mname : name,
-		scc2 : scc2,
-		scc3 : scc3,
-		musage : usage,
-		unit : unit,
-		scc4 : scc4,
-		nkNo : cjnub,
-		cjnub : cjnub,
-		janUseamount : janUseamount,
-		febUseamount : febUseamount,
-		marUseamount : marUseamount,
-		aprUseamount : aprUseamount,
-		mayUseamount : mayUseamount,
-		juneUseamount : juneUseamount,
-		julyUseamount : julyUseamount,
-		augUseamount : augUseamount,
-		septUseamount : septUseamount,
-		octUseAmount : octUseAmount,
-		novUseamount : novUseamount,
-		decUseamount : decUseamount,
-		gasNo : gasNo,
-		gasPre : gasPre,
-		gasVocs : gasVocs,
-		treatPre : treatPre
-* */
 
 
 //自定义函数：增加原料
@@ -585,13 +515,10 @@ function updatedata() {
             var name = document.getElementById("name").value;
             var usage = document.getElementById("annualOutput").value;
             var unit = document.getElementById("uint").value;
-            var deviceId = document.getElementById("deviceno").value;
-            var deviceNo = parseInt($("#deviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
             var gasNo= document.getElementById("gasNo").value;
             var gasPre= document.getElementById("gasPre").value;
             var gasVocs= document.getElementById("gasVocs").value;
             var treatPre= document.getElementById("treatPre").value;
-            var treatNo= document.getElementById("treatNo").value;
 
             var janUseamount= document.getElementById("janUseamount").value;
             var febUseamount= document.getElementById("febUseamount").value;
@@ -605,13 +532,11 @@ function updatedata() {
             var octUseAmount= document.getElementById("octUseAmount").value;
             var novUseamount= document.getElementById("novUseamount").value;
             var decUseamount= document.getElementById("decUseamount").value;
-
-
             // ajax请求。
             $.ajax({
                 type:"post",
                 dataType : "json",
-                url : "/raw/addRaw", //要访问的后台地址
+                url : "/solventraw/addsolventRaw", //要访问的后台地址
                 data : {
                     janUseamount:janUseamount,
                     febUseamount:febUseamount,
@@ -628,19 +553,16 @@ function updatedata() {
                     gasNo:gasNo,
                     gasPre:gasPre,
                     gasVocs:gasVocs,
-                    treatNo:treatNo,
                     treatPre:treatPre,
                     mname : name,
                     scc2 : scc2,
                     scc2Dec:scc2Dec,
                     scc3Dec:scc3Dec,
                     scc4Dec:scc4Dec,
-                    deviceNo : deviceNo,
                     scc3 : scc3,
                     musage : usage,
                     unit : unit,
-                    scc4 : scc4,
-                    deviceId: deviceId
+                    scc4 : scc4
 
                 }, //要发送的数据，采用josn格式
 
@@ -680,40 +602,6 @@ function updatedata() {
         bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请根据提示修改。。。</p>");
     }
 
-}
-
-//自定义函数：选中烟囱时显示烟囱参数
-function exhaustModel(exhustId,select){
-
-    if(exhustId!=''){
-        $.ajax({
-            type:"get",
-            dataType : "json",
-            url : "/exhaust/getExhaust", //要访问的后台地址
-            data : {
-                exhaustID : exhustId
-            }, //要发送的数据，采用josn格式
-            success : function(data) { //data为返回的数据
-                if (select=="update"){
-
-                    $("#updateexaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }else {
-                    $("#exaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }
-            }
-        });
-
-    } else {
-        document.getElementById("exaust_info").innerHTML = "<b style='color:purple'></b>";
-    }
 }
 
 
