@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FeiqiTemp;
 import com.nankai.xining.bean.FeiqiTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FeiqiTempMapper {
     long countByExample(FeiqiTempExample example);
 
@@ -27,4 +29,5 @@ public interface FeiqiTempMapper {
     int updateByPrimaryKeySelective(FeiqiTemp record);
 
     int updateByPrimaryKey(FeiqiTemp record);
+
 }

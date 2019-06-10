@@ -4,7 +4,9 @@ import com.nankai.xining.bean.RongjiProductTemp;
 import com.nankai.xining.bean.RongjiProductTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RongjiProductTempMapper {
     long countByExample(RongjiProductTempExample example);
 
@@ -27,4 +29,6 @@ public interface RongjiProductTempMapper {
     int updateByPrimaryKeySelective(RongjiProductTemp record);
 
     int updateByPrimaryKey(RongjiProductTemp record);
+
+    List<RongjiProductTemp> selectByFactoryIdWithJoin(int factoryId);
 }

@@ -10,6 +10,11 @@ import java.util.Date;
 public class DateTest {
 
     public static void main(String[] args) {
-        System.out.println(new Date());
+
+        //System.out.println(new Date());
+        Double a=80.0000;
+        System.out.println(a);
+
+
     }
 }

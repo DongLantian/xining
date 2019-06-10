@@ -3,6 +3,7 @@ package com.nankai.xining.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.nankai.xining.bean.*;
+import com.nankai.xining.repository.FeiqiTempMapper;
 import com.nankai.xining.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,15 @@ public class PagesMappingController {
     @Autowired
     SolventRawService solventRawService;
 
+    @Autowired
+    SolventProductService solventProductService;
+
+    @Autowired
+    WasteDeviceService wasteDeviceService;
+
+    @Autowired
+    RoadDustService roadDustService;
+
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -62,7 +72,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/auxiliaryroaddust")
-    public String auxiliaryroaddust(){
+    public String auxiliaryroaddust(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FRoadDustSourceTemp> fRoadDustSourceTempList = roadDustService.selectRoadDustListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(fRoadDustSourceTempList);
+        model.addAttribute("roaddustList",pageResult.getList());
+        model.addAttribute("roaddustCount",pageResult.getTotal());
+
         return "/user/auxiliaryroaddust";
     }
 
@@ -160,7 +179,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/solventproduct")
-    public String solventproduct(){
+    public String solventproduct(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<RongjiProductTemp> rongjiProductTempList = solventProductService.selectRawListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(rongjiProductTempList);
+        model.addAttribute("solventproductList",pageResult.getList());
+        model.addAttribute("solventproductCount",pageResult.getTotal());
+
         return "/user/solventproduct";
     }
 
@@ -179,7 +207,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/wastedevice")
-    public String wastedevice(){
+    public String wastedevice(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FeiqiTemp> feiqiTempList = wasteDeviceService.selectDeviceListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(feiqiTempList);
+        model.addAttribute("wastedeviceList",pageResult.getList());
+        model.addAttribute("wastedeviceCount",pageResult.getTotal());
+
         return "/user/wastedevice";
     }
 

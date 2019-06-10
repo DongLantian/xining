@@ -283,7 +283,363 @@
                         <div class="panel-body">
                             <p>在这里修改产品信息后点击确认按钮提交修改...</p>
 
+                            <div class="page-content">
 
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    生产活动类别
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="updateactivitiesCategory_input"
+                                                       id="updateactivitiesCategory_input"
+                                                       v-model="solventproduct.activitiesCategory" />
+
+
+                                                <div class="col-md-8">
+
+                                                    <select id="updateactivitiesCategory" name="updateactivitiesCategory"  class="form-control"
+                                                            Onchange="clientscc3('14',this.value,'updatenameCategory','updatedrainageProcess')" />
+                                                    <option value="">
+                                                        请选择
+                                                    </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品名称/类别
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <input type="hidden" name="updatenameCategory_input"
+                                                       id="updatenameCategory_input" v-model="solventproduct.nameCategory" />
+                                                <div class="col-md-8">
+                                                    <select id="updatenameCategory" name="updatenameCategory"  class="form-control"
+                                                            Onchange="clientscc4('14','updateactivitiesCategory',this.value,'updatedrainageProcess')" />
+                                                    <option disabled="disabled">
+                                                        请先选择生产活动类别
+                                                    </option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    生产/排污工艺
+                                                    <a style="color: red;">*</a>
+
+                                                </label>
+
+                                                <input type="hidden" name="updatedrainageProcess_input"
+                                                       id="updatedrainageProcess_input"
+                                                       v-model="solventproduct.drainageProcess" />
+
+                                                <div class="col-md-8">
+                                                    <select id="updatedrainageProcess" name="updatedrainageProcess" class="form-control" />
+                                                    <option disabled="disabled">
+                                                        请先选择产品名称/类别
+                                                    </option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品名称备注
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" id="updatename" name="updatename" v-model="solventproduct.name" class="form-control"/>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    总产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="updateannualOutput" id="updateannualOutput"
+                                                           class="form-control"
+                                                           v-model="solventproduct.annualOutput"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    计量单位
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input type="text" id="updateuint" name="updateuint" v-model="solventproduct.uint"
+                                                           class="form-control" />
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12" style="height:30px;font-size:15px;margin-top:15px;">
+                                        <a style="color: red;">产品月份产量的单位和产品总产量单位一致</a>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品一月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.janUseamount" type="text"
+                                                           id="updatejanUseamount" name="updatejanUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品二月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.febUseamount" type="text"
+                                                           id="updatefebUseamount" name="updatefebUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品三月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.marUseamount" type="text"
+                                                           id="updatemarUseamount" name="updatemarUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品四月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.aprUseamount" type="text"
+                                                           id="updateaprUseamount" name="updateaprUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品五月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.mayUseamount" type="text"
+                                                           id="updatemayUseamount" name="updatemayUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品六月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.juneUseamount" type="text"
+                                                           id="updatejuneUseamount" name="updatejuneUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品七月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.julyUseamount" type="text"
+                                                           id="updatejulyUseamount" name="updatejulyUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品八月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.augUseamount" type="text"
+                                                           id="updateaugUseamount" name="updateaugUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品九月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.septUseamount" type="text"
+                                                           id="updateseptUseamount" name="updateseptUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品十月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.octUseAmount" type="text"
+                                                           id="updateoctUseAmount" name="updateoctUseAmount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品十一月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.novUseamount" type="text"
+                                                           id="updatenovUseamount" name="updatenovUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label no-padding-right">
+                                                    产品十二月份产量
+                                                    <a style="color: red;">*</a>
+                                                </label>
+
+                                                <div class="col-md-8">
+                                                    <input v-model="solventproduct.decUseamount" type="text"
+                                                           id="updatedecUseamount" name="updatedecUseamount" class="form-control"
+                                                           onkeyup="if(isNaN(value))execCommand('undo')"
+                                                           onafterpaste="if(isNaN(value))execCommand('undo')"
+                                                           onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                                    <button id="updatesolventProduct"  class="btn btn-info btn-lg">确认修改产品信息</button>
+                                </div><br>
+
+
+                            </div>
 
 
                             <!--End page-content-->
@@ -310,8 +666,7 @@
                                                     <a style="color: red;">*</a>
                                                 </label>
                                                 <input type="hidden" name="activitiesCategory_input"
-                                                       id="activitiesCategory_input"
-                                                       value='${cur_rongji.activitiesCategory}' />
+                                                       id="activitiesCategory_input" />
 
 
                                                 <div class="col-md-8">
@@ -333,7 +688,7 @@
                                                     <a style="color: red;">*</a>
                                                 </label>
                                                 <input type="hidden" name="nameCategory_input"
-                                                       id="nameCategory_input" value='${cur_rongji.nameCategory}' />
+                                                       id="nameCategory_input"  />
                                                 <div class="col-md-8">
                                                     <select id="nameCategory" name="nameCategory"  class="form-control"
                                                             Onchange="clientscc4('14','activitiesCategory',this.value,'drainageProcess')" />
@@ -357,8 +712,7 @@
                                                 </label>
 
                                                 <input type="hidden" name="drainageProcess_input"
-                                                       id="drainageProcess_input"
-                                                       value='${cur_rongji.drainageProcess}' />
+                                                       id="drainageProcess_input" />
 
                                                 <div class="col-md-8">
                                                     <select id="drainageProcess" name="drainageProcess" class="form-control" />
@@ -377,7 +731,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input type="text" id="name" name="name" value="${cur_rongji.name}" class="form-control"/>
+                                                    <input type="text" id="name" name="name"  class="form-control"/>
 
                                                 </div>
                                             </div>
@@ -396,7 +750,6 @@
                                                 <div class="col-md-8">
                                                     <input type="text" name="annualOutput" id="annualOutput"
                                                            class="form-control" alt="p9x3p4s"
-                                                           value="${cur_rongji.annualOutput}"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
 
@@ -412,7 +765,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input type="text" id="uint" name="uint" value="${cur_rongji.uint}"
+                                                    <input type="text" id="uint" name="uint"
                                                            class="form-control" />
 
                                                 </div>
@@ -434,7 +787,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.janUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="janUseamount" name="janUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -452,7 +805,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.febUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="febUseamount" name="febUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -472,7 +825,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.marUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="marUseamount" name="marUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -490,7 +843,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.aprUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="aprUseamount" name="aprUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -510,7 +863,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.mayUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="mayUseamount" name="mayUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -528,12 +881,11 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.juneUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="juneUseamount" name="juneUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
-
 
                                                 </div>
                                             </div>
@@ -548,7 +900,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.julyUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="julyUseamount" name="julyUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -566,7 +918,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.augUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="augUseamount" name="augUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -586,7 +938,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.septUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="septUseamount" name="septUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -603,7 +955,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.octUseAmount}" type="text"
+                                                    <input  type="text"
                                                            id="octUseAmount" name="octUseAmount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -624,7 +976,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.novUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="novUseamount" name="novUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -641,7 +993,7 @@
                                                 </label>
 
                                                 <div class="col-md-8">
-                                                    <input value="${cur_rongji.decUseamount}" type="text"
+                                                    <input  type="text"
                                                            id="decUseamount" name="decUseamount" class="form-control"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -653,7 +1005,7 @@
                                     </div>
                                 </div>
                                 <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
-                                    <button id="addProduct" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                                    <button id="addsolventProduct" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
                                 </div><br>
 
     

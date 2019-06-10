@@ -9,12 +9,15 @@
     <!--=================================================-->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/bootstrap-select.min.css}" rel="stylesheet">
     <link th:href="@{/css/nifty.min.css}" rel="stylesheet">
     <link th:href="@{/themify-icons/themify-icons.min.css}" rel="stylesheet" >
 
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/validator/bootstrapValidator.min.css}" rel="stylesheet">
+
     <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
@@ -27,29 +30,40 @@
     <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
     <script  th:src="@{/js/user.js}"></script>
     <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/js/bootstrap-select.min.js}"></script>
     <script  th:src="@{/js/bootstrapPage.js}"></script>
+    <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
+    <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
-    <!--<script th:src="@{/js/enterpriseInfo.js}"></script>-->
+    <script th:src="@{/js/my/roaddust.js}"></script>
 
     <!--STYLE CSS-->
     <!--=================================================-->
     <style type="text/css">
         label {
             color: black;
-            padding-top: 5px;
+            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
         input[type=text], select {
+            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 15px;
         }
-
+        option{
+            font-size: 15px;
+        }
+        .form-control-feedback {
+            top: 10px;
+            right: 16px;
+        }
 
     </style>
 </head>
@@ -60,6 +74,7 @@
 </body>-->
 
 <body>
+
 <div id="container" class="effect aside-float aside-bright mainnav-fixed mainnav-lg">
 
     <!--NAVBAR-->
@@ -205,7 +220,590 @@
             <!--===================================================-->
             <div class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
 
+                <div id="exfDom">
 
+                    <h1>道路扬尘源列表</h1>
+                    <div style="height: 200px;">
+
+                        <!--道路扬尘源信息放到modelandview中，在页面映射时完成-->
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>道路扬尘源ID</th>
+                                <th>道路长度</th>
+                                <th>平均车重</th>
+                                <th>平均车速</th>
+                                <th>修改道路扬尘源信息</th>
+                                <th>删除该道路扬尘源</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  th:each="roaddust : ${roaddustList}">
+                                <th scope="row" th:text="${roaddust.roadDustid}">1</th>
+                                <td th:text="${roaddust.pathLength}">neo</td>
+                                <td th:text="${roaddust.averWeight}">neo</td>
+                                <td th:text="${roaddust.averSpeed}">Otto</td>
+                                <td><button th:value="${roaddust.roadDustid}" @click="editroadDust($event)" class="btn btn-info btn-sm">编辑</button></td>
+                                <td><button th:value="${roaddust.roadDustid}" @click="delroadDust($event)" class="btn btn-danger btn-sm">删除</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!--===============================================================================================-->
+                    <div style="height: 80px;">
+                        <div style="float: left;height: 60px;">
+                            <input id="roaddustCount" hidden="hidden" th:value="${roaddustCount}"></input>
+                            <script>
+                                var count = document.getElementById("roaddustCount").value;
+                                document.write(Pager({
+                                    totalCount:count, 		//总条数为150
+                                    pageSize:3,    			//每页显示3条内容，默认10
+                                    buttonSize:10,   		//显示size个按钮，默认10
+                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
+                                    className:'pagination', //分页的样式
+                                    prevButton:'上一页',     //上一页按钮
+                                    nextButton:'下一页',     //下一页按钮
+                                    firstButton:'首页',      //第一页按钮
+                                    lastButton:'末页',       //最后一页按钮
+
+                                }));
+                            </script>
+                        </div>
+                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
+                            <span style="font-weight: bold;">共有<span th:text="${roaddustCount}">0</span>个道路扬尘源。。。</span>
+                        </div>
+                        <div style="float:right;margin-right: 120px;">
+                            <button id="addBtn" class="btn btn-primary btn-lg">添加道路扬尘源</button>
+                        </div>
+
+                    </div><br><br><hr>
+                    <!--=======================修改道路扬尘源Panel，默认隐藏=================================-->
+                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">修改道路扬尘源信息（带*号为必填项）</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>在这里修改道路扬尘源信息后点击确认按钮提交修改...</p>
+
+                            <div class="row">
+
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                单位名称
+                                            </label>
+                                            <div class="col-md-7">
+                                                <label id="updatecompanyName" th:text="*{factoryName}"></label>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                是否喷洒抑尘剂<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select name="updatedustSuppression" id="updatedustSuppression"
+                                                        class="form-control"  v-model="roaddust.dustSuppression" >
+                                                    <option value="1">是</option>
+                                                    <option value="0">否</option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                道路长度(km)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatepathLength" name="updatepathLength"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.pathLength" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                道路平均宽度(m)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updateaverWidth" name="updateaverWidth" onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.averWidth" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12" >
+
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                平均车重(吨) <span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updateaverWeight" name="updateaverWeight"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.averWeight" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                日均车流量(辆/日)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatecarFlow" name="updatecarFlow"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.carFlow" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                平均车速(km/h)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updateaverSpeed" name="updateaverSpeed"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.averSpeed" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                吸尘清扫次数(安装真空装置)次数/天<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updateclearTimeInstall" name="updateclearTimeInstall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.clearTimeInstall" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                吸尘清扫次数(未安装真空装置)次数/天<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updateclearTimeUninstall" name="updateclearTimeUninstall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.clearTimeUninstall" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                春季湿扫 (次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatesweepSpring" name="updatesweepSpring"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.sweepSpring" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                夏季湿扫(次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatesweepSummer" name="updatesweepSummer" onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.sweepSummer" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                秋季湿扫(次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatesweepFall" name="updatesweepFall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.sweepFall" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                春季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatewaterTimesSpring" name="updatewaterTimesSpring"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.waterTimesSpring" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                夏季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatewaterTimesSummer" name="updatewaterTimesSummer"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.waterTimesSummer" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                秋季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="updatewaterTimesFall" name="updatewaterTimesFall"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"
+                                                       v-model="roaddust.waterTimesFall" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                是否铺装<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select name="updateispave" id="updateispave"
+                                                        class="form-control"  v-model="roaddust.ispave"  >
+                                                    <option value="1"> 是</option>
+                                                    <option  value="11">否</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                                <button id="updateroadDust"  class="btn btn-info btn-lg">确认修改道路扬尘源信息</button>
+                            </div><br>
+
+                            <!--End page-content-->
+
+                        </div>
+                    </div>
+
+                    <!--==============增加道路扬尘源Panel=====================================================-->
+                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">添加道路扬尘源（带*号为必填项）</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>在这里添加道路扬尘源...</p><br>
+
+                            <div class="row">
+
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                单位名称
+                                            </label>
+                                            <div class="col-md-7">
+                                                <label id="companyName" th:text="*{factoryName}"></label>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                是否喷洒抑尘剂<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select name="dustSuppression" id="dustSuppression"
+                                                        class="form-control"   >
+                                                    <option value="1" selected="selected">是</option>
+                                                    <option value="0">否</option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                道路长度(km)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="pathLength" name="pathLength"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                道路平均宽度(m)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="averWidth" name="averWidth" onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-12" >
+
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                平均车重(吨) <span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="averWeight" name="averWeight"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                日均车流量(辆/日)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="carFlow" name="carFlow"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                平均车速(km/h)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="averSpeed" name="averSpeed"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                吸尘清扫次数(安装真空装置)次数/天<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="clearTimeInstall" name="clearTimeInstall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                吸尘清扫次数(未安装真空装置)次数/天<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="clearTimeUninstall" name="clearTimeUninstall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                春季湿扫 (次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="sweepSpring" name="sweepSpring"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                夏季湿扫(次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="sweepSummer" name="sweepSummer" onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                秋季湿扫(次数/天)<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="sweepFall" name="sweepFall"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" >
+
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                春季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="waterTimesSpring" name="waterTimesSpring"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                夏季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="waterTimesSummer" name="waterTimesSummer"  onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-12" >
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                秋季每日洒水次数<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <input type="text" id="waterTimesFall" name="waterTimesFall"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                                       class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" >
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label no-padding-right">
+                                                是否铺装<span style="font-size: 18px;color:red; ">*</span>
+                                            </label>
+
+                                            <div class="col-md-7">
+                                                <select name="ispave" id="ispave"
+                                                        class="form-control"    >
+                                                    <option value="1" selected="selected"> 是</option>
+                                                    <option  value="11">否</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                                <button id="addroadDust" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
+                            </div><br>
+
+                            <!--End page-content-->
+
+                        </div>
+
+                        <!--End panel-body-->
+
+
+                    </div>
+
+                    <!--End addPanel-->
+
+                </div>
 
             </div>
             <!--===================================================-->
@@ -260,11 +858,11 @@
                                 </li>
                                 <li class="list-divider"></li>
 
-                                <!--一级菜单：设备生产原料及产品-->
+                                <!--一级菜单：道路扬尘源生产原料及产品-->
                                 <li>
                                     <a href="#">
                                         <i class="ti-wallet"></i>
-                                        <span class="menu-title">设备生产原料及产品
+                                        <span class="menu-title">道路扬尘源生产原料及产品
                                             </span>
                                         <i class="arrow"></i>
                                     </a>
@@ -313,7 +911,7 @@
                                 <li>
                                     <a href="/Client/wastedevice">
                                         <i class="ion-wrench"></i>
-                                        <span class="menu-title">废弃物处理设备</span>
+                                        <span class="menu-title">废弃物处理道路扬尘源</span>
                                     </a>
                                 </li>
 

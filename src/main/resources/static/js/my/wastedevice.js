@@ -2,13 +2,13 @@ $(function () {
 
     //1.页面加载时：初始化Scc第一级下拉菜单（update和add同时初始化）
 
-    //窑炉用途菜单初始化
+    //scc一级菜单初始化
     $.ajax({
         type:"post",
         dataType : "json",
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
-            scc1ID: '11'
+            scc1ID: '21'
         },                             //要发送的数据，采用josn格式
 
         success : function(list) { //list为返回的数据
@@ -26,45 +26,23 @@ $(function () {
 
         }
     });
-
-    //设备下拉菜单初始化
-    $.ajax({
-        type:"post",
-        dataType : "json",
-        url : "/common/getDeviceList", //要访问的后台地址
-        data : {},                             //要发送的数据，采用josn格式
-
-        success : function(list) { //list为返回的数据
-            //使用jQuery的each方法遍历，index是下标。使用for循环遍历也可以。
-            $.each(list,function (index,item) {
-                var $option = $("<option></option>");
-                $option.attr("value", item.id);
-                $option.text('设备'+item.nkNo+'号');
-                $("#updatedeviceno").append($option);
-                $("#deviceno").append("<option value="+item.id+">设备"+item.nkNo+"号</option>");
-            })
-        },
-        error : function(XMLResponse) {
-            alert(XMLResponse.responseText);
-
-        }
-    });
+    
 
     // 定义Vue对象，与页面中元素绑定
     //使用Vue控制页面元素：用于编辑和删除功能
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            product: {}
+            wastedevice: {}
         },
         methods:{
-            delProduct:function (e) {
+            delwasteDevice:function (e) {
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 bootbox.confirm({
-                    message : "<p style='font-size: 16px;'>删除该产品后此编号将不可用！</p>" +
-                    "<p style='font-size: 16px;'>如产品信息有误可点击编辑按钮进行修改。。。</p>" +
-                    "<p style='font-size: 16px;'>请确认是否删除该产品？？？</p>",
+                    message : "<p style='font-size: 16px;'>删除该设备后此编号将不可用！</p>" +
+                    "<p style='font-size: 16px;'>如设备信息有误可点击编辑按钮进行修改。。。</p>" +
+                    "<p style='font-size: 16px;'>请确认是否删除该设备？？？</p>",
                     buttons: {
                         confirm: {
                             label: "确认删除"
@@ -80,9 +58,9 @@ $(function () {
                             $.ajax({
                                 type:"post",
                                 dataType : "json",
-                                url : "/deviceProduct/delProduct", //要访问的后台地址
+                                url : "/wasteDevice/delDevice", //要访问的后台地址
                                 data : {
-                                    productID : curID
+                                    deviceID : curID
                                 }, //要发送的数据，采用josn格式
 
                                 success : function(data) { //data为返回的数据
@@ -91,7 +69,7 @@ $(function () {
                                             type: "success",
                                             container : "page",
                                             title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>产品已删除。。。6秒后自动刷新页面。。。</p>",
+                                            message : "<p style='font-size: 16px;'>设备已删除。。。6秒后自动刷新页面。。。</p>",
                                             timer : 5000
                                         });
                                         setTimeout(function(){
@@ -118,7 +96,7 @@ $(function () {
                     }
                 });
             },
-            editProduct:function(e) {
+            editwasteDevice:function(e) {
                 $("#updatePanel").removeAttr("hidden");
                 $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
@@ -127,19 +105,19 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
-                    url : "/deviceProduct/getProduct", //要访问的后台地址
+                    url : "/wasteDevice/getDevice", //要访问的后台地址
                     data : {
-                        productID : curID
+                        deviceID : curID
                     }, //要发送的数据，采用josn格式
 
                     success : function(data) { //data为返回的数据
-                        app.product=data;
-                        $("#updateactivitiesCategory_input").val(data.activitiesCategory);
-                        $("#updatenameCategory_input").val(data.nameCategory);
-                        $("#updatedrainageProcess_input").val(data.drainageProcess);
-                        $("#updateactivitiesCategory").val(data.activitiesCategory);
-                        clientscc3('11',data.activitiesCategory,'updatenameCategory','updatedrainageProcess');
-                        clientscc4('11','updateactivitiesCategory',data.nameCategory,'updatedrainageProcess');
+                        app.wastedevice=data;
+                        $("#updateactivitiesCategory_input").val(data.scc2);
+                        $("#updatenameCategory_input").val(data.scc3);
+                        $("#updatedrainageProcess_input").val(data.scc4);
+                        $("#updateactivitiesCategory").val(data.scc2);
+                        clientscc3('21',data.scc2,'updatenameCategory','updatedrainageProcess');
+                        clientscc4('21','updateactivitiesCategory',data.scc3,'updatedrainageProcess');
 
                         app.initSelect();
                     },
@@ -153,10 +131,10 @@ $(function () {
             },
             initSelect:function () {
                 setTimeout(function () {
-                    var nameCategoryInput = $("#updatenameCategory_input").val();
-                    var drainageProcessInput = $("#updatedrainageProcess_input").val();
-                    $("#updatenameCategory").val(nameCategoryInput);
-                    $("#updatedrainageProcess").val(drainageProcessInput);
+                    var scc3Input = $("#updatenameCategory_input").val();
+                    var scc4Input = $("#updatedrainageProcess_input").val();
+                    $("#updatenameCategory").val(scc3Input);
+                    $("#updatedrainageProcess").val(scc4Input);
                 },1000)
             }
 
@@ -172,37 +150,36 @@ $(function () {
 
 
     //修改窑炉信息
-    $("#updateProduct").click(function () {
+    $("#updatewasteDevice").click(function () {
         var bootstrapValidator = $("#updatePanel").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
             if (checkvalue("update")){
                 //可以提交
-                app.product.activitiesCategory = $("#updateactivitiesCategory").val();
-                app.product.nameCategory = $("#updatenameCategory").val();
-                app.product.drainageProcess = $("#updatedrainageProcess").val();
-                app.product.activitiesCategoryDec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.product.nameCategoryDec = $("#updatenameCategory").find("option:selected").text();
-                app.product.drainageProcessDec = $("#updatedrainageProcess").find("option:selected").text();
-                app.product.deviceNo = parseInt($("#updatedeviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
+                app.wastedevice.scc2 = $("#updateactivitiesCategory").val();
+                app.wastedevice.scc3 = $("#updatenameCategory").val();
+                app.wastedevice.scc4 = $("#updatedrainageProcess").val();
+                app.wastedevice.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
+                app.wastedevice.scc3Dec = $("#updatenameCategory").find("option:selected").text();
+                app.wastedevice.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
                 // ajax请求。
                 $.ajax({
                     type:"post",
                     dataType : "json",
-                    url : "/deviceProduct/updateProduct", //要访问的后台地址
+                    url : "/wasteDevice/updateDevice", //要访问的后台地址
                     contentType:"application/json",
-                    data : JSON.stringify(app.product), //直接传递对象给controller，
+                    data : JSON.stringify(app.wastedevice), //直接传递对象给controller，
                     // 需将json对象转化成字符流,必须声明dataType和contentType
                     // 同时controller中注解requestbody
 
                     success : function(reponseData) { //reponseData为返回的数据
                         if (reponseData.isUpdate){
-                            app.product=reponseData.product;
+                            app.wastedevice=reponseData.wastedevice;
                             $.niftyNoty({
                                 type: "success",
                                 container : "page",
                                 title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                                message : "<p style='font-size: 16px;'>产品信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
+                                message : "<p style='font-size: 16px;'>设备信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
                                 timer : 5000
                             });
                             setTimeout(function(){
@@ -232,6 +209,11 @@ $(function () {
     //数据校验
     $('#addPanel').bootstrapValidator({
         message: '这是必填项',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
         fields: {
             activitiesCategory:{
                 validators: {
@@ -248,20 +230,43 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            deviceno:{
-                validators: {
-                    notEmpty: {}
-                }
-            },
-            uint: {
+            deviceName: {
                 validators: {
                     notEmpty: {},
                     stringLength: {
-                        max: 20
+                        max: 30
                     }
                 }
             },
-            annualOutput:{
+            lon1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            watter:{
                 validators: {
                     notEmpty: {},
                     numeric: {}
@@ -345,6 +350,11 @@ $(function () {
     //数据校验
     $('#updatePanel').bootstrapValidator({
         message: '这是必填项',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
         fields: {
             updateactivitiesCategory:{
                 validators: {
@@ -361,20 +371,43 @@ $(function () {
                     notEmpty: {}
                 }
             },
-            updatedeviceno:{
-                validators: {
-                    notEmpty: {}
-                }
-            },
-            updateuint: {
+            updatedeviceName: {
                 validators: {
                     notEmpty: {},
                     stringLength: {
-                        max: 20
+                        max: 30
                     }
                 }
             },
-            updateannualOutput:{
+            updatelon1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            updatelat1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            updatewatter:{
                 validators: {
                     notEmpty: {},
                     numeric: {}
@@ -463,15 +496,17 @@ $(function () {
 function  checkvalue(type) {
     var ids;
     if (type=="add"){
-        ids = new Array("activitiesCategory", "nameCategory",
-            "drainageProcess","deviceno", "uint", "annualOutput",
-            "janUseamount","febUseamount","marUseamount","aprUseamount","mayUseamount","juneUseamount",
-            "julyUseamount","augUseamount","septUseamount","octUseAmount","novUseamount","decUseamount");
+        ids = new Array("deviceName", "activitiesCategory", "nameCategory",
+            "drainageProcess","watter",
+            "janUseamount","febUseamount","marUseamount","aprUseamount",
+            "mayUseamount","juneUseamount","julyUseamount","augUseamount",
+            "septUseamount","octUseAmount","novUseamount","decUseamount");
     }else if(type="update"){
-        ids = new Array("updateactivitiesCategory", "updatenameCategory",
-            "updatedrainageProcess","updatedeviceno", "updateuint", "updateannualOutput",
-            "updatejanUseamount","updatefebUseamount","updatemarUseamount","updateaprUseamount","updatemayUseamount","updatejuneUseamount",
-            "updatejulyUseamount","updateaugUseamount","updateseptUseamount","updateoctUseAmount","updatenovUseamount","updatedecUseamount");
+        ids = new Array("updatedeviceName", "updateactivitiesCategory", "updatenameCategory",
+            "updatedrainageProcess","updatewatter",
+            "updatejanUseamount","updatefebUseamount","updatemarUseamount","updateaprUseamount",
+            "updatemayUseamount","updatejuneUseamount","updatejulyUseamount","updateaugUseamount",
+            "updateseptUseamount","updateoctUseAmount","updatenovUseamount","updatedecUseamount");
     }
     var hasEmpty=0;
     for (var i=0;i<ids.length;i++){
@@ -487,7 +522,7 @@ function  checkvalue(type) {
 
 }
 
-//自定义函数：增加产品
+//自定义函数：增加设备
 function updatedata() {
     var bootstrapValidator = $("#addPanel").data('bootstrapValidator');
     bootstrapValidator.validate();
@@ -495,60 +530,58 @@ function updatedata() {
         if (checkvalue("add")){
 
             //必填项不为空，可以提交
-            var activitiesCategory = document.getElementById("activitiesCategory").value;
-            var activitiesCategoryDec = $("#activitiesCategory").find("option:selected").text();
-            var drainageProcess = document.getElementById("drainageProcess").value;
-            var drainageProcessDec = $("#drainageProcess").find("option:selected").text();
-            var nameCategory = document.getElementById("nameCategory").value;
-            var nameCategoryDec = $("#nameCategory").find("option:selected").text();
-            var name = document.getElementById("name").value;
-            var unit = document.getElementById("uint").value;
-            var annualOutput = document.getElementById("annualOutput").value;
-            var deviceId = document.getElementById("deviceno").value;
-            var deviceNo = parseInt($("#deviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
-            var janUseamount= document.getElementById("janUseamount").value;
-            var febUseamount= document.getElementById("febUseamount").value;
-            var marUseamount= document.getElementById("marUseamount").value;
-            var aprUseamount= document.getElementById("aprUseamount").value;
-            var mayUseamount= document.getElementById("mayUseamount").value;
-            var juneUseamount= document.getElementById("juneUseamount").value;
-            var julyUseamount= document.getElementById("julyUseamount").value;
-            var augUseamount= document.getElementById("augUseamount").value;
-            var septUseamount= document.getElementById("septUseamount").value;
-            var octUseAmount= document.getElementById("octUseAmount").value;
-            var novUseamount= document.getElementById("novUseamount").value;
-            var decUseamount= document.getElementById("decUseamount").value;
+            var deviceName = document.getElementById("deviceName").value;
+            var scc2 = document.getElementById("activitiesCategory").value;
+            var scc3 = document.getElementById("nameCategory").value;
+            var scc4 = document.getElementById("drainageProcess").value;
+            var scc2Dec = $("#activitiesCategory").find("option:selected").text();
+            var scc3Dec = $("#nameCategory").find("option:selected").text();
+            var scc4Dec = $("#drainageProcess").find("option:selected").text();
+            var lon1 = document.getElementById("lon1").value;
+            var lat1 = document.getElementById("lat1").value;
+            var janUseamount = document.getElementById("janUseamount").value;
+            var febUseamount = document.getElementById("febUseamount").value;
+            var marUseamount = document.getElementById("marUseamount").value;
+            var aprUseamount = document.getElementById("aprUseamount").value;
+            var mayUseamount = document.getElementById("mayUseamount").value;
+            var juneUseamount = document.getElementById("juneUseamount").value;
+            var julyUseamount = document.getElementById("julyUseamount").value;
+            var augUseamount = document.getElementById("augUseamount").value;
+            var septUseamount = document.getElementById("septUseamount").value;
+            var octUseAmount = document.getElementById("octUseAmount").value;
+            var novUseamount = document.getElementById("novUseamount").value;
+            var decUseamount = document.getElementById("decUseamount").value;
+            var watter = document.getElementById("watter").value;
 
 
             // ajax请求。
             $.ajax({
                 type:"post",
                 dataType : "json",
-                url : "/deviceProduct/addProduct", //要访问的后台地址
+                url : "/wasteDevice/addDevice", //要访问的后台地址
                 data : {
-                    janUseamount:janUseamount,
-                    febUseamount:febUseamount,
-                    marUseamount:marUseamount,
-                    aprUseamount:aprUseamount,
-                    mayUseamount:mayUseamount,
-                    juneUseamount:juneUseamount,
-                    julyUseamount:julyUseamount,
-                    augUseamount:augUseamount,
-                    septUseamount:septUseamount,
-                    octUseAmount:octUseAmount,
-                    novUseamount:novUseamount,
-                    decUseamount:decUseamount,
-                    activitiesCategory : activitiesCategory,
-                    activitiesCategoryDec : activitiesCategoryDec,
-                    nameCategory : nameCategory,
-                    nameCategoryDec : nameCategoryDec,
-                    drainageProcessDec : drainageProcessDec,
-                    drainageProcess : drainageProcess,
-                    name : name,
-                    annualOutput : annualOutput,
-                    uint : unit,
-                    deviceNo : deviceNo,
-                    deviceId: deviceId
+                    deviceName : deviceName,
+                    scc2 : scc2,
+                    scc2Dec : scc2Dec,
+                    scc3 : scc3,
+                    scc3Dec : scc3Dec,
+                    scc4 : scc4,
+                    scc4Dec : scc4Dec,
+                    lon1 : lon1,
+                    lat1 : lat1,
+                    watter : watter,
+                    janUseamount : janUseamount,
+                    febUseamount : febUseamount,
+                    marUseamount : marUseamount,
+                    aprUseamount : aprUseamount,
+                    mayUseamount : mayUseamount,
+                    juneUseamount : juneUseamount,
+                    julyUseamount : julyUseamount,
+                    augUseamount : augUseamount,
+                    septUseamount : septUseamount,
+                    octUseAmount : octUseAmount,
+                    novUseamount : novUseamount,
+                    decUseamount : decUseamount
 
                 }, //要发送的数据，采用josn格式
 
@@ -558,7 +591,7 @@ function updatedata() {
                             type: "success",
                             container : "page",
                             title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>产品信息已添加。。。6秒后自动刷新页面。。。</p>",
+                            message : "<p style='font-size: 16px;'>锅炉信息已添加。。。6秒后自动刷新页面。。。</p>",
                             timer : 5000
                         });
                         setTimeout(function(){
@@ -569,7 +602,7 @@ function updatedata() {
                             type: "warning",
                             container : "page",
                             title : "<br><p style='font-size: 17px;'>失败！！！</p>",
-                            message : "<p style='font-size: 16px;'>请重新填写产品信息并添加。</p>",
+                            message : "<p style='font-size: 16px;'>请重新填写烟囱信息并添加。</p>",
                             timer : 6000
                         });
                     }
