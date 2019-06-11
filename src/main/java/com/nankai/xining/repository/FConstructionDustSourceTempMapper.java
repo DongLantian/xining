@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FConstructionDustSourceTemp;
 import com.nankai.xining.bean.FConstructionDustSourceTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FConstructionDustSourceTempMapper {
     long countByExample(FConstructionDustSourceTempExample example);
 

@@ -1,5 +1,8 @@
 package com.nankai.xining.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +29,8 @@ public class FConstructionDustSourceTemp implements Serializable {
 
     private Double nowkgarea;
 
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
 
     private Double pm25Factors;
@@ -62,6 +67,8 @@ public class FConstructionDustSourceTemp implements Serializable {
 
     private String constructionType;
 
+    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date finishdate;
 
     private String shenheStatus;

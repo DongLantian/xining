@@ -55,6 +55,15 @@ public class PagesMappingController {
     @Autowired
     RoadDustService roadDustService;
 
+    @Autowired
+    ConstructionDustService constructionDustService;
+
+    @Autowired
+    YardDustService yardDustService;
+
+    @Autowired
+    BareSoilDustService bareSoilDustService;
+
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
@@ -62,12 +71,30 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/auxiliarybaresoildust")
-    public String auxiliarybaresoildust(){
+    public String auxiliarybaresoildust(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FBareSoilDustSourceTemp> fBareSoilDustSourceTempList = bareSoilDustService.selectBareDustListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(fBareSoilDustSourceTempList);
+        model.addAttribute("baredustList",pageResult.getList());
+        model.addAttribute("baredustCount",pageResult.getTotal());
+
         return "/user/auxiliarybaresoildust";
     }
 
     @RequestMapping("/auxiliaryconstructiondust")
-    public String auxiliaryconstructiondust(){
+    public String auxiliaryconstructiondust(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FConstructionDustSourceTemp> fConstructionDustSourceTemps = constructionDustService.selectConsDustListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(fConstructionDustSourceTemps);
+        model.addAttribute("consdustList",pageResult.getList());
+        model.addAttribute("consdustCount",pageResult.getTotal());
+
         return "/user/auxiliaryconstructiondust";
     }
 
@@ -91,7 +118,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/auxiliaryyarddust")
-    public String auxiliaryyarddust(){
+    public String auxiliaryyarddust( HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FYardDustSourceTemp> fYardDustSourceTempList = yardDustService.selectYardDustListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(fYardDustSourceTempList);
+        model.addAttribute("yarddustList",pageResult.getList());
+        model.addAttribute("yarddustCount",pageResult.getTotal());
+
         return "/user/auxiliaryyarddust";
     }
 

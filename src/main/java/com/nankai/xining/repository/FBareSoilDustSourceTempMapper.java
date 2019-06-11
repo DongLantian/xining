@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FBareSoilDustSourceTemp;
 import com.nankai.xining.bean.FBareSoilDustSourceTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FBareSoilDustSourceTempMapper {
     long countByExample(FBareSoilDustSourceTempExample example);
 

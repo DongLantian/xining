@@ -5,15 +5,15 @@ $(function () {
     var app = new Vue({
         el: '#exfDom',  //绑定DOM根节点（最外层标签）的id
         data: {
-            roaddust: {}
+            baredust: {}
         },
         methods:{
-            delroadDust:function (e) {
+            delbareDust:function (e) {
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 bootbox.confirm({
-                    message : "<p style='font-size: 16px;'>如道路扬尘源信息有误可点击编辑按钮进行修改。。。</p>" +
-                    "<p style='font-size: 16px;'>请确认是否删除该道路扬尘源？？？</p>",
+                    message : "<p style='font-size: 16px;'>如裸土扬尘源信息有误可点击编辑按钮进行修改。。。</p>" +
+                    "<p style='font-size: 16px;'>请确认是否删除该裸土扬尘源？？？</p>",
                     buttons: {
                         confirm: {
                             label: "确认删除"
@@ -29,9 +29,9 @@ $(function () {
                             $.ajax({
                                 type:"post",
                                 dataType : "json",
-                                url : "/roadDust/delRoadDust", //要访问的后台地址
+                                url : "/baresoil/delbaresoil", //要访问的后台地址
                                 data : {
-                                    roadDustID : curID
+                                    baresoilID : curID
                                 }, //要发送的数据，采用josn格式
 
                                 success : function(data) { //data为返回的数据
@@ -40,7 +40,7 @@ $(function () {
                                             type: "success",
                                             container : "page",
                                             title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>道路扬尘源已删除。。。6秒后自动刷新页面。。。</p>",
+                                            message : "<p style='font-size: 16px;'>裸土扬尘源已删除。。。6秒后自动刷新页面。。。</p>",
                                             timer : 5000
                                         });
                                         setTimeout(function(){
@@ -67,7 +67,7 @@ $(function () {
                     }
                 });
             },
-            editroadDust:function(e) {
+            editbareDust:function(e) {
                 $("#updatePanel").removeAttr("hidden");
                 $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
@@ -76,13 +76,13 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
-                    url : "/roadDust/getRoadDust", //要访问的后台地址
+                    url : "/baresoil/getbaresoil", //要访问的后台地址
                     data : {
-                        roadDustID : curID
+                        baresoilID : curID
                     }, //要发送的数据，采用josn格式
 
                     success : function(data) { //data为返回的数据
-                        app.roaddust=data;
+                        app.baredust=data;
                     },
                     error : function(XMLResponse) {
                         alert("没有");
@@ -102,36 +102,30 @@ $(function () {
     });
 
 
-    //修改道路扬尘源信息
-    $("#updateroadDust").click(function () {
+    //修改裸土扬尘源信息
+    $("#updateyardDust").click(function () {
         var bootstrapValidator = $("#updatePanel").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
             //可以提交
-            if(app.roaddust.ispave==1){
-                app.roaddust.scccode="1602001003";
-            }
-            else{
-                app.roaddust.scccode="1602002000";
-            }
             // ajax请求。
             $.ajax({
                 type:"post",
                 dataType : "json",
-                url : "/roadDust/updateRoadDust", //要访问的后台地址
+                url : "/baresoil/updateBareDust", //要访问的后台地址
                 contentType:"application/json",
-                data : JSON.stringify(app.roaddust), //直接传递对象给controller，
+                data : JSON.stringify(app.baredust), //直接传递对象给controller，
                 // 需将json对象转化成字符流,必须声明dataType和contentType
                 // 同时controller中注解requestbody
 
                 success : function(reponseData) { //reponseData为返回的数据
                     if (reponseData.isUpdate){
-                        app.roaddust=reponseData.roaddust;
+                        app.baredust=reponseData.baredust;
                         $.niftyNoty({
                             type: "success",
                             container : "page",
                             title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>道路扬尘源信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
+                            message : "<p style='font-size: 16px;'>裸土扬尘源信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
                             timer : 5000
                         });
                         setTimeout(function(){
@@ -163,79 +157,7 @@ $(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            pathLength:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            averWidth:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            averWeight:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            carFlow:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            averSpeed:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            clearTimeInstall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            clearTimeUninstall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            sweepSpring:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            sweepSummer:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            sweepFall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            waterTimesSpring:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            waterTimesSummer:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            waterTimesFall:{
+            bareSoilArea:{
                 validators: {
                     notEmpty: {},
                     integer: {}
@@ -253,79 +175,7 @@ $(function () {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            updatepathLength:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            updateaverWidth:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            updateaverWeight:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            updatecarFlow:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updateaverSpeed:{
-                validators: {
-                    notEmpty: {},
-                    numeric: {}
-                }
-            },
-            updateclearTimeInstall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updateclearTimeUninstall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatesweepSpring:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatesweepSummer:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatesweepFall:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatewaterTimesSpring:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatewaterTimesSummer:{
-                validators: {
-                    notEmpty: {},
-                    integer: {}
-                }
-            },
-            updatewaterTimesFall:{
+            updatebareSoilArea:{
                 validators: {
                     notEmpty: {},
                     integer: {}
@@ -335,64 +185,24 @@ $(function () {
 
     });
 
+
 });
 
-
-//自定义函数：增加道路扬尘源
+//自定义函数：增加裸土扬尘源
 function updatedata() {
     var bootstrapValidator = $("#addPanel").data('bootstrapValidator');
     bootstrapValidator.validate();
     if(bootstrapValidator.isValid()){
         //必填项不为空，可以提交
-        var companyName = document.getElementById("companyName").innerHTML;
-        var pathLength = document.getElementById("pathLength").value;
-        var ispave = document.getElementById("ispave").value;
-        var averWidth = document.getElementById("averWidth").value;
-        var averWeight = document.getElementById("averWeight").value;
-        var carFlow = document.getElementById("carFlow").value;
-        var averSpeed = document.getElementById("averSpeed").value;
-        var clearTimeInstall = document.getElementById("clearTimeInstall").value;
-        var clearTimeUninstall = document.getElementById("clearTimeUninstall").value;
-        var sweepSpring = document.getElementById("sweepSpring").value;
-        var sweepSummer = document.getElementById("sweepSummer").value;
-        var sweepFall = document.getElementById("sweepFall").value;
-        var waterTimesSpring = document.getElementById("waterTimesSpring").value;
-        var waterTimesSummer = document.getElementById("waterTimesSummer").value;
-        var waterTimesFall = document.getElementById("waterTimesFall").value;
-        var dustSuppression = document.getElementById("dustSuppression").value;
-        var scc;
-        if(ispave==1){
-            scc="1602001003";
-        }
-        else{
-            scc="1602002000";
-        }
-
+        var bareSoilArea = document.getElementById("bareSoilArea").value;
 
         // ajax请求。
         $.ajax({
             type:"post",
             dataType : "json",
-            url : "/roadDust/addRoadDust", //要访问的后台地址
+            url : "/baresoil/addbaresoil", //要访问的后台地址
             data : {
-                scccode:scc,
-                companyName: companyName,
-                pathLength : pathLength,
-                ispave : ispave,
-                averWidth : averWidth,
-                averWeight : averWeight ,
-                carFlow : carFlow,
-                averSpeed  : averSpeed,
-                clearTimeInstall : clearTimeInstall,
-                clearTimeUninstall : clearTimeUninstall,
-                sweepSpring : sweepSpring,
-                sweepSummer : sweepSummer,
-                sweepFall : sweepFall ,
-                waterTimesSpring : waterTimesSpring,
-                waterTimesSummer : waterTimesSummer,
-                waterTimesFall : waterTimesFall ,
-                dustSuppression : dustSuppression
-
+                bareSoilArea : bareSoilArea
             }, //要发送的数据，采用josn格式
 
             success : function(data) { //data为返回的数据
@@ -401,7 +211,7 @@ function updatedata() {
                         type: "success",
                         container : "page",
                         title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                        message : "<p style='font-size: 16px;'>道路扬尘源信息已添加。。。6秒后自动刷新页面。。。</p>",
+                        message : "<p style='font-size: 16px;'>裸土面积信息已添加。。。6秒后自动刷新页面。。。</p>",
                         timer : 5000
                     });
                     setTimeout(function(){
@@ -412,7 +222,7 @@ function updatedata() {
                         type: "warning",
                         container : "page",
                         title : "<br><p style='font-size: 17px;'>失败！！！</p>",
-                        message : "<p style='font-size: 16px;'>请重新填写道路扬尘源信息并添加。</p>",
+                        message : "<p style='font-size: 16px;'>请重新填写裸土信息并添加。</p>",
                         timer : 6000
                     });
                 }
