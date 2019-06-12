@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/nifty.min.css}" rel="stylesheet">
+    <link th:href="@{/css/nifty-demo-icons.min.css}" rel="stylesheet">
+    <link th:href="@{/css/magic-check.min.css}" rel="stylesheet">
+
+    <!--JAVASCRIPT libiaries-->
+    <!--=================================================-->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script  th:src="@{/js/jquery-2.2.4.min.js}"></script>
+    <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
+    <script  th:src="@{/js/user.js}"></script>
+    <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
+
+    <script th:src="@{/js/nifty.min.js}"></script>
+
+    <!--JAVASCRIPT myself-->
+    <!--=================================================-->
+    <!--<script th:src="@{/js/my/device.js}"></script>-->
+
+    <style>
+        .bg-mountain {
+            background-image: url("/img/bg-img/bg-img-3.jpg");
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            $("body").keydown(function() {
+                if (event.keyCode == "13") {
+                    $("#login").click();
+                }
+            });
+            $("#login").click(function () {
+                var facNo = $("#facNo").val();
+                var password = $("#password").val();
+                $.ajax({
+                    type:"post",
+                    dataType : "json",
+                    url : "/enterprise/enterpriseInfo", //要访问的后台地址
+                    data : {
+                        facNo : facNo,
+                        password : password
+                    }, //要发送的数据，采用josn格式
+
+                    success : function(data) { //data为返回的数据
+                        if (data.isok){
+                            window.location="enterpriseInfo";
+                        }else {
+                            $.niftyNoty({
+                                type: "danger",
+                                container : "floating",
+                                title : "<br><p style='font-size: 17px;'>用户名或密码错误！</p>",
+                                timer : 5000
+                            });
+                        }
+                    },
+
+                    error : function(XMLResponse) {
+                        alert("出了点问题。");
+
+                    }
+                });
+            })
+        });
+    </script>
+
+
+</head>
+<body>
+<div id="container" class="cls-container">
+
+    <!-- BACKGROUND IMAGE -->
+    <!--===================================================-->
+    <div id="bg-overlay" class="bg-img bg-mountain"></div>
+
+
+    <!-- LOGIN FORM -->
+    <!--===================================================-->
+    <div class="cls-content">
+        <div class="cls-content-sm panel">
+            <div class="panel-body">
+                <div class="mar-ver pad-btm">
+                    <h4 class="h4 mar-no">用户登录</h4><br>
+                    <p class="text-muted">使用已分配的企业账户登录</p>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="facNo" name="facNo" placeholder="企业账号" autofocus>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+                    </div>
+                    <div class="checkbox pad-btm text-left">
+                        <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
+                        <label for="demo-form-checkbox">记住密码</label>
+                    </div>
+                    <button id="login" class="btn btn-primary btn-lg btn-block" type="button">登录</button>
+                </form>
+            </div>
+
+            <div class="pad-all">
+                <a href="pages-password-reminder.html" class="btn-link mar-rgt">忘记密码?</a>
+                <a href="pages-register.html" class="btn-link mar-lft">注册新账号</a>
+
+                <div class="media pad-top bord-top">
+                    <div class="pull-right">
+                        <a href="#" class="pad-rgt"><i class="psi-facebook icon-lg text-primary"></i></a>
+                        <a href="#" class="pad-rgt"><i class="psi-twitter icon-lg text-info"></i></a>
+                        <a href="#" class="pad-rgt"><i class="psi-google-plus icon-lg text-danger"></i></a>
+                    </div>
+                    <div class="media-body text-left">
+                        使用其他方式登录
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--===================================================-->
+
+
+    <!-- DEMO PURPOSE ONLY -->
+    <!--===================================================-->
+    <!--<div class="demo-bg">
+        <div id="demo-bg-list">
+            <div class="demo-loading"><i class="psi-repeat-2"></i></div>
+            <img class="demo-chg-bg bg-trans active" src="/img/bg-img/thumbs/bg-trns.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-1.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-2.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-3.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-4.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-5.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-6.jpg" alt="Background Image">
+            <img class="demo-chg-bg" src="/img/bg-img/thumbs/bg-img-7.jpg" alt="Background Image">
+        </div>
+    </div>-->
+    <!--===================================================-->
+
+
+
+</div>
+<!--===================================================-->
+<!-- END OF CONTAINER -->
+
+
+</body>
+</html>

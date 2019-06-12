@@ -15,6 +15,7 @@
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/validator/bootstrapValidator.min.css}" rel="stylesheet">
     <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
@@ -27,9 +28,12 @@
     <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
     <script  th:src="@{/js/user.js}"></script>
     <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
+    <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/js/bootstrapPage.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
 
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
@@ -49,7 +53,10 @@
             border-radius: 4px;
             font-size: 15px;
         }
-
+        .form-control-feedback {
+            top: 3px;
+            right: 16px;
+        }
 
     </style>
 </head>
@@ -295,7 +302,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="materialUpdate" name="material" value="123"
+                                                <input type="text" id="materialUpdate" name="materialUpdate" value="123"
                                                        class="form-control" v-model="exhaust.exfMaterial"
                                                        Onchange="ischanged('material')"
                                                        onblur="TestLen(this.id,10)" />
@@ -317,7 +324,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="exfheightUpdate"
+                                                <input type="text" id="exfheightUpdate" name="exfheightUpdate"
                                                        v-model="exhaust.exfHeight"
                                                        Onchange="ischanged('exfheight')" alt="p4x3p3s"
                                                        class="check1 form-control" onkeyup="checkNum(this);" />
@@ -335,7 +342,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="smoke_outdUpdate"
+                                                <input type="text" id="smoke_outdUpdate" name="smoke_outdUpdate"
                                                        v-model="exhaust.smokeOutd" alt="p2x3p3s"
                                                        class="check1 form-control" Onchange="ischanged('smoke_outd')"
                                                        onkeyup="checkNum(this);" />
@@ -356,7 +363,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="smoke_outtemUpdate"
+                                                <input type="text" id="smoke_outtemUpdate" name="smoke_outtemUpdate"
                                                        v-model="exhaust.smokeOUtteM" alt="p7x3p3s"
                                                        class="check1 form-control" Onchange="ischanged('smoke_outtem')"
                                                        onkeyup="checkNum(this);" />
@@ -372,7 +379,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="smoke_outvUpdate"
+                                                <input type="text" id="smoke_outvUpdate" name="smoke_outvUpdate"
                                                        v-model="exhaust.smokeOutv" alt="p3x3p2s"
                                                        class="check1 form-control" Onchange="ischanged('smoke_outv')"
                                                        onkeyup="checkNum(this);" />
@@ -397,7 +404,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="smokeOutaUpdate"
+                                                <input type="text" id="smokeOutaUpdate" name="smokeOutaUpdate"
                                                        v-model="exhaust.smokeOuta" alt="p8x3p3s"
                                                        class="check1 form-control" Onchange="ischanged('smoke_outv')"
                                                        onkeyup="checkNum(this);" />
@@ -414,7 +421,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="longitudeUpdate"
+                                                <input type="text" id="longitudeUpdate" name="longitudeUpdate"
                                                        v-model="exhaust.exfLongitude" alt="p3x3p6s"
                                                        class="check1 form-control" onkeyup="if(isNaN(value))execCommand('undo')"
 
@@ -439,7 +446,7 @@
                                             </label>
 
                                             <div class="col-md-7">
-                                                <input type="text" id="latitudeUpdate"
+                                                <input type="text" id="latitudeUpdate" name="latitudeUpdate"
                                                        v-model="exhaust.exfLatitude" alt="p3x3p6s"
                                                        class="check1 form-control" onkeyup="if(isNaN(value))execCommand('undo')"
 
@@ -497,7 +504,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="smokeOuta" alt="p8x3p3s"
+                                                    <input type="text" id="smokeOuta" name="smokeOuta" alt="p8x3p3s"
                                                            class="check1 form-control" Onchange="ischanged('smoke_outv')"
                                                            onkeyup="checkNum(this);" />
                                                 </div>
@@ -518,7 +525,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="exfheight"
+                                                    <input type="text" id="exfheight" name="exfheight"
                                                            Onchange="ischanged('exfheight')" alt="p4x3p3s"
                                                            class="check1 form-control" onkeyup="checkNum(this);" />
                                                 </div>
@@ -536,7 +543,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="smoke_outd" alt="p2x3p3s"
+                                                    <input type="text" id="smoke_outd" name="smoke_outd" alt="p2x3p3s"
                                                            class="check1 form-control" Onchange="ischanged('smoke_outd')"
                                                            onkeyup="checkNum(this);" />
                                                 </div>
@@ -556,7 +563,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="smoke_outtem" alt="p7x3p3s"
+                                                    <input type="text" id="smoke_outtem" name="smoke_outtem" alt="p7x3p3s"
                                                            class="check1 form-control" Onchange="ischanged('smoke_outtem')"
                                                            onkeyup="checkNum(this);" />
                                                 </div>
@@ -571,7 +578,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="smoke_outv" alt="p3x3p2s"
+                                                    <input type="text" id="smoke_outv" name="smoke_outv" alt="p3x3p2s"
                                                            class="check1 form-control" Onchange="ischanged('smoke_outv')"
                                                            onkeyup="checkNum(this);" />
                                                 </div>
@@ -595,7 +602,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="latitude" alt="p3x3p6s"
+                                                    <input type="text" id="latitude" name="latitude" alt="p3x3p6s"
                                                            class="check1 form-control" onkeyup="if(isNaN(value))execCommand('undo')"
 
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
@@ -613,7 +620,7 @@
                                                 </label>
 
                                                 <div class="col-md-7">
-                                                    <input type="text" id="longitude" alt="p3x3p6s"
+                                                    <input type="text" id="longitude" name="longitude" alt="p3x3p6s"
                                                            class="check1 form-control" onkeyup="if(isNaN(value))execCommand('undo')"
 
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"

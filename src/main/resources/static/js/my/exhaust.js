@@ -116,50 +116,54 @@ $(function () {
 
     //修改烟囱信息
     $("#updateExhaust").click(function () {
-        if (checkvalue("update")){
-            // ajax请求。
-            $.ajax({
-                type:"post",
-                dataType : "json",
-                url : "/exhaust/updateExhaust", //要访问的后台地址
-                contentType:"application/json",
-                data : JSON.stringify(app.exhaust), //直接传递对象给controller，
-                // 需将json对象转化成字符流,必须声明dataType和contentType
-                // 同时controller中注解requestbody
+        var bootstrapValidator = $("#updatePanel").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(bootstrapValidator.isValid()){
+            if (checkvalue("update")){
+                // ajax请求。
+                $.ajax({
+                    type:"post",
+                    dataType : "json",
+                    url : "/exhaust/updateExhaust", //要访问的后台地址
+                    contentType:"application/json",
+                    data : JSON.stringify(app.exhaust), //直接传递对象给controller，
+                    // 需将json对象转化成字符流,必须声明dataType和contentType
+                    // 同时controller中注解requestbody
 
-                success : function(reponseData) { //reponseData为返回的数据
-                    if (reponseData.isUpdate){
-                        app.exhaust=reponseData.exhaust;
-                        $.niftyNoty({
-                            type: "success",
-                            container : "page",
-                            title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>烟囱信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
-                            timer : 5000
-                        });
-                        setTimeout(function(){
-                            window.location.reload();//刷新当前页面.
-                        },6000);
-                    }else {
-                        $.niftyNoty({
-                            type: "warning",
-                            container : "floating",
-                            title : "<br><p style='font-size: 16px;'>失败！！！</p>",
-                            message : "请重新填写信息并提交修改。。。",
-                            timer : 6000
-                        });
+                    success : function(reponseData) { //reponseData为返回的数据
+                        if (reponseData.isUpdate){
+                            app.exhaust=reponseData.exhaust;
+                            $.niftyNoty({
+                                type: "success",
+                                container : "page",
+                                title : "<br><p style='font-size: 17px;'>成功！！！</p>",
+                                message : "<p style='font-size: 16px;'>烟囱信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
+                                timer : 5000
+                            });
+                            setTimeout(function(){
+                                window.location.reload();//刷新当前页面.
+                            },6000);
+                        }else {
+                            $.niftyNoty({
+                                type: "warning",
+                                container : "floating",
+                                title : "<br><p style='font-size: 16px;'>失败！！！</p>",
+                                message : "请重新填写信息并提交修改。。。",
+                                timer : 6000
+                            });
+                        }
+
+                    },
+
+                    error : function(XMLResponse) {
+                        alert("失败");
+
                     }
-
-                },
-
-                error : function(XMLResponse) {
-                    alert("失败");
-
-                }
-            });
-        }else {
+                });
+            }
+        } else {
             //必填项有空值，不可以提交
-            bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
+            bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。</p>");
         }
 
     });
@@ -169,6 +173,161 @@ $(function () {
         $("#addPanel").removeAttr("hidden");
         $("#updatePanel").attr("hidden","hidden");
     });
+
+
+
+    //数据校验
+    $('#addPanel').bootstrapValidator({
+        message: '这是必填项',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            material:{
+                validators: {
+                    notEmpty: {}
+                }
+            },
+            smokeOuta:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            exfheight:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outd:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outtem:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outv:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            longitude: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 89.5833,
+                        max: 103.0667,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            latitude: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 31.1500,
+                        max: 39.3167,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            }
+        }
+    });
+
+    //数据校验
+    $('#updatePanel').bootstrapValidator({
+        message: '这是必填项',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            materialUpdate:{
+                validators: {
+                    notEmpty: {}
+                }
+            },
+            smokeOutaUpdate:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            exfheightUpdate:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outdUpdate:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outtemUpdate:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            smoke_outvUpdate:{
+                validators: {
+                    notEmpty: {},
+                    numeric: {}
+                }
+            },
+            longitudeUpdate: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 89.5833,
+                        max: 103.0667,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            latitudeUpdate: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 31.1500,
+                        max: 39.3167,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            }
+        }
+
+    });
+
+
 
 });
 
@@ -198,64 +357,68 @@ function  checkvalue(type) {
 }
 //自定义函数：增加烟囱
 function updatedata() {
-    if (checkvalue("add")){
-        //必填项不为空，可以提交
-        var material = document.getElementById("material").value;
-        var exfheight = document.getElementById("exfheight").value;
-        var smoke_outtem = document.getElementById("smoke_outtem").value;
-        var smoke_outd = document.getElementById("smoke_outd").value;
-        var smoke_outv = document.getElementById("smoke_outv").value;
-        var longitude = document.getElementById("longitude").value;
-        var latitude = document.getElementById("latitude").value;
-        var smokeOuta = parseInt(document.getElementById("smokeOuta").value);
+    var bootstrapValidator = $("#addPanel").data('bootstrapValidator');
+    bootstrapValidator.validate();
+    if(bootstrapValidator.isValid()){
+        if (checkvalue("add")){
+            //必填项不为空，可以提交
+            var material = document.getElementById("material").value;
+            var exfheight = document.getElementById("exfheight").value;
+            var smoke_outtem = document.getElementById("smoke_outtem").value;
+            var smoke_outd = document.getElementById("smoke_outd").value;
+            var smoke_outv = document.getElementById("smoke_outv").value;
+            var longitude = document.getElementById("longitude").value;
+            var latitude = document.getElementById("latitude").value;
+            var smokeOuta = parseInt(document.getElementById("smokeOuta").value);
 
-        // ajax请求。
-        $.ajax({
-            type:"post",
-            dataType : "json",
-            url : "/exhaust/addExhaust", //要访问的后台地址
-            data : {
-                exfMaterial : material,
-                exfHeight : exfheight,
-                smokeOutd : smoke_outd,
-                smokeOUtteM : smoke_outtem,
-                smokeOutv : smoke_outv,
-                exfLongitude : longitude,
-                exfLatitude : latitude,
-                smokeOuta : smokeOuta
-            }, //要发送的数据，采用josn格式
+            // ajax请求。
+            $.ajax({
+                type:"post",
+                dataType : "json",
+                url : "/exhaust/addExhaust", //要访问的后台地址
+                data : {
+                    exfMaterial : material,
+                    exfHeight : exfheight,
+                    smokeOutd : smoke_outd,
+                    smokeOUtteM : smoke_outtem,
+                    smokeOutv : smoke_outv,
+                    exfLongitude : longitude,
+                    exfLatitude : latitude,
+                    smokeOuta : smokeOuta
+                }, //要发送的数据，采用josn格式
 
-            success : function(data) { //data为返回的数据
-                if(data.isAdd){
-                    $.niftyNoty({
-                        type: "success",
-                        container : "page",
-                        title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                        message : "<p style='font-size: 16px;'>烟囱信息已添加。。。6秒后自动刷新页面。。。</p>",
-                        timer : 5000
-                    });
-                    setTimeout(function(){
-                        window.location.reload();//刷新当前页面.
-                    },6000);
-                }else {
-                    $.niftyNoty({
-                        type: "warning",
-                        container : "page",
-                        title : "<br><p style='font-size: 17px;'>失败！！！</p>",
-                        message : "<p style='font-size: 16px;'>请重新填写烟囱信息并添加。</p>",
-                        timer : 6000
-                    });
+                success : function(data) { //data为返回的数据
+                    if(data.isAdd){
+                        $.niftyNoty({
+                            type: "success",
+                            container : "page",
+                            title : "<br><p style='font-size: 17px;'>成功！！！</p>",
+                            message : "<p style='font-size: 16px;'>烟囱信息已添加。。。6秒后自动刷新页面。。。</p>",
+                            timer : 5000
+                        });
+                        setTimeout(function(){
+                            window.location.reload();//刷新当前页面.
+                        },6000);
+                    }else {
+                        $.niftyNoty({
+                            type: "warning",
+                            container : "page",
+                            title : "<br><p style='font-size: 17px;'>失败！！！</p>",
+                            message : "<p style='font-size: 16px;'>请重新填写烟囱信息并添加。</p>",
+                            timer : 6000
+                        });
+                    }
+                },
+
+                error : function(XMLResponse) {
+                    alert("出了点问题！！！");
+
                 }
-            },
-
-            error : function(XMLResponse) {
-                alert("出了点问题！！！");
-
-            }
-        });
-    }else {
+            });
+        }
+    } else {
         //必填项有空值，不可以提交
-        bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
+        bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。</p>");
     }
 
 }

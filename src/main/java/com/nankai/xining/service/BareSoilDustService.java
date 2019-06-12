@@ -49,7 +49,7 @@ public class BareSoilDustService {
     public boolean addBareSoilDust(FBareSoilDustSourceTemp fBareSoilDustSourceTemp, Integer factoryId) {
         //设置企业ID
         fBareSoilDustSourceTemp.setFactoryid(factoryId);
-        fBareSoilDustSourceTemp.setScccode("1601003002");//装卸
+        fBareSoilDustSourceTemp.setScccode("1601003002");
 
         if (fBareSoilDustSourceTempMapper.insertSelective(fBareSoilDustSourceTemp)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。

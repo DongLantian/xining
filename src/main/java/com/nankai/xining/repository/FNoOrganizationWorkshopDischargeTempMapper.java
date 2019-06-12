@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FNoOrganizationWorkshopDischargeTemp;
 import com.nankai.xining.bean.FNoOrganizationWorkshopDischargeTempExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FNoOrganizationWorkshopDischargeTempMapper {
     long countByExample(FNoOrganizationWorkshopDischargeTempExample example);
 

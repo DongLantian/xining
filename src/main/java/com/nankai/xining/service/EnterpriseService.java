@@ -46,6 +46,25 @@ public class EnterpriseService {
     }
 
     /**
+     * 根据工厂编号获取工厂信息
+     * @param factoryNo
+     * @return
+     */
+    public Factory getFactoryInfoByNo(String factoryNo){
+        FactoryExample factoryExample = new FactoryExample();
+        FactoryExample.Criteria criteria = factoryExample.createCriteria();
+        criteria.andFactoryNo1EqualTo(factoryNo);
+        List<Factory> factoryList = factoryMapper.selectByExample(factoryExample);
+        if (factoryList.isEmpty()){
+            return null;
+        }else {
+            return factoryList.get(0);
+        }
+    }
+
+
+
+    /**
      * 更新工厂信息
      * @param factory
      * @param factoryid

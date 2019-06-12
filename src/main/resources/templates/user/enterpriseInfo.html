@@ -15,6 +15,7 @@
     <link id="theme" href="/css/themes/type-b/theme-dark.min.css" rel="stylesheet">
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+    <link th:href="@{/plugins/validator/bootstrapValidator.min.css}" rel="stylesheet">
     <!--JAVASCRIPT libiaries-->
     <!--=================================================-->
 
@@ -27,9 +28,12 @@
     <!--js文件引入顺序问题：首先引入jQuery，再引入自定义js。否则无法解析。-->
     <script  th:src="@{/js/user.js}"></script>
     <script  th:src="@{/js/bootstrap.js}"></script>
+    <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
+    <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/js/bootstrapPage.js}"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
+    <script  th:src="@{/plugins/bootbox.js}"></script>
 
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
@@ -202,7 +206,7 @@
             <!--注意啦！开始啦！-->
             <!--主要内容写在这里-->
             <!--===================================================-->
-            <div class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
+            <div id="addPanel" class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
 
                 <div class="row" style="height: 40px;">
                     <div class="col-md-12" >
@@ -284,7 +288,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <select name="industryBigid" id="industryBigid" onchange="industrysmall(this.value)"
+                                    <select name="industryBigid" id="industryBigid" onchange="industrysmall(this.value)" required
                                             style="width: 173px; height: 30px;" th:value="*{industryBigid}">
                                         <option disabled="disabled">请选择</option>
 
@@ -302,7 +306,7 @@
 
                                 <div class="col-md-8">
                                     <select name="industryId" id="industryId"
-                                            style="width: 173px; height: 30px;" th:value="*{industryId}" Onchange="ischanged('kilnuse')">
+                                            style="width: 173px; height: 30px;" th:value="*{industryId}" Onchange="ischanged('kilnuse')">  required
                                         <option disabled="disabled">请选择</option>
 
                                     </select>
@@ -322,8 +326,8 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="legalperson" class="form-control"
-                                           style="height: 25px; width: 170px;"
+                                    <input type="text" id="legalperson" name="legalperson" class="form-control"
+                                           style="height: 25px; width: 170px;"      required
                                            th:value="*{legalperson}" Onchange="ischanged('kilnuse')"/>
 
                                 </div>
@@ -335,7 +339,7 @@
                                     企业规模<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <select name="factorySize" id="factorySize"
+                                    <select name="factorySize" id="factorySize"   required
                                             style="width: 173px; height: 30px;" th:value="*{factorySize}" Onchange="ischanged('kilnuse')">
                                         <option disabled="disabled">请选择</option>
                                         <option value="1">小型企业</option>
@@ -374,7 +378,7 @@
                                 </label>
                                 <div class="col-md-8">
 
-                                    <select name="countyRegisterCity" id="countyRegisterCity"
+                                    <select name="countyRegisterCity" id="countyRegisterCity"  required
 
                                             style="width: 173px; height: 30px;" onchange="changeCity(this.value,'countyidRegister','')">
                                         <option disabled="disabled">请选择
@@ -396,7 +400,7 @@
                                 </label>
                                 <div class="col-md-8">
 
-                                    <select name="countyidRegister" id="countyidRegister"
+                                    <select name="countyidRegister" id="countyidRegister"  required
 
                                             style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
                                         <option disabled="disabled">
@@ -415,7 +419,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="addressRegister" class="form-control"
+                                    <input type="text" id="addressRegister" name="addressRegister" class="form-control"   required
                                            style="height: 25px; width: 170px;"
                                            th:value="*{addressRegister}" Onchange="ischanged('kilnuse')"/>
                                 </div>
@@ -447,7 +451,7 @@
                                     实际城市<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <select name="countyCity" id="countyCity"
+                                    <select name="countyCity" id="countyCity"  required
 
                                             style="width: 173px; height: 30px;"  onchange="changeCity(this.value,'countyId','')">
                                         <option disabled="disabled" >
@@ -469,7 +473,7 @@
 
                                 <div class="col-md-8">
 
-                                    <select name="countyId" id="countyId"
+                                    <select name="countyId" id="countyId"  required
 
                                             style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
                                         <option disabled="disabled">
@@ -487,7 +491,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="address" class="form-control"
+                                    <input type="text" id="address" name="address" class="form-control"  required
                                            style="height: 25px; width: 170px;"
                                            th:value="*{address}" Onchange="ischanged('kilnuse')"/>
                                 </div>
@@ -505,7 +509,7 @@
                                 </label>
                                 <div class="col-md-8">
                                     <input th:value="*{factoryLongitude}" type="text"
-                                           id="factoryLongitude" class="form-control"
+                                           id="factoryLongitude" name="factoryLongitude" class="form-control"
                                            onblur="checklon(this.id)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
@@ -521,7 +525,7 @@
 
                                 <div class="col-md-8">
                                     <input th:value="*{factoryLatitude}" type="text" class="form-control"
-                                           onblur="checklat(this.id)"  id="factoryLatitude"
+                                           onblur="checklat(this.id)"  id="factoryLatitude" name="factoryLatitude"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
@@ -549,8 +553,8 @@
                                     生产总值(万元)<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <input th:value="*{totalOutput}" type="text"
-                                           id="totalOutput" class="form-control"
+                                    <input th:value="*{totalOutput}" type="text"  required
+                                           id="totalOutput" name="totalOutput" class="form-control"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"/>
@@ -568,8 +572,8 @@
                                     年生产天数(整数)<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <input th:value="*{yearDays}" type="text"
-                                           id="yearDays" class="form-control"
+                                    <input th:value="*{yearDays}" type="text"  required
+                                           id="yearDays" name="yearDays" class="form-control"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,365,'年生产天数')" />
@@ -582,8 +586,8 @@
                                     日生产小时数(整数)<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <input th:value="*{daysHours}" type="text"
-                                           id="daysHours" class="form-control"
+                                    <input th:value="*{daysHours}" type="text"  required
+                                           id="daysHours" name="daysHours" class="form-control"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,24,'日生产小时数')" />
@@ -602,8 +606,8 @@
                                     年用电量(万千瓦时)<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <input th:value="*{powerAmount}" type="text"
-                                           id="powerAmount" class="form-control"
+                                    <input th:value="*{powerAmount}" type="text"  required
+                                           id="powerAmount" name="powerAmount" class="form-control"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')" />
@@ -626,7 +630,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="principalName" class="form-control" Onchange="ischanged('kilnuse')"
+                                    <input type="text" id="principalName" name="principalName" class="form-control" required  Onchange="ischanged('kilnuse')"
                                            th:value="*{principalName}" style="height: 25px; width: 170px;" />
                                 </div>
                             </div>
@@ -639,7 +643,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="principalPhone" class="form-control" Onchange="ischanged('kilnuse')"
+                                    <input type="text" id="principalPhone" name="principalPhone" class="form-control" Onchange="ischanged('kilnuse')"
                                            style="height: 25px; width: 170px;" th:value="*{principalPhone}"
                                            onblur="checkpphone(this.id);" />
                                 </div>
@@ -656,7 +660,7 @@
                                     移动电话<a style="color:red">*</a>
                                 </label>
                                 <div class="col-md-8">
-                                    <input type="text" id="principalMobile" class="form-control" Onchange="ischanged('kilnuse')"
+                                    <input type="text" id="principalMobile" name="principalMobile" class="form-control" Onchange="ischanged('kilnuse')"
                                            style="height: 25px; width: 170px;" th:value="*{principalMobile}"
                                            onblur="checkpmobile(this.id);" />
                                 </div>
@@ -669,7 +673,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="principalEmail" class="form-control"
+                                    <input type="text" id="principalEmail" name="principalEmail" class="form-control"
                                            style="height: 25px; width: 170px;" th:value="*{principalEmail}"
                                            onblur="checkpemail(this.id);" Onchange="ischanged('kilnuse')"/>
 
@@ -697,7 +701,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon1" th:value="*{lon1}" class="form-control"
+                                    <input type="text" id="lon1" name="lon1" th:value="*{lon1}" class="form-control"
                                            onblur="checklonfour1(this.id,0)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                            onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
@@ -714,7 +718,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat1"  th:value="*{lat1}" class="form-control"
+                                    <input type="text" id="lat1" name="lat1"  th:value="*{lat1}" class="form-control"
                                            onblur="checklatfour1(this.id,0)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -735,7 +739,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon2"  th:value="*{lon2}"
+                                    <input type="text" id="lon2" name="lon2"  th:value="*{lon2}"
                                            class="form-control"
                                            onblur="checklonfour1(this.id,1)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -751,7 +755,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat2"  th:value="*{lat2}" class="form-control"
+                                    <input type="text" id="lat2" name="lat2"  th:value="*{lat2}" class="form-control"
                                            onblur="checklatfour1(this.id,1)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -772,7 +776,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon3" th:value="*{lon3}" class="form-control"
+                                    <input type="text" id="lon3" name="lon3" th:value="*{lon3}" class="form-control"
 
                                            onblur="checklonfour1(this.id,2)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -788,7 +792,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat3"  th:value="*{lat3}" class="form-control"
+                                    <input type="text" id="lat3" name="lat3"  th:value="*{lat3}" class="form-control"
                                            onblur="checklatfour1(this.id,2)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -809,7 +813,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon4"  th:value="*{lon4}" class="form-control"
+                                    <input type="text" id="lon4" name="lon4"  th:value="*{lon4}" class="form-control"
 
                                            onblur="checklonfour1(this.id,3)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -825,7 +829,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat4"   th:value="*{lat4}" class="form-control"
+                                    <input type="text" id="lat4" name="lat4"   th:value="*{lat4}" class="form-control"
                                            onblur="checklatfour1(this.id,3)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -848,7 +852,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon5"  th:value="*{lon5}" class="form-control"
+                                    <input type="text" id="lon5" name="lon5"  th:value="*{lon5}" class="form-control"
 
                                            onblur="checklonfour1(this.id,4)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -864,7 +868,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat5" class="form-control" th:value="*{lat5}"
+                                    <input type="text" id="lat5" name="lat5" class="form-control" th:value="*{lat5}"
                                            onblur="checklatfour1(this.id,4)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -885,7 +889,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon6"  th:value="*{lon6}" class="form-control"
+                                    <input type="text" id="lon6" name="lon6"  th:value="*{lon6}" class="form-control"
 
                                            onblur="checklonfour1(this.id,5)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -901,7 +905,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat6" class="form-control"
+                                    <input type="text" id="lat6" name="lat6" class="form-control"
                                            style="height: 25px; width: 170px;" th:value="*{lat6}"
 
                                            onblur="checklatfour1(this.id,5);"   onkeyup="if(isNaN(value))execCommand('undo')"
@@ -923,7 +927,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lon7"  th:value="*{lon7}" class="form-control"
+                                    <input type="text" id="lon7" name="lon7"  th:value="*{lon7}" class="form-control"
 
                                            onblur="checklonfour1(this.id,6)" style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"
@@ -939,7 +943,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" id="lat7" class="form-control" th:value="*{lat7}"
+                                    <input type="text" id="lat7" name="lat7" class="form-control" th:value="*{lat7}"
                                            onblur="checklatfour1(this.id,6)"
                                            style="height: 25px; margin-top: 3px; width: 170px;"
                                            onkeyup="if(isNaN(value))execCommand('undo')"

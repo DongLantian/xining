@@ -64,10 +64,18 @@ public class PagesMappingController {
     @Autowired
     BareSoilDustService bareSoilDustService;
 
+    @Autowired
+    WorkShopService workShopService;
+
 
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
         return "/user/enterpriseInfo";
+    }
+
+    @RequestMapping("/login")
+    public String login(){
+        return "/user/login";
     }
 
     @RequestMapping("/auxiliarybaresoildust")
@@ -113,7 +121,16 @@ public class PagesMappingController {
     }
 
     @RequestMapping("/auxiliaryWorkshop")
-    public String auxiliaryWorkshop(){
+    public String auxiliaryWorkshop(HttpSession session, Model model,@RequestParam(value="page", required=false, defaultValue="1") int page){
+        int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+        //获取第1页，3条内容，默认查询数据库中记录的总数count
+        PageHelper.startPage(page, PAGE_SIZE);
+        List<FNoOrganizationWorkshopDischargeTemp> fNoOrganizationWorkshopDischargeTempList = workShopService.selectWorkShopListByFactoryId(factoryId);
+        //用PageInfo对结果进行包装
+        PageInfo pageResult = new PageInfo(fNoOrganizationWorkshopDischargeTempList);
+        model.addAttribute("workshopList",pageResult.getList());
+        model.addAttribute("workshopCount",pageResult.getTotal());
+
         return "/user/auxiliaryWorkshop";
     }
 

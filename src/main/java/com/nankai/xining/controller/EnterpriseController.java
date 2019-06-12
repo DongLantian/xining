@@ -2,6 +2,7 @@ package com.nankai.xining.controller;
 
 import com.nankai.xining.bean.*;
 import com.nankai.xining.service.EnterpriseService;
+import com.nankai.xining.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,20 +27,28 @@ public class EnterpriseController {
     @Autowired
     EnterpriseService enterpriseService;
 
+    @Autowired
+    UserService userService;
+
     /**
      * 企业信息页面
      * @param session
      * @return
      */
     @RequestMapping("/enterpriseInfo")
-    public String enterpriseInfo(HttpSession session){
-        //工厂ID。暂未实现登录，做测试用
-        session.setAttribute("clientfactoryid","17203");
+    @ResponseBody
+    public Map<String,Object> enterpriseInfo(User user, HttpSession session){
+        HashMap result = new HashMap();
+        if (userService.checkUserNameAndPwd(user)){
+            Factory factoryInfo = enterpriseService.getFactoryInfoByNo(user.getFacNo());
+            session.setAttribute("factoryInfo",factoryInfo);
+            session.setAttribute("clientfactoryid",factoryInfo.getFactoryId());
+            result.put("isok",true);
+        }else {
+            result.put("isok",false);
+        }
+        return result;
 
-        Factory factoryInfo = enterpriseService.getFactoryInfo(17203);
-        session.setAttribute("factoryInfo",factoryInfo);
-
-        return "/user/enterpriseInfo";
     }
 
     /**

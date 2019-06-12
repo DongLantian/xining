@@ -103,6 +103,280 @@ $(document).ready(function() {
     }
 
 
+    //数据校验
+    $('#addPanel').bootstrapValidator({
+        message: '这是必填项',
+        fields: {
+            sourceType:{
+                validators: {
+                    notEmpty: {}
+                }
+            },
+            workshopid:{
+                validators: {
+                    notEmpty: {},
+                    integer: {}
+                }
+            },
+            productionUse: {
+                validators: {
+                    notEmpty: {},
+                    stringLength: {
+                        max: 60
+                    }
+                }
+            },
+            principalEmail: {
+                validators: {
+                    emailAddress: {}
+                }
+            },
+            principalPhone: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /0\d{2,4}-\d{7,8}/,
+                        message:'固定电话格式为：区号-座机号。例：0221-6356899'
+                    }
+                }
+            },
+            principalMobile: {
+                validators: {
+                    notEmpty: {},
+                    phone: {
+                        message: '手机号不符合规范',
+                        country: 'CN'
+                    }
+                }
+            },
+            factoryLongitude: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            factoryLatitude: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat1: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon2: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat2: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon3: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat3: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon4: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat4: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon5: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat5: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon6: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat6: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            },
+            lon7: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 73.6667,
+                        max: 96.3000,
+                        message: '经度范围为%s到%s',
+                    }
+                }
+            },
+            lat7: {
+                validators: {
+                    notEmpty: {},
+                    regexp: { //正则校验
+                        regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
+                        message:'请精确到小数点后4位到6位'
+                    },
+                    between: {
+                        min: 34.4167,
+                        max: 48.1667,
+                        message: '纬度范围为%s到%s',
+                    }
+                }
+            }
+        }
+    });
+
+
 });
 
 
@@ -193,138 +467,139 @@ function  checkvalue() {
 }
 
 function addFactory() {
-    if (checkvalue()){
-        var factoryName = document.getElementById("factoryName").value;
-        var factoryUsedname = document.getElementById("factoryUsedname").value;
-        var sourceType = document.getElementById("sourceType").value;
-        var industryBigid = document.getElementById("industryBigid").value;
-        var industryBigname=$("#industryBigid").find("option:selected").text();
-        var industryId = document.getElementById("industryId").value;
-        var industryName=$("#industryId").find("option:selected").text();
-        var legalperson = document.getElementById("legalperson").value;
-        var factorySize = document.getElementById("factorySize").value;
-        var countyRegisterCity = document.getElementById("countyRegisterCity").value;
-        var countyidRegister = document.getElementById("countyidRegister").value;//注册城市
-        var addressRegister = document.getElementById("addressRegister").value;//注册区县
-        var countyCity = document.getElementById("countyCity").value;
-        var cityName=$("#countyCity").find("option:selected").text();//城市名称
-        var countyRegisterCityDec=$("#countyRegisterCity").find("option:selected").text();//注册城市名称
-        var countyidRegisterDec=$("#countyidRegister").find("option:selected").text();//注册区县名称
-        var countyId = document.getElementById("countyId").value;
-        var countyName=$("#countyId").find("option:selected").text();//区县名称
-        var address = document.getElementById("address").value;
-        var factoryLongitude = document.getElementById("factoryLongitude").value;
-        var factoryLatitude = document.getElementById("factoryLatitude").value;
-        var totalOutput = document.getElementById("totalOutput").value;
-        var yearDays = document.getElementById("yearDays").value;
-        var daysHours = document.getElementById("daysHours").value;
-        var principalName = document.getElementById("principalName").value;
-        var principalPhone = document.getElementById("principalPhone").value;
-        var principalMobile = document.getElementById("principalMobile").value;
-        var principalEmail = document.getElementById("principalEmail").value;
-        var powerAmount = document.getElementById("powerAmount").value;
-        var lon1 = document.getElementById("lon1").value;
-        var lon2 = document.getElementById("lon2").value;
-        var lon3 = document.getElementById("lon3").value;
-        var lon4 = document.getElementById("lon4").value;
-        var lon5 = document.getElementById("lon5").value;
-        var lon6 = document.getElementById("lon6").value;
-        var lon7 = document.getElementById("lon7").value;
-        var lat1 = document.getElementById("lat1").value;
-        var lat2 = document.getElementById("lat2").value;
-        var lat3 = document.getElementById("lat3").value;
-        var lat4 = document.getElementById("lat4").value;
-        var lat5 = document.getElementById("lat5").value;
-        var lat6 = document.getElementById("lat6").value;
-        var lat7 = document.getElementById("lat7").value;
+    var bootstrapValidator = $("#addPanel").data('bootstrapValidator');
+    bootstrapValidator.validate();
+    if(bootstrapValidator.isValid()){
+        if (checkvalue()){
+            var factoryName = document.getElementById("factoryName").value;
+            var factoryUsedname = document.getElementById("factoryUsedname").value;
+            var sourceType = document.getElementById("sourceType").value;
+            var industryBigid = document.getElementById("industryBigid").value;
+            var industryBigname=$("#industryBigid").find("option:selected").text();
+            var industryId = document.getElementById("industryId").value;
+            var industryName=$("#industryId").find("option:selected").text();
+            var legalperson = document.getElementById("legalperson").value;
+            var factorySize = document.getElementById("factorySize").value;
+            var countyRegisterCity = document.getElementById("countyRegisterCity").value;
+            var countyidRegister = document.getElementById("countyidRegister").value;//注册城市
+            var addressRegister = document.getElementById("addressRegister").value;//注册区县
+            var countyCity = document.getElementById("countyCity").value;
+            var cityName=$("#countyCity").find("option:selected").text();//城市名称
+            var countyRegisterCityDec=$("#countyRegisterCity").find("option:selected").text();//注册城市名称
+            var countyidRegisterDec=$("#countyidRegister").find("option:selected").text();//注册区县名称
+            var countyId = document.getElementById("countyId").value;
+            var countyName=$("#countyId").find("option:selected").text();//区县名称
+            var address = document.getElementById("address").value;
+            var factoryLongitude = document.getElementById("factoryLongitude").value;
+            var factoryLatitude = document.getElementById("factoryLatitude").value;
+            var totalOutput = document.getElementById("totalOutput").value;
+            var yearDays = document.getElementById("yearDays").value;
+            var daysHours = document.getElementById("daysHours").value;
+            var principalName = document.getElementById("principalName").value;
+            var principalPhone = document.getElementById("principalPhone").value;
+            var principalMobile = document.getElementById("principalMobile").value;
+            var principalEmail = document.getElementById("principalEmail").value;
+            var powerAmount = document.getElementById("powerAmount").value;
+            var lon1 = document.getElementById("lon1").value;
+            var lon2 = document.getElementById("lon2").value;
+            var lon3 = document.getElementById("lon3").value;
+            var lon4 = document.getElementById("lon4").value;
+            var lon5 = document.getElementById("lon5").value;
+            var lon6 = document.getElementById("lon6").value;
+            var lon7 = document.getElementById("lon7").value;
+            var lat1 = document.getElementById("lat1").value;
+            var lat2 = document.getElementById("lat2").value;
+            var lat3 = document.getElementById("lat3").value;
+            var lat4 = document.getElementById("lat4").value;
+            var lat5 = document.getElementById("lat5").value;
+            var lat6 = document.getElementById("lat6").value;
+            var lat7 = document.getElementById("lat7").value;
 
-        $.ajax({
-            type:"post",
-            dataType : "json",
-            url : "/enterprise/enterpriseUpdate", //要访问的后台地址
-            data : {
-                cityName:cityName,
-                industryName:industryName,
-                factoryName:factoryName,
-                countyName:countyName,
-                industryBigname:industryBigname,
-                factoryUsedname:factoryUsedname,
-                powerAmount:powerAmount,
-                sourceType:sourceType,
-                industryBigid:industryBigid,
-                industryId:industryId,
-                legalperson:legalperson,
-                factorySize:factorySize,
-                countyRegisterCity:countyRegisterCity,
-                countyidRegister:countyidRegister,
-                countyRegisterCityDec:countyRegisterCityDec,
-                countyidRegisterDec:countyidRegisterDec,
-                addressRegister:addressRegister,
-                countyCity:countyCity,
-                countyId:countyId,
-                address:address,
-                factoryLongitude:factoryLongitude,
-                factoryLatitude:factoryLatitude,
-                totalOutput:totalOutput,
-                yearDays:yearDays,
-                daysHours:daysHours,
-                principalName:principalName,
-                principalPhone:principalPhone,
-                principalMobile:principalMobile,
-                principalEmail:principalEmail,
-                lon1:lon1,
-                lat1:lat1,
-                lon2:lon2,
-                lat2:lat2,
-                lon3:lon3,
-                lat3:lat3,
-                lon4:lon4,
-                lat4:lat4,
-                lon5:lon5,
-                lat5:lat5,
-                lon6:lon6,
-                lat6:lat6,
-                lon7:lon7,
-                lat7:lat7
-            }, //要发送的数据，采用josn格式
+            $.ajax({
+                type:"post",
+                dataType : "json",
+                url : "/enterprise/enterpriseUpdate", //要访问的后台地址
+                data : {
+                    cityName:cityName,
+                    industryName:industryName,
+                    factoryName:factoryName,
+                    countyName:countyName,
+                    industryBigname:industryBigname,
+                    factoryUsedname:factoryUsedname,
+                    powerAmount:powerAmount,
+                    sourceType:sourceType,
+                    industryBigid:industryBigid,
+                    industryId:industryId,
+                    legalperson:legalperson,
+                    factorySize:factorySize,
+                    countyRegisterCity:countyRegisterCity,
+                    countyidRegister:countyidRegister,
+                    countyRegisterCityDec:countyRegisterCityDec,
+                    countyidRegisterDec:countyidRegisterDec,
+                    addressRegister:addressRegister,
+                    countyCity:countyCity,
+                    countyId:countyId,
+                    address:address,
+                    factoryLongitude:factoryLongitude,
+                    factoryLatitude:factoryLatitude,
+                    totalOutput:totalOutput,
+                    yearDays:yearDays,
+                    daysHours:daysHours,
+                    principalName:principalName,
+                    principalPhone:principalPhone,
+                    principalMobile:principalMobile,
+                    principalEmail:principalEmail,
+                    lon1:lon1,
+                    lat1:lat1,
+                    lon2:lon2,
+                    lat2:lat2,
+                    lon3:lon3,
+                    lat3:lat3,
+                    lon4:lon4,
+                    lat4:lat4,
+                    lon5:lon5,
+                    lat5:lat5,
+                    lon6:lon6,
+                    lat6:lat6,
+                    lon7:lon7,
+                    lat7:lat7
+                }, //要发送的数据，采用josn格式
 
-            success : function(data) { //list为返回的数据
-                if(data.status==1){
-                    $.niftyNoty({
-                        type: "success",
-                        container : "page",
-                        title : "<br><p style='font-size: 18px;'>更新成功！！！企业信息已保存。。。</p>",
-                        timer : 6000
-                    });
-                }else{
-                    if(data.status==0){
+                success : function(data) { //list为返回的数据
+                    if(data.status==1){
                         $.niftyNoty({
-                            type: "warning",
+                            type: "success",
                             container : "page",
-                            title : "<br><p style='font-size: 18px;'>登录超时,企业信息保存失败！</p>",
+                            title : "<br><p style='font-size: 18px;'>更新成功！！！企业信息已保存。。。</p>",
                             timer : 6000
                         });
                     }else{
-                        $.niftyNoty({
-                            type: "warning",
-                            container : "page",
-                            title : "<br><p style='font-size: 18px;'>存在数据格式错误,企业信息保存失败！</p>",
-                            timer : 6000
-                        });
+                        if(data.status==0){
+                            $.niftyNoty({
+                                type: "warning",
+                                container : "page",
+                                title : "<br><p style='font-size: 18px;'>登录超时,企业信息保存失败！</p>",
+                                timer : 6000
+                            });
+                        }else{
+                            $.niftyNoty({
+                                type: "warning",
+                                container : "page",
+                                title : "<br><p style='font-size: 18px;'>存在数据格式错误,企业信息保存失败！</p>",
+                                timer : 6000
+                            });
+                        }
                     }
+                },
+                error : function() {
+                    alert("请求失败！");
                 }
-            },
-            error : function() {
-                alert("请求失败！");
-            }
-        });
-    }else{
-        $.niftyNoty({
-            type: "warning",
-            container : "floating",
-            title : "<br><p style='font-size: 18px;'>带*号必填！！！请填写完整。</p>",
-            timer : 5000
-        });
+            });
+        }
+    }
+    else{
+        //必填项有空值，不可以提交
+        bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。</p>");
     }
 
 }
