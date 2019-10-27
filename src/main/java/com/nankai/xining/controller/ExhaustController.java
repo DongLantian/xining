@@ -33,22 +33,22 @@ public class ExhaustController {
 
     @RequestMapping(value = "/getExhaust",method = {RequestMethod.GET})
     @ResponseBody
-    public ExhaustTemp getExhaust(int exhaustID){
-        ExhaustTemp resultExhaust = exhaustService.selectExhaust(exhaustID);
+    public Exhaust getExhaust(int exhaustID){
+        Exhaust resultExhaust = exhaustService.selectExhaust(exhaustID);
         return resultExhaust;
     }
 
 
     @RequestMapping(value = "/updateExhaust")
     @ResponseBody
-    public Map<String,Object> updateExhaust(@RequestBody ExhaustTemp exhaustTemp){
+    public Map<String,Object> updateExhaust(@RequestBody Exhaust exhaust){
         HashMap result = new HashMap();
-        if (exhaustService.updateExhaust(exhaustTemp)){
+        if (exhaustService.updateExhaust(exhaust)){
             result.put("isUpdate",true);
-            result.put("exhaust",exhaustTemp);
+            result.put("exhaust",exhaust);
         }else {
             result.put("isUpdate",false);
-            result.put("exhaust",exhaustTemp);
+            result.put("exhaust",exhaust);
         }
         return result;
     }
@@ -56,11 +56,11 @@ public class ExhaustController {
 
     @RequestMapping(value = "/addExhaust", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addExhaust(ExhaustTemp exhaustTemp,HttpSession session){
+    public Map<String,Object> addExhaust(Exhaust exhaust,HttpSession session){
         Map result = new HashMap();
         Integer m_factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (m_factoryId!=null){
-            if (exhaustService.addExhaust(exhaustTemp,m_factoryId)){
+            if (exhaustService.addExhaust(exhaust,m_factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);

@@ -19,30 +19,30 @@ import java.util.List;
 public class ExhaustService {
 
     @Autowired
-    ExhaustTempMapper exhaustTempMapper;
+    ExhaustMapper exhaustMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
 
     @Autowired
-    BoilerTempMapper boilerTempMapper;
+    BoilerMapper boilerMapper;
 
     @Autowired
-    KilnTempMapper kilnTempMapper;
+    KilnMapper kilnMapper;
 
     @Autowired
-    DeviceTempMapper deviceTempMapper;
+    DeviceMapper deviceMapper;
 
     /**
      * 根据企业ID查询烟囱信息列表
      * @param factoryId
      * @return
      */
-    public List<ExhaustTemp> selectExhaustListByFactoryId(int factoryId){
-        ExhaustTempExample exhaustTempExample = new ExhaustTempExample();
-        ExhaustTempExample.Criteria criteria = exhaustTempExample.createCriteria();
+    public List<Exhaust> selectExhaustListByFactoryId(int factoryId){
+        ExhaustExample exhaustExample = new ExhaustExample();
+        ExhaustExample.Criteria criteria = exhaustExample.createCriteria();
         criteria.andFactoryIdEqualTo(factoryId);
-        List<ExhaustTemp> resultExhaustList = exhaustTempMapper.selectByExample(exhaustTempExample);
+        List<Exhaust> resultExhaustList = exhaustMapper.selectByExample(exhaustExample);
         return resultExhaustList;
     }
 
@@ -51,18 +51,18 @@ public class ExhaustService {
      * @param exhaustID
      * @return
      */
-    public ExhaustTemp selectExhaust(int exhaustID) {
-        ExhaustTemp resultExhaust = exhaustTempMapper.selectByPrimaryKey(exhaustID);
+    public Exhaust selectExhaust(int exhaustID) {
+        Exhaust resultExhaust = exhaustMapper.selectByPrimaryKey(exhaustID);
         return resultExhaust;
     }
 
     /**
      * 更改选中的烟囱信息
-     * @param exhaustTemp
+     * @param exhaust
      * @return
      */
-    public boolean updateExhaust(ExhaustTemp exhaustTemp) {
-        if (exhaustTempMapper.updateByPrimaryKeySelective(exhaustTemp)!=0){
+    public boolean updateExhaust(Exhaust exhaust) {
+        if (exhaustMapper.updateByPrimaryKeySelective(exhaust)!=0){
             return true;
         }else
             return false;
@@ -70,29 +70,29 @@ public class ExhaustService {
 
     /**
      * 添加烟囱
-     * @param exhaustTemp
+     * @param exhaust
      * @param m_factoryId
      * @return
      */
-    public boolean addExhaust(ExhaustTemp exhaustTemp, Integer m_factoryId) {
+    public boolean addExhaust(Exhaust exhaust, Integer m_factoryId) {
         //设置烟囱编号，需要先找出烟囱表中该工厂下编号最大的烟囱
-        ExhaustTempExample exhaustTempExample = new ExhaustTempExample();
-        exhaustTempExample.setOrderByClause("NK_NO DESC");
-        ExhaustTempExample.Criteria criteria = exhaustTempExample.createCriteria();
+        ExhaustExample exhaustExample = new ExhaustExample();
+        exhaustExample.setOrderByClause("NK_NO DESC");
+        ExhaustExample.Criteria criteria = exhaustExample.createCriteria();
         criteria.andFactoryIdEqualTo(m_factoryId);
-        List<ExhaustTemp> exhaustList = exhaustTempMapper.selectByExample(exhaustTempExample);
+        List<Exhaust> exhaustList = exhaustMapper.selectByExample(exhaustExample);
         int curMaxNum=0;
         if (exhaustList.size()!=0){
-            ExhaustTemp maxNumExhaust = exhaustList.get(0);
+            Exhaust maxNumExhaust = exhaustList.get(0);
             curMaxNum = maxNumExhaust.getNkNo();
         }
 
 
-        exhaustTemp.setNkNo(curMaxNum+1);
-        exhaustTemp.setFactoryId(m_factoryId);
-        exhaustTemp.setExfNo("");
+        exhaust.setNkNo(curMaxNum+1);
+        exhaust.setFactoryId(m_factoryId);
+        exhaust.setExfNo("");
 
-        if (exhaustTempMapper.insertSelective(exhaustTemp)!=0){
+        if (exhaustMapper.insertSelective(exhaust)!=0){
             //添加烟囱成功
             //设置工厂表中的exhaust_num字段，即烟囱总数。
             //设置工厂表中更新时间
@@ -128,27 +128,27 @@ public class ExhaustService {
      */
     public int deleteExhaust(int exhaustID, Integer m_factoryId) {
         //首先判断有没有锅炉或者窑炉或者设备选了这个烟囱
-        BoilerTempExample boilerTempExample = new BoilerTempExample();
-        BoilerTempExample.Criteria criteriaBoiler = boilerTempExample.createCriteria();
+        BoilerExample boilerExample = new BoilerExample();
+        BoilerExample.Criteria criteriaBoiler = boilerExample.createCriteria();
         criteriaBoiler.andExhustIdEqualTo(exhaustID);
-        long boilerCount = boilerTempMapper.countByExample(boilerTempExample);
+        long boilerCount = boilerMapper.countByExample(boilerExample);
 
-        KilnTempExample kilnTempExample = new KilnTempExample();
-        KilnTempExample.Criteria criteriaKiln = kilnTempExample.createCriteria();
+        KilnExample kilnExample = new KilnExample();
+        KilnExample.Criteria criteriaKiln = kilnExample.createCriteria();
         criteriaKiln.andExhustIdEqualTo(exhaustID);
-        long kilnCount = kilnTempMapper.countByExample(kilnTempExample);
+        long kilnCount = kilnMapper.countByExample(kilnExample);
 
-        DeviceTempExample deviceTempExample = new DeviceTempExample();
-        DeviceTempExample.Criteria criteriaDevice = deviceTempExample.createCriteria();
+        DeviceExample deviceExample = new DeviceExample();
+        DeviceExample.Criteria criteriaDevice = deviceExample.createCriteria();
         criteriaDevice.andExhustIdEqualTo(exhaustID);
-        long deviceCount = deviceTempMapper.countByExample(deviceTempExample);
+        long deviceCount = deviceMapper.countByExample(deviceExample);
 
         if (boilerCount>0||kilnCount>0||deviceCount>0){
             //有锅炉或窑炉或设备选择了这个烟囱，不能删除。
             return 0;
         }else {
             //首先删除烟囱
-            if (exhaustTempMapper.deleteByPrimaryKey(exhaustID)!=0){
+            if (exhaustMapper.deleteByPrimaryKey(exhaustID)!=0){
                 //删除成功后factory表中exhaust_num字段减一
                 Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
                 int oldExhaustNum = fac.getExhaustNum();

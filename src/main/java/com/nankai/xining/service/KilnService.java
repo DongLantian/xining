@@ -20,13 +20,13 @@ import java.util.List;
 public class KilnService {
 
     @Autowired
-    KilnTempMapper kilnTempMapper;
+    KilnMapper kilnMapper;
 
     @Autowired
-    ExhaustTempMapper exhaustTempMapper;
+    ExhaustMapper exhaustMapper;
 
     @Autowired
-    TotalKilnTempMapper totalKilnTempMapper;
+    TotalKilnMapper totalKilnMapper;
 
     @Autowired
     SccMapper sccMapper;
@@ -39,9 +39,9 @@ public class KilnService {
      * @param factoryId
      * @return
      */
-    public List<KilnTemp> selectKilnListByFactoryId(int factoryId) {
-        List<KilnTemp> kilnTempList = kilnTempMapper.selectByFactoryIdWithJoin(factoryId);
-        return kilnTempList;
+    public List<Kiln> selectKilnListByFactoryId(int factoryId) {
+        List<Kiln> kilnList = kilnMapper.selectByFactoryIdWithJoin(factoryId);
+        return kilnList;
     }
 
 
@@ -50,91 +50,91 @@ public class KilnService {
      * @param kilnID
      * @return
      */
-    public KilnTemp selectKilnByID(Integer kilnID) {
-        return kilnTempMapper.selectByPrimaryKey(kilnID);
+    public Kiln selectKilnByID(Integer kilnID) {
+        return kilnMapper.selectByPrimaryKey(kilnID);
     }
 
     /**
      * 新增窑炉
-     * @param kilnTemp
+     * @param kiln
      * @param factoryId
      * @return
      */
     @Transactional
-    public boolean addKiln(KilnTemp kilnTemp, Integer factoryId) {
+    public boolean addKiln(Kiln kiln, Integer factoryId) {
 
         //设置窑炉编号，需要先找出窑炉表中该工厂下编号最大的窑炉
-        ExhaustTempExample exhaustTempExample = new ExhaustTempExample();
-        ExhaustTempExample.Criteria exhCriteria = exhaustTempExample.createCriteria();
+        ExhaustExample exhaustExample = new ExhaustExample();
+        ExhaustExample.Criteria exhCriteria = exhaustExample.createCriteria();
         exhCriteria.andFactoryIdEqualTo(factoryId);
-        List<ExhaustTemp> exhaustTempList= exhaustTempMapper.selectByExample(exhaustTempExample);
+        List<Exhaust> exhaustList= exhaustMapper.selectByExample(exhaustExample);
         List<Integer> exhaustIDList = new ArrayList<>();
-        for (ExhaustTemp temp:
-                exhaustTempList) {
+        for (Exhaust temp:
+                exhaustList) {
             exhaustIDList.add(temp.getExfId());
         }
-        KilnTempExample kilnTempExample = new KilnTempExample();
-        kilnTempExample.setOrderByClause("NK_NO DESC");
-        KilnTempExample.Criteria criteria = kilnTempExample.createCriteria();
+        KilnExample kilnExample = new KilnExample();
+        kilnExample.setOrderByClause("NK_NO DESC");
+        KilnExample.Criteria criteria = kilnExample.createCriteria();
         criteria.andExhustIdIn(exhaustIDList);
-        List<KilnTemp> kilnTempList = kilnTempMapper.selectByExample(kilnTempExample);
+        List<Kiln> kilnList = kilnMapper.selectByExample(kilnExample);
         int curMaxNum=0;
-        if (kilnTempList.size()!=0){
-            KilnTemp maxNumKiln = kilnTempList.get(0);
+        if (kilnList.size()!=0){
+            Kiln maxNumKiln = kilnList.get(0);
             curMaxNum = maxNumKiln.getNkNo();
         }
 
-        kilnTemp.setNkNo(curMaxNum+1);
-        kilnTemp.setKilnNo(curMaxNum+1+"");
+        kiln.setNkNo(curMaxNum+1);
+        kiln.setKilnNo(curMaxNum+1+"");
 
         //更新total_kiln数据
-        TotalKilnTempExample totalKilnTempExample = new TotalKilnTempExample();
-        TotalKilnTempExample.Criteria totalKcriteria = totalKilnTempExample.createCriteria();
+        TotalKilnExample totalKilnExample = new TotalKilnExample();
+        TotalKilnExample.Criteria totalKcriteria = totalKilnExample.createCriteria();
         totalKcriteria.andFactoryIdEqualTo(factoryId);
-        List<TotalKilnTemp> totalKilnTemp = totalKilnTempMapper.selectByExample(totalKilnTempExample);
+        List<TotalKiln> totalKiln = totalKilnMapper.selectByExample(totalKilnExample);
         Integer tkilnID = -1;
         boolean flag=true;
-        if (totalKilnTemp.size()!=0){
+        if (totalKiln.size()!=0){
             //表中有总数记录，直接加一
-            TotalKilnTemp totalKilnTemp1 = totalKilnTemp.get(0);
-            tkilnID = totalKilnTemp1.getFkilntotalId();
-            totalKilnTemp1.setFkilnNum(totalKilnTemp1.getFkilnNum()+1);
-            if (totalKilnTempMapper.updateByPrimaryKey(totalKilnTemp1)==0){
+            TotalKiln totalKiln1 = totalKiln.get(0);
+            tkilnID = totalKiln1.getFkilntotalId();
+            totalKiln1.setFkilnNum(totalKiln1.getFkilnNum()+1);
+            if (totalKilnMapper.updateByPrimaryKey(totalKiln1)==0){
                 flag=false;
             }
         }else {
             //表中无总数字段，插入
-            TotalKilnTemp totalKilnTemp2 = new TotalKilnTemp();
-            totalKilnTemp2.setFactoryId(factoryId);
-            totalKilnTemp2.setFkilnNum(1);
-            if (totalKilnTempMapper.insert(totalKilnTemp2)!=0){
-                totalKilnTemp=totalKilnTempMapper.selectByExample(totalKilnTempExample);
-                tkilnID = totalKilnTemp.get(0).getFkilntotalId();
+            TotalKiln totalKiln2 = new TotalKiln();
+            totalKiln2.setFactoryId(factoryId);
+            totalKiln2.setFkilnNum(1);
+            if (totalKilnMapper.insert(totalKiln2)!=0){
+                totalKiln=totalKilnMapper.selectByExample(totalKilnExample);
+                tkilnID = totalKiln.get(0).getFkilntotalId();
             }else {
                 flag=false;
             }
         }
 
 
-        //初始化kilnTemp
-        Double fuelAuseage = kilnTemp.getKilnFuelAusage();
-        String StrSCC="11"+kilnTemp.getFunctio()+kilnTemp.getFueltype()+kilnTemp.getModel();
+        //初始化kiln
+        Double fuelAuseage = kiln.getKilnFuelAusage();
+        String StrSCC="11"+kiln.getFunctio()+kiln.getFueltype()+kiln.getModel();
         Scc scc = sccMapper.selectByPrimaryKey(StrSCC);
-        kilnTemp.setBc((scc.getBc()*fuelAuseage)/100);
-        kilnTemp.setCo((scc.getCo()*fuelAuseage)/100);
-        kilnTemp.setNh3((scc.getNh3()*fuelAuseage)/100);
-        kilnTemp.setPm((scc.getPm()*fuelAuseage)/100);
-        kilnTemp.setOc((scc.getOc()*fuelAuseage)/100);
-        kilnTemp.setPm10((scc.getPm10()*fuelAuseage)/100);
-        kilnTemp.setPm25((scc.getPm25()*fuelAuseage)/100);
-        kilnTemp.setSo2((scc.getSo2()*fuelAuseage)/100);
-        kilnTemp.setNox((scc.getNox()*fuelAuseage)/100);
-        kilnTemp.setVoc((scc.getVocs()*fuelAuseage)/100);
-        kilnTemp.setScccode(StrSCC);
-        kilnTemp.setTkilnId(tkilnID);
+        kiln.setBc((scc.getBc()*fuelAuseage)/100);
+        kiln.setCo((scc.getCo()*fuelAuseage)/100);
+        kiln.setNh3((scc.getNh3()*fuelAuseage)/100);
+        kiln.setPm((scc.getPm()*fuelAuseage)/100);
+        kiln.setOc((scc.getOc()*fuelAuseage)/100);
+        kiln.setPm10((scc.getPm10()*fuelAuseage)/100);
+        kiln.setPm25((scc.getPm25()*fuelAuseage)/100);
+        kiln.setSo2((scc.getSo2()*fuelAuseage)/100);
+        kiln.setNox((scc.getNox()*fuelAuseage)/100);
+        kiln.setVoc((scc.getVocs()*fuelAuseage)/100);
+        kiln.setScccode(StrSCC);
+        kiln.setTkilnId(tkilnID);
 
         if (flag){
-            if (kilnTempMapper.insertSelective(kilnTemp)!=0) {
+            if (kilnMapper.insertSelective(kiln)!=0) {
                 //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
                 Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
                 Date now = new Date();
@@ -150,27 +150,27 @@ public class KilnService {
 
     /**
      * 更改窑炉信息
-     * @param kilnTemp
+     * @param kiln
      * @return
      */
-    public boolean updateKiln(KilnTemp kilnTemp) {
-        //初始化kilnTemp
-        Double fuelAuseage = kilnTemp.getKilnFuelAusage();
-        String StrSCC="11"+kilnTemp.getFunctio()+kilnTemp.getFueltype()+kilnTemp.getModel();
+    public boolean updateKiln(Kiln kiln) {
+        //初始化kiln
+        Double fuelAuseage = kiln.getKilnFuelAusage();
+        String StrSCC="11"+kiln.getFunctio()+kiln.getFueltype()+kiln.getModel();
         Scc scc = sccMapper.selectByPrimaryKey(StrSCC);
-        kilnTemp.setBc((scc.getBc()*fuelAuseage)/100);
-        kilnTemp.setCo((scc.getCo()*fuelAuseage)/100);
-        kilnTemp.setNh3((scc.getNh3()*fuelAuseage)/100);
-        kilnTemp.setPm((scc.getPm()*fuelAuseage)/100);
-        kilnTemp.setOc((scc.getOc()*fuelAuseage)/100);
-        kilnTemp.setPm10((scc.getPm10()*fuelAuseage)/100);
-        kilnTemp.setPm25((scc.getPm25()*fuelAuseage)/100);
-        kilnTemp.setSo2((scc.getSo2()*fuelAuseage)/100);
-        kilnTemp.setNox((scc.getNox()*fuelAuseage)/100);
-        kilnTemp.setVoc((scc.getVocs()*fuelAuseage)/100);
-        kilnTemp.setScccode(StrSCC);
+        kiln.setBc((scc.getBc()*fuelAuseage)/100);
+        kiln.setCo((scc.getCo()*fuelAuseage)/100);
+        kiln.setNh3((scc.getNh3()*fuelAuseage)/100);
+        kiln.setPm((scc.getPm()*fuelAuseage)/100);
+        kiln.setOc((scc.getOc()*fuelAuseage)/100);
+        kiln.setPm10((scc.getPm10()*fuelAuseage)/100);
+        kiln.setPm25((scc.getPm25()*fuelAuseage)/100);
+        kiln.setSo2((scc.getSo2()*fuelAuseage)/100);
+        kiln.setNox((scc.getNox()*fuelAuseage)/100);
+        kiln.setVoc((scc.getVocs()*fuelAuseage)/100);
+        kiln.setScccode(StrSCC);
 
-        if (kilnTempMapper.updateByPrimaryKey(kilnTemp)!=0){
+        if (kilnMapper.updateByPrimaryKey(kiln)!=0){
             return true;
         }else
             return false;
@@ -184,15 +184,15 @@ public class KilnService {
      */
     public int deleteKiln(int kilnID, Integer factoryID) {
         //删除窑炉的同时更改total表
-        if (kilnTempMapper.deleteByPrimaryKey(kilnID)!=0){
+        if (kilnMapper.deleteByPrimaryKey(kilnID)!=0){
             //更新total_kiln数据
-            TotalKilnTempExample totalKilnTempExample = new TotalKilnTempExample();
-            TotalKilnTempExample.Criteria totalKcriteria = totalKilnTempExample.createCriteria();
+            TotalKilnExample totalKilnExample = new TotalKilnExample();
+            TotalKilnExample.Criteria totalKcriteria = totalKilnExample.createCriteria();
             totalKcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalKilnTemp> totalKilnTemp = totalKilnTempMapper.selectByExample(totalKilnTempExample);
-            TotalKilnTemp totalKilnTemp1 = totalKilnTemp.get(0);
-            totalKilnTemp1.setFkilnNum(totalKilnTemp1.getFkilnNum()-1);
-            totalKilnTempMapper.updateByPrimaryKey(totalKilnTemp1);
+            List<TotalKiln> totalKiln = totalKilnMapper.selectByExample(totalKilnExample);
+            TotalKiln totalKiln1 = totalKiln.get(0);
+            totalKiln1.setFkilnNum(totalKiln1.getFkilnNum()-1);
+            totalKilnMapper.updateByPrimaryKey(totalKiln1);
             return 1;
         }else {
             return 0;

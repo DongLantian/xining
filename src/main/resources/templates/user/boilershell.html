@@ -234,7 +234,7 @@
                                 <th scope="row" th:text="${boiler.id}">1</th>
                                 <td th:text="${boiler.nkNo}">neo</td>
                                 <td th:text="${boiler.no}">neo</td>
-                                <td th:text="${boiler.modeldec}">Otto</td>
+                                <td th:text="${boiler.modelDec}">Otto</td>
                                 <td><button th:value="${boiler.id}" @click="editBoiler($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${boiler.id}" @click="delBoiler($event)" class="btn btn-danger btn-sm">删除</button></td>
                             </tr>
@@ -270,7 +270,7 @@
                         </div>
                     </div><br><br><hr>
                     <!--=======================修改锅炉Panel，默认隐藏=================================-->
-                    <div id="updatePanel" class="panel panel-info" hidden="hidden"  style="margin-right: 60px;">
+                    <div id="updatePanel" class="panel panel-info" hidden="hidden"  style="margin-right: 30px;">
                         <div class="panel-heading">
                             <h3 class="panel-title">修改锅炉信息（带*号为必填项）</h3>
                         </div>
@@ -574,7 +574,6 @@
                                                                v-model="boiler.fuelAusage" class="col-md-10"
                                                                alt="p7x3p4s" onchange="ischanged('kilnuse')"
                                                                onblur="sumall('updatefuelAusage','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount','使用量','updatefuelAusage')" />
-                                                        />
 
                                                     </div>
 

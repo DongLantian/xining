@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FRoadDustSource;
 import com.nankai.xining.bean.FRoadDustSourceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FRoadDustSourceMapper {
     long countByExample(FRoadDustSourceExample example);
 

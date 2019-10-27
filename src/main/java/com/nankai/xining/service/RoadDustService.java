@@ -1,9 +1,9 @@
 package com.nankai.xining.service;
 
-import com.nankai.xining.bean.FRoadDustSourceTemp;
-import com.nankai.xining.bean.FRoadDustSourceTempExample;
+import com.nankai.xining.bean.FRoadDustSource;
+import com.nankai.xining.bean.FRoadDustSourceExample;
 import com.nankai.xining.bean.Factory;
-import com.nankai.xining.repository.FRoadDustSourceTempMapper;
+import com.nankai.xining.repository.FRoadDustSourceMapper;
 import com.nankai.xining.repository.FactoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 public class RoadDustService {
 
     @Autowired
-    FRoadDustSourceTempMapper fRoadDustSourceTempMapper;
+    FRoadDustSourceMapper fRoadDustSourceMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -32,11 +32,11 @@ public class RoadDustService {
      * @param factoryId
      * @return
      */
-    public List<FRoadDustSourceTemp> selectRoadDustListByFactoryId(int factoryId) {
-        FRoadDustSourceTempExample fRoadDustSourceTempExample = new FRoadDustSourceTempExample();
-        FRoadDustSourceTempExample.Criteria criteria = fRoadDustSourceTempExample.createCriteria();
+    public List<FRoadDustSource> selectRoadDustListByFactoryId(int factoryId) {
+        FRoadDustSourceExample fRoadDustSourceExample = new FRoadDustSourceExample();
+        FRoadDustSourceExample.Criteria criteria = fRoadDustSourceExample.createCriteria();
         criteria.andFactoryidEqualTo(factoryId);
-        return fRoadDustSourceTempMapper.selectByExample(fRoadDustSourceTempExample);
+        return fRoadDustSourceMapper.selectByExample(fRoadDustSourceExample);
     }
 
 
@@ -45,23 +45,23 @@ public class RoadDustService {
      * @param roadDustID
      * @return
      */
-    public FRoadDustSourceTemp selectRoadDustByID(Integer roadDustID) {
-        return fRoadDustSourceTempMapper.selectByPrimaryKey(roadDustID);
+    public FRoadDustSource selectRoadDustByID(Integer roadDustID) {
+        return fRoadDustSourceMapper.selectByPrimaryKey(roadDustID);
     }
 
 
 
     /**
      * 添加道路扬尘源
-     * @param fRoadDustSourceTemp
+     * @param fRoadDustSource
      * @param factoryId
      * @return
      */
-    public boolean addRoadDust(FRoadDustSourceTemp fRoadDustSourceTemp, Integer factoryId) {
+    public boolean addRoadDust(FRoadDustSource fRoadDustSource, Integer factoryId) {
         //设置企业ID
-        fRoadDustSourceTemp.setFactoryid(factoryId);
+        fRoadDustSource.setFactoryid(factoryId);
 
-        if (fRoadDustSourceTempMapper.insertSelective(fRoadDustSourceTemp)!=0) {
+        if (fRoadDustSourceMapper.insertSelective(fRoadDustSource)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
             Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
@@ -76,11 +76,11 @@ public class RoadDustService {
 
     /**
      * 更改道路扬尘源信息
-     * @param fRoadDustSourceTemp
+     * @param fRoadDustSource
      * @return
      */
-    public boolean updateRoadDust(FRoadDustSourceTemp fRoadDustSourceTemp) {
-        if (fRoadDustSourceTempMapper.updateByPrimaryKey(fRoadDustSourceTemp)!=0){
+    public boolean updateRoadDust(FRoadDustSource fRoadDustSource) {
+        if (fRoadDustSourceMapper.updateByPrimaryKey(fRoadDustSource)!=0){
             return true;
         }else {
             return false;
@@ -94,7 +94,7 @@ public class RoadDustService {
      * @return
      */
     public int deleteRoadDust(int roadDustID) {
-        if (fRoadDustSourceTempMapper.deleteByPrimaryKey(roadDustID)!=0){
+        if (fRoadDustSourceMapper.deleteByPrimaryKey(roadDustID)!=0){
             return 1;
         }else {
             return 0;

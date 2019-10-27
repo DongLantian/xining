@@ -4,7 +4,9 @@ import com.nankai.xining.bean.RongjiProduct;
 import com.nankai.xining.bean.RongjiProductExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RongjiProductMapper {
     long countByExample(RongjiProductExample example);
 
@@ -27,4 +29,6 @@ public interface RongjiProductMapper {
     int updateByPrimaryKeySelective(RongjiProduct record);
 
     int updateByPrimaryKey(RongjiProduct record);
+
+    List<RongjiProduct> selectByFactoryIdWithJoin(int factoryId);
 }

@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.FBareSoilDustSourceTemp;
+import com.nankai.xining.bean.FBareSoilDustSource;
 import com.nankai.xining.service.BareSoilDustService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class BareSoilDustController {
 
     @RequestMapping(value = "/addbaresoil", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addbaresoil(FBareSoilDustSourceTemp fBareSoilDustSourceTemp, HttpSession session){
+    public Map<String,Object> addbaresoil(FBareSoilDustSource fBareSoilDustSource, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (bareSoilDustService.addBareSoilDust(fBareSoilDustSourceTemp,factoryId)){
+            if (bareSoilDustService.addBareSoilDust(fBareSoilDustSource,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -50,7 +50,7 @@ public class BareSoilDustController {
 
     @RequestMapping(value = "/getbaresoil")
     @ResponseBody
-    public FBareSoilDustSourceTemp getbaresoil(Integer baresoilID){
+    public FBareSoilDustSource getbaresoil(Integer baresoilID){
         return bareSoilDustService.selectBareDustByID(baresoilID);
     }
 
@@ -58,16 +58,16 @@ public class BareSoilDustController {
 
     @RequestMapping(value = "/updateBareDust")
     @ResponseBody
-    public Map<String,Object> updateBareDust(@RequestBody FBareSoilDustSourceTemp fBareSoilDustSourceTemp, HttpSession session){
+    public Map<String,Object> updateBareDust(@RequestBody FBareSoilDustSource fBareSoilDustSource, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (bareSoilDustService.updateBareDust(fBareSoilDustSourceTemp)){
+        if (bareSoilDustService.updateBareDust(fBareSoilDustSource)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("baredust",fBareSoilDustSourceTemp);
+            result.put("baredust",fBareSoilDustSource);
         }else {
             result.put("isUpdate",false);
-            result.put("baredust",fBareSoilDustSourceTemp);
+            result.put("baredust",fBareSoilDustSource);
         }
         return result;
     }

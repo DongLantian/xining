@@ -69,18 +69,19 @@
 <body>
 <div id="container" class="effect aside-float aside-bright mainnav-fixed mainnav-lg">
 
+
     <!--NAVBAR-->
     <!--===================================================-->
     <header id="navbar">
-        <div id="navbar-container" class="boxed" style="height: 50px;">
+        <div id="navbar-container" class="boxed">
 
             <!--Brand logo & name-->
             <!--================================-->
             <div class="navbar-header" style="height: 50px;">
                 <a href="#" class="navbar-brand">
-                    <img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">
-                    <div class="brand-title">
-                        <span class="brand-text">填报目录</span>
+                    <!--<img src="/img/logo.png" alt="Nifty Logo" class="brand-icon">-->
+                    <div style="margin-top: 15px;margin-left: 10px;">
+                        <span class="brand-text">大气污染源清单管理系统</span>
                     </div>
                 </a>
             </div>
@@ -109,10 +110,10 @@
 
                     <!--标题-->
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                    <div style="margin-left: 30px; padding-top: 5px;">
+                    <!--<div style="margin-left: 30px; padding-top: 5px;">
                         	<span class="text-2x text-bold" style="color: darkslategray; ">西宁市大气污染源清单管理系统
                         	</span>
-                    </div>
+                    </div>-->
 
 
                     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -135,7 +136,7 @@
                         </a>
 
 
-                        <div class="dropdown-menu dropdown-menu-right panel-default" style="width: 200px;">
+                        <div class="dropdown-menu dropdown-menu-right panel-default" style="width: 100px;">
                             <!-- User dropdown menu -->
                             <ul class="head-list">
                                 <li>
@@ -143,15 +144,10 @@
                                         <i class="ti-user icon-fw icon-lg"></i> 用户信息
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-settings icon-fw icon-lg"></i> 设置
-                                    </a>
-                                </li>
                             </ul>
 
                             <!-- Dropdown footer -->
-                            <div class="pad-all text-right">
+                            <div class="pad-all text-center">
                                 <a href="#" class="btn btn-primary">
                                     <i class="ti-unlock icon-fw"></i> 注销
                                 </a>
@@ -163,7 +159,7 @@
 
                     <li>
                         <a href="#" class="aside-toggle navbar-aside-icon" style="height: 50px;">
-                            <i class="pci-ver-dots"></i>
+                            <i class="pci-ver-dots" style="float: left"></i> <span style="float: left; font-size: 14px;">帮助</span>
                         </a>
                     </li>
                 </ul>
@@ -212,59 +208,66 @@
             <div  class="page-content " style="margin-left: 60px;" th:object="${session.factoryInfo}">
 
                 <div id="exfDom">
+                    <div class="panel  panel-mint" style="margin-right: 60px;">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">烟囱列表 <span style="color: #d9edf7 ;font-size: 15px;">(数量：<span th:text="${exhaustCount}"></span>个)</span></h3>
+                        </div>
 
-                    <h1>烟囱列表</h1>
-                    <div style="height: 200px;">
+                        <div class="panel-body">
+                            <div style="height: 200px;">
 
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>烟囱ID</th>
-                                <th>烟囱编号</th>
-                                <th>烟囱材质</th>
-                                <th>修改烟囱信息</th>
-                                <th>删除该烟囱</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="exhaust : ${exhaustList}">
-                                <th scope="row" th:text="${exhaust.exfId}">1</th>
-                                <td th:text="${exhaust.nkNo}">neo</td>
-                                <td th:text="${exhaust.exfMaterial}">Otto</td>
-                                <td><button th:value="${exhaust.exfId}" @click="editExhaust($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${exhaust.exfId}" @click="delExhaust($event)" class="btn btn-danger btn-sm">删除</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                <table class="table table-striped table-hover ">
+                                    <thead>
+                                    <tr>
+                                        <th>烟囱编号</th>
+                                        <th>烟囱材质</th>
+                                        <th>烟囱高度</th>
+                                        <th>烟气出口直径</th>
+                                        <th>修改烟囱信息</th>
+                                        <th>删除该烟囱</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="exhaust : ${exhaustList}">
+                                        <td th:text="${exhaust.nkNo}">neo</td>
+                                        <td th:text="${exhaust.exfMaterial}">Otto</td>
+                                        <td th:text="${exhaust.exfHeight}"></td>
+                                        <td th:text="${exhaust.smokeOutd}"></td>
+                                        <td><button th:value="${exhaust.exfId}" @click="editExhaust($event)" class="btn btn-info btn-sm">编辑</button></td>
+                                        <td><button th:value="${exhaust.exfId}" @click="delExhaust($event)" class="btn btn-danger btn-sm">删除</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="float: left;height: 60px;">
+                                <input id="exhaustCount" hidden="hidden" th:value="${exhaustCount}"></input>
+                                <script>
+                                    var count = document.getElementById("exhaustCount").value;
+                                    document.write(Pager({
+                                        totalCount:count, 		//总条数为150
+                                        pageSize:3,    			//每页显示3条内容，默认10
+                                        buttonSize:10,   		//显示size个按钮，默认10
+                                        pageParam:'page',   	//页码的参数名为'p'，默认为'page'
+                                        className:'pagination', //分页的样式
+                                        prevButton:'上一页',     //上一页按钮
+                                        nextButton:'下一页',     //下一页按钮
+                                        firstButton:'首页',      //第一页按钮
+                                        lastButton:'末页',       //最后一页按钮
 
+                                    }));
+                                </script>
+                            </div>
+                            <div style="height: 50px;">
+                                <div style="float:right;margin-right: 60px;margin-top: 20px;">
+                                    <button id="addBtn" class="btn btn-primary btn-lg">添加烟囱</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--===============================================================================================-->
-                    <div style="height: 80px;">
-                        <div style="float: left;height: 60px;">
-                            <input id="exhaustCount" hidden="hidden" th:value="${exhaustCount}"></input>
-                            <script>
-                                var count = document.getElementById("exhaustCount").value;
-                                document.write(Pager({
-                                    totalCount:count, 		//总条数为150
-                                    pageSize:3,    			//每页显示3条内容，默认10
-                                    buttonSize:10,   		//显示size个按钮，默认10
-                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
-                                    className:'pagination', //分页的样式
-                                    prevButton:'上一页',     //上一页按钮
-                                    nextButton:'下一页',     //下一页按钮
-                                    firstButton:'首页',      //第一页按钮
-                                    lastButton:'末页',       //最后一页按钮
 
-                                }));
-                            </script>
-                        </div>
-                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${exhaustCount}"></span>个烟囱。。。</span>
-                        </div>
-                        <div style="float:right;margin-right: 120px;">
-                            <button id="addBtn" class="btn btn-primary btn-lg">添加烟囱</button>
-                        </div>
-                    </div><br><br><hr>
+                    <!--===============================================================================================-->
+                    <hr>
+
                     <!--=======================修改烟囱Panel，默认隐藏=================================-->
                     <div id="updatePanel" class="panel panel-info" hidden="hidden" style="margin-right: 60px;">
                         <div class="panel-heading">
@@ -792,18 +795,6 @@
                                     <i class="ti-comments"></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#demo-asd-tab-2" data-toggle="tab">
-                                    <i class="ti-info-alt"></i>
-                                    Reports
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#demo-asd-tab-3" data-toggle="tab">
-                                    <i class="ti-settings"></i>
-                                    Settings
-                                </a>
-                            </li>
                         </ul>
                         <!--================================-->
                         <!--End nav tabs-->
@@ -824,29 +815,6 @@
                             </div>
                             <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                             <!--End first tab-->
-
-
-                            <!--Second tab-->
-                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                            <div class="tab-pane fade" id="demo-asd-tab-2">
-                                <p class="pad-all text-lg">Second tab</p>
-                                <div class="pad-hor">
-
-                                </div>
-                            </div>
-                            <!--End second tab-->
-                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-
-                            <!--Third tab-->
-                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-                            <div class="tab-pane fade" id="demo-asd-tab-3">
-                                <p class="pad-all text-lg">Third tab</p>
-                                <div class="pad-hor">
-
-                                </div>
-                            </div>
-                            <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
                         </div>
                     </div>

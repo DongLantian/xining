@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.DeviceProductTemp;
+import com.nankai.xining.bean.DeviceProduct;
 import com.nankai.xining.service.DeviceProductService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class DeviceProductController {
 
     @RequestMapping(value = "/getProduct")
     @ResponseBody
-    public DeviceProductTemp getProduct(Integer productID){
+    public DeviceProduct getProduct(Integer productID){
         return deviceProductService.selectProductByID(productID);
     }
 
@@ -41,11 +41,11 @@ public class DeviceProductController {
 
     @RequestMapping(value = "/addProduct", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addProduct(DeviceProductTemp deviceProductTemp, HttpSession session){
+    public Map<String,Object> addProduct(DeviceProduct deviceProduct, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (deviceProductService.addProduct(deviceProductTemp,factoryId)){
+            if (deviceProductService.addProduct(deviceProduct,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -59,16 +59,16 @@ public class DeviceProductController {
 
     @RequestMapping(value = "/updateProduct")
     @ResponseBody
-    public Map<String,Object> updateProduct(@RequestBody DeviceProductTemp deviceProductTemp, HttpSession session){
+    public Map<String,Object> updateProduct(@RequestBody DeviceProduct deviceProduct, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (deviceProductService.updateProduct(deviceProductTemp)){
+        if (deviceProductService.updateProduct(deviceProduct)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("product",deviceProductTemp);
+            result.put("product",deviceProduct);
         }else {
             result.put("isUpdate",false);
-            result.put("product",deviceProductTemp);
+            result.put("product",deviceProduct);
         }
         return result;
     }

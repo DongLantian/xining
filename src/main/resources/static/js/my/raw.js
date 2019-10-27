@@ -250,7 +250,9 @@ $(function () {
             },
             deviceno:{
                 validators: {
-                    notEmpty: {}
+                    notEmpty: {
+                        message: '必填项！需首先在生产工艺装置页面添加设备。'
+                    }
                 }
             },
             uint: {

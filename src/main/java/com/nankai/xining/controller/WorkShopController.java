@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.FNoOrganizationWorkshopDischargeTemp;
+import com.nankai.xining.bean.FNoOrganizationWorkshopDischarge;
 import com.nankai.xining.service.WorkShopService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class WorkShopController {
 
     @RequestMapping(value = "/addworkshop", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addworkshop(FNoOrganizationWorkshopDischargeTemp fNoOrganizationWorkshopDischargeTemp, HttpSession session){
+    public Map<String,Object> addworkshop(FNoOrganizationWorkshopDischarge fNoOrganizationWorkshopDischarge, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (workShopService.addWorkShop(fNoOrganizationWorkshopDischargeTemp,factoryId)){
+            if (workShopService.addWorkShop(fNoOrganizationWorkshopDischarge,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -50,7 +50,7 @@ public class WorkShopController {
 
     @RequestMapping(value = "/getworkshop")
     @ResponseBody
-    public FNoOrganizationWorkshopDischargeTemp getworkshop(Integer workshopID){
+    public FNoOrganizationWorkshopDischarge getworkshop(Integer workshopID){
         return workShopService.selectworkShopByID(workshopID);
     }
 
@@ -58,16 +58,16 @@ public class WorkShopController {
 
     @RequestMapping(value = "/updateWorkShop")
     @ResponseBody
-    public Map<String,Object> updateWorkShop(@RequestBody FNoOrganizationWorkshopDischargeTemp fNoOrganizationWorkshopDischargeTemp, HttpSession session){
+    public Map<String,Object> updateWorkShop(@RequestBody FNoOrganizationWorkshopDischarge fNoOrganizationWorkshopDischarge, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (workShopService.updateWorkShop(fNoOrganizationWorkshopDischargeTemp)){
+        if (workShopService.updateWorkShop(fNoOrganizationWorkshopDischarge)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("workshop",fNoOrganizationWorkshopDischargeTemp);
+            result.put("workshop",fNoOrganizationWorkshopDischarge);
         }else {
             result.put("isUpdate",false);
-            result.put("workshop",fNoOrganizationWorkshopDischargeTemp);
+            result.put("workshop",fNoOrganizationWorkshopDischarge);
         }
         return result;
     }

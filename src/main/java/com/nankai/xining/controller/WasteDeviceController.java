@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.FeiqiTemp;
+import com.nankai.xining.bean.Feiqi;
 import com.nankai.xining.service.WasteDeviceService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +32,18 @@ public class WasteDeviceController {
 
     @RequestMapping(value = "/getDevice")
     @ResponseBody
-    public FeiqiTemp getDevice(Integer deviceID){
+    public Feiqi getDevice(Integer deviceID){
         return wasteDeviceService.selectDeviceByID(deviceID);
     }
 
 
     @RequestMapping(value = "/addDevice", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addDevice(FeiqiTemp feiqiTemp, HttpSession session){
+    public Map<String,Object> addDevice(Feiqi feiqi, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (wasteDeviceService.addDevice(feiqiTemp,factoryId)){
+            if (wasteDeviceService.addDevice(feiqi,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -58,16 +58,16 @@ public class WasteDeviceController {
 
     @RequestMapping(value = "/updateDevice")
     @ResponseBody
-    public Map<String,Object> updateDevice(@RequestBody FeiqiTemp feiqiTemp, HttpSession session){
+    public Map<String,Object> updateDevice(@RequestBody Feiqi feiqi, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (wasteDeviceService.updateDevice(feiqiTemp)){
+        if (wasteDeviceService.updateDevice(feiqi)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("wastedevice",feiqiTemp);
+            result.put("wastedevice",feiqi);
         }else {
             result.put("isUpdate",false);
-            result.put("wastedevice",feiqiTemp);
+            result.put("wastedevice",feiqi);
         }
         return result;
     }

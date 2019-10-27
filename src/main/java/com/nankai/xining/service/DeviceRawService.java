@@ -19,16 +19,16 @@ import java.util.List;
 public class DeviceRawService {
 
     @Autowired
-    DeviceRawTempMapper deviceRawTempMapper;
+    DeviceRawMapper deviceRawMapper;
 
     @Autowired
-    ExhaustTempMapper exhaustTempMapper;
+    ExhaustMapper exhaustMapper;
 
     @Autowired
-    DeviceTempMapper deviceTempMapper;
+    DeviceMapper deviceMapper;
 
     @Autowired
-    TotalProductrawTempMapper totalProductrawTempMapper;
+    TotalProductrawMapper totalProductrawMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -38,9 +38,9 @@ public class DeviceRawService {
      * @param factoryId
      * @return
      */
-    public List<DeviceRawTemp> selectRawListByFactoryId(int factoryId) {
-        List<DeviceRawTemp> deviceRawTempList = deviceRawTempMapper.selectByFactoryIdWithJoin(factoryId);
-        return deviceRawTempList;
+    public List<DeviceRaw> selectRawListByFactoryId(int factoryId) {
+        List<DeviceRaw> deviceRawList = deviceRawMapper.selectByFactoryIdWithJoin(factoryId);
+        return deviceRawList;
     }
 
 
@@ -49,92 +49,92 @@ public class DeviceRawService {
      * @param rawID
      * @return
      */
-    public DeviceRawTemp selectRawByID(Integer rawID) {
-        return deviceRawTempMapper.selectByPrimaryKey(rawID);
+    public DeviceRaw selectRawByID(Integer rawID) {
+        return deviceRawMapper.selectByPrimaryKey(rawID);
     }
 
     /**
      *
-     * @param deviceRawTemp
+     * @param deviceRaw
      * @param factoryId
      * @return
      */
-    public boolean addRaw(DeviceRawTemp deviceRawTemp, Integer factoryId) {
+    public boolean addRaw(DeviceRaw deviceRaw, Integer factoryId) {
 
         //设置原料编号，需要先找出原料表中该工厂下编号最大的原料
         //首先找出该工厂下所有的烟囱
-        ExhaustTempExample exhaustTempExample = new ExhaustTempExample();
-        ExhaustTempExample.Criteria exhCriteria = exhaustTempExample.createCriteria();
+        ExhaustExample exhaustExample = new ExhaustExample();
+        ExhaustExample.Criteria exhCriteria = exhaustExample.createCriteria();
         exhCriteria.andFactoryIdEqualTo(factoryId);
-        List<ExhaustTemp> exhaustTempList= exhaustTempMapper.selectByExample(exhaustTempExample);
+        List<Exhaust> exhaustList= exhaustMapper.selectByExample(exhaustExample);
         //将烟囱ID放在一个列表里
         List<Integer> exhaustIDList = new ArrayList<>();
-        for (ExhaustTemp temp:
-                exhaustTempList) {
+        for (Exhaust temp:
+                exhaustList) {
             exhaustIDList.add(temp.getExfId());
         }
         //然后查询设备
-        DeviceTempExample deviceTempExample = new DeviceTempExample();
-        DeviceTempExample.Criteria criteria = deviceTempExample.createCriteria();
+        DeviceExample deviceExample = new DeviceExample();
+        DeviceExample.Criteria criteria = deviceExample.createCriteria();
         criteria.andExhustIdIn(exhaustIDList);
-        List<DeviceTemp> deviceTempList = deviceTempMapper.selectByExample(deviceTempExample);
+        List<Device> deviceList = deviceMapper.selectByExample(deviceExample);
         List<Integer> deviceIDList = new ArrayList<>();
-        for (DeviceTemp temp:
-                deviceTempList) {
+        for (Device temp:
+                deviceList) {
             deviceIDList.add(temp.getId());
         }
         //这样就可以查询原料了
-        DeviceRawTempExample deviceRawTempExample = new DeviceRawTempExample();
-        deviceRawTempExample.setOrderByClause("nk_no DESC");
-        DeviceRawTempExample.Criteria criteria2 = deviceRawTempExample.createCriteria();
+        DeviceRawExample deviceRawExample = new DeviceRawExample();
+        deviceRawExample.setOrderByClause("nk_no DESC");
+        DeviceRawExample.Criteria criteria2 = deviceRawExample.createCriteria();
         criteria2.andDeviceIdIn(deviceIDList);
-        List<DeviceRawTemp> deviceRawTempList = deviceRawTempMapper.selectByExample(deviceRawTempExample);
+        List<DeviceRaw> deviceRawList = deviceRawMapper.selectByExample(deviceRawExample);
         int curMaxNum=0;
-        if (deviceRawTempList.size()!=0){
-            DeviceRawTemp maxNumDeviceRaw = deviceRawTempList.get(0);
+        if (deviceRawList.size()!=0){
+            DeviceRaw maxNumDeviceRaw = deviceRawList.get(0);
             curMaxNum = maxNumDeviceRaw.getNkNo();
         }
         //设置原料序号
-        deviceRawTemp.setNkNo(curMaxNum+1);
+        deviceRaw.setNkNo(curMaxNum+1);
 
         //更新total_productraw数据
-        TotalProductrawTempExample totalProductrawTempExample = new TotalProductrawTempExample();
-        TotalProductrawTempExample.Criteria totalPcriteria = totalProductrawTempExample.createCriteria();
+        TotalProductrawExample totalProductrawExample = new TotalProductrawExample();
+        TotalProductrawExample.Criteria totalPcriteria = totalProductrawExample.createCriteria();
         totalPcriteria.andFactoryIdEqualTo(factoryId);
-        List<TotalProductrawTemp> totalProductrawTempList = totalProductrawTempMapper.selectByExample(totalProductrawTempExample);
+        List<TotalProductraw> totalProductrawList = totalProductrawMapper.selectByExample(totalProductrawExample);
         Integer productrawtotalID = -1;
         boolean flag=true;
-        if (totalProductrawTempList.size()!=0){
+        if (totalProductrawList.size()!=0){
             //表中有总数记录，直接加一
-            TotalProductrawTemp totalProductrawTemp = totalProductrawTempList.get(0);
-            productrawtotalID = totalProductrawTemp.getId();
-            totalProductrawTemp.setRawNum(totalProductrawTemp.getRawNum()+1);
-            if (totalProductrawTempMapper.updateByPrimaryKey(totalProductrawTemp)==0){
+            TotalProductraw totalProductraw = totalProductrawList.get(0);
+            productrawtotalID = totalProductraw.getId();
+            totalProductraw.setRawNum(totalProductraw.getRawNum()+1);
+            if (totalProductrawMapper.updateByPrimaryKey(totalProductraw)==0){
                 flag=false;
             }
         }else {
             ////表中无总数字段的情况是不可能发生的，因为没有设备不可以填写原料。
-            /*TotalProductrawTemp totalProductrawTemp = new TotalProductrawTemp();
-            totalProductrawTemp.setFactoryId(factoryId);
-            totalProductrawTemp.setDeviceNum(1);
-            totalProductrawTemp.setProductNum(0);
-            totalProductrawTemp.setRawNum(1);
-            if (totalProductrawTempMapper.insert(totalProductrawTemp)!=0){
-                totalProductrawTempList=totalProductrawTempMapper.selectByExample(totalProductrawTempExample);
-                productrawtotalID = totalProductrawTempList.get(0).getId();
+            /*TotalProductraw totalProductraw = new TotalProductraw();
+            totalProductraw.setFactoryId(factoryId);
+            totalProductraw.setDeviceNum(1);
+            totalProductraw.setProductNum(0);
+            totalProductraw.setRawNum(1);
+            if (totalProductrawMapper.insert(totalProductraw)!=0){
+                totalProductrawList=totalProductrawMapper.selectByExample(totalProductrawExample);
+                productrawtotalID = totalProductrawList.get(0).getId();
             }else {
                 flag=false;
             }*/
         }
 
 
-        //初始化deviceRawTemp
-        String StrSCC="11"+deviceRawTemp.getScc2()+deviceRawTemp.getScc3()+deviceRawTemp.getScc4();
-        deviceRawTemp.setSccCode(StrSCC);
-        deviceRawTemp.setDevicetotalId(productrawtotalID);
+        //初始化deviceRaw
+        String StrSCC="11"+deviceRaw.getScc2()+deviceRaw.getScc3()+deviceRaw.getScc4();
+        deviceRaw.setSccCode(StrSCC);
+        deviceRaw.setDevicetotalId(productrawtotalID);
 
         if (flag){
-            if (deviceRawTempMapper.insertSelective(deviceRawTemp)!=0) {
+            if (deviceRawMapper.insertSelective(deviceRaw)!=0) {
                 //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
                 Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
                 Date now = new Date();
@@ -157,15 +157,15 @@ public class DeviceRawService {
      */
     public int deleteRaw(int rawID, Integer factoryID) {
         //删除原料的同时更改total表
-        if (deviceRawTempMapper.deleteByPrimaryKey(rawID)!=0){
+        if (deviceRawMapper.deleteByPrimaryKey(rawID)!=0){
             //更新total_productraw_temp数据
-            TotalProductrawTempExample totalProductrawTempExample = new TotalProductrawTempExample();
-            TotalProductrawTempExample.Criteria totalPcriteria = totalProductrawTempExample.createCriteria();
+            TotalProductrawExample totalProductrawExample = new TotalProductrawExample();
+            TotalProductrawExample.Criteria totalPcriteria = totalProductrawExample.createCriteria();
             totalPcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalProductrawTemp> totalProductrawTempList = totalProductrawTempMapper.selectByExample(totalProductrawTempExample);
-            TotalProductrawTemp totalProductrawTemp = totalProductrawTempList.get(0);
-            totalProductrawTemp.setRawNum(totalProductrawTemp.getRawNum()-1);
-            totalProductrawTempMapper.updateByPrimaryKey(totalProductrawTemp);
+            List<TotalProductraw> totalProductrawList = totalProductrawMapper.selectByExample(totalProductrawExample);
+            TotalProductraw totalProductraw = totalProductrawList.get(0);
+            totalProductraw.setRawNum(totalProductraw.getRawNum()-1);
+            totalProductrawMapper.updateByPrimaryKey(totalProductraw);
             return 1;
         }else {
             return 0;
@@ -175,13 +175,13 @@ public class DeviceRawService {
 
     /**
      * 更新原料信息
-     * @param deviceRawTemp
+     * @param deviceRaw
      * @return
      */
-    public boolean updateRaw(DeviceRawTemp deviceRawTemp) {
-        String StrSCC="11"+deviceRawTemp.getScc2()+deviceRawTemp.getScc3()+deviceRawTemp.getScc4();
-        deviceRawTemp.setSccCode(StrSCC);
-        if (deviceRawTempMapper.updateByPrimaryKey(deviceRawTemp)!=0) return true;
+    public boolean updateRaw(DeviceRaw deviceRaw) {
+        String StrSCC="11"+deviceRaw.getScc2()+deviceRaw.getScc3()+deviceRaw.getScc4();
+        deviceRaw.setSccCode(StrSCC);
+        if (deviceRawMapper.updateByPrimaryKey(deviceRaw)!=0) return true;
         else return false;
     }
 }

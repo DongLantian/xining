@@ -184,8 +184,8 @@ $(function () {
                 app.boiler.fueltype = $("#updatefueltype").val();
                 app.boiler.model = $("#updatemodel").val();
                 app.boiler.functionDec = $("#updatefunctio").find("option:selected").text();
-                app.boiler.fueltypedec = $("#updatefueltype").find("option:selected").text();
-                app.boiler.modeldec = $("#updatemodel").find("option:selected").text();
+                app.boiler.fueltypeDec = $("#updatefueltype").find("option:selected").text();
+                app.boiler.modelDec = $("#updatemodel").find("option:selected").text();
                 app.boiler.dustremoveDec = $("#updatedustremoveId").find("option:selected").text();
                 app.boiler.sulphurremoveDec = $("#updatesulphurremoveId").find("option:selected").text();
                 app.boiler.nitreremoveDec = $("#updatenitreremoveId").find("option:selected").text();
@@ -260,7 +260,9 @@ $(function () {
             },
             mchimney:{
                 validators: {
-                    notEmpty: {}
+                    notEmpty: {
+                        message: '必填项！需首先在烟囱页面添加烟囱。'
+                    }
                 }
             },
             machineNo: {
@@ -738,8 +740,8 @@ function updatedata() {
                     so2out : so2out,
                     sulphurremoveDec : sulphurremoveDec,
                     dustremoveDec : dustremoveDec,
-                    modeldec : modelDec,
-                    fueltypedec : fueltypeDec,
+                    modelDec : modelDec,
+                    fueltypeDec : fueltypeDec,
                     nitreremoveDec : nitreremoveDec,
                     combustionsystem : combustionsystem,
                     fuelAusage : fuelAusage,

@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Kiln;
 import com.nankai.xining.bean.KilnExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface KilnMapper {
     long countByExample(KilnExample example);
 
@@ -27,4 +29,6 @@ public interface KilnMapper {
     int updateByPrimaryKeySelective(Kiln record);
 
     int updateByPrimaryKey(Kiln record);
+
+    List<Kiln> selectByFactoryIdWithJoin(int factoryId);
 }

@@ -1,9 +1,9 @@
 package com.nankai.xining.service;
 
-import com.nankai.xining.bean.FBareSoilDustSourceTemp;
-import com.nankai.xining.bean.FBareSoilDustSourceTempExample;
+import com.nankai.xining.bean.FBareSoilDustSource;
+import com.nankai.xining.bean.FBareSoilDustSourceExample;
 import com.nankai.xining.bean.Factory;
-import com.nankai.xining.repository.FBareSoilDustSourceTempMapper;
+import com.nankai.xining.repository.FBareSoilDustSourceMapper;
 import com.nankai.xining.repository.FactoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 public class BareSoilDustService {
 
     @Autowired
-    FBareSoilDustSourceTempMapper fBareSoilDustSourceTempMapper;
+    FBareSoilDustSourceMapper fBareSoilDustSourceMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -32,26 +32,26 @@ public class BareSoilDustService {
      * @param factoryId
      * @return
      */
-    public List<FBareSoilDustSourceTemp> selectBareDustListByFactoryId(int factoryId) {
-        FBareSoilDustSourceTempExample fBareSoilDustSourceTempExample = new FBareSoilDustSourceTempExample();
-        FBareSoilDustSourceTempExample.Criteria criteria = fBareSoilDustSourceTempExample.createCriteria();
+    public List<FBareSoilDustSource> selectBareDustListByFactoryId(int factoryId) {
+        FBareSoilDustSourceExample fBareSoilDustSourceExample = new FBareSoilDustSourceExample();
+        FBareSoilDustSourceExample.Criteria criteria = fBareSoilDustSourceExample.createCriteria();
         criteria.andFactoryidEqualTo(factoryId);
-        return fBareSoilDustSourceTempMapper.selectByExample(fBareSoilDustSourceTempExample);
+        return fBareSoilDustSourceMapper.selectByExample(fBareSoilDustSourceExample);
     }
 
 
     /**
      * 新增裸土
-     * @param fBareSoilDustSourceTemp
+     * @param fBareSoilDustSource
      * @param factoryId
      * @return
      */
-    public boolean addBareSoilDust(FBareSoilDustSourceTemp fBareSoilDustSourceTemp, Integer factoryId) {
+    public boolean addBareSoilDust(FBareSoilDustSource fBareSoilDustSource, Integer factoryId) {
         //设置企业ID
-        fBareSoilDustSourceTemp.setFactoryid(factoryId);
-        fBareSoilDustSourceTemp.setScccode("1601003002");
+        fBareSoilDustSource.setFactoryid(factoryId);
+        fBareSoilDustSource.setScccode("1601003002");
 
-        if (fBareSoilDustSourceTempMapper.insertSelective(fBareSoilDustSourceTemp)!=0) {
+        if (fBareSoilDustSourceMapper.insertSelective(fBareSoilDustSource)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
             Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
@@ -69,17 +69,17 @@ public class BareSoilDustService {
      * @param baresoilID
      * @return
      */
-    public FBareSoilDustSourceTemp selectBareDustByID(Integer baresoilID) {
-        return fBareSoilDustSourceTempMapper.selectByPrimaryKey(baresoilID);
+    public FBareSoilDustSource selectBareDustByID(Integer baresoilID) {
+        return fBareSoilDustSourceMapper.selectByPrimaryKey(baresoilID);
     }
 
     /**
      * 更新
-     * @param fBareSoilDustSourceTemp
+     * @param fBareSoilDustSource
      * @return
      */
-    public boolean updateBareDust(FBareSoilDustSourceTemp fBareSoilDustSourceTemp) {
-        if (fBareSoilDustSourceTempMapper.updateByPrimaryKey(fBareSoilDustSourceTemp)!=0){
+    public boolean updateBareDust(FBareSoilDustSource fBareSoilDustSource) {
+        if (fBareSoilDustSourceMapper.updateByPrimaryKey(fBareSoilDustSource)!=0){
             return true;
         }else {
             return false;
@@ -92,7 +92,7 @@ public class BareSoilDustService {
      * @return
      */
     public int deleteBareDust(int baresoilID) {
-        if (fBareSoilDustSourceTempMapper.deleteByPrimaryKey(baresoilID)!=0){
+        if (fBareSoilDustSourceMapper.deleteByPrimaryKey(baresoilID)!=0){
             return 1;
         }else {
             return 0;

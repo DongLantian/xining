@@ -23,6 +23,8 @@ public class DeviceProduct implements Serializable {
 
     private String name;
 
+    private String drainageProcessDec;
+
     private String drainageProcess;
 
     private String uint;
@@ -179,6 +181,14 @@ public class DeviceProduct implements Serializable {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getDrainageProcessDec() {
+        return drainageProcessDec;
+    }
+
+    public void setDrainageProcessDec(String drainageProcessDec) {
+        this.drainageProcessDec = drainageProcessDec == null ? null : drainageProcessDec.trim();
     }
 
     public String getDrainageProcess() {
@@ -501,6 +511,7 @@ public class DeviceProduct implements Serializable {
         sb.append(", nameCategoryDec=").append(nameCategoryDec);
         sb.append(", nameCategory=").append(nameCategory);
         sb.append(", name=").append(name);
+        sb.append(", drainageProcessDec=").append(drainageProcessDec);
         sb.append(", drainageProcess=").append(drainageProcess);
         sb.append(", uint=").append(uint);
         sb.append(", annualOutput=").append(annualOutput);
@@ -566,6 +577,7 @@ public class DeviceProduct implements Serializable {
             && (this.getNameCategoryDec() == null ? other.getNameCategoryDec() == null : this.getNameCategoryDec().equals(other.getNameCategoryDec()))
             && (this.getNameCategory() == null ? other.getNameCategory() == null : this.getNameCategory().equals(other.getNameCategory()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getDrainageProcessDec() == null ? other.getDrainageProcessDec() == null : this.getDrainageProcessDec().equals(other.getDrainageProcessDec()))
             && (this.getDrainageProcess() == null ? other.getDrainageProcess() == null : this.getDrainageProcess().equals(other.getDrainageProcess()))
             && (this.getUint() == null ? other.getUint() == null : this.getUint().equals(other.getUint()))
             && (this.getAnnualOutput() == null ? other.getAnnualOutput() == null : this.getAnnualOutput().equals(other.getAnnualOutput()))
@@ -620,6 +632,7 @@ public class DeviceProduct implements Serializable {
         result = prime * result + ((getNameCategoryDec() == null) ? 0 : getNameCategoryDec().hashCode());
         result = prime * result + ((getNameCategory() == null) ? 0 : getNameCategory().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getDrainageProcessDec() == null) ? 0 : getDrainageProcessDec().hashCode());
         result = prime * result + ((getDrainageProcess() == null) ? 0 : getDrainageProcess().hashCode());
         result = prime * result + ((getUint() == null) ? 0 : getUint().hashCode());
         result = prime * result + ((getAnnualOutput() == null) ? 0 : getAnnualOutput().hashCode());

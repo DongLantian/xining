@@ -1,7 +1,7 @@
 package com.nankai.xining.controller;
 
 
-import com.nankai.xining.bean.FConstructionDustSourceTemp;
+import com.nankai.xining.bean.FConstructionDustSource;
 import com.nankai.xining.service.ConstructionDustService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class ConstructionDustController {
 
     @RequestMapping(value = "/addconDust", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addconDust(FConstructionDustSourceTemp fConstructionDustSourceTemp, HttpSession session){
+    public Map<String,Object> addconDust(FConstructionDustSource fConstructionDustSource, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (constructionDustService.addConsDust(fConstructionDustSourceTemp,factoryId)){
+            if (constructionDustService.addConsDust(fConstructionDustSource,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -50,7 +50,7 @@ public class ConstructionDustController {
 
     @RequestMapping(value = "/getConDust")
     @ResponseBody
-    public FConstructionDustSourceTemp getConDust(Integer conDustID){
+    public FConstructionDustSource getConDust(Integer conDustID){
         return constructionDustService.selectConDustByID(conDustID);
     }
 
@@ -58,16 +58,16 @@ public class ConstructionDustController {
 
     @RequestMapping(value = "/updateConDust")
     @ResponseBody
-    public Map<String,Object> updateConDust(@RequestBody FConstructionDustSourceTemp fConstructionDustSourceTemp, HttpSession session){
+    public Map<String,Object> updateConDust(@RequestBody FConstructionDustSource fConstructionDustSource, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (constructionDustService.updateConDust(fConstructionDustSourceTemp)){
+        if (constructionDustService.updateConDust(fConstructionDustSource)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("consdust",fConstructionDustSourceTemp);
+            result.put("consdust",fConstructionDustSource);
         }else {
             result.put("isUpdate",false);
-            result.put("consdust",fConstructionDustSourceTemp);
+            result.put("consdust",fConstructionDustSource);
         }
         return result;
     }

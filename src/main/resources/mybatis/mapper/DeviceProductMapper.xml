@@ -12,6 +12,7 @@
     <result column="name_category_dec" jdbcType="VARCHAR" property="nameCategoryDec" />
     <result column="name_category" jdbcType="CHAR" property="nameCategory" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="drainage_process_dec" jdbcType="VARCHAR" property="drainageProcessDec" />
     <result column="drainage_process" jdbcType="CHAR" property="drainageProcess" />
     <result column="uint" jdbcType="VARCHAR" property="uint" />
     <result column="annual_output" jdbcType="DOUBLE" property="annualOutput" />
@@ -111,12 +112,12 @@
   </sql>
   <sql id="Base_Column_List">
     id, nk_no, devicetotal_id, device_no, device_id, activities_category_dec, activities_category, 
-    name_category_dec, name_category, name, drainage_process, uint, annual_output, scc_code, 
-    factor_status, factor_nox, nox, factor_co, co, factor_pm10, pm10, factor_pm25, pm25, 
-    factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3, nh3, factor_oc, oc, 
-    factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, May_useamount, 
-    June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount, nov_useamount, 
-    dec_useamount, danwei
+    name_category_dec, name_category, name, drainage_process_dec, drainage_process, uint, 
+    annual_output, scc_code, factor_status, factor_nox, nox, factor_co, co, factor_pm10, 
+    pm10, factor_pm25, pm25, factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3, 
+    nh3, factor_oc, oc, factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, 
+    May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount, 
+    nov_useamount, dec_useamount, danwei
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.DeviceProductExample" resultMap="BaseResultMap">
     select
@@ -152,35 +153,35 @@
     insert into device_product (id, nk_no, devicetotal_id, 
       device_no, device_id, activities_category_dec, 
       activities_category, name_category_dec, name_category, 
-      name, drainage_process, uint, 
-      annual_output, scc_code, factor_status, 
-      factor_nox, nox, factor_co, 
-      co, factor_pm10, pm10, 
-      factor_pm25, pm25, factor_pm, 
-      pm, factor_so2, so2, factor_voc, 
-      voc, factor_nh3, nh3, factor_oc, 
-      oc, factor_bc, bc, Jan_useamount, 
-      Feb_useamount, Mar_useamount, Apr_useamount, 
-      May_useamount, June_useamount, July_useamount, 
-      aug_useamount, sept_useamount, oct_use_amount, 
-      nov_useamount, dec_useamount, danwei
-      )
+      name, drainage_process_dec, drainage_process, 
+      uint, annual_output, scc_code, 
+      factor_status, factor_nox, nox, 
+      factor_co, co, factor_pm10, 
+      pm10, factor_pm25, pm25, 
+      factor_pm, pm, factor_so2, 
+      so2, factor_voc, voc, factor_nh3, 
+      nh3, factor_oc, oc, factor_bc, 
+      bc, Jan_useamount, Feb_useamount, 
+      Mar_useamount, Apr_useamount, May_useamount, 
+      June_useamount, July_useamount, aug_useamount, 
+      sept_useamount, oct_use_amount, nov_useamount, 
+      dec_useamount, danwei)
     values (#{id,jdbcType=INTEGER}, #{nkNo,jdbcType=INTEGER}, #{devicetotalId,jdbcType=INTEGER}, 
       #{deviceNo,jdbcType=INTEGER}, #{deviceId,jdbcType=INTEGER}, #{activitiesCategoryDec,jdbcType=VARCHAR}, 
       #{activitiesCategory,jdbcType=CHAR}, #{nameCategoryDec,jdbcType=VARCHAR}, #{nameCategory,jdbcType=CHAR}, 
-      #{name,jdbcType=VARCHAR}, #{drainageProcess,jdbcType=CHAR}, #{uint,jdbcType=VARCHAR}, 
-      #{annualOutput,jdbcType=DOUBLE}, #{sccCode,jdbcType=CHAR}, #{factorStatus,jdbcType=TINYINT}, 
-      #{factorNox,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, #{factorCo,jdbcType=DOUBLE}, 
-      #{co,jdbcType=DOUBLE}, #{factorPm10,jdbcType=DOUBLE}, #{pm10,jdbcType=DOUBLE}, 
-      #{factorPm25,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, #{factorPm,jdbcType=DOUBLE}, 
-      #{pm,jdbcType=DOUBLE}, #{factorSo2,jdbcType=DOUBLE}, #{so2,jdbcType=DOUBLE}, #{factorVoc,jdbcType=DOUBLE}, 
-      #{voc,jdbcType=DOUBLE}, #{factorNh3,jdbcType=DOUBLE}, #{nh3,jdbcType=DOUBLE}, #{factorOc,jdbcType=DOUBLE}, 
-      #{oc,jdbcType=DOUBLE}, #{factorBc,jdbcType=DOUBLE}, #{bc,jdbcType=DOUBLE}, #{janUseamount,jdbcType=DOUBLE}, 
-      #{febUseamount,jdbcType=DOUBLE}, #{marUseamount,jdbcType=DOUBLE}, #{aprUseamount,jdbcType=DOUBLE}, 
-      #{mayUseamount,jdbcType=DOUBLE}, #{juneUseamount,jdbcType=DOUBLE}, #{julyUseamount,jdbcType=DOUBLE}, 
-      #{augUseamount,jdbcType=DOUBLE}, #{septUseamount,jdbcType=DOUBLE}, #{octUseAmount,jdbcType=DOUBLE}, 
-      #{novUseamount,jdbcType=DOUBLE}, #{decUseamount,jdbcType=DOUBLE}, #{danwei,jdbcType=CHAR}
-      )
+      #{name,jdbcType=VARCHAR}, #{drainageProcessDec,jdbcType=VARCHAR}, #{drainageProcess,jdbcType=CHAR}, 
+      #{uint,jdbcType=VARCHAR}, #{annualOutput,jdbcType=DOUBLE}, #{sccCode,jdbcType=CHAR}, 
+      #{factorStatus,jdbcType=TINYINT}, #{factorNox,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, 
+      #{factorCo,jdbcType=DOUBLE}, #{co,jdbcType=DOUBLE}, #{factorPm10,jdbcType=DOUBLE}, 
+      #{pm10,jdbcType=DOUBLE}, #{factorPm25,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, 
+      #{factorPm,jdbcType=DOUBLE}, #{pm,jdbcType=DOUBLE}, #{factorSo2,jdbcType=DOUBLE}, 
+      #{so2,jdbcType=DOUBLE}, #{factorVoc,jdbcType=DOUBLE}, #{voc,jdbcType=DOUBLE}, #{factorNh3,jdbcType=DOUBLE}, 
+      #{nh3,jdbcType=DOUBLE}, #{factorOc,jdbcType=DOUBLE}, #{oc,jdbcType=DOUBLE}, #{factorBc,jdbcType=DOUBLE}, 
+      #{bc,jdbcType=DOUBLE}, #{janUseamount,jdbcType=DOUBLE}, #{febUseamount,jdbcType=DOUBLE}, 
+      #{marUseamount,jdbcType=DOUBLE}, #{aprUseamount,jdbcType=DOUBLE}, #{mayUseamount,jdbcType=DOUBLE}, 
+      #{juneUseamount,jdbcType=DOUBLE}, #{julyUseamount,jdbcType=DOUBLE}, #{augUseamount,jdbcType=DOUBLE}, 
+      #{septUseamount,jdbcType=DOUBLE}, #{octUseAmount,jdbcType=DOUBLE}, #{novUseamount,jdbcType=DOUBLE}, 
+      #{decUseamount,jdbcType=DOUBLE}, #{danwei,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.DeviceProduct">
     insert into device_product
@@ -214,6 +215,9 @@
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="drainageProcessDec != null">
+        drainage_process_dec,
       </if>
       <if test="drainageProcess != null">
         drainage_process,
@@ -360,6 +364,9 @@
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageProcessDec != null">
+        #{drainageProcessDec,jdbcType=VARCHAR},
       </if>
       <if test="drainageProcess != null">
         #{drainageProcess,jdbcType=CHAR},
@@ -516,6 +523,9 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.drainageProcessDec != null">
+        drainage_process_dec = #{record.drainageProcessDec,jdbcType=VARCHAR},
+      </if>
       <if test="record.drainageProcess != null">
         drainage_process = #{record.drainageProcess,jdbcType=CHAR},
       </if>
@@ -647,6 +657,7 @@
       name_category_dec = #{record.nameCategoryDec,jdbcType=VARCHAR},
       name_category = #{record.nameCategory,jdbcType=CHAR},
       name = #{record.name,jdbcType=VARCHAR},
+      drainage_process_dec = #{record.drainageProcessDec,jdbcType=VARCHAR},
       drainage_process = #{record.drainageProcess,jdbcType=CHAR},
       uint = #{record.uint,jdbcType=VARCHAR},
       annual_output = #{record.annualOutput,jdbcType=DOUBLE},
@@ -718,6 +729,9 @@
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="drainageProcessDec != null">
+        drainage_process_dec = #{drainageProcessDec,jdbcType=VARCHAR},
       </if>
       <if test="drainageProcess != null">
         drainage_process = #{drainageProcess,jdbcType=CHAR},
@@ -847,6 +861,7 @@
       name_category_dec = #{nameCategoryDec,jdbcType=VARCHAR},
       name_category = #{nameCategory,jdbcType=CHAR},
       name = #{name,jdbcType=VARCHAR},
+      drainage_process_dec = #{drainageProcessDec,jdbcType=VARCHAR},
       drainage_process = #{drainageProcess,jdbcType=CHAR},
       uint = #{uint,jdbcType=VARCHAR},
       annual_output = #{annualOutput,jdbcType=DOUBLE},
@@ -887,4 +902,20 @@
       danwei = #{danwei,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <!--自定义SQL：根据工厂ID查询产品（连接设备表和烟囱表）-->
+  <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT dpt.id, dpt.nk_no, devicetotal_id, dpt.device_no, device_id, activities_category_dec, activities_category,
+    name_category_dec, name_category, dpt.name, drainage_process_dec, drainage_process, uint,
+    annual_output, scc_code, factor_nox, nox, factor_co, co, factor_status, factor_pm10,
+    pm10, factor_pm25, pm25, factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3,
+    nh3, factor_oc, oc, factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount,
+    May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount,
+    nov_useamount, dec_useamount, danwei
+    from device_product dpt join device d on dpt.device_id = d.id
+    join exhaust e on d.EXHUST_ID = e.EXF_ID
+    WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+  </select>
+
+
 </mapper>

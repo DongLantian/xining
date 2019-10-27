@@ -46,12 +46,12 @@ $(function () {
                                             type: "success",
                                             container : "page",
                                             title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>烟囱已删除。。。6秒后自动刷新页面。。。</p>",
-                                            timer : 5000
+                                            message : "<p style='font-size: 16px;'>烟囱已删除。。。2秒后自动刷新页面。。。</p>",
+                                            timer : 2000
                                         });
                                         setTimeout(function(){
                                             window.location.reload();//刷新当前页面.
-                                        },6000);
+                                        },2000);
                                     }else if (data.isDel=="constraint"){
                                         $.niftyNoty({
                                             type: "warning",
@@ -136,13 +136,12 @@ $(function () {
                             $.niftyNoty({
                                 type: "success",
                                 container : "page",
-                                title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                                message : "<p style='font-size: 16px;'>烟囱信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
-                                timer : 5000
+                                title : "<br><p style='font-size: 17px;'>修改成功！！！</p>",
+                                timer : 2000
                             });
                             setTimeout(function(){
                                 window.location.reload();//刷新当前页面.
-                            },6000);
+                            },2000);
                         }else {
                             $.niftyNoty({
                                 type: "warning",
@@ -393,12 +392,12 @@ function updatedata() {
                             type: "success",
                             container : "page",
                             title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>烟囱信息已添加。。。6秒后自动刷新页面。。。</p>",
-                            timer : 5000
+                            message : "<p style='font-size: 16px;'>烟囱信息已添加。。。2秒后自动刷新页面。。。</p>",
+                            timer : 2000
                         });
                         setTimeout(function(){
                             window.location.reload();//刷新当前页面.
-                        },6000);
+                        },2000);
                     }else {
                         $.niftyNoty({
                             type: "warning",

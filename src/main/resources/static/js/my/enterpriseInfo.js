@@ -291,7 +291,7 @@ $(document).ready(function() {
             },
             lon5: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'
@@ -305,7 +305,7 @@ $(document).ready(function() {
             },
             lat5: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'
@@ -319,7 +319,7 @@ $(document).ready(function() {
             },
             lon6: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'
@@ -333,7 +333,7 @@ $(document).ready(function() {
             },
             lat6: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'
@@ -347,7 +347,7 @@ $(document).ready(function() {
             },
             lon7: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'
@@ -361,7 +361,7 @@ $(document).ready(function() {
             },
             lat7: {
                 validators: {
-                    notEmpty: {},
+
                     regexp: { //正则校验
                         regexp: /^(([1-9]{1}\d*)|(0{1}))(\.\d{4,6})$/,
                         message:'请精确到小数点后4位到6位'

@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FConstructionDustSource;
 import com.nankai.xining.bean.FConstructionDustSourceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FConstructionDustSourceMapper {
     long countByExample(FConstructionDustSourceExample example);
 

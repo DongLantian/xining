@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.RongjiProductTemp;
+import com.nankai.xining.bean.RongjiProduct;
 import com.nankai.xining.service.SolventProductService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class SolventProductController {
 
     @RequestMapping(value = "/getsolventProduct")
     @ResponseBody
-    public RongjiProductTemp getsolventProduct(Integer solventproductID){
+    public RongjiProduct getsolventProduct(Integer solventproductID){
         return solventProductService.selectsolventProductByID(solventproductID);
     }
 
@@ -40,11 +40,11 @@ public class SolventProductController {
 
     @RequestMapping(value = "/addsolventProduct", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addsolventProduct(RongjiProductTemp rongjiProductTemp, HttpSession session){
+    public Map<String,Object> addsolventProduct(RongjiProduct rongjiProduct, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (solventProductService.addsolventProduct(rongjiProductTemp,factoryId)){
+            if (solventProductService.addsolventProduct(rongjiProduct,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -59,16 +59,16 @@ public class SolventProductController {
 
     @RequestMapping(value = "/updatesolventProduct")
     @ResponseBody
-    public Map<String,Object> updatesolventProduct(@RequestBody RongjiProductTemp rongjiProductTemp, HttpSession session){
+    public Map<String,Object> updatesolventProduct(@RequestBody RongjiProduct rongjiProduct, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (solventProductService.updatesolventProduct(rongjiProductTemp)){
+        if (solventProductService.updatesolventProduct(rongjiProduct)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("solventproduct",rongjiProductTemp);
+            result.put("solventproduct",rongjiProduct);
         }else {
             result.put("isUpdate",false);
-            result.put("solventproduct",rongjiProductTemp);
+            result.put("solventproduct",rongjiProduct);
         }
         return result;
     }

@@ -241,7 +241,9 @@ $(function () {
             },
             mchimney:{
                 validators: {
-                    notEmpty: {}
+                    notEmpty: {
+                        message: '必填项！需首先在烟囱页面添加烟囱。'
+                    }
                 }
             }
 

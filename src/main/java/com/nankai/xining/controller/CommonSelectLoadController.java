@@ -35,17 +35,17 @@ public class CommonSelectLoadController {
 
     @RequestMapping(value = "/getExhaustList")
     @ResponseBody
-    public List<ExhaustTemp> getExhaustList(HttpSession session){
+    public List<Exhaust> getExhaustList(HttpSession session){
         int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        List<ExhaustTemp> exhaustList = exhaustService.selectExhaustListByFactoryId(factoryId);
+        List<Exhaust> exhaustList = exhaustService.selectExhaustListByFactoryId(factoryId);
         return exhaustList;
     }
 
     @RequestMapping(value = "/getDeviceList")
     @ResponseBody
-    public List<DeviceTemp> getDeviceList(HttpSession session){
+    public List<Device> getDeviceList(HttpSession session){
         int factoryId = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        List<DeviceTemp> deviceList = deviceService.selectDeviceListByFactoryId(factoryId);
+        List<Device> deviceList = deviceService.selectDeviceListByFactoryId(factoryId);
         return deviceList;
     }
 

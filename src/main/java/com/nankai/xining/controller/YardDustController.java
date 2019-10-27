@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.FYardDustSourceTemp;
+import com.nankai.xining.bean.FYardDustSource;
 import com.nankai.xining.service.YardDustService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +32,11 @@ public class YardDustController {
 
     @RequestMapping(value = "/addyardDust", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addyardDust(FYardDustSourceTemp fYardDustSourceTemp, HttpSession session){
+    public Map<String,Object> addyardDust(FYardDustSource fYardDustSource, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (yardDustService.addYardDust(fYardDustSourceTemp,factoryId)){
+            if (yardDustService.addYardDust(fYardDustSource,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -51,7 +51,7 @@ public class YardDustController {
 
     @RequestMapping(value = "/getYardDust")
     @ResponseBody
-    public FYardDustSourceTemp getYardDust(Integer yardID){
+    public FYardDustSource getYardDust(Integer yardID){
         return yardDustService.selectYardDustByID(yardID);
     }
 
@@ -59,16 +59,16 @@ public class YardDustController {
 
     @RequestMapping(value = "/updateYardDust")
     @ResponseBody
-    public Map<String,Object> updateYardDust(@RequestBody FYardDustSourceTemp fYardDustSourceTemp, HttpSession session){
+    public Map<String,Object> updateYardDust(@RequestBody FYardDustSource fYardDustSource, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (yardDustService.updateYardDust(fYardDustSourceTemp)){
+        if (yardDustService.updateYardDust(fYardDustSource)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("yarddust",fYardDustSourceTemp);
+            result.put("yarddust",fYardDustSource);
         }else {
             result.put("isUpdate",false);
-            result.put("yarddust",fYardDustSourceTemp);
+            result.put("yarddust",fYardDustSource);
         }
         return result;
     }

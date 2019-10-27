@@ -4,7 +4,9 @@ import com.nankai.xining.bean.Boiler;
 import com.nankai.xining.bean.BoilerExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BoilerMapper {
     long countByExample(BoilerExample example);
 
@@ -27,4 +29,6 @@ public interface BoilerMapper {
     int updateByPrimaryKeySelective(Boiler record);
 
     int updateByPrimaryKey(Boiler record);
+
+    List<Boiler> selectByFactoryIdWithJoin(int factoryId);
 }

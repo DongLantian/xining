@@ -1,5 +1,6 @@
 package com.nankai.xining.controller;
 
+import com.nankai.xining.bean.Boiler;
 import com.nankai.xining.bean.BoilerTemp;
 import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.service.BoilerService;
@@ -28,18 +29,18 @@ public class BoilerController {
 
     @RequestMapping(value = "/getBoiler")
     @ResponseBody
-    public BoilerTemp getBoiler(Integer boilerID){
-        BoilerTemp resultBoiler = boilerService.selectBoilerById(boilerID);
+    public Boiler getBoiler(Integer boilerID){
+        Boiler resultBoiler = boilerService.selectBoilerById(boilerID);
         return resultBoiler;
     }
 
     @RequestMapping(value = "/addBoiler", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addBoiler(BoilerTemp boilerTemp, HttpSession session){
+    public Map<String,Object> addBoiler(Boiler boiler, HttpSession session){
         Map result = new HashMap();
         Integer m_factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (m_factoryId!=null){
-            if (boilerService.addBoiler(boilerTemp,m_factoryId)){
+            if (boilerService.addBoiler(boiler,m_factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -52,16 +53,16 @@ public class BoilerController {
 
     @RequestMapping(value = "/updateBoiler")
     @ResponseBody
-    public Map<String,Object> updateBoiler(@RequestBody BoilerTemp boilerTemp,HttpSession session){
+    public Map<String,Object> updateBoiler(@RequestBody Boiler boiler,HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (boilerService.updateBoiler(boilerTemp)){
+        if (boilerService.updateBoiler(boiler)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("boiler",boilerTemp);
+            result.put("boiler",boiler);
         }else {
             result.put("isUpdate",false);
-            result.put("boiler",boilerTemp);
+            result.put("boiler",boiler);
         }
         return result;
     }

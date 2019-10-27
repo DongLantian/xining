@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.DeviceRawTemp;
+import com.nankai.xining.bean.DeviceRaw;
 import com.nankai.xining.service.DeviceRawService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +30,17 @@ public class DeviceRawController {
 
     @RequestMapping(value = "/getRaw")
     @ResponseBody
-    public DeviceRawTemp getRaw(Integer rawID){
+    public DeviceRaw getRaw(Integer rawID){
         return deviceRawService.selectRawByID(rawID);
     }
 
     @RequestMapping(value = "/addRaw", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addRaw(DeviceRawTemp deviceRawTemp, HttpSession session){
+    public Map<String,Object> addRaw(DeviceRaw deviceRaw, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (deviceRawService.addRaw(deviceRawTemp,factoryId)){
+            if (deviceRawService.addRaw(deviceRaw,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -56,16 +56,16 @@ public class DeviceRawController {
 
     @RequestMapping(value = "/updateRaw")
     @ResponseBody
-    public Map<String,Object> updateRaw(@RequestBody DeviceRawTemp deviceRawTemp, HttpSession session){
+    public Map<String,Object> updateRaw(@RequestBody DeviceRaw deviceRaw, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (deviceRawService.updateRaw(deviceRawTemp)){
+        if (deviceRawService.updateRaw(deviceRaw)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("raw",deviceRawTemp);
+            result.put("raw",deviceRaw);
         }else {
             result.put("isUpdate",false);
-            result.put("raw",deviceRawTemp);
+            result.put("raw",deviceRaw);
         }
         return result;
     }

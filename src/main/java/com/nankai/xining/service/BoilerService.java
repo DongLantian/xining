@@ -20,16 +20,16 @@ import java.util.List;
 public class BoilerService {
 
     @Autowired
-    BoilerTempMapper boilerTempMapper;
+    BoilerMapper boilerMapper;
 
     @Autowired
-    ExhaustTempMapper exhaustTempMapper;
+    ExhaustMapper exhaustMapper;
 
     @Autowired
     SccMapper sccMapper;
 
     @Autowired
-    TotalBoilerTempMapper totalBoilerTempMapper;
+    TotalBoilerMapper totalBoilerMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -39,9 +39,9 @@ public class BoilerService {
      * @param factoryId
      * @return
      */
-    public List<BoilerTemp> selectBoilerListByFactoryId(int factoryId){
-        List<BoilerTemp> boilerTempList = boilerTempMapper.selectByFactoryIdWithJoin(factoryId);
-        return boilerTempList;
+    public List<Boiler> selectBoilerListByFactoryId(int factoryId){
+        List<Boiler> boilerList = boilerMapper.selectByFactoryIdWithJoin(factoryId);
+        return boilerList;
     }
 
     /**
@@ -49,92 +49,92 @@ public class BoilerService {
      * @param boilerID
      * @return
      */
-    public BoilerTemp selectBoilerById(Integer boilerID) {
-        BoilerTemp boilerTemp = boilerTempMapper.selectByPrimaryKey(boilerID);
-        return boilerTemp;
+    public Boiler selectBoilerById(Integer boilerID) {
+        Boiler boiler = boilerMapper.selectByPrimaryKey(boilerID);
+        return boiler;
     }
 
     /**
      * 新增锅炉
-     * @param boilerTemp
+     * @param boiler
      * @param m_factoryId
      * @return
      */
     @Transactional
-    public boolean addBoiler(BoilerTemp boilerTemp, Integer m_factoryId) {
+    public boolean addBoiler(Boiler boiler, Integer m_factoryId) {
 
         //设置锅炉编号，需要先找出锅炉表中该工厂下编号最大的锅炉
-        ExhaustTempExample exhaustTempExample = new ExhaustTempExample();
-        ExhaustTempExample.Criteria exhCriteria = exhaustTempExample.createCriteria();
+        ExhaustExample exhaustExample = new ExhaustExample();
+        ExhaustExample.Criteria exhCriteria = exhaustExample.createCriteria();
         exhCriteria.andFactoryIdEqualTo(m_factoryId);
-        List<ExhaustTemp> exhaustTempList= exhaustTempMapper.selectByExample(exhaustTempExample);
+        List<Exhaust> exhaustList= exhaustMapper.selectByExample(exhaustExample);
         List<Integer> exhaustIDList = new ArrayList<>();
-        for (ExhaustTemp temp:
-                exhaustTempList) {
+        for (Exhaust temp:
+                exhaustList) {
             exhaustIDList.add(temp.getExfId());
         }
-        BoilerTempExample boilerTempExample = new BoilerTempExample();
-        boilerTempExample.setOrderByClause("NK_NO DESC");
-        BoilerTempExample.Criteria criteria = boilerTempExample.createCriteria();
+        BoilerExample boilerExample = new BoilerExample();
+        boilerExample.setOrderByClause("NK_NO DESC");
+        BoilerExample.Criteria criteria = boilerExample.createCriteria();
         criteria.andExhustIdIn(exhaustIDList);
-        List<BoilerTemp> boilerTempList = boilerTempMapper.selectByExample(boilerTempExample);
+        List<Boiler> boilerList = boilerMapper.selectByExample(boilerExample);
         int curMaxNum=0;
-        if (boilerTempList.size()!=0){
-            BoilerTemp maxNumBoiler = boilerTempList.get(0);
+        if (boilerList.size()!=0){
+            Boiler maxNumBoiler = boilerList.get(0);
             curMaxNum = maxNumBoiler.getNkNo();
         }
 
 
-        boilerTemp.setNkNo(curMaxNum+1);
+        boiler.setNkNo(curMaxNum+1);
 
         //更新total_boiler数据
-        TotalBoilerTempExample totalBoilerTempExample = new TotalBoilerTempExample();
-        TotalBoilerTempExample.Criteria totalBcriteria = totalBoilerTempExample.createCriteria();
+        TotalBoilerExample totalBoilerExample = new TotalBoilerExample();
+        TotalBoilerExample.Criteria totalBcriteria = totalBoilerExample.createCriteria();
         totalBcriteria.andFactoryIdEqualTo(m_factoryId);
-        List<TotalBoilerTemp> totalBoilerTemp = totalBoilerTempMapper.selectByExample(totalBoilerTempExample);
+        List<TotalBoiler> totalBoiler = totalBoilerMapper.selectByExample(totalBoilerExample);
         Integer tboilerID = -1;
         boolean flag=true;
-        if (totalBoilerTemp.size()!=0){
+        if (totalBoiler.size()!=0){
             //表中有总数记录，直接加一
-            TotalBoilerTemp totalBoilerTemp1 = totalBoilerTemp.get(0);
-            tboilerID = totalBoilerTemp1.getTboilerId();
-            totalBoilerTemp1.setTboilerNum(totalBoilerTemp1.getTboilerNum()+1);
-            if (totalBoilerTempMapper.updateByPrimaryKey(totalBoilerTemp1)==0){
+            TotalBoiler totalBoiler1 = totalBoiler.get(0);
+            tboilerID = totalBoiler1.getTboilerId();
+            totalBoiler1.setTboilerNum(totalBoiler1.getTboilerNum()+1);
+            if (totalBoilerMapper.updateByPrimaryKey(totalBoiler1)==0){
                 flag=false;
             }
         }else {
             //表中无总数字段，插入
-            TotalBoilerTemp totalBoilerTemp2 = new TotalBoilerTemp();
-            totalBoilerTemp2.setFactoryId(m_factoryId);
-            totalBoilerTemp2.setTboilerNum(1);
-            if (totalBoilerTempMapper.insert(totalBoilerTemp2)!=0){
-                totalBoilerTemp=totalBoilerTempMapper.selectByExample(totalBoilerTempExample);
-                tboilerID = totalBoilerTemp.get(0).getTboilerId();
+            TotalBoiler totalBoiler2 = new TotalBoiler();
+            totalBoiler2.setFactoryId(m_factoryId);
+            totalBoiler2.setTboilerNum(1);
+            if (totalBoilerMapper.insert(totalBoiler2)!=0){
+                totalBoiler=totalBoilerMapper.selectByExample(totalBoilerExample);
+                tboilerID = totalBoiler.get(0).getTboilerId();
             }else {
                 flag=false;
             }
         }
 
 
-        //初始化boilerTemp
-        Double fuelAuseage = boilerTemp.getFuelAusage();
-        String StrSCC="10"+boilerTemp.getFunctio()+boilerTemp.getFueltype()+boilerTemp.getModel();
+        //初始化boiler
+        Double fuelAuseage = boiler.getFuelAusage();
+        String StrSCC="10"+boiler.getFunctio()+boiler.getFueltype()+boiler.getModel();
         Scc scc = sccMapper.selectByPrimaryKey(StrSCC);
-        boilerTemp.setBc((scc.getBc()*fuelAuseage)/100);
-        boilerTemp.setCo((scc.getCo()*fuelAuseage)/100);
-        boilerTemp.setNh3((scc.getNh3()*fuelAuseage)/100);
-        boilerTemp.setPm((scc.getPm()*fuelAuseage)/100);
-        boilerTemp.setOc((scc.getOc()*fuelAuseage)/100);
-        boilerTemp.setPm10((scc.getPm10()*fuelAuseage)/100);
-        boilerTemp.setPm25((scc.getPm25()*fuelAuseage)/100);
-        boilerTemp.setSo2((scc.getSo2()*fuelAuseage)/100);
-        boilerTemp.setNox((scc.getNox()*fuelAuseage)/100);
-        boilerTemp.setVoc((scc.getVocs()*fuelAuseage)/100);
-        boilerTemp.setScc(StrSCC);
-        boilerTemp.setTboilerId(tboilerID);
+        boiler.setBc((scc.getBc()*fuelAuseage)/100);
+        boiler.setCo((scc.getCo()*fuelAuseage)/100);
+        boiler.setNh3((scc.getNh3()*fuelAuseage)/100);
+        boiler.setPm((scc.getPm()*fuelAuseage)/100);
+        boiler.setOc((scc.getOc()*fuelAuseage)/100);
+        boiler.setPm10((scc.getPm10()*fuelAuseage)/100);
+        boiler.setPm25((scc.getPm25()*fuelAuseage)/100);
+        boiler.setSo2((scc.getSo2()*fuelAuseage)/100);
+        boiler.setNox((scc.getNox()*fuelAuseage)/100);
+        boiler.setVoc((scc.getVocs()*fuelAuseage)/100);
+        boiler.setScc(StrSCC);
+        boiler.setTboilerId(tboilerID);
 
         if (flag){
-            if (boilerTempMapper.insertSelective(boilerTemp)!=0) {
+            if (boilerMapper.insertSelective(boiler)!=0) {
                 //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
                 Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
                 Date now = new Date();
@@ -150,27 +150,27 @@ public class BoilerService {
 
     /**
      * 更新选中的烟囱信息
-     * @param boilerTemp
+     * @param boiler
      * @return
      */
     @Transactional
-    public boolean updateBoiler(BoilerTemp boilerTemp) {
-        //初始化boilerTemp
-        Double fuelAuseage = boilerTemp.getFuelAusage();
-        String StrSCC="10"+boilerTemp.getFunctio()+boilerTemp.getFueltype()+boilerTemp.getModel();
+    public boolean updateBoiler(Boiler boiler) {
+        //初始化boiler
+        Double fuelAuseage = boiler.getFuelAusage();
+        String StrSCC="10"+boiler.getFunctio()+boiler.getFueltype()+boiler.getModel();
         Scc scc = sccMapper.selectByPrimaryKey(StrSCC);
-        boilerTemp.setBc((scc.getBc()*fuelAuseage)/100);
-        boilerTemp.setCo((scc.getCo()*fuelAuseage)/100);
-        boilerTemp.setNh3((scc.getNh3()*fuelAuseage)/100);
-        boilerTemp.setPm((scc.getPm()*fuelAuseage)/100);
-        boilerTemp.setOc((scc.getOc()*fuelAuseage)/100);
-        boilerTemp.setPm10((scc.getPm10()*fuelAuseage)/100);
-        boilerTemp.setPm25((scc.getPm25()*fuelAuseage)/100);
-        boilerTemp.setSo2((scc.getSo2()*fuelAuseage)/100);
-        boilerTemp.setNox((scc.getNox()*fuelAuseage)/100);
-        boilerTemp.setVoc((scc.getVocs()*fuelAuseage)/100);
-        boilerTemp.setScc(StrSCC);
-        if (boilerTempMapper.updateByPrimaryKey(boilerTemp)!=0){
+        boiler.setBc((scc.getBc()*fuelAuseage)/100);
+        boiler.setCo((scc.getCo()*fuelAuseage)/100);
+        boiler.setNh3((scc.getNh3()*fuelAuseage)/100);
+        boiler.setPm((scc.getPm()*fuelAuseage)/100);
+        boiler.setOc((scc.getOc()*fuelAuseage)/100);
+        boiler.setPm10((scc.getPm10()*fuelAuseage)/100);
+        boiler.setPm25((scc.getPm25()*fuelAuseage)/100);
+        boiler.setSo2((scc.getSo2()*fuelAuseage)/100);
+        boiler.setNox((scc.getNox()*fuelAuseage)/100);
+        boiler.setVoc((scc.getVocs()*fuelAuseage)/100);
+        boiler.setScc(StrSCC);
+        if (boilerMapper.updateByPrimaryKey(boiler)!=0){
             return true;
         }else
             return false;
@@ -186,15 +186,15 @@ public class BoilerService {
     @Transactional
     public int deleteBoiler(int boilerID, Integer factoryID) {
         //删除锅炉的同时更改total表
-        if (boilerTempMapper.deleteByPrimaryKey(boilerID)!=0){
+        if (boilerMapper.deleteByPrimaryKey(boilerID)!=0){
             //更新total_boiler数据
-            TotalBoilerTempExample totalBoilerTempExample = new TotalBoilerTempExample();
-            TotalBoilerTempExample.Criteria totalBcriteria = totalBoilerTempExample.createCriteria();
+            TotalBoilerExample totalBoilerExample = new TotalBoilerExample();
+            TotalBoilerExample.Criteria totalBcriteria = totalBoilerExample.createCriteria();
             totalBcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalBoilerTemp> totalBoilerTemp = totalBoilerTempMapper.selectByExample(totalBoilerTempExample);
-            TotalBoilerTemp totalBoilerTemp1 = totalBoilerTemp.get(0);
-            totalBoilerTemp1.setTboilerNum(totalBoilerTemp1.getTboilerNum()-1);
-            totalBoilerTempMapper.updateByPrimaryKey(totalBoilerTemp1);
+            List<TotalBoiler> totalBoiler = totalBoilerMapper.selectByExample(totalBoilerExample);
+            TotalBoiler totalBoiler1 = totalBoiler.get(0);
+            totalBoiler1.setTboilerNum(totalBoiler1.getTboilerNum()-1);
+            totalBoilerMapper.updateByPrimaryKey(totalBoiler1);
             return 1;
         }else {
             return 0;

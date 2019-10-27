@@ -1,5 +1,6 @@
 package com.nankai.xining.controller;
 
+import com.nankai.xining.bean.Device;
 import com.nankai.xining.bean.DeviceTemp;
 import com.nankai.xining.service.DeviceService;
 import com.nankai.xining.utils.LastChangedTimeSet;
@@ -30,18 +31,18 @@ public class DeviceController {
 
     @RequestMapping(value = "/getDevice")
     @ResponseBody
-    public DeviceTemp getDevice(Integer deviceID){
+    public Device getDevice(Integer deviceID){
         return deviceService.selectDeviceByID(deviceID);
     }
 
 
     @RequestMapping(value = "/addDevice", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addDevice(DeviceTemp deviceTemp, HttpSession session){
+    public Map<String,Object> addDevice(Device device, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (deviceService.addDevice(deviceTemp,factoryId)){
+            if (deviceService.addDevice(device,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -56,16 +57,16 @@ public class DeviceController {
 
     @RequestMapping(value = "/updateDevice")
     @ResponseBody
-    public Map<String,Object> updateDevice(@RequestBody DeviceTemp deviceTemp, HttpSession session){
+    public Map<String,Object> updateDevice(@RequestBody Device device, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (deviceService.updateDevice(deviceTemp)){
+        if (deviceService.updateDevice(device)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("device",deviceTemp);
+            result.put("device",device);
         }else {
             result.put("isUpdate",false);
-            result.put("device",deviceTemp);
+            result.put("device",device);
         }
         return result;
     }

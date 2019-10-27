@@ -1,9 +1,9 @@
 package com.nankai.xining.service;
 
-import com.nankai.xining.bean.FYardDustSourceTemp;
-import com.nankai.xining.bean.FYardDustSourceTempExample;
+import com.nankai.xining.bean.FYardDustSource;
+import com.nankai.xining.bean.FYardDustSourceExample;
 import com.nankai.xining.bean.Factory;
-import com.nankai.xining.repository.FYardDustSourceTempMapper;
+import com.nankai.xining.repository.FYardDustSourceMapper;
 import com.nankai.xining.repository.FactoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 public class YardDustService {
 
     @Autowired
-    FYardDustSourceTempMapper fYardDustSourceTempMapper;
+    FYardDustSourceMapper fYardDustSourceMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -32,27 +32,27 @@ public class YardDustService {
      * @param factoryId
      * @return
      */
-    public List<FYardDustSourceTemp> selectYardDustListByFactoryId(int factoryId) {
-        FYardDustSourceTempExample fYardDustSourceTempExample = new FYardDustSourceTempExample();
-        FYardDustSourceTempExample.Criteria criteria = fYardDustSourceTempExample.createCriteria();
+    public List<FYardDustSource> selectYardDustListByFactoryId(int factoryId) {
+        FYardDustSourceExample fYardDustSourceExample = new FYardDustSourceExample();
+        FYardDustSourceExample.Criteria criteria = fYardDustSourceExample.createCriteria();
         criteria.andFactoryidEqualTo(factoryId);
-        return fYardDustSourceTempMapper.selectByExample(fYardDustSourceTempExample);
+        return fYardDustSourceMapper.selectByExample(fYardDustSourceExample);
     }
 
 
     /**
      * 增加堆场
-     * @param fYardDustSourceTemp
+     * @param fYardDustSource
      * @param factoryId
      * @return
      */
-    public boolean addYardDust(FYardDustSourceTemp fYardDustSourceTemp, Integer factoryId) {
+    public boolean addYardDust(FYardDustSource fYardDustSource, Integer factoryId) {
         //设置企业ID
-        fYardDustSourceTemp.setFactoryid(factoryId);
+        fYardDustSource.setFactoryid(factoryId);
         //定义SCC变量
         String sccvalue="1604002";//风蚀
-        String mvariable=fYardDustSourceTemp.getMaterialType();
-        fYardDustSourceTemp.setMaterialType(mvariable);
+        String mvariable=fYardDustSource.getMaterialType();
+        fYardDustSource.setMaterialType(mvariable);
         if(mvariable.equals("未分类")){
             sccvalue+="000";
         }else if(mvariable.equals("焦炭")){
@@ -82,7 +82,7 @@ public class YardDustService {
         //装卸SCC
         //定义SCC变量
         String sccvalue1="1604001";
-        String mvariable1=fYardDustSourceTemp.getMaterialType();
+        String mvariable1=fYardDustSource.getMaterialType();
         if(mvariable1.equals("未分类")){
             sccvalue1+="000";
         }else if(mvariable.equals("焦炭")){
@@ -108,10 +108,10 @@ public class YardDustService {
         }else{
             sccvalue1+="011";
         }
-        fYardDustSourceTemp.setScccode(sccvalue);//风蚀
-        fYardDustSourceTemp.setScccode1(sccvalue1);//装卸
+        fYardDustSource.setScccode(sccvalue);//风蚀
+        fYardDustSource.setScccode1(sccvalue1);//装卸
 
-        if (fYardDustSourceTempMapper.insertSelective(fYardDustSourceTemp)!=0) {
+        if (fYardDustSourceMapper.insertSelective(fYardDustSource)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
             Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
@@ -128,18 +128,18 @@ public class YardDustService {
      * @param yardID
      * @return
      */
-    public FYardDustSourceTemp selectYardDustByID(Integer yardID) {
-        return fYardDustSourceTempMapper.selectByPrimaryKey(yardID);
+    public FYardDustSource selectYardDustByID(Integer yardID) {
+        return fYardDustSourceMapper.selectByPrimaryKey(yardID);
     }
 
 
     /**
      * 更新
-     * @param fYardDustSourceTemp
+     * @param fYardDustSource
      * @return
      */
-    public boolean updateYardDust(FYardDustSourceTemp fYardDustSourceTemp) {
-        if (fYardDustSourceTempMapper.updateByPrimaryKey(fYardDustSourceTemp)!=0){
+    public boolean updateYardDust(FYardDustSource fYardDustSource) {
+        if (fYardDustSourceMapper.updateByPrimaryKey(fYardDustSource)!=0){
             return true;
         }else {
             return false;
@@ -152,7 +152,7 @@ public class YardDustService {
      * @return
      */
     public int deleteYardDust(int yardDustID) {
-        if (fYardDustSourceTempMapper.deleteByPrimaryKey(yardDustID)!=0){
+        if (fYardDustSourceMapper.deleteByPrimaryKey(yardDustID)!=0){
             return 1;
         }else {
             return 0;

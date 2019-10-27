@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.FRoadDustSourceTemp;
+import com.nankai.xining.bean.FRoadDustSource;
 import com.nankai.xining.service.RoadDustService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +32,18 @@ public class RoadDustController {
 
     @RequestMapping(value = "/getRoadDust")
     @ResponseBody
-    public FRoadDustSourceTemp getRoadDust(Integer roadDustID){
+    public FRoadDustSource getRoadDust(Integer roadDustID){
         return roadDustService.selectRoadDustByID(roadDustID);
     }
 
 
     @RequestMapping(value = "/addRoadDust", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addRoadDust(FRoadDustSourceTemp fRoadDustSourceTemp, HttpSession session){
+    public Map<String,Object> addRoadDust(FRoadDustSource fRoadDustSource, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (roadDustService.addRoadDust(fRoadDustSourceTemp,factoryId)){
+            if (roadDustService.addRoadDust(fRoadDustSource,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -58,16 +58,16 @@ public class RoadDustController {
 
     @RequestMapping(value = "/updateRoadDust")
     @ResponseBody
-    public Map<String,Object> updateRoadDust(@RequestBody FRoadDustSourceTemp fRoadDustSourceTemp, HttpSession session){
+    public Map<String,Object> updateRoadDust(@RequestBody FRoadDustSource fRoadDustSource, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (roadDustService.updateRoadDust(fRoadDustSourceTemp)){
+        if (roadDustService.updateRoadDust(fRoadDustSource)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("roaddust",fRoadDustSourceTemp);
+            result.put("roaddust",fRoadDustSource);
         }else {
             result.put("isUpdate",false);
-            result.put("roaddust",fRoadDustSourceTemp);
+            result.put("roaddust",fRoadDustSource);
         }
         return result;
     }

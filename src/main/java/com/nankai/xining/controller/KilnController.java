@@ -1,5 +1,6 @@
 package com.nankai.xining.controller;
 
+import com.nankai.xining.bean.Kiln;
 import com.nankai.xining.bean.KilnTemp;
 import com.nankai.xining.service.KilnService;
 import com.nankai.xining.utils.LastChangedTimeSet;
@@ -30,18 +31,18 @@ public class KilnController {
 
     @RequestMapping(value = "/getKiln")
     @ResponseBody
-    public KilnTemp getKiln(Integer kilnID){
+    public Kiln getKiln(Integer kilnID){
         return kilnService.selectKilnByID(kilnID);
     }
 
 
     @RequestMapping(value = "/addKiln", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addKiln(KilnTemp kilnTemp, HttpSession session){
+    public Map<String,Object> addKiln(Kiln kiln, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (kilnService.addKiln(kilnTemp,factoryId)){
+            if (kilnService.addKiln(kiln,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);
@@ -55,16 +56,16 @@ public class KilnController {
 
     @RequestMapping(value = "/updateKiln")
     @ResponseBody
-    public Map<String,Object> updateBoiler(@RequestBody KilnTemp kilnTemp, HttpSession session){
+    public Map<String,Object> updateBoiler(@RequestBody Kiln kiln, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (kilnService.updateKiln(kilnTemp)){
+        if (kilnService.updateKiln(kiln)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("kiln",kilnTemp);
+            result.put("kiln",kiln);
         }else {
             result.put("isUpdate",false);
-            result.put("kiln",kilnTemp);
+            result.put("kiln",kiln);
         }
         return result;
     }

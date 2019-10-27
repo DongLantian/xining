@@ -4,7 +4,9 @@ import com.nankai.xining.bean.FYardDustSource;
 import com.nankai.xining.bean.FYardDustSourceExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface FYardDustSourceMapper {
     long countByExample(FYardDustSourceExample example);
 

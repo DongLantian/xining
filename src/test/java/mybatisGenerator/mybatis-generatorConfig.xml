@@ -58,6 +58,6 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表：通配符%表示生成所有表 -->
-        <table  tableName="industry_small"></table>
+        <table  tableName="device_product"></table>
     </context>
 </generatorConfiguration>

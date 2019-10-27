@@ -1,6 +1,6 @@
 package com.nankai.xining.controller;
 
-import com.nankai.xining.bean.RongjiRawTemp;
+import com.nankai.xining.bean.RongjiRaw;
 import com.nankai.xining.service.SolventRawService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,23 +31,23 @@ public class SolventRawController {
 
     @RequestMapping(value = "/getsolventRaw")
     @ResponseBody
-    public RongjiRawTemp getsolventRaw(Integer solventrawID){
+    public RongjiRaw getsolventRaw(Integer solventrawID){
         return solventRawService.selectsolventRawByID(solventrawID);
     }
 
 
     @RequestMapping(value = "/updatesolventRaw")
     @ResponseBody
-    public Map<String,Object> updatesolventRaw(@RequestBody RongjiRawTemp rongjiRawTemp, HttpSession session){
+    public Map<String,Object> updatesolventRaw(@RequestBody RongjiRaw rongjiRaw, HttpSession session){
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        if (solventRawService.updatesolventRaw(rongjiRawTemp)){
+        if (solventRawService.updatesolventRaw(rongjiRaw)){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isUpdate",true);
-            result.put("solventraw",rongjiRawTemp);
+            result.put("solventraw",rongjiRaw);
         }else {
             result.put("isUpdate",false);
-            result.put("solventraw",rongjiRawTemp);
+            result.put("solventraw",rongjiRaw);
         }
         return result;
     }
@@ -55,11 +55,11 @@ public class SolventRawController {
 
     @RequestMapping(value = "/addsolventRaw", method = {RequestMethod.POST})
     @ResponseBody
-    public Map<String,Object> addsolventRaw(RongjiRawTemp rongjiRawTemp, HttpSession session){
+    public Map<String,Object> addsolventRaw(RongjiRaw rongjiRaw, HttpSession session){
         Map result = new HashMap();
         Integer factoryId= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
         if (factoryId!=null){
-            if (solventRawService.addsolventRaw(rongjiRawTemp,factoryId)){
+            if (solventRawService.addsolventRaw(rongjiRaw,factoryId)){
                 result.put("isAdd",true);
             }else {
                 result.put("isAdd",false);

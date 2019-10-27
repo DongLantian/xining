@@ -184,9 +184,9 @@ $(function () {
                 app.kiln.functionDec = $("#updatefunctio").find("option:selected").text();
                 app.kiln.fueltypedec = $("#updatefueltype").find("option:selected").text();
                 app.kiln.modeldec = $("#updatemodel").find("option:selected").text();
-                app.kiln.dustremoveidDec = $("#updatedustremoveId").find("option:selected").text();
-                app.kiln.sulphurremoveidDec = $("#updatesulphurremoveId").find("option:selected").text();
-                app.kiln.nitreremoveidDec = $("#updatenitreremoveId").find("option:selected").text();
+                app.kiln.dustremovedec = $("#updatedustremoveId").find("option:selected").text();
+                app.kiln.sulphurremovedec = $("#updatesulphurremoveId").find("option:selected").text();
+                app.kiln.nitreremovedec = $("#updatenitreremoveId").find("option:selected").text();
                 app.kiln.exfNo = parseInt($("#updatemchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
                 // ajax请求。
                 $.ajax({
@@ -253,7 +253,9 @@ $(function () {
             },
             mchimney:{
                 validators: {
-                    notEmpty: {}
+                    notEmpty: {
+                        message: '必填项！需首先在烟囱页面添加烟囱。'
+                    }
                 }
             },
             kilnModel: {
@@ -663,9 +665,9 @@ function updatedata() {
                     pmout : pmout,
                     feiqiti : feiqiti,
                     so2out : so2out,
-                    dustremoveidDec : dustremoveDec,
-                    sulphurremoveidDec : sulphurremoveDec,
-                    nitreremoveidDec : nitreremoveDec,
+                    dustremovedec : dustremoveDec,
+                    sulphurremovedec : sulphurremoveDec,
+                    nitreremovedec : nitreremoveDec,
                     modelDec : modelDec,
                     fueltypeDec : fueltypeDec,
                     kilnFuelAusage : fuelAusage,

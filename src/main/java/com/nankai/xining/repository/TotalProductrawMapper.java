@@ -4,7 +4,9 @@ import com.nankai.xining.bean.TotalProductraw;
 import com.nankai.xining.bean.TotalProductrawExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface TotalProductrawMapper {
     long countByExample(TotalProductrawExample example);
 
