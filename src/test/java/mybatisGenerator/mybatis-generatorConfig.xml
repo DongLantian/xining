@@ -23,7 +23,7 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 ,加上“useSSL=false”是因为我SSL连接数据库出现了错误 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/xiningold?useSSL=false"
+                        connectionURL="jdbc:mysql://localhost:3306/sccadmin?useSSL=false"
                         userId="root" password="123">
             <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
             <!--不添加该属性会生成其他数据库中的表，很蛋疼。-->
