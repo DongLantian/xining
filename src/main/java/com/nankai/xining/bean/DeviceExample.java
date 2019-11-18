@@ -224,63 +224,63 @@ public class DeviceExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdIsNull() {
-            addCriterion("productrawtotal_id is null");
+        public Criteria andExhustIdIsNull() {
+            addCriterion("EXHUST_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdIsNotNull() {
-            addCriterion("productrawtotal_id is not null");
+        public Criteria andExhustIdIsNotNull() {
+            addCriterion("EXHUST_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdEqualTo(Integer value) {
-            addCriterion("productrawtotal_id =", value, "productrawtotalId");
+        public Criteria andExhustIdEqualTo(Integer value) {
+            addCriterion("EXHUST_ID =", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdNotEqualTo(Integer value) {
-            addCriterion("productrawtotal_id <>", value, "productrawtotalId");
+        public Criteria andExhustIdNotEqualTo(Integer value) {
+            addCriterion("EXHUST_ID <>", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdGreaterThan(Integer value) {
-            addCriterion("productrawtotal_id >", value, "productrawtotalId");
+        public Criteria andExhustIdGreaterThan(Integer value) {
+            addCriterion("EXHUST_ID >", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("productrawtotal_id >=", value, "productrawtotalId");
+        public Criteria andExhustIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("EXHUST_ID >=", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdLessThan(Integer value) {
-            addCriterion("productrawtotal_id <", value, "productrawtotalId");
+        public Criteria andExhustIdLessThan(Integer value) {
+            addCriterion("EXHUST_ID <", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdLessThanOrEqualTo(Integer value) {
-            addCriterion("productrawtotal_id <=", value, "productrawtotalId");
+        public Criteria andExhustIdLessThanOrEqualTo(Integer value) {
+            addCriterion("EXHUST_ID <=", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdIn(List<Integer> values) {
-            addCriterion("productrawtotal_id in", values, "productrawtotalId");
+        public Criteria andExhustIdIn(List<Integer> values) {
+            addCriterion("EXHUST_ID in", values, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdNotIn(List<Integer> values) {
-            addCriterion("productrawtotal_id not in", values, "productrawtotalId");
+        public Criteria andExhustIdNotIn(List<Integer> values) {
+            addCriterion("EXHUST_ID not in", values, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdBetween(Integer value1, Integer value2) {
-            addCriterion("productrawtotal_id between", value1, value2, "productrawtotalId");
+        public Criteria andExhustIdBetween(Integer value1, Integer value2) {
+            addCriterion("EXHUST_ID between", value1, value2, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andProductrawtotalIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("productrawtotal_id not between", value1, value2, "productrawtotalId");
+        public Criteria andExhustIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("EXHUST_ID not between", value1, value2, "exhustId");
             return (Criteria) this;
         }
 
@@ -351,76 +351,6 @@ public class DeviceExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIsNull() {
-            addCriterion("device_no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIsNotNull() {
-            addCriterion("device_no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoEqualTo(String value) {
-            addCriterion("device_no =", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotEqualTo(String value) {
-            addCriterion("device_no <>", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoGreaterThan(String value) {
-            addCriterion("device_no >", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoGreaterThanOrEqualTo(String value) {
-            addCriterion("device_no >=", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoLessThan(String value) {
-            addCriterion("device_no <", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoLessThanOrEqualTo(String value) {
-            addCriterion("device_no <=", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoLike(String value) {
-            addCriterion("device_no like", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotLike(String value) {
-            addCriterion("device_no not like", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIn(List<String> values) {
-            addCriterion("device_no in", values, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotIn(List<String> values) {
-            addCriterion("device_no not in", values, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoBetween(String value1, String value2) {
-            addCriterion("device_no between", value1, value2, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotBetween(String value1, String value2) {
-            addCriterion("device_no not between", value1, value2, "deviceNo");
             return (Criteria) this;
         }
 
@@ -611,126 +541,6 @@ public class DeviceExample {
 
         public Criteria andPracticalPowerNotBetween(Double value1, Double value2) {
             addCriterion("practical_power not between", value1, value2, "practicalPower");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoIsNull() {
-            addCriterion("EXHUST_NO is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoIsNotNull() {
-            addCriterion("EXHUST_NO is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoEqualTo(Integer value) {
-            addCriterion("EXHUST_NO =", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoNotEqualTo(Integer value) {
-            addCriterion("EXHUST_NO <>", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoGreaterThan(Integer value) {
-            addCriterion("EXHUST_NO >", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_NO >=", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoLessThan(Integer value) {
-            addCriterion("EXHUST_NO <", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoLessThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_NO <=", value, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoIn(List<Integer> values) {
-            addCriterion("EXHUST_NO in", values, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoNotIn(List<Integer> values) {
-            addCriterion("EXHUST_NO not in", values, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_NO between", value1, value2, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustNoNotBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_NO not between", value1, value2, "exhustNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdIsNull() {
-            addCriterion("EXHUST_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdIsNotNull() {
-            addCriterion("EXHUST_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdEqualTo(Integer value) {
-            addCriterion("EXHUST_ID =", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotEqualTo(Integer value) {
-            addCriterion("EXHUST_ID <>", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdGreaterThan(Integer value) {
-            addCriterion("EXHUST_ID >", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_ID >=", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdLessThan(Integer value) {
-            addCriterion("EXHUST_ID <", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdLessThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_ID <=", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdIn(List<Integer> values) {
-            addCriterion("EXHUST_ID in", values, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotIn(List<Integer> values) {
-            addCriterion("EXHUST_ID not in", values, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_ID between", value1, value2, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_ID not between", value1, value2, "exhustId");
             return (Criteria) this;
         }
 

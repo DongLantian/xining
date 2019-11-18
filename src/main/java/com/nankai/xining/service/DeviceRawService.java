@@ -28,9 +28,6 @@ public class DeviceRawService {
     DeviceMapper deviceMapper;
 
     @Autowired
-    TotalProductrawMapper totalProductrawMapper;
-
-    @Autowired
     FactoryMapper factoryMapper;
 
     /**
@@ -54,7 +51,7 @@ public class DeviceRawService {
     }
 
     /**
-     *
+     * 增加原料
      * @param deviceRaw
      * @param factoryId
      * @return
@@ -97,55 +94,24 @@ public class DeviceRawService {
         //设置原料序号
         deviceRaw.setNkNo(curMaxNum+1);
 
-        //更新total_productraw数据
-        TotalProductrawExample totalProductrawExample = new TotalProductrawExample();
-        TotalProductrawExample.Criteria totalPcriteria = totalProductrawExample.createCriteria();
-        totalPcriteria.andFactoryIdEqualTo(factoryId);
-        List<TotalProductraw> totalProductrawList = totalProductrawMapper.selectByExample(totalProductrawExample);
-        Integer productrawtotalID = -1;
-        boolean flag=true;
-        if (totalProductrawList.size()!=0){
-            //表中有总数记录，直接加一
-            TotalProductraw totalProductraw = totalProductrawList.get(0);
-            productrawtotalID = totalProductraw.getId();
-            totalProductraw.setRawNum(totalProductraw.getRawNum()+1);
-            if (totalProductrawMapper.updateByPrimaryKey(totalProductraw)==0){
-                flag=false;
-            }
-        }else {
-            ////表中无总数字段的情况是不可能发生的，因为没有设备不可以填写原料。
-            /*TotalProductraw totalProductraw = new TotalProductraw();
-            totalProductraw.setFactoryId(factoryId);
-            totalProductraw.setDeviceNum(1);
-            totalProductraw.setProductNum(0);
-            totalProductraw.setRawNum(1);
-            if (totalProductrawMapper.insert(totalProductraw)!=0){
-                totalProductrawList=totalProductrawMapper.selectByExample(totalProductrawExample);
-                productrawtotalID = totalProductrawList.get(0).getId();
-            }else {
-                flag=false;
-            }*/
-        }
-
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int deviceRawCount = deviceRawList.size()+1;
+        factory.setDeviceRawCount(deviceRawCount);
 
         //初始化deviceRaw
         String StrSCC="11"+deviceRaw.getScc2()+deviceRaw.getScc3()+deviceRaw.getScc4();
         deviceRaw.setSccCode(StrSCC);
-        deviceRaw.setDevicetotalId(productrawtotalID);
+        if (deviceRawMapper.insertSelective(deviceRaw)!=0) {
+            //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
+            Date now = new Date();
+            factory.setLastChangedTime(now);
+            factoryMapper.updateByPrimaryKeySelective(factory);
 
-        if (flag){
-            if (deviceRawMapper.insertSelective(deviceRaw)!=0) {
-                //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-                Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
-                Date now = new Date();
-                factory.setLastChangedTime(now);
-                factoryMapper.updateByPrimaryKeySelective(factory);
+            return true;
+        }
+        else return false;
 
-                return true;
-            }
-            else return false;
-        }else
-            return false;
     }
 
 
@@ -158,14 +124,11 @@ public class DeviceRawService {
     public int deleteRaw(int rawID, Integer factoryID) {
         //删除原料的同时更改total表
         if (deviceRawMapper.deleteByPrimaryKey(rawID)!=0){
-            //更新total_productraw_temp数据
-            TotalProductrawExample totalProductrawExample = new TotalProductrawExample();
-            TotalProductrawExample.Criteria totalPcriteria = totalProductrawExample.createCriteria();
-            totalPcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalProductraw> totalProductrawList = totalProductrawMapper.selectByExample(totalProductrawExample);
-            TotalProductraw totalProductraw = totalProductrawList.get(0);
-            totalProductraw.setRawNum(totalProductraw.getRawNum()-1);
-            totalProductrawMapper.updateByPrimaryKey(totalProductraw);
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int deviceRawCount = factory.getDeviceRawCount()-1;
+            factory.setDeviceRawCount(deviceRawCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
             return 1;
         }else {
             return 0;

@@ -78,7 +78,7 @@ public class WasteDeviceController {
     public Map<String,String> delDevice(int deviceID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = wasteDeviceService.deleteDevice(deviceID);
+        int delFlag = wasteDeviceService.deleteDevice(deviceID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");

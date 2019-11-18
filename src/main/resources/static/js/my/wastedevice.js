@@ -130,12 +130,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
                     var scc3Input = $("#updatenameCategory_input").val();
                     var scc4Input = $("#updatedrainageProcess_input").val();
                     $("#updatenameCategory").val(scc3Input);
                     $("#updatedrainageProcess").val(scc4Input);
-                },1000)
             }
 
         }
@@ -159,9 +157,6 @@ $(function () {
                 app.wastedevice.scc2 = $("#updateactivitiesCategory").val();
                 app.wastedevice.scc3 = $("#updatenameCategory").val();
                 app.wastedevice.scc4 = $("#updatedrainageProcess").val();
-                app.wastedevice.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.wastedevice.scc3Dec = $("#updatenameCategory").find("option:selected").text();
-                app.wastedevice.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
                 // ajax请求。
                 $.ajax({
                     type:"post",
@@ -534,9 +529,6 @@ function updatedata() {
             var scc2 = document.getElementById("activitiesCategory").value;
             var scc3 = document.getElementById("nameCategory").value;
             var scc4 = document.getElementById("drainageProcess").value;
-            var scc2Dec = $("#activitiesCategory").find("option:selected").text();
-            var scc3Dec = $("#nameCategory").find("option:selected").text();
-            var scc4Dec = $("#drainageProcess").find("option:selected").text();
             var lon1 = document.getElementById("lon1").value;
             var lat1 = document.getElementById("lat1").value;
             var janUseamount = document.getElementById("janUseamount").value;
@@ -562,11 +554,8 @@ function updatedata() {
                 data : {
                     deviceName : deviceName,
                     scc2 : scc2,
-                    scc2Dec : scc2Dec,
                     scc3 : scc3,
-                    scc3Dec : scc3Dec,
                     scc4 : scc4,
-                    scc4Dec : scc4Dec,
                     lon1 : lon1,
                     lat1 : lat1,
                     watter : watter,

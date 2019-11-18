@@ -6,6 +6,7 @@ $(function () {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
             scc1ID: '10'
@@ -31,6 +32,7 @@ $(function () {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/common/getExhaustList", //要访问的后台地址
         data : {},                             //要发送的数据，采用josn格式
 
@@ -96,7 +98,7 @@ $(function () {
                                             timer : 5000
                                         });
                                         setTimeout(function(){
-                                            window.location.reload();//刷新当前页面.
+                                            window.location.href="/Client/boilershell?page=1";
                                         },6000);
                                     }else {
                                         $.niftyNoty({
@@ -156,12 +158,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
-                    var fuelInput = $("#updatefueltype_input").val();
-                    var modelInput = $("#updatemodel_input").val();
-                    $("#updatefueltype").val(fuelInput);
-                    $("#updatemodel").val(modelInput);
-                },1000)
+                var fuelInput = $("#updatefueltype_input").val();
+                var modelInput = $("#updatemodel_input").val();
+                $("#updatefueltype").val(fuelInput);
+                $("#updatemodel").val(modelInput);
             }
 
         }
@@ -186,9 +186,6 @@ $(function () {
                 app.boiler.functionDec = $("#updatefunctio").find("option:selected").text();
                 app.boiler.fueltypeDec = $("#updatefueltype").find("option:selected").text();
                 app.boiler.modelDec = $("#updatemodel").find("option:selected").text();
-                app.boiler.dustremoveDec = $("#updatedustremoveId").find("option:selected").text();
-                app.boiler.sulphurremoveDec = $("#updatesulphurremoveId").find("option:selected").text();
-                app.boiler.nitreremoveDec = $("#updatenitreremoveId").find("option:selected").text();
                 app.boiler.exfNo = parseInt($("#updatemchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
                 // ajax请求。
                 $.ajax({
@@ -712,9 +709,6 @@ function updatedata() {
             var dustremoveId = document.getElementById("dustremoveId").value;
             var sulfurId = document.getElementById("sulphurremoveId").value;
             var nitreId = document.getElementById("nitreremoveId").value;
-            var dustremoveDec = $("#dustremoveId").find("option:selected").text();
-            var sulphurremoveDec = $("#sulphurremoveId").find("option:selected").text();
-            var nitreremoveDec = $("#nitreremoveId").find("option:selected").text();
 
             var chimneynkno = parseInt($("#mchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
 
@@ -738,11 +732,8 @@ function updatedata() {
                     pmout : pmout,
                     feiqiti : feiqiti,
                     so2out : so2out,
-                    sulphurremoveDec : sulphurremoveDec,
-                    dustremoveDec : dustremoveDec,
                     modelDec : modelDec,
                     fueltypeDec : fueltypeDec,
-                    nitreremoveDec : nitreremoveDec,
                     combustionsystem : combustionsystem,
                     fuelAusage : fuelAusage,
                     fuelAusageunit : fuelAusageunit,

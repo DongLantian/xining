@@ -152,12 +152,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
                     var nameCategoryInput = $("#updatenameCategory_input").val();
                     var drainageProcessInput = $("#updatedrainageProcess_input").val();
                     $("#updatenameCategory").val(nameCategoryInput);
                     $("#updatedrainageProcess").val(drainageProcessInput);
-                },1000)
             }
 
         }
@@ -182,7 +180,6 @@ $(function () {
                 app.product.nameCategory = $("#updatenameCategory").val();
                 app.product.drainageProcess = $("#updatedrainageProcess").val();
                 app.product.activitiesCategoryDec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.product.nameCategoryDec = $("#updatenameCategory").find("option:selected").text();
                 app.product.drainageProcessDec = $("#updatedrainageProcess").find("option:selected").text();
                 app.product.deviceNo = parseInt($("#updatedeviceno").find("option:selected").text().replace(/[^0-9]/ig,""));
                 // ajax请求。
@@ -502,7 +499,6 @@ function updatedata() {
             var drainageProcess = document.getElementById("drainageProcess").value;
             var drainageProcessDec = $("#drainageProcess").find("option:selected").text();
             var nameCategory = document.getElementById("nameCategory").value;
-            var nameCategoryDec = $("#nameCategory").find("option:selected").text();
             var name = document.getElementById("name").value;
             var unit = document.getElementById("uint").value;
             var annualOutput = document.getElementById("annualOutput").value;
@@ -543,7 +539,6 @@ function updatedata() {
                     activitiesCategory : activitiesCategory,
                     activitiesCategoryDec : activitiesCategoryDec,
                     nameCategory : nameCategory,
-                    nameCategoryDec : nameCategoryDec,
                     drainageProcessDec : drainageProcessDec,
                     drainageProcess : drainageProcess,
                     name : name,

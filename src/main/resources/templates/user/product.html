@@ -227,7 +227,6 @@
                             <thead>
                             <tr>
                                 <th>产品序号</th>
-                                <th>生产/排污工艺</th>
                                 <th>产品备注</th>
                                 <th>修改产品信息</th>
                                 <th>删除该产品</th>
@@ -236,7 +235,6 @@
                             <tbody>
                             <tr  th:each="product : ${productList}">
                                 <td th:text="${product.nkNo}">neo</td>
-                                <td th:text="${product.drainageProcessDec}">neo</td>
                                 <td th:text="${product.name}">Otto</td>
                                 <td><button th:value="${product.id}" @click="editProduct($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${product.id}" @click="delProduct($event)" class="btn btn-danger btn-sm">删除</button></td>

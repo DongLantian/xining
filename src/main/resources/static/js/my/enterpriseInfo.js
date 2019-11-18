@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
-    $.niftyNoty({
+    /*$.niftyNoty({
         type: "warning",
         icon :  'ion-paper-airplane icon-3x',
         container : "floating",
         title : "<br><p style='font-size: 16px;'>第一次登陆本系统请完善企业信息。" +
         "<br><br>带<strong>*</strong>号的为必填项.......填写完整之后可更新企业信息。</p>"
-    });
+    });*/
 
     var datatime=new Date();
 
@@ -23,6 +23,7 @@ $(document).ready(function() {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/enterprise/getIndustryBigAll", //要访问的后台地址
         data : {},                             //要发送的数据，采用josn格式
 
@@ -40,6 +41,7 @@ $(document).ready(function() {
 
         }
     });
+
     var m_indutryBig=$("#getindustryBigid").text();
     $("#industryBigid option[value='"+m_indutryBig+"']").attr("selected", true);
     if(m_indutryBig!=''){
@@ -50,6 +52,7 @@ $(document).ready(function() {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/enterprise/getCityAll", //要访问的后台地址
         data : {},                             //要发送的数据，采用josn格式
 
@@ -79,6 +82,7 @@ $(document).ready(function() {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/enterprise/getCityAll", //要访问的后台地址
         data : {},                             //要发送的数据，采用josn格式
 
@@ -387,6 +391,7 @@ function industrysmall(m_value){
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/enterprise/getIndustrySmallByBigID", //要访问的后台地址
         data : {
             industrybigid:m_value
@@ -420,6 +425,7 @@ function  changeCity(m_value,next,m_countyCode){
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/enterprise/getCountryByCityCode", //要访问的后台地址
         data : {
             cityCode: m_value
@@ -475,20 +481,14 @@ function addFactory() {
             var factoryUsedname = document.getElementById("factoryUsedname").value;
             var sourceType = document.getElementById("sourceType").value;
             var industryBigid = document.getElementById("industryBigid").value;
-            var industryBigname=$("#industryBigid").find("option:selected").text();
             var industryId = document.getElementById("industryId").value;
-            var industryName=$("#industryId").find("option:selected").text();
             var legalperson = document.getElementById("legalperson").value;
             var factorySize = document.getElementById("factorySize").value;
             var countyRegisterCity = document.getElementById("countyRegisterCity").value;
             var countyidRegister = document.getElementById("countyidRegister").value;//注册城市
             var addressRegister = document.getElementById("addressRegister").value;//注册区县
             var countyCity = document.getElementById("countyCity").value;
-            var cityName=$("#countyCity").find("option:selected").text();//城市名称
-            var countyRegisterCityDec=$("#countyRegisterCity").find("option:selected").text();//注册城市名称
-            var countyidRegisterDec=$("#countyidRegister").find("option:selected").text();//注册区县名称
             var countyId = document.getElementById("countyId").value;
-            var countyName=$("#countyId").find("option:selected").text();//区县名称
             var address = document.getElementById("address").value;
             var factoryLongitude = document.getElementById("factoryLongitude").value;
             var factoryLatitude = document.getElementById("factoryLatitude").value;
@@ -518,13 +518,10 @@ function addFactory() {
             $.ajax({
                 type:"post",
                 dataType : "json",
+                async: false,
                 url : "/enterprise/enterpriseUpdate", //要访问的后台地址
                 data : {
-                    cityName:cityName,
-                    industryName:industryName,
                     factoryName:factoryName,
-                    countyName:countyName,
-                    industryBigname:industryBigname,
                     factoryUsedname:factoryUsedname,
                     powerAmount:powerAmount,
                     sourceType:sourceType,
@@ -532,12 +529,8 @@ function addFactory() {
                     industryId:industryId,
                     legalperson:legalperson,
                     factorySize:factorySize,
-                    countyRegisterCity:countyRegisterCity,
                     countyidRegister:countyidRegister,
-                    countyRegisterCityDec:countyRegisterCityDec,
-                    countyidRegisterDec:countyidRegisterDec,
                     addressRegister:addressRegister,
-                    countyCity:countyCity,
                     countyId:countyId,
                     address:address,
                     factoryLongitude:factoryLongitude,
@@ -571,22 +564,25 @@ function addFactory() {
                             type: "success",
                             container : "page",
                             title : "<br><p style='font-size: 18px;'>更新成功！！！企业信息已保存。。。</p>",
-                            timer : 6000
+                            timer : 3000
                         });
+                        setTimeout(function(){
+                            window.location.reload();//刷新当前页面.
+                        },3000);
                     }else{
                         if(data.status==0){
                             $.niftyNoty({
                                 type: "warning",
                                 container : "page",
                                 title : "<br><p style='font-size: 18px;'>登录超时,企业信息保存失败！</p>",
-                                timer : 6000
+                                timer : 3000
                             });
                         }else{
                             $.niftyNoty({
                                 type: "warning",
                                 container : "page",
                                 title : "<br><p style='font-size: 18px;'>存在数据格式错误,企业信息保存失败！</p>",
-                                timer : 6000
+                                timer : 3000
                             });
                         }
                     }

@@ -920,7 +920,7 @@
 
   <!--自定义SQL：根据工厂ID查询锅炉（连接烟囱表）-->
   <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT ID, b.NK_NO,b.no, EXHUST_ID, version, FUNCTION_DEC, FUNCTIO, FUELTYPE_DEC, MODEL_DEC, MODEL,
+    SELECT ID, b.NK_NO, EXHUST_ID, version, FUNCTION_DEC, FUNCTIO, FUELTYPE_DEC, MODEL_DEC, MODEL,
     TONS, FUELTYPE, COALASH, COALSULFUR, COMBUSTIONSYSTEM, FUEL_AUSAGE, FUEL_AUSAGEUNIT,
     dustremove_id, sulphurremove_id, nitreremove_id, pm10, pm25, co, voc, pm, so2, nox,
     nh3, oc, bc, scc, machine_no, coal_volatilisation, installed_capacity, feiqiti, so2out,
@@ -929,6 +929,5 @@
     dec_useamount
     from boiler b join exhaust e on b.EXHUST_ID = e.EXF_ID
     WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
-    ORDER BY b.NK_NO
   </select>
 </mapper>

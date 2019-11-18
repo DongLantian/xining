@@ -61,9 +61,18 @@ public class RoadDustService {
         //设置企业ID
         fRoadDustSource.setFactoryid(factoryId);
 
+        FRoadDustSourceExample fRoadDustSourceExample = new FRoadDustSourceExample();
+        FRoadDustSourceExample.Criteria criteria = fRoadDustSourceExample.createCriteria();
+        criteria.andFactoryidEqualTo(factoryId);
+        List<FRoadDustSource> fRoadDustSourceList = fRoadDustSourceMapper.selectByExample(fRoadDustSourceExample);
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int fRoadDustCount = fRoadDustSourceList.size()+1;
+        factory.setRoadDustCount(fRoadDustCount);
+
+
         if (fRoadDustSourceMapper.insertSelective(fRoadDustSource)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-            Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
             factory.setLastChangedTime(now);
             factoryMapper.updateByPrimaryKeySelective(factory);
@@ -93,8 +102,14 @@ public class RoadDustService {
      * @param roadDustID
      * @return
      */
-    public int deleteRoadDust(int roadDustID) {
+    public int deleteRoadDust(int roadDustID, int factoryID) {
         if (fRoadDustSourceMapper.deleteByPrimaryKey(roadDustID)!=0){
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int roadDustCount = factory.getRoadDustCount()-1;
+            factory.setRoadDustCount(roadDustCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
+
             return 1;
         }else {
             return 0;

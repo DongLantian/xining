@@ -90,18 +90,18 @@ public class ExhaustService {
 
         exhaust.setNkNo(curMaxNum+1);
         exhaust.setFactoryId(m_factoryId);
-        exhaust.setExfNo("");
+
+        //设置工厂表中的exhaust_count字段，即烟囱总数。
+        Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
+        int oldExhaustNum = exhaustList.size();
 
         if (exhaustMapper.insertSelective(exhaust)!=0){
             //添加烟囱成功
-            //设置工厂表中的exhaust_num字段，即烟囱总数。
             //设置工厂表中更新时间
-            Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
-            int oldExhaustNum = fac.getExhaustNum();
             int  m_status=0;
             Date now = new Date();
 
-            fac.setExhaustNum(oldExhaustNum+1);
+            fac.setExhaustCount(oldExhaustNum+1);
 
             if(fac.getStatus()!=null){
                 m_status=fac.getStatus();
@@ -151,8 +151,8 @@ public class ExhaustService {
             if (exhaustMapper.deleteByPrimaryKey(exhaustID)!=0){
                 //删除成功后factory表中exhaust_num字段减一
                 Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
-                int oldExhaustNum = fac.getExhaustNum();
-                fac.setExhaustNum(oldExhaustNum-1);
+                int oldExhaustNum = fac.getExhaustCount()==null?0:fac.getExhaustCount();
+                fac.setExhaustCount(oldExhaustNum-1);
                 factoryMapper.updateByPrimaryKeySelective(fac);
 
                 return 1;

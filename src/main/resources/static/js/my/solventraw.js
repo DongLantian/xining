@@ -129,12 +129,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
                     var scc3Input = $("#updatenameCategory_input").val();
                     var scc4Input = $("#updatedrainageProcess_input").val();
                     $("#updatenameCategory").val(scc3Input);
                     $("#updatedrainageProcess").val(scc4Input);
-                },1000)
             }
 
         }
@@ -158,9 +156,6 @@ $(function () {
                 app.solventraw.scc2 = $("#updateactivitiesCategory").val();
                 app.solventraw.scc3 = $("#updatenameCategory").val();
                 app.solventraw.scc4 = $("#updatedrainageProcess").val();
-                app.solventraw.scc2Dec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.solventraw.scc3Dec = $("#updatenameCategory").find("option:selected").text();
-                app.solventraw.scc4Dec = $("#updatedrainageProcess").find("option:selected").text();
                 // ajax请求。
                 $.ajax({
                     type:"post",
@@ -507,11 +502,8 @@ function updatedata() {
 
             //必填项不为空，可以提交
             var scc2 = document.getElementById("activitiesCategory").value;
-            var scc2Dec=$("#activitiesCategory").find("option:selected").text();
             var scc3 = document.getElementById("nameCategory").value;
-            var scc3Dec=$("#nameCategory").find("option:selected").text();
             var scc4 = document.getElementById("drainageProcess").value;
-            var scc4Dec=$("#drainageProcess").find("option:selected").text();
             var name = document.getElementById("name").value;
             var usage = document.getElementById("annualOutput").value;
             var unit = document.getElementById("uint").value;
@@ -556,9 +548,6 @@ function updatedata() {
                     treatPre:treatPre,
                     mname : name,
                     scc2 : scc2,
-                    scc2Dec:scc2Dec,
-                    scc3Dec:scc3Dec,
-                    scc4Dec:scc4Dec,
                     scc3 : scc3,
                     musage : usage,
                     unit : unit,

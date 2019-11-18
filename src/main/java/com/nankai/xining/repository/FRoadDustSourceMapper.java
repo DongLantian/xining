@@ -2,9 +2,10 @@ package com.nankai.xining.repository;
 
 import com.nankai.xining.bean.FRoadDustSource;
 import com.nankai.xining.bean.FRoadDustSourceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface FRoadDustSourceMapper {

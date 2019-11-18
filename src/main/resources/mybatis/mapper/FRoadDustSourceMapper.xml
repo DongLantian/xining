@@ -3,9 +3,8 @@
 <mapper namespace="com.nankai.xining.repository.FRoadDustSourceMapper">
   <resultMap id="BaseResultMap" type="com.nankai.xining.bean.FRoadDustSource">
     <id column="road_dustid" jdbcType="INTEGER" property="roadDustid" />
-    <result column="scccode" jdbcType="CHAR" property="scccode" />
     <result column="factoryid" jdbcType="INTEGER" property="factoryid" />
-    <result column="company_name" jdbcType="CHAR" property="companyName" />
+    <result column="scccode" jdbcType="CHAR" property="scccode" />
     <result column="start_longitude" jdbcType="DOUBLE" property="startLongitude" />
     <result column="start_latitude" jdbcType="DOUBLE" property="startLatitude" />
     <result column="end_longitude" jdbcType="DOUBLE" property="endLongitude" />
@@ -27,8 +26,6 @@
     <result column="water_times_fall" jdbcType="DOUBLE" property="waterTimesFall" />
     <result column="dust_suppression" jdbcType="INTEGER" property="dustSuppression" />
     <result column="control_measures" jdbcType="VARCHAR" property="controlMeasures" />
-    <result column="pm10_factors" jdbcType="DOUBLE" property="pm10Factors" />
-    <result column="pm25_factors" jdbcType="DOUBLE" property="pm25Factors" />
     <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
     <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
     <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
@@ -93,12 +90,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    road_dustid, scccode, factoryid, company_name, start_longitude, start_latitude, end_longitude, 
+    road_dustid, factoryid, scccode, start_longitude, start_latitude, end_longitude, 
     end_latitude, road_type, path_length, ispave, aver_width, aver_weight, car_flow, 
     aver_speed, clear_time_install, clear_time_uninstall, sweep_spring, sweep_summer, 
     sweep_fall, water_times_spring, water_times_summer, water_times_fall, dust_suppression, 
-    control_measures, pm10_factors, pm25_factors, pm25_emission, pm10_emission, oc_emission, 
-    bc_emission
+    control_measures, pm25_emission, pm10_emission, oc_emission, bc_emission
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.FRoadDustSourceExample" resultMap="BaseResultMap">
     select
@@ -131,26 +127,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.nankai.xining.bean.FRoadDustSource">
-    insert into f_road_dust_source (road_dustid, scccode, factoryid, 
-      company_name, start_longitude, start_latitude, 
-      end_longitude, end_latitude, road_type, 
-      path_length, ispave, aver_width, 
-      aver_weight, car_flow, aver_speed, 
-      clear_time_install, clear_time_uninstall, sweep_spring, 
-      sweep_summer, sweep_fall, water_times_spring, 
-      water_times_summer, water_times_fall, dust_suppression, 
-      control_measures, pm10_factors, pm25_factors, 
+    insert into f_road_dust_source (road_dustid, factoryid, scccode, 
+      start_longitude, start_latitude, end_longitude, 
+      end_latitude, road_type, path_length, 
+      ispave, aver_width, aver_weight, 
+      car_flow, aver_speed, clear_time_install, 
+      clear_time_uninstall, sweep_spring, sweep_summer, 
+      sweep_fall, water_times_spring, water_times_summer, 
+      water_times_fall, dust_suppression, control_measures, 
       pm25_emission, pm10_emission, oc_emission, 
       bc_emission)
-    values (#{roadDustid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{factoryid,jdbcType=INTEGER}, 
-      #{companyName,jdbcType=CHAR}, #{startLongitude,jdbcType=DOUBLE}, #{startLatitude,jdbcType=DOUBLE}, 
-      #{endLongitude,jdbcType=DOUBLE}, #{endLatitude,jdbcType=DOUBLE}, #{roadType,jdbcType=VARCHAR}, 
-      #{pathLength,jdbcType=DOUBLE}, #{ispave,jdbcType=VARCHAR}, #{averWidth,jdbcType=DOUBLE}, 
-      #{averWeight,jdbcType=DOUBLE}, #{carFlow,jdbcType=INTEGER}, #{averSpeed,jdbcType=DOUBLE}, 
-      #{clearTimeInstall,jdbcType=DOUBLE}, #{clearTimeUninstall,jdbcType=DOUBLE}, #{sweepSpring,jdbcType=DOUBLE}, 
-      #{sweepSummer,jdbcType=DOUBLE}, #{sweepFall,jdbcType=DOUBLE}, #{waterTimesSpring,jdbcType=DOUBLE}, 
-      #{waterTimesSummer,jdbcType=DOUBLE}, #{waterTimesFall,jdbcType=DOUBLE}, #{dustSuppression,jdbcType=INTEGER}, 
-      #{controlMeasures,jdbcType=VARCHAR}, #{pm10Factors,jdbcType=DOUBLE}, #{pm25Factors,jdbcType=DOUBLE}, 
+    values (#{roadDustid,jdbcType=INTEGER}, #{factoryid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, 
+      #{startLongitude,jdbcType=DOUBLE}, #{startLatitude,jdbcType=DOUBLE}, #{endLongitude,jdbcType=DOUBLE}, 
+      #{endLatitude,jdbcType=DOUBLE}, #{roadType,jdbcType=VARCHAR}, #{pathLength,jdbcType=DOUBLE}, 
+      #{ispave,jdbcType=VARCHAR}, #{averWidth,jdbcType=DOUBLE}, #{averWeight,jdbcType=DOUBLE}, 
+      #{carFlow,jdbcType=INTEGER}, #{averSpeed,jdbcType=DOUBLE}, #{clearTimeInstall,jdbcType=DOUBLE}, 
+      #{clearTimeUninstall,jdbcType=DOUBLE}, #{sweepSpring,jdbcType=DOUBLE}, #{sweepSummer,jdbcType=DOUBLE}, 
+      #{sweepFall,jdbcType=DOUBLE}, #{waterTimesSpring,jdbcType=DOUBLE}, #{waterTimesSummer,jdbcType=DOUBLE}, 
+      #{waterTimesFall,jdbcType=DOUBLE}, #{dustSuppression,jdbcType=INTEGER}, #{controlMeasures,jdbcType=VARCHAR}, 
       #{pm25Emission,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, 
       #{bcEmission,jdbcType=DOUBLE})
   </insert>
@@ -160,14 +154,11 @@
       <if test="roadDustid != null">
         road_dustid,
       </if>
-      <if test="scccode != null">
-        scccode,
-      </if>
       <if test="factoryid != null">
         factoryid,
       </if>
-      <if test="companyName != null">
-        company_name,
+      <if test="scccode != null">
+        scccode,
       </if>
       <if test="startLongitude != null">
         start_longitude,
@@ -232,12 +223,6 @@
       <if test="controlMeasures != null">
         control_measures,
       </if>
-      <if test="pm10Factors != null">
-        pm10_factors,
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors,
-      </if>
       <if test="pm25Emission != null">
         pm25_emission,
       </if>
@@ -255,14 +240,11 @@
       <if test="roadDustid != null">
         #{roadDustid,jdbcType=INTEGER},
       </if>
-      <if test="scccode != null">
-        #{scccode,jdbcType=CHAR},
-      </if>
       <if test="factoryid != null">
         #{factoryid,jdbcType=INTEGER},
       </if>
-      <if test="companyName != null">
-        #{companyName,jdbcType=CHAR},
+      <if test="scccode != null">
+        #{scccode,jdbcType=CHAR},
       </if>
       <if test="startLongitude != null">
         #{startLongitude,jdbcType=DOUBLE},
@@ -327,12 +309,6 @@
       <if test="controlMeasures != null">
         #{controlMeasures,jdbcType=VARCHAR},
       </if>
-      <if test="pm10Factors != null">
-        #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm25Factors != null">
-        #{pm25Factors,jdbcType=DOUBLE},
-      </if>
       <if test="pm25Emission != null">
         #{pm25Emission,jdbcType=DOUBLE},
       </if>
@@ -359,14 +335,11 @@
       <if test="record.roadDustid != null">
         road_dustid = #{record.roadDustid,jdbcType=INTEGER},
       </if>
-      <if test="record.scccode != null">
-        scccode = #{record.scccode,jdbcType=CHAR},
-      </if>
       <if test="record.factoryid != null">
         factoryid = #{record.factoryid,jdbcType=INTEGER},
       </if>
-      <if test="record.companyName != null">
-        company_name = #{record.companyName,jdbcType=CHAR},
+      <if test="record.scccode != null">
+        scccode = #{record.scccode,jdbcType=CHAR},
       </if>
       <if test="record.startLongitude != null">
         start_longitude = #{record.startLongitude,jdbcType=DOUBLE},
@@ -431,12 +404,6 @@
       <if test="record.controlMeasures != null">
         control_measures = #{record.controlMeasures,jdbcType=VARCHAR},
       </if>
-      <if test="record.pm10Factors != null">
-        pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="record.pm25Factors != null">
-        pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
-      </if>
       <if test="record.pm25Emission != null">
         pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
       </if>
@@ -457,9 +424,8 @@
   <update id="updateByExample" parameterType="map">
     update f_road_dust_source
     set road_dustid = #{record.roadDustid,jdbcType=INTEGER},
-      scccode = #{record.scccode,jdbcType=CHAR},
       factoryid = #{record.factoryid,jdbcType=INTEGER},
-      company_name = #{record.companyName,jdbcType=CHAR},
+      scccode = #{record.scccode,jdbcType=CHAR},
       start_longitude = #{record.startLongitude,jdbcType=DOUBLE},
       start_latitude = #{record.startLatitude,jdbcType=DOUBLE},
       end_longitude = #{record.endLongitude,jdbcType=DOUBLE},
@@ -481,8 +447,6 @@
       water_times_fall = #{record.waterTimesFall,jdbcType=DOUBLE},
       dust_suppression = #{record.dustSuppression,jdbcType=INTEGER},
       control_measures = #{record.controlMeasures,jdbcType=VARCHAR},
-      pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
       pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
       pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
       oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
@@ -494,14 +458,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.nankai.xining.bean.FRoadDustSource">
     update f_road_dust_source
     <set>
-      <if test="scccode != null">
-        scccode = #{scccode,jdbcType=CHAR},
-      </if>
       <if test="factoryid != null">
         factoryid = #{factoryid,jdbcType=INTEGER},
       </if>
-      <if test="companyName != null">
-        company_name = #{companyName,jdbcType=CHAR},
+      <if test="scccode != null">
+        scccode = #{scccode,jdbcType=CHAR},
       </if>
       <if test="startLongitude != null">
         start_longitude = #{startLongitude,jdbcType=DOUBLE},
@@ -566,12 +527,6 @@
       <if test="controlMeasures != null">
         control_measures = #{controlMeasures,jdbcType=VARCHAR},
       </if>
-      <if test="pm10Factors != null">
-        pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
-      </if>
       <if test="pm25Emission != null">
         pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
       </if>
@@ -589,9 +544,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.FRoadDustSource">
     update f_road_dust_source
-    set scccode = #{scccode,jdbcType=CHAR},
-      factoryid = #{factoryid,jdbcType=INTEGER},
-      company_name = #{companyName,jdbcType=CHAR},
+    set factoryid = #{factoryid,jdbcType=INTEGER},
+      scccode = #{scccode,jdbcType=CHAR},
       start_longitude = #{startLongitude,jdbcType=DOUBLE},
       start_latitude = #{startLatitude,jdbcType=DOUBLE},
       end_longitude = #{endLongitude,jdbcType=DOUBLE},
@@ -613,8 +567,6 @@
       water_times_fall = #{waterTimesFall,jdbcType=DOUBLE},
       dust_suppression = #{dustSuppression,jdbcType=INTEGER},
       control_measures = #{controlMeasures,jdbcType=VARCHAR},
-      pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
       pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
       pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
       oc_emission = #{ocEmission,jdbcType=DOUBLE},

@@ -224,126 +224,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andDevicetotalIdIsNull() {
-            addCriterion("devicetotal_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdIsNotNull() {
-            addCriterion("devicetotal_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdEqualTo(Integer value) {
-            addCriterion("devicetotal_id =", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdNotEqualTo(Integer value) {
-            addCriterion("devicetotal_id <>", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdGreaterThan(Integer value) {
-            addCriterion("devicetotal_id >", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("devicetotal_id >=", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdLessThan(Integer value) {
-            addCriterion("devicetotal_id <", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdLessThanOrEqualTo(Integer value) {
-            addCriterion("devicetotal_id <=", value, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdIn(List<Integer> values) {
-            addCriterion("devicetotal_id in", values, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdNotIn(List<Integer> values) {
-            addCriterion("devicetotal_id not in", values, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdBetween(Integer value1, Integer value2) {
-            addCriterion("devicetotal_id between", value1, value2, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDevicetotalIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("devicetotal_id not between", value1, value2, "devicetotalId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIsNull() {
-            addCriterion("device_no is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIsNotNull() {
-            addCriterion("device_no is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoEqualTo(Integer value) {
-            addCriterion("device_no =", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotEqualTo(Integer value) {
-            addCriterion("device_no <>", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoGreaterThan(Integer value) {
-            addCriterion("device_no >", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("device_no >=", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoLessThan(Integer value) {
-            addCriterion("device_no <", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoLessThanOrEqualTo(Integer value) {
-            addCriterion("device_no <=", value, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoIn(List<Integer> values) {
-            addCriterion("device_no in", values, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotIn(List<Integer> values) {
-            addCriterion("device_no not in", values, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoBetween(Integer value1, Integer value2) {
-            addCriterion("device_no between", value1, value2, "deviceNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeviceNoNotBetween(Integer value1, Integer value2) {
-            addCriterion("device_no not between", value1, value2, "deviceNo");
-            return (Criteria) this;
-        }
-
         public Criteria andDeviceIdIsNull() {
             addCriterion("device_id is null");
             return (Criteria) this;
@@ -401,76 +281,6 @@ public class DeviceProductExample {
 
         public Criteria andDeviceIdNotBetween(Integer value1, Integer value2) {
             addCriterion("device_id not between", value1, value2, "deviceId");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecIsNull() {
-            addCriterion("activities_category_dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecIsNotNull() {
-            addCriterion("activities_category_dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecEqualTo(String value) {
-            addCriterion("activities_category_dec =", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecNotEqualTo(String value) {
-            addCriterion("activities_category_dec <>", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecGreaterThan(String value) {
-            addCriterion("activities_category_dec >", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecGreaterThanOrEqualTo(String value) {
-            addCriterion("activities_category_dec >=", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecLessThan(String value) {
-            addCriterion("activities_category_dec <", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecLessThanOrEqualTo(String value) {
-            addCriterion("activities_category_dec <=", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecLike(String value) {
-            addCriterion("activities_category_dec like", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecNotLike(String value) {
-            addCriterion("activities_category_dec not like", value, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecIn(List<String> values) {
-            addCriterion("activities_category_dec in", values, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecNotIn(List<String> values) {
-            addCriterion("activities_category_dec not in", values, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecBetween(String value1, String value2) {
-            addCriterion("activities_category_dec between", value1, value2, "activitiesCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andActivitiesCategoryDecNotBetween(String value1, String value2) {
-            addCriterion("activities_category_dec not between", value1, value2, "activitiesCategoryDec");
             return (Criteria) this;
         }
 
@@ -544,76 +354,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameCategoryDecIsNull() {
-            addCriterion("name_category_dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecIsNotNull() {
-            addCriterion("name_category_dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecEqualTo(String value) {
-            addCriterion("name_category_dec =", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecNotEqualTo(String value) {
-            addCriterion("name_category_dec <>", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecGreaterThan(String value) {
-            addCriterion("name_category_dec >", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecGreaterThanOrEqualTo(String value) {
-            addCriterion("name_category_dec >=", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecLessThan(String value) {
-            addCriterion("name_category_dec <", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecLessThanOrEqualTo(String value) {
-            addCriterion("name_category_dec <=", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecLike(String value) {
-            addCriterion("name_category_dec like", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecNotLike(String value) {
-            addCriterion("name_category_dec not like", value, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecIn(List<String> values) {
-            addCriterion("name_category_dec in", values, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecNotIn(List<String> values) {
-            addCriterion("name_category_dec not in", values, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecBetween(String value1, String value2) {
-            addCriterion("name_category_dec between", value1, value2, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNameCategoryDecNotBetween(String value1, String value2) {
-            addCriterion("name_category_dec not between", value1, value2, "nameCategoryDec");
-            return (Criteria) this;
-        }
-
         public Criteria andNameCategoryIsNull() {
             addCriterion("name_category is null");
             return (Criteria) this;
@@ -684,73 +424,73 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("name is null");
+        public Criteria andSccCodeIsNull() {
+            addCriterion("scc_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
+        public Criteria andSccCodeIsNotNull() {
+            addCriterion("scc_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
+        public Criteria andSccCodeEqualTo(String value) {
+            addCriterion("scc_code =", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
+        public Criteria andSccCodeNotEqualTo(String value) {
+            addCriterion("scc_code <>", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
+        public Criteria andSccCodeGreaterThan(String value) {
+            addCriterion("scc_code >", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
+        public Criteria andSccCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("scc_code >=", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
+        public Criteria andSccCodeLessThan(String value) {
+            addCriterion("scc_code <", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
+        public Criteria andSccCodeLessThanOrEqualTo(String value) {
+            addCriterion("scc_code <=", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
+        public Criteria andSccCodeLike(String value) {
+            addCriterion("scc_code like", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
+        public Criteria andSccCodeNotLike(String value) {
+            addCriterion("scc_code not like", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+        public Criteria andSccCodeIn(List<String> values) {
+            addCriterion("scc_code in", values, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+        public Criteria andSccCodeNotIn(List<String> values) {
+            addCriterion("scc_code not in", values, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
+        public Criteria andSccCodeBetween(String value1, String value2) {
+            addCriterion("scc_code between", value1, value2, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
+        public Criteria andSccCodeNotBetween(String value1, String value2) {
+            addCriterion("scc_code not between", value1, value2, "sccCode");
             return (Criteria) this;
         }
 
@@ -821,6 +561,76 @@ public class DeviceProductExample {
 
         public Criteria andDrainageProcessNotBetween(String value1, String value2) {
             addCriterion("drainage_process not between", value1, value2, "drainageProcess");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNull() {
+            addCriterion("name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIsNotNull() {
+            addCriterion("name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameEqualTo(String value) {
+            addCriterion("name =", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotEqualTo(String value) {
+            addCriterion("name <>", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThan(String value) {
+            addCriterion("name >", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameGreaterThanOrEqualTo(String value) {
+            addCriterion("name >=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThan(String value) {
+            addCriterion("name <", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLessThanOrEqualTo(String value) {
+            addCriterion("name <=", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameLike(String value) {
+            addCriterion("name like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotLike(String value) {
+            addCriterion("name not like", value, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameIn(List<String> values) {
+            addCriterion("name in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotIn(List<String> values) {
+            addCriterion("name not in", values, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameBetween(String value1, String value2) {
+            addCriterion("name between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andNameNotBetween(String value1, String value2) {
+            addCriterion("name not between", value1, value2, "name");
             return (Criteria) this;
         }
 
@@ -954,196 +764,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeIsNull() {
-            addCriterion("scc_code is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeIsNotNull() {
-            addCriterion("scc_code is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeEqualTo(String value) {
-            addCriterion("scc_code =", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeNotEqualTo(String value) {
-            addCriterion("scc_code <>", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeGreaterThan(String value) {
-            addCriterion("scc_code >", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("scc_code >=", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeLessThan(String value) {
-            addCriterion("scc_code <", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeLessThanOrEqualTo(String value) {
-            addCriterion("scc_code <=", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeLike(String value) {
-            addCriterion("scc_code like", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeNotLike(String value) {
-            addCriterion("scc_code not like", value, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeIn(List<String> values) {
-            addCriterion("scc_code in", values, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeNotIn(List<String> values) {
-            addCriterion("scc_code not in", values, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeBetween(String value1, String value2) {
-            addCriterion("scc_code between", value1, value2, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andSccCodeNotBetween(String value1, String value2) {
-            addCriterion("scc_code not between", value1, value2, "sccCode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIsNull() {
-            addCriterion("factor_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIsNotNull() {
-            addCriterion("factor_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusEqualTo(Byte value) {
-            addCriterion("factor_status =", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotEqualTo(Byte value) {
-            addCriterion("factor_status <>", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusGreaterThan(Byte value) {
-            addCriterion("factor_status >", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("factor_status >=", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusLessThan(Byte value) {
-            addCriterion("factor_status <", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("factor_status <=", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIn(List<Byte> values) {
-            addCriterion("factor_status in", values, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotIn(List<Byte> values) {
-            addCriterion("factor_status not in", values, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusBetween(Byte value1, Byte value2) {
-            addCriterion("factor_status between", value1, value2, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("factor_status not between", value1, value2, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxIsNull() {
-            addCriterion("factor_nox is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxIsNotNull() {
-            addCriterion("factor_nox is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxEqualTo(Double value) {
-            addCriterion("factor_nox =", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotEqualTo(Double value) {
-            addCriterion("factor_nox <>", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxGreaterThan(Double value) {
-            addCriterion("factor_nox >", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_nox >=", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxLessThan(Double value) {
-            addCriterion("factor_nox <", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxLessThanOrEqualTo(Double value) {
-            addCriterion("factor_nox <=", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxIn(List<Double> values) {
-            addCriterion("factor_nox in", values, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotIn(List<Double> values) {
-            addCriterion("factor_nox not in", values, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxBetween(Double value1, Double value2) {
-            addCriterion("factor_nox between", value1, value2, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotBetween(Double value1, Double value2) {
-            addCriterion("factor_nox not between", value1, value2, "factorNox");
-            return (Criteria) this;
-        }
-
         public Criteria andNoxIsNull() {
             addCriterion("nox is null");
             return (Criteria) this;
@@ -1201,66 +821,6 @@ public class DeviceProductExample {
 
         public Criteria andNoxNotBetween(Double value1, Double value2) {
             addCriterion("nox not between", value1, value2, "nox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoIsNull() {
-            addCriterion("factor_co is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoIsNotNull() {
-            addCriterion("factor_co is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoEqualTo(Double value) {
-            addCriterion("factor_co =", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotEqualTo(Double value) {
-            addCriterion("factor_co <>", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoGreaterThan(Double value) {
-            addCriterion("factor_co >", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_co >=", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoLessThan(Double value) {
-            addCriterion("factor_co <", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoLessThanOrEqualTo(Double value) {
-            addCriterion("factor_co <=", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoIn(List<Double> values) {
-            addCriterion("factor_co in", values, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotIn(List<Double> values) {
-            addCriterion("factor_co not in", values, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoBetween(Double value1, Double value2) {
-            addCriterion("factor_co between", value1, value2, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotBetween(Double value1, Double value2) {
-            addCriterion("factor_co not between", value1, value2, "factorCo");
             return (Criteria) this;
         }
 
@@ -1324,66 +884,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorPm10IsNull() {
-            addCriterion("factor_pm10 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10IsNotNull() {
-            addCriterion("factor_pm10 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10EqualTo(Double value) {
-            addCriterion("factor_pm10 =", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotEqualTo(Double value) {
-            addCriterion("factor_pm10 <>", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10GreaterThan(Double value) {
-            addCriterion("factor_pm10 >", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_pm10 >=", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10LessThan(Double value) {
-            addCriterion("factor_pm10 <", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10LessThanOrEqualTo(Double value) {
-            addCriterion("factor_pm10 <=", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10In(List<Double> values) {
-            addCriterion("factor_pm10 in", values, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotIn(List<Double> values) {
-            addCriterion("factor_pm10 not in", values, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10Between(Double value1, Double value2) {
-            addCriterion("factor_pm10 between", value1, value2, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotBetween(Double value1, Double value2) {
-            addCriterion("factor_pm10 not between", value1, value2, "factorPm10");
-            return (Criteria) this;
-        }
-
         public Criteria andPm10IsNull() {
             addCriterion("pm10 is null");
             return (Criteria) this;
@@ -1441,66 +941,6 @@ public class DeviceProductExample {
 
         public Criteria andPm10NotBetween(Double value1, Double value2) {
             addCriterion("pm10 not between", value1, value2, "pm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25IsNull() {
-            addCriterion("factor_pm25 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25IsNotNull() {
-            addCriterion("factor_pm25 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25EqualTo(Double value) {
-            addCriterion("factor_pm25 =", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotEqualTo(Double value) {
-            addCriterion("factor_pm25 <>", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25GreaterThan(Double value) {
-            addCriterion("factor_pm25 >", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_pm25 >=", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25LessThan(Double value) {
-            addCriterion("factor_pm25 <", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25LessThanOrEqualTo(Double value) {
-            addCriterion("factor_pm25 <=", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25In(List<Double> values) {
-            addCriterion("factor_pm25 in", values, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotIn(List<Double> values) {
-            addCriterion("factor_pm25 not in", values, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25Between(Double value1, Double value2) {
-            addCriterion("factor_pm25 between", value1, value2, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotBetween(Double value1, Double value2) {
-            addCriterion("factor_pm25 not between", value1, value2, "factorPm25");
             return (Criteria) this;
         }
 
@@ -1564,66 +1004,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorPmIsNull() {
-            addCriterion("factor_pm is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmIsNotNull() {
-            addCriterion("factor_pm is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmEqualTo(Double value) {
-            addCriterion("factor_pm =", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotEqualTo(Double value) {
-            addCriterion("factor_pm <>", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmGreaterThan(Double value) {
-            addCriterion("factor_pm >", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_pm >=", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmLessThan(Double value) {
-            addCriterion("factor_pm <", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmLessThanOrEqualTo(Double value) {
-            addCriterion("factor_pm <=", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmIn(List<Double> values) {
-            addCriterion("factor_pm in", values, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotIn(List<Double> values) {
-            addCriterion("factor_pm not in", values, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmBetween(Double value1, Double value2) {
-            addCriterion("factor_pm between", value1, value2, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotBetween(Double value1, Double value2) {
-            addCriterion("factor_pm not between", value1, value2, "factorPm");
-            return (Criteria) this;
-        }
-
         public Criteria andPmIsNull() {
             addCriterion("pm is null");
             return (Criteria) this;
@@ -1681,66 +1061,6 @@ public class DeviceProductExample {
 
         public Criteria andPmNotBetween(Double value1, Double value2) {
             addCriterion("pm not between", value1, value2, "pm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2IsNull() {
-            addCriterion("factor_so2 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2IsNotNull() {
-            addCriterion("factor_so2 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2EqualTo(Double value) {
-            addCriterion("factor_so2 =", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotEqualTo(Double value) {
-            addCriterion("factor_so2 <>", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2GreaterThan(Double value) {
-            addCriterion("factor_so2 >", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_so2 >=", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2LessThan(Double value) {
-            addCriterion("factor_so2 <", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2LessThanOrEqualTo(Double value) {
-            addCriterion("factor_so2 <=", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2In(List<Double> values) {
-            addCriterion("factor_so2 in", values, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotIn(List<Double> values) {
-            addCriterion("factor_so2 not in", values, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2Between(Double value1, Double value2) {
-            addCriterion("factor_so2 between", value1, value2, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotBetween(Double value1, Double value2) {
-            addCriterion("factor_so2 not between", value1, value2, "factorSo2");
             return (Criteria) this;
         }
 
@@ -1804,66 +1124,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorVocIsNull() {
-            addCriterion("factor_voc is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocIsNotNull() {
-            addCriterion("factor_voc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocEqualTo(Double value) {
-            addCriterion("factor_voc =", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotEqualTo(Double value) {
-            addCriterion("factor_voc <>", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocGreaterThan(Double value) {
-            addCriterion("factor_voc >", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_voc >=", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocLessThan(Double value) {
-            addCriterion("factor_voc <", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocLessThanOrEqualTo(Double value) {
-            addCriterion("factor_voc <=", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocIn(List<Double> values) {
-            addCriterion("factor_voc in", values, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotIn(List<Double> values) {
-            addCriterion("factor_voc not in", values, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocBetween(Double value1, Double value2) {
-            addCriterion("factor_voc between", value1, value2, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotBetween(Double value1, Double value2) {
-            addCriterion("factor_voc not between", value1, value2, "factorVoc");
-            return (Criteria) this;
-        }
-
         public Criteria andVocIsNull() {
             addCriterion("voc is null");
             return (Criteria) this;
@@ -1921,66 +1181,6 @@ public class DeviceProductExample {
 
         public Criteria andVocNotBetween(Double value1, Double value2) {
             addCriterion("voc not between", value1, value2, "voc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3IsNull() {
-            addCriterion("factor_nh3 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3IsNotNull() {
-            addCriterion("factor_nh3 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3EqualTo(Double value) {
-            addCriterion("factor_nh3 =", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotEqualTo(Double value) {
-            addCriterion("factor_nh3 <>", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3GreaterThan(Double value) {
-            addCriterion("factor_nh3 >", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_nh3 >=", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3LessThan(Double value) {
-            addCriterion("factor_nh3 <", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3LessThanOrEqualTo(Double value) {
-            addCriterion("factor_nh3 <=", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3In(List<Double> values) {
-            addCriterion("factor_nh3 in", values, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotIn(List<Double> values) {
-            addCriterion("factor_nh3 not in", values, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3Between(Double value1, Double value2) {
-            addCriterion("factor_nh3 between", value1, value2, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotBetween(Double value1, Double value2) {
-            addCriterion("factor_nh3 not between", value1, value2, "factorNh3");
             return (Criteria) this;
         }
 
@@ -2044,66 +1244,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorOcIsNull() {
-            addCriterion("factor_oc is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcIsNotNull() {
-            addCriterion("factor_oc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcEqualTo(Double value) {
-            addCriterion("factor_oc =", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotEqualTo(Double value) {
-            addCriterion("factor_oc <>", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcGreaterThan(Double value) {
-            addCriterion("factor_oc >", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_oc >=", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcLessThan(Double value) {
-            addCriterion("factor_oc <", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcLessThanOrEqualTo(Double value) {
-            addCriterion("factor_oc <=", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcIn(List<Double> values) {
-            addCriterion("factor_oc in", values, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotIn(List<Double> values) {
-            addCriterion("factor_oc not in", values, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcBetween(Double value1, Double value2) {
-            addCriterion("factor_oc between", value1, value2, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotBetween(Double value1, Double value2) {
-            addCriterion("factor_oc not between", value1, value2, "factorOc");
-            return (Criteria) this;
-        }
-
         public Criteria andOcIsNull() {
             addCriterion("oc is null");
             return (Criteria) this;
@@ -2164,66 +1304,6 @@ public class DeviceProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorBcIsNull() {
-            addCriterion("factor_bc is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcIsNotNull() {
-            addCriterion("factor_bc is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcEqualTo(Double value) {
-            addCriterion("factor_bc =", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotEqualTo(Double value) {
-            addCriterion("factor_bc <>", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcGreaterThan(Double value) {
-            addCriterion("factor_bc >", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_bc >=", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcLessThan(Double value) {
-            addCriterion("factor_bc <", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcLessThanOrEqualTo(Double value) {
-            addCriterion("factor_bc <=", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcIn(List<Double> values) {
-            addCriterion("factor_bc in", values, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotIn(List<Double> values) {
-            addCriterion("factor_bc not in", values, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcBetween(Double value1, Double value2) {
-            addCriterion("factor_bc between", value1, value2, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotBetween(Double value1, Double value2) {
-            addCriterion("factor_bc not between", value1, value2, "factorBc");
-            return (Criteria) this;
-        }
-
         public Criteria andBcIsNull() {
             addCriterion("bc is null");
             return (Criteria) this;
@@ -2281,6 +1361,76 @@ public class DeviceProductExample {
 
         public Criteria andBcNotBetween(Double value1, Double value2) {
             addCriterion("bc not between", value1, value2, "bc");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiIsNull() {
+            addCriterion("danwei is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiIsNotNull() {
+            addCriterion("danwei is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiEqualTo(String value) {
+            addCriterion("danwei =", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiNotEqualTo(String value) {
+            addCriterion("danwei <>", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiGreaterThan(String value) {
+            addCriterion("danwei >", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiGreaterThanOrEqualTo(String value) {
+            addCriterion("danwei >=", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiLessThan(String value) {
+            addCriterion("danwei <", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiLessThanOrEqualTo(String value) {
+            addCriterion("danwei <=", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiLike(String value) {
+            addCriterion("danwei like", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiNotLike(String value) {
+            addCriterion("danwei not like", value, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiIn(List<String> values) {
+            addCriterion("danwei in", values, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiNotIn(List<String> values) {
+            addCriterion("danwei not in", values, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiBetween(String value1, String value2) {
+            addCriterion("danwei between", value1, value2, "danwei");
+            return (Criteria) this;
+        }
+
+        public Criteria andDanweiNotBetween(String value1, String value2) {
+            addCriterion("danwei not between", value1, value2, "danwei");
             return (Criteria) this;
         }
 
@@ -3001,76 +2151,6 @@ public class DeviceProductExample {
 
         public Criteria andDecUseamountNotBetween(Double value1, Double value2) {
             addCriterion("dec_useamount not between", value1, value2, "decUseamount");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiIsNull() {
-            addCriterion("danwei is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiIsNotNull() {
-            addCriterion("danwei is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiEqualTo(String value) {
-            addCriterion("danwei =", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiNotEqualTo(String value) {
-            addCriterion("danwei <>", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiGreaterThan(String value) {
-            addCriterion("danwei >", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiGreaterThanOrEqualTo(String value) {
-            addCriterion("danwei >=", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiLessThan(String value) {
-            addCriterion("danwei <", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiLessThanOrEqualTo(String value) {
-            addCriterion("danwei <=", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiLike(String value) {
-            addCriterion("danwei like", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiNotLike(String value) {
-            addCriterion("danwei not like", value, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiIn(List<String> values) {
-            addCriterion("danwei in", values, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiNotIn(List<String> values) {
-            addCriterion("danwei not in", values, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiBetween(String value1, String value2) {
-            addCriterion("danwei between", value1, value2, "danwei");
-            return (Criteria) this;
-        }
-
-        public Criteria andDanweiNotBetween(String value1, String value2) {
-            addCriterion("danwei not between", value1, value2, "danwei");
             return (Criteria) this;
         }
     }

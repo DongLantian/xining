@@ -50,7 +50,7 @@ $(function () {
                                             timer : 2000
                                         });
                                         setTimeout(function(){
-                                            window.location.reload();//刷新当前页面.
+                                            window.location.href="/Client/exhaust?page=1";
                                         },2000);
                                     }else if (data.isDel=="constraint"){
                                         $.niftyNoty({

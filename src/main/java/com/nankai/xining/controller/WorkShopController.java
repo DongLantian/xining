@@ -79,7 +79,7 @@ public class WorkShopController {
     public Map<String,String> delworkshop(int workshopID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = workShopService.deleteWorkShop(workshopID);
+        int delFlag = workShopService.deleteWorkShop(workshopID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");

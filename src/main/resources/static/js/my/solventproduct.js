@@ -130,12 +130,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
                     var nameCategoryInput = $("#updatenameCategory_input").val();
                     var drainageProcessInput = $("#updatedrainageProcess_input").val();
                     $("#updatenameCategory").val(nameCategoryInput);
                     $("#updatedrainageProcess").val(drainageProcessInput);
-                },1000)
             }
 
         }
@@ -159,9 +157,6 @@ $(function () {
                 app.solventproduct.activitiesCategory = $("#updateactivitiesCategory").val();
                 app.solventproduct.nameCategory = $("#updatenameCategory").val();
                 app.solventproduct.drainageProcess = $("#updatedrainageProcess").val();
-                app.solventproduct.activitiesCategoryDec = $("#updateactivitiesCategory").find("option:selected").text();
-                app.solventproduct.nameCategoryDec = $("#updatenameCategory").find("option:selected").text();
-                app.solventproduct.drainageProcessDec = $("#updatedrainageProcess").find("option:selected").text();
                 // ajax请求。
                 $.ajax({
                     type:"post",
@@ -463,11 +458,8 @@ function updatedata() {
 
             //必填项不为空，可以提交
             var activitiesCategory = document.getElementById("activitiesCategory").value;
-            var activitiesCategoryDec = $("#activitiesCategory").find("option:selected").text();
             var drainageProcess = document.getElementById("drainageProcess").value;
-            var drainageProcessDec = $("#drainageProcess").find("option:selected").text();
             var nameCategory = document.getElementById("nameCategory").value;
-            var nameCategoryDec = $("#nameCategory").find("option:selected").text();
             var name = document.getElementById("name").value;
             var unit = document.getElementById("uint").value;
             var annualOutput = document.getElementById("annualOutput").value;
@@ -505,10 +497,7 @@ function updatedata() {
                     novUseamount:novUseamount,
                     decUseamount:decUseamount,
                     activitiesCategory : activitiesCategory,
-                    activitiesCategoryDec : activitiesCategoryDec,
                     nameCategory : nameCategory,
-                    nameCategoryDec : nameCategoryDec,
-                    drainageProcessDec : drainageProcessDec,
                     drainageProcess : drainageProcess,
                     name : name,
                     annualOutput : annualOutput,

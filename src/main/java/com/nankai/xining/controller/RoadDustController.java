@@ -78,7 +78,7 @@ public class RoadDustController {
     public Map<String,String> delRoadDust(int roadDustID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = roadDustService.deleteRoadDust(roadDustID);
+        int delFlag = roadDustService.deleteRoadDust(roadDustID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");

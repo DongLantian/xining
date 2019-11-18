@@ -6,6 +6,7 @@ $(function () {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/scc/loadSelectA", //要访问的后台地址
         data : {
             scc1ID: '11'
@@ -31,6 +32,7 @@ $(function () {
     $.ajax({
         type:"post",
         dataType : "json",
+        async: false,
         url : "/common/getExhaustList", //要访问的后台地址
         data : {},                             //要发送的数据，采用josn格式
 
@@ -152,12 +154,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
-                    var fuelInput = $("#updatefueltype_input").val();
-                    var modelInput = $("#updatemodel_input").val();
-                    $("#updatefueltype").val(fuelInput);
-                    $("#updatemodel").val(modelInput);
-                },1000)
+                var fuelInput = $("#updatefueltype_input").val();
+                var modelInput = $("#updatemodel_input").val();
+                $("#updatefueltype").val(fuelInput);
+                $("#updatemodel").val(modelInput);
             }
 
         }
@@ -181,9 +181,6 @@ $(function () {
                 app.kiln.functio = $("#updatefunctio").val();
                 app.kiln.fueltype = $("#updatefueltype").val();
                 app.kiln.model = $("#updatemodel").val();
-                app.kiln.functionDec = $("#updatefunctio").find("option:selected").text();
-                app.kiln.fueltypedec = $("#updatefueltype").find("option:selected").text();
-                app.kiln.modeldec = $("#updatemodel").find("option:selected").text();
                 app.kiln.dustremovedec = $("#updatedustremoveId").find("option:selected").text();
                 app.kiln.sulphurremovedec = $("#updatesulphurremoveId").find("option:selected").text();
                 app.kiln.nitreremovedec = $("#updatenitreremoveId").find("option:selected").text();
@@ -605,11 +602,8 @@ function updatedata() {
 
             //必填项不为空，可以提交
             var functio = document.getElementById("functio").value;
-            var functiondec = $("#functio").find("option:selected").text();
             var fueltype = document.getElementById("fueltype").value;
-            var fueltypeDec = $("#fueltype").find("option:selected").text();
             var model = document.getElementById("model").value;
-            var modelDec = $("#model").find("option:selected").text();
 
 
             var coalsulfur = document.getElementById("coalsulfur").value;
@@ -655,7 +649,6 @@ function updatedata() {
                 url : "/kiln/addKiln", //要访问的后台地址
                 data : {
                     functio : functio,
-                    functionDec : functiondec,
                     model : model,
                     coalVolatilisation : coalVolatilisation,
                     fueltype : fueltype,
@@ -668,8 +661,6 @@ function updatedata() {
                     dustremovedec : dustremoveDec,
                     sulphurremovedec : sulphurremoveDec,
                     nitreremovedec : nitreremoveDec,
-                    modelDec : modelDec,
-                    fueltypeDec : fueltypeDec,
                     kilnFuelAusage : fuelAusage,
                     kilnFuelAusageunit : fuelAusageunit,
                     kilnModel : kilnModel,

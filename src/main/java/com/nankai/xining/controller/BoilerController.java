@@ -1,8 +1,6 @@
 package com.nankai.xining.controller;
 
 import com.nankai.xining.bean.Boiler;
-import com.nankai.xining.bean.BoilerTemp;
-import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.service.BoilerService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,55 +4,28 @@
   <resultMap id="BaseResultMap" type="com.nankai.xining.bean.Factory">
     <id column="factory_id" jdbcType="INTEGER" property="factoryId" />
     <result column="factory_no" jdbcType="CHAR" property="factoryNo" />
-    <result column="factory_no1" jdbcType="CHAR" property="factoryNo1" />
-    <result column="factory_no2" jdbcType="CHAR" property="factoryNo2" />
     <result column="legalperson" jdbcType="VARCHAR" property="legalperson" />
     <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
     <result column="factory_usedname" jdbcType="VARCHAR" property="factoryUsedname" />
     <result column="factory_size" jdbcType="VARCHAR" property="factorySize" />
-    <result column="county_city_dec" jdbcType="VARCHAR" property="countyCityDec" />
-    <result column="county_city" jdbcType="VARCHAR" property="countyCity" />
-    <result column="total_value" jdbcType="DOUBLE" property="totalValue" />
-    <result column="county_name" jdbcType="VARCHAR" property="countyName" />
     <result column="county_id" jdbcType="CHAR" property="countyId" />
     <result column="industry_bigid" jdbcType="CHAR" property="industryBigid" />
-    <result column="industry_name" jdbcType="CHAR" property="industryName" />
-    <result column="industry_bigname" jdbcType="CHAR" property="industryBigname" />
     <result column="industry_id" jdbcType="CHAR" property="industryId" />
-    <result column="addressdetail" jdbcType="VARCHAR" property="addressdetail" />
     <result column="address" jdbcType="CHAR" property="address" />
-    <result column="county_register_city_dec" jdbcType="VARCHAR" property="countyRegisterCityDec" />
-    <result column="county_register_city" jdbcType="VARCHAR" property="countyRegisterCity" />
-    <result column="aregisterdetail" jdbcType="VARCHAR" property="aregisterdetail" />
     <result column="power_amount" jdbcType="DOUBLE" property="powerAmount" />
     <result column="address_register" jdbcType="VARCHAR" property="addressRegister" />
-    <result column="countyid_register_dec" jdbcType="VARCHAR" property="countyidRegisterDec" />
     <result column="countyid_register" jdbcType="CHAR" property="countyidRegister" />
     <result column="factory_longitude" jdbcType="DOUBLE" property="factoryLongitude" />
     <result column="factory_latitude" jdbcType="DOUBLE" property="factoryLatitude" />
     <result column="source_type" jdbcType="CHAR" property="sourceType" />
-    <result column="gasequ_type" jdbcType="CHAR" property="gasequType" />
     <result column="year" jdbcType="CHAR" property="year" />
-    <result column="flag" jdbcType="BIT" property="flag" />
     <result column="last_changed_time" jdbcType="TIMESTAMP" property="lastChangedTime" />
     <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
     <result column="filling_time" jdbcType="TIMESTAMP" property="fillingTime" />
-    <result column="devicestatus" jdbcType="INTEGER" property="devicestatus" />
-    <result column="boilerstatus" jdbcType="INTEGER" property="boilerstatus" />
-    <result column="kilnstatus" jdbcType="INTEGER" property="kilnstatus" />
     <result column="Year_days" jdbcType="INTEGER" property="yearDays" />
     <result column="Days_hours" jdbcType="INTEGER" property="daysHours" />
-    <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
-    <result column="CITY_ID" jdbcType="INTEGER" property="cityId" />
     <result column="total_output" jdbcType="DOUBLE" property="totalOutput" />
-    <result column="factorystatus" jdbcType="INTEGER" property="factorystatus" />
-    <result column="exhauststatus" jdbcType="INTEGER" property="exhauststatus" />
-    <result column="statusdec" jdbcType="VARCHAR" property="statusdec" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="exhaust_num" jdbcType="INTEGER" property="exhaustNum" />
-    <result column="important" jdbcType="INTEGER" property="important" />
-    <result column="shihuaflag" jdbcType="INTEGER" property="shihuaflag" />
-    <result column="feiqnub" jdbcType="INTEGER" property="feiqnub" />
     <result column="principal_name" jdbcType="VARCHAR" property="principalName" />
     <result column="principal_phone" jdbcType="VARCHAR" property="principalPhone" />
     <result column="principal_mobile" jdbcType="VARCHAR" property="principalMobile" />
@@ -71,6 +44,22 @@
     <result column="lon6" jdbcType="DOUBLE" property="lon6" />
     <result column="lat7" jdbcType="DOUBLE" property="lat7" />
     <result column="lon7" jdbcType="DOUBLE" property="lon7" />
+    <result column="exhaust_count" jdbcType="INTEGER" property="exhaustCount" />
+    <result column="boiler_count" jdbcType="INTEGER" property="boilerCount" />
+    <result column="kiln_count" jdbcType="INTEGER" property="kilnCount" />
+    <result column="device_count" jdbcType="INTEGER" property="deviceCount" />
+    <result column="device_product_count" jdbcType="INTEGER" property="deviceProductCount" />
+    <result column="device_raw_count" jdbcType="INTEGER" property="deviceRawCount" />
+    <result column="rongji_product_count" jdbcType="INTEGER" property="rongjiProductCount" />
+    <result column="rongji_raw_count" jdbcType="INTEGER" property="rongjiRawCount" />
+    <result column="feiqi_count" jdbcType="INTEGER" property="feiqiCount" />
+    <result column="soil_dust_count" jdbcType="INTEGER" property="soilDustCount" />
+    <result column="con_dust_count" jdbcType="INTEGER" property="conDustCount" />
+    <result column="road_dust_count" jdbcType="INTEGER" property="roadDustCount" />
+    <result column="yard_dust_count" jdbcType="INTEGER" property="yardDustCount" />
+    <result column="no_org_work_count" jdbcType="INTEGER" property="noOrgWorkCount" />
+    <result column="flag" jdbcType="BIT" property="flag" />
+    <result column="important" jdbcType="INTEGER" property="important" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.nankai.xining.bean.Factory">
     <result column="note" jdbcType="LONGVARCHAR" property="note" />
@@ -134,16 +123,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    factory_id, factory_no, factory_no1, factory_no2, legalperson, factory_name, factory_usedname, 
-    factory_size, county_city_dec, county_city, total_value, county_name, county_id, 
-    industry_bigid, industry_name, industry_bigname, industry_id, addressdetail, address, 
-    county_register_city_dec, county_register_city, aregisterdetail, power_amount, address_register, 
-    countyid_register_dec, countyid_register, factory_longitude, factory_latitude, source_type, 
-    gasequ_type, year, flag, last_changed_time, audit_time, filling_time, devicestatus, 
-    boilerstatus, kilnstatus, Year_days, Days_hours, CITY_NAME, CITY_ID, total_output, 
-    factorystatus, exhauststatus, statusdec, status, exhaust_num, important, shihuaflag, 
-    feiqnub, principal_name, principal_phone, principal_mobile, principal_email, lat1, 
-    lon1, lat2, lon2, lat3, lon3, lat4, lon4, lat5, lon5, lat6, lon6, lat7, lon7
+    factory_id, factory_no, legalperson, factory_name, factory_usedname, factory_size, 
+    county_id, industry_bigid, industry_id, address, power_amount, address_register, 
+    countyid_register, factory_longitude, factory_latitude, source_type, year, last_changed_time, 
+    audit_time, filling_time, Year_days, Days_hours, total_output, status, principal_name, 
+    principal_phone, principal_mobile, principal_email, lat1, lon1, lat2, lon2, lat3, 
+    lon3, lat4, lon4, lat5, lon5, lat6, lon6, lat7, lon7, exhaust_count, boiler_count, 
+    kiln_count, device_count, device_product_count, device_raw_count, rongji_product_count, 
+    rongji_raw_count, feiqi_count, soil_dust_count, con_dust_count, road_dust_count, 
+    yard_dust_count, no_org_work_count, flag, important
   </sql>
   <sql id="Blob_Column_List">
     note
@@ -197,52 +185,44 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.nankai.xining.bean.Factory">
-    insert into factory (factory_id, factory_no, factory_no1, 
-      factory_no2, legalperson, factory_name, 
-      factory_usedname, factory_size, county_city_dec, 
-      county_city, total_value, county_name, 
-      county_id, industry_bigid, industry_name, 
-      industry_bigname, industry_id, addressdetail, 
-      address, county_register_city_dec, county_register_city, 
-      aregisterdetail, power_amount, address_register, 
-      countyid_register_dec, countyid_register, factory_longitude, 
-      factory_latitude, source_type, gasequ_type, 
-      year, flag, last_changed_time, 
-      audit_time, filling_time, devicestatus, 
-      boilerstatus, kilnstatus, Year_days, 
-      Days_hours, CITY_NAME, CITY_ID, 
-      total_output, factorystatus, exhauststatus, 
-      statusdec, status, exhaust_num, 
-      important, shihuaflag, feiqnub, 
+    insert into factory (factory_id, factory_no, legalperson, 
+      factory_name, factory_usedname, factory_size, 
+      county_id, industry_bigid, industry_id, 
+      address, power_amount, address_register, 
+      countyid_register, factory_longitude, factory_latitude, 
+      source_type, year, last_changed_time, 
+      audit_time, filling_time, Year_days, 
+      Days_hours, total_output, status, 
       principal_name, principal_phone, principal_mobile, 
       principal_email, lat1, lon1, 
       lat2, lon2, lat3, lon3, 
       lat4, lon4, lat5, lon5, 
       lat6, lon6, lat7, lon7, 
-      note)
-    values (#{factoryId,jdbcType=INTEGER}, #{factoryNo,jdbcType=CHAR}, #{factoryNo1,jdbcType=CHAR}, 
-      #{factoryNo2,jdbcType=CHAR}, #{legalperson,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
-      #{factoryUsedname,jdbcType=VARCHAR}, #{factorySize,jdbcType=VARCHAR}, #{countyCityDec,jdbcType=VARCHAR}, 
-      #{countyCity,jdbcType=VARCHAR}, #{totalValue,jdbcType=DOUBLE}, #{countyName,jdbcType=VARCHAR}, 
-      #{countyId,jdbcType=CHAR}, #{industryBigid,jdbcType=CHAR}, #{industryName,jdbcType=CHAR}, 
-      #{industryBigname,jdbcType=CHAR}, #{industryId,jdbcType=CHAR}, #{addressdetail,jdbcType=VARCHAR}, 
-      #{address,jdbcType=CHAR}, #{countyRegisterCityDec,jdbcType=VARCHAR}, #{countyRegisterCity,jdbcType=VARCHAR}, 
-      #{aregisterdetail,jdbcType=VARCHAR}, #{powerAmount,jdbcType=DOUBLE}, #{addressRegister,jdbcType=VARCHAR}, 
-      #{countyidRegisterDec,jdbcType=VARCHAR}, #{countyidRegister,jdbcType=CHAR}, #{factoryLongitude,jdbcType=DOUBLE}, 
-      #{factoryLatitude,jdbcType=DOUBLE}, #{sourceType,jdbcType=CHAR}, #{gasequType,jdbcType=CHAR}, 
-      #{year,jdbcType=CHAR}, #{flag,jdbcType=BIT}, #{lastChangedTime,jdbcType=TIMESTAMP}, 
-      #{auditTime,jdbcType=TIMESTAMP}, #{fillingTime,jdbcType=TIMESTAMP}, #{devicestatus,jdbcType=INTEGER}, 
-      #{boilerstatus,jdbcType=INTEGER}, #{kilnstatus,jdbcType=INTEGER}, #{yearDays,jdbcType=INTEGER}, 
-      #{daysHours,jdbcType=INTEGER}, #{cityName,jdbcType=VARCHAR}, #{cityId,jdbcType=INTEGER}, 
-      #{totalOutput,jdbcType=DOUBLE}, #{factorystatus,jdbcType=INTEGER}, #{exhauststatus,jdbcType=INTEGER}, 
-      #{statusdec,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{exhaustNum,jdbcType=INTEGER}, 
-      #{important,jdbcType=INTEGER}, #{shihuaflag,jdbcType=INTEGER}, #{feiqnub,jdbcType=INTEGER}, 
+      exhaust_count, boiler_count, kiln_count, 
+      device_count, device_product_count, device_raw_count, 
+      rongji_product_count, rongji_raw_count, feiqi_count, 
+      soil_dust_count, con_dust_count, road_dust_count, 
+      yard_dust_count, no_org_work_count, flag, 
+      important, note)
+    values (#{factoryId,jdbcType=INTEGER}, #{factoryNo,jdbcType=CHAR}, #{legalperson,jdbcType=VARCHAR}, 
+      #{factoryName,jdbcType=VARCHAR}, #{factoryUsedname,jdbcType=VARCHAR}, #{factorySize,jdbcType=VARCHAR}, 
+      #{countyId,jdbcType=CHAR}, #{industryBigid,jdbcType=CHAR}, #{industryId,jdbcType=CHAR}, 
+      #{address,jdbcType=CHAR}, #{powerAmount,jdbcType=DOUBLE}, #{addressRegister,jdbcType=VARCHAR}, 
+      #{countyidRegister,jdbcType=CHAR}, #{factoryLongitude,jdbcType=DOUBLE}, #{factoryLatitude,jdbcType=DOUBLE}, 
+      #{sourceType,jdbcType=CHAR}, #{year,jdbcType=CHAR}, #{lastChangedTime,jdbcType=TIMESTAMP}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{fillingTime,jdbcType=TIMESTAMP}, #{yearDays,jdbcType=INTEGER}, 
+      #{daysHours,jdbcType=INTEGER}, #{totalOutput,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, 
       #{principalName,jdbcType=VARCHAR}, #{principalPhone,jdbcType=VARCHAR}, #{principalMobile,jdbcType=VARCHAR}, 
       #{principalEmail,jdbcType=VARCHAR}, #{lat1,jdbcType=DOUBLE}, #{lon1,jdbcType=DOUBLE}, 
       #{lat2,jdbcType=DOUBLE}, #{lon2,jdbcType=DOUBLE}, #{lat3,jdbcType=DOUBLE}, #{lon3,jdbcType=DOUBLE}, 
       #{lat4,jdbcType=DOUBLE}, #{lon4,jdbcType=DOUBLE}, #{lat5,jdbcType=DOUBLE}, #{lon5,jdbcType=DOUBLE}, 
       #{lat6,jdbcType=DOUBLE}, #{lon6,jdbcType=DOUBLE}, #{lat7,jdbcType=DOUBLE}, #{lon7,jdbcType=DOUBLE}, 
-      #{note,jdbcType=LONGVARCHAR})
+      #{exhaustCount,jdbcType=INTEGER}, #{boilerCount,jdbcType=INTEGER}, #{kilnCount,jdbcType=INTEGER}, 
+      #{deviceCount,jdbcType=INTEGER}, #{deviceProductCount,jdbcType=INTEGER}, #{deviceRawCount,jdbcType=INTEGER}, 
+      #{rongjiProductCount,jdbcType=INTEGER}, #{rongjiRawCount,jdbcType=INTEGER}, #{feiqiCount,jdbcType=INTEGER}, 
+      #{soilDustCount,jdbcType=INTEGER}, #{conDustCount,jdbcType=INTEGER}, #{roadDustCount,jdbcType=INTEGER}, 
+      #{yardDustCount,jdbcType=INTEGER}, #{noOrgWorkCount,jdbcType=INTEGER}, #{flag,jdbcType=BIT}, 
+      #{important,jdbcType=INTEGER}, #{note,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.Factory">
     insert into factory
@@ -252,12 +232,6 @@
       </if>
       <if test="factoryNo != null">
         factory_no,
-      </if>
-      <if test="factoryNo1 != null">
-        factory_no1,
-      </if>
-      <if test="factoryNo2 != null">
-        factory_no2,
       </if>
       <if test="legalperson != null">
         legalperson,
@@ -271,56 +245,23 @@
       <if test="factorySize != null">
         factory_size,
       </if>
-      <if test="countyCityDec != null">
-        county_city_dec,
-      </if>
-      <if test="countyCity != null">
-        county_city,
-      </if>
-      <if test="totalValue != null">
-        total_value,
-      </if>
-      <if test="countyName != null">
-        county_name,
-      </if>
       <if test="countyId != null">
         county_id,
       </if>
       <if test="industryBigid != null">
         industry_bigid,
       </if>
-      <if test="industryName != null">
-        industry_name,
-      </if>
-      <if test="industryBigname != null">
-        industry_bigname,
-      </if>
       <if test="industryId != null">
         industry_id,
       </if>
-      <if test="addressdetail != null">
-        addressdetail,
-      </if>
       <if test="address != null">
         address,
-      </if>
-      <if test="countyRegisterCityDec != null">
-        county_register_city_dec,
-      </if>
-      <if test="countyRegisterCity != null">
-        county_register_city,
-      </if>
-      <if test="aregisterdetail != null">
-        aregisterdetail,
       </if>
       <if test="powerAmount != null">
         power_amount,
       </if>
       <if test="addressRegister != null">
         address_register,
-      </if>
-      <if test="countyidRegisterDec != null">
-        countyid_register_dec,
       </if>
       <if test="countyidRegister != null">
         countyid_register,
@@ -334,14 +275,8 @@
       <if test="sourceType != null">
         source_type,
       </if>
-      <if test="gasequType != null">
-        gasequ_type,
-      </if>
       <if test="year != null">
         year,
-      </if>
-      <if test="flag != null">
-        flag,
       </if>
       <if test="lastChangedTime != null">
         last_changed_time,
@@ -352,53 +287,17 @@
       <if test="fillingTime != null">
         filling_time,
       </if>
-      <if test="devicestatus != null">
-        devicestatus,
-      </if>
-      <if test="boilerstatus != null">
-        boilerstatus,
-      </if>
-      <if test="kilnstatus != null">
-        kilnstatus,
-      </if>
       <if test="yearDays != null">
         Year_days,
       </if>
       <if test="daysHours != null">
         Days_hours,
       </if>
-      <if test="cityName != null">
-        CITY_NAME,
-      </if>
-      <if test="cityId != null">
-        CITY_ID,
-      </if>
       <if test="totalOutput != null">
         total_output,
       </if>
-      <if test="factorystatus != null">
-        factorystatus,
-      </if>
-      <if test="exhauststatus != null">
-        exhauststatus,
-      </if>
-      <if test="statusdec != null">
-        statusdec,
-      </if>
       <if test="status != null">
         status,
-      </if>
-      <if test="exhaustNum != null">
-        exhaust_num,
-      </if>
-      <if test="important != null">
-        important,
-      </if>
-      <if test="shihuaflag != null">
-        shihuaflag,
-      </if>
-      <if test="feiqnub != null">
-        feiqnub,
       </if>
       <if test="principalName != null">
         principal_name,
@@ -454,6 +353,54 @@
       <if test="lon7 != null">
         lon7,
       </if>
+      <if test="exhaustCount != null">
+        exhaust_count,
+      </if>
+      <if test="boilerCount != null">
+        boiler_count,
+      </if>
+      <if test="kilnCount != null">
+        kiln_count,
+      </if>
+      <if test="deviceCount != null">
+        device_count,
+      </if>
+      <if test="deviceProductCount != null">
+        device_product_count,
+      </if>
+      <if test="deviceRawCount != null">
+        device_raw_count,
+      </if>
+      <if test="rongjiProductCount != null">
+        rongji_product_count,
+      </if>
+      <if test="rongjiRawCount != null">
+        rongji_raw_count,
+      </if>
+      <if test="feiqiCount != null">
+        feiqi_count,
+      </if>
+      <if test="soilDustCount != null">
+        soil_dust_count,
+      </if>
+      <if test="conDustCount != null">
+        con_dust_count,
+      </if>
+      <if test="roadDustCount != null">
+        road_dust_count,
+      </if>
+      <if test="yardDustCount != null">
+        yard_dust_count,
+      </if>
+      <if test="noOrgWorkCount != null">
+        no_org_work_count,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="important != null">
+        important,
+      </if>
       <if test="note != null">
         note,
       </if>
@@ -464,12 +411,6 @@
       </if>
       <if test="factoryNo != null">
         #{factoryNo,jdbcType=CHAR},
-      </if>
-      <if test="factoryNo1 != null">
-        #{factoryNo1,jdbcType=CHAR},
-      </if>
-      <if test="factoryNo2 != null">
-        #{factoryNo2,jdbcType=CHAR},
       </if>
       <if test="legalperson != null">
         #{legalperson,jdbcType=VARCHAR},
@@ -483,56 +424,23 @@
       <if test="factorySize != null">
         #{factorySize,jdbcType=VARCHAR},
       </if>
-      <if test="countyCityDec != null">
-        #{countyCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="countyCity != null">
-        #{countyCity,jdbcType=VARCHAR},
-      </if>
-      <if test="totalValue != null">
-        #{totalValue,jdbcType=DOUBLE},
-      </if>
-      <if test="countyName != null">
-        #{countyName,jdbcType=VARCHAR},
-      </if>
       <if test="countyId != null">
         #{countyId,jdbcType=CHAR},
       </if>
       <if test="industryBigid != null">
         #{industryBigid,jdbcType=CHAR},
       </if>
-      <if test="industryName != null">
-        #{industryName,jdbcType=CHAR},
-      </if>
-      <if test="industryBigname != null">
-        #{industryBigname,jdbcType=CHAR},
-      </if>
       <if test="industryId != null">
         #{industryId,jdbcType=CHAR},
       </if>
-      <if test="addressdetail != null">
-        #{addressdetail,jdbcType=VARCHAR},
-      </if>
       <if test="address != null">
         #{address,jdbcType=CHAR},
-      </if>
-      <if test="countyRegisterCityDec != null">
-        #{countyRegisterCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="countyRegisterCity != null">
-        #{countyRegisterCity,jdbcType=VARCHAR},
-      </if>
-      <if test="aregisterdetail != null">
-        #{aregisterdetail,jdbcType=VARCHAR},
       </if>
       <if test="powerAmount != null">
         #{powerAmount,jdbcType=DOUBLE},
       </if>
       <if test="addressRegister != null">
         #{addressRegister,jdbcType=VARCHAR},
-      </if>
-      <if test="countyidRegisterDec != null">
-        #{countyidRegisterDec,jdbcType=VARCHAR},
       </if>
       <if test="countyidRegister != null">
         #{countyidRegister,jdbcType=CHAR},
@@ -546,14 +454,8 @@
       <if test="sourceType != null">
         #{sourceType,jdbcType=CHAR},
       </if>
-      <if test="gasequType != null">
-        #{gasequType,jdbcType=CHAR},
-      </if>
       <if test="year != null">
         #{year,jdbcType=CHAR},
-      </if>
-      <if test="flag != null">
-        #{flag,jdbcType=BIT},
       </if>
       <if test="lastChangedTime != null">
         #{lastChangedTime,jdbcType=TIMESTAMP},
@@ -564,53 +466,17 @@
       <if test="fillingTime != null">
         #{fillingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="devicestatus != null">
-        #{devicestatus,jdbcType=INTEGER},
-      </if>
-      <if test="boilerstatus != null">
-        #{boilerstatus,jdbcType=INTEGER},
-      </if>
-      <if test="kilnstatus != null">
-        #{kilnstatus,jdbcType=INTEGER},
-      </if>
       <if test="yearDays != null">
         #{yearDays,jdbcType=INTEGER},
       </if>
       <if test="daysHours != null">
         #{daysHours,jdbcType=INTEGER},
       </if>
-      <if test="cityName != null">
-        #{cityName,jdbcType=VARCHAR},
-      </if>
-      <if test="cityId != null">
-        #{cityId,jdbcType=INTEGER},
-      </if>
       <if test="totalOutput != null">
         #{totalOutput,jdbcType=DOUBLE},
       </if>
-      <if test="factorystatus != null">
-        #{factorystatus,jdbcType=INTEGER},
-      </if>
-      <if test="exhauststatus != null">
-        #{exhauststatus,jdbcType=INTEGER},
-      </if>
-      <if test="statusdec != null">
-        #{statusdec,jdbcType=VARCHAR},
-      </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
-      </if>
-      <if test="exhaustNum != null">
-        #{exhaustNum,jdbcType=INTEGER},
-      </if>
-      <if test="important != null">
-        #{important,jdbcType=INTEGER},
-      </if>
-      <if test="shihuaflag != null">
-        #{shihuaflag,jdbcType=INTEGER},
-      </if>
-      <if test="feiqnub != null">
-        #{feiqnub,jdbcType=INTEGER},
       </if>
       <if test="principalName != null">
         #{principalName,jdbcType=VARCHAR},
@@ -666,6 +532,54 @@
       <if test="lon7 != null">
         #{lon7,jdbcType=DOUBLE},
       </if>
+      <if test="exhaustCount != null">
+        #{exhaustCount,jdbcType=INTEGER},
+      </if>
+      <if test="boilerCount != null">
+        #{boilerCount,jdbcType=INTEGER},
+      </if>
+      <if test="kilnCount != null">
+        #{kilnCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCount != null">
+        #{deviceCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceProductCount != null">
+        #{deviceProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceRawCount != null">
+        #{deviceRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="rongjiProductCount != null">
+        #{rongjiProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="rongjiRawCount != null">
+        #{rongjiRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="feiqiCount != null">
+        #{feiqiCount,jdbcType=INTEGER},
+      </if>
+      <if test="soilDustCount != null">
+        #{soilDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="conDustCount != null">
+        #{conDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="roadDustCount != null">
+        #{roadDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="yardDustCount != null">
+        #{yardDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="noOrgWorkCount != null">
+        #{noOrgWorkCount,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=BIT},
+      </if>
+      <if test="important != null">
+        #{important,jdbcType=INTEGER},
+      </if>
       <if test="note != null">
         #{note,jdbcType=LONGVARCHAR},
       </if>
@@ -686,12 +600,6 @@
       <if test="record.factoryNo != null">
         factory_no = #{record.factoryNo,jdbcType=CHAR},
       </if>
-      <if test="record.factoryNo1 != null">
-        factory_no1 = #{record.factoryNo1,jdbcType=CHAR},
-      </if>
-      <if test="record.factoryNo2 != null">
-        factory_no2 = #{record.factoryNo2,jdbcType=CHAR},
-      </if>
       <if test="record.legalperson != null">
         legalperson = #{record.legalperson,jdbcType=VARCHAR},
       </if>
@@ -704,56 +612,23 @@
       <if test="record.factorySize != null">
         factory_size = #{record.factorySize,jdbcType=VARCHAR},
       </if>
-      <if test="record.countyCityDec != null">
-        county_city_dec = #{record.countyCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="record.countyCity != null">
-        county_city = #{record.countyCity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.totalValue != null">
-        total_value = #{record.totalValue,jdbcType=DOUBLE},
-      </if>
-      <if test="record.countyName != null">
-        county_name = #{record.countyName,jdbcType=VARCHAR},
-      </if>
       <if test="record.countyId != null">
         county_id = #{record.countyId,jdbcType=CHAR},
       </if>
       <if test="record.industryBigid != null">
         industry_bigid = #{record.industryBigid,jdbcType=CHAR},
       </if>
-      <if test="record.industryName != null">
-        industry_name = #{record.industryName,jdbcType=CHAR},
-      </if>
-      <if test="record.industryBigname != null">
-        industry_bigname = #{record.industryBigname,jdbcType=CHAR},
-      </if>
       <if test="record.industryId != null">
         industry_id = #{record.industryId,jdbcType=CHAR},
       </if>
-      <if test="record.addressdetail != null">
-        addressdetail = #{record.addressdetail,jdbcType=VARCHAR},
-      </if>
       <if test="record.address != null">
         address = #{record.address,jdbcType=CHAR},
-      </if>
-      <if test="record.countyRegisterCityDec != null">
-        county_register_city_dec = #{record.countyRegisterCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="record.countyRegisterCity != null">
-        county_register_city = #{record.countyRegisterCity,jdbcType=VARCHAR},
-      </if>
-      <if test="record.aregisterdetail != null">
-        aregisterdetail = #{record.aregisterdetail,jdbcType=VARCHAR},
       </if>
       <if test="record.powerAmount != null">
         power_amount = #{record.powerAmount,jdbcType=DOUBLE},
       </if>
       <if test="record.addressRegister != null">
         address_register = #{record.addressRegister,jdbcType=VARCHAR},
-      </if>
-      <if test="record.countyidRegisterDec != null">
-        countyid_register_dec = #{record.countyidRegisterDec,jdbcType=VARCHAR},
       </if>
       <if test="record.countyidRegister != null">
         countyid_register = #{record.countyidRegister,jdbcType=CHAR},
@@ -767,14 +642,8 @@
       <if test="record.sourceType != null">
         source_type = #{record.sourceType,jdbcType=CHAR},
       </if>
-      <if test="record.gasequType != null">
-        gasequ_type = #{record.gasequType,jdbcType=CHAR},
-      </if>
       <if test="record.year != null">
         year = #{record.year,jdbcType=CHAR},
-      </if>
-      <if test="record.flag != null">
-        flag = #{record.flag,jdbcType=BIT},
       </if>
       <if test="record.lastChangedTime != null">
         last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
@@ -785,53 +654,17 @@
       <if test="record.fillingTime != null">
         filling_time = #{record.fillingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.devicestatus != null">
-        devicestatus = #{record.devicestatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.boilerstatus != null">
-        boilerstatus = #{record.boilerstatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.kilnstatus != null">
-        kilnstatus = #{record.kilnstatus,jdbcType=INTEGER},
-      </if>
       <if test="record.yearDays != null">
         Year_days = #{record.yearDays,jdbcType=INTEGER},
       </if>
       <if test="record.daysHours != null">
         Days_hours = #{record.daysHours,jdbcType=INTEGER},
       </if>
-      <if test="record.cityName != null">
-        CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cityId != null">
-        CITY_ID = #{record.cityId,jdbcType=INTEGER},
-      </if>
       <if test="record.totalOutput != null">
         total_output = #{record.totalOutput,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorystatus != null">
-        factorystatus = #{record.factorystatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.exhauststatus != null">
-        exhauststatus = #{record.exhauststatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.statusdec != null">
-        statusdec = #{record.statusdec,jdbcType=VARCHAR},
-      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.exhaustNum != null">
-        exhaust_num = #{record.exhaustNum,jdbcType=INTEGER},
-      </if>
-      <if test="record.important != null">
-        important = #{record.important,jdbcType=INTEGER},
-      </if>
-      <if test="record.shihuaflag != null">
-        shihuaflag = #{record.shihuaflag,jdbcType=INTEGER},
-      </if>
-      <if test="record.feiqnub != null">
-        feiqnub = #{record.feiqnub,jdbcType=INTEGER},
       </if>
       <if test="record.principalName != null">
         principal_name = #{record.principalName,jdbcType=VARCHAR},
@@ -887,6 +720,54 @@
       <if test="record.lon7 != null">
         lon7 = #{record.lon7,jdbcType=DOUBLE},
       </if>
+      <if test="record.exhaustCount != null">
+        exhaust_count = #{record.exhaustCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.boilerCount != null">
+        boiler_count = #{record.boilerCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.kilnCount != null">
+        kiln_count = #{record.kilnCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceCount != null">
+        device_count = #{record.deviceCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceProductCount != null">
+        device_product_count = #{record.deviceProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceRawCount != null">
+        device_raw_count = #{record.deviceRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.rongjiProductCount != null">
+        rongji_product_count = #{record.rongjiProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.rongjiRawCount != null">
+        rongji_raw_count = #{record.rongjiRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.feiqiCount != null">
+        feiqi_count = #{record.feiqiCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.soilDustCount != null">
+        soil_dust_count = #{record.soilDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.conDustCount != null">
+        con_dust_count = #{record.conDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.roadDustCount != null">
+        road_dust_count = #{record.roadDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.yardDustCount != null">
+        yard_dust_count = #{record.yardDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.noOrgWorkCount != null">
+        no_org_work_count = #{record.noOrgWorkCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.flag != null">
+        flag = #{record.flag,jdbcType=BIT},
+      </if>
+      <if test="record.important != null">
+        important = #{record.important,jdbcType=INTEGER},
+      </if>
       <if test="record.note != null">
         note = #{record.note,jdbcType=LONGVARCHAR},
       </if>
@@ -899,55 +780,28 @@
     update factory
     set factory_id = #{record.factoryId,jdbcType=INTEGER},
       factory_no = #{record.factoryNo,jdbcType=CHAR},
-      factory_no1 = #{record.factoryNo1,jdbcType=CHAR},
-      factory_no2 = #{record.factoryNo2,jdbcType=CHAR},
       legalperson = #{record.legalperson,jdbcType=VARCHAR},
       factory_name = #{record.factoryName,jdbcType=VARCHAR},
       factory_usedname = #{record.factoryUsedname,jdbcType=VARCHAR},
       factory_size = #{record.factorySize,jdbcType=VARCHAR},
-      county_city_dec = #{record.countyCityDec,jdbcType=VARCHAR},
-      county_city = #{record.countyCity,jdbcType=VARCHAR},
-      total_value = #{record.totalValue,jdbcType=DOUBLE},
-      county_name = #{record.countyName,jdbcType=VARCHAR},
       county_id = #{record.countyId,jdbcType=CHAR},
       industry_bigid = #{record.industryBigid,jdbcType=CHAR},
-      industry_name = #{record.industryName,jdbcType=CHAR},
-      industry_bigname = #{record.industryBigname,jdbcType=CHAR},
       industry_id = #{record.industryId,jdbcType=CHAR},
-      addressdetail = #{record.addressdetail,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=CHAR},
-      county_register_city_dec = #{record.countyRegisterCityDec,jdbcType=VARCHAR},
-      county_register_city = #{record.countyRegisterCity,jdbcType=VARCHAR},
-      aregisterdetail = #{record.aregisterdetail,jdbcType=VARCHAR},
       power_amount = #{record.powerAmount,jdbcType=DOUBLE},
       address_register = #{record.addressRegister,jdbcType=VARCHAR},
-      countyid_register_dec = #{record.countyidRegisterDec,jdbcType=VARCHAR},
       countyid_register = #{record.countyidRegister,jdbcType=CHAR},
       factory_longitude = #{record.factoryLongitude,jdbcType=DOUBLE},
       factory_latitude = #{record.factoryLatitude,jdbcType=DOUBLE},
       source_type = #{record.sourceType,jdbcType=CHAR},
-      gasequ_type = #{record.gasequType,jdbcType=CHAR},
       year = #{record.year,jdbcType=CHAR},
-      flag = #{record.flag,jdbcType=BIT},
       last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
       audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
       filling_time = #{record.fillingTime,jdbcType=TIMESTAMP},
-      devicestatus = #{record.devicestatus,jdbcType=INTEGER},
-      boilerstatus = #{record.boilerstatus,jdbcType=INTEGER},
-      kilnstatus = #{record.kilnstatus,jdbcType=INTEGER},
       Year_days = #{record.yearDays,jdbcType=INTEGER},
       Days_hours = #{record.daysHours,jdbcType=INTEGER},
-      CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
-      CITY_ID = #{record.cityId,jdbcType=INTEGER},
       total_output = #{record.totalOutput,jdbcType=DOUBLE},
-      factorystatus = #{record.factorystatus,jdbcType=INTEGER},
-      exhauststatus = #{record.exhauststatus,jdbcType=INTEGER},
-      statusdec = #{record.statusdec,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
-      exhaust_num = #{record.exhaustNum,jdbcType=INTEGER},
-      important = #{record.important,jdbcType=INTEGER},
-      shihuaflag = #{record.shihuaflag,jdbcType=INTEGER},
-      feiqnub = #{record.feiqnub,jdbcType=INTEGER},
       principal_name = #{record.principalName,jdbcType=VARCHAR},
       principal_phone = #{record.principalPhone,jdbcType=VARCHAR},
       principal_mobile = #{record.principalMobile,jdbcType=VARCHAR},
@@ -966,6 +820,22 @@
       lon6 = #{record.lon6,jdbcType=DOUBLE},
       lat7 = #{record.lat7,jdbcType=DOUBLE},
       lon7 = #{record.lon7,jdbcType=DOUBLE},
+      exhaust_count = #{record.exhaustCount,jdbcType=INTEGER},
+      boiler_count = #{record.boilerCount,jdbcType=INTEGER},
+      kiln_count = #{record.kilnCount,jdbcType=INTEGER},
+      device_count = #{record.deviceCount,jdbcType=INTEGER},
+      device_product_count = #{record.deviceProductCount,jdbcType=INTEGER},
+      device_raw_count = #{record.deviceRawCount,jdbcType=INTEGER},
+      rongji_product_count = #{record.rongjiProductCount,jdbcType=INTEGER},
+      rongji_raw_count = #{record.rongjiRawCount,jdbcType=INTEGER},
+      feiqi_count = #{record.feiqiCount,jdbcType=INTEGER},
+      soil_dust_count = #{record.soilDustCount,jdbcType=INTEGER},
+      con_dust_count = #{record.conDustCount,jdbcType=INTEGER},
+      road_dust_count = #{record.roadDustCount,jdbcType=INTEGER},
+      yard_dust_count = #{record.yardDustCount,jdbcType=INTEGER},
+      no_org_work_count = #{record.noOrgWorkCount,jdbcType=INTEGER},
+      flag = #{record.flag,jdbcType=BIT},
+      important = #{record.important,jdbcType=INTEGER},
       note = #{record.note,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -975,55 +845,28 @@
     update factory
     set factory_id = #{record.factoryId,jdbcType=INTEGER},
       factory_no = #{record.factoryNo,jdbcType=CHAR},
-      factory_no1 = #{record.factoryNo1,jdbcType=CHAR},
-      factory_no2 = #{record.factoryNo2,jdbcType=CHAR},
       legalperson = #{record.legalperson,jdbcType=VARCHAR},
       factory_name = #{record.factoryName,jdbcType=VARCHAR},
       factory_usedname = #{record.factoryUsedname,jdbcType=VARCHAR},
       factory_size = #{record.factorySize,jdbcType=VARCHAR},
-      county_city_dec = #{record.countyCityDec,jdbcType=VARCHAR},
-      county_city = #{record.countyCity,jdbcType=VARCHAR},
-      total_value = #{record.totalValue,jdbcType=DOUBLE},
-      county_name = #{record.countyName,jdbcType=VARCHAR},
       county_id = #{record.countyId,jdbcType=CHAR},
       industry_bigid = #{record.industryBigid,jdbcType=CHAR},
-      industry_name = #{record.industryName,jdbcType=CHAR},
-      industry_bigname = #{record.industryBigname,jdbcType=CHAR},
       industry_id = #{record.industryId,jdbcType=CHAR},
-      addressdetail = #{record.addressdetail,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=CHAR},
-      county_register_city_dec = #{record.countyRegisterCityDec,jdbcType=VARCHAR},
-      county_register_city = #{record.countyRegisterCity,jdbcType=VARCHAR},
-      aregisterdetail = #{record.aregisterdetail,jdbcType=VARCHAR},
       power_amount = #{record.powerAmount,jdbcType=DOUBLE},
       address_register = #{record.addressRegister,jdbcType=VARCHAR},
-      countyid_register_dec = #{record.countyidRegisterDec,jdbcType=VARCHAR},
       countyid_register = #{record.countyidRegister,jdbcType=CHAR},
       factory_longitude = #{record.factoryLongitude,jdbcType=DOUBLE},
       factory_latitude = #{record.factoryLatitude,jdbcType=DOUBLE},
       source_type = #{record.sourceType,jdbcType=CHAR},
-      gasequ_type = #{record.gasequType,jdbcType=CHAR},
       year = #{record.year,jdbcType=CHAR},
-      flag = #{record.flag,jdbcType=BIT},
       last_changed_time = #{record.lastChangedTime,jdbcType=TIMESTAMP},
       audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
       filling_time = #{record.fillingTime,jdbcType=TIMESTAMP},
-      devicestatus = #{record.devicestatus,jdbcType=INTEGER},
-      boilerstatus = #{record.boilerstatus,jdbcType=INTEGER},
-      kilnstatus = #{record.kilnstatus,jdbcType=INTEGER},
       Year_days = #{record.yearDays,jdbcType=INTEGER},
       Days_hours = #{record.daysHours,jdbcType=INTEGER},
-      CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
-      CITY_ID = #{record.cityId,jdbcType=INTEGER},
       total_output = #{record.totalOutput,jdbcType=DOUBLE},
-      factorystatus = #{record.factorystatus,jdbcType=INTEGER},
-      exhauststatus = #{record.exhauststatus,jdbcType=INTEGER},
-      statusdec = #{record.statusdec,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
-      exhaust_num = #{record.exhaustNum,jdbcType=INTEGER},
-      important = #{record.important,jdbcType=INTEGER},
-      shihuaflag = #{record.shihuaflag,jdbcType=INTEGER},
-      feiqnub = #{record.feiqnub,jdbcType=INTEGER},
       principal_name = #{record.principalName,jdbcType=VARCHAR},
       principal_phone = #{record.principalPhone,jdbcType=VARCHAR},
       principal_mobile = #{record.principalMobile,jdbcType=VARCHAR},
@@ -1041,7 +884,23 @@
       lat6 = #{record.lat6,jdbcType=DOUBLE},
       lon6 = #{record.lon6,jdbcType=DOUBLE},
       lat7 = #{record.lat7,jdbcType=DOUBLE},
-      lon7 = #{record.lon7,jdbcType=DOUBLE}
+      lon7 = #{record.lon7,jdbcType=DOUBLE},
+      exhaust_count = #{record.exhaustCount,jdbcType=INTEGER},
+      boiler_count = #{record.boilerCount,jdbcType=INTEGER},
+      kiln_count = #{record.kilnCount,jdbcType=INTEGER},
+      device_count = #{record.deviceCount,jdbcType=INTEGER},
+      device_product_count = #{record.deviceProductCount,jdbcType=INTEGER},
+      device_raw_count = #{record.deviceRawCount,jdbcType=INTEGER},
+      rongji_product_count = #{record.rongjiProductCount,jdbcType=INTEGER},
+      rongji_raw_count = #{record.rongjiRawCount,jdbcType=INTEGER},
+      feiqi_count = #{record.feiqiCount,jdbcType=INTEGER},
+      soil_dust_count = #{record.soilDustCount,jdbcType=INTEGER},
+      con_dust_count = #{record.conDustCount,jdbcType=INTEGER},
+      road_dust_count = #{record.roadDustCount,jdbcType=INTEGER},
+      yard_dust_count = #{record.yardDustCount,jdbcType=INTEGER},
+      no_org_work_count = #{record.noOrgWorkCount,jdbcType=INTEGER},
+      flag = #{record.flag,jdbcType=BIT},
+      important = #{record.important,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -1051,12 +910,6 @@
     <set>
       <if test="factoryNo != null">
         factory_no = #{factoryNo,jdbcType=CHAR},
-      </if>
-      <if test="factoryNo1 != null">
-        factory_no1 = #{factoryNo1,jdbcType=CHAR},
-      </if>
-      <if test="factoryNo2 != null">
-        factory_no2 = #{factoryNo2,jdbcType=CHAR},
       </if>
       <if test="legalperson != null">
         legalperson = #{legalperson,jdbcType=VARCHAR},
@@ -1070,56 +923,23 @@
       <if test="factorySize != null">
         factory_size = #{factorySize,jdbcType=VARCHAR},
       </if>
-      <if test="countyCityDec != null">
-        county_city_dec = #{countyCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="countyCity != null">
-        county_city = #{countyCity,jdbcType=VARCHAR},
-      </if>
-      <if test="totalValue != null">
-        total_value = #{totalValue,jdbcType=DOUBLE},
-      </if>
-      <if test="countyName != null">
-        county_name = #{countyName,jdbcType=VARCHAR},
-      </if>
       <if test="countyId != null">
         county_id = #{countyId,jdbcType=CHAR},
       </if>
       <if test="industryBigid != null">
         industry_bigid = #{industryBigid,jdbcType=CHAR},
       </if>
-      <if test="industryName != null">
-        industry_name = #{industryName,jdbcType=CHAR},
-      </if>
-      <if test="industryBigname != null">
-        industry_bigname = #{industryBigname,jdbcType=CHAR},
-      </if>
       <if test="industryId != null">
         industry_id = #{industryId,jdbcType=CHAR},
       </if>
-      <if test="addressdetail != null">
-        addressdetail = #{addressdetail,jdbcType=VARCHAR},
-      </if>
       <if test="address != null">
         address = #{address,jdbcType=CHAR},
-      </if>
-      <if test="countyRegisterCityDec != null">
-        county_register_city_dec = #{countyRegisterCityDec,jdbcType=VARCHAR},
-      </if>
-      <if test="countyRegisterCity != null">
-        county_register_city = #{countyRegisterCity,jdbcType=VARCHAR},
-      </if>
-      <if test="aregisterdetail != null">
-        aregisterdetail = #{aregisterdetail,jdbcType=VARCHAR},
       </if>
       <if test="powerAmount != null">
         power_amount = #{powerAmount,jdbcType=DOUBLE},
       </if>
       <if test="addressRegister != null">
         address_register = #{addressRegister,jdbcType=VARCHAR},
-      </if>
-      <if test="countyidRegisterDec != null">
-        countyid_register_dec = #{countyidRegisterDec,jdbcType=VARCHAR},
       </if>
       <if test="countyidRegister != null">
         countyid_register = #{countyidRegister,jdbcType=CHAR},
@@ -1133,14 +953,8 @@
       <if test="sourceType != null">
         source_type = #{sourceType,jdbcType=CHAR},
       </if>
-      <if test="gasequType != null">
-        gasequ_type = #{gasequType,jdbcType=CHAR},
-      </if>
       <if test="year != null">
         year = #{year,jdbcType=CHAR},
-      </if>
-      <if test="flag != null">
-        flag = #{flag,jdbcType=BIT},
       </if>
       <if test="lastChangedTime != null">
         last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
@@ -1151,53 +965,17 @@
       <if test="fillingTime != null">
         filling_time = #{fillingTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="devicestatus != null">
-        devicestatus = #{devicestatus,jdbcType=INTEGER},
-      </if>
-      <if test="boilerstatus != null">
-        boilerstatus = #{boilerstatus,jdbcType=INTEGER},
-      </if>
-      <if test="kilnstatus != null">
-        kilnstatus = #{kilnstatus,jdbcType=INTEGER},
-      </if>
       <if test="yearDays != null">
         Year_days = #{yearDays,jdbcType=INTEGER},
       </if>
       <if test="daysHours != null">
         Days_hours = #{daysHours,jdbcType=INTEGER},
       </if>
-      <if test="cityName != null">
-        CITY_NAME = #{cityName,jdbcType=VARCHAR},
-      </if>
-      <if test="cityId != null">
-        CITY_ID = #{cityId,jdbcType=INTEGER},
-      </if>
       <if test="totalOutput != null">
         total_output = #{totalOutput,jdbcType=DOUBLE},
       </if>
-      <if test="factorystatus != null">
-        factorystatus = #{factorystatus,jdbcType=INTEGER},
-      </if>
-      <if test="exhauststatus != null">
-        exhauststatus = #{exhauststatus,jdbcType=INTEGER},
-      </if>
-      <if test="statusdec != null">
-        statusdec = #{statusdec,jdbcType=VARCHAR},
-      </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="exhaustNum != null">
-        exhaust_num = #{exhaustNum,jdbcType=INTEGER},
-      </if>
-      <if test="important != null">
-        important = #{important,jdbcType=INTEGER},
-      </if>
-      <if test="shihuaflag != null">
-        shihuaflag = #{shihuaflag,jdbcType=INTEGER},
-      </if>
-      <if test="feiqnub != null">
-        feiqnub = #{feiqnub,jdbcType=INTEGER},
       </if>
       <if test="principalName != null">
         principal_name = #{principalName,jdbcType=VARCHAR},
@@ -1253,6 +1031,54 @@
       <if test="lon7 != null">
         lon7 = #{lon7,jdbcType=DOUBLE},
       </if>
+      <if test="exhaustCount != null">
+        exhaust_count = #{exhaustCount,jdbcType=INTEGER},
+      </if>
+      <if test="boilerCount != null">
+        boiler_count = #{boilerCount,jdbcType=INTEGER},
+      </if>
+      <if test="kilnCount != null">
+        kiln_count = #{kilnCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCount != null">
+        device_count = #{deviceCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceProductCount != null">
+        device_product_count = #{deviceProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="deviceRawCount != null">
+        device_raw_count = #{deviceRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="rongjiProductCount != null">
+        rongji_product_count = #{rongjiProductCount,jdbcType=INTEGER},
+      </if>
+      <if test="rongjiRawCount != null">
+        rongji_raw_count = #{rongjiRawCount,jdbcType=INTEGER},
+      </if>
+      <if test="feiqiCount != null">
+        feiqi_count = #{feiqiCount,jdbcType=INTEGER},
+      </if>
+      <if test="soilDustCount != null">
+        soil_dust_count = #{soilDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="conDustCount != null">
+        con_dust_count = #{conDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="roadDustCount != null">
+        road_dust_count = #{roadDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="yardDustCount != null">
+        yard_dust_count = #{yardDustCount,jdbcType=INTEGER},
+      </if>
+      <if test="noOrgWorkCount != null">
+        no_org_work_count = #{noOrgWorkCount,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=BIT},
+      </if>
+      <if test="important != null">
+        important = #{important,jdbcType=INTEGER},
+      </if>
       <if test="note != null">
         note = #{note,jdbcType=LONGVARCHAR},
       </if>
@@ -1262,55 +1088,28 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.nankai.xining.bean.Factory">
     update factory
     set factory_no = #{factoryNo,jdbcType=CHAR},
-      factory_no1 = #{factoryNo1,jdbcType=CHAR},
-      factory_no2 = #{factoryNo2,jdbcType=CHAR},
       legalperson = #{legalperson,jdbcType=VARCHAR},
       factory_name = #{factoryName,jdbcType=VARCHAR},
       factory_usedname = #{factoryUsedname,jdbcType=VARCHAR},
       factory_size = #{factorySize,jdbcType=VARCHAR},
-      county_city_dec = #{countyCityDec,jdbcType=VARCHAR},
-      county_city = #{countyCity,jdbcType=VARCHAR},
-      total_value = #{totalValue,jdbcType=DOUBLE},
-      county_name = #{countyName,jdbcType=VARCHAR},
       county_id = #{countyId,jdbcType=CHAR},
       industry_bigid = #{industryBigid,jdbcType=CHAR},
-      industry_name = #{industryName,jdbcType=CHAR},
-      industry_bigname = #{industryBigname,jdbcType=CHAR},
       industry_id = #{industryId,jdbcType=CHAR},
-      addressdetail = #{addressdetail,jdbcType=VARCHAR},
       address = #{address,jdbcType=CHAR},
-      county_register_city_dec = #{countyRegisterCityDec,jdbcType=VARCHAR},
-      county_register_city = #{countyRegisterCity,jdbcType=VARCHAR},
-      aregisterdetail = #{aregisterdetail,jdbcType=VARCHAR},
       power_amount = #{powerAmount,jdbcType=DOUBLE},
       address_register = #{addressRegister,jdbcType=VARCHAR},
-      countyid_register_dec = #{countyidRegisterDec,jdbcType=VARCHAR},
       countyid_register = #{countyidRegister,jdbcType=CHAR},
       factory_longitude = #{factoryLongitude,jdbcType=DOUBLE},
       factory_latitude = #{factoryLatitude,jdbcType=DOUBLE},
       source_type = #{sourceType,jdbcType=CHAR},
-      gasequ_type = #{gasequType,jdbcType=CHAR},
       year = #{year,jdbcType=CHAR},
-      flag = #{flag,jdbcType=BIT},
       last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
       audit_time = #{auditTime,jdbcType=TIMESTAMP},
       filling_time = #{fillingTime,jdbcType=TIMESTAMP},
-      devicestatus = #{devicestatus,jdbcType=INTEGER},
-      boilerstatus = #{boilerstatus,jdbcType=INTEGER},
-      kilnstatus = #{kilnstatus,jdbcType=INTEGER},
       Year_days = #{yearDays,jdbcType=INTEGER},
       Days_hours = #{daysHours,jdbcType=INTEGER},
-      CITY_NAME = #{cityName,jdbcType=VARCHAR},
-      CITY_ID = #{cityId,jdbcType=INTEGER},
       total_output = #{totalOutput,jdbcType=DOUBLE},
-      factorystatus = #{factorystatus,jdbcType=INTEGER},
-      exhauststatus = #{exhauststatus,jdbcType=INTEGER},
-      statusdec = #{statusdec,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      exhaust_num = #{exhaustNum,jdbcType=INTEGER},
-      important = #{important,jdbcType=INTEGER},
-      shihuaflag = #{shihuaflag,jdbcType=INTEGER},
-      feiqnub = #{feiqnub,jdbcType=INTEGER},
       principal_name = #{principalName,jdbcType=VARCHAR},
       principal_phone = #{principalPhone,jdbcType=VARCHAR},
       principal_mobile = #{principalMobile,jdbcType=VARCHAR},
@@ -1329,61 +1128,50 @@
       lon6 = #{lon6,jdbcType=DOUBLE},
       lat7 = #{lat7,jdbcType=DOUBLE},
       lon7 = #{lon7,jdbcType=DOUBLE},
+      exhaust_count = #{exhaustCount,jdbcType=INTEGER},
+      boiler_count = #{boilerCount,jdbcType=INTEGER},
+      kiln_count = #{kilnCount,jdbcType=INTEGER},
+      device_count = #{deviceCount,jdbcType=INTEGER},
+      device_product_count = #{deviceProductCount,jdbcType=INTEGER},
+      device_raw_count = #{deviceRawCount,jdbcType=INTEGER},
+      rongji_product_count = #{rongjiProductCount,jdbcType=INTEGER},
+      rongji_raw_count = #{rongjiRawCount,jdbcType=INTEGER},
+      feiqi_count = #{feiqiCount,jdbcType=INTEGER},
+      soil_dust_count = #{soilDustCount,jdbcType=INTEGER},
+      con_dust_count = #{conDustCount,jdbcType=INTEGER},
+      road_dust_count = #{roadDustCount,jdbcType=INTEGER},
+      yard_dust_count = #{yardDustCount,jdbcType=INTEGER},
+      no_org_work_count = #{noOrgWorkCount,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=BIT},
+      important = #{important,jdbcType=INTEGER},
       note = #{note,jdbcType=LONGVARCHAR}
     where factory_id = #{factoryId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.Factory">
     update factory
     set factory_no = #{factoryNo,jdbcType=CHAR},
-      factory_no1 = #{factoryNo1,jdbcType=CHAR},
-      factory_no2 = #{factoryNo2,jdbcType=CHAR},
       legalperson = #{legalperson,jdbcType=VARCHAR},
       factory_name = #{factoryName,jdbcType=VARCHAR},
       factory_usedname = #{factoryUsedname,jdbcType=VARCHAR},
       factory_size = #{factorySize,jdbcType=VARCHAR},
-      county_city_dec = #{countyCityDec,jdbcType=VARCHAR},
-      county_city = #{countyCity,jdbcType=VARCHAR},
-      total_value = #{totalValue,jdbcType=DOUBLE},
-      county_name = #{countyName,jdbcType=VARCHAR},
       county_id = #{countyId,jdbcType=CHAR},
       industry_bigid = #{industryBigid,jdbcType=CHAR},
-      industry_name = #{industryName,jdbcType=CHAR},
-      industry_bigname = #{industryBigname,jdbcType=CHAR},
       industry_id = #{industryId,jdbcType=CHAR},
-      addressdetail = #{addressdetail,jdbcType=VARCHAR},
       address = #{address,jdbcType=CHAR},
-      county_register_city_dec = #{countyRegisterCityDec,jdbcType=VARCHAR},
-      county_register_city = #{countyRegisterCity,jdbcType=VARCHAR},
-      aregisterdetail = #{aregisterdetail,jdbcType=VARCHAR},
       power_amount = #{powerAmount,jdbcType=DOUBLE},
       address_register = #{addressRegister,jdbcType=VARCHAR},
-      countyid_register_dec = #{countyidRegisterDec,jdbcType=VARCHAR},
       countyid_register = #{countyidRegister,jdbcType=CHAR},
       factory_longitude = #{factoryLongitude,jdbcType=DOUBLE},
       factory_latitude = #{factoryLatitude,jdbcType=DOUBLE},
       source_type = #{sourceType,jdbcType=CHAR},
-      gasequ_type = #{gasequType,jdbcType=CHAR},
       year = #{year,jdbcType=CHAR},
-      flag = #{flag,jdbcType=BIT},
       last_changed_time = #{lastChangedTime,jdbcType=TIMESTAMP},
       audit_time = #{auditTime,jdbcType=TIMESTAMP},
       filling_time = #{fillingTime,jdbcType=TIMESTAMP},
-      devicestatus = #{devicestatus,jdbcType=INTEGER},
-      boilerstatus = #{boilerstatus,jdbcType=INTEGER},
-      kilnstatus = #{kilnstatus,jdbcType=INTEGER},
       Year_days = #{yearDays,jdbcType=INTEGER},
       Days_hours = #{daysHours,jdbcType=INTEGER},
-      CITY_NAME = #{cityName,jdbcType=VARCHAR},
-      CITY_ID = #{cityId,jdbcType=INTEGER},
       total_output = #{totalOutput,jdbcType=DOUBLE},
-      factorystatus = #{factorystatus,jdbcType=INTEGER},
-      exhauststatus = #{exhauststatus,jdbcType=INTEGER},
-      statusdec = #{statusdec,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      exhaust_num = #{exhaustNum,jdbcType=INTEGER},
-      important = #{important,jdbcType=INTEGER},
-      shihuaflag = #{shihuaflag,jdbcType=INTEGER},
-      feiqnub = #{feiqnub,jdbcType=INTEGER},
       principal_name = #{principalName,jdbcType=VARCHAR},
       principal_phone = #{principalPhone,jdbcType=VARCHAR},
       principal_mobile = #{principalMobile,jdbcType=VARCHAR},
@@ -1401,7 +1189,28 @@
       lat6 = #{lat6,jdbcType=DOUBLE},
       lon6 = #{lon6,jdbcType=DOUBLE},
       lat7 = #{lat7,jdbcType=DOUBLE},
-      lon7 = #{lon7,jdbcType=DOUBLE}
+      lon7 = #{lon7,jdbcType=DOUBLE},
+      exhaust_count = #{exhaustCount,jdbcType=INTEGER},
+      boiler_count = #{boilerCount,jdbcType=INTEGER},
+      kiln_count = #{kilnCount,jdbcType=INTEGER},
+      device_count = #{deviceCount,jdbcType=INTEGER},
+      device_product_count = #{deviceProductCount,jdbcType=INTEGER},
+      device_raw_count = #{deviceRawCount,jdbcType=INTEGER},
+      rongji_product_count = #{rongjiProductCount,jdbcType=INTEGER},
+      rongji_raw_count = #{rongjiRawCount,jdbcType=INTEGER},
+      feiqi_count = #{feiqiCount,jdbcType=INTEGER},
+      soil_dust_count = #{soilDustCount,jdbcType=INTEGER},
+      con_dust_count = #{conDustCount,jdbcType=INTEGER},
+      road_dust_count = #{roadDustCount,jdbcType=INTEGER},
+      yard_dust_count = #{yardDustCount,jdbcType=INTEGER},
+      no_org_work_count = #{noOrgWorkCount,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=BIT},
+      important = #{important,jdbcType=INTEGER}
     where factory_id = #{factoryId,jdbcType=INTEGER}
   </update>
+
+  <select id="getCitybyCountry" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT city_code
+  FROM county WHERE COUNTY_ID = #{countryID,jdbcType=VARCHAR}
+  </select>
 </mapper>

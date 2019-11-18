@@ -2,9 +2,10 @@ package com.nankai.xining.repository;
 
 import com.nankai.xining.bean.Feiqi;
 import com.nankai.xining.bean.FeiqiExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface FeiqiMapper {

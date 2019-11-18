@@ -5,9 +5,7 @@ import com.nankai.xining.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 
@@ -50,15 +48,29 @@ public class EnterpriseService {
      * @param factoryNo
      * @return
      */
-    public Factory getFactoryInfoByNo(String factoryNo){
+    public FactoryInfo getFactoryInfoByNo(String factoryNo) throws IllegalAccessException {
         FactoryExample factoryExample = new FactoryExample();
         FactoryExample.Criteria criteria = factoryExample.createCriteria();
-        criteria.andFactoryNo1EqualTo(factoryNo);
+        criteria.andFactoryNoEqualTo(factoryNo);
         List<Factory> factoryList = factoryMapper.selectByExample(factoryExample);
         if (factoryList.isEmpty()){
             return null;
         }else {
-            return factoryList.get(0);
+            Factory factory = factoryList.get(0);
+            FactoryInfo factoryInfo = new FactoryInfo();
+            //使用反射将factory对象的数据拷贝到factoryInfo
+            Field[] fields=factory.getClass().getDeclaredFields();
+            for(int i = 0; i < fields.length; i++){
+                if (fields[i].getName().equals("serialVersionUID")) continue;
+                fields[i].setAccessible(true);
+                Object sourceValue=fields[i].get(factory);
+                fields[i].set(factoryInfo,sourceValue );
+            }
+            String countyID = factoryInfo.getCountyId();
+            String countyIDRegister = factoryInfo.getCountyidRegister();
+            factoryInfo.setCountyCity(factoryMapper.getCitybyCountry(countyID));
+            factoryInfo.setCountyRegisterCity(factoryMapper.getCitybyCountry(countyIDRegister));
+            return factoryInfo;
         }
     }
 
@@ -70,24 +82,34 @@ public class EnterpriseService {
      * @param factoryid
      * @return Factory
      */
-    public Factory updateFactory(Factory factory,int factoryid){
+    public FactoryInfo updateFactory(Factory factory, int factoryid) throws IllegalAccessException {
 
         factory.setFactoryId(factoryid);
         Factory fac=factoryMapper.selectByPrimaryKey(factoryid);
-        factory.setFactoryNo1(fac.getFactoryNo1());
+        factory.setFactoryNo(fac.getFactoryNo());
         if(fac.getFillingTime()==null){
             factory.setFillingTime(new Date());
         }else{
             factory.setFillingTime(fac.getFillingTime());
         }
         factory.setLastChangedTime(new Date());
-        factory.setExhaustNum(fac.getExhaustNum());
-        factory.setFeiqnub(fac.getFeiqnub());
         factory.setYear(fac.getYear());
         factory.setStatus(8);
-        factory.setStatusdec("只填写基本信息");
         if (factoryMapper.updateByPrimaryKeySelective(factory)!=0){
-            return factory;
+            FactoryInfo factoryInfo = new FactoryInfo();
+            //使用反射将factory对象的数据拷贝到factoryInfo
+            Field[] fields=factory.getClass().getDeclaredFields();
+            for(int i = 0; i < fields.length; i++){
+                if (fields[i].getName().equals("serialVersionUID")) continue;
+                fields[i].setAccessible(true);
+                Object sourceValue=fields[i].get(factory);
+                fields[i].set(factoryInfo,sourceValue );
+            }
+            String countyID = factoryInfo.getCountyId();
+            String countyIDRegister = factoryInfo.getCountyidRegister();
+            factoryInfo.setCountyCity(factoryMapper.getCitybyCountry(countyID));
+            factoryInfo.setCountyRegisterCity(factoryMapper.getCitybyCountry(countyIDRegister));
+            return factoryInfo;
         }else
             return null;
     }

@@ -26,9 +26,6 @@ public class KilnService {
     ExhaustMapper exhaustMapper;
 
     @Autowired
-    TotalKilnMapper totalKilnMapper;
-
-    @Autowired
     SccMapper sccMapper;
 
     @Autowired
@@ -85,35 +82,11 @@ public class KilnService {
         }
 
         kiln.setNkNo(curMaxNum+1);
-        kiln.setKilnNo(curMaxNum+1+"");
 
-        //更新total_kiln数据
-        TotalKilnExample totalKilnExample = new TotalKilnExample();
-        TotalKilnExample.Criteria totalKcriteria = totalKilnExample.createCriteria();
-        totalKcriteria.andFactoryIdEqualTo(factoryId);
-        List<TotalKiln> totalKiln = totalKilnMapper.selectByExample(totalKilnExample);
-        Integer tkilnID = -1;
-        boolean flag=true;
-        if (totalKiln.size()!=0){
-            //表中有总数记录，直接加一
-            TotalKiln totalKiln1 = totalKiln.get(0);
-            tkilnID = totalKiln1.getFkilntotalId();
-            totalKiln1.setFkilnNum(totalKiln1.getFkilnNum()+1);
-            if (totalKilnMapper.updateByPrimaryKey(totalKiln1)==0){
-                flag=false;
-            }
-        }else {
-            //表中无总数字段，插入
-            TotalKiln totalKiln2 = new TotalKiln();
-            totalKiln2.setFactoryId(factoryId);
-            totalKiln2.setFkilnNum(1);
-            if (totalKilnMapper.insert(totalKiln2)!=0){
-                totalKiln=totalKilnMapper.selectByExample(totalKilnExample);
-                tkilnID = totalKiln.get(0).getFkilntotalId();
-            }else {
-                flag=false;
-            }
-        }
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int kilnCount = kilnList.size()+1;
+        factory.setKilnCount(kilnCount);
 
 
         //初始化kiln
@@ -131,21 +104,15 @@ public class KilnService {
         kiln.setNox((scc.getNox()*fuelAuseage)/100);
         kiln.setVoc((scc.getVocs()*fuelAuseage)/100);
         kiln.setScccode(StrSCC);
-        kiln.setTkilnId(tkilnID);
+        if (kilnMapper.insertSelective(kiln)!=0) {
+            //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
+            Date now = new Date();
+            factory.setLastChangedTime(now);
+            factoryMapper.updateByPrimaryKeySelective(factory);
 
-        if (flag){
-            if (kilnMapper.insertSelective(kiln)!=0) {
-                //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-                Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
-                Date now = new Date();
-                factory.setLastChangedTime(now);
-                factoryMapper.updateByPrimaryKeySelective(factory);
-
-                return true;
-            }
-            else return false;
-        }else
-            return false;
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -185,14 +152,11 @@ public class KilnService {
     public int deleteKiln(int kilnID, Integer factoryID) {
         //删除窑炉的同时更改total表
         if (kilnMapper.deleteByPrimaryKey(kilnID)!=0){
-            //更新total_kiln数据
-            TotalKilnExample totalKilnExample = new TotalKilnExample();
-            TotalKilnExample.Criteria totalKcriteria = totalKilnExample.createCriteria();
-            totalKcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalKiln> totalKiln = totalKilnMapper.selectByExample(totalKilnExample);
-            TotalKiln totalKiln1 = totalKiln.get(0);
-            totalKiln1.setFkilnNum(totalKiln1.getFkilnNum()-1);
-            totalKilnMapper.updateByPrimaryKey(totalKiln1);
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int kilnCount = factory.getKilnCount()-1;
+            factory.setKilnCount(kilnCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
             return 1;
         }else {
             return 0;

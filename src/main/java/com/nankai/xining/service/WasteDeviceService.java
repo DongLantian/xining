@@ -74,6 +74,11 @@ public class WasteDeviceService {
         //设置企业ID
         feiqi.setFactoryId(factoryId);
 
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int feiqiCount = feiqiList.size()+1;
+        factory.setFeiqiCount(feiqiCount);
+
         //初始化feiqi
         String StrSCC="21"+feiqi.getScc2()+feiqi.getScc3()+feiqi.getScc4();
         feiqi.setSccCode(StrSCC);
@@ -81,7 +86,6 @@ public class WasteDeviceService {
 
         if (feiqiMapper.insertSelective(feiqi)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-            Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
             factory.setLastChangedTime(now);
             factoryMapper.updateByPrimaryKeySelective(factory);
@@ -111,8 +115,14 @@ public class WasteDeviceService {
      * @param deviceID
      * @return
      */
-    public int deleteDevice(int deviceID) {
+    public int deleteDevice(int deviceID, int factoryID) {
         if (feiqiMapper.deleteByPrimaryKey(deviceID)!=0){
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int feiqiCount = factory.getFeiqiCount()-1;
+            factory.setFeiqiCount(feiqiCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
+
             return 1;
         }else {
             return 0;

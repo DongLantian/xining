@@ -1,8 +1,6 @@
 package com.nankai.xining.service;
 
-import com.nankai.xining.bean.FYardDustSource;
-import com.nankai.xining.bean.FYardDustSourceExample;
-import com.nankai.xining.bean.Factory;
+import com.nankai.xining.bean.*;
 import com.nankai.xining.repository.FYardDustSourceMapper;
 import com.nankai.xining.repository.FactoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,9 +109,17 @@ public class YardDustService {
         fYardDustSource.setScccode(sccvalue);//风蚀
         fYardDustSource.setScccode1(sccvalue1);//装卸
 
+        FYardDustSourceExample fYardDustSourceExample = new FYardDustSourceExample();
+        FYardDustSourceExample.Criteria criteria = fYardDustSourceExample.createCriteria();
+        criteria.andFactoryidEqualTo(factoryId);
+        List<FYardDustSource> fYardDustSourceList = fYardDustSourceMapper.selectByExample(fYardDustSourceExample);
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int fYardDustCount = fYardDustSourceList.size()+1;
+        factory.setYardDustCount(fYardDustCount);
+
         if (fYardDustSourceMapper.insertSelective(fYardDustSource)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-            Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
             factory.setLastChangedTime(now);
             factoryMapper.updateByPrimaryKeySelective(factory);
@@ -151,8 +157,14 @@ public class YardDustService {
      * @param yardDustID
      * @return
      */
-    public int deleteYardDust(int yardDustID) {
+    public int deleteYardDust(int yardDustID, int factoryID) {
         if (fYardDustSourceMapper.deleteByPrimaryKey(yardDustID)!=0){
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int yardDustCount = factory.getYardDustCount()-1;
+            factory.setYardDustCount(yardDustCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
+
             return 1;
         }else {
             return 0;

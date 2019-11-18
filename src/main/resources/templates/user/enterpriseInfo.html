@@ -219,7 +219,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <label id='factotyno' th:text="*{factoryNo1}"
+                                    <label id='factotyno' th:text="*{factoryNo}"
                                            style="font-size: 15px; margin-top: 3px; font-weight: bold;">
                                     </label>
                                 </div>
@@ -299,14 +299,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right"
-                                >
+                                <label class="col-md-4 control-label no-padding-right">
                                     行业小分类<a style="color:red">*</a>
                                 </label>
 
                                 <div class="col-md-8">
                                     <select name="industryId" id="industryId"
-                                            style="width: 173px; height: 30px;" th:value="*{industryId}" Onchange="ischanged('kilnuse')">  required
+                                            style="width: 173px; height: 30px;" th:value="*{industryId}" required>
                                         <option disabled="disabled">请选择</option>
 
                                     </select>

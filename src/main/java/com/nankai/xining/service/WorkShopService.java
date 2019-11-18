@@ -1,8 +1,6 @@
 package com.nankai.xining.service;
 
-import com.nankai.xining.bean.FNoOrganizationWorkshopDischarge;
-import com.nankai.xining.bean.FNoOrganizationWorkshopDischargeExample;
-import com.nankai.xining.bean.Factory;
+import com.nankai.xining.bean.*;
 import com.nankai.xining.repository.FNoOrganizationWorkshopDischargeMapper;
 import com.nankai.xining.repository.FactoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +57,17 @@ public class WorkShopService {
         fNoOrganizationWorkshopDischarge.setFactoryid(factoryId);
         fNoOrganizationWorkshopDischarge.setScccode("1001110100");
 
+        FNoOrganizationWorkshopDischargeExample fNoOrganizationWorkshopDischargeExample = new FNoOrganizationWorkshopDischargeExample();
+        FNoOrganizationWorkshopDischargeExample.Criteria criteria = fNoOrganizationWorkshopDischargeExample.createCriteria();
+        criteria.andFactoryidEqualTo(factoryId);
+        List<FNoOrganizationWorkshopDischarge> fNoOrganizationWorkshopDischargeList = fNoOrganizationWorkshopDischargeMapper.selectByExample(fNoOrganizationWorkshopDischargeExample);
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+        int fNoOraWsDustCount = fNoOrganizationWorkshopDischargeList.size()+1;
+        factory.setNoOrgWorkCount(fNoOraWsDustCount);
+
         if (fNoOrganizationWorkshopDischargeMapper.insertSelective(fNoOrganizationWorkshopDischarge)!=0) {
             //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-            Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
             Date now = new Date();
             factory.setLastChangedTime(now);
             factoryMapper.updateByPrimaryKeySelective(factory);
@@ -88,9 +94,16 @@ public class WorkShopService {
      * @param workshopID
      * @return
      */
-    public int deleteWorkShop(int workshopID) {
-        if (fNoOrganizationWorkshopDischargeMapper.deleteByPrimaryKey(workshopID)!=0)
+    public int deleteWorkShop(int workshopID,int factoryID) {
+        if (fNoOrganizationWorkshopDischargeMapper.deleteByPrimaryKey(workshopID)!=0){
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int noOraWsCount = factory.getNoOrgWorkCount()-1;
+            factory.setNoOrgWorkCount(noOraWsCount);
+            factoryMapper.updateByPrimaryKeySelective(factory);
+
             return 1;
+        }
         else
             return 0;
     }

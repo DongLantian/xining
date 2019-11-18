@@ -5,8 +5,6 @@
     <id column="construct_dustid" jdbcType="INTEGER" property="constructDustid" />
     <result column="scccode" jdbcType="CHAR" property="scccode" />
     <result column="factoryid" jdbcType="INTEGER" property="factoryid" />
-    <result column="year" jdbcType="CHAR" property="year" />
-    <result column="Company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="construct_state" jdbcType="VARCHAR" property="constructState" />
     <result column="construct_area" jdbcType="DOUBLE" property="constructArea" />
     <result column="construct_months" jdbcType="VARCHAR" property="constructMonths" />
@@ -14,10 +12,6 @@
     <result column="finisharea" jdbcType="DOUBLE" property="finisharea" />
     <result column="nowkgarea" jdbcType="DOUBLE" property="nowkgarea" />
     <result column="startdate" jdbcType="DATE" property="startdate" />
-    <result column="pm25_factors" jdbcType="DOUBLE" property="pm25Factors" />
-    <result column="pm10_factors" jdbcType="DOUBLE" property="pm10Factors" />
-    <result column="oc_factors" jdbcType="DOUBLE" property="ocFactors" />
-    <result column="bc_factors" jdbcType="DOUBLE" property="bcFactors" />
     <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
     <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
     <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
@@ -32,7 +26,6 @@
     <result column="LATITUDE4" jdbcType="DOUBLE" property="latitude4" />
     <result column="construction_type" jdbcType="VARCHAR" property="constructionType" />
     <result column="finishdate" jdbcType="DATE" property="finishdate" />
-    <result column="shenhe_status" jdbcType="VARCHAR" property="shenheStatus" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -94,11 +87,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    construct_dustid, scccode, factoryid, year, Company_name, construct_state, construct_area, 
-    construct_months, control_measures, finisharea, nowkgarea, startdate, pm25_factors, 
-    pm10_factors, oc_factors, bc_factors, pm10_emission, pm25_emission, oc_emission, 
-    bc_emission, LONGITUDE1, LATITUDE1, LONGITUDE2, LATITUDE2, LONGITUDE3, LATITUDE3, 
-    LONGITUDE4, LATITUDE4, construction_type, finishdate, shenhe_status, note
+    construct_dustid, scccode, factoryid, construct_state, construct_area, construct_months, 
+    control_measures, finisharea, nowkgarea, startdate, pm10_emission, pm25_emission, 
+    oc_emission, bc_emission, LONGITUDE1, LATITUDE1, LONGITUDE2, LATITUDE2, LONGITUDE3, 
+    LATITUDE3, LONGITUDE4, LATITUDE4, construction_type, finishdate, note
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.FConstructionDustSourceExample" resultMap="BaseResultMap">
     select
@@ -132,27 +124,23 @@
   </delete>
   <insert id="insert" parameterType="com.nankai.xining.bean.FConstructionDustSource">
     insert into f_construction_dust_source (construct_dustid, scccode, factoryid, 
-      year, Company_name, construct_state, 
-      construct_area, construct_months, control_measures, 
-      finisharea, nowkgarea, startdate, 
-      pm25_factors, pm10_factors, oc_factors, 
-      bc_factors, pm10_emission, pm25_emission, 
+      construct_state, construct_area, construct_months, 
+      control_measures, finisharea, nowkgarea, 
+      startdate, pm10_emission, pm25_emission, 
       oc_emission, bc_emission, LONGITUDE1, 
       LATITUDE1, LONGITUDE2, LATITUDE2, 
       LONGITUDE3, LATITUDE3, LONGITUDE4, 
       LATITUDE4, construction_type, finishdate, 
-      shenhe_status, note)
+      note)
     values (#{constructDustid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{factoryid,jdbcType=INTEGER}, 
-      #{year,jdbcType=CHAR}, #{companyName,jdbcType=VARCHAR}, #{constructState,jdbcType=VARCHAR}, 
-      #{constructArea,jdbcType=DOUBLE}, #{constructMonths,jdbcType=VARCHAR}, #{controlMeasures,jdbcType=VARCHAR}, 
-      #{finisharea,jdbcType=DOUBLE}, #{nowkgarea,jdbcType=DOUBLE}, #{startdate,jdbcType=DATE}, 
-      #{pm25Factors,jdbcType=DOUBLE}, #{pm10Factors,jdbcType=DOUBLE}, #{ocFactors,jdbcType=DOUBLE}, 
-      #{bcFactors,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, #{pm25Emission,jdbcType=DOUBLE}, 
+      #{constructState,jdbcType=VARCHAR}, #{constructArea,jdbcType=DOUBLE}, #{constructMonths,jdbcType=VARCHAR}, 
+      #{controlMeasures,jdbcType=VARCHAR}, #{finisharea,jdbcType=DOUBLE}, #{nowkgarea,jdbcType=DOUBLE}, 
+      #{startdate,jdbcType=DATE}, #{pm10Emission,jdbcType=DOUBLE}, #{pm25Emission,jdbcType=DOUBLE}, 
       #{ocEmission,jdbcType=DOUBLE}, #{bcEmission,jdbcType=DOUBLE}, #{longitude1,jdbcType=DOUBLE}, 
       #{latitude1,jdbcType=DOUBLE}, #{longitude2,jdbcType=DOUBLE}, #{latitude2,jdbcType=DOUBLE}, 
       #{longitude3,jdbcType=DOUBLE}, #{latitude3,jdbcType=DOUBLE}, #{longitude4,jdbcType=DOUBLE}, 
       #{latitude4,jdbcType=DOUBLE}, #{constructionType,jdbcType=VARCHAR}, #{finishdate,jdbcType=DATE}, 
-      #{shenheStatus,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+      #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.FConstructionDustSource">
     insert into f_construction_dust_source
@@ -165,12 +153,6 @@
       </if>
       <if test="factoryid != null">
         factoryid,
-      </if>
-      <if test="year != null">
-        year,
-      </if>
-      <if test="companyName != null">
-        Company_name,
       </if>
       <if test="constructState != null">
         construct_state,
@@ -192,18 +174,6 @@
       </if>
       <if test="startdate != null">
         startdate,
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors,
-      </if>
-      <if test="pm10Factors != null">
-        pm10_factors,
-      </if>
-      <if test="ocFactors != null">
-        oc_factors,
-      </if>
-      <if test="bcFactors != null">
-        bc_factors,
       </if>
       <if test="pm10Emission != null">
         pm10_emission,
@@ -247,9 +217,6 @@
       <if test="finishdate != null">
         finishdate,
       </if>
-      <if test="shenheStatus != null">
-        shenhe_status,
-      </if>
       <if test="note != null">
         note,
       </if>
@@ -263,12 +230,6 @@
       </if>
       <if test="factoryid != null">
         #{factoryid,jdbcType=INTEGER},
-      </if>
-      <if test="year != null">
-        #{year,jdbcType=CHAR},
-      </if>
-      <if test="companyName != null">
-        #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="constructState != null">
         #{constructState,jdbcType=VARCHAR},
@@ -290,18 +251,6 @@
       </if>
       <if test="startdate != null">
         #{startdate,jdbcType=DATE},
-      </if>
-      <if test="pm25Factors != null">
-        #{pm25Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm10Factors != null">
-        #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="ocFactors != null">
-        #{ocFactors,jdbcType=DOUBLE},
-      </if>
-      <if test="bcFactors != null">
-        #{bcFactors,jdbcType=DOUBLE},
       </if>
       <if test="pm10Emission != null">
         #{pm10Emission,jdbcType=DOUBLE},
@@ -345,9 +294,6 @@
       <if test="finishdate != null">
         #{finishdate,jdbcType=DATE},
       </if>
-      <if test="shenheStatus != null">
-        #{shenheStatus,jdbcType=VARCHAR},
-      </if>
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
       </if>
@@ -371,12 +317,6 @@
       <if test="record.factoryid != null">
         factoryid = #{record.factoryid,jdbcType=INTEGER},
       </if>
-      <if test="record.year != null">
-        year = #{record.year,jdbcType=CHAR},
-      </if>
-      <if test="record.companyName != null">
-        Company_name = #{record.companyName,jdbcType=VARCHAR},
-      </if>
       <if test="record.constructState != null">
         construct_state = #{record.constructState,jdbcType=VARCHAR},
       </if>
@@ -397,18 +337,6 @@
       </if>
       <if test="record.startdate != null">
         startdate = #{record.startdate,jdbcType=DATE},
-      </if>
-      <if test="record.pm25Factors != null">
-        pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="record.pm10Factors != null">
-        pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="record.ocFactors != null">
-        oc_factors = #{record.ocFactors,jdbcType=DOUBLE},
-      </if>
-      <if test="record.bcFactors != null">
-        bc_factors = #{record.bcFactors,jdbcType=DOUBLE},
       </if>
       <if test="record.pm10Emission != null">
         pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
@@ -452,9 +380,6 @@
       <if test="record.finishdate != null">
         finishdate = #{record.finishdate,jdbcType=DATE},
       </if>
-      <if test="record.shenheStatus != null">
-        shenhe_status = #{record.shenheStatus,jdbcType=VARCHAR},
-      </if>
       <if test="record.note != null">
         note = #{record.note,jdbcType=VARCHAR},
       </if>
@@ -468,8 +393,6 @@
     set construct_dustid = #{record.constructDustid,jdbcType=INTEGER},
       scccode = #{record.scccode,jdbcType=CHAR},
       factoryid = #{record.factoryid,jdbcType=INTEGER},
-      year = #{record.year,jdbcType=CHAR},
-      Company_name = #{record.companyName,jdbcType=VARCHAR},
       construct_state = #{record.constructState,jdbcType=VARCHAR},
       construct_area = #{record.constructArea,jdbcType=DOUBLE},
       construct_months = #{record.constructMonths,jdbcType=VARCHAR},
@@ -477,10 +400,6 @@
       finisharea = #{record.finisharea,jdbcType=DOUBLE},
       nowkgarea = #{record.nowkgarea,jdbcType=DOUBLE},
       startdate = #{record.startdate,jdbcType=DATE},
-      pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
-      pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      oc_factors = #{record.ocFactors,jdbcType=DOUBLE},
-      bc_factors = #{record.bcFactors,jdbcType=DOUBLE},
       pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
       pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
       oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
@@ -495,7 +414,6 @@
       LATITUDE4 = #{record.latitude4,jdbcType=DOUBLE},
       construction_type = #{record.constructionType,jdbcType=VARCHAR},
       finishdate = #{record.finishdate,jdbcType=DATE},
-      shenhe_status = #{record.shenheStatus,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -509,12 +427,6 @@
       </if>
       <if test="factoryid != null">
         factoryid = #{factoryid,jdbcType=INTEGER},
-      </if>
-      <if test="year != null">
-        year = #{year,jdbcType=CHAR},
-      </if>
-      <if test="companyName != null">
-        Company_name = #{companyName,jdbcType=VARCHAR},
       </if>
       <if test="constructState != null">
         construct_state = #{constructState,jdbcType=VARCHAR},
@@ -536,18 +448,6 @@
       </if>
       <if test="startdate != null">
         startdate = #{startdate,jdbcType=DATE},
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm10Factors != null">
-        pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="ocFactors != null">
-        oc_factors = #{ocFactors,jdbcType=DOUBLE},
-      </if>
-      <if test="bcFactors != null">
-        bc_factors = #{bcFactors,jdbcType=DOUBLE},
       </if>
       <if test="pm10Emission != null">
         pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
@@ -591,9 +491,6 @@
       <if test="finishdate != null">
         finishdate = #{finishdate,jdbcType=DATE},
       </if>
-      <if test="shenheStatus != null">
-        shenhe_status = #{shenheStatus,jdbcType=VARCHAR},
-      </if>
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
@@ -604,8 +501,6 @@
     update f_construction_dust_source
     set scccode = #{scccode,jdbcType=CHAR},
       factoryid = #{factoryid,jdbcType=INTEGER},
-      year = #{year,jdbcType=CHAR},
-      Company_name = #{companyName,jdbcType=VARCHAR},
       construct_state = #{constructState,jdbcType=VARCHAR},
       construct_area = #{constructArea,jdbcType=DOUBLE},
       construct_months = #{constructMonths,jdbcType=VARCHAR},
@@ -613,10 +508,6 @@
       finisharea = #{finisharea,jdbcType=DOUBLE},
       nowkgarea = #{nowkgarea,jdbcType=DOUBLE},
       startdate = #{startdate,jdbcType=DATE},
-      pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
-      pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      oc_factors = #{ocFactors,jdbcType=DOUBLE},
-      bc_factors = #{bcFactors,jdbcType=DOUBLE},
       pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
       pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
       oc_emission = #{ocEmission,jdbcType=DOUBLE},
@@ -631,7 +522,6 @@
       LATITUDE4 = #{latitude4,jdbcType=DOUBLE},
       construction_type = #{constructionType,jdbcType=VARCHAR},
       finishdate = #{finishdate,jdbcType=DATE},
-      shenhe_status = #{shenheStatus,jdbcType=VARCHAR},
       note = #{note,jdbcType=VARCHAR}
     where construct_dustid = #{constructDustid,jdbcType=INTEGER}
   </update>

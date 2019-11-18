@@ -6,8 +6,6 @@
     <result column="sccCode" jdbcType="CHAR" property="scccode" />
     <result column="factoryid" jdbcType="INTEGER" property="factoryid" />
     <result column="bare_soil_area" jdbcType="DOUBLE" property="bareSoilArea" />
-    <result column="pm10_factors" jdbcType="DOUBLE" property="pm10Factors" />
-    <result column="pm25_factors" jdbcType="DOUBLE" property="pm25Factors" />
     <result column="pm25_emission" jdbcType="DOUBLE" property="pm25Emission" />
     <result column="pm10_emission" jdbcType="DOUBLE" property="pm10Emission" />
     <result column="oc_emission" jdbcType="DOUBLE" property="ocEmission" />
@@ -72,8 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    bare_soilid, sccCode, factoryid, bare_soil_area, pm10_factors, pm25_factors, pm25_emission, 
-    pm10_emission, oc_emission, bc_emission
+    bare_soilid, sccCode, factoryid, bare_soil_area, pm25_emission, pm10_emission, oc_emission, 
+    bc_emission
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.FBareSoilDustSourceExample" resultMap="BaseResultMap">
     select
@@ -107,13 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.nankai.xining.bean.FBareSoilDustSource">
     insert into f_bare_soil_dust_source (bare_soilid, sccCode, factoryid, 
-      bare_soil_area, pm10_factors, pm25_factors, 
-      pm25_emission, pm10_emission, oc_emission, 
-      bc_emission)
+      bare_soil_area, pm25_emission, pm10_emission, 
+      oc_emission, bc_emission)
     values (#{bareSoilid,jdbcType=INTEGER}, #{scccode,jdbcType=CHAR}, #{factoryid,jdbcType=INTEGER}, 
-      #{bareSoilArea,jdbcType=DOUBLE}, #{pm10Factors,jdbcType=DOUBLE}, #{pm25Factors,jdbcType=DOUBLE}, 
-      #{pm25Emission,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, #{ocEmission,jdbcType=DOUBLE}, 
-      #{bcEmission,jdbcType=DOUBLE})
+      #{bareSoilArea,jdbcType=DOUBLE}, #{pm25Emission,jdbcType=DOUBLE}, #{pm10Emission,jdbcType=DOUBLE}, 
+      #{ocEmission,jdbcType=DOUBLE}, #{bcEmission,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.FBareSoilDustSource">
     insert into f_bare_soil_dust_source
@@ -129,12 +125,6 @@
       </if>
       <if test="bareSoilArea != null">
         bare_soil_area,
-      </if>
-      <if test="pm10Factors != null">
-        pm10_factors,
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors,
       </if>
       <if test="pm25Emission != null">
         pm25_emission,
@@ -161,12 +151,6 @@
       </if>
       <if test="bareSoilArea != null">
         #{bareSoilArea,jdbcType=DOUBLE},
-      </if>
-      <if test="pm10Factors != null">
-        #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm25Factors != null">
-        #{pm25Factors,jdbcType=DOUBLE},
       </if>
       <if test="pm25Emission != null">
         #{pm25Emission,jdbcType=DOUBLE},
@@ -203,12 +187,6 @@
       <if test="record.bareSoilArea != null">
         bare_soil_area = #{record.bareSoilArea,jdbcType=DOUBLE},
       </if>
-      <if test="record.pm10Factors != null">
-        pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="record.pm25Factors != null">
-        pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
-      </if>
       <if test="record.pm25Emission != null">
         pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
       </if>
@@ -232,8 +210,6 @@
       sccCode = #{record.scccode,jdbcType=CHAR},
       factoryid = #{record.factoryid,jdbcType=INTEGER},
       bare_soil_area = #{record.bareSoilArea,jdbcType=DOUBLE},
-      pm10_factors = #{record.pm10Factors,jdbcType=DOUBLE},
-      pm25_factors = #{record.pm25Factors,jdbcType=DOUBLE},
       pm25_emission = #{record.pm25Emission,jdbcType=DOUBLE},
       pm10_emission = #{record.pm10Emission,jdbcType=DOUBLE},
       oc_emission = #{record.ocEmission,jdbcType=DOUBLE},
@@ -253,12 +229,6 @@
       </if>
       <if test="bareSoilArea != null">
         bare_soil_area = #{bareSoilArea,jdbcType=DOUBLE},
-      </if>
-      <if test="pm10Factors != null">
-        pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      </if>
-      <if test="pm25Factors != null">
-        pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
       </if>
       <if test="pm25Emission != null">
         pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
@@ -280,8 +250,6 @@
     set sccCode = #{scccode,jdbcType=CHAR},
       factoryid = #{factoryid,jdbcType=INTEGER},
       bare_soil_area = #{bareSoilArea,jdbcType=DOUBLE},
-      pm10_factors = #{pm10Factors,jdbcType=DOUBLE},
-      pm25_factors = #{pm25Factors,jdbcType=DOUBLE},
       pm25_emission = #{pm25Emission,jdbcType=DOUBLE},
       pm10_emission = #{pm10Emission,jdbcType=DOUBLE},
       oc_emission = #{ocEmission,jdbcType=DOUBLE},

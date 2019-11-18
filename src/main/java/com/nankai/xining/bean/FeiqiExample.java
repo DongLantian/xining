@@ -164,66 +164,6 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactoryIdIsNull() {
-            addCriterion("factory_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdIsNotNull() {
-            addCriterion("factory_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdEqualTo(Integer value) {
-            addCriterion("factory_id =", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdNotEqualTo(Integer value) {
-            addCriterion("factory_id <>", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdGreaterThan(Integer value) {
-            addCriterion("factory_id >", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("factory_id >=", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdLessThan(Integer value) {
-            addCriterion("factory_id <", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdLessThanOrEqualTo(Integer value) {
-            addCriterion("factory_id <=", value, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdIn(List<Integer> values) {
-            addCriterion("factory_id in", values, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdNotIn(List<Integer> values) {
-            addCriterion("factory_id not in", values, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdBetween(Integer value1, Integer value2) {
-            addCriterion("factory_id between", value1, value2, "factoryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactoryIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("factory_id not between", value1, value2, "factoryId");
-            return (Criteria) this;
-        }
-
         public Criteria andNknoIsNull() {
             addCriterion("nkno is null");
             return (Criteria) this;
@@ -281,6 +221,66 @@ public class FeiqiExample {
 
         public Criteria andNknoNotBetween(Integer value1, Integer value2) {
             addCriterion("nkno not between", value1, value2, "nkno");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdIsNull() {
+            addCriterion("factory_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdIsNotNull() {
+            addCriterion("factory_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdEqualTo(Integer value) {
+            addCriterion("factory_id =", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdNotEqualTo(Integer value) {
+            addCriterion("factory_id <>", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdGreaterThan(Integer value) {
+            addCriterion("factory_id >", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("factory_id >=", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdLessThan(Integer value) {
+            addCriterion("factory_id <", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("factory_id <=", value, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdIn(List<Integer> values) {
+            addCriterion("factory_id in", values, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdNotIn(List<Integer> values) {
+            addCriterion("factory_id not in", values, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("factory_id between", value1, value2, "factoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFactoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("factory_id not between", value1, value2, "factoryId");
             return (Criteria) this;
         }
 
@@ -424,76 +424,6 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andScc2DecIsNull() {
-            addCriterion("scc2_dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecIsNotNull() {
-            addCriterion("scc2_dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecEqualTo(String value) {
-            addCriterion("scc2_dec =", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecNotEqualTo(String value) {
-            addCriterion("scc2_dec <>", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecGreaterThan(String value) {
-            addCriterion("scc2_dec >", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecGreaterThanOrEqualTo(String value) {
-            addCriterion("scc2_dec >=", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecLessThan(String value) {
-            addCriterion("scc2_dec <", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecLessThanOrEqualTo(String value) {
-            addCriterion("scc2_dec <=", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecLike(String value) {
-            addCriterion("scc2_dec like", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecNotLike(String value) {
-            addCriterion("scc2_dec not like", value, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecIn(List<String> values) {
-            addCriterion("scc2_dec in", values, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecNotIn(List<String> values) {
-            addCriterion("scc2_dec not in", values, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecBetween(String value1, String value2) {
-            addCriterion("scc2_dec between", value1, value2, "scc2Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc2DecNotBetween(String value1, String value2) {
-            addCriterion("scc2_dec not between", value1, value2, "scc2Dec");
-            return (Criteria) this;
-        }
-
         public Criteria andScc3IsNull() {
             addCriterion("scc3 is null");
             return (Criteria) this;
@@ -561,76 +491,6 @@ public class FeiqiExample {
 
         public Criteria andScc3NotBetween(String value1, String value2) {
             addCriterion("scc3 not between", value1, value2, "scc3");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecIsNull() {
-            addCriterion("scc3_dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecIsNotNull() {
-            addCriterion("scc3_dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecEqualTo(String value) {
-            addCriterion("scc3_dec =", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecNotEqualTo(String value) {
-            addCriterion("scc3_dec <>", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecGreaterThan(String value) {
-            addCriterion("scc3_dec >", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecGreaterThanOrEqualTo(String value) {
-            addCriterion("scc3_dec >=", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecLessThan(String value) {
-            addCriterion("scc3_dec <", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecLessThanOrEqualTo(String value) {
-            addCriterion("scc3_dec <=", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecLike(String value) {
-            addCriterion("scc3_dec like", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecNotLike(String value) {
-            addCriterion("scc3_dec not like", value, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecIn(List<String> values) {
-            addCriterion("scc3_dec in", values, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecNotIn(List<String> values) {
-            addCriterion("scc3_dec not in", values, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecBetween(String value1, String value2) {
-            addCriterion("scc3_dec between", value1, value2, "scc3Dec");
-            return (Criteria) this;
-        }
-
-        public Criteria andScc3DecNotBetween(String value1, String value2) {
-            addCriterion("scc3_dec not between", value1, value2, "scc3Dec");
             return (Criteria) this;
         }
 
@@ -704,73 +564,73 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecIsNull() {
-            addCriterion("scc4_dec is null");
+        public Criteria andSccCodeIsNull() {
+            addCriterion("scc_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecIsNotNull() {
-            addCriterion("scc4_dec is not null");
+        public Criteria andSccCodeIsNotNull() {
+            addCriterion("scc_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecEqualTo(String value) {
-            addCriterion("scc4_dec =", value, "scc4Dec");
+        public Criteria andSccCodeEqualTo(String value) {
+            addCriterion("scc_code =", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecNotEqualTo(String value) {
-            addCriterion("scc4_dec <>", value, "scc4Dec");
+        public Criteria andSccCodeNotEqualTo(String value) {
+            addCriterion("scc_code <>", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecGreaterThan(String value) {
-            addCriterion("scc4_dec >", value, "scc4Dec");
+        public Criteria andSccCodeGreaterThan(String value) {
+            addCriterion("scc_code >", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecGreaterThanOrEqualTo(String value) {
-            addCriterion("scc4_dec >=", value, "scc4Dec");
+        public Criteria andSccCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("scc_code >=", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecLessThan(String value) {
-            addCriterion("scc4_dec <", value, "scc4Dec");
+        public Criteria andSccCodeLessThan(String value) {
+            addCriterion("scc_code <", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecLessThanOrEqualTo(String value) {
-            addCriterion("scc4_dec <=", value, "scc4Dec");
+        public Criteria andSccCodeLessThanOrEqualTo(String value) {
+            addCriterion("scc_code <=", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecLike(String value) {
-            addCriterion("scc4_dec like", value, "scc4Dec");
+        public Criteria andSccCodeLike(String value) {
+            addCriterion("scc_code like", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecNotLike(String value) {
-            addCriterion("scc4_dec not like", value, "scc4Dec");
+        public Criteria andSccCodeNotLike(String value) {
+            addCriterion("scc_code not like", value, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecIn(List<String> values) {
-            addCriterion("scc4_dec in", values, "scc4Dec");
+        public Criteria andSccCodeIn(List<String> values) {
+            addCriterion("scc_code in", values, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecNotIn(List<String> values) {
-            addCriterion("scc4_dec not in", values, "scc4Dec");
+        public Criteria andSccCodeNotIn(List<String> values) {
+            addCriterion("scc_code not in", values, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecBetween(String value1, String value2) {
-            addCriterion("scc4_dec between", value1, value2, "scc4Dec");
+        public Criteria andSccCodeBetween(String value1, String value2) {
+            addCriterion("scc_code between", value1, value2, "sccCode");
             return (Criteria) this;
         }
 
-        public Criteria andScc4DecNotBetween(String value1, String value2) {
-            addCriterion("scc4_dec not between", value1, value2, "scc4Dec");
+        public Criteria andSccCodeNotBetween(String value1, String value2) {
+            addCriterion("scc_code not between", value1, value2, "sccCode");
             return (Criteria) this;
         }
 
@@ -1374,66 +1234,6 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andFenIsNull() {
-            addCriterion("fen is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenIsNotNull() {
-            addCriterion("fen is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenEqualTo(Double value) {
-            addCriterion("fen =", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenNotEqualTo(Double value) {
-            addCriterion("fen <>", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenGreaterThan(Double value) {
-            addCriterion("fen >", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenGreaterThanOrEqualTo(Double value) {
-            addCriterion("fen >=", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenLessThan(Double value) {
-            addCriterion("fen <", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenLessThanOrEqualTo(Double value) {
-            addCriterion("fen <=", value, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenIn(List<Double> values) {
-            addCriterion("fen in", values, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenNotIn(List<Double> values) {
-            addCriterion("fen not in", values, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenBetween(Double value1, Double value2) {
-            addCriterion("fen between", value1, value2, "fen");
-            return (Criteria) this;
-        }
-
-        public Criteria andFenNotBetween(Double value1, Double value2) {
-            addCriterion("fen not between", value1, value2, "fen");
-            return (Criteria) this;
-        }
-
         public Criteria andDuiIsNull() {
             addCriterion("dui is null");
             return (Criteria) this;
@@ -1494,133 +1294,183 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andFenIsNull() {
+            addCriterion("fen is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andFenIsNotNull() {
+            addCriterion("fen is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
-            addCriterion("status =", value, "status");
+        public Criteria andFenEqualTo(Double value) {
+            addCriterion("fen =", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andFenNotEqualTo(Double value) {
+            addCriterion("fen <>", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
-            addCriterion("status >", value, "status");
+        public Criteria andFenGreaterThan(Double value) {
+            addCriterion("fen >", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andFenGreaterThanOrEqualTo(Double value) {
+            addCriterion("fen >=", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
-            addCriterion("status <", value, "status");
+        public Criteria andFenLessThan(Double value) {
+            addCriterion("fen <", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andFenLessThanOrEqualTo(Double value) {
+            addCriterion("fen <=", value, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andFenIn(List<Double> values) {
+            addCriterion("fen in", values, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andFenNotIn(List<Double> values) {
+            addCriterion("fen not in", values, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andFenBetween(Double value1, Double value2) {
+            addCriterion("fen between", value1, value2, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andFenNotBetween(Double value1, Double value2) {
+            addCriterion("fen not between", value1, value2, "fen");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecIsNull() {
-            addCriterion("status_dec is null");
+        public Criteria andPm10EmissionIsNull() {
+            addCriterion("pm10_emission is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecIsNotNull() {
-            addCriterion("status_dec is not null");
+        public Criteria andPm10EmissionIsNotNull() {
+            addCriterion("pm10_emission is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecEqualTo(String value) {
-            addCriterion("status_dec =", value, "statusDec");
+        public Criteria andPm10EmissionEqualTo(Double value) {
+            addCriterion("pm10_emission =", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecNotEqualTo(String value) {
-            addCriterion("status_dec <>", value, "statusDec");
+        public Criteria andPm10EmissionNotEqualTo(Double value) {
+            addCriterion("pm10_emission <>", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecGreaterThan(String value) {
-            addCriterion("status_dec >", value, "statusDec");
+        public Criteria andPm10EmissionGreaterThan(Double value) {
+            addCriterion("pm10_emission >", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecGreaterThanOrEqualTo(String value) {
-            addCriterion("status_dec >=", value, "statusDec");
+        public Criteria andPm10EmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("pm10_emission >=", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecLessThan(String value) {
-            addCriterion("status_dec <", value, "statusDec");
+        public Criteria andPm10EmissionLessThan(Double value) {
+            addCriterion("pm10_emission <", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecLessThanOrEqualTo(String value) {
-            addCriterion("status_dec <=", value, "statusDec");
+        public Criteria andPm10EmissionLessThanOrEqualTo(Double value) {
+            addCriterion("pm10_emission <=", value, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecLike(String value) {
-            addCriterion("status_dec like", value, "statusDec");
+        public Criteria andPm10EmissionIn(List<Double> values) {
+            addCriterion("pm10_emission in", values, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecNotLike(String value) {
-            addCriterion("status_dec not like", value, "statusDec");
+        public Criteria andPm10EmissionNotIn(List<Double> values) {
+            addCriterion("pm10_emission not in", values, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecIn(List<String> values) {
-            addCriterion("status_dec in", values, "statusDec");
+        public Criteria andPm10EmissionBetween(Double value1, Double value2) {
+            addCriterion("pm10_emission between", value1, value2, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecNotIn(List<String> values) {
-            addCriterion("status_dec not in", values, "statusDec");
+        public Criteria andPm10EmissionNotBetween(Double value1, Double value2) {
+            addCriterion("pm10_emission not between", value1, value2, "pm10Emission");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecBetween(String value1, String value2) {
-            addCriterion("status_dec between", value1, value2, "statusDec");
+        public Criteria andPm25EmissionIsNull() {
+            addCriterion("pm25_emission is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusDecNotBetween(String value1, String value2) {
-            addCriterion("status_dec not between", value1, value2, "statusDec");
+        public Criteria andPm25EmissionIsNotNull() {
+            addCriterion("pm25_emission is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionEqualTo(Double value) {
+            addCriterion("pm25_emission =", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionNotEqualTo(Double value) {
+            addCriterion("pm25_emission <>", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionGreaterThan(Double value) {
+            addCriterion("pm25_emission >", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("pm25_emission >=", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionLessThan(Double value) {
+            addCriterion("pm25_emission <", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionLessThanOrEqualTo(Double value) {
+            addCriterion("pm25_emission <=", value, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionIn(List<Double> values) {
+            addCriterion("pm25_emission in", values, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionNotIn(List<Double> values) {
+            addCriterion("pm25_emission not in", values, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionBetween(Double value1, Double value2) {
+            addCriterion("pm25_emission between", value1, value2, "pm25Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andPm25EmissionNotBetween(Double value1, Double value2) {
+            addCriterion("pm25_emission not between", value1, value2, "pm25Emission");
             return (Criteria) this;
         }
 
@@ -1744,73 +1594,243 @@ public class FeiqiExample {
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeIsNull() {
-            addCriterion("scc_code is null");
+        public Criteria andOcEmissionIsNull() {
+            addCriterion("oc_emission is null");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeIsNotNull() {
-            addCriterion("scc_code is not null");
+        public Criteria andOcEmissionIsNotNull() {
+            addCriterion("oc_emission is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeEqualTo(String value) {
-            addCriterion("scc_code =", value, "sccCode");
+        public Criteria andOcEmissionEqualTo(Double value) {
+            addCriterion("oc_emission =", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeNotEqualTo(String value) {
-            addCriterion("scc_code <>", value, "sccCode");
+        public Criteria andOcEmissionNotEqualTo(Double value) {
+            addCriterion("oc_emission <>", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeGreaterThan(String value) {
-            addCriterion("scc_code >", value, "sccCode");
+        public Criteria andOcEmissionGreaterThan(Double value) {
+            addCriterion("oc_emission >", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("scc_code >=", value, "sccCode");
+        public Criteria andOcEmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("oc_emission >=", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeLessThan(String value) {
-            addCriterion("scc_code <", value, "sccCode");
+        public Criteria andOcEmissionLessThan(Double value) {
+            addCriterion("oc_emission <", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeLessThanOrEqualTo(String value) {
-            addCriterion("scc_code <=", value, "sccCode");
+        public Criteria andOcEmissionLessThanOrEqualTo(Double value) {
+            addCriterion("oc_emission <=", value, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeLike(String value) {
-            addCriterion("scc_code like", value, "sccCode");
+        public Criteria andOcEmissionIn(List<Double> values) {
+            addCriterion("oc_emission in", values, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeNotLike(String value) {
-            addCriterion("scc_code not like", value, "sccCode");
+        public Criteria andOcEmissionNotIn(List<Double> values) {
+            addCriterion("oc_emission not in", values, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeIn(List<String> values) {
-            addCriterion("scc_code in", values, "sccCode");
+        public Criteria andOcEmissionBetween(Double value1, Double value2) {
+            addCriterion("oc_emission between", value1, value2, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeNotIn(List<String> values) {
-            addCriterion("scc_code not in", values, "sccCode");
+        public Criteria andOcEmissionNotBetween(Double value1, Double value2) {
+            addCriterion("oc_emission not between", value1, value2, "ocEmission");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeBetween(String value1, String value2) {
-            addCriterion("scc_code between", value1, value2, "sccCode");
+        public Criteria andBcEmissionIsNull() {
+            addCriterion("bc_emission is null");
             return (Criteria) this;
         }
 
-        public Criteria andSccCodeNotBetween(String value1, String value2) {
-            addCriterion("scc_code not between", value1, value2, "sccCode");
+        public Criteria andBcEmissionIsNotNull() {
+            addCriterion("bc_emission is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionEqualTo(Double value) {
+            addCriterion("bc_emission =", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionNotEqualTo(Double value) {
+            addCriterion("bc_emission <>", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionGreaterThan(Double value) {
+            addCriterion("bc_emission >", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("bc_emission >=", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionLessThan(Double value) {
+            addCriterion("bc_emission <", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionLessThanOrEqualTo(Double value) {
+            addCriterion("bc_emission <=", value, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionIn(List<Double> values) {
+            addCriterion("bc_emission in", values, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionNotIn(List<Double> values) {
+            addCriterion("bc_emission not in", values, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionBetween(Double value1, Double value2) {
+            addCriterion("bc_emission between", value1, value2, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andBcEmissionNotBetween(Double value1, Double value2) {
+            addCriterion("bc_emission not between", value1, value2, "bcEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionIsNull() {
+            addCriterion("so2_emission is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionIsNotNull() {
+            addCriterion("so2_emission is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionEqualTo(Double value) {
+            addCriterion("so2_emission =", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionNotEqualTo(Double value) {
+            addCriterion("so2_emission <>", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionGreaterThan(Double value) {
+            addCriterion("so2_emission >", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("so2_emission >=", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionLessThan(Double value) {
+            addCriterion("so2_emission <", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionLessThanOrEqualTo(Double value) {
+            addCriterion("so2_emission <=", value, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionIn(List<Double> values) {
+            addCriterion("so2_emission in", values, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionNotIn(List<Double> values) {
+            addCriterion("so2_emission not in", values, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionBetween(Double value1, Double value2) {
+            addCriterion("so2_emission between", value1, value2, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andSo2EmissionNotBetween(Double value1, Double value2) {
+            addCriterion("so2_emission not between", value1, value2, "so2Emission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionIsNull() {
+            addCriterion("nox_emission is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionIsNotNull() {
+            addCriterion("nox_emission is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionEqualTo(Double value) {
+            addCriterion("nox_emission =", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionNotEqualTo(Double value) {
+            addCriterion("nox_emission <>", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionGreaterThan(Double value) {
+            addCriterion("nox_emission >", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionGreaterThanOrEqualTo(Double value) {
+            addCriterion("nox_emission >=", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionLessThan(Double value) {
+            addCriterion("nox_emission <", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionLessThanOrEqualTo(Double value) {
+            addCriterion("nox_emission <=", value, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionIn(List<Double> values) {
+            addCriterion("nox_emission in", values, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionNotIn(List<Double> values) {
+            addCriterion("nox_emission not in", values, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionBetween(Double value1, Double value2) {
+            addCriterion("nox_emission between", value1, value2, "noxEmission");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoxEmissionNotBetween(Double value1, Double value2) {
+            addCriterion("nox_emission not between", value1, value2, "noxEmission");
             return (Criteria) this;
         }
 
@@ -2531,366 +2551,6 @@ public class FeiqiExample {
 
         public Criteria andDecUseamountNotBetween(Double value1, Double value2) {
             addCriterion("dec_useamount not between", value1, value2, "decUseamount");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionIsNull() {
-            addCriterion("pm10_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionIsNotNull() {
-            addCriterion("pm10_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionEqualTo(Double value) {
-            addCriterion("pm10_emission =", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionNotEqualTo(Double value) {
-            addCriterion("pm10_emission <>", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionGreaterThan(Double value) {
-            addCriterion("pm10_emission >", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("pm10_emission >=", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionLessThan(Double value) {
-            addCriterion("pm10_emission <", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionLessThanOrEqualTo(Double value) {
-            addCriterion("pm10_emission <=", value, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionIn(List<Double> values) {
-            addCriterion("pm10_emission in", values, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionNotIn(List<Double> values) {
-            addCriterion("pm10_emission not in", values, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionBetween(Double value1, Double value2) {
-            addCriterion("pm10_emission between", value1, value2, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm10EmissionNotBetween(Double value1, Double value2) {
-            addCriterion("pm10_emission not between", value1, value2, "pm10Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionIsNull() {
-            addCriterion("pm25_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionIsNotNull() {
-            addCriterion("pm25_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionEqualTo(Double value) {
-            addCriterion("pm25_emission =", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionNotEqualTo(Double value) {
-            addCriterion("pm25_emission <>", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionGreaterThan(Double value) {
-            addCriterion("pm25_emission >", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("pm25_emission >=", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionLessThan(Double value) {
-            addCriterion("pm25_emission <", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionLessThanOrEqualTo(Double value) {
-            addCriterion("pm25_emission <=", value, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionIn(List<Double> values) {
-            addCriterion("pm25_emission in", values, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionNotIn(List<Double> values) {
-            addCriterion("pm25_emission not in", values, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionBetween(Double value1, Double value2) {
-            addCriterion("pm25_emission between", value1, value2, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andPm25EmissionNotBetween(Double value1, Double value2) {
-            addCriterion("pm25_emission not between", value1, value2, "pm25Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionIsNull() {
-            addCriterion("oc_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionIsNotNull() {
-            addCriterion("oc_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionEqualTo(Double value) {
-            addCriterion("oc_emission =", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionNotEqualTo(Double value) {
-            addCriterion("oc_emission <>", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionGreaterThan(Double value) {
-            addCriterion("oc_emission >", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("oc_emission >=", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionLessThan(Double value) {
-            addCriterion("oc_emission <", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionLessThanOrEqualTo(Double value) {
-            addCriterion("oc_emission <=", value, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionIn(List<Double> values) {
-            addCriterion("oc_emission in", values, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionNotIn(List<Double> values) {
-            addCriterion("oc_emission not in", values, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionBetween(Double value1, Double value2) {
-            addCriterion("oc_emission between", value1, value2, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andOcEmissionNotBetween(Double value1, Double value2) {
-            addCriterion("oc_emission not between", value1, value2, "ocEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionIsNull() {
-            addCriterion("bc_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionIsNotNull() {
-            addCriterion("bc_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionEqualTo(Double value) {
-            addCriterion("bc_emission =", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionNotEqualTo(Double value) {
-            addCriterion("bc_emission <>", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionGreaterThan(Double value) {
-            addCriterion("bc_emission >", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("bc_emission >=", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionLessThan(Double value) {
-            addCriterion("bc_emission <", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionLessThanOrEqualTo(Double value) {
-            addCriterion("bc_emission <=", value, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionIn(List<Double> values) {
-            addCriterion("bc_emission in", values, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionNotIn(List<Double> values) {
-            addCriterion("bc_emission not in", values, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionBetween(Double value1, Double value2) {
-            addCriterion("bc_emission between", value1, value2, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andBcEmissionNotBetween(Double value1, Double value2) {
-            addCriterion("bc_emission not between", value1, value2, "bcEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionIsNull() {
-            addCriterion("so2_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionIsNotNull() {
-            addCriterion("so2_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionEqualTo(Double value) {
-            addCriterion("so2_emission =", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionNotEqualTo(Double value) {
-            addCriterion("so2_emission <>", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionGreaterThan(Double value) {
-            addCriterion("so2_emission >", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("so2_emission >=", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionLessThan(Double value) {
-            addCriterion("so2_emission <", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionLessThanOrEqualTo(Double value) {
-            addCriterion("so2_emission <=", value, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionIn(List<Double> values) {
-            addCriterion("so2_emission in", values, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionNotIn(List<Double> values) {
-            addCriterion("so2_emission not in", values, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionBetween(Double value1, Double value2) {
-            addCriterion("so2_emission between", value1, value2, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andSo2EmissionNotBetween(Double value1, Double value2) {
-            addCriterion("so2_emission not between", value1, value2, "so2Emission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionIsNull() {
-            addCriterion("nox_emission is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionIsNotNull() {
-            addCriterion("nox_emission is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionEqualTo(Double value) {
-            addCriterion("nox_emission =", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionNotEqualTo(Double value) {
-            addCriterion("nox_emission <>", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionGreaterThan(Double value) {
-            addCriterion("nox_emission >", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionGreaterThanOrEqualTo(Double value) {
-            addCriterion("nox_emission >=", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionLessThan(Double value) {
-            addCriterion("nox_emission <", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionLessThanOrEqualTo(Double value) {
-            addCriterion("nox_emission <=", value, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionIn(List<Double> values) {
-            addCriterion("nox_emission in", values, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionNotIn(List<Double> values) {
-            addCriterion("nox_emission not in", values, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionBetween(Double value1, Double value2) {
-            addCriterion("nox_emission between", value1, value2, "noxEmission");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoxEmissionNotBetween(Double value1, Double value2) {
-            addCriterion("nox_emission not between", value1, value2, "noxEmission");
             return (Criteria) this;
         }
     }

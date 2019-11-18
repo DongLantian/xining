@@ -4,40 +4,25 @@
   <resultMap id="BaseResultMap" type="com.nankai.xining.bean.DeviceProduct">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="nk_no" jdbcType="INTEGER" property="nkNo" />
-    <result column="devicetotal_id" jdbcType="INTEGER" property="devicetotalId" />
-    <result column="device_no" jdbcType="INTEGER" property="deviceNo" />
     <result column="device_id" jdbcType="INTEGER" property="deviceId" />
-    <result column="activities_category_dec" jdbcType="VARCHAR" property="activitiesCategoryDec" />
     <result column="activities_category" jdbcType="CHAR" property="activitiesCategory" />
-    <result column="name_category_dec" jdbcType="VARCHAR" property="nameCategoryDec" />
     <result column="name_category" jdbcType="CHAR" property="nameCategory" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="drainage_process_dec" jdbcType="VARCHAR" property="drainageProcessDec" />
+    <result column="scc_code" jdbcType="CHAR" property="sccCode" />
     <result column="drainage_process" jdbcType="CHAR" property="drainageProcess" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="uint" jdbcType="VARCHAR" property="uint" />
     <result column="annual_output" jdbcType="DOUBLE" property="annualOutput" />
-    <result column="scc_code" jdbcType="CHAR" property="sccCode" />
-    <result column="factor_status" jdbcType="TINYINT" property="factorStatus" />
-    <result column="factor_nox" jdbcType="DOUBLE" property="factorNox" />
     <result column="nox" jdbcType="DOUBLE" property="nox" />
-    <result column="factor_co" jdbcType="DOUBLE" property="factorCo" />
     <result column="co" jdbcType="DOUBLE" property="co" />
-    <result column="factor_pm10" jdbcType="DOUBLE" property="factorPm10" />
     <result column="pm10" jdbcType="DOUBLE" property="pm10" />
-    <result column="factor_pm25" jdbcType="DOUBLE" property="factorPm25" />
     <result column="pm25" jdbcType="DOUBLE" property="pm25" />
-    <result column="factor_pm" jdbcType="DOUBLE" property="factorPm" />
     <result column="pm" jdbcType="DOUBLE" property="pm" />
-    <result column="factor_so2" jdbcType="DOUBLE" property="factorSo2" />
     <result column="so2" jdbcType="DOUBLE" property="so2" />
-    <result column="factor_voc" jdbcType="DOUBLE" property="factorVoc" />
     <result column="voc" jdbcType="DOUBLE" property="voc" />
-    <result column="factor_nh3" jdbcType="DOUBLE" property="factorNh3" />
     <result column="nh3" jdbcType="DOUBLE" property="nh3" />
-    <result column="factor_oc" jdbcType="DOUBLE" property="factorOc" />
     <result column="oc" jdbcType="DOUBLE" property="oc" />
-    <result column="factor_bc" jdbcType="DOUBLE" property="factorBc" />
     <result column="bc" jdbcType="DOUBLE" property="bc" />
+    <result column="danwei" jdbcType="CHAR" property="danwei" />
     <result column="Jan_useamount" jdbcType="DOUBLE" property="janUseamount" />
     <result column="Feb_useamount" jdbcType="DOUBLE" property="febUseamount" />
     <result column="Mar_useamount" jdbcType="DOUBLE" property="marUseamount" />
@@ -50,7 +35,6 @@
     <result column="oct_use_amount" jdbcType="DOUBLE" property="octUseAmount" />
     <result column="nov_useamount" jdbcType="DOUBLE" property="novUseamount" />
     <result column="dec_useamount" jdbcType="DOUBLE" property="decUseamount" />
-    <result column="danwei" jdbcType="CHAR" property="danwei" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -111,13 +95,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nk_no, devicetotal_id, device_no, device_id, activities_category_dec, activities_category, 
-    name_category_dec, name_category, name, drainage_process_dec, drainage_process, uint, 
-    annual_output, scc_code, factor_status, factor_nox, nox, factor_co, co, factor_pm10, 
-    pm10, factor_pm25, pm25, factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3, 
-    nh3, factor_oc, oc, factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, 
-    May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount, 
-    nov_useamount, dec_useamount, danwei
+    id, nk_no, device_id, activities_category, name_category, scc_code, drainage_process, 
+    name, uint, annual_output, nox, co, pm10, pm25, pm, so2, voc, nh3, oc, bc, danwei, 
+    Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, May_useamount, June_useamount, 
+    July_useamount, aug_useamount, sept_useamount, oct_use_amount, nov_useamount, dec_useamount
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.DeviceProductExample" resultMap="BaseResultMap">
     select
@@ -150,38 +131,28 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.nankai.xining.bean.DeviceProduct">
-    insert into device_product (id, nk_no, devicetotal_id, 
-      device_no, device_id, activities_category_dec, 
-      activities_category, name_category_dec, name_category, 
-      name, drainage_process_dec, drainage_process, 
-      uint, annual_output, scc_code, 
-      factor_status, factor_nox, nox, 
-      factor_co, co, factor_pm10, 
-      pm10, factor_pm25, pm25, 
-      factor_pm, pm, factor_so2, 
-      so2, factor_voc, voc, factor_nh3, 
-      nh3, factor_oc, oc, factor_bc, 
-      bc, Jan_useamount, Feb_useamount, 
+    insert into device_product (id, nk_no, device_id, 
+      activities_category, name_category, scc_code, 
+      drainage_process, name, uint, 
+      annual_output, nox, co, 
+      pm10, pm25, pm, so2, 
+      voc, nh3, oc, bc, 
+      danwei, Jan_useamount, Feb_useamount, 
       Mar_useamount, Apr_useamount, May_useamount, 
       June_useamount, July_useamount, aug_useamount, 
       sept_useamount, oct_use_amount, nov_useamount, 
-      dec_useamount, danwei)
-    values (#{id,jdbcType=INTEGER}, #{nkNo,jdbcType=INTEGER}, #{devicetotalId,jdbcType=INTEGER}, 
-      #{deviceNo,jdbcType=INTEGER}, #{deviceId,jdbcType=INTEGER}, #{activitiesCategoryDec,jdbcType=VARCHAR}, 
-      #{activitiesCategory,jdbcType=CHAR}, #{nameCategoryDec,jdbcType=VARCHAR}, #{nameCategory,jdbcType=CHAR}, 
-      #{name,jdbcType=VARCHAR}, #{drainageProcessDec,jdbcType=VARCHAR}, #{drainageProcess,jdbcType=CHAR}, 
-      #{uint,jdbcType=VARCHAR}, #{annualOutput,jdbcType=DOUBLE}, #{sccCode,jdbcType=CHAR}, 
-      #{factorStatus,jdbcType=TINYINT}, #{factorNox,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, 
-      #{factorCo,jdbcType=DOUBLE}, #{co,jdbcType=DOUBLE}, #{factorPm10,jdbcType=DOUBLE}, 
-      #{pm10,jdbcType=DOUBLE}, #{factorPm25,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, 
-      #{factorPm,jdbcType=DOUBLE}, #{pm,jdbcType=DOUBLE}, #{factorSo2,jdbcType=DOUBLE}, 
-      #{so2,jdbcType=DOUBLE}, #{factorVoc,jdbcType=DOUBLE}, #{voc,jdbcType=DOUBLE}, #{factorNh3,jdbcType=DOUBLE}, 
-      #{nh3,jdbcType=DOUBLE}, #{factorOc,jdbcType=DOUBLE}, #{oc,jdbcType=DOUBLE}, #{factorBc,jdbcType=DOUBLE}, 
-      #{bc,jdbcType=DOUBLE}, #{janUseamount,jdbcType=DOUBLE}, #{febUseamount,jdbcType=DOUBLE}, 
+      dec_useamount)
+    values (#{id,jdbcType=INTEGER}, #{nkNo,jdbcType=INTEGER}, #{deviceId,jdbcType=INTEGER}, 
+      #{activitiesCategory,jdbcType=CHAR}, #{nameCategory,jdbcType=CHAR}, #{sccCode,jdbcType=CHAR}, 
+      #{drainageProcess,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{uint,jdbcType=VARCHAR}, 
+      #{annualOutput,jdbcType=DOUBLE}, #{nox,jdbcType=DOUBLE}, #{co,jdbcType=DOUBLE}, 
+      #{pm10,jdbcType=DOUBLE}, #{pm25,jdbcType=DOUBLE}, #{pm,jdbcType=DOUBLE}, #{so2,jdbcType=DOUBLE}, 
+      #{voc,jdbcType=DOUBLE}, #{nh3,jdbcType=DOUBLE}, #{oc,jdbcType=DOUBLE}, #{bc,jdbcType=DOUBLE}, 
+      #{danwei,jdbcType=CHAR}, #{janUseamount,jdbcType=DOUBLE}, #{febUseamount,jdbcType=DOUBLE}, 
       #{marUseamount,jdbcType=DOUBLE}, #{aprUseamount,jdbcType=DOUBLE}, #{mayUseamount,jdbcType=DOUBLE}, 
       #{juneUseamount,jdbcType=DOUBLE}, #{julyUseamount,jdbcType=DOUBLE}, #{augUseamount,jdbcType=DOUBLE}, 
       #{septUseamount,jdbcType=DOUBLE}, #{octUseAmount,jdbcType=DOUBLE}, #{novUseamount,jdbcType=DOUBLE}, 
-      #{decUseamount,jdbcType=DOUBLE}, #{danwei,jdbcType=CHAR})
+      #{decUseamount,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.DeviceProduct">
     insert into device_product
@@ -192,35 +163,23 @@
       <if test="nkNo != null">
         nk_no,
       </if>
-      <if test="devicetotalId != null">
-        devicetotal_id,
-      </if>
-      <if test="deviceNo != null">
-        device_no,
-      </if>
       <if test="deviceId != null">
         device_id,
-      </if>
-      <if test="activitiesCategoryDec != null">
-        activities_category_dec,
       </if>
       <if test="activitiesCategory != null">
         activities_category,
       </if>
-      <if test="nameCategoryDec != null">
-        name_category_dec,
-      </if>
       <if test="nameCategory != null">
         name_category,
       </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="drainageProcessDec != null">
-        drainage_process_dec,
+      <if test="sccCode != null">
+        scc_code,
       </if>
       <if test="drainageProcess != null">
         drainage_process,
+      </if>
+      <if test="name != null">
+        name,
       </if>
       <if test="uint != null">
         uint,
@@ -228,71 +187,38 @@
       <if test="annualOutput != null">
         annual_output,
       </if>
-      <if test="sccCode != null">
-        scc_code,
-      </if>
-      <if test="factorStatus != null">
-        factor_status,
-      </if>
-      <if test="factorNox != null">
-        factor_nox,
-      </if>
       <if test="nox != null">
         nox,
-      </if>
-      <if test="factorCo != null">
-        factor_co,
       </if>
       <if test="co != null">
         co,
       </if>
-      <if test="factorPm10 != null">
-        factor_pm10,
-      </if>
       <if test="pm10 != null">
         pm10,
-      </if>
-      <if test="factorPm25 != null">
-        factor_pm25,
       </if>
       <if test="pm25 != null">
         pm25,
       </if>
-      <if test="factorPm != null">
-        factor_pm,
-      </if>
       <if test="pm != null">
         pm,
-      </if>
-      <if test="factorSo2 != null">
-        factor_so2,
       </if>
       <if test="so2 != null">
         so2,
       </if>
-      <if test="factorVoc != null">
-        factor_voc,
-      </if>
       <if test="voc != null">
         voc,
-      </if>
-      <if test="factorNh3 != null">
-        factor_nh3,
       </if>
       <if test="nh3 != null">
         nh3,
       </if>
-      <if test="factorOc != null">
-        factor_oc,
-      </if>
       <if test="oc != null">
         oc,
       </if>
-      <if test="factorBc != null">
-        factor_bc,
-      </if>
       <if test="bc != null">
         bc,
+      </if>
+      <if test="danwei != null">
+        danwei,
       </if>
       <if test="janUseamount != null">
         Jan_useamount,
@@ -330,9 +256,6 @@
       <if test="decUseamount != null">
         dec_useamount,
       </if>
-      <if test="danwei != null">
-        danwei,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -341,35 +264,23 @@
       <if test="nkNo != null">
         #{nkNo,jdbcType=INTEGER},
       </if>
-      <if test="devicetotalId != null">
-        #{devicetotalId,jdbcType=INTEGER},
-      </if>
-      <if test="deviceNo != null">
-        #{deviceNo,jdbcType=INTEGER},
-      </if>
       <if test="deviceId != null">
         #{deviceId,jdbcType=INTEGER},
-      </if>
-      <if test="activitiesCategoryDec != null">
-        #{activitiesCategoryDec,jdbcType=VARCHAR},
       </if>
       <if test="activitiesCategory != null">
         #{activitiesCategory,jdbcType=CHAR},
       </if>
-      <if test="nameCategoryDec != null">
-        #{nameCategoryDec,jdbcType=VARCHAR},
-      </if>
       <if test="nameCategory != null">
         #{nameCategory,jdbcType=CHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="drainageProcessDec != null">
-        #{drainageProcessDec,jdbcType=VARCHAR},
+      <if test="sccCode != null">
+        #{sccCode,jdbcType=CHAR},
       </if>
       <if test="drainageProcess != null">
         #{drainageProcess,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="uint != null">
         #{uint,jdbcType=VARCHAR},
@@ -377,71 +288,38 @@
       <if test="annualOutput != null">
         #{annualOutput,jdbcType=DOUBLE},
       </if>
-      <if test="sccCode != null">
-        #{sccCode,jdbcType=CHAR},
-      </if>
-      <if test="factorStatus != null">
-        #{factorStatus,jdbcType=TINYINT},
-      </if>
-      <if test="factorNox != null">
-        #{factorNox,jdbcType=DOUBLE},
-      </if>
       <if test="nox != null">
         #{nox,jdbcType=DOUBLE},
-      </if>
-      <if test="factorCo != null">
-        #{factorCo,jdbcType=DOUBLE},
       </if>
       <if test="co != null">
         #{co,jdbcType=DOUBLE},
       </if>
-      <if test="factorPm10 != null">
-        #{factorPm10,jdbcType=DOUBLE},
-      </if>
       <if test="pm10 != null">
         #{pm10,jdbcType=DOUBLE},
-      </if>
-      <if test="factorPm25 != null">
-        #{factorPm25,jdbcType=DOUBLE},
       </if>
       <if test="pm25 != null">
         #{pm25,jdbcType=DOUBLE},
       </if>
-      <if test="factorPm != null">
-        #{factorPm,jdbcType=DOUBLE},
-      </if>
       <if test="pm != null">
         #{pm,jdbcType=DOUBLE},
-      </if>
-      <if test="factorSo2 != null">
-        #{factorSo2,jdbcType=DOUBLE},
       </if>
       <if test="so2 != null">
         #{so2,jdbcType=DOUBLE},
       </if>
-      <if test="factorVoc != null">
-        #{factorVoc,jdbcType=DOUBLE},
-      </if>
       <if test="voc != null">
         #{voc,jdbcType=DOUBLE},
-      </if>
-      <if test="factorNh3 != null">
-        #{factorNh3,jdbcType=DOUBLE},
       </if>
       <if test="nh3 != null">
         #{nh3,jdbcType=DOUBLE},
       </if>
-      <if test="factorOc != null">
-        #{factorOc,jdbcType=DOUBLE},
-      </if>
       <if test="oc != null">
         #{oc,jdbcType=DOUBLE},
       </if>
-      <if test="factorBc != null">
-        #{factorBc,jdbcType=DOUBLE},
-      </if>
       <if test="bc != null">
         #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="danwei != null">
+        #{danwei,jdbcType=CHAR},
       </if>
       <if test="janUseamount != null">
         #{janUseamount,jdbcType=DOUBLE},
@@ -479,9 +357,6 @@
       <if test="decUseamount != null">
         #{decUseamount,jdbcType=DOUBLE},
       </if>
-      <if test="danwei != null">
-        #{danwei,jdbcType=CHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.nankai.xining.bean.DeviceProductExample" resultType="java.lang.Long">
@@ -499,35 +374,23 @@
       <if test="record.nkNo != null">
         nk_no = #{record.nkNo,jdbcType=INTEGER},
       </if>
-      <if test="record.devicetotalId != null">
-        devicetotal_id = #{record.devicetotalId,jdbcType=INTEGER},
-      </if>
-      <if test="record.deviceNo != null">
-        device_no = #{record.deviceNo,jdbcType=INTEGER},
-      </if>
       <if test="record.deviceId != null">
         device_id = #{record.deviceId,jdbcType=INTEGER},
-      </if>
-      <if test="record.activitiesCategoryDec != null">
-        activities_category_dec = #{record.activitiesCategoryDec,jdbcType=VARCHAR},
       </if>
       <if test="record.activitiesCategory != null">
         activities_category = #{record.activitiesCategory,jdbcType=CHAR},
       </if>
-      <if test="record.nameCategoryDec != null">
-        name_category_dec = #{record.nameCategoryDec,jdbcType=VARCHAR},
-      </if>
       <if test="record.nameCategory != null">
         name_category = #{record.nameCategory,jdbcType=CHAR},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.drainageProcessDec != null">
-        drainage_process_dec = #{record.drainageProcessDec,jdbcType=VARCHAR},
+      <if test="record.sccCode != null">
+        scc_code = #{record.sccCode,jdbcType=CHAR},
       </if>
       <if test="record.drainageProcess != null">
         drainage_process = #{record.drainageProcess,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.uint != null">
         uint = #{record.uint,jdbcType=VARCHAR},
@@ -535,71 +398,38 @@
       <if test="record.annualOutput != null">
         annual_output = #{record.annualOutput,jdbcType=DOUBLE},
       </if>
-      <if test="record.sccCode != null">
-        scc_code = #{record.sccCode,jdbcType=CHAR},
-      </if>
-      <if test="record.factorStatus != null">
-        factor_status = #{record.factorStatus,jdbcType=TINYINT},
-      </if>
-      <if test="record.factorNox != null">
-        factor_nox = #{record.factorNox,jdbcType=DOUBLE},
-      </if>
       <if test="record.nox != null">
         nox = #{record.nox,jdbcType=DOUBLE},
-      </if>
-      <if test="record.factorCo != null">
-        factor_co = #{record.factorCo,jdbcType=DOUBLE},
       </if>
       <if test="record.co != null">
         co = #{record.co,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorPm10 != null">
-        factor_pm10 = #{record.factorPm10,jdbcType=DOUBLE},
-      </if>
       <if test="record.pm10 != null">
         pm10 = #{record.pm10,jdbcType=DOUBLE},
-      </if>
-      <if test="record.factorPm25 != null">
-        factor_pm25 = #{record.factorPm25,jdbcType=DOUBLE},
       </if>
       <if test="record.pm25 != null">
         pm25 = #{record.pm25,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorPm != null">
-        factor_pm = #{record.factorPm,jdbcType=DOUBLE},
-      </if>
       <if test="record.pm != null">
         pm = #{record.pm,jdbcType=DOUBLE},
-      </if>
-      <if test="record.factorSo2 != null">
-        factor_so2 = #{record.factorSo2,jdbcType=DOUBLE},
       </if>
       <if test="record.so2 != null">
         so2 = #{record.so2,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorVoc != null">
-        factor_voc = #{record.factorVoc,jdbcType=DOUBLE},
-      </if>
       <if test="record.voc != null">
         voc = #{record.voc,jdbcType=DOUBLE},
-      </if>
-      <if test="record.factorNh3 != null">
-        factor_nh3 = #{record.factorNh3,jdbcType=DOUBLE},
       </if>
       <if test="record.nh3 != null">
         nh3 = #{record.nh3,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorOc != null">
-        factor_oc = #{record.factorOc,jdbcType=DOUBLE},
-      </if>
       <if test="record.oc != null">
         oc = #{record.oc,jdbcType=DOUBLE},
       </if>
-      <if test="record.factorBc != null">
-        factor_bc = #{record.factorBc,jdbcType=DOUBLE},
-      </if>
       <if test="record.bc != null">
         bc = #{record.bc,jdbcType=DOUBLE},
+      </if>
+      <if test="record.danwei != null">
+        danwei = #{record.danwei,jdbcType=CHAR},
       </if>
       <if test="record.janUseamount != null">
         Jan_useamount = #{record.janUseamount,jdbcType=DOUBLE},
@@ -637,9 +467,6 @@
       <if test="record.decUseamount != null">
         dec_useamount = #{record.decUseamount,jdbcType=DOUBLE},
       </if>
-      <if test="record.danwei != null">
-        danwei = #{record.danwei,jdbcType=CHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -649,40 +476,25 @@
     update device_product
     set id = #{record.id,jdbcType=INTEGER},
       nk_no = #{record.nkNo,jdbcType=INTEGER},
-      devicetotal_id = #{record.devicetotalId,jdbcType=INTEGER},
-      device_no = #{record.deviceNo,jdbcType=INTEGER},
       device_id = #{record.deviceId,jdbcType=INTEGER},
-      activities_category_dec = #{record.activitiesCategoryDec,jdbcType=VARCHAR},
       activities_category = #{record.activitiesCategory,jdbcType=CHAR},
-      name_category_dec = #{record.nameCategoryDec,jdbcType=VARCHAR},
       name_category = #{record.nameCategory,jdbcType=CHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      drainage_process_dec = #{record.drainageProcessDec,jdbcType=VARCHAR},
+      scc_code = #{record.sccCode,jdbcType=CHAR},
       drainage_process = #{record.drainageProcess,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       uint = #{record.uint,jdbcType=VARCHAR},
       annual_output = #{record.annualOutput,jdbcType=DOUBLE},
-      scc_code = #{record.sccCode,jdbcType=CHAR},
-      factor_status = #{record.factorStatus,jdbcType=TINYINT},
-      factor_nox = #{record.factorNox,jdbcType=DOUBLE},
       nox = #{record.nox,jdbcType=DOUBLE},
-      factor_co = #{record.factorCo,jdbcType=DOUBLE},
       co = #{record.co,jdbcType=DOUBLE},
-      factor_pm10 = #{record.factorPm10,jdbcType=DOUBLE},
       pm10 = #{record.pm10,jdbcType=DOUBLE},
-      factor_pm25 = #{record.factorPm25,jdbcType=DOUBLE},
       pm25 = #{record.pm25,jdbcType=DOUBLE},
-      factor_pm = #{record.factorPm,jdbcType=DOUBLE},
       pm = #{record.pm,jdbcType=DOUBLE},
-      factor_so2 = #{record.factorSo2,jdbcType=DOUBLE},
       so2 = #{record.so2,jdbcType=DOUBLE},
-      factor_voc = #{record.factorVoc,jdbcType=DOUBLE},
       voc = #{record.voc,jdbcType=DOUBLE},
-      factor_nh3 = #{record.factorNh3,jdbcType=DOUBLE},
       nh3 = #{record.nh3,jdbcType=DOUBLE},
-      factor_oc = #{record.factorOc,jdbcType=DOUBLE},
       oc = #{record.oc,jdbcType=DOUBLE},
-      factor_bc = #{record.factorBc,jdbcType=DOUBLE},
       bc = #{record.bc,jdbcType=DOUBLE},
+      danwei = #{record.danwei,jdbcType=CHAR},
       Jan_useamount = #{record.janUseamount,jdbcType=DOUBLE},
       Feb_useamount = #{record.febUseamount,jdbcType=DOUBLE},
       Mar_useamount = #{record.marUseamount,jdbcType=DOUBLE},
@@ -694,8 +506,7 @@
       sept_useamount = #{record.septUseamount,jdbcType=DOUBLE},
       oct_use_amount = #{record.octUseAmount,jdbcType=DOUBLE},
       nov_useamount = #{record.novUseamount,jdbcType=DOUBLE},
-      dec_useamount = #{record.decUseamount,jdbcType=DOUBLE},
-      danwei = #{record.danwei,jdbcType=CHAR}
+      dec_useamount = #{record.decUseamount,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -706,35 +517,23 @@
       <if test="nkNo != null">
         nk_no = #{nkNo,jdbcType=INTEGER},
       </if>
-      <if test="devicetotalId != null">
-        devicetotal_id = #{devicetotalId,jdbcType=INTEGER},
-      </if>
-      <if test="deviceNo != null">
-        device_no = #{deviceNo,jdbcType=INTEGER},
-      </if>
       <if test="deviceId != null">
         device_id = #{deviceId,jdbcType=INTEGER},
-      </if>
-      <if test="activitiesCategoryDec != null">
-        activities_category_dec = #{activitiesCategoryDec,jdbcType=VARCHAR},
       </if>
       <if test="activitiesCategory != null">
         activities_category = #{activitiesCategory,jdbcType=CHAR},
       </if>
-      <if test="nameCategoryDec != null">
-        name_category_dec = #{nameCategoryDec,jdbcType=VARCHAR},
-      </if>
       <if test="nameCategory != null">
         name_category = #{nameCategory,jdbcType=CHAR},
       </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="drainageProcessDec != null">
-        drainage_process_dec = #{drainageProcessDec,jdbcType=VARCHAR},
+      <if test="sccCode != null">
+        scc_code = #{sccCode,jdbcType=CHAR},
       </if>
       <if test="drainageProcess != null">
         drainage_process = #{drainageProcess,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="uint != null">
         uint = #{uint,jdbcType=VARCHAR},
@@ -742,71 +541,38 @@
       <if test="annualOutput != null">
         annual_output = #{annualOutput,jdbcType=DOUBLE},
       </if>
-      <if test="sccCode != null">
-        scc_code = #{sccCode,jdbcType=CHAR},
-      </if>
-      <if test="factorStatus != null">
-        factor_status = #{factorStatus,jdbcType=TINYINT},
-      </if>
-      <if test="factorNox != null">
-        factor_nox = #{factorNox,jdbcType=DOUBLE},
-      </if>
       <if test="nox != null">
         nox = #{nox,jdbcType=DOUBLE},
-      </if>
-      <if test="factorCo != null">
-        factor_co = #{factorCo,jdbcType=DOUBLE},
       </if>
       <if test="co != null">
         co = #{co,jdbcType=DOUBLE},
       </if>
-      <if test="factorPm10 != null">
-        factor_pm10 = #{factorPm10,jdbcType=DOUBLE},
-      </if>
       <if test="pm10 != null">
         pm10 = #{pm10,jdbcType=DOUBLE},
-      </if>
-      <if test="factorPm25 != null">
-        factor_pm25 = #{factorPm25,jdbcType=DOUBLE},
       </if>
       <if test="pm25 != null">
         pm25 = #{pm25,jdbcType=DOUBLE},
       </if>
-      <if test="factorPm != null">
-        factor_pm = #{factorPm,jdbcType=DOUBLE},
-      </if>
       <if test="pm != null">
         pm = #{pm,jdbcType=DOUBLE},
-      </if>
-      <if test="factorSo2 != null">
-        factor_so2 = #{factorSo2,jdbcType=DOUBLE},
       </if>
       <if test="so2 != null">
         so2 = #{so2,jdbcType=DOUBLE},
       </if>
-      <if test="factorVoc != null">
-        factor_voc = #{factorVoc,jdbcType=DOUBLE},
-      </if>
       <if test="voc != null">
         voc = #{voc,jdbcType=DOUBLE},
-      </if>
-      <if test="factorNh3 != null">
-        factor_nh3 = #{factorNh3,jdbcType=DOUBLE},
       </if>
       <if test="nh3 != null">
         nh3 = #{nh3,jdbcType=DOUBLE},
       </if>
-      <if test="factorOc != null">
-        factor_oc = #{factorOc,jdbcType=DOUBLE},
-      </if>
       <if test="oc != null">
         oc = #{oc,jdbcType=DOUBLE},
       </if>
-      <if test="factorBc != null">
-        factor_bc = #{factorBc,jdbcType=DOUBLE},
-      </if>
       <if test="bc != null">
         bc = #{bc,jdbcType=DOUBLE},
+      </if>
+      <if test="danwei != null">
+        danwei = #{danwei,jdbcType=CHAR},
       </if>
       <if test="janUseamount != null">
         Jan_useamount = #{janUseamount,jdbcType=DOUBLE},
@@ -844,49 +610,31 @@
       <if test="decUseamount != null">
         dec_useamount = #{decUseamount,jdbcType=DOUBLE},
       </if>
-      <if test="danwei != null">
-        danwei = #{danwei,jdbcType=CHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.nankai.xining.bean.DeviceProduct">
     update device_product
     set nk_no = #{nkNo,jdbcType=INTEGER},
-      devicetotal_id = #{devicetotalId,jdbcType=INTEGER},
-      device_no = #{deviceNo,jdbcType=INTEGER},
       device_id = #{deviceId,jdbcType=INTEGER},
-      activities_category_dec = #{activitiesCategoryDec,jdbcType=VARCHAR},
       activities_category = #{activitiesCategory,jdbcType=CHAR},
-      name_category_dec = #{nameCategoryDec,jdbcType=VARCHAR},
       name_category = #{nameCategory,jdbcType=CHAR},
-      name = #{name,jdbcType=VARCHAR},
-      drainage_process_dec = #{drainageProcessDec,jdbcType=VARCHAR},
+      scc_code = #{sccCode,jdbcType=CHAR},
       drainage_process = #{drainageProcess,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
       uint = #{uint,jdbcType=VARCHAR},
       annual_output = #{annualOutput,jdbcType=DOUBLE},
-      scc_code = #{sccCode,jdbcType=CHAR},
-      factor_status = #{factorStatus,jdbcType=TINYINT},
-      factor_nox = #{factorNox,jdbcType=DOUBLE},
       nox = #{nox,jdbcType=DOUBLE},
-      factor_co = #{factorCo,jdbcType=DOUBLE},
       co = #{co,jdbcType=DOUBLE},
-      factor_pm10 = #{factorPm10,jdbcType=DOUBLE},
       pm10 = #{pm10,jdbcType=DOUBLE},
-      factor_pm25 = #{factorPm25,jdbcType=DOUBLE},
       pm25 = #{pm25,jdbcType=DOUBLE},
-      factor_pm = #{factorPm,jdbcType=DOUBLE},
       pm = #{pm,jdbcType=DOUBLE},
-      factor_so2 = #{factorSo2,jdbcType=DOUBLE},
       so2 = #{so2,jdbcType=DOUBLE},
-      factor_voc = #{factorVoc,jdbcType=DOUBLE},
       voc = #{voc,jdbcType=DOUBLE},
-      factor_nh3 = #{factorNh3,jdbcType=DOUBLE},
       nh3 = #{nh3,jdbcType=DOUBLE},
-      factor_oc = #{factorOc,jdbcType=DOUBLE},
       oc = #{oc,jdbcType=DOUBLE},
-      factor_bc = #{factorBc,jdbcType=DOUBLE},
       bc = #{bc,jdbcType=DOUBLE},
+      danwei = #{danwei,jdbcType=CHAR},
       Jan_useamount = #{janUseamount,jdbcType=DOUBLE},
       Feb_useamount = #{febUseamount,jdbcType=DOUBLE},
       Mar_useamount = #{marUseamount,jdbcType=DOUBLE},
@@ -898,24 +646,19 @@
       sept_useamount = #{septUseamount,jdbcType=DOUBLE},
       oct_use_amount = #{octUseAmount,jdbcType=DOUBLE},
       nov_useamount = #{novUseamount,jdbcType=DOUBLE},
-      dec_useamount = #{decUseamount,jdbcType=DOUBLE},
-      danwei = #{danwei,jdbcType=CHAR}
+      dec_useamount = #{decUseamount,jdbcType=DOUBLE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <!--自定义SQL：根据工厂ID查询产品（连接设备表和烟囱表）-->
   <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT dpt.id, dpt.nk_no, devicetotal_id, dpt.device_no, device_id, activities_category_dec, activities_category,
-    name_category_dec, name_category, dpt.name, drainage_process_dec, drainage_process, uint,
-    annual_output, scc_code, factor_nox, nox, factor_co, co, factor_status, factor_pm10,
-    pm10, factor_pm25, pm25, factor_pm, pm, factor_so2, so2, factor_voc, voc, factor_nh3,
-    nh3, factor_oc, oc, factor_bc, bc, Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount,
-    May_useamount, June_useamount, July_useamount, aug_useamount, sept_useamount, oct_use_amount,
-    nov_useamount, dec_useamount, danwei
+    SELECT dpt.id, dpt.nk_no, device_id, activities_category, name_category, scc_code, drainage_process,
+    dpt.name, uint, annual_output, nox, co, pm10, pm25, pm, so2, voc, nh3, oc, bc, danwei,
+    Jan_useamount, Feb_useamount, Mar_useamount, Apr_useamount, May_useamount, June_useamount,
+    July_useamount, aug_useamount, sept_useamount, oct_use_amount, nov_useamount, dec_useamount
     from device_product dpt join device d on dpt.device_id = d.id
     join exhaust e on d.EXHUST_ID = e.EXF_ID
     WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
   </select>
-
 
 </mapper>

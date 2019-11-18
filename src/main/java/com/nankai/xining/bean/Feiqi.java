@@ -5,23 +5,19 @@ import java.io.Serializable;
 public class Feiqi implements Serializable {
     private Integer id;
 
-    private Integer factoryId;
-
     private Integer nkno;
+
+    private Integer factoryId;
 
     private String deviceName;
 
     private String scc2;
 
-    private String scc2Dec;
-
     private String scc3;
-
-    private String scc3Dec;
 
     private String scc4;
 
-    private String scc4Dec;
+    private String sccCode;
 
     private Double lon1;
 
@@ -43,19 +39,25 @@ public class Feiqi implements Serializable {
 
     private Double tian;
 
-    private Double fen;
-
     private Double dui;
 
-    private Integer status;
+    private Double fen;
 
-    private String statusDec;
+    private Double pm10Emission;
+
+    private Double pm25Emission;
 
     private Double vocs;
 
     private Double nh3;
 
-    private String sccCode;
+    private Double ocEmission;
+
+    private Double bcEmission;
+
+    private Double so2Emission;
+
+    private Double noxEmission;
 
     private Double marUseamount;
 
@@ -81,18 +83,6 @@ public class Feiqi implements Serializable {
 
     private Double decUseamount;
 
-    private Double pm10Emission;
-
-    private Double pm25Emission;
-
-    private Double ocEmission;
-
-    private Double bcEmission;
-
-    private Double so2Emission;
-
-    private Double noxEmission;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -103,20 +93,20 @@ public class Feiqi implements Serializable {
         this.id = id;
     }
 
-    public Integer getFactoryId() {
-        return factoryId;
-    }
-
-    public void setFactoryId(Integer factoryId) {
-        this.factoryId = factoryId;
-    }
-
     public Integer getNkno() {
         return nkno;
     }
 
     public void setNkno(Integer nkno) {
         this.nkno = nkno;
+    }
+
+    public Integer getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(Integer factoryId) {
+        this.factoryId = factoryId;
     }
 
     public String getDeviceName() {
@@ -135,28 +125,12 @@ public class Feiqi implements Serializable {
         this.scc2 = scc2 == null ? null : scc2.trim();
     }
 
-    public String getScc2Dec() {
-        return scc2Dec;
-    }
-
-    public void setScc2Dec(String scc2Dec) {
-        this.scc2Dec = scc2Dec == null ? null : scc2Dec.trim();
-    }
-
     public String getScc3() {
         return scc3;
     }
 
     public void setScc3(String scc3) {
         this.scc3 = scc3 == null ? null : scc3.trim();
-    }
-
-    public String getScc3Dec() {
-        return scc3Dec;
-    }
-
-    public void setScc3Dec(String scc3Dec) {
-        this.scc3Dec = scc3Dec == null ? null : scc3Dec.trim();
     }
 
     public String getScc4() {
@@ -167,12 +141,12 @@ public class Feiqi implements Serializable {
         this.scc4 = scc4 == null ? null : scc4.trim();
     }
 
-    public String getScc4Dec() {
-        return scc4Dec;
+    public String getSccCode() {
+        return sccCode;
     }
 
-    public void setScc4Dec(String scc4Dec) {
-        this.scc4Dec = scc4Dec == null ? null : scc4Dec.trim();
+    public void setSccCode(String sccCode) {
+        this.sccCode = sccCode == null ? null : sccCode.trim();
     }
 
     public Double getLon1() {
@@ -255,14 +229,6 @@ public class Feiqi implements Serializable {
         this.tian = tian;
     }
 
-    public Double getFen() {
-        return fen;
-    }
-
-    public void setFen(Double fen) {
-        this.fen = fen;
-    }
-
     public Double getDui() {
         return dui;
     }
@@ -271,20 +237,28 @@ public class Feiqi implements Serializable {
         this.dui = dui;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Double getFen() {
+        return fen;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setFen(Double fen) {
+        this.fen = fen;
     }
 
-    public String getStatusDec() {
-        return statusDec;
+    public Double getPm10Emission() {
+        return pm10Emission;
     }
 
-    public void setStatusDec(String statusDec) {
-        this.statusDec = statusDec == null ? null : statusDec.trim();
+    public void setPm10Emission(Double pm10Emission) {
+        this.pm10Emission = pm10Emission;
+    }
+
+    public Double getPm25Emission() {
+        return pm25Emission;
+    }
+
+    public void setPm25Emission(Double pm25Emission) {
+        this.pm25Emission = pm25Emission;
     }
 
     public Double getVocs() {
@@ -303,12 +277,36 @@ public class Feiqi implements Serializable {
         this.nh3 = nh3;
     }
 
-    public String getSccCode() {
-        return sccCode;
+    public Double getOcEmission() {
+        return ocEmission;
     }
 
-    public void setSccCode(String sccCode) {
-        this.sccCode = sccCode == null ? null : sccCode.trim();
+    public void setOcEmission(Double ocEmission) {
+        this.ocEmission = ocEmission;
+    }
+
+    public Double getBcEmission() {
+        return bcEmission;
+    }
+
+    public void setBcEmission(Double bcEmission) {
+        this.bcEmission = bcEmission;
+    }
+
+    public Double getSo2Emission() {
+        return so2Emission;
+    }
+
+    public void setSo2Emission(Double so2Emission) {
+        this.so2Emission = so2Emission;
+    }
+
+    public Double getNoxEmission() {
+        return noxEmission;
+    }
+
+    public void setNoxEmission(Double noxEmission) {
+        this.noxEmission = noxEmission;
     }
 
     public Double getMarUseamount() {
@@ -407,54 +405,6 @@ public class Feiqi implements Serializable {
         this.decUseamount = decUseamount;
     }
 
-    public Double getPm10Emission() {
-        return pm10Emission;
-    }
-
-    public void setPm10Emission(Double pm10Emission) {
-        this.pm10Emission = pm10Emission;
-    }
-
-    public Double getPm25Emission() {
-        return pm25Emission;
-    }
-
-    public void setPm25Emission(Double pm25Emission) {
-        this.pm25Emission = pm25Emission;
-    }
-
-    public Double getOcEmission() {
-        return ocEmission;
-    }
-
-    public void setOcEmission(Double ocEmission) {
-        this.ocEmission = ocEmission;
-    }
-
-    public Double getBcEmission() {
-        return bcEmission;
-    }
-
-    public void setBcEmission(Double bcEmission) {
-        this.bcEmission = bcEmission;
-    }
-
-    public Double getSo2Emission() {
-        return so2Emission;
-    }
-
-    public void setSo2Emission(Double so2Emission) {
-        this.so2Emission = so2Emission;
-    }
-
-    public Double getNoxEmission() {
-        return noxEmission;
-    }
-
-    public void setNoxEmission(Double noxEmission) {
-        this.noxEmission = noxEmission;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -462,15 +412,13 @@ public class Feiqi implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", factoryId=").append(factoryId);
         sb.append(", nkno=").append(nkno);
+        sb.append(", factoryId=").append(factoryId);
         sb.append(", deviceName=").append(deviceName);
         sb.append(", scc2=").append(scc2);
-        sb.append(", scc2Dec=").append(scc2Dec);
         sb.append(", scc3=").append(scc3);
-        sb.append(", scc3Dec=").append(scc3Dec);
         sb.append(", scc4=").append(scc4);
-        sb.append(", scc4Dec=").append(scc4Dec);
+        sb.append(", sccCode=").append(sccCode);
         sb.append(", lon1=").append(lon1);
         sb.append(", lon2=").append(lon2);
         sb.append(", lon3=").append(lon3);
@@ -481,13 +429,16 @@ public class Feiqi implements Serializable {
         sb.append(", lat4=").append(lat4);
         sb.append(", watter=").append(watter);
         sb.append(", tian=").append(tian);
-        sb.append(", fen=").append(fen);
         sb.append(", dui=").append(dui);
-        sb.append(", status=").append(status);
-        sb.append(", statusDec=").append(statusDec);
+        sb.append(", fen=").append(fen);
+        sb.append(", pm10Emission=").append(pm10Emission);
+        sb.append(", pm25Emission=").append(pm25Emission);
         sb.append(", vocs=").append(vocs);
         sb.append(", nh3=").append(nh3);
-        sb.append(", sccCode=").append(sccCode);
+        sb.append(", ocEmission=").append(ocEmission);
+        sb.append(", bcEmission=").append(bcEmission);
+        sb.append(", so2Emission=").append(so2Emission);
+        sb.append(", noxEmission=").append(noxEmission);
         sb.append(", marUseamount=").append(marUseamount);
         sb.append(", febUseamount=").append(febUseamount);
         sb.append(", janUseamount=").append(janUseamount);
@@ -500,12 +451,6 @@ public class Feiqi implements Serializable {
         sb.append(", octUseAmount=").append(octUseAmount);
         sb.append(", novUseamount=").append(novUseamount);
         sb.append(", decUseamount=").append(decUseamount);
-        sb.append(", pm10Emission=").append(pm10Emission);
-        sb.append(", pm25Emission=").append(pm25Emission);
-        sb.append(", ocEmission=").append(ocEmission);
-        sb.append(", bcEmission=").append(bcEmission);
-        sb.append(", so2Emission=").append(so2Emission);
-        sb.append(", noxEmission=").append(noxEmission);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -524,15 +469,13 @@ public class Feiqi implements Serializable {
         }
         Feiqi other = (Feiqi) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getFactoryId() == null ? other.getFactoryId() == null : this.getFactoryId().equals(other.getFactoryId()))
             && (this.getNkno() == null ? other.getNkno() == null : this.getNkno().equals(other.getNkno()))
+            && (this.getFactoryId() == null ? other.getFactoryId() == null : this.getFactoryId().equals(other.getFactoryId()))
             && (this.getDeviceName() == null ? other.getDeviceName() == null : this.getDeviceName().equals(other.getDeviceName()))
             && (this.getScc2() == null ? other.getScc2() == null : this.getScc2().equals(other.getScc2()))
-            && (this.getScc2Dec() == null ? other.getScc2Dec() == null : this.getScc2Dec().equals(other.getScc2Dec()))
             && (this.getScc3() == null ? other.getScc3() == null : this.getScc3().equals(other.getScc3()))
-            && (this.getScc3Dec() == null ? other.getScc3Dec() == null : this.getScc3Dec().equals(other.getScc3Dec()))
             && (this.getScc4() == null ? other.getScc4() == null : this.getScc4().equals(other.getScc4()))
-            && (this.getScc4Dec() == null ? other.getScc4Dec() == null : this.getScc4Dec().equals(other.getScc4Dec()))
+            && (this.getSccCode() == null ? other.getSccCode() == null : this.getSccCode().equals(other.getSccCode()))
             && (this.getLon1() == null ? other.getLon1() == null : this.getLon1().equals(other.getLon1()))
             && (this.getLon2() == null ? other.getLon2() == null : this.getLon2().equals(other.getLon2()))
             && (this.getLon3() == null ? other.getLon3() == null : this.getLon3().equals(other.getLon3()))
@@ -543,13 +486,16 @@ public class Feiqi implements Serializable {
             && (this.getLat4() == null ? other.getLat4() == null : this.getLat4().equals(other.getLat4()))
             && (this.getWatter() == null ? other.getWatter() == null : this.getWatter().equals(other.getWatter()))
             && (this.getTian() == null ? other.getTian() == null : this.getTian().equals(other.getTian()))
-            && (this.getFen() == null ? other.getFen() == null : this.getFen().equals(other.getFen()))
             && (this.getDui() == null ? other.getDui() == null : this.getDui().equals(other.getDui()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getStatusDec() == null ? other.getStatusDec() == null : this.getStatusDec().equals(other.getStatusDec()))
+            && (this.getFen() == null ? other.getFen() == null : this.getFen().equals(other.getFen()))
+            && (this.getPm10Emission() == null ? other.getPm10Emission() == null : this.getPm10Emission().equals(other.getPm10Emission()))
+            && (this.getPm25Emission() == null ? other.getPm25Emission() == null : this.getPm25Emission().equals(other.getPm25Emission()))
             && (this.getVocs() == null ? other.getVocs() == null : this.getVocs().equals(other.getVocs()))
             && (this.getNh3() == null ? other.getNh3() == null : this.getNh3().equals(other.getNh3()))
-            && (this.getSccCode() == null ? other.getSccCode() == null : this.getSccCode().equals(other.getSccCode()))
+            && (this.getOcEmission() == null ? other.getOcEmission() == null : this.getOcEmission().equals(other.getOcEmission()))
+            && (this.getBcEmission() == null ? other.getBcEmission() == null : this.getBcEmission().equals(other.getBcEmission()))
+            && (this.getSo2Emission() == null ? other.getSo2Emission() == null : this.getSo2Emission().equals(other.getSo2Emission()))
+            && (this.getNoxEmission() == null ? other.getNoxEmission() == null : this.getNoxEmission().equals(other.getNoxEmission()))
             && (this.getMarUseamount() == null ? other.getMarUseamount() == null : this.getMarUseamount().equals(other.getMarUseamount()))
             && (this.getFebUseamount() == null ? other.getFebUseamount() == null : this.getFebUseamount().equals(other.getFebUseamount()))
             && (this.getJanUseamount() == null ? other.getJanUseamount() == null : this.getJanUseamount().equals(other.getJanUseamount()))
@@ -561,13 +507,7 @@ public class Feiqi implements Serializable {
             && (this.getAprUseamount() == null ? other.getAprUseamount() == null : this.getAprUseamount().equals(other.getAprUseamount()))
             && (this.getOctUseAmount() == null ? other.getOctUseAmount() == null : this.getOctUseAmount().equals(other.getOctUseAmount()))
             && (this.getNovUseamount() == null ? other.getNovUseamount() == null : this.getNovUseamount().equals(other.getNovUseamount()))
-            && (this.getDecUseamount() == null ? other.getDecUseamount() == null : this.getDecUseamount().equals(other.getDecUseamount()))
-            && (this.getPm10Emission() == null ? other.getPm10Emission() == null : this.getPm10Emission().equals(other.getPm10Emission()))
-            && (this.getPm25Emission() == null ? other.getPm25Emission() == null : this.getPm25Emission().equals(other.getPm25Emission()))
-            && (this.getOcEmission() == null ? other.getOcEmission() == null : this.getOcEmission().equals(other.getOcEmission()))
-            && (this.getBcEmission() == null ? other.getBcEmission() == null : this.getBcEmission().equals(other.getBcEmission()))
-            && (this.getSo2Emission() == null ? other.getSo2Emission() == null : this.getSo2Emission().equals(other.getSo2Emission()))
-            && (this.getNoxEmission() == null ? other.getNoxEmission() == null : this.getNoxEmission().equals(other.getNoxEmission()));
+            && (this.getDecUseamount() == null ? other.getDecUseamount() == null : this.getDecUseamount().equals(other.getDecUseamount()));
     }
 
     @Override
@@ -575,15 +515,13 @@ public class Feiqi implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getFactoryId() == null) ? 0 : getFactoryId().hashCode());
         result = prime * result + ((getNkno() == null) ? 0 : getNkno().hashCode());
+        result = prime * result + ((getFactoryId() == null) ? 0 : getFactoryId().hashCode());
         result = prime * result + ((getDeviceName() == null) ? 0 : getDeviceName().hashCode());
         result = prime * result + ((getScc2() == null) ? 0 : getScc2().hashCode());
-        result = prime * result + ((getScc2Dec() == null) ? 0 : getScc2Dec().hashCode());
         result = prime * result + ((getScc3() == null) ? 0 : getScc3().hashCode());
-        result = prime * result + ((getScc3Dec() == null) ? 0 : getScc3Dec().hashCode());
         result = prime * result + ((getScc4() == null) ? 0 : getScc4().hashCode());
-        result = prime * result + ((getScc4Dec() == null) ? 0 : getScc4Dec().hashCode());
+        result = prime * result + ((getSccCode() == null) ? 0 : getSccCode().hashCode());
         result = prime * result + ((getLon1() == null) ? 0 : getLon1().hashCode());
         result = prime * result + ((getLon2() == null) ? 0 : getLon2().hashCode());
         result = prime * result + ((getLon3() == null) ? 0 : getLon3().hashCode());
@@ -594,13 +532,16 @@ public class Feiqi implements Serializable {
         result = prime * result + ((getLat4() == null) ? 0 : getLat4().hashCode());
         result = prime * result + ((getWatter() == null) ? 0 : getWatter().hashCode());
         result = prime * result + ((getTian() == null) ? 0 : getTian().hashCode());
-        result = prime * result + ((getFen() == null) ? 0 : getFen().hashCode());
         result = prime * result + ((getDui() == null) ? 0 : getDui().hashCode());
-        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getStatusDec() == null) ? 0 : getStatusDec().hashCode());
+        result = prime * result + ((getFen() == null) ? 0 : getFen().hashCode());
+        result = prime * result + ((getPm10Emission() == null) ? 0 : getPm10Emission().hashCode());
+        result = prime * result + ((getPm25Emission() == null) ? 0 : getPm25Emission().hashCode());
         result = prime * result + ((getVocs() == null) ? 0 : getVocs().hashCode());
         result = prime * result + ((getNh3() == null) ? 0 : getNh3().hashCode());
-        result = prime * result + ((getSccCode() == null) ? 0 : getSccCode().hashCode());
+        result = prime * result + ((getOcEmission() == null) ? 0 : getOcEmission().hashCode());
+        result = prime * result + ((getBcEmission() == null) ? 0 : getBcEmission().hashCode());
+        result = prime * result + ((getSo2Emission() == null) ? 0 : getSo2Emission().hashCode());
+        result = prime * result + ((getNoxEmission() == null) ? 0 : getNoxEmission().hashCode());
         result = prime * result + ((getMarUseamount() == null) ? 0 : getMarUseamount().hashCode());
         result = prime * result + ((getFebUseamount() == null) ? 0 : getFebUseamount().hashCode());
         result = prime * result + ((getJanUseamount() == null) ? 0 : getJanUseamount().hashCode());
@@ -613,12 +554,6 @@ public class Feiqi implements Serializable {
         result = prime * result + ((getOctUseAmount() == null) ? 0 : getOctUseAmount().hashCode());
         result = prime * result + ((getNovUseamount() == null) ? 0 : getNovUseamount().hashCode());
         result = prime * result + ((getDecUseamount() == null) ? 0 : getDecUseamount().hashCode());
-        result = prime * result + ((getPm10Emission() == null) ? 0 : getPm10Emission().hashCode());
-        result = prime * result + ((getPm25Emission() == null) ? 0 : getPm25Emission().hashCode());
-        result = prime * result + ((getOcEmission() == null) ? 0 : getOcEmission().hashCode());
-        result = prime * result + ((getBcEmission() == null) ? 0 : getBcEmission().hashCode());
-        result = prime * result + ((getSo2Emission() == null) ? 0 : getSo2Emission().hashCode());
-        result = prime * result + ((getNoxEmission() == null) ? 0 : getNoxEmission().hashCode());
         return result;
     }
 }

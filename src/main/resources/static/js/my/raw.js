@@ -152,12 +152,10 @@ $(function () {
 
             },
             initSelect:function () {
-                setTimeout(function () {
-                    var scc3Input = $("#updatenameCategory_input").val();
-                    var scc4Input = $("#updatedrainageProcess_input").val();
-                    $("#updatenameCategory").val(scc3Input);
-                    $("#updatedrainageProcess").val(scc4Input);
-                },1000)
+                var scc3Input = $("#updatenameCategory_input").val();
+                var scc4Input = $("#updatedrainageProcess_input").val();
+                $("#updatenameCategory").val(scc3Input);
+                $("#updatedrainageProcess").val(scc4Input);
             }
 
         }

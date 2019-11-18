@@ -228,7 +228,6 @@
                             <tr>
                                 <th>窑炉ID</th>
                                 <th>窑炉序号</th>
-                                <th>窑炉编号</th>
                                 <th>窑炉类型</th>
                                 <th>修改窑炉信息</th>
                                 <th>删除该窑炉</th>
@@ -238,8 +237,7 @@
                             <tr  th:each="kiln : ${kilnList}">
                                 <th scope="row" th:text="${kiln.id}">1</th>
                                 <td th:text="${kiln.nkNo}">neo</td>
-                                <td th:text="${kiln.kilnNo}">neo</td>
-                                <td th:text="${kiln.modelDec}">Otto</td>
+                                <td th:text="${kiln.kilnModel}">Otto</td>
                                 <td><button th:value="${kiln.id}" @click="editKiln($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${kiln.id}" @click="delKiln($event)" class="btn btn-danger btn-sm">删除</button></td>
                             </tr>

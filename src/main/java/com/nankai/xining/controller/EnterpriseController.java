@@ -37,10 +37,10 @@ public class EnterpriseController {
      */
     @RequestMapping("/enterpriseInfo")
     @ResponseBody
-    public Map<String,Object> enterpriseInfo(User user, HttpSession session){
+    public Map<String,Object> enterpriseInfo(User user, HttpSession session) throws IllegalAccessException {
         HashMap result = new HashMap();
         if (userService.checkUserNameAndPwd(user)){
-            Factory factoryInfo = enterpriseService.getFactoryInfoByNo(user.getFacNo());
+            FactoryInfo factoryInfo = enterpriseService.getFactoryInfoByNo(user.getFacNo());
             session.setAttribute("factoryInfo",factoryInfo);
             session.setAttribute("clientfactoryid",factoryInfo.getFactoryId());
             result.put("isok",true);
@@ -59,12 +59,12 @@ public class EnterpriseController {
      */
     @RequestMapping(value = "enterpriseUpdate")
     @ResponseBody
-    public Map<String,Integer> updateEnterpriseInfo(Factory factory,HttpSession session){
+    public Map<String,Integer> updateEnterpriseInfo(Factory factory,HttpSession session) throws IllegalAccessException {
         Map resultStatus = new HashMap();
         Integer m_factoryInteger= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
 
         if(m_factoryInteger!=null){
-            Factory resultFactory=enterpriseService.updateFactory(factory,m_factoryInteger);
+            FactoryInfo resultFactory=enterpriseService.updateFactory(factory,m_factoryInteger);
             if (resultFactory!=null){
                 session.setAttribute("factoryInfo",resultFactory);
                 resultStatus.put("status",1);//成功

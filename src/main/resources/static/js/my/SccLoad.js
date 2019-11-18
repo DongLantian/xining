@@ -12,6 +12,7 @@ function clientscc3(scc1,scc2,selectB,selectC) {
         $.ajax({
             type:"post",
             dataType : "json",
+            async: false,
             url : "/scc/loadSelectB", //要访问的后台地址
             data : {
                 scc1ID: scc1,
@@ -51,6 +52,7 @@ function clientscc4(scc1,selectA,scc3,selectC) {
         $.ajax({
             type:"post",
             dataType : "json",
+            async: false,
             url : "/scc/loadSelectC", //要访问的后台地址
             data : {
                 scc1ID: scc1,

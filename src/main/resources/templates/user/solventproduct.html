@@ -228,7 +228,6 @@
                             <tr>
                                 <th>产品ID</th>
                                 <th>产品序号</th>
-                                <th>生产/排污工艺</th>
                                 <th>产品备注</th>
                                 <th>修改产品信息</th>
                                 <th>删除该产品</th>
@@ -238,7 +237,6 @@
                             <tr  th:each="solventproduct : ${solventproductList}">
                                 <th scope="row" th:text="${solventproduct.id}">1</th>
                                 <td th:text="${solventproduct.nkNo}">neo</td>
-                                <td th:text="${solventproduct.drainageProcessDec}">neo</td>
                                 <td th:text="${solventproduct.name}">Otto</td>
                                 <td><button th:value="${solventproduct.id}" @click="editsolventProduct($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${solventproduct.id}" @click="delsolventProduct($event)" class="btn btn-danger btn-sm">删除</button></td>

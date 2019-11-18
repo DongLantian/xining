@@ -5,11 +5,9 @@ import java.io.Serializable;
 public class FRoadDustSource implements Serializable {
     private Integer roadDustid;
 
-    private String scccode;
-
     private Integer factoryid;
 
-    private String companyName;
+    private String scccode;
 
     private Double startLongitude;
 
@@ -53,10 +51,6 @@ public class FRoadDustSource implements Serializable {
 
     private String controlMeasures;
 
-    private Double pm10Factors;
-
-    private Double pm25Factors;
-
     private Double pm25Emission;
 
     private Double pm10Emission;
@@ -75,14 +69,6 @@ public class FRoadDustSource implements Serializable {
         this.roadDustid = roadDustid;
     }
 
-    public String getScccode() {
-        return scccode;
-    }
-
-    public void setScccode(String scccode) {
-        this.scccode = scccode == null ? null : scccode.trim();
-    }
-
     public Integer getFactoryid() {
         return factoryid;
     }
@@ -91,12 +77,12 @@ public class FRoadDustSource implements Serializable {
         this.factoryid = factoryid;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getScccode() {
+        return scccode;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName == null ? null : companyName.trim();
+    public void setScccode(String scccode) {
+        this.scccode = scccode == null ? null : scccode.trim();
     }
 
     public Double getStartLongitude() {
@@ -267,22 +253,6 @@ public class FRoadDustSource implements Serializable {
         this.controlMeasures = controlMeasures == null ? null : controlMeasures.trim();
     }
 
-    public Double getPm10Factors() {
-        return pm10Factors;
-    }
-
-    public void setPm10Factors(Double pm10Factors) {
-        this.pm10Factors = pm10Factors;
-    }
-
-    public Double getPm25Factors() {
-        return pm25Factors;
-    }
-
-    public void setPm25Factors(Double pm25Factors) {
-        this.pm25Factors = pm25Factors;
-    }
-
     public Double getPm25Emission() {
         return pm25Emission;
     }
@@ -322,9 +292,8 @@ public class FRoadDustSource implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", roadDustid=").append(roadDustid);
-        sb.append(", scccode=").append(scccode);
         sb.append(", factoryid=").append(factoryid);
-        sb.append(", companyName=").append(companyName);
+        sb.append(", scccode=").append(scccode);
         sb.append(", startLongitude=").append(startLongitude);
         sb.append(", startLatitude=").append(startLatitude);
         sb.append(", endLongitude=").append(endLongitude);
@@ -346,8 +315,6 @@ public class FRoadDustSource implements Serializable {
         sb.append(", waterTimesFall=").append(waterTimesFall);
         sb.append(", dustSuppression=").append(dustSuppression);
         sb.append(", controlMeasures=").append(controlMeasures);
-        sb.append(", pm10Factors=").append(pm10Factors);
-        sb.append(", pm25Factors=").append(pm25Factors);
         sb.append(", pm25Emission=").append(pm25Emission);
         sb.append(", pm10Emission=").append(pm10Emission);
         sb.append(", ocEmission=").append(ocEmission);
@@ -370,9 +337,8 @@ public class FRoadDustSource implements Serializable {
         }
         FRoadDustSource other = (FRoadDustSource) that;
         return (this.getRoadDustid() == null ? other.getRoadDustid() == null : this.getRoadDustid().equals(other.getRoadDustid()))
-            && (this.getScccode() == null ? other.getScccode() == null : this.getScccode().equals(other.getScccode()))
             && (this.getFactoryid() == null ? other.getFactoryid() == null : this.getFactoryid().equals(other.getFactoryid()))
-            && (this.getCompanyName() == null ? other.getCompanyName() == null : this.getCompanyName().equals(other.getCompanyName()))
+            && (this.getScccode() == null ? other.getScccode() == null : this.getScccode().equals(other.getScccode()))
             && (this.getStartLongitude() == null ? other.getStartLongitude() == null : this.getStartLongitude().equals(other.getStartLongitude()))
             && (this.getStartLatitude() == null ? other.getStartLatitude() == null : this.getStartLatitude().equals(other.getStartLatitude()))
             && (this.getEndLongitude() == null ? other.getEndLongitude() == null : this.getEndLongitude().equals(other.getEndLongitude()))
@@ -394,8 +360,6 @@ public class FRoadDustSource implements Serializable {
             && (this.getWaterTimesFall() == null ? other.getWaterTimesFall() == null : this.getWaterTimesFall().equals(other.getWaterTimesFall()))
             && (this.getDustSuppression() == null ? other.getDustSuppression() == null : this.getDustSuppression().equals(other.getDustSuppression()))
             && (this.getControlMeasures() == null ? other.getControlMeasures() == null : this.getControlMeasures().equals(other.getControlMeasures()))
-            && (this.getPm10Factors() == null ? other.getPm10Factors() == null : this.getPm10Factors().equals(other.getPm10Factors()))
-            && (this.getPm25Factors() == null ? other.getPm25Factors() == null : this.getPm25Factors().equals(other.getPm25Factors()))
             && (this.getPm25Emission() == null ? other.getPm25Emission() == null : this.getPm25Emission().equals(other.getPm25Emission()))
             && (this.getPm10Emission() == null ? other.getPm10Emission() == null : this.getPm10Emission().equals(other.getPm10Emission()))
             && (this.getOcEmission() == null ? other.getOcEmission() == null : this.getOcEmission().equals(other.getOcEmission()))
@@ -407,9 +371,8 @@ public class FRoadDustSource implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getRoadDustid() == null) ? 0 : getRoadDustid().hashCode());
-        result = prime * result + ((getScccode() == null) ? 0 : getScccode().hashCode());
         result = prime * result + ((getFactoryid() == null) ? 0 : getFactoryid().hashCode());
-        result = prime * result + ((getCompanyName() == null) ? 0 : getCompanyName().hashCode());
+        result = prime * result + ((getScccode() == null) ? 0 : getScccode().hashCode());
         result = prime * result + ((getStartLongitude() == null) ? 0 : getStartLongitude().hashCode());
         result = prime * result + ((getStartLatitude() == null) ? 0 : getStartLatitude().hashCode());
         result = prime * result + ((getEndLongitude() == null) ? 0 : getEndLongitude().hashCode());
@@ -431,8 +394,6 @@ public class FRoadDustSource implements Serializable {
         result = prime * result + ((getWaterTimesFall() == null) ? 0 : getWaterTimesFall().hashCode());
         result = prime * result + ((getDustSuppression() == null) ? 0 : getDustSuppression().hashCode());
         result = prime * result + ((getControlMeasures() == null) ? 0 : getControlMeasures().hashCode());
-        result = prime * result + ((getPm10Factors() == null) ? 0 : getPm10Factors().hashCode());
-        result = prime * result + ((getPm25Factors() == null) ? 0 : getPm25Factors().hashCode());
         result = prime * result + ((getPm25Emission() == null) ? 0 : getPm25Emission().hashCode());
         result = prime * result + ((getPm10Emission() == null) ? 0 : getPm10Emission().hashCode());
         result = prime * result + ((getOcEmission() == null) ? 0 : getOcEmission().hashCode());

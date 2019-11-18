@@ -28,8 +28,6 @@ public class BoilerService {
     @Autowired
     SccMapper sccMapper;
 
-    @Autowired
-    TotalBoilerMapper totalBoilerMapper;
 
     @Autowired
     FactoryMapper factoryMapper;
@@ -87,34 +85,10 @@ public class BoilerService {
 
         boiler.setNkNo(curMaxNum+1);
 
-        //更新total_boiler数据
-        TotalBoilerExample totalBoilerExample = new TotalBoilerExample();
-        TotalBoilerExample.Criteria totalBcriteria = totalBoilerExample.createCriteria();
-        totalBcriteria.andFactoryIdEqualTo(m_factoryId);
-        List<TotalBoiler> totalBoiler = totalBoilerMapper.selectByExample(totalBoilerExample);
-        Integer tboilerID = -1;
-        boolean flag=true;
-        if (totalBoiler.size()!=0){
-            //表中有总数记录，直接加一
-            TotalBoiler totalBoiler1 = totalBoiler.get(0);
-            tboilerID = totalBoiler1.getTboilerId();
-            totalBoiler1.setTboilerNum(totalBoiler1.getTboilerNum()+1);
-            if (totalBoilerMapper.updateByPrimaryKey(totalBoiler1)==0){
-                flag=false;
-            }
-        }else {
-            //表中无总数字段，插入
-            TotalBoiler totalBoiler2 = new TotalBoiler();
-            totalBoiler2.setFactoryId(m_factoryId);
-            totalBoiler2.setTboilerNum(1);
-            if (totalBoilerMapper.insert(totalBoiler2)!=0){
-                totalBoiler=totalBoilerMapper.selectByExample(totalBoilerExample);
-                tboilerID = totalBoiler.get(0).getTboilerId();
-            }else {
-                flag=false;
-            }
-        }
-
+        //更新factory中的count数据
+        Factory factory = factoryMapper.selectByPrimaryKey(m_factoryId);
+        int boilerCount = boilerList.size()+1;
+        factory.setBoilerCount(boilerCount);
 
         //初始化boiler
         Double fuelAuseage = boiler.getFuelAusage();
@@ -131,21 +105,16 @@ public class BoilerService {
         boiler.setNox((scc.getNox()*fuelAuseage)/100);
         boiler.setVoc((scc.getVocs()*fuelAuseage)/100);
         boiler.setScc(StrSCC);
-        boiler.setTboilerId(tboilerID);
 
-        if (flag){
-            if (boilerMapper.insertSelective(boiler)!=0) {
-                //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
-                Factory fac = factoryMapper.selectByPrimaryKey(m_factoryId);
-                Date now = new Date();
-                fac.setLastChangedTime(now);
-                factoryMapper.updateByPrimaryKeySelective(fac);
+        if (boilerMapper.insertSelective(boiler)!=0) {
+            //设置factory表中的更新时间：由于添加锅炉时早已添加烟囱，所以只需设置更新时间即可，不用判断了。
+            Date now = new Date();
+            factory.setLastChangedTime(now);
+            factoryMapper.updateByPrimaryKeySelective(factory);
 
-                return true;
-            }
-            else return false;
-        }else
-            return false;
+            return true;
+        }
+        else return false;
     }
 
     /**
@@ -187,14 +156,11 @@ public class BoilerService {
     public int deleteBoiler(int boilerID, Integer factoryID) {
         //删除锅炉的同时更改total表
         if (boilerMapper.deleteByPrimaryKey(boilerID)!=0){
-            //更新total_boiler数据
-            TotalBoilerExample totalBoilerExample = new TotalBoilerExample();
-            TotalBoilerExample.Criteria totalBcriteria = totalBoilerExample.createCriteria();
-            totalBcriteria.andFactoryIdEqualTo(factoryID);
-            List<TotalBoiler> totalBoiler = totalBoilerMapper.selectByExample(totalBoilerExample);
-            TotalBoiler totalBoiler1 = totalBoiler.get(0);
-            totalBoiler1.setTboilerNum(totalBoiler1.getTboilerNum()-1);
-            totalBoilerMapper.updateByPrimaryKey(totalBoiler1);
+            //更新factory中的count数据
+            Factory factory = factoryMapper.selectByPrimaryKey(factoryID);
+            int boilerCount = factory.getBoilerCount();
+            factory.setBoilerCount(boilerCount-1);
+            factoryMapper.updateByPrimaryKeySelective(factory);
             return 1;
         }else {
             return 0;

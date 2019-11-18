@@ -8,10 +8,6 @@ public class Factory implements Serializable {
 
     private String factoryNo;
 
-    private String factoryNo1;
-
-    private String factoryNo2;
-
     private String legalperson;
 
     private String factoryName;
@@ -20,39 +16,17 @@ public class Factory implements Serializable {
 
     private String factorySize;
 
-    private String countyCityDec;
-
-    private String countyCity;
-
-    private Double totalValue;
-
-    private String countyName;
-
     private String countyId;
 
     private String industryBigid;
 
-    private String industryName;
-
-    private String industryBigname;
-
     private String industryId;
 
-    private String addressdetail;
-
     private String address;
-
-    private String countyRegisterCityDec;
-
-    private String countyRegisterCity;
-
-    private String aregisterdetail;
 
     private Double powerAmount;
 
     private String addressRegister;
-
-    private String countyidRegisterDec;
 
     private String countyidRegister;
 
@@ -62,11 +36,7 @@ public class Factory implements Serializable {
 
     private String sourceType;
 
-    private String gasequType;
-
     private String year;
-
-    private Boolean flag;
 
     private Date lastChangedTime;
 
@@ -74,37 +44,13 @@ public class Factory implements Serializable {
 
     private Date fillingTime;
 
-    private Integer devicestatus;
-
-    private Integer boilerstatus;
-
-    private Integer kilnstatus;
-
     private Integer yearDays;
 
     private Integer daysHours;
 
-    private String cityName;
-
-    private Integer cityId;
-
     private Double totalOutput;
 
-    private Integer factorystatus;
-
-    private Integer exhauststatus;
-
-    private String statusdec;
-
     private Integer status;
-
-    private Integer exhaustNum;
-
-    private Integer important;
-
-    private Integer shihuaflag;
-
-    private Integer feiqnub;
 
     private String principalName;
 
@@ -142,6 +88,38 @@ public class Factory implements Serializable {
 
     private Double lon7;
 
+    private Integer exhaustCount;
+
+    private Integer boilerCount;
+
+    private Integer kilnCount;
+
+    private Integer deviceCount;
+
+    private Integer deviceProductCount;
+
+    private Integer deviceRawCount;
+
+    private Integer rongjiProductCount;
+
+    private Integer rongjiRawCount;
+
+    private Integer feiqiCount;
+
+    private Integer soilDustCount;
+
+    private Integer conDustCount;
+
+    private Integer roadDustCount;
+
+    private Integer yardDustCount;
+
+    private Integer noOrgWorkCount;
+
+    private Boolean flag;
+
+    private Integer important;
+
     private String note;
 
     private static final long serialVersionUID = 1L;
@@ -160,22 +138,6 @@ public class Factory implements Serializable {
 
     public void setFactoryNo(String factoryNo) {
         this.factoryNo = factoryNo == null ? null : factoryNo.trim();
-    }
-
-    public String getFactoryNo1() {
-        return factoryNo1;
-    }
-
-    public void setFactoryNo1(String factoryNo1) {
-        this.factoryNo1 = factoryNo1 == null ? null : factoryNo1.trim();
-    }
-
-    public String getFactoryNo2() {
-        return factoryNo2;
-    }
-
-    public void setFactoryNo2(String factoryNo2) {
-        this.factoryNo2 = factoryNo2 == null ? null : factoryNo2.trim();
     }
 
     public String getLegalperson() {
@@ -210,38 +172,6 @@ public class Factory implements Serializable {
         this.factorySize = factorySize == null ? null : factorySize.trim();
     }
 
-    public String getCountyCityDec() {
-        return countyCityDec;
-    }
-
-    public void setCountyCityDec(String countyCityDec) {
-        this.countyCityDec = countyCityDec == null ? null : countyCityDec.trim();
-    }
-
-    public String getCountyCity() {
-        return countyCity;
-    }
-
-    public void setCountyCity(String countyCity) {
-        this.countyCity = countyCity == null ? null : countyCity.trim();
-    }
-
-    public Double getTotalValue() {
-        return totalValue;
-    }
-
-    public void setTotalValue(Double totalValue) {
-        this.totalValue = totalValue;
-    }
-
-    public String getCountyName() {
-        return countyName;
-    }
-
-    public void setCountyName(String countyName) {
-        this.countyName = countyName == null ? null : countyName.trim();
-    }
-
     public String getCountyId() {
         return countyId;
     }
@@ -258,22 +188,6 @@ public class Factory implements Serializable {
         this.industryBigid = industryBigid == null ? null : industryBigid.trim();
     }
 
-    public String getIndustryName() {
-        return industryName;
-    }
-
-    public void setIndustryName(String industryName) {
-        this.industryName = industryName == null ? null : industryName.trim();
-    }
-
-    public String getIndustryBigname() {
-        return industryBigname;
-    }
-
-    public void setIndustryBigname(String industryBigname) {
-        this.industryBigname = industryBigname == null ? null : industryBigname.trim();
-    }
-
     public String getIndustryId() {
         return industryId;
     }
@@ -282,44 +196,12 @@ public class Factory implements Serializable {
         this.industryId = industryId == null ? null : industryId.trim();
     }
 
-    public String getAddressdetail() {
-        return addressdetail;
-    }
-
-    public void setAddressdetail(String addressdetail) {
-        this.addressdetail = addressdetail == null ? null : addressdetail.trim();
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
-    }
-
-    public String getCountyRegisterCityDec() {
-        return countyRegisterCityDec;
-    }
-
-    public void setCountyRegisterCityDec(String countyRegisterCityDec) {
-        this.countyRegisterCityDec = countyRegisterCityDec == null ? null : countyRegisterCityDec.trim();
-    }
-
-    public String getCountyRegisterCity() {
-        return countyRegisterCity;
-    }
-
-    public void setCountyRegisterCity(String countyRegisterCity) {
-        this.countyRegisterCity = countyRegisterCity == null ? null : countyRegisterCity.trim();
-    }
-
-    public String getAregisterdetail() {
-        return aregisterdetail;
-    }
-
-    public void setAregisterdetail(String aregisterdetail) {
-        this.aregisterdetail = aregisterdetail == null ? null : aregisterdetail.trim();
     }
 
     public Double getPowerAmount() {
@@ -336,14 +218,6 @@ public class Factory implements Serializable {
 
     public void setAddressRegister(String addressRegister) {
         this.addressRegister = addressRegister == null ? null : addressRegister.trim();
-    }
-
-    public String getCountyidRegisterDec() {
-        return countyidRegisterDec;
-    }
-
-    public void setCountyidRegisterDec(String countyidRegisterDec) {
-        this.countyidRegisterDec = countyidRegisterDec == null ? null : countyidRegisterDec.trim();
     }
 
     public String getCountyidRegister() {
@@ -378,28 +252,12 @@ public class Factory implements Serializable {
         this.sourceType = sourceType == null ? null : sourceType.trim();
     }
 
-    public String getGasequType() {
-        return gasequType;
-    }
-
-    public void setGasequType(String gasequType) {
-        this.gasequType = gasequType == null ? null : gasequType.trim();
-    }
-
     public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
         this.year = year == null ? null : year.trim();
-    }
-
-    public Boolean getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Boolean flag) {
-        this.flag = flag;
     }
 
     public Date getLastChangedTime() {
@@ -426,30 +284,6 @@ public class Factory implements Serializable {
         this.fillingTime = fillingTime;
     }
 
-    public Integer getDevicestatus() {
-        return devicestatus;
-    }
-
-    public void setDevicestatus(Integer devicestatus) {
-        this.devicestatus = devicestatus;
-    }
-
-    public Integer getBoilerstatus() {
-        return boilerstatus;
-    }
-
-    public void setBoilerstatus(Integer boilerstatus) {
-        this.boilerstatus = boilerstatus;
-    }
-
-    public Integer getKilnstatus() {
-        return kilnstatus;
-    }
-
-    public void setKilnstatus(Integer kilnstatus) {
-        this.kilnstatus = kilnstatus;
-    }
-
     public Integer getYearDays() {
         return yearDays;
     }
@@ -466,22 +300,6 @@ public class Factory implements Serializable {
         this.daysHours = daysHours;
     }
 
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName == null ? null : cityName.trim();
-    }
-
-    public Integer getCityId() {
-        return cityId;
-    }
-
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
-
     public Double getTotalOutput() {
         return totalOutput;
     }
@@ -490,68 +308,12 @@ public class Factory implements Serializable {
         this.totalOutput = totalOutput;
     }
 
-    public Integer getFactorystatus() {
-        return factorystatus;
-    }
-
-    public void setFactorystatus(Integer factorystatus) {
-        this.factorystatus = factorystatus;
-    }
-
-    public Integer getExhauststatus() {
-        return exhauststatus;
-    }
-
-    public void setExhauststatus(Integer exhauststatus) {
-        this.exhauststatus = exhauststatus;
-    }
-
-    public String getStatusdec() {
-        return statusdec;
-    }
-
-    public void setStatusdec(String statusdec) {
-        this.statusdec = statusdec == null ? null : statusdec.trim();
-    }
-
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public Integer getExhaustNum() {
-        return exhaustNum;
-    }
-
-    public void setExhaustNum(Integer exhaustNum) {
-        this.exhaustNum = exhaustNum;
-    }
-
-    public Integer getImportant() {
-        return important;
-    }
-
-    public void setImportant(Integer important) {
-        this.important = important;
-    }
-
-    public Integer getShihuaflag() {
-        return shihuaflag;
-    }
-
-    public void setShihuaflag(Integer shihuaflag) {
-        this.shihuaflag = shihuaflag;
-    }
-
-    public Integer getFeiqnub() {
-        return feiqnub;
-    }
-
-    public void setFeiqnub(Integer feiqnub) {
-        this.feiqnub = feiqnub;
     }
 
     public String getPrincipalName() {
@@ -698,6 +460,134 @@ public class Factory implements Serializable {
         this.lon7 = lon7;
     }
 
+    public Integer getExhaustCount() {
+        return exhaustCount;
+    }
+
+    public void setExhaustCount(Integer exhaustCount) {
+        this.exhaustCount = exhaustCount;
+    }
+
+    public Integer getBoilerCount() {
+        return boilerCount;
+    }
+
+    public void setBoilerCount(Integer boilerCount) {
+        this.boilerCount = boilerCount;
+    }
+
+    public Integer getKilnCount() {
+        return kilnCount;
+    }
+
+    public void setKilnCount(Integer kilnCount) {
+        this.kilnCount = kilnCount;
+    }
+
+    public Integer getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(Integer deviceCount) {
+        this.deviceCount = deviceCount;
+    }
+
+    public Integer getDeviceProductCount() {
+        return deviceProductCount;
+    }
+
+    public void setDeviceProductCount(Integer deviceProductCount) {
+        this.deviceProductCount = deviceProductCount;
+    }
+
+    public Integer getDeviceRawCount() {
+        return deviceRawCount;
+    }
+
+    public void setDeviceRawCount(Integer deviceRawCount) {
+        this.deviceRawCount = deviceRawCount;
+    }
+
+    public Integer getRongjiProductCount() {
+        return rongjiProductCount;
+    }
+
+    public void setRongjiProductCount(Integer rongjiProductCount) {
+        this.rongjiProductCount = rongjiProductCount;
+    }
+
+    public Integer getRongjiRawCount() {
+        return rongjiRawCount;
+    }
+
+    public void setRongjiRawCount(Integer rongjiRawCount) {
+        this.rongjiRawCount = rongjiRawCount;
+    }
+
+    public Integer getFeiqiCount() {
+        return feiqiCount;
+    }
+
+    public void setFeiqiCount(Integer feiqiCount) {
+        this.feiqiCount = feiqiCount;
+    }
+
+    public Integer getSoilDustCount() {
+        return soilDustCount;
+    }
+
+    public void setSoilDustCount(Integer soilDustCount) {
+        this.soilDustCount = soilDustCount;
+    }
+
+    public Integer getConDustCount() {
+        return conDustCount;
+    }
+
+    public void setConDustCount(Integer conDustCount) {
+        this.conDustCount = conDustCount;
+    }
+
+    public Integer getRoadDustCount() {
+        return roadDustCount;
+    }
+
+    public void setRoadDustCount(Integer roadDustCount) {
+        this.roadDustCount = roadDustCount;
+    }
+
+    public Integer getYardDustCount() {
+        return yardDustCount;
+    }
+
+    public void setYardDustCount(Integer yardDustCount) {
+        this.yardDustCount = yardDustCount;
+    }
+
+    public Integer getNoOrgWorkCount() {
+        return noOrgWorkCount;
+    }
+
+    public void setNoOrgWorkCount(Integer noOrgWorkCount) {
+        this.noOrgWorkCount = noOrgWorkCount;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
+
+    public Integer getImportant() {
+        return important;
+    }
+
+    public void setImportant(Integer important) {
+        this.important = important;
+    }
+
     public String getNote() {
         return note;
     }
@@ -714,55 +604,28 @@ public class Factory implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", factoryId=").append(factoryId);
         sb.append(", factoryNo=").append(factoryNo);
-        sb.append(", factoryNo1=").append(factoryNo1);
-        sb.append(", factoryNo2=").append(factoryNo2);
         sb.append(", legalperson=").append(legalperson);
         sb.append(", factoryName=").append(factoryName);
         sb.append(", factoryUsedname=").append(factoryUsedname);
         sb.append(", factorySize=").append(factorySize);
-        sb.append(", countyCityDec=").append(countyCityDec);
-        sb.append(", countyCity=").append(countyCity);
-        sb.append(", totalValue=").append(totalValue);
-        sb.append(", countyName=").append(countyName);
         sb.append(", countyId=").append(countyId);
         sb.append(", industryBigid=").append(industryBigid);
-        sb.append(", industryName=").append(industryName);
-        sb.append(", industryBigname=").append(industryBigname);
         sb.append(", industryId=").append(industryId);
-        sb.append(", addressdetail=").append(addressdetail);
         sb.append(", address=").append(address);
-        sb.append(", countyRegisterCityDec=").append(countyRegisterCityDec);
-        sb.append(", countyRegisterCity=").append(countyRegisterCity);
-        sb.append(", aregisterdetail=").append(aregisterdetail);
         sb.append(", powerAmount=").append(powerAmount);
         sb.append(", addressRegister=").append(addressRegister);
-        sb.append(", countyidRegisterDec=").append(countyidRegisterDec);
         sb.append(", countyidRegister=").append(countyidRegister);
         sb.append(", factoryLongitude=").append(factoryLongitude);
         sb.append(", factoryLatitude=").append(factoryLatitude);
         sb.append(", sourceType=").append(sourceType);
-        sb.append(", gasequType=").append(gasequType);
         sb.append(", year=").append(year);
-        sb.append(", flag=").append(flag);
         sb.append(", lastChangedTime=").append(lastChangedTime);
         sb.append(", auditTime=").append(auditTime);
         sb.append(", fillingTime=").append(fillingTime);
-        sb.append(", devicestatus=").append(devicestatus);
-        sb.append(", boilerstatus=").append(boilerstatus);
-        sb.append(", kilnstatus=").append(kilnstatus);
         sb.append(", yearDays=").append(yearDays);
         sb.append(", daysHours=").append(daysHours);
-        sb.append(", cityName=").append(cityName);
-        sb.append(", cityId=").append(cityId);
         sb.append(", totalOutput=").append(totalOutput);
-        sb.append(", factorystatus=").append(factorystatus);
-        sb.append(", exhauststatus=").append(exhauststatus);
-        sb.append(", statusdec=").append(statusdec);
         sb.append(", status=").append(status);
-        sb.append(", exhaustNum=").append(exhaustNum);
-        sb.append(", important=").append(important);
-        sb.append(", shihuaflag=").append(shihuaflag);
-        sb.append(", feiqnub=").append(feiqnub);
         sb.append(", principalName=").append(principalName);
         sb.append(", principalPhone=").append(principalPhone);
         sb.append(", principalMobile=").append(principalMobile);
@@ -781,6 +644,22 @@ public class Factory implements Serializable {
         sb.append(", lon6=").append(lon6);
         sb.append(", lat7=").append(lat7);
         sb.append(", lon7=").append(lon7);
+        sb.append(", exhaustCount=").append(exhaustCount);
+        sb.append(", boilerCount=").append(boilerCount);
+        sb.append(", kilnCount=").append(kilnCount);
+        sb.append(", deviceCount=").append(deviceCount);
+        sb.append(", deviceProductCount=").append(deviceProductCount);
+        sb.append(", deviceRawCount=").append(deviceRawCount);
+        sb.append(", rongjiProductCount=").append(rongjiProductCount);
+        sb.append(", rongjiRawCount=").append(rongjiRawCount);
+        sb.append(", feiqiCount=").append(feiqiCount);
+        sb.append(", soilDustCount=").append(soilDustCount);
+        sb.append(", conDustCount=").append(conDustCount);
+        sb.append(", roadDustCount=").append(roadDustCount);
+        sb.append(", yardDustCount=").append(yardDustCount);
+        sb.append(", noOrgWorkCount=").append(noOrgWorkCount);
+        sb.append(", flag=").append(flag);
+        sb.append(", important=").append(important);
         sb.append(", note=").append(note);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
@@ -801,55 +680,28 @@ public class Factory implements Serializable {
         Factory other = (Factory) that;
         return (this.getFactoryId() == null ? other.getFactoryId() == null : this.getFactoryId().equals(other.getFactoryId()))
             && (this.getFactoryNo() == null ? other.getFactoryNo() == null : this.getFactoryNo().equals(other.getFactoryNo()))
-            && (this.getFactoryNo1() == null ? other.getFactoryNo1() == null : this.getFactoryNo1().equals(other.getFactoryNo1()))
-            && (this.getFactoryNo2() == null ? other.getFactoryNo2() == null : this.getFactoryNo2().equals(other.getFactoryNo2()))
             && (this.getLegalperson() == null ? other.getLegalperson() == null : this.getLegalperson().equals(other.getLegalperson()))
             && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
             && (this.getFactoryUsedname() == null ? other.getFactoryUsedname() == null : this.getFactoryUsedname().equals(other.getFactoryUsedname()))
             && (this.getFactorySize() == null ? other.getFactorySize() == null : this.getFactorySize().equals(other.getFactorySize()))
-            && (this.getCountyCityDec() == null ? other.getCountyCityDec() == null : this.getCountyCityDec().equals(other.getCountyCityDec()))
-            && (this.getCountyCity() == null ? other.getCountyCity() == null : this.getCountyCity().equals(other.getCountyCity()))
-            && (this.getTotalValue() == null ? other.getTotalValue() == null : this.getTotalValue().equals(other.getTotalValue()))
-            && (this.getCountyName() == null ? other.getCountyName() == null : this.getCountyName().equals(other.getCountyName()))
             && (this.getCountyId() == null ? other.getCountyId() == null : this.getCountyId().equals(other.getCountyId()))
             && (this.getIndustryBigid() == null ? other.getIndustryBigid() == null : this.getIndustryBigid().equals(other.getIndustryBigid()))
-            && (this.getIndustryName() == null ? other.getIndustryName() == null : this.getIndustryName().equals(other.getIndustryName()))
-            && (this.getIndustryBigname() == null ? other.getIndustryBigname() == null : this.getIndustryBigname().equals(other.getIndustryBigname()))
             && (this.getIndustryId() == null ? other.getIndustryId() == null : this.getIndustryId().equals(other.getIndustryId()))
-            && (this.getAddressdetail() == null ? other.getAddressdetail() == null : this.getAddressdetail().equals(other.getAddressdetail()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-            && (this.getCountyRegisterCityDec() == null ? other.getCountyRegisterCityDec() == null : this.getCountyRegisterCityDec().equals(other.getCountyRegisterCityDec()))
-            && (this.getCountyRegisterCity() == null ? other.getCountyRegisterCity() == null : this.getCountyRegisterCity().equals(other.getCountyRegisterCity()))
-            && (this.getAregisterdetail() == null ? other.getAregisterdetail() == null : this.getAregisterdetail().equals(other.getAregisterdetail()))
             && (this.getPowerAmount() == null ? other.getPowerAmount() == null : this.getPowerAmount().equals(other.getPowerAmount()))
             && (this.getAddressRegister() == null ? other.getAddressRegister() == null : this.getAddressRegister().equals(other.getAddressRegister()))
-            && (this.getCountyidRegisterDec() == null ? other.getCountyidRegisterDec() == null : this.getCountyidRegisterDec().equals(other.getCountyidRegisterDec()))
             && (this.getCountyidRegister() == null ? other.getCountyidRegister() == null : this.getCountyidRegister().equals(other.getCountyidRegister()))
             && (this.getFactoryLongitude() == null ? other.getFactoryLongitude() == null : this.getFactoryLongitude().equals(other.getFactoryLongitude()))
             && (this.getFactoryLatitude() == null ? other.getFactoryLatitude() == null : this.getFactoryLatitude().equals(other.getFactoryLatitude()))
             && (this.getSourceType() == null ? other.getSourceType() == null : this.getSourceType().equals(other.getSourceType()))
-            && (this.getGasequType() == null ? other.getGasequType() == null : this.getGasequType().equals(other.getGasequType()))
             && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
-            && (this.getFlag() == null ? other.getFlag() == null : this.getFlag().equals(other.getFlag()))
             && (this.getLastChangedTime() == null ? other.getLastChangedTime() == null : this.getLastChangedTime().equals(other.getLastChangedTime()))
             && (this.getAuditTime() == null ? other.getAuditTime() == null : this.getAuditTime().equals(other.getAuditTime()))
             && (this.getFillingTime() == null ? other.getFillingTime() == null : this.getFillingTime().equals(other.getFillingTime()))
-            && (this.getDevicestatus() == null ? other.getDevicestatus() == null : this.getDevicestatus().equals(other.getDevicestatus()))
-            && (this.getBoilerstatus() == null ? other.getBoilerstatus() == null : this.getBoilerstatus().equals(other.getBoilerstatus()))
-            && (this.getKilnstatus() == null ? other.getKilnstatus() == null : this.getKilnstatus().equals(other.getKilnstatus()))
             && (this.getYearDays() == null ? other.getYearDays() == null : this.getYearDays().equals(other.getYearDays()))
             && (this.getDaysHours() == null ? other.getDaysHours() == null : this.getDaysHours().equals(other.getDaysHours()))
-            && (this.getCityName() == null ? other.getCityName() == null : this.getCityName().equals(other.getCityName()))
-            && (this.getCityId() == null ? other.getCityId() == null : this.getCityId().equals(other.getCityId()))
             && (this.getTotalOutput() == null ? other.getTotalOutput() == null : this.getTotalOutput().equals(other.getTotalOutput()))
-            && (this.getFactorystatus() == null ? other.getFactorystatus() == null : this.getFactorystatus().equals(other.getFactorystatus()))
-            && (this.getExhauststatus() == null ? other.getExhauststatus() == null : this.getExhauststatus().equals(other.getExhauststatus()))
-            && (this.getStatusdec() == null ? other.getStatusdec() == null : this.getStatusdec().equals(other.getStatusdec()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getExhaustNum() == null ? other.getExhaustNum() == null : this.getExhaustNum().equals(other.getExhaustNum()))
-            && (this.getImportant() == null ? other.getImportant() == null : this.getImportant().equals(other.getImportant()))
-            && (this.getShihuaflag() == null ? other.getShihuaflag() == null : this.getShihuaflag().equals(other.getShihuaflag()))
-            && (this.getFeiqnub() == null ? other.getFeiqnub() == null : this.getFeiqnub().equals(other.getFeiqnub()))
             && (this.getPrincipalName() == null ? other.getPrincipalName() == null : this.getPrincipalName().equals(other.getPrincipalName()))
             && (this.getPrincipalPhone() == null ? other.getPrincipalPhone() == null : this.getPrincipalPhone().equals(other.getPrincipalPhone()))
             && (this.getPrincipalMobile() == null ? other.getPrincipalMobile() == null : this.getPrincipalMobile().equals(other.getPrincipalMobile()))
@@ -868,6 +720,22 @@ public class Factory implements Serializable {
             && (this.getLon6() == null ? other.getLon6() == null : this.getLon6().equals(other.getLon6()))
             && (this.getLat7() == null ? other.getLat7() == null : this.getLat7().equals(other.getLat7()))
             && (this.getLon7() == null ? other.getLon7() == null : this.getLon7().equals(other.getLon7()))
+            && (this.getExhaustCount() == null ? other.getExhaustCount() == null : this.getExhaustCount().equals(other.getExhaustCount()))
+            && (this.getBoilerCount() == null ? other.getBoilerCount() == null : this.getBoilerCount().equals(other.getBoilerCount()))
+            && (this.getKilnCount() == null ? other.getKilnCount() == null : this.getKilnCount().equals(other.getKilnCount()))
+            && (this.getDeviceCount() == null ? other.getDeviceCount() == null : this.getDeviceCount().equals(other.getDeviceCount()))
+            && (this.getDeviceProductCount() == null ? other.getDeviceProductCount() == null : this.getDeviceProductCount().equals(other.getDeviceProductCount()))
+            && (this.getDeviceRawCount() == null ? other.getDeviceRawCount() == null : this.getDeviceRawCount().equals(other.getDeviceRawCount()))
+            && (this.getRongjiProductCount() == null ? other.getRongjiProductCount() == null : this.getRongjiProductCount().equals(other.getRongjiProductCount()))
+            && (this.getRongjiRawCount() == null ? other.getRongjiRawCount() == null : this.getRongjiRawCount().equals(other.getRongjiRawCount()))
+            && (this.getFeiqiCount() == null ? other.getFeiqiCount() == null : this.getFeiqiCount().equals(other.getFeiqiCount()))
+            && (this.getSoilDustCount() == null ? other.getSoilDustCount() == null : this.getSoilDustCount().equals(other.getSoilDustCount()))
+            && (this.getConDustCount() == null ? other.getConDustCount() == null : this.getConDustCount().equals(other.getConDustCount()))
+            && (this.getRoadDustCount() == null ? other.getRoadDustCount() == null : this.getRoadDustCount().equals(other.getRoadDustCount()))
+            && (this.getYardDustCount() == null ? other.getYardDustCount() == null : this.getYardDustCount().equals(other.getYardDustCount()))
+            && (this.getNoOrgWorkCount() == null ? other.getNoOrgWorkCount() == null : this.getNoOrgWorkCount().equals(other.getNoOrgWorkCount()))
+            && (this.getFlag() == null ? other.getFlag() == null : this.getFlag().equals(other.getFlag()))
+            && (this.getImportant() == null ? other.getImportant() == null : this.getImportant().equals(other.getImportant()))
             && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()));
     }
 
@@ -877,55 +745,28 @@ public class Factory implements Serializable {
         int result = 1;
         result = prime * result + ((getFactoryId() == null) ? 0 : getFactoryId().hashCode());
         result = prime * result + ((getFactoryNo() == null) ? 0 : getFactoryNo().hashCode());
-        result = prime * result + ((getFactoryNo1() == null) ? 0 : getFactoryNo1().hashCode());
-        result = prime * result + ((getFactoryNo2() == null) ? 0 : getFactoryNo2().hashCode());
         result = prime * result + ((getLegalperson() == null) ? 0 : getLegalperson().hashCode());
         result = prime * result + ((getFactoryName() == null) ? 0 : getFactoryName().hashCode());
         result = prime * result + ((getFactoryUsedname() == null) ? 0 : getFactoryUsedname().hashCode());
         result = prime * result + ((getFactorySize() == null) ? 0 : getFactorySize().hashCode());
-        result = prime * result + ((getCountyCityDec() == null) ? 0 : getCountyCityDec().hashCode());
-        result = prime * result + ((getCountyCity() == null) ? 0 : getCountyCity().hashCode());
-        result = prime * result + ((getTotalValue() == null) ? 0 : getTotalValue().hashCode());
-        result = prime * result + ((getCountyName() == null) ? 0 : getCountyName().hashCode());
         result = prime * result + ((getCountyId() == null) ? 0 : getCountyId().hashCode());
         result = prime * result + ((getIndustryBigid() == null) ? 0 : getIndustryBigid().hashCode());
-        result = prime * result + ((getIndustryName() == null) ? 0 : getIndustryName().hashCode());
-        result = prime * result + ((getIndustryBigname() == null) ? 0 : getIndustryBigname().hashCode());
         result = prime * result + ((getIndustryId() == null) ? 0 : getIndustryId().hashCode());
-        result = prime * result + ((getAddressdetail() == null) ? 0 : getAddressdetail().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
-        result = prime * result + ((getCountyRegisterCityDec() == null) ? 0 : getCountyRegisterCityDec().hashCode());
-        result = prime * result + ((getCountyRegisterCity() == null) ? 0 : getCountyRegisterCity().hashCode());
-        result = prime * result + ((getAregisterdetail() == null) ? 0 : getAregisterdetail().hashCode());
         result = prime * result + ((getPowerAmount() == null) ? 0 : getPowerAmount().hashCode());
         result = prime * result + ((getAddressRegister() == null) ? 0 : getAddressRegister().hashCode());
-        result = prime * result + ((getCountyidRegisterDec() == null) ? 0 : getCountyidRegisterDec().hashCode());
         result = prime * result + ((getCountyidRegister() == null) ? 0 : getCountyidRegister().hashCode());
         result = prime * result + ((getFactoryLongitude() == null) ? 0 : getFactoryLongitude().hashCode());
         result = prime * result + ((getFactoryLatitude() == null) ? 0 : getFactoryLatitude().hashCode());
         result = prime * result + ((getSourceType() == null) ? 0 : getSourceType().hashCode());
-        result = prime * result + ((getGasequType() == null) ? 0 : getGasequType().hashCode());
         result = prime * result + ((getYear() == null) ? 0 : getYear().hashCode());
-        result = prime * result + ((getFlag() == null) ? 0 : getFlag().hashCode());
         result = prime * result + ((getLastChangedTime() == null) ? 0 : getLastChangedTime().hashCode());
         result = prime * result + ((getAuditTime() == null) ? 0 : getAuditTime().hashCode());
         result = prime * result + ((getFillingTime() == null) ? 0 : getFillingTime().hashCode());
-        result = prime * result + ((getDevicestatus() == null) ? 0 : getDevicestatus().hashCode());
-        result = prime * result + ((getBoilerstatus() == null) ? 0 : getBoilerstatus().hashCode());
-        result = prime * result + ((getKilnstatus() == null) ? 0 : getKilnstatus().hashCode());
         result = prime * result + ((getYearDays() == null) ? 0 : getYearDays().hashCode());
         result = prime * result + ((getDaysHours() == null) ? 0 : getDaysHours().hashCode());
-        result = prime * result + ((getCityName() == null) ? 0 : getCityName().hashCode());
-        result = prime * result + ((getCityId() == null) ? 0 : getCityId().hashCode());
         result = prime * result + ((getTotalOutput() == null) ? 0 : getTotalOutput().hashCode());
-        result = prime * result + ((getFactorystatus() == null) ? 0 : getFactorystatus().hashCode());
-        result = prime * result + ((getExhauststatus() == null) ? 0 : getExhauststatus().hashCode());
-        result = prime * result + ((getStatusdec() == null) ? 0 : getStatusdec().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
-        result = prime * result + ((getExhaustNum() == null) ? 0 : getExhaustNum().hashCode());
-        result = prime * result + ((getImportant() == null) ? 0 : getImportant().hashCode());
-        result = prime * result + ((getShihuaflag() == null) ? 0 : getShihuaflag().hashCode());
-        result = prime * result + ((getFeiqnub() == null) ? 0 : getFeiqnub().hashCode());
         result = prime * result + ((getPrincipalName() == null) ? 0 : getPrincipalName().hashCode());
         result = prime * result + ((getPrincipalPhone() == null) ? 0 : getPrincipalPhone().hashCode());
         result = prime * result + ((getPrincipalMobile() == null) ? 0 : getPrincipalMobile().hashCode());
@@ -944,6 +785,22 @@ public class Factory implements Serializable {
         result = prime * result + ((getLon6() == null) ? 0 : getLon6().hashCode());
         result = prime * result + ((getLat7() == null) ? 0 : getLat7().hashCode());
         result = prime * result + ((getLon7() == null) ? 0 : getLon7().hashCode());
+        result = prime * result + ((getExhaustCount() == null) ? 0 : getExhaustCount().hashCode());
+        result = prime * result + ((getBoilerCount() == null) ? 0 : getBoilerCount().hashCode());
+        result = prime * result + ((getKilnCount() == null) ? 0 : getKilnCount().hashCode());
+        result = prime * result + ((getDeviceCount() == null) ? 0 : getDeviceCount().hashCode());
+        result = prime * result + ((getDeviceProductCount() == null) ? 0 : getDeviceProductCount().hashCode());
+        result = prime * result + ((getDeviceRawCount() == null) ? 0 : getDeviceRawCount().hashCode());
+        result = prime * result + ((getRongjiProductCount() == null) ? 0 : getRongjiProductCount().hashCode());
+        result = prime * result + ((getRongjiRawCount() == null) ? 0 : getRongjiRawCount().hashCode());
+        result = prime * result + ((getFeiqiCount() == null) ? 0 : getFeiqiCount().hashCode());
+        result = prime * result + ((getSoilDustCount() == null) ? 0 : getSoilDustCount().hashCode());
+        result = prime * result + ((getConDustCount() == null) ? 0 : getConDustCount().hashCode());
+        result = prime * result + ((getRoadDustCount() == null) ? 0 : getRoadDustCount().hashCode());
+        result = prime * result + ((getYardDustCount() == null) ? 0 : getYardDustCount().hashCode());
+        result = prime * result + ((getNoOrgWorkCount() == null) ? 0 : getNoOrgWorkCount().hashCode());
+        result = prime * result + ((getFlag() == null) ? 0 : getFlag().hashCode());
+        result = prime * result + ((getImportant() == null) ? 0 : getImportant().hashCode());
         result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
         return result;
     }

@@ -164,126 +164,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andExhustIdIsNull() {
-            addCriterion("EXHUST_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdIsNotNull() {
-            addCriterion("EXHUST_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdEqualTo(Integer value) {
-            addCriterion("EXHUST_ID =", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotEqualTo(Integer value) {
-            addCriterion("EXHUST_ID <>", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdGreaterThan(Integer value) {
-            addCriterion("EXHUST_ID >", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_ID >=", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdLessThan(Integer value) {
-            addCriterion("EXHUST_ID <", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdLessThanOrEqualTo(Integer value) {
-            addCriterion("EXHUST_ID <=", value, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdIn(List<Integer> values) {
-            addCriterion("EXHUST_ID in", values, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotIn(List<Integer> values) {
-            addCriterion("EXHUST_ID not in", values, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_ID between", value1, value2, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andExhustIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("EXHUST_ID not between", value1, value2, "exhustId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdIsNull() {
-            addCriterion("TKILN_ID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdIsNotNull() {
-            addCriterion("TKILN_ID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdEqualTo(Integer value) {
-            addCriterion("TKILN_ID =", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdNotEqualTo(Integer value) {
-            addCriterion("TKILN_ID <>", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdGreaterThan(Integer value) {
-            addCriterion("TKILN_ID >", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("TKILN_ID >=", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdLessThan(Integer value) {
-            addCriterion("TKILN_ID <", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdLessThanOrEqualTo(Integer value) {
-            addCriterion("TKILN_ID <=", value, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdIn(List<Integer> values) {
-            addCriterion("TKILN_ID in", values, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdNotIn(List<Integer> values) {
-            addCriterion("TKILN_ID not in", values, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdBetween(Integer value1, Integer value2) {
-            addCriterion("TKILN_ID between", value1, value2, "tkilnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTkilnIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("TKILN_ID not between", value1, value2, "tkilnId");
-            return (Criteria) this;
-        }
-
         public Criteria andNkNoIsNull() {
             addCriterion("NK_NO is null");
             return (Criteria) this;
@@ -344,143 +224,63 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoIsNull() {
-            addCriterion("KILN_NO is null");
+        public Criteria andExhustIdIsNull() {
+            addCriterion("EXHUST_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoIsNotNull() {
-            addCriterion("KILN_NO is not null");
+        public Criteria andExhustIdIsNotNull() {
+            addCriterion("EXHUST_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoEqualTo(String value) {
-            addCriterion("KILN_NO =", value, "kilnNo");
+        public Criteria andExhustIdEqualTo(Integer value) {
+            addCriterion("EXHUST_ID =", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoNotEqualTo(String value) {
-            addCriterion("KILN_NO <>", value, "kilnNo");
+        public Criteria andExhustIdNotEqualTo(Integer value) {
+            addCriterion("EXHUST_ID <>", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoGreaterThan(String value) {
-            addCriterion("KILN_NO >", value, "kilnNo");
+        public Criteria andExhustIdGreaterThan(Integer value) {
+            addCriterion("EXHUST_ID >", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoGreaterThanOrEqualTo(String value) {
-            addCriterion("KILN_NO >=", value, "kilnNo");
+        public Criteria andExhustIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("EXHUST_ID >=", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoLessThan(String value) {
-            addCriterion("KILN_NO <", value, "kilnNo");
+        public Criteria andExhustIdLessThan(Integer value) {
+            addCriterion("EXHUST_ID <", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoLessThanOrEqualTo(String value) {
-            addCriterion("KILN_NO <=", value, "kilnNo");
+        public Criteria andExhustIdLessThanOrEqualTo(Integer value) {
+            addCriterion("EXHUST_ID <=", value, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoLike(String value) {
-            addCriterion("KILN_NO like", value, "kilnNo");
+        public Criteria andExhustIdIn(List<Integer> values) {
+            addCriterion("EXHUST_ID in", values, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoNotLike(String value) {
-            addCriterion("KILN_NO not like", value, "kilnNo");
+        public Criteria andExhustIdNotIn(List<Integer> values) {
+            addCriterion("EXHUST_ID not in", values, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoIn(List<String> values) {
-            addCriterion("KILN_NO in", values, "kilnNo");
+        public Criteria andExhustIdBetween(Integer value1, Integer value2) {
+            addCriterion("EXHUST_ID between", value1, value2, "exhustId");
             return (Criteria) this;
         }
 
-        public Criteria andKilnNoNotIn(List<String> values) {
-            addCriterion("KILN_NO not in", values, "kilnNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andKilnNoBetween(String value1, String value2) {
-            addCriterion("KILN_NO between", value1, value2, "kilnNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andKilnNoNotBetween(String value1, String value2) {
-            addCriterion("KILN_NO not between", value1, value2, "kilnNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecIsNull() {
-            addCriterion("FUNCTION_Dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecIsNotNull() {
-            addCriterion("FUNCTION_Dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecEqualTo(String value) {
-            addCriterion("FUNCTION_Dec =", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecNotEqualTo(String value) {
-            addCriterion("FUNCTION_Dec <>", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecGreaterThan(String value) {
-            addCriterion("FUNCTION_Dec >", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecGreaterThanOrEqualTo(String value) {
-            addCriterion("FUNCTION_Dec >=", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecLessThan(String value) {
-            addCriterion("FUNCTION_Dec <", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecLessThanOrEqualTo(String value) {
-            addCriterion("FUNCTION_Dec <=", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecLike(String value) {
-            addCriterion("FUNCTION_Dec like", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecNotLike(String value) {
-            addCriterion("FUNCTION_Dec not like", value, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecIn(List<String> values) {
-            addCriterion("FUNCTION_Dec in", values, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecNotIn(List<String> values) {
-            addCriterion("FUNCTION_Dec not in", values, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecBetween(String value1, String value2) {
-            addCriterion("FUNCTION_Dec between", value1, value2, "functionDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctionDecNotBetween(String value1, String value2) {
-            addCriterion("FUNCTION_Dec not between", value1, value2, "functionDec");
+        public Criteria andExhustIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("EXHUST_ID not between", value1, value2, "exhustId");
             return (Criteria) this;
         }
 
@@ -551,76 +351,6 @@ public class KilnExample {
 
         public Criteria andFunctioNotBetween(String value1, String value2) {
             addCriterion("FUNCTIO not between", value1, value2, "functio");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecIsNull() {
-            addCriterion("MODEL_DEC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecIsNotNull() {
-            addCriterion("MODEL_DEC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecEqualTo(String value) {
-            addCriterion("MODEL_DEC =", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecNotEqualTo(String value) {
-            addCriterion("MODEL_DEC <>", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecGreaterThan(String value) {
-            addCriterion("MODEL_DEC >", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecGreaterThanOrEqualTo(String value) {
-            addCriterion("MODEL_DEC >=", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecLessThan(String value) {
-            addCriterion("MODEL_DEC <", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecLessThanOrEqualTo(String value) {
-            addCriterion("MODEL_DEC <=", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecLike(String value) {
-            addCriterion("MODEL_DEC like", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecNotLike(String value) {
-            addCriterion("MODEL_DEC not like", value, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecIn(List<String> values) {
-            addCriterion("MODEL_DEC in", values, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecNotIn(List<String> values) {
-            addCriterion("MODEL_DEC not in", values, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecBetween(String value1, String value2) {
-            addCriterion("MODEL_DEC between", value1, value2, "modelDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andModelDecNotBetween(String value1, String value2) {
-            addCriterion("MODEL_DEC not between", value1, value2, "modelDec");
             return (Criteria) this;
         }
 
@@ -764,76 +494,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFueltypeDecIsNull() {
-            addCriterion("fueltype_dec is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecIsNotNull() {
-            addCriterion("fueltype_dec is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecEqualTo(String value) {
-            addCriterion("fueltype_dec =", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecNotEqualTo(String value) {
-            addCriterion("fueltype_dec <>", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecGreaterThan(String value) {
-            addCriterion("fueltype_dec >", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecGreaterThanOrEqualTo(String value) {
-            addCriterion("fueltype_dec >=", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecLessThan(String value) {
-            addCriterion("fueltype_dec <", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecLessThanOrEqualTo(String value) {
-            addCriterion("fueltype_dec <=", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecLike(String value) {
-            addCriterion("fueltype_dec like", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecNotLike(String value) {
-            addCriterion("fueltype_dec not like", value, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecIn(List<String> values) {
-            addCriterion("fueltype_dec in", values, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecNotIn(List<String> values) {
-            addCriterion("fueltype_dec not in", values, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecBetween(String value1, String value2) {
-            addCriterion("fueltype_dec between", value1, value2, "fueltypeDec");
-            return (Criteria) this;
-        }
-
-        public Criteria andFueltypeDecNotBetween(String value1, String value2) {
-            addCriterion("fueltype_dec not between", value1, value2, "fueltypeDec");
-            return (Criteria) this;
-        }
-
         public Criteria andFueltypeIsNull() {
             addCriterion("fueltype is null");
             return (Criteria) this;
@@ -901,6 +561,76 @@ public class KilnExample {
 
         public Criteria andFueltypeNotBetween(String value1, String value2) {
             addCriterion("fueltype not between", value1, value2, "fueltype");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeIsNull() {
+            addCriterion("SCCCODE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeIsNotNull() {
+            addCriterion("SCCCODE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeEqualTo(String value) {
+            addCriterion("SCCCODE =", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeNotEqualTo(String value) {
+            addCriterion("SCCCODE <>", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeGreaterThan(String value) {
+            addCriterion("SCCCODE >", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeGreaterThanOrEqualTo(String value) {
+            addCriterion("SCCCODE >=", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeLessThan(String value) {
+            addCriterion("SCCCODE <", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeLessThanOrEqualTo(String value) {
+            addCriterion("SCCCODE <=", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeLike(String value) {
+            addCriterion("SCCCODE like", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeNotLike(String value) {
+            addCriterion("SCCCODE not like", value, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeIn(List<String> values) {
+            addCriterion("SCCCODE in", values, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeNotIn(List<String> values) {
+            addCriterion("SCCCODE not in", values, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeBetween(String value1, String value2) {
+            addCriterion("SCCCODE between", value1, value2, "scccode");
+            return (Criteria) this;
+        }
+
+        public Criteria andScccodeNotBetween(String value1, String value2) {
+            addCriterion("SCCCODE not between", value1, value2, "scccode");
             return (Criteria) this;
         }
 
@@ -1034,76 +764,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andNitreremovedecIsNull() {
-            addCriterion("NITREREMOVEDEC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecIsNotNull() {
-            addCriterion("NITREREMOVEDEC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecEqualTo(String value) {
-            addCriterion("NITREREMOVEDEC =", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecNotEqualTo(String value) {
-            addCriterion("NITREREMOVEDEC <>", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecGreaterThan(String value) {
-            addCriterion("NITREREMOVEDEC >", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecGreaterThanOrEqualTo(String value) {
-            addCriterion("NITREREMOVEDEC >=", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecLessThan(String value) {
-            addCriterion("NITREREMOVEDEC <", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecLessThanOrEqualTo(String value) {
-            addCriterion("NITREREMOVEDEC <=", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecLike(String value) {
-            addCriterion("NITREREMOVEDEC like", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecNotLike(String value) {
-            addCriterion("NITREREMOVEDEC not like", value, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecIn(List<String> values) {
-            addCriterion("NITREREMOVEDEC in", values, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecNotIn(List<String> values) {
-            addCriterion("NITREREMOVEDEC not in", values, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecBetween(String value1, String value2) {
-            addCriterion("NITREREMOVEDEC between", value1, value2, "nitreremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andNitreremovedecNotBetween(String value1, String value2) {
-            addCriterion("NITREREMOVEDEC not between", value1, value2, "nitreremovedec");
-            return (Criteria) this;
-        }
-
         public Criteria andNitreremoveidIsNull() {
             addCriterion("NITREREMOVEID is null");
             return (Criteria) this;
@@ -1161,76 +821,6 @@ public class KilnExample {
 
         public Criteria andNitreremoveidNotBetween(Integer value1, Integer value2) {
             addCriterion("NITREREMOVEID not between", value1, value2, "nitreremoveid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecIsNull() {
-            addCriterion("DUSTREMOVEDEC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecIsNotNull() {
-            addCriterion("DUSTREMOVEDEC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecEqualTo(String value) {
-            addCriterion("DUSTREMOVEDEC =", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecNotEqualTo(String value) {
-            addCriterion("DUSTREMOVEDEC <>", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecGreaterThan(String value) {
-            addCriterion("DUSTREMOVEDEC >", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecGreaterThanOrEqualTo(String value) {
-            addCriterion("DUSTREMOVEDEC >=", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecLessThan(String value) {
-            addCriterion("DUSTREMOVEDEC <", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecLessThanOrEqualTo(String value) {
-            addCriterion("DUSTREMOVEDEC <=", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecLike(String value) {
-            addCriterion("DUSTREMOVEDEC like", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecNotLike(String value) {
-            addCriterion("DUSTREMOVEDEC not like", value, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecIn(List<String> values) {
-            addCriterion("DUSTREMOVEDEC in", values, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecNotIn(List<String> values) {
-            addCriterion("DUSTREMOVEDEC not in", values, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecBetween(String value1, String value2) {
-            addCriterion("DUSTREMOVEDEC between", value1, value2, "dustremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andDustremovedecNotBetween(String value1, String value2) {
-            addCriterion("DUSTREMOVEDEC not between", value1, value2, "dustremovedec");
             return (Criteria) this;
         }
 
@@ -1294,76 +884,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andSulphurremovedecIsNull() {
-            addCriterion("SULPHURREMOVEDEC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecIsNotNull() {
-            addCriterion("SULPHURREMOVEDEC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecEqualTo(String value) {
-            addCriterion("SULPHURREMOVEDEC =", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecNotEqualTo(String value) {
-            addCriterion("SULPHURREMOVEDEC <>", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecGreaterThan(String value) {
-            addCriterion("SULPHURREMOVEDEC >", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecGreaterThanOrEqualTo(String value) {
-            addCriterion("SULPHURREMOVEDEC >=", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecLessThan(String value) {
-            addCriterion("SULPHURREMOVEDEC <", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecLessThanOrEqualTo(String value) {
-            addCriterion("SULPHURREMOVEDEC <=", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecLike(String value) {
-            addCriterion("SULPHURREMOVEDEC like", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecNotLike(String value) {
-            addCriterion("SULPHURREMOVEDEC not like", value, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecIn(List<String> values) {
-            addCriterion("SULPHURREMOVEDEC in", values, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecNotIn(List<String> values) {
-            addCriterion("SULPHURREMOVEDEC not in", values, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecBetween(String value1, String value2) {
-            addCriterion("SULPHURREMOVEDEC between", value1, value2, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
-        public Criteria andSulphurremovedecNotBetween(String value1, String value2) {
-            addCriterion("SULPHURREMOVEDEC not between", value1, value2, "sulphurremovedec");
-            return (Criteria) this;
-        }
-
         public Criteria andSulphurremoveidIsNull() {
             addCriterion("SULPHURREMOVEID is null");
             return (Criteria) this;
@@ -1421,66 +941,6 @@ public class KilnExample {
 
         public Criteria andSulphurremoveidNotBetween(Integer value1, Integer value2) {
             addCriterion("SULPHURREMOVEID not between", value1, value2, "sulphurremoveid");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoIsNull() {
-            addCriterion("EXF_NO is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoIsNotNull() {
-            addCriterion("EXF_NO is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoEqualTo(Byte value) {
-            addCriterion("EXF_NO =", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoNotEqualTo(Byte value) {
-            addCriterion("EXF_NO <>", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoGreaterThan(Byte value) {
-            addCriterion("EXF_NO >", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoGreaterThanOrEqualTo(Byte value) {
-            addCriterion("EXF_NO >=", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoLessThan(Byte value) {
-            addCriterion("EXF_NO <", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoLessThanOrEqualTo(Byte value) {
-            addCriterion("EXF_NO <=", value, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoIn(List<Byte> values) {
-            addCriterion("EXF_NO in", values, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoNotIn(List<Byte> values) {
-            addCriterion("EXF_NO not in", values, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoBetween(Byte value1, Byte value2) {
-            addCriterion("EXF_NO between", value1, value2, "exfNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andExfNoNotBetween(Byte value1, Byte value2) {
-            addCriterion("EXF_NO not between", value1, value2, "exfNo");
             return (Criteria) this;
         }
 
@@ -1664,126 +1124,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorPm10IsNull() {
-            addCriterion("factor_pm10 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10IsNotNull() {
-            addCriterion("factor_pm10 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10EqualTo(Double value) {
-            addCriterion("factor_pm10 =", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotEqualTo(Double value) {
-            addCriterion("factor_pm10 <>", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10GreaterThan(Double value) {
-            addCriterion("factor_pm10 >", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_pm10 >=", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10LessThan(Double value) {
-            addCriterion("factor_pm10 <", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10LessThanOrEqualTo(Double value) {
-            addCriterion("factor_pm10 <=", value, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10In(List<Double> values) {
-            addCriterion("factor_pm10 in", values, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotIn(List<Double> values) {
-            addCriterion("factor_pm10 not in", values, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10Between(Double value1, Double value2) {
-            addCriterion("factor_pm10 between", value1, value2, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm10NotBetween(Double value1, Double value2) {
-            addCriterion("factor_pm10 not between", value1, value2, "factorPm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIsNull() {
-            addCriterion("factor_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIsNotNull() {
-            addCriterion("factor_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusEqualTo(Byte value) {
-            addCriterion("factor_status =", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotEqualTo(Byte value) {
-            addCriterion("factor_status <>", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusGreaterThan(Byte value) {
-            addCriterion("factor_status >", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("factor_status >=", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusLessThan(Byte value) {
-            addCriterion("factor_status <", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("factor_status <=", value, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusIn(List<Byte> values) {
-            addCriterion("factor_status in", values, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotIn(List<Byte> values) {
-            addCriterion("factor_status not in", values, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusBetween(Byte value1, Byte value2) {
-            addCriterion("factor_status between", value1, value2, "factorStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("factor_status not between", value1, value2, "factorStatus");
-            return (Criteria) this;
-        }
-
         public Criteria andPm10IsNull() {
             addCriterion("PM10 is null");
             return (Criteria) this;
@@ -1841,66 +1181,6 @@ public class KilnExample {
 
         public Criteria andPm10NotBetween(Double value1, Double value2) {
             addCriterion("PM10 not between", value1, value2, "pm10");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25IsNull() {
-            addCriterion("factor_pm25 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25IsNotNull() {
-            addCriterion("factor_pm25 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25EqualTo(Double value) {
-            addCriterion("factor_pm25 =", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotEqualTo(Double value) {
-            addCriterion("factor_pm25 <>", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25GreaterThan(Double value) {
-            addCriterion("factor_pm25 >", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_pm25 >=", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25LessThan(Double value) {
-            addCriterion("factor_pm25 <", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25LessThanOrEqualTo(Double value) {
-            addCriterion("factor_pm25 <=", value, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25In(List<Double> values) {
-            addCriterion("factor_pm25 in", values, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotIn(List<Double> values) {
-            addCriterion("factor_pm25 not in", values, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25Between(Double value1, Double value2) {
-            addCriterion("factor_pm25 between", value1, value2, "factorPm25");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPm25NotBetween(Double value1, Double value2) {
-            addCriterion("factor_pm25 not between", value1, value2, "factorPm25");
             return (Criteria) this;
         }
 
@@ -1964,66 +1244,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorCoIsNull() {
-            addCriterion("factor_CO is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoIsNotNull() {
-            addCriterion("factor_CO is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoEqualTo(Double value) {
-            addCriterion("factor_CO =", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotEqualTo(Double value) {
-            addCriterion("factor_CO <>", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoGreaterThan(Double value) {
-            addCriterion("factor_CO >", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_CO >=", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoLessThan(Double value) {
-            addCriterion("factor_CO <", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoLessThanOrEqualTo(Double value) {
-            addCriterion("factor_CO <=", value, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoIn(List<Double> values) {
-            addCriterion("factor_CO in", values, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotIn(List<Double> values) {
-            addCriterion("factor_CO not in", values, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoBetween(Double value1, Double value2) {
-            addCriterion("factor_CO between", value1, value2, "factorCo");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorCoNotBetween(Double value1, Double value2) {
-            addCriterion("factor_CO not between", value1, value2, "factorCo");
-            return (Criteria) this;
-        }
-
         public Criteria andCoIsNull() {
             addCriterion("CO is null");
             return (Criteria) this;
@@ -2081,66 +1301,6 @@ public class KilnExample {
 
         public Criteria andCoNotBetween(Double value1, Double value2) {
             addCriterion("CO not between", value1, value2, "co");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocIsNull() {
-            addCriterion("factor_VOC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocIsNotNull() {
-            addCriterion("factor_VOC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocEqualTo(Double value) {
-            addCriterion("factor_VOC =", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotEqualTo(Double value) {
-            addCriterion("factor_VOC <>", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocGreaterThan(Double value) {
-            addCriterion("factor_VOC >", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_VOC >=", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocLessThan(Double value) {
-            addCriterion("factor_VOC <", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocLessThanOrEqualTo(Double value) {
-            addCriterion("factor_VOC <=", value, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocIn(List<Double> values) {
-            addCriterion("factor_VOC in", values, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotIn(List<Double> values) {
-            addCriterion("factor_VOC not in", values, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocBetween(Double value1, Double value2) {
-            addCriterion("factor_VOC between", value1, value2, "factorVoc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorVocNotBetween(Double value1, Double value2) {
-            addCriterion("factor_VOC not between", value1, value2, "factorVoc");
             return (Criteria) this;
         }
 
@@ -2204,66 +1364,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorPmIsNull() {
-            addCriterion("factor_PM is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmIsNotNull() {
-            addCriterion("factor_PM is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmEqualTo(Double value) {
-            addCriterion("factor_PM =", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotEqualTo(Double value) {
-            addCriterion("factor_PM <>", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmGreaterThan(Double value) {
-            addCriterion("factor_PM >", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_PM >=", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmLessThan(Double value) {
-            addCriterion("factor_PM <", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmLessThanOrEqualTo(Double value) {
-            addCriterion("factor_PM <=", value, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmIn(List<Double> values) {
-            addCriterion("factor_PM in", values, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotIn(List<Double> values) {
-            addCriterion("factor_PM not in", values, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmBetween(Double value1, Double value2) {
-            addCriterion("factor_PM between", value1, value2, "factorPm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorPmNotBetween(Double value1, Double value2) {
-            addCriterion("factor_PM not between", value1, value2, "factorPm");
-            return (Criteria) this;
-        }
-
         public Criteria andPmIsNull() {
             addCriterion("PM is null");
             return (Criteria) this;
@@ -2321,66 +1421,6 @@ public class KilnExample {
 
         public Criteria andPmNotBetween(Double value1, Double value2) {
             addCriterion("PM not between", value1, value2, "pm");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2IsNull() {
-            addCriterion("factor_SO2 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2IsNotNull() {
-            addCriterion("factor_SO2 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2EqualTo(Double value) {
-            addCriterion("factor_SO2 =", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotEqualTo(Double value) {
-            addCriterion("factor_SO2 <>", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2GreaterThan(Double value) {
-            addCriterion("factor_SO2 >", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_SO2 >=", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2LessThan(Double value) {
-            addCriterion("factor_SO2 <", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2LessThanOrEqualTo(Double value) {
-            addCriterion("factor_SO2 <=", value, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2In(List<Double> values) {
-            addCriterion("factor_SO2 in", values, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotIn(List<Double> values) {
-            addCriterion("factor_SO2 not in", values, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2Between(Double value1, Double value2) {
-            addCriterion("factor_SO2 between", value1, value2, "factorSo2");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorSo2NotBetween(Double value1, Double value2) {
-            addCriterion("factor_SO2 not between", value1, value2, "factorSo2");
             return (Criteria) this;
         }
 
@@ -2444,66 +1484,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorNoxIsNull() {
-            addCriterion("factor_NOX is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxIsNotNull() {
-            addCriterion("factor_NOX is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxEqualTo(Double value) {
-            addCriterion("factor_NOX =", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotEqualTo(Double value) {
-            addCriterion("factor_NOX <>", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxGreaterThan(Double value) {
-            addCriterion("factor_NOX >", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_NOX >=", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxLessThan(Double value) {
-            addCriterion("factor_NOX <", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxLessThanOrEqualTo(Double value) {
-            addCriterion("factor_NOX <=", value, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxIn(List<Double> values) {
-            addCriterion("factor_NOX in", values, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotIn(List<Double> values) {
-            addCriterion("factor_NOX not in", values, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxBetween(Double value1, Double value2) {
-            addCriterion("factor_NOX between", value1, value2, "factorNox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNoxNotBetween(Double value1, Double value2) {
-            addCriterion("factor_NOX not between", value1, value2, "factorNox");
-            return (Criteria) this;
-        }
-
         public Criteria andNoxIsNull() {
             addCriterion("NOX is null");
             return (Criteria) this;
@@ -2561,66 +1541,6 @@ public class KilnExample {
 
         public Criteria andNoxNotBetween(Double value1, Double value2) {
             addCriterion("NOX not between", value1, value2, "nox");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3IsNull() {
-            addCriterion("factor_NH3 is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3IsNotNull() {
-            addCriterion("factor_NH3 is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3EqualTo(Double value) {
-            addCriterion("factor_NH3 =", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotEqualTo(Double value) {
-            addCriterion("factor_NH3 <>", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3GreaterThan(Double value) {
-            addCriterion("factor_NH3 >", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3GreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_NH3 >=", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3LessThan(Double value) {
-            addCriterion("factor_NH3 <", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3LessThanOrEqualTo(Double value) {
-            addCriterion("factor_NH3 <=", value, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3In(List<Double> values) {
-            addCriterion("factor_NH3 in", values, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotIn(List<Double> values) {
-            addCriterion("factor_NH3 not in", values, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3Between(Double value1, Double value2) {
-            addCriterion("factor_NH3 between", value1, value2, "factorNh3");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorNh3NotBetween(Double value1, Double value2) {
-            addCriterion("factor_NH3 not between", value1, value2, "factorNh3");
             return (Criteria) this;
         }
 
@@ -2684,66 +1604,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorOcIsNull() {
-            addCriterion("factor_OC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcIsNotNull() {
-            addCriterion("factor_OC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcEqualTo(Double value) {
-            addCriterion("factor_OC =", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotEqualTo(Double value) {
-            addCriterion("factor_OC <>", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcGreaterThan(Double value) {
-            addCriterion("factor_OC >", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_OC >=", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcLessThan(Double value) {
-            addCriterion("factor_OC <", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcLessThanOrEqualTo(Double value) {
-            addCriterion("factor_OC <=", value, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcIn(List<Double> values) {
-            addCriterion("factor_OC in", values, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotIn(List<Double> values) {
-            addCriterion("factor_OC not in", values, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcBetween(Double value1, Double value2) {
-            addCriterion("factor_OC between", value1, value2, "factorOc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorOcNotBetween(Double value1, Double value2) {
-            addCriterion("factor_OC not between", value1, value2, "factorOc");
-            return (Criteria) this;
-        }
-
         public Criteria andOcIsNull() {
             addCriterion("OC is null");
             return (Criteria) this;
@@ -2804,66 +1664,6 @@ public class KilnExample {
             return (Criteria) this;
         }
 
-        public Criteria andFactorBcIsNull() {
-            addCriterion("factor_BC is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcIsNotNull() {
-            addCriterion("factor_BC is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcEqualTo(Double value) {
-            addCriterion("factor_BC =", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotEqualTo(Double value) {
-            addCriterion("factor_BC <>", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcGreaterThan(Double value) {
-            addCriterion("factor_BC >", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcGreaterThanOrEqualTo(Double value) {
-            addCriterion("factor_BC >=", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcLessThan(Double value) {
-            addCriterion("factor_BC <", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcLessThanOrEqualTo(Double value) {
-            addCriterion("factor_BC <=", value, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcIn(List<Double> values) {
-            addCriterion("factor_BC in", values, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotIn(List<Double> values) {
-            addCriterion("factor_BC not in", values, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcBetween(Double value1, Double value2) {
-            addCriterion("factor_BC between", value1, value2, "factorBc");
-            return (Criteria) this;
-        }
-
-        public Criteria andFactorBcNotBetween(Double value1, Double value2) {
-            addCriterion("factor_BC not between", value1, value2, "factorBc");
-            return (Criteria) this;
-        }
-
         public Criteria andBcIsNull() {
             addCriterion("BC is null");
             return (Criteria) this;
@@ -2921,76 +1721,6 @@ public class KilnExample {
 
         public Criteria andBcNotBetween(Double value1, Double value2) {
             addCriterion("BC not between", value1, value2, "bc");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeIsNull() {
-            addCriterion("SCCCODE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeIsNotNull() {
-            addCriterion("SCCCODE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeEqualTo(String value) {
-            addCriterion("SCCCODE =", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeNotEqualTo(String value) {
-            addCriterion("SCCCODE <>", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeGreaterThan(String value) {
-            addCriterion("SCCCODE >", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeGreaterThanOrEqualTo(String value) {
-            addCriterion("SCCCODE >=", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeLessThan(String value) {
-            addCriterion("SCCCODE <", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeLessThanOrEqualTo(String value) {
-            addCriterion("SCCCODE <=", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeLike(String value) {
-            addCriterion("SCCCODE like", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeNotLike(String value) {
-            addCriterion("SCCCODE not like", value, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeIn(List<String> values) {
-            addCriterion("SCCCODE in", values, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeNotIn(List<String> values) {
-            addCriterion("SCCCODE not in", values, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeBetween(String value1, String value2) {
-            addCriterion("SCCCODE between", value1, value2, "scccode");
-            return (Criteria) this;
-        }
-
-        public Criteria andScccodeNotBetween(String value1, String value2) {
-            addCriterion("SCCCODE not between", value1, value2, "scccode");
             return (Criteria) this;
         }
 

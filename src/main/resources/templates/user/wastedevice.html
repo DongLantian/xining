@@ -230,7 +230,6 @@
                             <tr>
                                 <th>设备ID</th>
                                 <th>设备序号</th>
-                                <th>生产/排污工艺</th>
                                 <th>设备名称</th>
                                 <th>修改设备信息</th>
                                 <th>删除该设备</th>
@@ -240,7 +239,6 @@
                             <tr  th:each="wastedevice : ${wastedeviceList}">
                                 <th scope="row" th:text="${wastedevice.id}">1</th>
                                 <td th:text="${wastedevice.nkno}">neo</td>
-                                <td th:text="${wastedevice.scc4Dec}">neo</td>
                                 <td th:text="${wastedevice.deviceName}">Otto</td>
                                 <td><button th:value="${wastedevice.id}" @click="editwasteDevice($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${wastedevice.id}" @click="delwasteDevice($event)" class="btn btn-danger btn-sm">删除</button></td>

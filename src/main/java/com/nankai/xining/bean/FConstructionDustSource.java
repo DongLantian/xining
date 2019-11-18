@@ -1,8 +1,5 @@
 package com.nankai.xining.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,10 +9,6 @@ public class FConstructionDustSource implements Serializable {
     private String scccode;
 
     private Integer factoryid;
-
-    private String year;
-
-    private String companyName;
 
     private String constructState;
 
@@ -29,17 +22,7 @@ public class FConstructionDustSource implements Serializable {
 
     private Double nowkgarea;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
-
-    private Double pm25Factors;
-
-    private Double pm10Factors;
-
-    private Double ocFactors;
-
-    private Double bcFactors;
 
     private Double pm10Emission;
 
@@ -67,11 +50,7 @@ public class FConstructionDustSource implements Serializable {
 
     private String constructionType;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date finishdate;
-
-    private String shenheStatus;
 
     private String note;
 
@@ -99,22 +78,6 @@ public class FConstructionDustSource implements Serializable {
 
     public void setFactoryid(Integer factoryid) {
         this.factoryid = factoryid;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year == null ? null : year.trim();
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName == null ? null : companyName.trim();
     }
 
     public String getConstructState() {
@@ -171,38 +134,6 @@ public class FConstructionDustSource implements Serializable {
 
     public void setStartdate(Date startdate) {
         this.startdate = startdate;
-    }
-
-    public Double getPm25Factors() {
-        return pm25Factors;
-    }
-
-    public void setPm25Factors(Double pm25Factors) {
-        this.pm25Factors = pm25Factors;
-    }
-
-    public Double getPm10Factors() {
-        return pm10Factors;
-    }
-
-    public void setPm10Factors(Double pm10Factors) {
-        this.pm10Factors = pm10Factors;
-    }
-
-    public Double getOcFactors() {
-        return ocFactors;
-    }
-
-    public void setOcFactors(Double ocFactors) {
-        this.ocFactors = ocFactors;
-    }
-
-    public Double getBcFactors() {
-        return bcFactors;
-    }
-
-    public void setBcFactors(Double bcFactors) {
-        this.bcFactors = bcFactors;
     }
 
     public Double getPm10Emission() {
@@ -317,14 +248,6 @@ public class FConstructionDustSource implements Serializable {
         this.finishdate = finishdate;
     }
 
-    public String getShenheStatus() {
-        return shenheStatus;
-    }
-
-    public void setShenheStatus(String shenheStatus) {
-        this.shenheStatus = shenheStatus == null ? null : shenheStatus.trim();
-    }
-
     public String getNote() {
         return note;
     }
@@ -342,8 +265,6 @@ public class FConstructionDustSource implements Serializable {
         sb.append(", constructDustid=").append(constructDustid);
         sb.append(", scccode=").append(scccode);
         sb.append(", factoryid=").append(factoryid);
-        sb.append(", year=").append(year);
-        sb.append(", companyName=").append(companyName);
         sb.append(", constructState=").append(constructState);
         sb.append(", constructArea=").append(constructArea);
         sb.append(", constructMonths=").append(constructMonths);
@@ -351,10 +272,6 @@ public class FConstructionDustSource implements Serializable {
         sb.append(", finisharea=").append(finisharea);
         sb.append(", nowkgarea=").append(nowkgarea);
         sb.append(", startdate=").append(startdate);
-        sb.append(", pm25Factors=").append(pm25Factors);
-        sb.append(", pm10Factors=").append(pm10Factors);
-        sb.append(", ocFactors=").append(ocFactors);
-        sb.append(", bcFactors=").append(bcFactors);
         sb.append(", pm10Emission=").append(pm10Emission);
         sb.append(", pm25Emission=").append(pm25Emission);
         sb.append(", ocEmission=").append(ocEmission);
@@ -369,7 +286,6 @@ public class FConstructionDustSource implements Serializable {
         sb.append(", latitude4=").append(latitude4);
         sb.append(", constructionType=").append(constructionType);
         sb.append(", finishdate=").append(finishdate);
-        sb.append(", shenheStatus=").append(shenheStatus);
         sb.append(", note=").append(note);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
@@ -391,8 +307,6 @@ public class FConstructionDustSource implements Serializable {
         return (this.getConstructDustid() == null ? other.getConstructDustid() == null : this.getConstructDustid().equals(other.getConstructDustid()))
             && (this.getScccode() == null ? other.getScccode() == null : this.getScccode().equals(other.getScccode()))
             && (this.getFactoryid() == null ? other.getFactoryid() == null : this.getFactoryid().equals(other.getFactoryid()))
-            && (this.getYear() == null ? other.getYear() == null : this.getYear().equals(other.getYear()))
-            && (this.getCompanyName() == null ? other.getCompanyName() == null : this.getCompanyName().equals(other.getCompanyName()))
             && (this.getConstructState() == null ? other.getConstructState() == null : this.getConstructState().equals(other.getConstructState()))
             && (this.getConstructArea() == null ? other.getConstructArea() == null : this.getConstructArea().equals(other.getConstructArea()))
             && (this.getConstructMonths() == null ? other.getConstructMonths() == null : this.getConstructMonths().equals(other.getConstructMonths()))
@@ -400,10 +314,6 @@ public class FConstructionDustSource implements Serializable {
             && (this.getFinisharea() == null ? other.getFinisharea() == null : this.getFinisharea().equals(other.getFinisharea()))
             && (this.getNowkgarea() == null ? other.getNowkgarea() == null : this.getNowkgarea().equals(other.getNowkgarea()))
             && (this.getStartdate() == null ? other.getStartdate() == null : this.getStartdate().equals(other.getStartdate()))
-            && (this.getPm25Factors() == null ? other.getPm25Factors() == null : this.getPm25Factors().equals(other.getPm25Factors()))
-            && (this.getPm10Factors() == null ? other.getPm10Factors() == null : this.getPm10Factors().equals(other.getPm10Factors()))
-            && (this.getOcFactors() == null ? other.getOcFactors() == null : this.getOcFactors().equals(other.getOcFactors()))
-            && (this.getBcFactors() == null ? other.getBcFactors() == null : this.getBcFactors().equals(other.getBcFactors()))
             && (this.getPm10Emission() == null ? other.getPm10Emission() == null : this.getPm10Emission().equals(other.getPm10Emission()))
             && (this.getPm25Emission() == null ? other.getPm25Emission() == null : this.getPm25Emission().equals(other.getPm25Emission()))
             && (this.getOcEmission() == null ? other.getOcEmission() == null : this.getOcEmission().equals(other.getOcEmission()))
@@ -418,7 +328,6 @@ public class FConstructionDustSource implements Serializable {
             && (this.getLatitude4() == null ? other.getLatitude4() == null : this.getLatitude4().equals(other.getLatitude4()))
             && (this.getConstructionType() == null ? other.getConstructionType() == null : this.getConstructionType().equals(other.getConstructionType()))
             && (this.getFinishdate() == null ? other.getFinishdate() == null : this.getFinishdate().equals(other.getFinishdate()))
-            && (this.getShenheStatus() == null ? other.getShenheStatus() == null : this.getShenheStatus().equals(other.getShenheStatus()))
             && (this.getNote() == null ? other.getNote() == null : this.getNote().equals(other.getNote()));
     }
 
@@ -429,8 +338,6 @@ public class FConstructionDustSource implements Serializable {
         result = prime * result + ((getConstructDustid() == null) ? 0 : getConstructDustid().hashCode());
         result = prime * result + ((getScccode() == null) ? 0 : getScccode().hashCode());
         result = prime * result + ((getFactoryid() == null) ? 0 : getFactoryid().hashCode());
-        result = prime * result + ((getYear() == null) ? 0 : getYear().hashCode());
-        result = prime * result + ((getCompanyName() == null) ? 0 : getCompanyName().hashCode());
         result = prime * result + ((getConstructState() == null) ? 0 : getConstructState().hashCode());
         result = prime * result + ((getConstructArea() == null) ? 0 : getConstructArea().hashCode());
         result = prime * result + ((getConstructMonths() == null) ? 0 : getConstructMonths().hashCode());
@@ -438,10 +345,6 @@ public class FConstructionDustSource implements Serializable {
         result = prime * result + ((getFinisharea() == null) ? 0 : getFinisharea().hashCode());
         result = prime * result + ((getNowkgarea() == null) ? 0 : getNowkgarea().hashCode());
         result = prime * result + ((getStartdate() == null) ? 0 : getStartdate().hashCode());
-        result = prime * result + ((getPm25Factors() == null) ? 0 : getPm25Factors().hashCode());
-        result = prime * result + ((getPm10Factors() == null) ? 0 : getPm10Factors().hashCode());
-        result = prime * result + ((getOcFactors() == null) ? 0 : getOcFactors().hashCode());
-        result = prime * result + ((getBcFactors() == null) ? 0 : getBcFactors().hashCode());
         result = prime * result + ((getPm10Emission() == null) ? 0 : getPm10Emission().hashCode());
         result = prime * result + ((getPm25Emission() == null) ? 0 : getPm25Emission().hashCode());
         result = prime * result + ((getOcEmission() == null) ? 0 : getOcEmission().hashCode());
@@ -456,7 +359,6 @@ public class FConstructionDustSource implements Serializable {
         result = prime * result + ((getLatitude4() == null) ? 0 : getLatitude4().hashCode());
         result = prime * result + ((getConstructionType() == null) ? 0 : getConstructionType().hashCode());
         result = prime * result + ((getFinishdate() == null) ? 0 : getFinishdate().hashCode());
-        result = prime * result + ((getShenheStatus() == null) ? 0 : getShenheStatus().hashCode());
         result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
         return result;
     }

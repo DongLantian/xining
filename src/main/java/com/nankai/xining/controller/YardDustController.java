@@ -79,7 +79,7 @@ public class YardDustController {
     public Map<String,String> delyardDust(int yardDustID,HttpSession session) throws Exception{
         HashMap result = new HashMap();
         Integer factoryID= Integer.parseInt(session.getAttribute("clientfactoryid").toString());
-        int delFlag = yardDustService.deleteYardDust(yardDustID);
+        int delFlag = yardDustService.deleteYardDust(yardDustID,factoryID);
         if (delFlag==1){
             LastChangedTimeSet.setLastChangedTime(factoryID);
             result.put("isDel","success");

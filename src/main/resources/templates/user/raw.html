@@ -228,7 +228,6 @@
                             <tr>
                                 <th>原料ID</th>
                                 <th>原料序号</th>
-                                <th>生产/排污工艺</th>
                                 <th>原料备注</th>
                                 <th>修改原料信息</th>
                                 <th>删除该原料</th>
@@ -238,7 +237,6 @@
                             <tr  th:each="raw : ${rawList}">
                                 <th scope="row" th:text="${raw.id}">1</th>
                                 <td th:text="${raw.nkNo}">neo</td>
-                                <td th:text="${raw.scc4Dec}">neo</td>
                                 <td th:text="${raw.mname}">Otto</td>
                                 <td><button th:value="${raw.id}" @click="editRaw($event)" class="btn btn-info btn-sm">编辑</button></td>
                                 <td><button th:value="${raw.id}" @click="delRaw($event)" class="btn btn-danger btn-sm">删除</button></td>
