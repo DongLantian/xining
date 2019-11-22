@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class View {
     @RequestMapping("/")
     public String view(){
-        return "user/enterpriseInfo";
+        return "user/mainPage";
     }
 }

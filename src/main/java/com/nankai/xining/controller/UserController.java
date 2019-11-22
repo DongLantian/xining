@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;*/
 
 
-@RequestMapping("/user")
+@RequestMapping("/userControl")
 @Controller
 public class UserController {
 

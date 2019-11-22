@@ -73,9 +73,14 @@ public class PagesMappingController {
         return "user/enterpriseInfo";
     }
 
-    @RequestMapping("/layuiTest")
-    public String layuiTest(){
-        return "/user/layuiTest";
+    @RequestMapping("/mainPage")
+    public String mainPage(){
+        return "/user/mainPage";
+    }
+
+    @RequestMapping("/layuiIndex")
+    public String layuiIndex(){
+        return "/user/layuiIndex";
     }
 
     @RequestMapping("/login")
