@@ -92,6 +92,7 @@ $(function () {
                 $.ajax({
                     type:"get",
                     dataType : "json",
+                    async: false,
                     url : "/exhaust/getExhaust", //要访问的后台地址
                     data : {
                         exhaustID : curID
@@ -106,6 +107,19 @@ $(function () {
                         alert("没有");
 
                     }
+                });
+
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+
+                    /*layer.msg('hello');*/
+                    layer.open({
+                        title :'修改烟囱信息（带*号为必填项）',
+                        type: 1,
+                        skin: 'layui-layer-lan',
+                        area: ['1000px', '500px'],
+                        content: $('#updatePanel') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    });
                 });
             }
 
