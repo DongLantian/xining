@@ -1,7 +1,6 @@
 package com.nankai.xining.controller;
 
 import com.nankai.xining.bean.Device;
-import com.nankai.xining.bean.DeviceTemp;
 import com.nankai.xining.service.DeviceService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;

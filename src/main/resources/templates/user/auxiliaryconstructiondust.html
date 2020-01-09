@@ -37,6 +37,8 @@
     <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/plugins/bootbox.js}"></script>
 
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+
     <script th:src="@{/js/nifty.min.js}"></script>
 
     <link th:href="@{/css/bootstrap-datetimepicker.min.css}" rel="stylesheet">
@@ -51,39 +53,17 @@
     <style type="text/css">
         label {
             color: black;
-            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
-        input[type=text], select {
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 15px;
+        .layui-form-pane .layui-form-label {
+            width:190px;
         }
-        option{
-            font-size: 15px;
-        }
-        .form-control-feedback {
-            top: 10px;
-            right: 16px;
+        input {
+            color: black;
         }
 
     </style>
-    <script type="text/javascript">
-        $(function () {
-            $(".form_date").datetimepicker( {
-                language : 'zh-CN',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 2,
-                minView: 2,
-                forceParse: 0
-            });
-        });
-    </script>
 
 </head>
 
@@ -122,125 +102,141 @@
 
                 <div id="exfDom">
 
-                    <h1>施工扬尘源列表</h1>
-                    <div style="height: 200px;">
+                    <div class="layui-card" style="margin-right: 60px;">
+                        <div class="layui-card-header layui-bg-green" style="height: 55px;padding-top: 5px;">
+                            <div style="float:left;">
+                                <button id="addBtn" type="button" class="layui-btn layui-btn-radius">
+                                    <i class="layui-icon" style="font-size: 26px; font-weight: bolder;">&#xe608;</i> 添加施工扬尘源
+                                </button>
+                            </div>
+                        </div>
 
-                        <!--施工扬尘源信息放到modelandview中，在页面映射时完成-->
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>施工扬尘源ID</th>
-                                <th>施工类型</th>
-                                <th>施工阶段</th>
-                                <th>规划面积</th>
-                                <th>修改施工源</th>
-                                <th>删除施工源</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="consdust : ${consdustList}">
-                                <th scope="row" th:text="${consdust.constructDustid}">1</th>
-                                <td th:text="${consdust.constructionType}">neo</td>
-                                <td th:text="${consdust.constructState}">neo</td>
-                                <td th:text="${consdust.nowkgarea}">Otto</td>
-                                <td><button th:value="${consdust.constructDustid}" @click="editconsDust($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${consdust.constructDustid}" @click="delconsDust($event)" class="btn btn-danger btn-sm">删除</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="layui-card-body">
+                            <div style="height: 200px;">
 
+                                <!--施工扬尘源信息放到modelandview中，在页面映射时完成-->
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>施工类型</th>
+                                        <th>施工阶段</th>
+                                        <th>规划面积</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="consdust : ${consdustList}">
+                                        <th><i class="layui-icon layui-icon-tips" ></i></th>
+                                        <td th:text="${consdust.constructionType}">neo</td>
+                                        <td th:text="${consdust.constructState}">neo</td>
+                                        <td th:text="${consdust.nowkgarea}">Otto</td>
+                                        <td><button th:value="${consdust.constructDustid}" @click="editconsDust($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
+                                            <button th:value="${consdust.constructDustid}" @click="delconsDust($event)" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon"></i>删除</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="pageUtil" style="height: 60px;">
+                                <input id="consdustCount" hidden="hidden" th:value="${consdustCount}"></input>
+                                <script>
+                                    var count = document.getElementById("consdustCount").value;
+                                    var page = getQueryVariable("page");
+                                    layui.use(['laypage', 'layer'], function(){
+                                        var laypage = layui.laypage
+                                            ,layer = layui.layer;
+                                        //完整功能
+                                        laypage.render({
+                                            elem: 'pageUtil'
+                                            ,count: count
+                                            ,first: '首页'
+                                            ,last: '尾页'
+                                            ,limit: 3
+                                            ,curr: page
+                                            ,layout: ['count', 'prev', 'page', 'next']
+                                            ,jump: function(obj,first){
+                                                if(!first){
+                                                    window.location.href="/Client/auxiliaryconstructiondust?page="+obj.curr;
+                                                }
+                                            }
+                                        });
+                                    });
+                                    function getQueryVariable(variable)
+                                    {
+                                        var query = window.location.search.substring(1);
+                                        var vars = query.split("&");
+                                        for (var i=0;i<vars.length;i++) {
+                                            var pair = vars[i].split("=");
+                                            if(pair[0] == variable){return pair[1];}
+                                        }
+                                        return(false);
+                                    }
+                                </script>
+                            </div>
+                        </div>
                     </div>
-                    <!--===============================================================================================-->
-                    <div style="height: 80px;">
-                        <div style="float: left;height: 60px;">
-                            <input id="consdustCount" hidden="hidden" th:value="${consdustCount}"></input>
-                            <script>
-                                var count = document.getElementById("consdustCount").value;
-                                document.write(Pager({
-                                    totalCount:count, 		//总条数为150
-                                    pageSize:3,    			//每页显示3条内容，默认10
-                                    buttonSize:10,   		//显示size个按钮，默认10
-                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
-                                    className:'pagination', //分页的样式
-                                    prevButton:'上一页',     //上一页按钮
-                                    nextButton:'下一页',     //下一页按钮
-                                    firstButton:'首页',      //第一页按钮
-                                    lastButton:'末页'       //最后一页按钮
-
-                                }));
-                            </script>
-                        </div>
-                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${consdustCount}">0</span>个施工扬尘源。。。</span>
-                        </div>
-                        <div style="float:right;margin-right: 120px;">
-                            <button id="addBtn" class="btn btn-primary btn-lg">添加施工扬尘源</button>
-                        </div>
-
-                    </div><br><br><hr>
+                    <hr>
+                    
                     <!--=======================修改施工扬尘源Panel，默认隐藏=================================-->
-                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">修改施工扬尘源信息（带*号为必填项）</h3>
-                        </div>
+                    <div id="updatePanel" hidden="hidden" >
                         <div class="panel-body">
-                            <p>在这里修改施工扬尘源信息后点击确认按钮提交修改...</p>
+                            <p>在这里修改施工扬尘源信息后点击确认按钮提交修改（带*号为必填项）...</p>
 
-                            <div class="row">
+                            <div class="layui-form layui-form-pane">
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             >
                                                 施工类型:<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
-                                                <input name="updatenconstructionType" id="updatenconstructionType" v-model="consdust.constructionType" class="form-control" readonly></input>
+                                            <div class="layui-input-inline">
+                                                <input name="updatenconstructionType" id="updatenconstructionType" v-model="consdust.constructionType" class="layui-input" readonly></input>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             >
                                                 建筑施工阶段:<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
-                                                <input name="updatenconstructState" id="updatenconstructState" v-model="consdust.constructState" class="form-control" readonly>
+                                            <div class="layui-input-inline">
+                                                <input name="updatenconstructState" id="updatenconstructState" v-model="consdust.constructState" class="layui-input" readonly>
                                                 </input>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 施工规划面积(m<sup>2</sup>):
                                                 <a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
-                                                <input type="text" id="updatenconstructArea" name="updatenconstructArea" v-model="consdust.constructArea" class="form-control"/>
+                                            <div class="layui-input-inline">
+                                                <input type="text" id="updatenconstructArea" name="updatenconstructArea" v-model="consdust.constructArea" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             >
                                                 施工开工面积(m<sup>2</sup>):
 
                                             </label>
 
-                                            <div class="col-md-8">
-                                                <input type="text" id="updatennowkgarea" name="updatennowkgarea" v-model="consdust.nowkgarea" class="form-control"/>
+                                            <div class="layui-input-inline">
+                                                <input type="text" id="updatennowkgarea" name="updatennowkgarea" v-model="consdust.nowkgarea" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
@@ -249,8 +245,59 @@
 
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label no-padding-right">
+                                            年活动月份:
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12 " >
+                                    <div class="form-group">
+                                        <div >
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox" value="1" lay-ignore />1月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="2" lay-ignore />2月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="3" lay-ignore />3月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="4" lay-ignore />4月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="5" lay-ignore />5月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox" value="6" lay-ignore />6月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="7" lay-ignore />7月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="8" lay-ignore />8月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="9" lay-ignore />9月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="10" lay-ignore />10月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="11" lay-ignore />11月</label>
+                                            <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="12" lay-ignore />12月</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xs-12 layui-form-item" >
+                                    <div class="form-group" >
+                                        <label class="col-md-2 control-label no-padding-right" >
+                                            控制措施:<a style="color: red">*</a>
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 " >
+                                    <div class="form-group" >
+
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="A1" lay-ignore />1.8m硬质围挡</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="A2" lay-ignore />2.4m硬质围挡</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="B" lay-ignore />化学抑尘剂</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="C" lay-ignore />覆盖防尘布</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="E" lay-ignore />路面铺装和洒水</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="F" lay-ignore />封闭</label>
+                                        <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="无" lay-ignore />无控制措施</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 layui-form-item">
+                                    <div class="col-xs-12 layui-form-item" >
                                         <div class="form-group">
                                             <label class="col-md-2 control-label no-padding-right">
                                                 年活动月份:
@@ -260,104 +307,33 @@
 
                                 </div>
 
-                                <div class="col-md-12" >
-                                    <div class="col-md-12" >
-                                        <div class="form-group">
-                                            <div class="col-md-12" >
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox" value="1" />1月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="2" />2月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="3" />3月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="4" />4月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="5" />5月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox" value="6" />6月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="7" />7月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="8" />8月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="9" />9月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="10" />10月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="11" />11月</label>
-                                                <label><input name="updateMonth" v-model="updateMonth" type="checkbox"value="12" />12月</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-xs-12 layui-form-item"  >
+                                    <div class="form-group" >
+                                        <label class="col-md-5 layui-form-label"
+                                        >
+                                            施工开始日期：
 
-                                </div>
-
-                                <div class="col-md-12" >
-                                    <div class="col-md-12" >
-                                        <div class="form-group" >
-                                            <label class="col-md-2 control-label no-padding-right" >
-                                                控制措施:<a style="color: red">*</a>
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12" >
-                                    <div class="col-md-12" >
-                                        <div class="form-group" >
-
-                                            <div class="col-md-12" >
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="A1" />1.8m硬质围挡</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="A2" />2.4m硬质围挡</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="B" />化学抑尘剂</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="C" />覆盖防尘布</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="E" />路面铺装和洒水</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="F" />封闭</label>
-                                                <label><input name="updatecontrol" v-model="updatecontrol" type="checkbox" value="无" />无控制措施</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12" >
-                                    <div class="col-md-10" >
-                                        <div class="form-group" >
-                                            <label class="col-md-3 control-label no-padding-right"
-                                            >
-                                                施工开始日期：
-
-                                            </label>
-                                            <div class="input-group date form_date "
-                                                 style="width: 200px" data-date="" data-date-format="yyyy-mm-dd"
-                                                 data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input id="updatenstartdate" class="form-control" v-model="consdust.startdate"
-                                                       style="height: 30px; width: 170px;" size="16" type="text"
-                                                       value="" readonly>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-remove"></span> </span>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-calendar"></span> </span>
-                                            </div>
+                                        </label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="updatenstartdate" class="layui-input" v-model="consdust.startdate" readonly="readonly" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
 
                                 </div>
 
 
-                                <div class="col-md-12" >
-                                    <div class="col-md-10" >
-                                        <div class="form-group" >
-                                            <label class="col-md-3 control-label no-padding-right">
-                                                施工结束日期：
+                                <div class="col-xs-12 layui-form-item" >
+                                    <div class="form-group" >
+                                        <label class="col-md-5 layui-form-label">
+                                            施工结束日期：
 
-                                            </label>
+                                        </label>
 
-
-                                            <div class="input-group date form_date "
-                                                 style="width: 200px" data-date="" data-date-format="yyyy-mm-dd"
-                                                 data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                                <input id="updatenfinishdate" class="form-control" v-model="consdust.finishdate"
-                                                       style="height: 30px; width: 170px;" size="16" type="text"
-                                                       value="" readonly>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-remove"></span> </span>
-                                                <span class="input-group-addon"><span
-                                                        class="glyphicon glyphicon-calendar"></span> </span>
-                                            </div>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="updatenfinishdate" class="layui-input" v-model="consdust.finishdate" readonly="readonly" placeholder="yyyy-MM-dd">
                                         </div>
-                                    </div>
 
+                                    </div>
                                 </div>
 
                             </div>
@@ -371,25 +347,22 @@
                     </div>
 
                     <!--==============增加施工扬尘源Panel=====================================================-->
-                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">添加施工扬尘源（带*号为必填项）</h3>
-                        </div>
+                    <div id="addPanel" hidden="hidden" >
                         <div class="panel-body">
                             <p>在这里添加施工扬尘源...</p><br>
 
-                            <div class="row">
+                            <div class="layui-form layui-form-pane">
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                >
                                             施工类型:<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
-                                            <select name="nconstructionType" id="nconstructionType" class="form-control" >
+                                        <div class="layui-input-inline">
+                                            <select name="nconstructionType" id="nconstructionType" class="layui-input" >
                                             <option value="">请选择</option>
                                             <option value="城市市政基础设施建设">城市市政基础设施建设</option>
                                             <option value="建筑物建造与拆迁建筑物建造与拆迁">建筑物建造与拆迁</option>
@@ -402,13 +375,13 @@
 
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                >
                                             建筑施工阶段:<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
-                                            <select name="nconstructState" id="nconstructState" class="form-control" >
+                                        <div class="layui-input-inline">
+                                            <select name="nconstructState" id="nconstructState" class="layui-input" >
                                             <option value="">请选择</option>
                                             <option value="未分类">未分类</option>
                                             <option value="土方开挖">土方开挖</option>
@@ -422,31 +395,31 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                >
                                             施工规划面积(m<sup>2</sup>):
                                             <a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
-                                            <input type="text" id="nconstructArea" name="nconstructArea" class="form-control"/>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="nconstructArea" name="nconstructArea" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                >
                                             施工开工面积(m<sup>2</sup>):
 
                                         </label>
 
-                                        <div class="col-md-8">
-                                            <input type="text" id="nnowkgarea" name="nnowkgarea" class="form-control"/>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="nnowkgarea" name="nnowkgarea" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
@@ -455,115 +428,84 @@
 
                             </div>
 
-                            <div class="col-md-12">
-                                <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item">
                                     <div class="form-group">
                                         <label class="col-md-2 control-label no-padding-right">
                                             年活动月份:
                                         </label>
                                     </div>
-                                </div>
 
                             </div>
 
-                            <div class="col-md-12" >
-                                <div class="col-md-12" >
+                            <div class="col-xs-12 " >
                                     <div class="form-group">
-                                        <div class="col-md-12" >
-                                            <label><input name="Month" type="checkbox" value="1" />1月</label>
-                                            <label><input name="Month" type="checkbox"value="2" />2月</label>
-                                            <label><input name="Month" type="checkbox"value="3" />3月</label>
-                                            <label><input name="Month" type="checkbox"value="4" />4月</label>
-                                            <label><input name="Month" type="checkbox"value="5" />5月</label>
-                                            <label><input name="Month" type="checkbox" value="6" />6月</label>
-                                            <label><input name="Month" type="checkbox"value="7" />7月</label>
-                                            <label><input name="Month" type="checkbox"value="8" />8月</label>
-                                            <label><input name="Month" type="checkbox"value="9" />9月</label>
-                                            <label><input name="Month" type="checkbox"value="10" />10月</label>
-                                            <label><input name="Month" type="checkbox"value="11" />11月</label>
-                                            <label><input name="Month" type="checkbox"value="12" />12月</label>
+                                        <div >
+                                            <label><input name="Month" type="checkbox" value="1" lay-ignore />1月</label>
+                                            <label><input name="Month" type="checkbox"value="2" lay-ignore />2月</label>
+                                            <label><input name="Month" type="checkbox"value="3" lay-ignore />3月</label>
+                                            <label><input name="Month" type="checkbox"value="4" lay-ignore />4月</label>
+                                            <label><input name="Month" type="checkbox"value="5" lay-ignore />5月</label>
+                                            <label><input name="Month" type="checkbox" value="6" lay-ignore />6月</label>
+                                            <label><input name="Month" type="checkbox"value="7" lay-ignore />7月</label>
+                                            <label><input name="Month" type="checkbox"value="8" lay-ignore />8月</label>
+                                            <label><input name="Month" type="checkbox"value="9" lay-ignore />9月</label>
+                                            <label><input name="Month" type="checkbox"value="10" lay-ignore />10月</label>
+                                            <label><input name="Month" type="checkbox"value="11" lay-ignore />11月</label>
+                                            <label><input name="Month" type="checkbox"value="12" lay-ignore />12月</label>
                                         </div>
                                     </div>
-                                </div>
 
                             </div>
 
-                            <div class="col-md-12" >
-                                <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                     <div class="form-group" >
                                         <label class="col-md-2 control-label no-padding-right" >
                                             控制措施:<a style="color: red">*</a>
                                         </label>
 
                                     </div>
-                                </div>
                             </div>
 
-                            <div class="col-md-12" >
-                                <div class="col-md-12" >
+                            <div class="col-xs-12" >
                                     <div class="form-group" >
 
-                                        <div class="col-md-12" >
-                                            <label><input name="control" type="checkbox" value="A1" />1.8m硬质围挡</label>
-                                            <label><input name="control" type="checkbox" value="A2" />2.4m硬质围挡</label>
-                                            <label><input name="control" type="checkbox" value="B" />化学抑尘剂</label>
-                                            <label><input name="control" type="checkbox" value="C" />覆盖防尘布</label>
-                                            <label><input name="control" type="checkbox" value="E" />路面铺装和洒水</label>
-                                            <label><input name="control" type="checkbox" value="F" />封闭</label>
-                                            <label><input name="control" type="checkbox" value="无" />无控制措施</label>
-                                        </div>
+                                        <label><input name="control" type="checkbox" value="A1" lay-ignore />1.8m硬质围挡</label>
+                                        <label><input name="control" type="checkbox" value="A2" lay-ignore />2.4m硬质围挡</label>
+                                        <label><input name="control" type="checkbox" value="B" lay-ignore />化学抑尘剂</label>
+                                        <label><input name="control" type="checkbox" value="C" lay-ignore />覆盖防尘布</label>
+                                        <label><input name="control" type="checkbox" value="E" lay-ignore />路面铺装和洒水</label>
+                                        <label><input name="control" type="checkbox" value="F" lay-ignore />封闭</label>
+                                        <label><input name="control" type="checkbox" value="无" lay-ignore />无控制措施</label>
                                     </div>
-                                </div>
                             </div>
 
-                            <div class="col-md-12" >
-                                <div class="col-md-10" >
+                            <div class="col-xs-12 layui-form-item"  >
                                     <div class="form-group" >
-                                        <label class="col-md-3 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                 >
                                             施工开始日期：
 
                                         </label>
-                                        <div class="input-group date form_date "
-                                             style="width: 200px" data-date="" data-date-format="yyyy-mm-dd"
-                                             data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input id="nstartdate" class="form-control"
-                                                   style="height: 30px; width: 170px;" size="16" type="text"
-                                                   value="" readonly>
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-remove"></span> </span>
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-calendar"></span> </span>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" id="nstartdate" readonly="readonly" placeholder="yyyy-MM-dd">
                                         </div>
                                     </div>
-                                </div>
 
                             </div>
 
 
-                            <div class="col-md-12" >
-                                <div class="col-md-10" >
+                            <div class="col-xs-12 layui-form-item" >
                                     <div class="form-group" >
-                                        <label class="col-md-3 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             施工结束日期：
 
                                         </label>
 
-
-                                        <div class="input-group date form_date "
-                                             style="width: 200px" data-date="" data-date-format="yyyy-mm-dd"
-                                             data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                            <input id="nfinishdate" class="form-control"
-                                                   style="height: 30px; width: 170px;" size="16" type="text"
-                                                   value="" readonly>
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-remove"></span> </span>
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-calendar"></span> </span>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" id="nfinishdate" readonly="readonly" placeholder="yyyy-MM-dd">
                                         </div>
-                                    </div>
-                                </div>
 
+                                    </div>
                             </div>
                             </div>
                             <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
@@ -647,7 +589,31 @@
 <!--向js中提供session中的参数-->
 <!--<div th:object="${session.factoryInfo}">
 </div>-->
+<script>
+    layui.use(['form', 'layer','laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer;
+        var laydate = layui.laydate;
 
+        //常规用法
+        laydate.render({
+            elem: '#nstartdate'
+        });
+        laydate.render({
+            elem: '#nfinishdate'
+        });
+        laydate.render({
+            elem: '#updatenstartdate'
+        });
+        laydate.render({
+            elem: '#updatenfinishdate'
+        });
+
+
+
+
+    });
+</script>
 
 </body>
 

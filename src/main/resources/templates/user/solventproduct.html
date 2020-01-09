@@ -36,6 +36,8 @@
     <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
     <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/plugins/bootbox.js}"></script>
+    
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
@@ -49,18 +51,14 @@
     <style type="text/css">
         label {
             color: black;
-            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
-        input[type=text], select {
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 15px;
+        .layui-form-pane .layui-form-label {
+            width:190px;
         }
-        option{
-            font-size: 15px;
+        input {
+            color: black;
         }
 
 
@@ -98,75 +96,91 @@
 
                 <div id="exfDom">
 
-                    <h1>产品列表</h1>
-                    <div style="height: 200px;">
+                    <div class="layui-card" style="margin-right: 60px;">
+                        <div class="layui-card-header layui-bg-green" style="height: 55px;padding-top: 5px;">
+                            <div style="float:left;">
+                                <button id="addBtn" type="button" class="layui-btn layui-btn-radius">
+                                    <i class="layui-icon" style="font-size: 26px; font-weight: bolder;">&#xe608;</i> 添加产品
+                                </button>
+                            </div>
+                        </div>
 
-                        <!--产品信息放到modelandview中，在页面映射时完成-->
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>产品ID</th>
-                                <th>产品序号</th>
-                                <th>产品备注</th>
-                                <th>修改产品信息</th>
-                                <th>删除该产品</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="solventproduct : ${solventproductList}">
-                                <th scope="row" th:text="${solventproduct.id}">1</th>
-                                <td th:text="${solventproduct.nkNo}">neo</td>
-                                <td th:text="${solventproduct.name}">Otto</td>
-                                <td><button th:value="${solventproduct.id}" @click="editsolventProduct($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${solventproduct.id}" @click="delsolventProduct($event)" class="btn btn-danger btn-sm">删除</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="layui-card-body">
+                            <div style="height: 200px;">
 
+                                <!--产品信息放到modelandview中，在页面映射时完成-->
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>产品序号</th>
+                                        <th>产品备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="solventproduct : ${solventproductList}">
+                                        <th><i class="layui-icon layui-icon-tips" ></i></th>
+                                        <td th:text="${solventproduct.nkNo}">neo</td>
+                                        <td th:text="${solventproduct.name}">Otto</td>
+                                        <td><button th:value="${solventproduct.id}" @click="editsolventProduct($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
+                                            <button th:value="${solventproduct.id}" @click="delsolventProduct($event)" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon"></i>删除</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="pageUtil" style="height: 60px;">
+                                <input id="solventproductCount" hidden="hidden" th:value="${solventproductCount}"></input>
+                                <script>
+                                    var count = document.getElementById("solventproductCount").value;
+                                    var page = getQueryVariable("page");
+                                    layui.use(['laypage', 'layer'], function(){
+                                        var laypage = layui.laypage
+                                            ,layer = layui.layer;
+                                        //完整功能
+                                        laypage.render({
+                                            elem: 'pageUtil'
+                                            ,count: count
+                                            ,first: '首页'
+                                            ,last: '尾页'
+                                            ,limit: 3
+                                            ,curr: page
+                                            ,layout: ['count', 'prev', 'page', 'next']
+                                            ,jump: function(obj,first){
+                                                if(!first){
+                                                    window.location.href="/Client/solventproduct?page="+obj.curr;
+                                                }
+                                            }
+                                        });
+                                    });
+                                    function getQueryVariable(variable)
+                                    {
+                                        var query = window.location.search.substring(1);
+                                        var vars = query.split("&");
+                                        for (var i=0;i<vars.length;i++) {
+                                            var pair = vars[i].split("=");
+                                            if(pair[0] == variable){return pair[1];}
+                                        }
+                                        return(false);
+                                    }
+                                </script>
+                            </div>
+                        </div>
                     </div>
-                    <!--===============================================================================================-->
-                    <div style="height: 80px;">
-                        <div style="float: left;height: 60px;">
-                            <input id="solventproductCount" hidden="hidden" th:value="${solventproductCount}"></input>
-                            <script>
-                                var count = document.getElementById("solventproductCount").value;
-                                document.write(Pager({
-                                    totalCount:count, 		//总条数为150
-                                    pageSize:3,    			//每页显示3条内容，默认10
-                                    buttonSize:10,   		//显示size个按钮，默认10
-                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
-                                    className:'pagination', //分页的样式
-                                    prevButton:'上一页',     //上一页按钮
-                                    nextButton:'下一页',     //下一页按钮
-                                    firstButton:'首页',      //第一页按钮
-                                    lastButton:'末页',       //最后一页按钮
-
-                                }));
-                            </script>
-                        </div>
-                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${solventproductCount}">0</span>个产品。。。</span>
-                        </div>
-                        <div style="float:right;margin-right: 120px;">
-                            <button id="addBtn" class="btn btn-primary btn-lg">添加产品</button>
-                        </div>
-
-                    </div><br><br><hr>
+                    <hr>
+                    
                     <!--=======================修改产品Panel，默认隐藏=================================-->
-                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">修改产品信息（带*号为必填项）</h3>
-                        </div>
+                    <div id="updatePanel" hidden="hidden" >
                         <div class="panel-body">
-                            <p>在这里修改产品信息后点击确认按钮提交修改...</p>
+                            <p>在这里修改产品信息后点击确认按钮提交修改（带*号为必填项）...</p>
 
-                            <div class="page-content">
+                            <div class="layui-form layui-form-pane">
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     生产活动类别
                                                     <a style="color: red;">*</a>
                                                 </label>
@@ -175,13 +189,11 @@
                                                        v-model="solventproduct.activitiesCategory" />
 
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
 
-                                                    <select id="updateactivitiesCategory" name="updateactivitiesCategory"  class="form-control"
-                                                            Onchange="clientscc3('14',this.value,'updatenameCategory','updatedrainageProcess')" />
-                                                    <option value="">
-                                                        请选择
-                                                    </option>
+                                                    <select id="updateactivitiesCategory" name="updateactivitiesCategory"  class="layui-input"
+                                                            lay-filter="updateactivitiesCategory"/>
+                                                    <option value="">请选择</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -189,15 +201,15 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品名称/类别
                                                     <a style="color: red;">*</a>
                                                 </label>
                                                 <input type="hidden" name="updatenameCategory_input"
                                                        id="updatenameCategory_input" v-model="solventproduct.nameCategory" />
-                                                <div class="col-md-8">
-                                                    <select id="updatenameCategory" name="updatenameCategory"  class="form-control"
-                                                            Onchange="clientscc4('14','updateactivitiesCategory',this.value,'updatedrainageProcess')" />
+                                                <div class="layui-input-inline">
+                                                    <select id="updatenameCategory" name="updatenameCategory"  class="layui-input"
+                                                            lay-filter="updatenameCategory" />
                                                     <option disabled="disabled">
                                                         请先选择生产活动类别
                                                     </option>
@@ -208,10 +220,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     生产/排污工艺
                                                     <a style="color: red;">*</a>
 
@@ -221,8 +233,8 @@
                                                        id="updatedrainageProcess_input"
                                                        v-model="solventproduct.drainageProcess" />
 
-                                                <div class="col-md-8">
-                                                    <select id="updatedrainageProcess" name="updatedrainageProcess" class="form-control" />
+                                                <div class="layui-input-inline">
+                                                    <select id="updatedrainageProcess" name="updatedrainageProcess" class="layui-input" />
                                                     <option disabled="disabled">
                                                         请先选择产品名称/类别
                                                     </option>
@@ -233,12 +245,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品名称备注
                                                 </label>
 
-                                                <div class="col-md-8">
-                                                    <input type="text" id="updatename" name="updatename" v-model="solventproduct.name" class="form-control"/>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="updatename" name="updatename" v-model="solventproduct.name" class="layui-input"/>
 
                                                 </div>
                                             </div>
@@ -247,16 +259,16 @@
 
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     总产量
                                                     <a style="color: red;">*</a>
                                                 </label>
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input type="text" name="updateannualOutput" id="updateannualOutput"
-                                                           class="form-control"
+                                                           class="layui-input"
                                                            v-model="solventproduct.annualOutput"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
 
@@ -267,14 +279,14 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     计量单位
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input type="text" id="updateuint" name="updateuint" v-model="solventproduct.uint"
-                                                           class="form-control" />
+                                                           class="layui-input" />
 
                                                 </div>
 
@@ -286,17 +298,17 @@
                                         <a style="color: red;">产品月份产量的单位和产品总产量单位一致</a>
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品一月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.janUseamount" type="text"
-                                                           id="updatejanUseamount" name="updatejanUseamount" class="form-control"
+                                                           id="updatejanUseamount" name="updatejanUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -307,14 +319,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品二月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.febUseamount" type="text"
-                                                           id="updatefebUseamount" name="updatefebUseamount" class="form-control"
+                                                           id="updatefebUseamount" name="updatefebUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -324,17 +336,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品三月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.marUseamount" type="text"
-                                                           id="updatemarUseamount" name="updatemarUseamount" class="form-control"
+                                                           id="updatemarUseamount" name="updatemarUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -344,14 +356,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品四月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.aprUseamount" type="text"
-                                                           id="updateaprUseamount" name="updateaprUseamount" class="form-control"
+                                                           id="updateaprUseamount" name="updateaprUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -361,17 +373,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品五月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.mayUseamount" type="text"
-                                                           id="updatemayUseamount" name="updatemayUseamount" class="form-control"
+                                                           id="updatemayUseamount" name="updatemayUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -382,14 +394,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品六月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.juneUseamount" type="text"
-                                                           id="updatejuneUseamount" name="updatejuneUseamount" class="form-control"
+                                                           id="updatejuneUseamount" name="updatejuneUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -398,17 +410,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品七月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.julyUseamount" type="text"
-                                                           id="updatejulyUseamount" name="updatejulyUseamount" class="form-control"
+                                                           id="updatejulyUseamount" name="updatejulyUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -419,14 +431,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品八月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.augUseamount" type="text"
-                                                           id="updateaugUseamount" name="updateaugUseamount" class="form-control"
+                                                           id="updateaugUseamount" name="updateaugUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -436,17 +448,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品九月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.septUseamount" type="text"
-                                                           id="updateseptUseamount" name="updateseptUseamount" class="form-control"
+                                                           id="updateseptUseamount" name="updateseptUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -456,14 +468,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.octUseAmount" type="text"
-                                                           id="updateoctUseAmount" name="updateoctUseAmount" class="form-control"
+                                                           id="updateoctUseAmount" name="updateoctUseAmount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -474,17 +486,17 @@
                                     </div>
 
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十一月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.novUseamount" type="text"
-                                                           id="updatenovUseamount" name="updatenovUseamount" class="form-control"
+                                                           id="updatenovUseamount" name="updatenovUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -494,14 +506,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十二月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input v-model="solventproduct.decUseamount" type="text"
-                                                           id="updatedecUseamount" name="updatedecUseamount" class="form-control"
+                                                           id="updatedecUseamount" name="updatedecUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('updateannualOutput','updatejanUseamount','updatefebUseamount','updatemarUseamount','updateaprUseamount','updatemayUseamount','updatejuneUseamount','updatejulyUseamount','updateaugUseamount','updateseptUseamount','updateoctUseAmount','updatenovUseamount','updatedecUseamount')" />
@@ -525,20 +537,17 @@
                     </div>
 
                     <!--==============增加产品Panel=====================================================-->
-                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">添加产品（带*号为必填项）</h3>
-                        </div>
+                    <div id="addPanel" hidden="hidden" >
                         <div class="panel-body">
-                            <p>在这里添加产品...</p><br>
+                            <p>在这里添加产品（带*号为必填项）...</p><br>
 
-                            <div class="page-content">
+                            <div class="layui-form layui-form-pane">
                                 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     生产活动类别
                                                     <a style="color: red;">*</a>
                                                 </label>
@@ -546,13 +555,11 @@
                                                        id="activitiesCategory_input" />
 
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
 
-                                                    <select id="activitiesCategory" name="activitiesCategory"  class="form-control"
-                                                            Onchange="clientscc3('14',this.value,'nameCategory','drainageProcess')" />
-                                                    <option value="">
-                                                        请选择
-                                                    </option>
+                                                    <select id="activitiesCategory" name="activitiesCategory"  class="layui-input"
+                                                            lay-filter="activitiesCategory" />
+                                                    <option value="">请选择</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -560,15 +567,15 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品名称/类别
                                                     <a style="color: red;">*</a>
                                                 </label>
                                                 <input type="hidden" name="nameCategory_input"
                                                        id="nameCategory_input"  />
-                                                <div class="col-md-8">
-                                                    <select id="nameCategory" name="nameCategory"  class="form-control"
-                                                            Onchange="clientscc4('14','activitiesCategory',this.value,'drainageProcess')" />
+                                                <div class="layui-input-inline">
+                                                    <select id="nameCategory" name="nameCategory"  class="layui-input"
+                                                            lay-filter="nameCategory" />
                                                     <option disabled="disabled">
                                                         请先选择生产活动类别
                                                     </option>
@@ -579,10 +586,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     生产/排污工艺
                                                     <a style="color: red;">*</a>
 
@@ -591,8 +598,8 @@
                                                 <input type="hidden" name="drainageProcess_input"
                                                        id="drainageProcess_input" />
 
-                                                <div class="col-md-8">
-                                                    <select id="drainageProcess" name="drainageProcess" class="form-control" />
+                                                <div class="layui-input-inline">
+                                                    <select id="drainageProcess" name="drainageProcess" class="layui-input" />
                                                     <option disabled="disabled">
                                                         请先选择产品名称/类别
                                                     </option>
@@ -603,12 +610,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品名称备注
                                                 </label>
 
-                                                <div class="col-md-8">
-                                                    <input type="text" id="name" name="name"  class="form-control"/>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" id="name" name="name"  class="layui-input"/>
 
                                                 </div>
                                             </div>
@@ -617,16 +624,16 @@
 
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     总产量
                                                     <a style="color: red;">*</a>
                                                 </label>
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input type="text" name="annualOutput" id="annualOutput"
-                                                           class="form-control" alt="p9x3p4s"
+                                                           class="layui-input" alt="p9x3p4s"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
 
 
@@ -636,14 +643,14 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     计量单位
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input type="text" id="uint" name="uint"
-                                                           class="form-control" />
+                                                           class="layui-input" />
 
                                                 </div>
 
@@ -655,17 +662,17 @@
                                         <a style="color: red;">产品月份产量的单位和产品总产量单位一致</a>
                                     </div>
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品一月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="janUseamount" name="janUseamount" class="form-control"
+                                                           id="janUseamount" name="janUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -676,14 +683,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品二月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="febUseamount" name="febUseamount" class="form-control"
+                                                           id="febUseamount" name="febUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -693,17 +700,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品三月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="marUseamount" name="marUseamount" class="form-control"
+                                                           id="marUseamount" name="marUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -714,14 +721,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品四月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="aprUseamount" name="aprUseamount" class="form-control"
+                                                           id="aprUseamount" name="aprUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -731,17 +738,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品五月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="mayUseamount" name="mayUseamount" class="form-control"
+                                                           id="mayUseamount" name="mayUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -752,14 +759,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品六月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="juneUseamount" name="juneUseamount" class="form-control"
+                                                           id="juneUseamount" name="juneUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -768,17 +775,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品七月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="julyUseamount" name="julyUseamount" class="form-control"
+                                                           id="julyUseamount" name="julyUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -789,14 +796,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品八月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="augUseamount" name="augUseamount" class="form-control"
+                                                           id="augUseamount" name="augUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -806,17 +813,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品九月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="septUseamount" name="septUseamount" class="form-control"
+                                                           id="septUseamount" name="septUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -826,14 +833,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="octUseAmount" name="octUseAmount" class="form-control"
+                                                           id="octUseAmount" name="octUseAmount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -844,17 +851,17 @@
                                     </div>
 
 
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十一月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="novUseamount" name="novUseamount" class="form-control"
+                                                           id="novUseamount" name="novUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -864,14 +871,14 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label no-padding-right">
+                                                <label class="col-md-5 layui-form-label">
                                                     产品十二月份产量
                                                     <a style="color: red;">*</a>
                                                 </label>
 
-                                                <div class="col-md-8">
+                                                <div class="layui-input-inline">
                                                     <input  type="text"
-                                                           id="decUseamount" name="decUseamount" class="form-control"
+                                                           id="decUseamount" name="decUseamount" class="layui-input"
                                                            onkeyup="if(isNaN(value))execCommand('undo')"
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
                                                            onblur="sumall('annualOutput','janUseamount','febUseamount','marUseamount','aprUseamount','mayUseamount','juneUseamount','julyUseamount','augUseamount','septUseamount','octUseAmount','novUseamount','decUseamount')" />
@@ -966,7 +973,32 @@
 <!--向js中提供session中的参数-->
 <!--<div th:object="${session.factoryInfo}">
 </div>-->
+<script>
+    layui.use(['form', 'layer'], function () {
+        var form = layui.form
+            , layer = layui.layer;
 
+        form.on('select(updateactivitiesCategory)', function (data) {
+            clientscc3('14',data.value,'updatenameCategory','updatedrainageProcess');
+            form.render('select');
+        });
+        form.on('select(updatenameCategory)', function (data) {
+            clientscc4('14','updateactivitiesCategory',data.value,'updatedrainageProcess');
+            form.render('select');
+        });
+        form.on('select(activitiesCategory)', function (data) {
+            clientscc3('14',data.value,'nameCategory','drainageProcess');
+            form.render('select');
+        });
+        form.on('select(nameCategory)', function (data) {
+            clientscc4('14','activitiesCategory',data.value,'drainageProcess');
+            form.render('select');
+        });
+
+
+
+    });
+</script>
 
 </body>
 

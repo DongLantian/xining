@@ -803,6 +803,7 @@
     dec_useamount
     from kiln k join exhaust e on k.EXHUST_ID = e.EXF_ID
     WHERE FACTORY_ID = #{factoryId,jdbcType=INTEGER}
+    ORDER BY k.NK_NO
   </select>
 
 </mapper>

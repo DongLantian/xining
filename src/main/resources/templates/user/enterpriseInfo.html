@@ -35,6 +35,7 @@
 
     <script th:src="@{/js/nifty.min.js}"></script>
     <script  th:src="@{/plugins/bootbox.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
     <!--JAVASCRIPT myself-->
     <!--=================================================-->
@@ -45,14 +46,18 @@
     <style type="text/css">
         label {
             color: black;
-            padding-top: 5px;
             font-size: 15px;
             font-family: Consolas;
         }
-        input[type=text], select {
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 15px;
+        .layui-form-pane .layui-form-label {
+            width:190px;
+            text-align: left;
+        }
+        .layui-form-item {
+            margin-bottom: 5px;
+        }
+        input {
+            color: black;
         }
 
 
@@ -90,791 +95,792 @@
             <!--注意啦！开始啦！-->
             <!--主要内容写在这里-->
             <!--===================================================-->
-            <div id="addPanel" class="page-content " style="margin-left: 30px;padding-bottom: 100px;" th:object="${session.factoryInfo}">
+            <div id="addPanel" class="page-content" style="margin-left: 30px;padding-bottom: 100px;" th:object="${session.factoryInfo}">
 
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12" >
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    机构代码
-                                </label>
-
-                                <div class="col-md-8">
-                                    <label id='factotyno' th:text="*{factoryNo}"
-                                           style="font-size: 15px; margin-top: 3px; font-weight: bold;">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    企业名称
-                                </label>
-                                <div class="col-md-8">
-                                    <input type="text" id="factoryName" name="factoryName"
-                                           class="form-control" th:value="*{factoryName}"
-                                            style="height: 25px; width: 170px;"
-                                           onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group" >
-                                <label class="col-md-4 control-label no-padding-right">
-                                    曾用名
-                                </label>
-                                <div class="col-md-8">
-
-                                    <input type="text" id="factoryUsedname"
-                                           name="factoryUsedname" class="form-control"
-                                           style="height: 25px; width: 170px;" th:value="*{factoryUsedname}" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    污染源类型<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <select name="sourceType" id="sourceType"
-                                            style="width: 173px; height: 30px;" th:value="*{sourceType}" Onchange="ischanged('kilnuse')">
-                                        <option disabled="disabled">请选择</option>
-                                        <option value="废气国控">废气国控</option>
-                                        <option value="废气市控">废气市控</option>
-                                        <option value="废气市控">废气省控</option>
-                                        <option value="废气市控">废气其它</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    行业大分类<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <select name="industryBigid" id="industryBigid" onchange="industrysmall(this.value)" required
-                                            style="width: 173px; height: 30px;" th:value="*{industryBigid}">
-                                        <option disabled="disabled">请选择</option>
-
-
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    行业小分类<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <select name="industryId" id="industryId"
-                                            style="width: 173px; height: 30px;" th:value="*{industryId}" required>
-                                        <option disabled="disabled">请选择</option>
-
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    法定代表人<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="legalperson" name="legalperson" class="form-control"
-                                           style="height: 25px; width: 170px;"      required
-                                           th:value="*{legalperson}" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    企业规模<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <select name="factorySize" id="factorySize"   required
-                                            style="width: 173px; height: 30px;" th:value="*{factorySize}" Onchange="ischanged('kilnuse')">
-                                        <option disabled="disabled">请选择</option>
-                                        <option value="1">小型企业</option>
-                                        <option value="2">中小型企业</option>
-                                        <option value="3">中型企业</option>
-                                        <option value="4">大中型企业</option>
-                                        <option value="5">大型企业</option>
-                                    </select>
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    注册省份
-                                </label>
-                                <div class="col-md-8">
-                                    <input type="text"  class="form-control"
-                                           style="height: 25px; width: 170px;" readonly="readonly"
-                                           value="青海" />
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    注册城市<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-
-                                    <select name="countyRegisterCity" id="countyRegisterCity"  required
-
-                                            style="width: 173px; height: 30px;" onchange="changeCity(this.value,'countyidRegister','')">
-                                        <option disabled="disabled">请选择
-                                        </option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    注册行政区<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-
-                                    <select name="countyidRegister" id="countyidRegister"  required
-
-                                            style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
-                                        <option disabled="disabled">
-                                            请选择
-                                        </option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-
-                                <label class="col-md-4 control-label no-padding-right">
-                                    注册详细地址<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="addressRegister" name="addressRegister" class="form-control"   required
-                                           style="height: 25px; width: 170px;"
-                                           th:value="*{addressRegister}" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    实际省份
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control"
-                                           style="height: 25px; width: 170px;" readonly="readonly"
-                                           value="青海" />
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    实际城市<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <select name="countyCity" id="countyCity"  required
-
-                                            style="width: 173px; height: 30px;"  onchange="changeCity(this.value,'countyId','')">
-                                        <option disabled="disabled" >
-                                            请选择
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    实际行政区<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-
-                                    <select name="countyId" id="countyId"  required
-
-                                            style="width: 173px; height: 30px;" Onchange="ischanged('kilnuse')">
-                                        <option disabled="disabled">
-                                            请选择
-                                        </option>
-                                    </select>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    实际详细地址<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="address" name="address" class="form-control"  required
-                                           style="height: 25px; width: 170px;"
-                                           th:value="*{address}" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    企业经度<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input th:value="*{factoryLongitude}" type="text"
-                                           id="factoryLongitude" name="factoryLongitude" class="form-control"
-                                           onblur="checklon(this.id)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    企业纬度<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input th:value="*{factoryLatitude}" type="text" class="form-control"
-                                           onblur="checklat(this.id)"  id="factoryLatitude" name="factoryLatitude"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    填报内容的年份
-                                </label>
-                                <div class="col-md-8">
-                                    <a th:text="*{year}" style="color:red;font-size: 15px;"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产总值(万元)<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input th:value="*{totalOutput}" type="text"  required
-                                           id="totalOutput" name="totalOutput" class="form-control"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    年生产天数(整数)<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input th:value="*{yearDays}" type="text"  required
-                                           id="yearDays" name="yearDays" class="form-control"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,365,'年生产天数')" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    日生产小时数(整数)<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input th:value="*{daysHours}" type="text"  required
-                                           id="daysHours" name="daysHours" class="form-control"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,24,'日生产小时数')" />
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    年用电量(万千瓦时)<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input th:value="*{powerAmount}" type="text"  required
-                                           id="powerAmount" name="powerAmount" class="form-control"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" />
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    统计负责人<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="principalName" name="principalName" class="form-control" required  Onchange="ischanged('kilnuse')"
-                                           th:value="*{principalName}" style="height: 25px; width: 170px;" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    固定电话
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="principalPhone" name="principalPhone" class="form-control" Onchange="ischanged('kilnuse')"
-                                           style="height: 25px; width: 170px;" th:value="*{principalPhone}"
-                                           onblur="checkpphone(this.id);" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="height: 40px;">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    移动电话<a style="color:red">*</a>
-                                </label>
-                                <div class="col-md-8">
-                                    <input type="text" id="principalMobile" name="principalMobile" class="form-control" Onchange="ischanged('kilnuse')"
-                                           style="height: 25px; width: 170px;" th:value="*{principalMobile}"
-                                           onblur="checkpmobile(this.id);" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    电子邮箱<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="principalEmail" name="principalEmail" class="form-control"
-                                           style="height: 25px; width: 170px;" th:value="*{principalEmail}"
-                                           onblur="checkpemail(this.id);" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <br><hr>
-                <div class="row" style="height: 40px;margin-left: 5px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <a style="color: red">生产厂区四至拐点经纬度指的是工厂面积拐点的经纬度，企业厂区面积小于1平方千米的，不用填报四至拐点经纬度,其他企业至少填写四个角落的经纬度</a>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度1<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon1" name="lon1" th:value="*{lon1}" class="form-control"
-                                           onblur="checklonfour1(this.id,0)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度1<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat1" name="lat1"  th:value="*{lat1}" class="form-control"
-                                           onblur="checklatfour1(this.id,0)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度2<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon2" name="lon2"  th:value="*{lon2}"
-                                           class="form-control"
-                                           onblur="checklonfour1(this.id,1)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度2<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat2" name="lat2"  th:value="*{lat2}" class="form-control"
-                                           onblur="checklatfour1(this.id,1)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667"  Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度3<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon3" name="lon3" th:value="*{lon3}" class="form-control"
-
-                                           onblur="checklonfour1(this.id,2)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度3<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat3" name="lat3"  th:value="*{lat3}" class="form-control"
-                                           onblur="checklatfour1(this.id,2)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度4<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon4" name="lon4"  th:value="*{lon4}" class="form-control"
-
-                                           onblur="checklonfour1(this.id,3)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度4<a style="color:red">*</a>
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat4" name="lat4"   th:value="*{lat4}" class="form-control"
-                                           onblur="checklatfour1(this.id,3)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="height: 40px;" id="preparerrow1">
-
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度5
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon5" name="lon5"  th:value="*{lon5}" class="form-control"
-
-                                           onblur="checklonfour1(this.id,4)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度5
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat5" name="lat5" class="form-control" th:value="*{lat5}"
-                                           onblur="checklatfour1(this.id,4)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度6
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon6" name="lon6"  th:value="*{lon6}" class="form-control"
-
-                                           onblur="checklonfour1(this.id,5)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000"  Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度6
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat6" name="lat6" class="form-control"
-                                           style="height: 25px; width: 170px;" th:value="*{lat6}"
-
-                                           onblur="checklatfour1(this.id,5);"   onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="height: 40px;" id="preparerrow1">
-                    <div class="col-md-12">
-                        <!-- PAGE CONTENT BEGINS -->
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点经度7
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lon7" name="lon7"  th:value="*{lon7}" class="form-control"
-
-                                           onblur="checklonfour1(this.id,6)" style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-                                           onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label no-padding-right">
-                                    生产厂区四至拐点纬度7
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" id="lat7" name="lat7" class="form-control" th:value="*{lat7}"
-                                           onblur="checklatfour1(this.id,6)"
-                                           style="height: 25px; margin-top: 3px; width: 170px;"
-                                           onkeyup="if(isNaN(value))execCommand('undo')"
-
-                                           onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="">
+                <form class="layui-form layui-form-pane">
                     <div class="row" style="height: 40px;">
-
-                        <div class="col-md-12">
-                            <!-- PAGE CONTENT BEGINS -->
+                        <div class="col-xs-12 layui-form-item" >
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label no-padding-right">
-                                        填报状态(无需填写)：
+                                    <label class="col-md-4 layui-form-label">
+                                        机构代码
                                     </label>
 
-                                    <div class="col-md-8">
-                                        <input type="text" id="status" disabled="disabled"
-                                               value="只填写基本信息" class="form-control"
-                                               style="height: 25px; width: 170px;">
+                                    <div class="layui-input-inline">
+                                        <label id='factotyno' th:text="*{factoryNo}"
+                                               style="font-size: 18px; margin-top: 5px;margin-left: 15px; font-weight: bold;">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        企业名称
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="factoryName" name="factoryName"
+                                               class="layui-input" th:value="*{factoryName}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <br>
-                <div class="row" >
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item ">
+                            <div class="col-md-6">
+                                <div class="form-group" >
+                                    <label class="col-md-4 layui-form-label">
+                                        曾用名
+                                    </label>
+                                    <div class="layui-input-inline">
 
+                                        <input type="text" id="factoryUsedname"
+                                               name="factoryUsedname" class="layui-input"
+                                               th:value="*{factoryUsedname}" Onchange="ischanged('kilnuse')"/>
 
-                    <div style="margin-left: 450px;">
-                        <button type="button" class="btn btn-primary"
-                                onclick="addFactory();">
-                            <label style="font-size: 16px; color:white">
-                                保存修改
-                            </label>
-                        </button>
-                        <input type="hidden" name="malert" id="malert" value='0'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        污染源类型<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <select name="sourceType" id="sourceType"
+                                                th:value="*{sourceType}" Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">请选择</option>
+                                            <option value="废气国控">废气国控</option>
+                                            <option value="废气市控">废气市控</option>
+                                            <option value="废气市控">废气省控</option>
+                                            <option value="废气市控">废气其它</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        行业大分类<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <select name="industryBigid" id="industryBigid" lay-filter="industryBigid"
+                                                th:value="*{industryBigid}" required>
+                                            <option disabled="disabled">请选择</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        行业小分类<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <select name="industryId" id="industryId"
+                                                th:value="*{industryId}" required>
+                                            <option disabled="disabled">请选择</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        法定代表人<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="legalperson" name="legalperson" class="layui-input"
+                                               required
+                                               th:value="*{legalperson}" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        企业规模<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <select name="factorySize" id="factorySize"   required
+                                                th:value="*{factorySize}" Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">请选择</option>
+                                            <option value="1">小型企业</option>
+                                            <option value="2">中小型企业</option>
+                                            <option value="3">中型企业</option>
+                                            <option value="4">大中型企业</option>
+                                            <option value="5">大型企业</option>
+                                        </select>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        注册省份
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input type="text"  class="layui-input layui-disabled"
+                                               disabled="disabled"
+                                               value="青海" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        注册城市<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+
+                                        <select name="countyRegisterCity" id="countyRegisterCity"  required
+                                                lay-filter="countyRegisterCity"
+                                                style="width: 173px; height: 30px;">
+                                            <option disabled="disabled">请选择
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        注册行政区<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+
+                                        <select name="countyidRegister" id="countyidRegister"  required
+
+                                                Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">
+                                                请选择
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label class="col-md-4 layui-form-label">
+                                        注册详细地址<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="addressRegister" name="addressRegister" class="layui-input"   required
+
+                                               th:value="*{addressRegister}" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        实际省份
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input"
+                                               readonly="readonly"
+                                               value="青海" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        实际城市<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <select name="countyCity" id="countyCity"  required
+                                                lay-filter="countyCity"
+                                                style="width: 173px; height: 30px;">
+                                            <option disabled="disabled" >
+                                                请选择
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        实际行政区<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+
+                                        <select name="countyId" id="countyId"  required
+
+                                                Onchange="ischanged('kilnuse')">
+                                            <option disabled="disabled">
+                                                请选择
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        实际详细地址<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="address" name="address" class="layui-input"  required
+
+                                               th:value="*{address}" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        企业经度<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{factoryLongitude}" type="text"
+                                               id="factoryLongitude" name="factoryLongitude" class="layui-input"
+                                               onblur="checklon(this.id)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        企业纬度<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{factoryLatitude}" type="text" class="layui-input"
+                                               onblur="checklat(this.id)"  id="factoryLatitude" name="factoryLatitude"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        填报内容的年份
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <label th:text="*{year}" style="color:red;font-size: 18px;margin-left: 15px;margin-top: 5px;font-weight: bolder;"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产总值(万元)<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{totalOutput}" type="text"  required
+                                               id="totalOutput" name="totalOutput" class="layui-input"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        年生产天数(整数)<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{yearDays}" type="text"  required
+                                               id="yearDays" name="yearDays" class="layui-input"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,365,'年生产天数')" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        日生产小时数(整数)<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{daysHours}" type="text"  required
+                                               id="daysHours" name="daysHours" class="layui-input"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" onblur="IsChangeNew(this.id,0,24,'日生产小时数')" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        年用电量(万千瓦时)<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input th:value="*{powerAmount}" type="text"  required
+                                               id="powerAmount" name="powerAmount" class="layui-input"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')" Onchange="ischanged('kilnuse')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        统计负责人<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="principalName" name="principalName" class="layui-input" required  Onchange="ischanged('kilnuse')"
+                                               th:value="*{principalName}"  />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        固定电话
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="principalPhone" name="principalPhone" class="layui-input" Onchange="ischanged('kilnuse')"
+                                               th:value="*{principalPhone}"
+                                               onblur="checkpphone(this.id);" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        移动电话<a style="color:red">*</a>
+                                    </label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="principalMobile" name="principalMobile" class="layui-input" Onchange="ischanged('kilnuse')"
+                                               th:value="*{principalMobile}"
+                                               onblur="checkpmobile(this.id);" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        电子邮箱<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="principalEmail" name="principalEmail" class="layui-input"
+                                               th:value="*{principalEmail}"
+                                               onblur="checkpemail(this.id);" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <br><hr>
+                    <div class="row" style="height: 40px;margin-left: 5px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <a style="color: red">生产厂区四至拐点经纬度指的是工厂面积拐点的经纬度，企业厂区面积小于1平方千米的，不用填报四至拐点经纬度,其他企业至少填写四个角落的经纬度</a>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度1<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon1" name="lon1" th:value="*{lon1}" class="layui-input"
+                                               onblur="checklonfour1(this.id,0)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度1<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat1" name="lat1"  th:value="*{lat1}" class="layui-input"
+                                               onblur="checklatfour1(this.id,0)"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度2<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon2" name="lon2"  th:value="*{lon2}"
+                                               class="layui-input"
+                                               onblur="checklonfour1(this.id,1)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度2<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat2" name="lat2"  th:value="*{lat2}" class="layui-input"
+                                               onblur="checklatfour1(this.id,1)"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667"  Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度3<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon3" name="lon3" th:value="*{lon3}" class="layui-input"
+
+                                               onblur="checklonfour1(this.id,2)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度3<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat3" name="lat3"  th:value="*{lat3}" class="layui-input"
+                                               onblur="checklatfour1(this.id,2)"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度4<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon4" name="lon4"  th:value="*{lon4}" class="layui-input"
+
+                                               onblur="checklonfour1(this.id,3)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度4<a style="color:red">*</a>
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat4" name="lat4"   th:value="*{lat4}" class="layui-input"
+                                               onblur="checklatfour1(this.id,3)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="height: 40px;">
+
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度5
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon5" name="lon5"  th:value="*{lon5}" class="layui-input"
+
+                                               onblur="checklonfour1(this.id,4)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度5
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat5" name="lat5" class="layui-input" th:value="*{lat5}"
+                                               onblur="checklatfour1(this.id,4)"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;" >
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度6
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon6" name="lon6"  th:value="*{lon6}" class="layui-input"
+
+                                               onblur="checklonfour1(this.id,5)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000"  Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度6
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat6" name="lat6" class="layui-input"
+                                               th:value="*{lat6}"
+
+                                               onblur="checklatfour1(this.id,5);"   onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 40px;">
+                        <div class="col-xs-12 layui-form-item">
+                            <!-- PAGE CONTENT BEGINS -->
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点经度7
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lon7" name="lon7"  th:value="*{lon7}" class="layui-input"
+
+                                               onblur="checklonfour1(this.id,6)"
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+                                               onafterpaste="if(isNaN(value))execCommand('undo')"  placeholder="73.6667~96.3000" Onchange="ischanged('kilnuse')"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-4 layui-form-label">
+                                        生产厂区四至拐点纬度7
+                                    </label>
+
+                                    <div class="layui-input-inline">
+                                        <input type="text" id="lat7" name="lat7" class="layui-input" th:value="*{lat7}"
+                                               onblur="checklatfour1(this.id,6)"
+
+                                               onkeyup="if(isNaN(value))execCommand('undo')"
+
+                                               onafterpaste="if(isNaN(value))execCommand('undo')" placeholder="34.4167~48.1667" Onchange="ischanged('kilnuse')"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="">
+                        <div class="row" style="height: 40px;">
+
+                            <div class="col-xs-12 layui-form-item">
+                                <!-- PAGE CONTENT BEGINS -->
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 layui-form-label">
+                                            填报状态(无需填写)：
+                                        </label>
+
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="status" disabled="disabled"
+                                                   value="只填写基本信息" class="layui-input layui-disabled"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" >
+
+
+                        <div style="margin-left: 450px;">
+                            <button type="button" class="btn btn-primary"
+                                    onclick="addFactory();">
+                                <label style="font-size: 16px; color:white">
+                                    保存修改
+                                </label>
+                            </button>
+                            <input type="hidden" name="malert" id="malert" value='0'>
+                        </div>
+                    </div>
+                </form>
+
                 <!-- /.page-footer -->
 
 
@@ -942,8 +948,26 @@
     <p id="getcountyCity" th:text="*{countyCity}" hidden="hidden"></p>
     <p id="getcountyId" th:text="*{countyId}" hidden="hidden"></p>
 </div>
+<script type="text/javascript">
+        layui.use(['form'], function () {
+            var form = layui.form;
 
+            form.on('select(industryBigid)', function(data){
+                industrysmall(data.value);
+                form.render('select');
+            });
+            form.on('select(countyRegisterCity)', function(data){
+                changeCity(data.value,'countyidRegister','');
+                form.render('select');
+            });
+            form.on('select(countyCity)', function(data){
+                changeCity(data.value,'countyId','');
+                form.render('select');
+            });
 
+        });
+
+</script>
 </body>
 
 

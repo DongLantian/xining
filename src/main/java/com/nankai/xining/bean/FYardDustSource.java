@@ -37,12 +37,12 @@ public class FYardDustSource implements Serializable {
 
     private Double loadingCount;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm")
-    @DateTimeFormat(pattern = "HH:mm")
+    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private Date loadingStart;
 
-    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm")
-    @DateTimeFormat(pattern = "HH:mm")
+    @JsonFormat(timezone = "GMT+8",pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
     private Date loadingTime;
 
     private Double loadingCapacity;

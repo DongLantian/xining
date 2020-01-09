@@ -36,13 +36,10 @@
             <dl class="layui-nav-child">
                 <!-- 二级菜单 -->
                 <dd>
-                    <a onclick="WeAdminShow('个人信息','http://www.baidu.com')">个人信息</a>
+                    <a href="/Client/login">切换帐号</a>
                 </dd>
                 <dd>
-                    <a onclick="WeAdminShow('切换帐号','/login.html')">切换帐号</a>
-                </dd>
-                <dd>
-                    <a class="loginout" href="/login.html">退出</a>
+                    <a class="loginout" href="/userControl/loginOut">退出</a>
                 </dd>
             </dl>
         </li>
@@ -132,7 +129,7 @@
 
                 </ul>
             </li>
-            <li>
+            <!--<li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>管理员管理</cite>
@@ -227,7 +224,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>
@@ -237,11 +234,11 @@
 <div class="page-content">
     <div class="layui-tab tab" lay-filter="wenav_tab" id="WeTabTip" lay-allowclose="true">
         <ul class="layui-tab-title" id="tabName">
-            <li>我的桌面</li>
+            <li style="display: none;"></li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">
-                <iframe src='/pages/welcome.html' frameborder="0" scrolling="yes" class="weIframe"></iframe>
+            <div class="layui-tab-item">
+                <!--<iframe tab-id='1' src='/Client/enterpriseInfo' frameborder="0" scrolling="yes" class="weIframe"></iframe>-->
             </div>
         </div>
     </div>
@@ -263,22 +260,23 @@
         base: '/static/js/'
         ,version: '101100'
     }).use('admin');
-    layui.use(['jquery','admin'], function(){
+    layui.use(['jquery','admin','layer'], function(){
         var $ = layui.jquery;
-        /*$(function(){
-            var login = JSON.parse(localStorage.getItem("login"));
-            if(login){
-                if(login=0){
-                    window.location.href='./login.html';
-                    return false;
-                }else{
-                    return false;
-                }
-            }else{
-                window.location.href='./login.html';
-                return false;
-            }
-        });*/
+        $(function(){
+            /*$("#userInfo").click(function () {
+                layer.open({
+                    title :'个人信息',
+                    type: 1,
+                    skin: 'layui-layer-molv',
+                    area: ['1000px', '620px'],
+                    content: $("#addPanel")
+                });
+            });*/
+            /*var factoryInfo = '${session.factoryInfo}';
+            if(factoryInfo==null){
+                window.location.href='/Client/login';
+            }*/
+        });
     });
 
 </script>

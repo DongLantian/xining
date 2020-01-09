@@ -36,6 +36,7 @@
     <script  th:src="@{/plugins/validator/bootstrapValidator.js}"></script>
     <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/plugins/bootbox.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
     <script th:src="@{/js/nifty.min.js}"></script>
 
@@ -51,40 +52,17 @@
     <style type="text/css">
         label {
             color: black;
-            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
-        input[type=text], select {
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 15px;
+        .layui-form-pane .layui-form-label {
+            width:190px;
         }
-        option{
-            font-size: 15px;
-        }
-        .form-control-feedback {
-            top: 10px;
-            right: 16px;
+        input {
+            color: black;
         }
 
     </style>
-    <script type="text/javascript">
-        $(function () {
-            $('.form_time').datetimepicker({
-                language:  'zh-CN',
-                weekStart: 1,
-                todayBtn:  1,
-                autoclose: 1,
-                todayHighlight: 1,
-                startView: 1,
-                minView: 0,
-                maxView: 1,
-                forceParse: 0
-            });
-        });
-    </script>
 
 </head>
 
@@ -118,80 +96,95 @@
 
                 <div id="exfDom">
 
-                    <h1>堆场扬尘源列表</h1>
-                    <div style="height: 200px;">
+                    <div class="layui-card" style="margin-right: 60px;">
+                        <div class="layui-card-header layui-bg-green" style="height: 55px;padding-top: 5px;">
+                            <div style="float:left;">
+                                <button id="addBtn" type="button" class="layui-btn layui-btn-radius">
+                                    <i class="layui-icon" style="font-size: 26px; font-weight: bolder;">&#xe608;</i> 添加堆场扬尘源
+                                </button>
+                            </div>
+                        </div>
 
-                        <!--堆场扬尘源信息放到modelandview中，在页面映射时完成-->
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>堆场扬尘源ID</th>
-                                <th>物料种类</th>
-                                <th>装载量</th>
-                                <th>装载次数</th>
-                                <th>修改堆场源</th>
-                                <th>删除堆场源</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="yarddust : ${yarddustList}">
-                                <th scope="row" th:text="${yarddust.windDustid}">1</th>
-                                <td th:text="${yarddust.materialType}">neo</td>
-                                <td th:text="${yarddust.materialCapacity}">neo</td>
-                                <td th:text="${yarddust.loadingCount}">Otto</td>
-                                <td><button th:value="${yarddust.windDustid}" @click="edityardDust($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${yarddust.windDustid}" @click="delyardDust($event)" class="btn btn-danger btn-sm">删除</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="layui-card-body">
+                            <div style="height: 200px;">
 
+                                <!--堆场扬尘源信息放到modelandview中，在页面映射时完成-->
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>物料种类</th>
+                                        <th>装载量</th>
+                                        <th>装载次数</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="yarddust : ${yarddustList}">
+                                        <th><i class="layui-icon layui-icon-tips" ></i></th>
+                                        <td th:text="${yarddust.materialType}">neo</td>
+                                        <td th:text="${yarddust.materialCapacity}">neo</td>
+                                        <td th:text="${yarddust.loadingCount}">Otto</td>
+                                        <td><button th:value="${yarddust.windDustid}" @click="edityardDust($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
+                                            <button th:value="${yarddust.windDustid}" @click="delyardDust($event)" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon"></i>删除</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="pageUtil" style="height: 60px;">
+                                <input id="yarddustCount" hidden="hidden" th:value="${yarddustCount}"></input>
+                                <script>
+                                    var count = document.getElementById("yarddustCount").value;
+                                    var page = getQueryVariable("page");
+                                    layui.use(['laypage', 'layer'], function(){
+                                        var laypage = layui.laypage
+                                            ,layer = layui.layer;
+                                        //完整功能
+                                        laypage.render({
+                                            elem: 'pageUtil'
+                                            ,count: count
+                                            ,first: '首页'
+                                            ,last: '尾页'
+                                            ,limit: 3
+                                            ,curr: page
+                                            ,layout: ['count', 'prev', 'page', 'next']
+                                            ,jump: function(obj,first){
+                                                if(!first){
+                                                    window.location.href="/Client/auxiliaryconstructiondust?page="+obj.curr;
+                                                }
+                                            }
+                                        });
+                                    });
+                                    function getQueryVariable(variable)
+                                    {
+                                        var query = window.location.search.substring(1);
+                                        var vars = query.split("&");
+                                        for (var i=0;i<vars.length;i++) {
+                                            var pair = vars[i].split("=");
+                                            if(pair[0] == variable){return pair[1];}
+                                        }
+                                        return(false);
+                                    }
+                                </script>
+                            </div>
+                        </div>
                     </div>
-                    <!--===============================================================================================-->
-                    <div style="height: 80px;">
-                        <div style="float: left;height: 60px;">
-                            <input id="yarddustCount" hidden="hidden" th:value="${yarddustCount}"></input>
-                            <script>
-                                var count = document.getElementById("yarddustCount").value;
-                                document.write(Pager({
-                                    totalCount:count, 		//总条数为150
-                                    pageSize:3,    			//每页显示3条内容，默认10
-                                    buttonSize:10,   		//显示size个按钮，默认10
-                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
-                                    className:'pagination', //分页的样式
-                                    prevButton:'上一页',     //上一页按钮
-                                    nextButton:'下一页',     //下一页按钮
-                                    firstButton:'首页',      //第一页按钮
-                                    lastButton:'末页',       //最后一页按钮
-
-                                }));
-                            </script>
-                        </div>
-                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${yarddustCount}">0</span>个堆场扬尘源。。。</span>
-                        </div>
-                        <div style="float:right;margin-right: 120px;">
-                            <button id="addBtn" class="btn btn-primary btn-lg">添加堆场扬尘源</button>
-                        </div>
-
-                    </div><br><br><hr>
+                    <hr>
                     <!--=======================修改堆场扬尘源Panel，默认隐藏=================================-->
-                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">修改堆场扬尘源信息（带*号为必填项）</h3>
-                        </div>
+                    <div id="updatePanel" hidden="hidden" >
                         <div class="panel-body">
                             <p>在这里修改堆场扬尘源信息后点击确认按钮提交修改...</p>
 
-                            <div class="row">
+                            <div class="layui-form layui-form-pane">
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 物料种类:<a style="color: red">*</a>
                                             </label>
-                                            <div class="col-md-8">
-                                                <select name="updatendmaterialType" id="updatendmaterialType" class="form-control" v-model="yarddust.materialType" >
+                                            <div class="layui-input-inline">
+                                                <select name="updatendmaterialType" id="updatendmaterialType" class="layui-input" v-model="yarddust.materialType" >
                                                     <option value="">请选择</option>
                                                     <option value="焦炭">焦炭</option>
                                                     <option value="块矿">块矿</option>
@@ -212,131 +205,131 @@
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 物料含水率(%):<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" id="updatendmoistureMateria" name="updatendmoistureMateria" v-model="yarddust.moistureMateria" onblur="checkhs(this.id)"
-                                                       onkeyup="checkNum(this);" class="form-control"/>
+                                                       onkeyup="checkNum(this);" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 年物料装卸量(t):<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" v-model="yarddust.materialCapacity" id="updatendmaterialCapacity" name="updatendmaterialCapacity" onblur="checkwl(this.id)"
-                                                       onkeyup="checkNum(this);" class="form-control"/>
+                                                       onkeyup="checkNum(this);" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 每日装卸次数:<a style="color: red">*</a></label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" v-model="yarddust.loadingCount" id="updatendloadingCount" name="updatendloadingCount"
-                                                       onkeyup="checkNum(this);" class="form-control"/>
+                                                       onkeyup="checkNum(this);" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right">
+                                            <label class="col-md-5 layui-form-label">
                                                 每次装卸量(t):<a style="color: red">*</a>
                                             </label>
-                                            <div class="col-md-8">
-                                                <input type="text" v-model="yarddust.loadingCapacity" id="updatendloadingCapacity" name="updatendloadingCapacity" class="form-control"/>
+                                            <div class="layui-input-inline">
+                                                <input type="text" v-model="yarddust.loadingCapacity" id="updatendloadingCapacity" name="updatendloadingCapacity" class="layui-input"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             > 料堆占地面积(m<sup>2</sup>):<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" v-model="yarddust.heapCovered" id="updatendheapCovered" name="updatendheapCovered" onkeyup="checkNum(this);"
-                                                       class="form-control"
+                                                       class="layui-input"
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
 
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             > 料堆表面积(m<sup>2</sup>):<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" v-model="yarddust.heapArea" id="updatendheapArea" name="updatendheapArea"
-                                                       onkeyup="checkNum(this);" class="form-control"
+                                                       onkeyup="checkNum(this);" class="layui-input"
                                                 />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6" >
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label no-padding-right"
+                                            <label class="col-md-5 layui-form-label"
                                             > 料堆高度(m):<a style="color: red">*</a>
                                             </label>
 
-                                            <div class="col-md-8">
+                                            <div class="layui-input-inline">
                                                 <input type="text" v-model="yarddust.heapHeigh" id="updatendheapHeigh" name="updatendheapHeigh" onkeyup="checkNum(this);"
-                                                       class="form-control" />
+                                                       class="layui-input" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-12" >
                                         <div class="form-group" >
-                                            <label class="col-md-2 control-label no-padding-right">
+                                            <label class="col-md-5">
                                                 装卸控制措施:<a style="color: red">*</a>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-12" >
                                         <div class="form-group" >
 
                                             <div class="col-md-12" >
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox" value="A" />封闭</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="B" />密封</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="C" />抑尘墙</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="D" />抑尘网</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="E" />防风网</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="F" />洒水</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="G" />喷淋</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="H" />喷水</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="I" />半封闭</label>
-                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="J" />无</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox" value="A" lay-ignore />封闭</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="B" lay-ignore />密封</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="C" lay-ignore />抑尘墙</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="D" lay-ignore />抑尘网</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="E" lay-ignore />防风网</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="F" lay-ignore />洒水</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="G" lay-ignore />喷淋</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="H" lay-ignore />喷水</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="I" lay-ignore />半封闭</label>
+                                                <label><input name="updateyarddust" v-model="updateyarddust" type="checkbox"value="J" lay-ignore />无</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-12" >
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label no-padding-right"
+                                            <label class="col-md-5"
                                             >
                                                 风蚀控制措施:
                                                 <a style="color: red">*</a>
@@ -345,50 +338,44 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-12" >
                                         <div class="form-group">
 
                                             <div class="col-md-12" >
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="A" />封闭</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="B" />密闭</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="C" />洒水</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="D" />喷淋</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="E" />喷水</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="F" />化学覆盖剂</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="G" />编织布覆盖</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="H" />半封闭</label>
-                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="I" />无</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="A" lay-ignore />封闭</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="B" lay-ignore />密闭</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="C" lay-ignore />洒水</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="D" lay-ignore />喷淋</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="E" lay-ignore />喷水</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="F" lay-ignore />化学覆盖剂</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="G" lay-ignore />编织布覆盖</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="H" lay-ignore />半封闭</label>
+                                                <label><input name="updatewinddust" v-model="updatewinddust" type="checkbox" value="I" lay-ignore />无</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group" >
-                                            <label class="col-md-4 control-label no-padding-right"> 日装卸开始时间:</label>
-                                            <div  class="input-group date form_time "   data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                            <label class="col-md-5 layui-form-label"> 日装卸开始时间:</label>
+                                            <div class="layui-input-inline">
                                                 <input type="text" id="updatendloadingStart" name="updatendloadingStart" v-model="yarddust.loadingStart"
-                                                       class="form-control"
-                                                       value="" readonly="readonly"/>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                       class="layui-input" readonly="readonly" placeholder="HH:mm:ss"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-12" >
+                                <div class="col-xs-12 layui-form-item" >
                                     <div class="col-md-6" >
                                         <div class="form-group" >
-                                            <label class="col-md-4 control-label no-padding-right"> 日装卸结束时间:</label>
-                                            <div    class="input-group date form_time " data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                            <label class="col-md-5 layui-form-label"> 日装卸结束时间:</label>
+                                            <div class="layui-input-inline">
                                                 <input type="text" id="updatendloadingTime" name="updatendloadingTime" v-model="yarddust.loadingTime"
-                                                       class="form-control"
-                                                       value="" readonly="readonly"/>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                       class="layui-input" readonly="readonly" placeholder="HH:mm:ss"/>
                                             </div>
                                         </div>
                                     </div>
@@ -405,23 +392,20 @@
                     </div>
 
                     <!--==============增加堆场扬尘源Panel=====================================================-->
-                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">添加堆场扬尘源（带*号为必填项）</h3>
-                        </div>
+                    <div id="addPanel" hidden="hidden"  >
                         <div class="panel-body">
                             <p>在这里添加堆场扬尘源...</p><br>
 
-                            <div class="row">
+                            <div class="layui-form layui-form-pane">
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             物料种类:<a style="color: red">*</a>
                                         </label>
-                                        <div class="col-md-8">
-                                            <select name="ndmaterialType" id="ndmaterialType" class="form-control"  >
+                                        <div class="layui-input-inline">
+                                            <select name="ndmaterialType" id="ndmaterialType" class="layui-input"  >
                                                 <option value="">请选择</option>
                                                 <option value="焦炭">焦炭</option>
                                                 <option value="块矿">块矿</option>
@@ -442,131 +426,131 @@
                                 </div>
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             物料含水率(%):<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndmoistureMateria" name="ndmoistureMateria" onblur="checkhs(this.id)"
-                                                   onkeyup="checkNum(this);" class="form-control"/>
+                                                   onkeyup="checkNum(this);" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             年物料装卸量(t):<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndmaterialCapacity" name="ndmaterialCapacity" onblur="checkwl(this.id)"
-                                                   onkeyup="checkNum(this);" class="form-control"/>
+                                                   onkeyup="checkNum(this);" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             每日装卸次数:<a style="color: red">*</a></label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndloadingCount" name="ndloadingCount"
-                                                   onkeyup="checkNum(this);" class="form-control"/>
+                                                   onkeyup="checkNum(this);" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             每次装卸量(t):<a style="color: red">*</a>
                                         </label>
-                                        <div class="col-md-8">
-                                            <input type="text" id="ndloadingCapacity" name="ndloadingCapacity" class="form-control"/>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="ndloadingCapacity" name="ndloadingCapacity" class="layui-input"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                > 料堆占地面积(m<sup>2</sup>):<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndheapCovered" name="ndheapCovered" onkeyup="checkNum(this);"
-                                                   class="form-control"
+                                                   class="layui-input"
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
 
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                > 料堆表面积(m<sup>2</sup>):<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndheapArea" name="ndheapArea"
-                                                   onkeyup="checkNum(this);" class="form-control"
+                                                   onkeyup="checkNum(this);" class="layui-input"
                                                     />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6" >
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label no-padding-right"
+                                        <label class="col-md-5 layui-form-label"
                                                > 料堆高度(m):<a style="color: red">*</a>
                                         </label>
 
-                                        <div class="col-md-8">
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndheapHeigh" name="ndheapHeigh" onkeyup="checkNum(this);"
-                                                   class="form-control" />
+                                                   class="layui-input" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-12" >
                                     <div class="form-group" >
-                                        <label class="col-md-2 control-label no-padding-right">
+                                        <label class="col-md-5">
                                             装卸控制措施:<a style="color: red">*</a>
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-12" >
                                     <div class="form-group" >
 
                                         <div class="col-md-12" >
-                                            <label><input name="yarddust" type="checkbox" value="A" />封闭</label>
-                                            <label><input name="yarddust" type="checkbox"value="B" />密封</label>
-                                            <label><input name="yarddust" type="checkbox"value="C" />抑尘墙</label>
-                                            <label><input name="yarddust" type="checkbox"value="D" />抑尘网</label>
-                                            <label><input name="yarddust" type="checkbox"value="E" />防风网</label>
-                                            <label><input name="yarddust" type="checkbox"value="F" />洒水</label>
-                                            <label><input name="yarddust" type="checkbox"value="G" />喷淋</label>
-                                            <label><input name="yarddust" type="checkbox"value="H" />喷水</label>
-                                            <label><input name="yarddust" type="checkbox"value="I" />半封闭</label>
-                                            <label><input name="yarddust" type="checkbox"value="J" />无</label>
+                                            <label><input name="yarddust" type="checkbox" value="A" lay-ignore />封闭</label>
+                                            <label><input name="yarddust" type="checkbox"value="B" lay-ignore />密封</label>
+                                            <label><input name="yarddust" type="checkbox"value="C" lay-ignore />抑尘墙</label>
+                                            <label><input name="yarddust" type="checkbox"value="D" lay-ignore />抑尘网</label>
+                                            <label><input name="yarddust" type="checkbox"value="E" lay-ignore />防风网</label>
+                                            <label><input name="yarddust" type="checkbox"value="F" lay-ignore />洒水</label>
+                                            <label><input name="yarddust" type="checkbox"value="G" lay-ignore />喷淋</label>
+                                            <label><input name="yarddust" type="checkbox"value="H" lay-ignore />喷水</label>
+                                            <label><input name="yarddust" type="checkbox"value="I" lay-ignore />半封闭</label>
+                                            <label><input name="yarddust" type="checkbox"value="J" lay-ignore />无</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-12" >
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label no-padding-right"
+                                        <label class="col-md-5"
                                                 >
                                             风蚀控制措施:
                                             <a style="color: red">*</a>
@@ -575,50 +559,44 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-12" >
                                     <div class="form-group">
 
                                         <div class="col-md-12" >
-                                            <label><input name="winddust" type="checkbox" value="A" />封闭</label>
-                                            <label><input name="winddust" type="checkbox" value="B" />密闭</label>
-                                            <label><input name="winddust" type="checkbox" value="C" />洒水</label>
-                                            <label><input name="winddust" type="checkbox" value="D" />喷淋</label>
-                                            <label><input name="winddust" type="checkbox" value="E" />喷水</label>
-                                            <label><input name="winddust" type="checkbox" value="F" />化学覆盖剂</label>
-                                            <label><input name="winddust" type="checkbox" value="G" />编织布覆盖</label>
-                                            <label><input name="winddust" type="checkbox" value="H" />半封闭</label>
-                                            <label><input name="winddust" type="checkbox" value="I" />无</label>
+                                            <label><input name="winddust" type="checkbox" value="A" lay-ignore />封闭</label>
+                                            <label><input name="winddust" type="checkbox" value="B" lay-ignore />密闭</label>
+                                            <label><input name="winddust" type="checkbox" value="C" lay-ignore />洒水</label>
+                                            <label><input name="winddust" type="checkbox" value="D" lay-ignore />喷淋</label>
+                                            <label><input name="winddust" type="checkbox" value="E" lay-ignore />喷水</label>
+                                            <label><input name="winddust" type="checkbox" value="F" lay-ignore />化学覆盖剂</label>
+                                            <label><input name="winddust" type="checkbox" value="G" lay-ignore />编织布覆盖</label>
+                                            <label><input name="winddust" type="checkbox" value="H" lay-ignore />半封闭</label>
+                                            <label><input name="winddust" type="checkbox" value="I" lay-ignore />无</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group" >
-                                        <label class="col-md-4 control-label no-padding-right"> 日装卸开始时间:</label>
-                                        <div  class="input-group date form_time "   data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                        <label class="col-md-5 layui-form-label"> 日装卸开始时间:</label>
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndloadingStart" name="ndloadingStart"
-                                                   class="form-control"
-                                                   value="" readonly="readonly"/>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                   class="layui-input" readonly="readonly" placeholder="HH:mm:ss"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12" >
+                            <div class="col-xs-12 layui-form-item" >
                                 <div class="col-md-6" >
                                     <div class="form-group" >
-                                        <label class="col-md-4 control-label no-padding-right"> 日装卸结束时间:</label>
-                                        <div    class="input-group date form_time " data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                        <label class="col-md-5 layui-form-label"> 日装卸结束时间:</label>
+                                        <div class="layui-input-inline">
                                             <input type="text" id="ndloadingTime" name="ndloadingTime"
-                                                   class="form-control"
-                                                   value="" readonly="readonly"/>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                                   class="layui-input" readonly="readonly" placeholder="HH:mm:ss"/>
                                         </div>
                                     </div>
                                 </div>
@@ -704,7 +682,35 @@
 <!--向js中提供session中的参数-->
 <!--<div th:object="${session.factoryInfo}">
 </div>-->
+<script>
+    layui.use(['form', 'layer','laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer;
+        var laydate = layui.laydate;
 
+        //常规用法
+        laydate.render({
+            elem: '#ndloadingStart'
+            ,type: 'time'
+        });
+        laydate.render({
+            elem: '#ndloadingTime'
+            ,type: 'time'
+        });
+        laydate.render({
+            elem: '#updatendloadingStart'
+            ,type: 'time'
+        });
+        laydate.render({
+            elem: '#updatendloadingTime'
+            ,type: 'time'
+        });
+
+
+
+
+    });
+</script>
 
 </body>
 

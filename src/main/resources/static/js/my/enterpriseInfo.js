@@ -1,25 +1,17 @@
 $(document).ready(function() {
 
-    /*$.niftyNoty({
-        type: "warning",
-        icon :  'ion-paper-airplane icon-3x',
-        container : "floating",
-        title : "<br><p style='font-size: 16px;'>第一次登陆本系统请完善企业信息。" +
-        "<br><br>带<strong>*</strong>号的为必填项.......填写完整之后可更新企业信息。</p>"
-    });*/
-
     var datatime=new Date();
 
-/*企业规模菜单初始化*/
+    /*企业规模菜单初始化*/
     var factorySize=$("#getfactorySize").text();
     document.getElementById("factorySize").val=factorySize;
     $("#factorySize option[value='"+factorySize+"']").attr("selected", true);
-/*污染源类型菜单初始化*/
+    /*污染源类型菜单初始化*/
     var abc=$("#getsourceType").text();
     $("#sourceType").val(abc);
     $("#sourceType option[value='"+abc+"']").attr("selected", true);
 
-/*行业类别两个下拉菜单初始化*/
+    /*行业类别两个下拉菜单初始化*/
     $.ajax({
         type:"post",
         dataType : "json",
@@ -48,7 +40,7 @@ $(document).ready(function() {
         industrysmall(m_indutryBig);
     }
 
-/*注册城市和注册行政区两个下拉菜单初始化*/
+    /*注册城市和注册行政区两个下拉菜单初始化*/
     $.ajax({
         type:"post",
         dataType : "json",
@@ -77,7 +69,7 @@ $(document).ready(function() {
         changeCity(m_countyRegisterCity,'countyidRegister',m_countyidRegister);
     }
 
-/*实际城市和实际行政区两个下拉菜单初始化*/
+    /*实际城市和实际行政区两个下拉菜单初始化*/
     /*行业类别两个下拉菜单初始化*/
     $.ajax({
         type:"post",
@@ -132,6 +124,7 @@ $(document).ready(function() {
             },
             principalEmail: {
                 validators: {
+                    notEmpty: {},
                     emailAddress: {}
                 }
             },
@@ -560,30 +553,19 @@ function addFactory() {
 
                 success : function(data) { //list为返回的数据
                     if(data.status==1){
-                        $.niftyNoty({
-                            type: "success",
-                            container : "page",
-                            title : "<br><p style='font-size: 18px;'>更新成功！！！企业信息已保存。。。</p>",
-                            timer : 3000
+                        layer.msg('修改成功', {
+                            icon: 1,
+                            anim: 6,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(index){
+                            layer.close(index);
+                            window.location.reload();
                         });
-                        setTimeout(function(){
-                            window.location.reload();//刷新当前页面.
-                        },3000);
                     }else{
                         if(data.status==0){
-                            $.niftyNoty({
-                                type: "warning",
-                                container : "page",
-                                title : "<br><p style='font-size: 18px;'>登录超时,企业信息保存失败！</p>",
-                                timer : 3000
-                            });
+                            layer.alert('登录超时,企业信息保存失败！',{icon: 5});
                         }else{
-                            $.niftyNoty({
-                                type: "warning",
-                                container : "page",
-                                title : "<br><p style='font-size: 18px;'>存在数据格式错误,企业信息保存失败！</p>",
-                                timer : 3000
-                            });
+                            layer.alert('存在数据格式错误,企业信息保存失败！',{icon: 5});
                         }
                     }
                 },
@@ -602,26 +584,18 @@ function addFactory() {
 
 
 /*
-
 function addsaveinfo(page, target) {
     var m_alert = 0;
-
     $.post("ajax/ExhaustTemp/getinfo.do", {
         target : target
     }, function(data) {
         var json = eval("(" + data + ")");
         //alert(json.result);
-
         saveinfo(page, target, 'all', json.result);
-
     });
-
 }
-
-
 function ischanged(name) {
     document.getElementById("malert").value = 1;
     $('#m_alert').show();
 }
-
 */

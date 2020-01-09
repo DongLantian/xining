@@ -23,8 +23,8 @@
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 ,加上“useSSL=false”是因为我SSL连接数据库出现了错误 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://222.30.48.147:3306/scctb?useSSL=false"
-                        userId="root" password="nkxl123">
+                        connectionURL="jdbc:mysql://localhost:3306/xiningold?useSSL=false"
+                        userId="root" password="123">
             <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
             <!--不添加该属性会生成其他数据库中的表，很蛋疼。-->
             <property name="nullCatalogMeansCurrent" value="true"/>
@@ -58,6 +58,6 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表：通配符%表示生成所有表 -->
-        <table  tableName="boiler"></table>
+        <table  tableName="device_product_temp"></table>
     </context>
 </generatorConfiguration>

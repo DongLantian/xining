@@ -26,6 +26,16 @@ layui.define(['jquery', 'form', 'layer', 'element'], function(exports) {
 		 * @todo 读取本地存储中记录的已打开的tab项
 		 * 刷新后，读取记录，打开原来已打开的tab项
 		 */
+        /*tab.tabAdd("工厂信息", "/Client/enterpriseInfo", 1);*/
+        element.tabAdd('wenav_tab', {
+            title: "企业信息",
+            content: '<iframe tab-id=1 frameborder="0" src="/Client/enterpriseInfo" scrolling="yes" class="weIframe"></iframe>',
+            id: 1
+        });
+        //当前窗口内容
+        setStorageMenu("工厂信息", "/Client/enterpriseInfo", 1);
+        CustomRightClick(1); //绑定右键菜单
+        FrameWH(); //计算框架高度
 
 		/*
 		 * @todo table事件

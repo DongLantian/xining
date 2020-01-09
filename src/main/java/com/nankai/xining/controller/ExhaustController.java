@@ -1,7 +1,6 @@
 package com.nankai.xining.controller;
 
 import com.nankai.xining.bean.Exhaust;
-import com.nankai.xining.bean.ExhaustTemp;
 import com.nankai.xining.bean.Factory;
 import com.nankai.xining.service.EnterpriseService;
 import com.nankai.xining.service.ExhaustService;

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /*import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,13 @@ public class UserController {
     @RequestMapping("/enterpriseInfo")
     public String enterpriseInfo(){
         return "/user/enterpriseInfo";
+    }
+
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpSession session){
+        session.removeAttribute("factoryInfo");
+        session.removeAttribute("clientfactoryid");
+        return "user/login";
     }
 
     /*@RequestMapping("/index")

@@ -51,11 +51,10 @@
             font-family: Consolas;
         }
         .layui-form-pane .layui-form-label {
-            width:230px;
+            width:220px;
         }
-        .form-control-feedback {
-            top: 3px;
-            right: 16px;
+        input {
+            color: black;
         }
 
     </style>
@@ -97,20 +96,21 @@
 
                 <div id="exfDom">
                     <div class="layui-card" style="margin-right: 60px;">
-                        <div class="layui-card-header layui-bg-green">
-                                <div style="float:left;">
-                                    <button id="addBtn" type="button" class="layui-btn">
-                                        <i class="layui-icon">&#xe608;</i> 添加烟囱
-                                    </button>
-                                </div>
+                        <div class="layui-card-header layui-bg-green" style="height: 55px;padding-top: 5px;">
+                            <div style="float:left;">
+                                <button id="addBtn" type="button" class="layui-btn layui-btn-radius">
+                                    <i class="layui-icon" style="font-size: 26px; font-weight: bolder;">&#xe608;</i> 添加烟囱
+                                </button>
+                            </div>
                         </div>
 
                         <div class="layui-card-body">
-                            <div style="height: 180px;">
+                            <div style="height: 200px;">
 
-                                <table class="layui-table"  lay-skin="nob">
+                                <table class="layui-table" >
                                     <thead>
                                     <tr>
+                                        <th style="width: 50px;"></th>
                                         <th>烟囱编号</th>
                                         <th>烟囱材质</th>
                                         <th>烟囱高度</th>
@@ -120,11 +120,12 @@
                                     </thead>
                                     <tbody>
                                     <tr  th:each="exhaust : ${exhaustList}">
+                                        <th><i class="layui-icon layui-icon-tips" ></i></th>
                                         <td th:text="${exhaust.nkNo}">neo</td>
                                         <td th:text="${exhaust.exfMaterial}">Otto</td>
                                         <td th:text="${exhaust.exfHeight}"></td>
                                         <td th:text="${exhaust.smokeOutd}"></td>
-                                        <td class="layui-btn-group"><button th:value="${exhaust.exfId}" @click="editExhaust($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
+                                        <td><button th:value="${exhaust.exfId}" @click="editExhaust($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
                                         <button th:value="${exhaust.exfId}" @click="delExhaust($event)" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon"></i>删除</button></td>
                                     </tr>
                                     </tbody>
@@ -171,15 +172,14 @@
                     </div>
 
                     <!--===============================================================================================-->
-                    <hr>
+
 
                     <!--=======================修改烟囱Panel，默认隐藏=================================-->
-                    <div id="updatePanel" class="panel panel-info" hidden="hidden">
+                    <div id="updatePanel" hidden="hidden">
                         <div class="panel-body">
-                            <p>在这里修改烟囱信息后点击确认按钮提交修改...</p>
+                            <p>在这里修改烟囱信息（带*号为必填项）...</p>
                             <div class="layui-form layui-form-pane">
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <!-- PAGE CONTENT BEGINS -->
 
                                         <div class="col-md-6">
@@ -216,10 +216,8 @@
 
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 layui-form-label"
@@ -255,10 +253,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 layui-form-label"
@@ -295,10 +291,8 @@
 
 
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <!-- PAGE CONTENT BEGINS -->
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -327,21 +321,17 @@
 
                                                 <div class="layui-input-inline">
                                                     <input type="text" id="longitudeUpdate" name="longitudeUpdate"
-                                                           v-model="exhaust.exfLongitude" alt="p3x3p6s"
+                                                           v-model="exhaust.exfLongitude"
                                                            class="layui-input" onkeyup="if(isNaN(value))execCommand('undo')"
-
                                                            onafterpaste="if(isNaN(value))execCommand('undo')"
-                                                           placeholder="89.5833~103.0667"
-                                                           Onchange="ischanged('longitude')" />
+                                                           placeholder="89.5833~103.0667" />
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 layui-form-label"
@@ -363,7 +353,6 @@
                                         </div>
 
                                     </div>
-                                </div>
 
                                 <div class="row" style="text-align: center; margin-top: 50px; ">
                                     <button id="updateExhaust" class="btn btn-info btn-lg">确认修改烟囱信息</button>
@@ -373,29 +362,23 @@
                     </div>
 
                     <!--==============增加烟囱Panel=====================================================-->
-                    <div id="addPanel" hidden="hidden" class="panel panel-bordered-primary" style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">添加烟囱（带*号为必填项）</h3>
-                        </div>
+                    <div id="addPanel" hidden="hidden">
                         <div class="panel-body">
-                            <p>在这里添加烟囱...</p><br>
+                            <p>在这里添加烟囱（带*号为必填项）...</p><br>
                             <div class="layui-form layui-form-pane">
-                                <div>
-                                    <div class="col-xs-12">
+
+                                    <div class="col-xs-12 layui-form-item">
                                         <!-- PAGE CONTENT BEGINS -->
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class=" layui-form-label col-md-5"
-                                                       for="material">
+                                                <label class=" layui-form-label col-md-5">
                                                     烟囱材质
                                                     <a style="color: red;">*</a>
                                                 </label>
 
                                                 <div class="layui-input-inline">
                                                     <input type="text" id="material" name="material"
-                                                           class="layui-input"
-                                                           Onchange="ischanged('material')"
-                                                           onblur="TestLen(this.id,10)" />
+                                                           class="layui-input" />
                                                 </div>
                                             </div>
 
@@ -417,10 +400,9 @@
 
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 layui-form-label"
@@ -455,10 +437,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+
+                                    <div class="col-xs-12 layui-form-item">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="col-md-5 layui-form-label"
@@ -493,10 +474,9 @@
 
 
                                     </div>
-                                </div>
 
-                                <div class="row" style="height: 40px;">
-                                    <div class="col-xs-12">
+
+                                    <div class="col-xs-12 layui-form-item">
                                         <!-- PAGE CONTENT BEGINS -->
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -536,7 +516,6 @@
 
                                         </div>
                                     </div>
-                                </div>
 
                                 <div class="row" style="text-align: center; margin-top: 50px; ">
                                     <button onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>

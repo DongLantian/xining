@@ -37,6 +37,8 @@
     <script  th:src="@{/plugins/validator/zh_CN.js}"></script>
     <script  th:src="@{/plugins/bootbox.js}"></script>
 
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+
     <script th:src="@{/js/nifty.min.js}"></script>
 
     <!--JAVASCRIPT myself-->
@@ -48,22 +50,14 @@
     <style type="text/css">
         label {
             color: black;
-            padding-top: 10px;
             font-size: 15px;
             font-family: Consolas;
         }
-        input[type=text], select {
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 15px;
+        .layui-form-pane .layui-form-label {
+            width:190px;
         }
-        option{
-            font-size: 15px;
-        }
-        .form-control-feedback {
-            top: 10px;
-            right: 16px;
+        input {
+            color: black;
         }
 
     </style>
@@ -104,84 +98,100 @@
 
                 <div id="exfDom">
 
-                    <h1>裸土扬尘源列表</h1>
-                    <div style="height: 200px;">
+                    <div class="layui-card" style="margin-right: 60px;">
+                        <div class="layui-card-header layui-bg-green" style="height: 55px;padding-top: 5px;">
+                            <div style="float:left;">
+                                <button id="addBtn" type="button" class="layui-btn layui-btn-radius">
+                                    <i class="layui-icon" style="font-size: 26px; font-weight: bolder;">&#xe608;</i> 添加裸土扬尘源
+                                </button>
+                            </div>
+                        </div>
 
-                        <!--裸土扬尘源信息放到modelandview中，在页面映射时完成-->
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>裸土扬尘源ID</th>
-                                <th>裸土面积</th>
-                                <th>修改裸土源</th>
-                                <th>删除裸土源</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr  th:each="baredust : ${baredustList}">
-                                <th scope="row" th:text="${baredust.bareSoilid}">1</th>
-                                <td th:text="${baredust.bareSoilArea}">neo</td>
-                                <td><button th:value="${baredust.bareSoilid}" @click="editbareDust($event)" class="btn btn-info btn-sm">编辑</button></td>
-                                <td><button th:value="${baredust.bareSoilid}" @click="delbareDust($event)" class="btn btn-danger btn-sm">删除</button></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="layui-card-body">
+                            <div style="height: 200px;">
 
+                                <!--裸土扬尘源信息放到modelandview中，在页面映射时完成-->
+                                <table class="layui-table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>裸土面积</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  th:each="baredust : ${baredustList}">
+                                        <td><i class="layui-icon layui-icon-tips" ></i></td>
+                                        <td th:text="${baredust.bareSoilArea}"></td>
+                                        <td><button th:value="${baredust.bareSoilid}" @click="editbareDust($event)" class="layui-btn layui-btn-sm"><i class="layui-icon"></i>编辑</button>
+                                            <button th:value="${baredust.bareSoilid}" @click="delbareDust($event)" class="layui-btn layui-btn-sm layui-btn-danger"><i class="layui-icon"></i>删除</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="pageUtil" style="height: 60px;">
+                                <input id="baredustCount" hidden="hidden" th:value="${baredustCount}"></input>
+                                <script>
+                                    var count = document.getElementById("baredustCount").value;
+                                    var page = getQueryVariable("page");
+                                    layui.use(['laypage', 'layer'], function(){
+                                        var laypage = layui.laypage
+                                            ,layer = layui.layer;
+                                        //完整功能
+                                        laypage.render({
+                                            elem: 'pageUtil'
+                                            ,count: count
+                                            ,first: '首页'
+                                            ,last: '尾页'
+                                            ,limit: 3
+                                            ,curr: page
+                                            ,layout: ['count', 'prev', 'page', 'next']
+                                            ,jump: function(obj,first){
+                                                if(!first){
+                                                    window.location.href="/Client/auxiliarybaresoildust?page="+obj.curr;
+                                                }
+                                            }
+                                        });
+                                    });
+                                    function getQueryVariable(variable)
+                                    {
+                                        var query = window.location.search.substring(1);
+                                        var vars = query.split("&");
+                                        for (var i=0;i<vars.length;i++) {
+                                            var pair = vars[i].split("=");
+                                            if(pair[0] == variable){return pair[1];}
+                                        }
+                                        return(false);
+                                    }
+                                </script>
+                            </div>
+                        </div>
                     </div>
-                    <!--===============================================================================================-->
-                    <div style="height: 80px;">
-                        <div style="float: left;height: 60px;">
-                            <input id="baredustCount" hidden="hidden" th:value="${baredustCount}"></input>
-                            <script>
-                                var count = document.getElementById("baredustCount").value;
-                                document.write(Pager({
-                                    totalCount:count, 		//总条数为150
-                                    pageSize:3,    			//每页显示3条内容，默认10
-                                    buttonSize:10,   		//显示size个按钮，默认10
-                                    pageParam:'page',   	//页码的参数名为'p'，默认为'page'
-                                    className:'pagination', //分页的样式
-                                    prevButton:'上一页',     //上一页按钮
-                                    nextButton:'下一页',     //下一页按钮
-                                    firstButton:'首页',      //第一页按钮
-                                    lastButton:'末页'       //最后一页按钮
+                    <hr>
 
-                                }));
-                            </script>
-                        </div>
-                        <div style="float: left;height: 60px;padding-top: 26px;padding-left: 15px; font-size: 16px; ">
-                            <span style="font-weight: bold;">共有<span th:text="${baredustCount}">0</span>个裸土扬尘源。。。</span>
-                        </div>
-                        <div style="float:right;margin-right: 120px;">
-                            <button id="addBtn" class="btn btn-primary btn-lg">添加裸土扬尘源</button>
-                        </div>
-
-                    </div><br><br><hr>
                     <!--=======================修改裸土扬尘源Panel，默认隐藏=================================-->
-                    <div id="updatePanel" hidden="hidden" class="panel panel-info"   style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">修改裸土扬尘源信息（带*号为必填项）</h3>
-                        </div>
+                    <div id="updatePanel" hidden="hidden">
                         <div class="panel-body">
                             <p>在这里修改裸土扬尘源信息后点击确认按钮提交修改...</p>
 
-                            <div class="row">
+                            <div class="layui-form layui-form-pane">
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 layui-form-item">
                                     <div class="form-group">
-                                        <label class="col-md-5 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             裸土面积
                                             <a style="color: red;">*</a>
                                         </label>
 
-                                        <div class="col-md-7">
-                                            <input type="text" id="updatebareSoilArea" name="updatebareSoilArea" v-model="baredust.bareSoilArea" class="form-control" maxlength="20" required/>
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="updatebareSoilArea" name="updatebareSoilArea" v-model="baredust.bareSoilArea" class="layui-input" maxlength="20" required/>
                                         </div>
                                     </div>
 
                                 </div>
 
                             </div>
-                            <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                            <div style="margin: 0 auto; text-align: center;margin-top: 100px;">
                                 <button id="updateyardDust"  class="btn btn-info btn-lg">确认修改裸土面积</button>
                             </div><br>
 
@@ -191,30 +201,27 @@
                     </div>
 
                     <!--==============增加裸土扬尘源Panel=====================================================-->
-                    <div id="addPanel" hidden="hidden"  class="panel panel-bordered-primary"  style="margin-right: 60px;">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">添加裸土扬尘源（带*号为必填项）</h3>
-                        </div>
+                    <div id="addPanel" hidden="hidden" >
                         <div class="panel-body">
                             <p>在这里添加裸土扬尘源...</p><br>
 
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="layui-form layui-form-pane">
+                                <div class="col-md-6 layui-form-item">
                                     <div class="form-group">
-                                        <label class="col-md-5 control-label no-padding-right">
+                                        <label class="col-md-5 layui-form-label">
                                             裸土面积
                                             <a style="color: red;">*</a>
                                         </label>
 
-                                        <div class="col-md-7">
-                                            <input type="text" id="bareSoilArea" name="bareSoilArea" class="form-control"  maxlength="20" required />
+                                        <div class="layui-input-inline">
+                                            <input type="text" id="bareSoilArea" name="bareSoilArea" class="layui-input"  maxlength="20" required />
                                         </div>
                                     </div>
 
                                 </div>
 
                             </div>
-                            <div style="margin: 0 auto; text-align: center;margin-top: 50px;">
+                            <div style="margin: 0 auto;text-align: center; margin-top: 100px;">
                                 <button id="addyardDust" onclick="updatedata();" class="btn btn-primary btn-lg">确认添加</button>
                             </div><br>
 

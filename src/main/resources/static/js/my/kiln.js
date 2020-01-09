@@ -89,23 +89,16 @@ $(function () {
 
                                 success : function(data) { //data为返回的数据
                                     if (data.isDel=="success"){
-                                        $.niftyNoty({
-                                            type: "success",
-                                            container : "page",
-                                            title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>锅炉已删除。。。6秒后自动刷新页面。。。</p>",
-                                            timer : 5000
+                                        layer.msg('删除成功', {
+                                            icon: 1,
+                                            anim: 6,
+                                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                        }, function(index){
+                                            layer.close(index);
+                                            window.location.href="/Client/kilnshell?page=1";
                                         });
-                                        setTimeout(function(){
-                                            window.location.reload();//刷新当前页面.
-                                        },6000);
                                     }else {
-                                        $.niftyNoty({
-                                            type: "warning",
-                                            container : "page",
-                                            title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>",
-                                            timer : 5000
-                                        });
+                                        layer.alert('删除失败！！！请重新登录系统并重试！',{icon: 5});
                                     }
                                 },
 
@@ -121,14 +114,13 @@ $(function () {
                 });
             },
             editKiln:function(e) {
-                $("#updatePanel").removeAttr("hidden");
-                $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 // ajax请求。
                 $.ajax({
                     type:"get",
                     dataType : "json",
+                    async: false,
                     url : "/kiln/getKiln", //要访问的后台地址
                     data : {
                         kilnID : curID
@@ -143,21 +135,40 @@ $(function () {
                         clientscc3('11',data.functio,'updatefueltype','updatemodel');
                         clientscc4('11','updatefunctio_input',data.fueltype,'updatemodel');
 
-                        app.initSelect();
+                        app.initSelect(data);
                     },
                     error : function(XMLResponse) {
                         alert("没有");
 
                     }
                 });
+                layui.use(['form','layer'], function(){
+                    var layer = layui.layer;
+                    var form = layui.form;
+                    form.render('select');
+
+                    /*layer.msg('hello');*/
+                    layer.open({
+                        title :'修改窑炉信息',
+                        type: 1,
+                        skin: 'layui-layer-molv',
+                        area: ['1100px', '520px'],
+                        content: $('#updatePanel') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    });
+                });
 
 
             },
-            initSelect:function () {
+            initSelect:function (data) {
                 var fuelInput = $("#updatefueltype_input").val();
                 var modelInput = $("#updatemodel_input").val();
                 $("#updatefueltype").val(fuelInput);
                 $("#updatemodel").val(modelInput);
+                $("#updatefuelAusageunit").val(data.kilnFuelAusageunit);
+                $("#updatedustremoveId").val(data.dustremoveid);
+                $("#updatesulphurremoveId").val(data.sulphurremoveid);
+                $("#updatenitreremoveId").val(data.nitreremoveid);
+                $("#updatemchimney").val(data.exhustId);
             }
 
         }
@@ -166,8 +177,16 @@ $(function () {
 
 
     $("#addBtn").click(function () {
-        $("#addPanel").removeAttr("hidden");
-        $("#updatePanel").attr("hidden","hidden");
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                title :'添加窑炉',
+                type: 1,
+                skin: 'layui-layer-molv',
+                area: ['1100px', '520px'],
+                content: $('#addPanel') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+            });
+        });
     });
 
 
@@ -185,6 +204,13 @@ $(function () {
                 app.kiln.sulphurremovedec = $("#updatesulphurremoveId").find("option:selected").text();
                 app.kiln.nitreremovedec = $("#updatenitreremoveId").find("option:selected").text();
                 app.kiln.exfNo = parseInt($("#updatemchimney").find("option:selected").text().replace(/[^0-9]/ig,""));
+
+                app.kiln.exhustId = parseInt(document.getElementById("updatemchimney").value);
+                app.kiln.kilnFuelAusageunit = document.getElementById("updatefuelAusageunit").value;
+                app.kiln.dustremoveid = document.getElementById("updatedustremoveId").value;
+                app.kiln.sulphurremoveid  = document.getElementById("updatesulphurremoveId").value;
+                app.kiln.nitreremoveid = document.getElementById("updatenitreremoveId").value;
+
                 // ajax请求。
                 $.ajax({
                     type:"post",
@@ -198,19 +224,16 @@ $(function () {
                     success : function(reponseData) { //reponseData为返回的数据
                         if (reponseData.isUpdate){
                             app.kiln=reponseData.kiln;
-                            $.niftyNoty({
-                                type: "success",
-                                container : "page",
-                                title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                                message : "<p style='font-size: 16px;'>锅炉信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
-                                timer : 5000
+                            layer.msg('修改成功', {
+                                icon: 1,
+                                anim: 6,
+                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(index){
+                                layer.close(index);
+                                window.location.reload();
                             });
-                            setTimeout(function(){
-                                window.location.reload();//刷新当前页面.
-                            },6000);
                         }else {
-                            bootbox.alert("<p style='font-size: 17px;'>失败！！！</p>" +
-                                "<p style='font-size: 17px;'>请重新填写信息并提交修改。。。</p>");
+                            layer.alert('请重新填写信息并提交修改。',{icon: 5});
                         }
 
                     },
@@ -222,10 +245,10 @@ $(function () {
                 });
             }else {
                 //必填项有空值，不可以提交
-                bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
+                layer.alert('带*号必填！！！请填写完整。',{icon: 5});
             }
         }else {
-            bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。。。</p>");
+            layer.alert('所填数据不符合要求，请按提示修改。',{icon: 5});
         }
     });
 
@@ -687,24 +710,16 @@ function updatedata() {
 
                 success : function(data) { //data为返回的数据
                     if(data.isAdd){
-                        $.niftyNoty({
-                            type: "success",
-                            container : "page",
-                            title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>锅炉信息已添加。。。6秒后自动刷新页面。。。</p>",
-                            timer : 5000
+                        layer.msg('添加成功', {
+                            icon: 1,
+                            anim: 6,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(index){
+                            layer.close(index);
+                            window.location.reload();
                         });
-                        setTimeout(function(){
-                            window.location.reload();//刷新当前页面.
-                        },6000);
                     }else {
-                        $.niftyNoty({
-                            type: "warning",
-                            container : "page",
-                            title : "<br><p style='font-size: 17px;'>失败！！！</p>",
-                            message : "<p style='font-size: 16px;'>请重新填写烟囱信息并添加。</p>",
-                            timer : 6000
-                        });
+                        layer.alert('添加失败。请再次尝试。',{icon: 5});
                     }
                 },
 
@@ -715,48 +730,13 @@ function updatedata() {
             });
         }else {
             //必填项有空值，不可以提交
-            bootbox.alert("<p style='font-size: 17px;'>带*号必填！！！请填写完整。。。</p>");
+            layer.alert('带*号必填！！！请填写完整。',{icon: 5});
         }
     }else {
-        bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请根据提示修改。。。</p>");
+        layer.alert('所填数据不符合要求，请按提示修改。',{icon: 5});
     }
 
 }
-
-//自定义函数：选中烟囱时显示烟囱参数
-function exhaustModel(exhustId,select){
-
-    if(exhustId!=''){
-        $.ajax({
-            type:"get",
-            dataType : "json",
-            url : "/exhaust/getExhaust", //要访问的后台地址
-            data : {
-                exhaustID : exhustId
-            }, //要发送的数据，采用josn格式
-            success : function(data) { //data为返回的数据
-                if (select=="update"){
-
-                    $("#updateexaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }else {
-                    $("#exaust_info").html("<b style='color:purple'>烟囱"
-                        + data.nkNo + "号的详细信息：</br>"
-                        + "材质："+data.exfMaterial+"，高度："+data.exfHeight+"，出口直径："+data.smokeOutd
-                        + "，出口温度："+data.smokeOUtteM+"，出口流速："+data.smokeOutv+"，烟气流量："+data.smokeOuta
-                        + "</b>");
-                }
-            }
-        });
-
-    } else {
-        document.getElementById("exaust_info").innerHTML = "<b style='color:purple'></b>";
-    }
-}
-
 
 /***
  * CAIJUN
@@ -801,13 +781,13 @@ function sumall(total,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12){
     }
     var t= document.getElementById(total).value;
     if(t<sum){
-        $.niftyNoty({
-            type: "warning",
-            container : "floating",
-            title : "<br><p style='font-size: 16px;'>您输入的各个月份的使用量之和大于年使用量，已自动修改年使用量</p>",
-            timer : 5000
+        layer.msg('您输入的各个月份的使用量之和大于年使用量，请修改年使用量', {
+            icon: 2,
+            anim: 6,
+            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+        }, function(index){
+            layer.close(index);
         });
-        document.getElementById(total).value=sum;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.nankai.xining.controller;
 
 import com.nankai.xining.bean.Kiln;
-import com.nankai.xining.bean.KilnTemp;
 import com.nankai.xining.service.KilnService;
 import com.nankai.xining.utils.LastChangedTimeSet;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -36,23 +36,16 @@ $(function () {
 
                                 success : function(data) { //data为返回的数据
                                     if (data.isDel=="success"){
-                                        $.niftyNoty({
-                                            type: "success",
-                                            container : "page",
-                                            title : "<br><p style='font-size: 17px;'>删除成功！！！</p>",
-                                            message : "<p style='font-size: 16px;'>车间已删除。。。6秒后自动刷新页面。。。</p>",
-                                            timer : 5000
+                                        layer.msg('删除成功', {
+                                            icon: 1,
+                                            anim: 6,
+                                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                        }, function(index){
+                                            layer.close(index);
+                                            window.location.href="/Client/auxiliaryWorkshop?page=1";
                                         });
-                                        setTimeout(function(){
-                                            window.location.reload();//刷新当前页面.
-                                        },6000);
                                     }else {
-                                        $.niftyNoty({
-                                            type: "warning",
-                                            container : "page",
-                                            title : "<br><p style='font-size: 17px;'>删除失败！！！请重新登录系统并重试！！！</p>",
-                                            timer : 5000
-                                        });
+                                        layer.alert('删除失败！！！请重新登录系统并重试！',{icon: 5});
                                     }
                                 },
 
@@ -68,8 +61,6 @@ $(function () {
                 });
             },
             editworkshop:function(e) {
-                $("#updatePanel").removeAttr("hidden");
-                $("#addPanel").attr("hidden","hidden");
                 var cur = e.currentTarget;  //获取当前元素，即注册点击事件的button
                 var curID = cur.value;      //获取button的value，即exhaust.exfId值
                 // ajax请求。
@@ -89,6 +80,21 @@ $(function () {
                     }
                 });
 
+                layui.use(['form','layer'], function(){
+                    var layer = layui.layer;
+                    var form = layui.form;
+                    form.render('select');
+
+                    /*layer.msg('hello');*/
+                    layer.open({
+                        title :'修改无组织车间',
+                        type: 1,
+                        skin: 'layui-layer-molv',
+                        area: ['1160px', '400px'],
+                        content: $('#updatePanel') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    });
+                });
+
             }
 
         }
@@ -97,8 +103,16 @@ $(function () {
 
 
     $("#addBtn").click(function () {
-        $("#addPanel").removeAttr("hidden");
-        $("#updatePanel").attr("hidden","hidden");
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                title :'添加无组织车间',
+                type: 1,
+                skin: 'layui-layer-molv',
+                area: ['1160px', '400px'],
+                content: $('#addPanel') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+            });
+        });
     });
 
 
@@ -121,19 +135,16 @@ $(function () {
                 success : function(reponseData) { //reponseData为返回的数据
                     if (reponseData.isUpdate){
                         app.workshop=reponseData.workshop;
-                        $.niftyNoty({
-                            type: "success",
-                            container : "page",
-                            title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                            message : "<p style='font-size: 16px;'>车间信息已经修改。。。6秒后将自动刷新当前页面。。。</p>",
-                            timer : 5000
+                        layer.msg('修改成功', {
+                            icon: 1,
+                            anim: 6,
+                            time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                        }, function(index){
+                            layer.close(index);
+                            window.location.reload();
                         });
-                        setTimeout(function(){
-                            window.location.reload();//刷新当前页面.
-                        },6000);
                     }else {
-                        bootbox.alert("<p style='font-size: 17px;'>失败！！！</p>" +
-                            "<p style='font-size: 17px;'>请重新填写信息并提交修改。。。</p>");
+                        layer.alert('请重新填写信息并提交修改。',{icon: 5});
                     }
 
                 },
@@ -144,18 +155,18 @@ $(function () {
                 }
             });
         }else {
-            bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请按提示修改。。。</p>");
+            layer.alert('所填数据不符合要求，请按提示修改。',{icon: 5});
         }
     });
 
     //数据校验
     $('#addPanel').bootstrapValidator({
         message: '这是必填项',
-        feedbackIcons: {
+        /*feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
-        },
+        },*/
         fields: {
             workshopid:{
                 validators: {
@@ -211,11 +222,11 @@ $(function () {
     //数据校验
     $('#updatePanel').bootstrapValidator({
         message: '这是必填项',
-        feedbackIcons: {
+        /*feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
-        },
+        },*/
         fields: {
             updateworkshopid:{
                 validators: {
@@ -299,24 +310,16 @@ function updatedata() {
 
             success : function(data) { //data为返回的数据
                 if(data.isAdd){
-                    $.niftyNoty({
-                        type: "success",
-                        container : "page",
-                        title : "<br><p style='font-size: 17px;'>成功！！！</p>",
-                        message : "<p style='font-size: 16px;'>车间信息已添加。。。6秒后自动刷新页面。。。</p>",
-                        timer : 5000
+                    layer.msg('添加成功', {
+                        icon: 1,
+                        anim: 6,
+                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                    }, function(index){
+                        layer.close(index);
+                        window.location.reload();
                     });
-                    setTimeout(function(){
-                        window.location.reload();//刷新当前页面.
-                    },6000);
                 }else {
-                    $.niftyNoty({
-                        type: "warning",
-                        container : "page",
-                        title : "<br><p style='font-size: 17px;'>失败！！！</p>",
-                        message : "<p style='font-size: 16px;'>请重新填写车间信息并添加。</p>",
-                        timer : 6000
-                    });
+                    layer.alert('添加失败。请再次尝试。',{icon: 5});
                 }
             },
 
@@ -326,7 +329,7 @@ function updatedata() {
             }
         });
     }else {
-        bootbox.alert("<p style='font-size: 17px;'>所填数据不符合要求，请根据提示修改。。。</p>");
+        layer.alert('所填数据不符合要求，请按提示修改。',{icon: 5});
     }
 
 }
