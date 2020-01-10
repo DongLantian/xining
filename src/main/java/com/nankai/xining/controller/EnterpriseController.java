@@ -123,4 +123,29 @@ public class EnterpriseController {
         List<County> resultCountry = enterpriseService.getcountryPartByCitycode(cityCode);
         return resultCountry;
     }
+
+
+    /**
+     * 完成填表
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/completeFillIn")
+    @ResponseBody
+    public Map<String,Integer> completeFillIn(HttpSession session) {
+        Map resultStatus = new HashMap();
+        Integer m_factoryInteger = Integer.parseInt(session.getAttribute("clientfactoryid").toString());
+
+        if (m_factoryInteger != null) {
+            if (enterpriseService.completeFillIn(m_factoryInteger)==1){
+                resultStatus.put("status", 1);//成功
+            }else
+                resultStatus.put("status", 2);//更新失败
+        }else
+            resultStatus.put("status", 2);//更新失败
+
+        return resultStatus;
+    }
+
+
 }

@@ -11,9 +11,11 @@
     <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
 
     <link th:href="@{/plugins/ionicons/css/ionicons.min.css}" rel="stylesheet">
+
     <link rel="stylesheet" th:href="@{/static/css/font.css}">
     <link rel="stylesheet" th:href="@{/static/css/weadmin.css}">
     <script type="text/javascript" th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script  th:src="@{/js/jquery-2.2.4.min.js}"></script>
 </head>
 
 <body>
@@ -227,8 +229,8 @@
             </li>-->
         </ul>
     </div>
-    <div style="margin-left: 50px;margin-top: 50px;">
-        <button>完成填报</button>
+    <div style="margin-left: 70px;margin-top: 30px;">
+        <button id="completeBtn"  type="button" class="layui-btn layui-btn-primary" style="background-color: #009688;color: white;font-size: 15px;">完成填报</button>
     </div>
 </div>
 <!-- <div class="x-slide_left"></div> -->
@@ -279,6 +281,49 @@
             if(factoryInfo==null){
                 window.location.href='/Client/login';
             }*/
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#completeBtn").click(function () {
+            layer.confirm("<p style='font-size: 16px;'>请将所需填报项目填报完成后再提交！</p>" +
+                "<br>" +
+                "<p style='font-size: 16px;'>请确认是否完成填报？</p>", {
+                btn: ['确认', '还未完成'] //可以无限个按钮
+            }, function(index){
+                //按钮【确认】的回调
+                $.ajax({
+                    type:"get",
+                    dataType : "json",
+                    async: false,
+                    url : "/enterprise/completeFillIn", //要访问的后台地址
+                    data : {}, //要发送的数据，采用josn格式
+
+                    success : function(data) { //data为返回的数据
+                        if(data.status==1){
+                            layer.msg('已完成所有填报项目', {
+                                icon: 1,
+                                anim: 6,
+                                time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function(index){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        }else{
+                            layer.alert('提交失败！',{icon: 5});
+
+                        }
+                    }
+            });
+
+
+                layer.close(index);
+            }, function(index){
+                //按钮【还未完成】的回调
+            });
+
         });
     });
 
