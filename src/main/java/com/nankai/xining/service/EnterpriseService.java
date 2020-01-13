@@ -161,4 +161,17 @@ public class EnterpriseService {
         List<County> resultCountry = countyMapper.selectByExample(countyExample);
         return resultCountry;
     }
+
+    /**
+     * 完成填报
+     * @param m_factoryInteger
+     */
+    public int completeFillIn(Integer m_factoryInteger) {
+        Factory factory = factoryMapper.selectByPrimaryKey(m_factoryInteger);
+        factory.setStatus(1);
+        if (factoryMapper.updateByPrimaryKeySelective(factory)!=0){
+            return 1;
+        }else
+            return 0;
+    }
 }
