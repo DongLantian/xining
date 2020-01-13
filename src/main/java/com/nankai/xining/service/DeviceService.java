@@ -81,6 +81,7 @@ public class DeviceService {
 
 
         device.setNkNo(curMaxNum+1);
+        device.setFactoryId(factoryId);
 
         //更新factory中的count数据
         Factory factory = factoryMapper.selectByPrimaryKey(factoryId);

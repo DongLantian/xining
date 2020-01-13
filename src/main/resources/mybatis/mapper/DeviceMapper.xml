@@ -11,6 +11,10 @@
     <result column="practical_power" jdbcType="DOUBLE" property="practicalPower" />
     <result column="yearrun_days" jdbcType="INTEGER" property="yearrunDays" />
     <result column="design_unit" jdbcType="CHAR" property="designUnit" />
+    <result column="factory_id" jdbcType="INTEGER" property="factoryId" />
+    <result column="productrawtotal_id" jdbcType="INTEGER" property="productrawtotalId" />
+    <result column="EXHUST_NO" jdbcType="INTEGER" property="exhustNo" />
+    <result column="device_no" jdbcType="VARCHAR" property="deviceNo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, nk_no, EXHUST_ID, name, device_flow, design_power, practical_power, yearrun_days, 
-    design_unit
+    design_unit, factory_id, productrawtotal_id, EXHUST_NO, device_no
   </sql>
   <select id="selectByExample" parameterType="com.nankai.xining.bean.DeviceExample" resultMap="BaseResultMap">
     select
@@ -107,12 +111,14 @@
   <insert id="insert" parameterType="com.nankai.xining.bean.Device">
     insert into device (id, nk_no, EXHUST_ID, 
       name, device_flow, design_power, 
-      practical_power, yearrun_days, design_unit
-      )
+      practical_power, yearrun_days, design_unit, 
+      factory_id, productrawtotal_id, EXHUST_NO, 
+      device_no)
     values (#{id,jdbcType=INTEGER}, #{nkNo,jdbcType=INTEGER}, #{exhustId,jdbcType=INTEGER}, 
       #{name,jdbcType=VARCHAR}, #{deviceFlow,jdbcType=VARCHAR}, #{designPower,jdbcType=DOUBLE}, 
-      #{practicalPower,jdbcType=DOUBLE}, #{yearrunDays,jdbcType=INTEGER}, #{designUnit,jdbcType=CHAR}
-      )
+      #{practicalPower,jdbcType=DOUBLE}, #{yearrunDays,jdbcType=INTEGER}, #{designUnit,jdbcType=CHAR}, 
+      #{factoryId,jdbcType=INTEGER}, #{productrawtotalId,jdbcType=INTEGER}, #{exhustNo,jdbcType=INTEGER}, 
+      #{deviceNo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.nankai.xining.bean.Device">
     insert into device
@@ -144,6 +150,18 @@
       <if test="designUnit != null">
         design_unit,
       </if>
+      <if test="factoryId != null">
+        factory_id,
+      </if>
+      <if test="productrawtotalId != null">
+        productrawtotal_id,
+      </if>
+      <if test="exhustNo != null">
+        EXHUST_NO,
+      </if>
+      <if test="deviceNo != null">
+        device_no,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -172,6 +190,18 @@
       </if>
       <if test="designUnit != null">
         #{designUnit,jdbcType=CHAR},
+      </if>
+      <if test="factoryId != null">
+        #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productrawtotalId != null">
+        #{productrawtotalId,jdbcType=INTEGER},
+      </if>
+      <if test="exhustNo != null">
+        #{exhustNo,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNo != null">
+        #{deviceNo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +241,18 @@
       <if test="record.designUnit != null">
         design_unit = #{record.designUnit,jdbcType=CHAR},
       </if>
+      <if test="record.factoryId != null">
+        factory_id = #{record.factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.productrawtotalId != null">
+        productrawtotal_id = #{record.productrawtotalId,jdbcType=INTEGER},
+      </if>
+      <if test="record.exhustNo != null">
+        EXHUST_NO = #{record.exhustNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceNo != null">
+        device_no = #{record.deviceNo,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,7 +268,11 @@
       design_power = #{record.designPower,jdbcType=DOUBLE},
       practical_power = #{record.practicalPower,jdbcType=DOUBLE},
       yearrun_days = #{record.yearrunDays,jdbcType=INTEGER},
-      design_unit = #{record.designUnit,jdbcType=CHAR}
+      design_unit = #{record.designUnit,jdbcType=CHAR},
+      factory_id = #{record.factoryId,jdbcType=INTEGER},
+      productrawtotal_id = #{record.productrawtotalId,jdbcType=INTEGER},
+      EXHUST_NO = #{record.exhustNo,jdbcType=INTEGER},
+      device_no = #{record.deviceNo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -258,6 +304,18 @@
       <if test="designUnit != null">
         design_unit = #{designUnit,jdbcType=CHAR},
       </if>
+      <if test="factoryId != null">
+        factory_id = #{factoryId,jdbcType=INTEGER},
+      </if>
+      <if test="productrawtotalId != null">
+        productrawtotal_id = #{productrawtotalId,jdbcType=INTEGER},
+      </if>
+      <if test="exhustNo != null">
+        EXHUST_NO = #{exhustNo,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNo != null">
+        device_no = #{deviceNo,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -270,16 +328,21 @@
       design_power = #{designPower,jdbcType=DOUBLE},
       practical_power = #{practicalPower,jdbcType=DOUBLE},
       yearrun_days = #{yearrunDays,jdbcType=INTEGER},
-      design_unit = #{designUnit,jdbcType=CHAR}
+      design_unit = #{designUnit,jdbcType=CHAR},
+      factory_id = #{factoryId,jdbcType=INTEGER},
+      productrawtotal_id = #{productrawtotalId,jdbcType=INTEGER},
+      EXHUST_NO = #{exhustNo,jdbcType=INTEGER},
+      device_no = #{deviceNo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <!--自定义SQL：根据工厂ID查询设备（连接烟囱表）-->
   <select id="selectByFactoryIdWithJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT id, d.nk_no, EXHUST_ID, name, device_flow, design_power, practical_power, yearrun_days,
-    design_unit
-    from device d join exhaust e on d.EXHUST_ID = e.EXF_ID
-    WHERE FACTORY_ID  = #{factoryId,jdbcType=INTEGER}
+    design_unit, factory_id
+    from device d
+    WHERE factory_id  = #{factoryId,jdbcType=INTEGER}
   </select>
+
 
 </mapper>

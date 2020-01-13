@@ -21,6 +21,14 @@ public class Device implements Serializable {
 
     private String designUnit;
 
+    private Integer factoryId;
+
+    private Integer productrawtotalId;
+
+    private Integer exhustNo;
+
+    private String deviceNo;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -95,6 +103,38 @@ public class Device implements Serializable {
         this.designUnit = designUnit == null ? null : designUnit.trim();
     }
 
+    public Integer getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(Integer factoryId) {
+        this.factoryId = factoryId;
+    }
+
+    public Integer getProductrawtotalId() {
+        return productrawtotalId;
+    }
+
+    public void setProductrawtotalId(Integer productrawtotalId) {
+        this.productrawtotalId = productrawtotalId;
+    }
+
+    public Integer getExhustNo() {
+        return exhustNo;
+    }
+
+    public void setExhustNo(Integer exhustNo) {
+        this.exhustNo = exhustNo;
+    }
+
+    public String getDeviceNo() {
+        return deviceNo;
+    }
+
+    public void setDeviceNo(String deviceNo) {
+        this.deviceNo = deviceNo == null ? null : deviceNo.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -110,6 +150,10 @@ public class Device implements Serializable {
         sb.append(", practicalPower=").append(practicalPower);
         sb.append(", yearrunDays=").append(yearrunDays);
         sb.append(", designUnit=").append(designUnit);
+        sb.append(", factoryId=").append(factoryId);
+        sb.append(", productrawtotalId=").append(productrawtotalId);
+        sb.append(", exhustNo=").append(exhustNo);
+        sb.append(", deviceNo=").append(deviceNo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -135,7 +179,11 @@ public class Device implements Serializable {
             && (this.getDesignPower() == null ? other.getDesignPower() == null : this.getDesignPower().equals(other.getDesignPower()))
             && (this.getPracticalPower() == null ? other.getPracticalPower() == null : this.getPracticalPower().equals(other.getPracticalPower()))
             && (this.getYearrunDays() == null ? other.getYearrunDays() == null : this.getYearrunDays().equals(other.getYearrunDays()))
-            && (this.getDesignUnit() == null ? other.getDesignUnit() == null : this.getDesignUnit().equals(other.getDesignUnit()));
+            && (this.getDesignUnit() == null ? other.getDesignUnit() == null : this.getDesignUnit().equals(other.getDesignUnit()))
+            && (this.getFactoryId() == null ? other.getFactoryId() == null : this.getFactoryId().equals(other.getFactoryId()))
+            && (this.getProductrawtotalId() == null ? other.getProductrawtotalId() == null : this.getProductrawtotalId().equals(other.getProductrawtotalId()))
+            && (this.getExhustNo() == null ? other.getExhustNo() == null : this.getExhustNo().equals(other.getExhustNo()))
+            && (this.getDeviceNo() == null ? other.getDeviceNo() == null : this.getDeviceNo().equals(other.getDeviceNo()));
     }
 
     @Override
@@ -151,6 +199,10 @@ public class Device implements Serializable {
         result = prime * result + ((getPracticalPower() == null) ? 0 : getPracticalPower().hashCode());
         result = prime * result + ((getYearrunDays() == null) ? 0 : getYearrunDays().hashCode());
         result = prime * result + ((getDesignUnit() == null) ? 0 : getDesignUnit().hashCode());
+        result = prime * result + ((getFactoryId() == null) ? 0 : getFactoryId().hashCode());
+        result = prime * result + ((getProductrawtotalId() == null) ? 0 : getProductrawtotalId().hashCode());
+        result = prime * result + ((getExhustNo() == null) ? 0 : getExhustNo().hashCode());
+        result = prime * result + ((getDeviceNo() == null) ? 0 : getDeviceNo().hashCode());
         return result;
     }
 }
